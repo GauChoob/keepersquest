@@ -6834,7 +6834,7 @@ Call_006_5A29:
     add b                                         ; $5B3B: $80
     add b                                         ; $5B3C: $80
     ld a, a                                       ; $5B3D: $7F
-    jp Jump_000_3CFF                              ; $5B3E: $C3 $FF $3C
+    db $C3, $FF, $3C
 
 
     rst $38                                       ; $5B41: $FF
@@ -8293,7 +8293,7 @@ jr_006_610B:
     rst $28                                       ; $6138: $EF
     pop af                                        ; $6139: $F1
     inc sp                                        ; $613A: $33
-    call Call_000_3EC1                            ; $613B: $CD $C1 $3E
+    db $CD, $C1, $3E
     add hl, de                                    ; $613E: $19
     and $35                                       ; $613F: $E6 $35
     jp z, $CC33                                   ; $6141: $CA $33 $CC

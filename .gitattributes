@@ -1,0 +1,8 @@
+# text
+*.config text
+*.asm text
+*.inc text
+*.mgi text
+
+# binary
+*.dat binary
