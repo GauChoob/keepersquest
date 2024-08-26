@@ -44,6 +44,12 @@ jobs:
           $env:Path += ";" + (Get-Item .).FullName + "\rgbds"
           make
   
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v4
+        with:
+          name: rom
+          path: game.gbc
+
       - name: Verify checksum
         shell: pwsh
         run: |
