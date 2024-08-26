@@ -44,11 +44,12 @@ jobs:
           $env:Path += ";" + (Get-Item .).FullName + "\rgbds"
           make
   
-      - name: Archive code coverage results
+      - name: Store rom in case checksum differs from local checksum
         uses: actions/upload-artifact@v4
         with:
           name: rom
           path: game.gbc
+          retention-days: 1
 
       - name: Verify checksum
         shell: pwsh
