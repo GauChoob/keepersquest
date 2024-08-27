@@ -632,7 +632,7 @@ jr_005_42E2:
 
 
     ld a, $05                                     ; $42E8: $3E $05
-    ld [$C95A], a                                 ; $42EA: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $42EA: $EA $5A $C9
     ldh [rSVBK], a                                ; $42ED: $E0 $70
     call Call_005_42F6                            ; $42EF: $CD $F6 $42
     call Call_005_432C                            ; $42F2: $CD $2C $43
@@ -738,7 +738,7 @@ jr_005_4370:
 
 
     ld a, $05                                     ; $4372: $3E $05
-    ld [$C95A], a                                 ; $4374: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4374: $EA $5A $C9
     ldh [rSVBK], a                                ; $4377: $E0 $70
     ld a, [$C6D2]                                 ; $4379: $FA $D2 $C6
     ld [$C6D0], a                                 ; $437C: $EA $D0 $C6
@@ -777,7 +777,7 @@ jr_005_43A1:
     ld a, [hl+]                                   ; $43AE: $2A
     ld h, [hl]                                    ; $43AF: $66
     ld l, a                                       ; $43B0: $6F
-    call Call_000_07BF                            ; $43B1: $CD $BF $07
+    call CallHL                            ; $43B1: $CD $BF $07
     ld hl, $C6D5                                  ; $43B4: $21 $D5 $C6
     ld a, [hl]                                    ; $43B7: $7E
     add c                                         ; $43B8: $81
@@ -790,7 +790,7 @@ jr_005_43A1:
     ld a, [hl+]                                   ; $43C2: $2A
     ld h, [hl]                                    ; $43C3: $66
     ld l, a                                       ; $43C4: $6F
-    call Call_000_07BF                            ; $43C5: $CD $BF $07
+    call CallHL                            ; $43C5: $CD $BF $07
     call Call_005_4750                            ; $43C8: $CD $50 $47
     ret                                           ; $43CB: $C9
 

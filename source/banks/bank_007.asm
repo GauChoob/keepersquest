@@ -39,7 +39,7 @@ jr_007_4025:
     xor $02                                       ; $4030: $EE $02
     ld e, a                                       ; $4032: $5F
     ld a, $06                                     ; $4033: $3E $06
-    ld [$C95A], a                                 ; $4035: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4035: $EA $5A $C9
     ldh [rSVBK], a                                ; $4038: $E0 $70
     call Call_007_4042                            ; $403A: $CD $42 $40
     xor a                                         ; $403D: $AF
@@ -434,8 +434,7 @@ jr_007_427F:
     ret                                           ; $4295: $C9
 
 
-    ld a, [$C95B]                                 ; $4296: $FA $5B $C9
-    push af                                       ; $4299: $F5
+    PushROMBank
     ld hl, $4190                                  ; $429A: $21 $90 $41
     ld e, $04                                     ; $429D: $1E $04
     call Call_000_07A9                            ; $429F: $CD $A9 $07
@@ -487,9 +486,7 @@ jr_007_42C7:
     ld a, [hl+]                                   ; $42D9: $2A
     ld [$C9FC], a                                 ; $42DA: $EA $FC $C9
     call Call_000_32BE                            ; $42DD: $CD $BE $32
-    pop af                                        ; $42E0: $F1
-    ld [$C95B], a                                 ; $42E1: $EA $5B $C9
-    ld [$2000], a                                 ; $42E4: $EA $00 $20
+    PopROMBank
     ret                                           ; $42E7: $C9
 
 
@@ -984,9 +981,9 @@ Call_007_4521:
     call Call_007_4496                            ; $45AC: $CD $96 $44
     call Call_007_4521                            ; $45AF: $CD $21 $45
     ld a, $12                                     ; $45B2: $3E $12
-    ld [$C6E8], a                                 ; $45B4: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $45B4: $EA $E8 $C6
     ld a, $2C                                     ; $45B7: $3E $2C
-    ld [$C6E9], a                                 ; $45B9: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $45B9: $EA $E9 $C6
     ret                                           ; $45BC: $C9
 
 
@@ -1367,7 +1364,7 @@ jr_007_4768:
     ld h, a                                       ; $4771: $67
     ld a, [$C851]                                 ; $4772: $FA $51 $C8
     ld l, a                                       ; $4775: $6F
-    call Call_000_07BF                            ; $4776: $CD $BF $07
+    call CallHL                            ; $4776: $CD $BF $07
     pop hl                                        ; $4779: $E1
     ld a, c                                       ; $477A: $79
     ld [hl+], a                                   ; $477B: $22
@@ -1390,19 +1387,19 @@ jr_007_4768:
     xor a                                         ; $478C: $AF
     ld [$C854], a                                 ; $478D: $EA $54 $C8
     ld a, $07                                     ; $4790: $3E $07
-    ld [$C6EA], a                                 ; $4792: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4792: $EA $EA $C6
     ld a, $AC                                     ; $4795: $3E $AC
-    ld [$C6E8], a                                 ; $4797: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4797: $EA $E8 $C6
     ld a, $45                                     ; $479A: $3E $45
-    ld [$C6E9], a                                 ; $479C: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $479C: $EA $E9 $C6
     ret                                           ; $479F: $C9
 
 
 jr_007_47A0:
     ld a, $12                                     ; $47A0: $3E $12
-    ld [$C6E8], a                                 ; $47A2: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $47A2: $EA $E8 $C6
     ld a, $2C                                     ; $47A5: $3E $2C
-    ld [$C6E9], a                                 ; $47A7: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $47A7: $EA $E9 $C6
     ret                                           ; $47AA: $C9
 
 
@@ -1941,7 +1938,7 @@ Jump_007_4AA5:
     push de                                       ; $4AA6: $D5
     push hl                                       ; $4AA7: $E5
     ld a, $03                                     ; $4AA8: $3E $03
-    ld [$C95A], a                                 ; $4AAA: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4AAA: $EA $5A $C9
     ldh [rSVBK], a                                ; $4AAD: $E0 $70
     ld a, [hl]                                    ; $4AAF: $7E
     ld c, a                                       ; $4AB0: $4F
@@ -1970,7 +1967,7 @@ Jump_007_4AA5:
     xor a                                         ; $4AD0: $AF
     ld [$FF4F], a                                 ; $4AD1: $EA $4F $FF
     ld a, a                                       ; $4AD4: $7F
-    ld [$C95A], a                                 ; $4AD5: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4AD5: $EA $5A $C9
     ldh [rSVBK], a                                ; $4AD8: $E0 $70
     ret                                           ; $4ADA: $C9
 
@@ -1994,11 +1991,11 @@ Jump_007_4AA5:
     ld a, l                                       ; $4AFB: $7D
     ld [$C8E8], a                                 ; $4AFC: $EA $E8 $C8
     ld a, $07                                     ; $4AFF: $3E $07
-    ld [$C6EA], a                                 ; $4B01: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4B01: $EA $EA $C6
     ld a, $CA                                     ; $4B04: $3E $CA
-    ld [$C6E8], a                                 ; $4B06: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4B06: $EA $E8 $C6
     ld a, $4C                                     ; $4B09: $3E $4C
-    ld [$C6E9], a                                 ; $4B0B: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4B0B: $EA $E9 $C6
     ret                                           ; $4B0E: $C9
 
 
@@ -2021,12 +2018,12 @@ Jump_007_4AA5:
     ld a, l                                       ; $4B2F: $7D
     ld [$C8E8], a                                 ; $4B30: $EA $E8 $C8
     ld a, $07                                     ; $4B33: $3E $07
-    ld [$C6EA], a                                 ; $4B35: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4B35: $EA $EA $C6
     ld a, $CA                                     ; $4B38: $3E $CA
-    ld [$C6E8], a                                 ; $4B3A: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4B3A: $EA $E8 $C6
     ld a, $4C                                     ; $4B3D: $3E $4C
-    ld [$C6E9], a                                 ; $4B3F: $EA $E9 $C6
-    call Call_000_0840                            ; $4B42: $CD $40 $08
+    ld [wVBlank_Func + 1], a                                 ; $4B3F: $EA $E9 $C6
+    call System_DoVFunc                            ; $4B42: $CD $40 $08
     ret                                           ; $4B45: $C9
 
 
@@ -2356,9 +2353,9 @@ Call_007_4C7C:
     ld a, l                                       ; $4CBB: $7D
     ld [$C8E8], a                                 ; $4CBC: $EA $E8 $C8
     ld a, $CA                                     ; $4CBF: $3E $CA
-    ld [$C6E8], a                                 ; $4CC1: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4CC1: $EA $E8 $C6
     ld a, $4C                                     ; $4CC4: $3E $4C
-    ld [$C6E9], a                                 ; $4CC6: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4CC6: $EA $E9 $C6
     ret                                           ; $4CC9: $C9
 
 
@@ -2371,13 +2368,13 @@ Call_007_4C7C:
     ld a, [$C8E8]                                 ; $4CD6: $FA $E8 $C8
     ld l, a                                       ; $4CD9: $6F
     ld a, $12                                     ; $4CDA: $3E $12
-    ld [$C6E8], a                                 ; $4CDC: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4CDC: $EA $E8 $C6
     ld a, $2C                                     ; $4CDF: $3E $2C
-    ld [$C6E9], a                                 ; $4CE1: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4CE1: $EA $E9 $C6
 
 Call_007_4CE4:
     ld a, $02                                     ; $4CE4: $3E $02
-    ld [$C95A], a                                 ; $4CE6: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4CE6: $EA $5A $C9
     ldh [rSVBK], a                                ; $4CE9: $E0 $70
     xor a                                         ; $4CEB: $AF
     ldh [rVBK], a                                 ; $4CEC: $E0 $4F
@@ -2649,7 +2646,7 @@ Jump_007_4E54:
     ld a, [$C8B6]                                 ; $4E59: $FA $B6 $C8
     ld e, a                                       ; $4E5C: $5F
     ld a, $02                                     ; $4E5D: $3E $02
-    ld [$C95A], a                                 ; $4E5F: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E5F: $EA $5A $C9
     ldh [rSVBK], a                                ; $4E62: $E0 $70
     ld bc, $C116                                  ; $4E64: $01 $16 $C1
     ld a, [$C8B8]                                 ; $4E67: $FA $B8 $C8
@@ -2869,7 +2866,7 @@ Jump_007_4F61:
     ld a, [$C8B0]                                 ; $4F78: $FA $B0 $C8
     ld l, a                                       ; $4F7B: $6F
     ld a, $03                                     ; $4F7C: $3E $03
-    ld [$C95A], a                                 ; $4F7E: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4F7E: $EA $5A $C9
     ldh [rSVBK], a                                ; $4F81: $E0 $70
     ld a, [hl]                                    ; $4F83: $7E
     ld [$C8B8], a                                 ; $4F84: $EA $B8 $C8
@@ -2914,7 +2911,7 @@ jr_007_4FC1:
     ld a, [$C881]                                 ; $4FC5: $FA $81 $C8
     ld [$C8B7], a                                 ; $4FC8: $EA $B7 $C8
     ld a, $02                                     ; $4FCB: $3E $02
-    ld [$C95A], a                                 ; $4FCD: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4FCD: $EA $5A $C9
     ldh [rSVBK], a                                ; $4FD0: $E0 $70
     ld bc, $C116                                  ; $4FD2: $01 $16 $C1
     ld a, [$C8B8]                                 ; $4FD5: $FA $B8 $C8
@@ -3520,7 +3517,7 @@ Jump_007_5323:
     ld a, [$C88F]                                 ; $5329: $FA $8F $C8
     ld e, a                                       ; $532C: $5F
     ld a, $02                                     ; $532D: $3E $02
-    ld [$C95A], a                                 ; $532F: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $532F: $EA $5A $C9
     ldh [rSVBK], a                                ; $5332: $E0 $70
     ld bc, $C100                                  ; $5334: $01 $00 $C1
     ld a, [$C890]                                 ; $5337: $FA $90 $C8
@@ -3745,7 +3742,7 @@ Jump_007_543E:
     ld a, [$C888]                                 ; $544F: $FA $88 $C8
     ld l, a                                       ; $5452: $6F
     ld a, $03                                     ; $5453: $3E $03
-    ld [$C95A], a                                 ; $5455: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $5455: $EA $5A $C9
     ldh [rSVBK], a                                ; $5458: $E0 $70
     ld a, [hl+]                                   ; $545A: $2A
     ld [$C890], a                                 ; $545B: $EA $90 $C8
@@ -3782,7 +3779,7 @@ jr_007_5492:
     ld a, [$C880]                                 ; $5496: $FA $80 $C8
     ld [$C88E], a                                 ; $5499: $EA $8E $C8
     ld a, $02                                     ; $549C: $3E $02
-    ld [$C95A], a                                 ; $549E: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $549E: $EA $5A $C9
     ldh [rSVBK], a                                ; $54A1: $E0 $70
     ld bc, $C100                                  ; $54A3: $01 $00 $C1
     ld a, [$C890]                                 ; $54A6: $FA $90 $C8
@@ -4155,9 +4152,9 @@ jr_007_54C2:
     ld a, [$C862]                                 ; $5669: $FA $62 $C8
     ld [hl], a                                    ; $566C: $77
     ld a, $12                                     ; $566D: $3E $12
-    ld [$C6E8], a                                 ; $566F: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $566F: $EA $E8 $C6
     ld a, $2C                                     ; $5672: $3E $2C
-    ld [$C6E9], a                                 ; $5674: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $5674: $EA $E9 $C6
     ret                                           ; $5677: $C9
 
 
@@ -4217,13 +4214,13 @@ Call_007_5697:
     ld a, l                                       ; $56C0: $7D
     ld [$C85F], a                                 ; $56C1: $EA $5F $C8
     ld a, $07                                     ; $56C4: $3E $07
-    ld [$C6EA], a                                 ; $56C6: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $56C6: $EA $EA $C6
     ld a, $0E                                     ; $56C9: $3E $0E
-    ld [$C6E8], a                                 ; $56CB: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $56CB: $EA $E8 $C6
     ld a, $56                                     ; $56CE: $3E $56
-    ld [$C6E9], a                                 ; $56D0: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $56D0: $EA $E9 $C6
     call Call_007_58C0                            ; $56D3: $CD $C0 $58
-    call Call_000_0840                            ; $56D6: $CD $40 $08
+    call System_DoVFunc                            ; $56D6: $CD $40 $08
     ret                                           ; $56D9: $C9
 
 
@@ -4392,7 +4389,7 @@ Call_007_5707:
     jp Jump_000_22D6                              ; $5870: $C3 $D6 $22
 
 
-    call Call_000_0840                            ; $5873: $CD $40 $08
+    call System_DoVFunc                            ; $5873: $CD $40 $08
     ld hl, $C863                                  ; $5876: $21 $63 $C8
     ld a, [hl+]                                   ; $5879: $2A
     ld h, [hl]                                    ; $587A: $66

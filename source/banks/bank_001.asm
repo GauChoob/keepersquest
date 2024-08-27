@@ -106,8 +106,8 @@ Call_001_4062:
 
 
     ld a, $FF                                     ; $407D: $3E $FF
-    ldh [$97], a                                  ; $407F: $E0 $97
-    ldh [$98], a                                  ; $4081: $E0 $98
+    ldh [$FF97], a                                  ; $407F: $E0 $97
+    ldh [$FF98], a                                  ; $4081: $E0 $98
     ld de, $C154                                  ; $4083: $11 $54 $C1
     ld hl, $C154                                  ; $4086: $21 $54 $C1
 
@@ -131,7 +131,7 @@ jr_001_4089:
     ld a, [hl+]                                   ; $409A: $2A
     ld h, [hl]                                    ; $409B: $66
     ld l, a                                       ; $409C: $6F
-    call Call_000_07BF                            ; $409D: $CD $BF $07
+    call CallHL                            ; $409D: $CD $BF $07
     pop hl                                        ; $40A0: $E1
     pop de                                        ; $40A1: $D1
     ldh a, [$97]                                  ; $40A2: $F0 $97
@@ -255,29 +255,29 @@ Call_001_412F:
     ld h, b                                       ; $412F: $60
     ld l, c                                       ; $4130: $69
     ld a, l                                       ; $4131: $7D
-    ldh [$8A], a                                  ; $4132: $E0 $8A
+    ldh [$FF8A], a                                  ; $4132: $E0 $8A
     ld a, h                                       ; $4134: $7C
-    ldh [$8B], a                                  ; $4135: $E0 $8B
+    ldh [$FF8B], a                                  ; $4135: $E0 $8B
     ld a, [hl+]                                   ; $4137: $2A
-    ldh [$8C], a                                  ; $4138: $E0 $8C
+    ldh [$FF8C], a                                  ; $4138: $E0 $8C
     ld a, [hl+]                                   ; $413A: $2A
-    ldh [$8D], a                                  ; $413B: $E0 $8D
+    ldh [$FF8D], a                                  ; $413B: $E0 $8D
     ld a, [hl+]                                   ; $413D: $2A
-    ldh [$8E], a                                  ; $413E: $E0 $8E
+    ldh [$FF8E], a                                  ; $413E: $E0 $8E
     ld a, [hl+]                                   ; $4140: $2A
-    ldh [$8F], a                                  ; $4141: $E0 $8F
+    ldh [$FF8F], a                                  ; $4141: $E0 $8F
     ld a, [hl+]                                   ; $4143: $2A
-    ldh [$90], a                                  ; $4144: $E0 $90
+    ldh [$FF90], a                                  ; $4144: $E0 $90
     ld a, [hl+]                                   ; $4146: $2A
-    ldh [$91], a                                  ; $4147: $E0 $91
+    ldh [$FF91], a                                  ; $4147: $E0 $91
     ld a, [hl+]                                   ; $4149: $2A
-    ldh [$92], a                                  ; $414A: $E0 $92
+    ldh [$FF92], a                                  ; $414A: $E0 $92
     ld a, [hl+]                                   ; $414C: $2A
-    ldh [$93], a                                  ; $414D: $E0 $93
+    ldh [$FF93], a                                  ; $414D: $E0 $93
     ld a, [hl+]                                   ; $414F: $2A
-    ldh [$94], a                                  ; $4150: $E0 $94
+    ldh [$FF94], a                                  ; $4150: $E0 $94
     ld a, [hl+]                                   ; $4152: $2A
-    ldh [$95], a                                  ; $4153: $E0 $95
+    ldh [$FF95], a                                  ; $4153: $E0 $95
     xor a                                         ; $4155: $AF
     ld [$C6D2], a                                 ; $4156: $EA $D2 $C6
     ld [$C6D3], a                                 ; $4159: $EA $D3 $C6
@@ -381,7 +381,7 @@ Jump_001_41D8:
     ldh a, [$93]                                  ; $41DB: $F0 $93
     ld l, a                                       ; $41DD: $6F
     ld a, $05                                     ; $41DE: $3E $05
-    ld [$C95A], a                                 ; $41E0: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $41E0: $EA $5A $C9
     ldh [rSVBK], a                                ; $41E3: $E0 $70
     ld a, [hl]                                    ; $41E5: $7E
     cp $82                                        ; $41E6: $FE $82
@@ -447,7 +447,7 @@ Call_001_422E:
     ret nz                                        ; $4232: $C0
 
     ld a, $05                                     ; $4233: $3E $05
-    ld [$C95A], a                                 ; $4235: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4235: $EA $5A $C9
     ldh [rSVBK], a                                ; $4238: $E0 $70
     ld a, [$C6E1]                                 ; $423A: $FA $E1 $C6
     ld e, a                                       ; $423D: $5F
@@ -923,7 +923,7 @@ jr_001_4433:
     ld b, a                                       ; $445D: $47
     ld a, [$C883]                                 ; $445E: $FA $83 $C8
     add b                                         ; $4461: $80
-    ldh [$92], a                                  ; $4462: $E0 $92
+    ldh [$FF92], a                                  ; $4462: $E0 $92
     ld a, [hl+]                                   ; $4464: $2A
     ld h, [hl]                                    ; $4465: $66
     ld l, a                                       ; $4466: $6F
@@ -940,7 +940,7 @@ jr_001_4433:
     ld b, [hl]                                    ; $4478: $46
     ld a, [$C882]                                 ; $4479: $FA $82 $C8
     add b                                         ; $447C: $80
-    ldh [$91], a                                  ; $447D: $E0 $91
+    ldh [$FF91], a                                  ; $447D: $E0 $91
     ld l, b                                       ; $447F: $68
     ld h, $00                                     ; $4480: $26 $00
     add hl, de                                    ; $4482: $19
@@ -954,9 +954,9 @@ jr_001_4433:
     ld a, l                                       ; $4490: $7D
     ld [$FF93], a                                 ; $4491: $EA $93 $FF
     ld a, $19                                     ; $4494: $3E $19
-    ldh [$AB], a                                  ; $4496: $E0 $AB
+    ldh [$FFAB], a                                  ; $4496: $E0 $AB
     ld a, $0D                                     ; $4498: $3E $0D
-    ldh [$AC], a                                  ; $449A: $E0 $AC
+    ldh [$FFAC], a                                  ; $449A: $E0 $AC
     ret                                           ; $449C: $C9
 
 
@@ -971,12 +971,12 @@ jr_001_4433:
     ld a, [$C704]                                 ; $44AE: $FA $04 $C7
     ld l, a                                       ; $44B1: $6F
     ld a, $05                                     ; $44B2: $3E $05
-    ld [$C95A], a                                 ; $44B4: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $44B4: $EA $5A $C9
     ldh [rSVBK], a                                ; $44B7: $E0 $70
     ld a, [de]                                    ; $44B9: $1A
     ld [hl], a                                    ; $44BA: $77
     ld a, $03                                     ; $44BB: $3E $03
-    ld [$C95A], a                                 ; $44BD: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $44BD: $EA $5A $C9
     ldh [rSVBK], a                                ; $44C0: $E0 $70
     ld a, [de]                                    ; $44C2: $1A
     ld [hl], a                                    ; $44C3: $77
@@ -1012,7 +1012,7 @@ jr_001_44E3:
     dec a                                         ; $44EB: $3D
     jr z, jr_001_4512                             ; $44EC: $28 $24
 
-    ldh [$AD], a                                  ; $44EE: $E0 $AD
+    ldh [$FFAD], a                                  ; $44EE: $E0 $AD
     inc bc                                        ; $44F0: $03
     ld a, b                                       ; $44F1: $78
     ld [$C703], a                                 ; $44F2: $EA $03 $C7
@@ -1038,7 +1038,7 @@ jr_001_44E3:
 
 jr_001_4512:
     ldh a, [$AE]                                  ; $4512: $F0 $AE
-    ldh [$AD], a                                  ; $4514: $E0 $AD
+    ldh [$FFAD], a                                  ; $4514: $E0 $AD
     dec a                                         ; $4516: $3D
     ld l, a                                       ; $4517: $6F
     ld a, [$C707]                                 ; $4518: $FA $07 $C7
@@ -1093,21 +1093,21 @@ jr_001_4548:
     ld a, [$C704]                                 ; $456D: $FA $04 $C7
     ld l, a                                       ; $4570: $6F
     ld a, $06                                     ; $4571: $3E $06
-    ld [$C95A], a                                 ; $4573: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4573: $EA $5A $C9
     ldh [rSVBK], a                                ; $4576: $E0 $70
     ld a, [de]                                    ; $4578: $1A
     ld c, a                                       ; $4579: $4F
     ld a, $05                                     ; $457A: $3E $05
-    ld [$C95A], a                                 ; $457C: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $457C: $EA $5A $C9
     ldh [rSVBK], a                                ; $457F: $E0 $70
     ld [hl], c                                    ; $4581: $71
     ld a, $04                                     ; $4582: $3E $04
-    ld [$C95A], a                                 ; $4584: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4584: $EA $5A $C9
     ldh [rSVBK], a                                ; $4587: $E0 $70
     ld a, [de]                                    ; $4589: $1A
     ld c, a                                       ; $458A: $4F
     ld a, $03                                     ; $458B: $3E $03
-    ld [$C95A], a                                 ; $458D: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $458D: $EA $5A $C9
     ldh [rSVBK], a                                ; $4590: $E0 $70
     ld [hl], c                                    ; $4592: $71
     jp Jump_001_44C4                              ; $4593: $C3 $C4 $44
@@ -1236,9 +1236,9 @@ jr_001_4615:
     ld a, c                                       ; $4619: $79
     ld [$FFA9], a                                 ; $461A: $EA $A9 $FF
     ld a, $D3                                     ; $461D: $3E $D3
-    ldh [$AB], a                                  ; $461F: $E0 $AB
+    ldh [$FFAB], a                                  ; $461F: $E0 $AB
     ld a, $0A                                     ; $4621: $3E $0A
-    ldh [$AC], a                                  ; $4623: $E0 $AC
+    ldh [$FFAC], a                                  ; $4623: $E0 $AC
     ret                                           ; $4625: $C9
 
 
@@ -1420,9 +1420,9 @@ Call_001_46D7:
     ld hl, $9C65                                  ; $470F: $21 $65 $9C
     call Call_001_46C5                            ; $4712: $CD $C5 $46
     ld a, $12                                     ; $4715: $3E $12
-    ld [$C6E8], a                                 ; $4717: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4717: $EA $E8 $C6
     ld a, $2C                                     ; $471A: $3E $2C
-    ld [$C6E9], a                                 ; $471C: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $471C: $EA $E9 $C6
     ret                                           ; $471F: $C9
 
 
@@ -1433,9 +1433,9 @@ Call_001_46D7:
     ld hl, $9C45                                  ; $472A: $21 $45 $9C
     call Call_001_46C5                            ; $472D: $CD $C5 $46
     ld a, $12                                     ; $4730: $3E $12
-    ld [$C6E8], a                                 ; $4732: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4732: $EA $E8 $C6
     ld a, $2C                                     ; $4735: $3E $2C
-    ld [$C6E9], a                                 ; $4737: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4737: $EA $E9 $C6
     ret                                           ; $473A: $C9
 
 
@@ -1444,9 +1444,9 @@ Call_001_46D7:
     ld hl, $9C85                                  ; $473F: $21 $85 $9C
     call Call_001_46C5                            ; $4742: $CD $C5 $46
     ld a, $12                                     ; $4745: $3E $12
-    ld [$C6E8], a                                 ; $4747: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4747: $EA $E8 $C6
     ld a, $2C                                     ; $474A: $3E $2C
-    ld [$C6E9], a                                 ; $474C: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $474C: $EA $E9 $C6
     ret                                           ; $474F: $C9
 
 
@@ -1519,9 +1519,9 @@ Call_001_46D7:
     ld [hl+], a                                   ; $47A1: $22
     ld [hl+], a                                   ; $47A2: $22
     ld a, $12                                     ; $47A3: $3E $12
-    ld [$C6E8], a                                 ; $47A5: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $47A5: $EA $E8 $C6
     ld a, $2C                                     ; $47A8: $3E $2C
-    ld [$C6E9], a                                 ; $47AA: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $47AA: $EA $E9 $C6
     ret                                           ; $47AD: $C9
 
 
@@ -1546,9 +1546,9 @@ jr_001_47C4:
     ld a, $80                                     ; $47C7: $3E $80
     ld [hl], a                                    ; $47C9: $77
     ld a, $12                                     ; $47CA: $3E $12
-    ld [$C6E8], a                                 ; $47CC: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $47CC: $EA $E8 $C6
     ld a, $2C                                     ; $47CF: $3E $2C
-    ld [$C6E9], a                                 ; $47D1: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $47D1: $EA $E9 $C6
     ret                                           ; $47D4: $C9
 
 
@@ -1573,9 +1573,9 @@ jr_001_47E6:
     ld a, $EF                                     ; $47EE: $3E $EF
     ld [hl], a                                    ; $47F0: $77
     ld a, $12                                     ; $47F1: $3E $12
-    ld [$C6E8], a                                 ; $47F3: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $47F3: $EA $E8 $C6
     ld a, $2C                                     ; $47F6: $3E $2C
-    ld [$C6E9], a                                 ; $47F8: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $47F8: $EA $E9 $C6
     ret                                           ; $47FB: $C9
 
 
@@ -1648,9 +1648,9 @@ jr_001_47E6:
     and $01                                       ; $484A: $E6 $01
     ld [$C6F0], a                                 ; $484C: $EA $F0 $C6
     ld a, $12                                     ; $484F: $3E $12
-    ld [$C6E8], a                                 ; $4851: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4851: $EA $E8 $C6
     ld a, $2C                                     ; $4854: $3E $2C
-    ld [$C6E9], a                                 ; $4856: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4856: $EA $E9 $C6
     ret                                           ; $4859: $C9
 
 
@@ -1660,9 +1660,9 @@ jr_001_47E6:
     ld bc, $9C25                                  ; $4861: $01 $25 $9C
     call Call_001_46D7                            ; $4864: $CD $D7 $46
     ld a, $12                                     ; $4867: $3E $12
-    ld [$C6E8], a                                 ; $4869: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4869: $EA $E8 $C6
     ld a, $2C                                     ; $486C: $3E $2C
-    ld [$C6E9], a                                 ; $486E: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $486E: $EA $E9 $C6
     ret                                           ; $4871: $C9
 
 
@@ -1675,9 +1675,9 @@ jr_001_47E6:
     ld bc, $9C65                                  ; $4882: $01 $65 $9C
     call Call_001_46D7                            ; $4885: $CD $D7 $46
     ld a, $12                                     ; $4888: $3E $12
-    ld [$C6E8], a                                 ; $488A: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $488A: $EA $E8 $C6
     ld a, $2C                                     ; $488D: $3E $2C
-    ld [$C6E9], a                                 ; $488F: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $488F: $EA $E9 $C6
     ret                                           ; $4892: $C9
 
 
@@ -1690,9 +1690,9 @@ jr_001_47E6:
     ld bc, $9C45                                  ; $48A3: $01 $45 $9C
     call Call_001_46D7                            ; $48A6: $CD $D7 $46
     ld a, $12                                     ; $48A9: $3E $12
-    ld [$C6E8], a                                 ; $48AB: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $48AB: $EA $E8 $C6
     ld a, $2C                                     ; $48AE: $3E $2C
-    ld [$C6E9], a                                 ; $48B0: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $48B0: $EA $E9 $C6
     ret                                           ; $48B3: $C9
 
 
@@ -1702,9 +1702,9 @@ jr_001_47E6:
     ldh [rWY], a                                  ; $48BC: $E0 $4A
     ldh [rLYC], a                                 ; $48BE: $E0 $45
     ld a, $12                                     ; $48C0: $3E $12
-    ld [$C6E8], a                                 ; $48C2: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $48C2: $EA $E8 $C6
     ld a, $2C                                     ; $48C5: $3E $2C
-    ld [$C6E9], a                                 ; $48C7: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $48C7: $EA $E9 $C6
     ret                                           ; $48CA: $C9
 
 
@@ -1730,11 +1730,11 @@ jr_001_47E6:
     ld a, $09                                     ; $48E5: $3E $09
     ld [$FFAD], a                                 ; $48E7: $EA $AD $FF
     ld a, $01                                     ; $48EA: $3E $01
-    ld [$C6EA], a                                 ; $48EC: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $48EC: $EA $EA $C6
     ld a, $05                                     ; $48EF: $3E $05
-    ld [$C6E8], a                                 ; $48F1: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $48F1: $EA $E8 $C6
     ld a, $47                                     ; $48F4: $3E $47
-    ld [$C6E9], a                                 ; $48F6: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $48F6: $EA $E9 $C6
     ld a, $04                                     ; $48F9: $3E $04
     ld [$FFAB], a                                 ; $48FB: $EA $AB $FF
     ld a, $49                                     ; $48FE: $3E $49
@@ -1755,11 +1755,11 @@ jr_001_47E6:
     ld a, [hl]                                    ; $4916: $7E
     ld [$C6F5], a                                 ; $4917: $EA $F5 $C6
     ld a, $01                                     ; $491A: $3E $01
-    ld [$C6EA], a                                 ; $491C: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $491C: $EA $EA $C6
     ld a, $B4                                     ; $491F: $3E $B4
-    ld [$C6E8], a                                 ; $4921: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4921: $EA $E8 $C6
     ld a, $48                                     ; $4924: $3E $48
-    ld [$C6E9], a                                 ; $4926: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4926: $EA $E9 $C6
     ret                                           ; $4929: $C9
 
 
@@ -1767,11 +1767,11 @@ Jump_001_492A:
     ld a, $90                                     ; $492A: $3E $90
     ld [$C6F5], a                                 ; $492C: $EA $F5 $C6
     ld a, $01                                     ; $492F: $3E $01
-    ld [$C6EA], a                                 ; $4931: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4931: $EA $EA $C6
     ld a, $B4                                     ; $4934: $3E $B4
-    ld [$C6E8], a                                 ; $4936: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4936: $EA $E8 $C6
     ld a, $48                                     ; $4939: $3E $48
-    ld [$C6E9], a                                 ; $493B: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $493B: $EA $E9 $C6
     ld a, $25                                     ; $493E: $3E $25
     ld [$FFA0], a                                 ; $4940: $EA $A0 $FF
     ld a, $2D                                     ; $4943: $3E $2D
@@ -1812,11 +1812,11 @@ Jump_001_4958:
     ld a, $8F                                     ; $4981: $3E $8F
     ldh [rLYC], a                                 ; $4983: $E0 $45
     ld a, $01                                     ; $4985: $3E $01
-    ld [$C6EA], a                                 ; $4987: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4987: $EA $EA $C6
     ld a, $50                                     ; $498A: $3E $50
-    ld [$C6E8], a                                 ; $498C: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $498C: $EA $E8 $C6
     ld a, $47                                     ; $498F: $3E $47
-    ld [$C6E9], a                                 ; $4991: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4991: $EA $E9 $C6
     ld a, $A9                                     ; $4994: $3E $A9
     ld [$FFAB], a                                 ; $4996: $EA $AB $FF
     ld a, $49                                     ; $4999: $3E $49
@@ -1829,11 +1829,11 @@ Jump_001_4958:
 
 
     ld a, $01                                     ; $49A9: $3E $01
-    ld [$C6EA], a                                 ; $49AB: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $49AB: $EA $EA $C6
     ld a, $05                                     ; $49AE: $3E $05
-    ld [$C6E8], a                                 ; $49B0: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $49B0: $EA $E8 $C6
     ld a, $47                                     ; $49B3: $3E $47
-    ld [$C6E9], a                                 ; $49B5: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $49B5: $EA $E9 $C6
     ld a, $C3                                     ; $49B8: $3E $C3
     ld [$FFAB], a                                 ; $49BA: $EA $AB $FF
     ld a, $49                                     ; $49BD: $3E $49
@@ -1842,9 +1842,9 @@ Jump_001_4958:
 
 
     ld a, $20                                     ; $49C3: $3E $20
-    ld [$C6E8], a                                 ; $49C5: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $49C5: $EA $E8 $C6
     ld a, $47                                     ; $49C8: $3E $47
-    ld [$C6E9], a                                 ; $49CA: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $49CA: $EA $E9 $C6
     ld a, $D8                                     ; $49CD: $3E $D8
     ld [$FFAB], a                                 ; $49CF: $EA $AB $FF
     ld a, $49                                     ; $49D2: $3E $49
@@ -1853,9 +1853,9 @@ Jump_001_4958:
 
 
     ld a, $3B                                     ; $49D8: $3E $3B
-    ld [$C6E8], a                                 ; $49DA: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $49DA: $EA $E8 $C6
     ld a, $47                                     ; $49DD: $3E $47
-    ld [$C6E9], a                                 ; $49DF: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $49DF: $EA $E9 $C6
     ld a, $ED                                     ; $49E2: $3E $ED
     ld [$FFAB], a                                 ; $49E4: $EA $AB $FF
     ld a, $49                                     ; $49E7: $3E $49
@@ -1876,11 +1876,11 @@ Jump_001_4958:
     ld a, [hl]                                    ; $4A00: $7E
     ld [$C6F5], a                                 ; $4A01: $EA $F5 $C6
     ld a, $01                                     ; $4A04: $3E $01
-    ld [$C6EA], a                                 ; $4A06: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $4A06: $EA $EA $C6
     ld a, $B4                                     ; $4A09: $3E $B4
-    ld [$C6E8], a                                 ; $4A0B: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4A0B: $EA $E8 $C6
     ld a, $48                                     ; $4A0E: $3E $48
-    ld [$C6E9], a                                 ; $4A10: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4A10: $EA $E9 $C6
     ret                                           ; $4A13: $C9
 
 
@@ -1914,7 +1914,7 @@ Call_001_4A34:
     ret nz                                        ; $4A3E: $C0
 
     ld a, $05                                     ; $4A3F: $3E $05
-    ld [$C95A], a                                 ; $4A41: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4A41: $EA $5A $C9
     ldh [rSVBK], a                                ; $4A44: $E0 $70
     ld a, [$C6D2]                                 ; $4A46: $FA $D2 $C6
     ld c, a                                       ; $4A49: $4F
@@ -2097,7 +2097,7 @@ Call_001_4B1C:
 
 Call_001_4B43:
     ld a, $05                                     ; $4B43: $3E $05
-    ld [$C95A], a                                 ; $4B45: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4B45: $EA $5A $C9
     ldh [rSVBK], a                                ; $4B48: $E0 $70
     ldh a, [$8C]                                  ; $4B4A: $F0 $8C
     ld e, a                                       ; $4B4C: $5F
@@ -2114,7 +2114,7 @@ Call_001_4B43:
 jr_001_4B5C:
     ld a, e                                       ; $4B5C: $7B
     res 5, a                                      ; $4B5D: $CB $AF
-    ldh [$8C], a                                  ; $4B5F: $E0 $8C
+    ldh [$FF8C], a                                  ; $4B5F: $E0 $8C
     ret                                           ; $4B61: $C9
 
 
@@ -2135,7 +2135,7 @@ Call_001_4B62:
     ld [hl], a                                    ; $4B75: $77
     ldh a, [$8C]                                  ; $4B76: $F0 $8C
     set 5, a                                      ; $4B78: $CB $EF
-    ldh [$8C], a                                  ; $4B7A: $E0 $8C
+    ldh [$FF8C], a                                  ; $4B7A: $E0 $8C
     ret                                           ; $4B7C: $C9
 
 
@@ -2200,12 +2200,12 @@ Jump_001_4BBA:
     ld a, l                                       ; $4BCB: $7D
     ld [$C8E8], a                                 ; $4BCC: $EA $E8 $C8
     ld a, $05                                     ; $4BCF: $3E $05
-    ld [$C95A], a                                 ; $4BD1: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4BD1: $EA $5A $C9
     ldh [rSVBK], a                                ; $4BD4: $E0 $70
     ld a, $00                                     ; $4BD6: $3E $00
     ld [hl], a                                    ; $4BD8: $77
     ld a, $03                                     ; $4BD9: $3E $03
-    ld [$C95A], a                                 ; $4BDB: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4BDB: $EA $5A $C9
     ldh [rSVBK], a                                ; $4BDE: $E0 $70
     ld a, $FC                                     ; $4BE0: $3E $FC
     ld [hl], a                                    ; $4BE2: $77
@@ -2240,7 +2240,7 @@ Jump_001_4C08:
     pop af                                        ; $4C11: $F1
     ldh a, [$B1]                                  ; $4C12: $F0 $B1
     set 2, a                                      ; $4C14: $CB $D7
-    ldh [$B1], a                                  ; $4C16: $E0 $B1
+    ldh [$FFB1], a                                  ; $4C16: $E0 $B1
     ld a, [hl]                                    ; $4C18: $7E
     ld e, a                                       ; $4C19: $5F
     cp $0B                                        ; $4C1A: $FE $0B
@@ -2292,7 +2292,7 @@ Jump_001_4C59:
     pop af                                        ; $4C62: $F1
     ldh a, [$B1]                                  ; $4C63: $F0 $B1
     set 2, a                                      ; $4C65: $CB $D7
-    ldh [$B1], a                                  ; $4C67: $E0 $B1
+    ldh [$FFB1], a                                  ; $4C67: $E0 $B1
     ld a, [hl]                                    ; $4C69: $7E
     ld e, a                                       ; $4C6A: $5F
     cp $0B                                        ; $4C6B: $FE $0B
@@ -2344,7 +2344,7 @@ Jump_001_4CAA:
     pop af                                        ; $4CB3: $F1
     ldh a, [$B1]                                  ; $4CB4: $F0 $B1
     set 2, a                                      ; $4CB6: $CB $D7
-    ldh [$B1], a                                  ; $4CB8: $E0 $B1
+    ldh [$FFB1], a                                  ; $4CB8: $E0 $B1
     ld a, [hl]                                    ; $4CBA: $7E
     ld e, a                                       ; $4CBB: $5F
     cp $0B                                        ; $4CBC: $FE $0B
@@ -2396,7 +2396,7 @@ Jump_001_4CFB:
     pop af                                        ; $4D04: $F1
     ldh a, [$B1]                                  ; $4D05: $F0 $B1
     set 2, a                                      ; $4D07: $CB $D7
-    ldh [$B1], a                                  ; $4D09: $E0 $B1
+    ldh [$FFB1], a                                  ; $4D09: $E0 $B1
     ld a, [hl]                                    ; $4D0B: $7E
     ld e, a                                       ; $4D0C: $5F
     cp $0B                                        ; $4D0D: $FE $0B
@@ -2453,7 +2453,7 @@ Call_001_4D4C:
     ld l, a                                       ; $4D60: $6F
     add hl, de                                    ; $4D61: $19
     ld a, $05                                     ; $4D62: $3E $05
-    ld [$C95A], a                                 ; $4D64: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4D64: $EA $5A $C9
     ldh [rSVBK], a                                ; $4D67: $E0 $70
     ret                                           ; $4D69: $C9
 
@@ -2471,7 +2471,7 @@ Call_001_4D6A:
     ld l, a                                       ; $4D7B: $6F
     add hl, de                                    ; $4D7C: $19
     ld a, $05                                     ; $4D7D: $3E $05
-    ld [$C95A], a                                 ; $4D7F: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4D7F: $EA $5A $C9
     ldh [rSVBK], a                                ; $4D82: $E0 $70
     ret                                           ; $4D84: $C9
 
@@ -2489,7 +2489,7 @@ Call_001_4D85:
     ld l, a                                       ; $4D96: $6F
     add hl, de                                    ; $4D97: $19
     ld a, $05                                     ; $4D98: $3E $05
-    ld [$C95A], a                                 ; $4D9A: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4D9A: $EA $5A $C9
     ldh [rSVBK], a                                ; $4D9D: $E0 $70
     ret                                           ; $4D9F: $C9
 
@@ -2511,7 +2511,7 @@ Call_001_4DA0:
     ld l, a                                       ; $4DB6: $6F
     add hl, de                                    ; $4DB7: $19
     ld a, $05                                     ; $4DB8: $3E $05
-    ld [$C95A], a                                 ; $4DBA: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4DBA: $EA $5A $C9
     ldh [rSVBK], a                                ; $4DBD: $E0 $70
     ret                                           ; $4DBF: $C9
 
@@ -2531,7 +2531,7 @@ Call_001_4DC0:
     ld l, a                                       ; $4DD4: $6F
     add hl, de                                    ; $4DD5: $19
     ld a, $05                                     ; $4DD6: $3E $05
-    ld [$C95A], a                                 ; $4DD8: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4DD8: $EA $5A $C9
     ldh [rSVBK], a                                ; $4DDB: $E0 $70
     ret                                           ; $4DDD: $C9
 
@@ -2549,7 +2549,7 @@ Call_001_4DDE:
     ld l, a                                       ; $4DEF: $6F
     add hl, de                                    ; $4DF0: $19
     ld a, $05                                     ; $4DF1: $3E $05
-    ld [$C95A], a                                 ; $4DF3: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4DF3: $EA $5A $C9
     ldh [rSVBK], a                                ; $4DF6: $E0 $70
     ret                                           ; $4DF8: $C9
 
@@ -2567,7 +2567,7 @@ Call_001_4DF9:
     ld l, a                                       ; $4E0A: $6F
     add hl, de                                    ; $4E0B: $19
     ld a, $05                                     ; $4E0C: $3E $05
-    ld [$C95A], a                                 ; $4E0E: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E0E: $EA $5A $C9
     ldh [rSVBK], a                                ; $4E11: $E0 $70
     ret                                           ; $4E13: $C9
 
@@ -2589,7 +2589,7 @@ Call_001_4E14:
     ld l, a                                       ; $4E2A: $6F
     add hl, de                                    ; $4E2B: $19
     ld a, $05                                     ; $4E2C: $3E $05
-    ld [$C95A], a                                 ; $4E2E: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E2E: $EA $5A $C9
     ldh [rSVBK], a                                ; $4E31: $E0 $70
     ret                                           ; $4E33: $C9
 
@@ -2624,7 +2624,7 @@ Jump_001_4E3D:
     ld a, $09                                     ; $4E63: $3E $09
     ld [hl], a                                    ; $4E65: $77
     ld a, $03                                     ; $4E66: $3E $03
-    ld [$C95A], a                                 ; $4E68: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E68: $EA $5A $C9
     ldh [rSVBK], a                                ; $4E6B: $E0 $70
     ld [hl], c                                    ; $4E6D: $71
     ld hl, $4B0F                                  ; $4E6E: $21 $0F $4B
@@ -2646,12 +2646,12 @@ Jump_001_4E3D:
     ld a, l                                       ; $4E8D: $7D
     ld [$C9D0], a                                 ; $4E8E: $EA $D0 $C9
     ld a, $05                                     ; $4E91: $3E $05
-    ld [$C95A], a                                 ; $4E93: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E93: $EA $5A $C9
     ldh [rSVBK], a                                ; $4E96: $E0 $70
     ld a, $81                                     ; $4E98: $3E $81
     ld [hl], a                                    ; $4E9A: $77
     ld a, $03                                     ; $4E9B: $3E $03
-    ld [$C95A], a                                 ; $4E9D: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4E9D: $EA $5A $C9
     ldh [rSVBK], a                                ; $4EA0: $E0 $70
     ld a, $FD                                     ; $4EA2: $3E $FD
     ld [hl], a                                    ; $4EA4: $77
@@ -2669,11 +2669,11 @@ Jump_001_4E3D:
     call Call_000_07A9                            ; $4EBD: $CD $A9 $07
     call Call_001_4B7D                            ; $4EC0: $CD $7D $4B
     ld a, $34                                     ; $4EC3: $3E $34
-    ldh [$8D], a                                  ; $4EC5: $E0 $8D
+    ldh [$FF8D], a                                  ; $4EC5: $E0 $8D
     ld a, $63                                     ; $4EC7: $3E $63
-    ldh [$8E], a                                  ; $4EC9: $E0 $8E
+    ldh [$FF8E], a                                  ; $4EC9: $E0 $8E
     ld a, $03                                     ; $4ECB: $3E $03
-    ld [$C95A], a                                 ; $4ECD: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4ECD: $EA $5A $C9
     ldh [rSVBK], a                                ; $4ED0: $E0 $70
     ld a, [$FF9F]                                 ; $4ED2: $FA $9F $FF
     ld h, a                                       ; $4ED5: $67
@@ -2687,7 +2687,7 @@ Jump_001_4E3D:
     push hl                                       ; $4EE2: $E5
     add hl, de                                    ; $4EE3: $19
     ld a, $05                                     ; $4EE4: $3E $05
-    ld [$C95A], a                                 ; $4EE6: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4EE6: $EA $5A $C9
     ldh [rSVBK], a                                ; $4EE9: $E0 $70
     ld a, [hl]                                    ; $4EEB: $7E
     cp $81                                        ; $4EEC: $FE $81
@@ -2709,11 +2709,11 @@ Jump_001_4E3D:
     call Call_000_07A9                            ; $4F05: $CD $A9 $07
     call Call_001_4B7D                            ; $4F08: $CD $7D $4B
     ld a, $34                                     ; $4F0B: $3E $34
-    ldh [$8D], a                                  ; $4F0D: $E0 $8D
+    ldh [$FF8D], a                                  ; $4F0D: $E0 $8D
     ld a, $63                                     ; $4F0F: $3E $63
-    ldh [$8E], a                                  ; $4F11: $E0 $8E
+    ldh [$FF8E], a                                  ; $4F11: $E0 $8E
     ld a, $03                                     ; $4F13: $3E $03
-    ld [$C95A], a                                 ; $4F15: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4F15: $EA $5A $C9
     ldh [rSVBK], a                                ; $4F18: $E0 $70
     ld hl, $FF93                                  ; $4F1A: $21 $93 $FF
     ld a, [hl+]                                   ; $4F1D: $2A
@@ -2728,7 +2728,7 @@ Jump_001_4E3D:
     push hl                                       ; $4F2A: $E5
     dec hl                                        ; $4F2B: $2B
     ld a, $05                                     ; $4F2C: $3E $05
-    ld [$C95A], a                                 ; $4F2E: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4F2E: $EA $5A $C9
     ldh [rSVBK], a                                ; $4F31: $E0 $70
     ld a, [hl]                                    ; $4F33: $7E
     cp $81                                        ; $4F34: $FE $81
@@ -2750,11 +2750,11 @@ Jump_001_4E3D:
     call Call_000_07A9                            ; $4F4D: $CD $A9 $07
     call Call_001_4B7D                            ; $4F50: $CD $7D $4B
     ld a, $34                                     ; $4F53: $3E $34
-    ldh [$8D], a                                  ; $4F55: $E0 $8D
+    ldh [$FF8D], a                                  ; $4F55: $E0 $8D
     ld a, $63                                     ; $4F57: $3E $63
-    ldh [$8E], a                                  ; $4F59: $E0 $8E
+    ldh [$FF8E], a                                  ; $4F59: $E0 $8E
     ld a, $03                                     ; $4F5B: $3E $03
-    ld [$C95A], a                                 ; $4F5D: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4F5D: $EA $5A $C9
     ldh [rSVBK], a                                ; $4F60: $E0 $70
     ld hl, $FF93                                  ; $4F62: $21 $93 $FF
     ld a, [hl+]                                   ; $4F65: $2A
@@ -2769,7 +2769,7 @@ Jump_001_4E3D:
     push hl                                       ; $4F72: $E5
     inc hl                                        ; $4F73: $23
     ld a, $05                                     ; $4F74: $3E $05
-    ld [$C95A], a                                 ; $4F76: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4F76: $EA $5A $C9
     ldh [rSVBK], a                                ; $4F79: $E0 $70
     ld a, [hl]                                    ; $4F7B: $7E
     cp $81                                        ; $4F7C: $FE $81
@@ -2791,11 +2791,11 @@ Jump_001_4E3D:
     call Call_000_07A9                            ; $4F95: $CD $A9 $07
     call Call_001_4B7D                            ; $4F98: $CD $7D $4B
     ld a, $34                                     ; $4F9B: $3E $34
-    ldh [$8D], a                                  ; $4F9D: $E0 $8D
+    ldh [$FF8D], a                                  ; $4F9D: $E0 $8D
     ld a, $63                                     ; $4F9F: $3E $63
-    ldh [$8E], a                                  ; $4FA1: $E0 $8E
+    ldh [$FF8E], a                                  ; $4FA1: $E0 $8E
     ld a, $03                                     ; $4FA3: $3E $03
-    ld [$C95A], a                                 ; $4FA5: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4FA5: $EA $5A $C9
     ldh [rSVBK], a                                ; $4FA8: $E0 $70
     ld hl, $FF93                                  ; $4FAA: $21 $93 $FF
     ld a, [hl+]                                   ; $4FAD: $2A
@@ -2815,7 +2815,7 @@ Jump_001_4E3D:
     push hl                                       ; $4FC2: $E5
     add hl, de                                    ; $4FC3: $19
     ld a, $05                                     ; $4FC4: $3E $05
-    ld [$C95A], a                                 ; $4FC6: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4FC6: $EA $5A $C9
     ldh [rSVBK], a                                ; $4FC9: $E0 $70
     ld a, [hl]                                    ; $4FCB: $7E
     cp $81                                        ; $4FCC: $FE $81
@@ -2849,13 +2849,13 @@ Call_001_4FE6:
 
 Jump_001_4FEF:
     ld a, $D3                                     ; $4FEF: $3E $D3
-    ldh [$AB], a                                  ; $4FF1: $E0 $AB
+    ldh [$FFAB], a                                  ; $4FF1: $E0 $AB
     ld a, $0A                                     ; $4FF3: $3E $0A
-    ldh [$AC], a                                  ; $4FF5: $E0 $AC
+    ldh [$FFAC], a                                  ; $4FF5: $E0 $AC
     ld a, $02                                     ; $4FF7: $3E $02
-    ldh [$8D], a                                  ; $4FF9: $E0 $8D
+    ldh [$FF8D], a                                  ; $4FF9: $E0 $8D
     ld a, $50                                     ; $4FFB: $3E $50
-    ldh [$8E], a                                  ; $4FFD: $E0 $8E
+    ldh [$FF8E], a                                  ; $4FFD: $E0 $8E
     jp Jump_001_634D                              ; $4FFF: $C3 $4D $63
 
 
@@ -2884,19 +2884,19 @@ Jump_001_4FEF:
 
 Jump_001_5030:
     ld a, $03                                     ; $5030: $3E $03
-    ldh [$8C], a                                  ; $5032: $E0 $8C
+    ldh [$FF8C], a                                  ; $5032: $E0 $8C
     ld a, $D3                                     ; $5034: $3E $D3
-    ldh [$AB], a                                  ; $5036: $E0 $AB
+    ldh [$FFAB], a                                  ; $5036: $E0 $AB
     ld a, $0A                                     ; $5038: $3E $0A
-    ldh [$AC], a                                  ; $503A: $E0 $AC
+    ldh [$FFAC], a                                  ; $503A: $E0 $AC
     ld a, $C9                                     ; $503C: $3E $C9
-    ldh [$A9], a                                  ; $503E: $E0 $A9
+    ldh [$FFA9], a                                  ; $503E: $E0 $A9
     ld a, $68                                     ; $5040: $3E $68
-    ldh [$AA], a                                  ; $5042: $E0 $AA
+    ldh [$FFAA], a                                  ; $5042: $E0 $AA
     ld a, $71                                     ; $5044: $3E $71
-    ldh [$8D], a                                  ; $5046: $E0 $8D
+    ldh [$FF8D], a                                  ; $5046: $E0 $8D
     ld a, $50                                     ; $5048: $3E $50
-    ldh [$8E], a                                  ; $504A: $E0 $8E
+    ldh [$FF8E], a                                  ; $504A: $E0 $8E
     jp Jump_001_634D                              ; $504C: $C3 $4D $63
 
 
@@ -2904,24 +2904,24 @@ Jump_001_5030:
 
 Jump_001_5052:
     ld a, $03                                     ; $5052: $3E $03
-    ldh [$8C], a                                  ; $5054: $E0 $8C
+    ldh [$FF8C], a                                  ; $5054: $E0 $8C
     ld a, $D3                                     ; $5056: $3E $D3
-    ldh [$AB], a                                  ; $5058: $E0 $AB
+    ldh [$FFAB], a                                  ; $5058: $E0 $AB
     ld a, $0A                                     ; $505A: $3E $0A
-    ldh [$AC], a                                  ; $505C: $E0 $AC
+    ldh [$FFAC], a                                  ; $505C: $E0 $AC
     ld a, $DA                                     ; $505E: $3E $DA
-    ldh [$A9], a                                  ; $5060: $E0 $A9
+    ldh [$FFA9], a                                  ; $5060: $E0 $A9
     ld a, $68                                     ; $5062: $3E $68
-    ldh [$AA], a                                  ; $5064: $E0 $AA
+    ldh [$FFAA], a                                  ; $5064: $E0 $AA
     ld a, $71                                     ; $5066: $3E $71
-    ldh [$8D], a                                  ; $5068: $E0 $8D
+    ldh [$FF8D], a                                  ; $5068: $E0 $8D
     ld a, $50                                     ; $506A: $3E $50
-    ldh [$8E], a                                  ; $506C: $E0 $8E
+    ldh [$FF8E], a                                  ; $506C: $E0 $8E
     jp Jump_001_634D                              ; $506E: $C3 $4D $63
 
 
     ld a, $03                                     ; $5071: $3E $03
-    ldh [$8C], a                                  ; $5073: $E0 $8C
+    ldh [$FF8C], a                                  ; $5073: $E0 $8C
     call Call_001_6393                            ; $5075: $CD $93 $63
     call Call_001_4FE6                            ; $5078: $CD $E6 $4F
     ld a, [$C9CD]                                 ; $507B: $FA $CD $C9
@@ -2961,9 +2961,9 @@ Jump_001_5052:
 
     call Call_001_4FDD                            ; $50BF: $CD $DD $4F
     ld a, $AF                                     ; $50C2: $3E $AF
-    ldh [$A9], a                                  ; $50C4: $E0 $A9
+    ldh [$FFA9], a                                  ; $50C4: $E0 $A9
     ld a, $66                                     ; $50C6: $3E $66
-    ldh [$AA], a                                  ; $50C8: $E0 $AA
+    ldh [$FFAA], a                                  ; $50C8: $E0 $AA
     jp Jump_001_6354                              ; $50CA: $C3 $54 $63
 
 
@@ -2977,19 +2977,19 @@ Jump_001_50CD:
 
 Jump_001_50DA:
     ld a, $01                                     ; $50DA: $3E $01
-    ldh [$8C], a                                  ; $50DC: $E0 $8C
+    ldh [$FF8C], a                                  ; $50DC: $E0 $8C
     ld a, $D3                                     ; $50DE: $3E $D3
-    ldh [$AB], a                                  ; $50E0: $E0 $AB
+    ldh [$FFAB], a                                  ; $50E0: $E0 $AB
     ld a, $0A                                     ; $50E2: $3E $0A
-    ldh [$AC], a                                  ; $50E4: $E0 $AC
+    ldh [$FFAC], a                                  ; $50E4: $E0 $AC
     ld a, $E7                                     ; $50E6: $3E $E7
-    ldh [$A9], a                                  ; $50E8: $E0 $A9
+    ldh [$FFA9], a                                  ; $50E8: $E0 $A9
     ld a, $67                                     ; $50EA: $3E $67
-    ldh [$AA], a                                  ; $50EC: $E0 $AA
+    ldh [$FFAA], a                                  ; $50EC: $E0 $AA
     ld a, $1B                                     ; $50EE: $3E $1B
-    ldh [$8D], a                                  ; $50F0: $E0 $8D
+    ldh [$FF8D], a                                  ; $50F0: $E0 $8D
     ld a, $51                                     ; $50F2: $3E $51
-    ldh [$8E], a                                  ; $50F4: $E0 $8E
+    ldh [$FF8E], a                                  ; $50F4: $E0 $8E
     jp Jump_001_634D                              ; $50F6: $C3 $4D $63
 
 
@@ -2997,24 +2997,24 @@ Jump_001_50DA:
 
 Jump_001_50FC:
     ld a, $01                                     ; $50FC: $3E $01
-    ldh [$8C], a                                  ; $50FE: $E0 $8C
+    ldh [$FF8C], a                                  ; $50FE: $E0 $8C
     ld a, $D3                                     ; $5100: $3E $D3
-    ldh [$AB], a                                  ; $5102: $E0 $AB
+    ldh [$FFAB], a                                  ; $5102: $E0 $AB
     ld a, $0A                                     ; $5104: $3E $0A
-    ldh [$AC], a                                  ; $5106: $E0 $AC
+    ldh [$FFAC], a                                  ; $5106: $E0 $AC
     ld a, $F8                                     ; $5108: $3E $F8
-    ldh [$A9], a                                  ; $510A: $E0 $A9
+    ldh [$FFA9], a                                  ; $510A: $E0 $A9
     ld a, $67                                     ; $510C: $3E $67
-    ldh [$AA], a                                  ; $510E: $E0 $AA
+    ldh [$FFAA], a                                  ; $510E: $E0 $AA
     ld a, $1B                                     ; $5110: $3E $1B
-    ldh [$8D], a                                  ; $5112: $E0 $8D
+    ldh [$FF8D], a                                  ; $5112: $E0 $8D
     ld a, $51                                     ; $5114: $3E $51
-    ldh [$8E], a                                  ; $5116: $E0 $8E
+    ldh [$FF8E], a                                  ; $5116: $E0 $8E
     jp Jump_001_634D                              ; $5118: $C3 $4D $63
 
 
     ld a, $01                                     ; $511B: $3E $01
-    ldh [$8C], a                                  ; $511D: $E0 $8C
+    ldh [$FF8C], a                                  ; $511D: $E0 $8C
     call Call_001_6393                            ; $511F: $CD $93 $63
     call Call_001_4FE6                            ; $5122: $CD $E6 $4F
     ld a, [$C9CD]                                 ; $5125: $FA $CD $C9
@@ -3054,9 +3054,9 @@ Jump_001_50FC:
 
     call Call_001_4FDD                            ; $5169: $CD $DD $4F
     ld a, $79                                     ; $516C: $3E $79
-    ldh [$A9], a                                  ; $516E: $E0 $A9
+    ldh [$FFA9], a                                  ; $516E: $E0 $A9
     ld a, $66                                     ; $5170: $3E $66
-    ldh [$AA], a                                  ; $5172: $E0 $AA
+    ldh [$FFAA], a                                  ; $5172: $E0 $AA
     jp Jump_001_6354                              ; $5174: $C3 $54 $63
 
 
@@ -3070,19 +3070,19 @@ Jump_001_5177:
 
 Jump_001_5184:
     ld a, $02                                     ; $5184: $3E $02
-    ldh [$8C], a                                  ; $5186: $E0 $8C
+    ldh [$FF8C], a                                  ; $5186: $E0 $8C
     ld a, $D3                                     ; $5188: $3E $D3
-    ldh [$AB], a                                  ; $518A: $E0 $AB
+    ldh [$FFAB], a                                  ; $518A: $E0 $AB
     ld a, $0A                                     ; $518C: $3E $0A
-    ldh [$AC], a                                  ; $518E: $E0 $AC
+    ldh [$FFAC], a                                  ; $518E: $E0 $AC
     ld a, $43                                     ; $5190: $3E $43
-    ldh [$A9], a                                  ; $5192: $E0 $A9
+    ldh [$FFA9], a                                  ; $5192: $E0 $A9
     ld a, $68                                     ; $5194: $3E $68
-    ldh [$AA], a                                  ; $5196: $E0 $AA
+    ldh [$FFAA], a                                  ; $5196: $E0 $AA
     ld a, $C5                                     ; $5198: $3E $C5
-    ldh [$8D], a                                  ; $519A: $E0 $8D
+    ldh [$FF8D], a                                  ; $519A: $E0 $8D
     ld a, $51                                     ; $519C: $3E $51
-    ldh [$8E], a                                  ; $519E: $E0 $8E
+    ldh [$FF8E], a                                  ; $519E: $E0 $8E
     jp Jump_001_634D                              ; $51A0: $C3 $4D $63
 
 
@@ -3090,24 +3090,24 @@ Jump_001_5184:
 
 Jump_001_51A6:
     ld a, $02                                     ; $51A6: $3E $02
-    ldh [$8C], a                                  ; $51A8: $E0 $8C
+    ldh [$FF8C], a                                  ; $51A8: $E0 $8C
     ld a, $D3                                     ; $51AA: $3E $D3
-    ldh [$AB], a                                  ; $51AC: $E0 $AB
+    ldh [$FFAB], a                                  ; $51AC: $E0 $AB
     ld a, $0A                                     ; $51AE: $3E $0A
-    ldh [$AC], a                                  ; $51B0: $E0 $AC
+    ldh [$FFAC], a                                  ; $51B0: $E0 $AC
     ld a, $54                                     ; $51B2: $3E $54
-    ldh [$A9], a                                  ; $51B4: $E0 $A9
+    ldh [$FFA9], a                                  ; $51B4: $E0 $A9
     ld a, $68                                     ; $51B6: $3E $68
-    ldh [$AA], a                                  ; $51B8: $E0 $AA
+    ldh [$FFAA], a                                  ; $51B8: $E0 $AA
     ld a, $C5                                     ; $51BA: $3E $C5
-    ldh [$8D], a                                  ; $51BC: $E0 $8D
+    ldh [$FF8D], a                                  ; $51BC: $E0 $8D
     ld a, $51                                     ; $51BE: $3E $51
-    ldh [$8E], a                                  ; $51C0: $E0 $8E
+    ldh [$FF8E], a                                  ; $51C0: $E0 $8E
     jp Jump_001_634D                              ; $51C2: $C3 $4D $63
 
 
     ld a, $02                                     ; $51C5: $3E $02
-    ldh [$8C], a                                  ; $51C7: $E0 $8C
+    ldh [$FF8C], a                                  ; $51C7: $E0 $8C
     call Call_001_6393                            ; $51C9: $CD $93 $63
     call Call_001_4FE6                            ; $51CC: $CD $E6 $4F
     ld a, [$C9CD]                                 ; $51CF: $FA $CD $C9
@@ -3147,9 +3147,9 @@ Jump_001_51A6:
 
     call Call_001_4FDD                            ; $5213: $CD $DD $4F
     ld a, $8B                                     ; $5216: $3E $8B
-    ldh [$A9], a                                  ; $5218: $E0 $A9
+    ldh [$FFA9], a                                  ; $5218: $E0 $A9
     ld a, $66                                     ; $521A: $3E $66
-    ldh [$AA], a                                  ; $521C: $E0 $AA
+    ldh [$FFAA], a                                  ; $521C: $E0 $AA
     jp Jump_001_6354                              ; $521E: $C3 $54 $63
 
 
@@ -3163,19 +3163,19 @@ Jump_001_5221:
 
 Jump_001_522E:
     ld a, $00                                     ; $522E: $3E $00
-    ldh [$8C], a                                  ; $5230: $E0 $8C
+    ldh [$FF8C], a                                  ; $5230: $E0 $8C
     ld a, $D3                                     ; $5232: $3E $D3
-    ldh [$AB], a                                  ; $5234: $E0 $AB
+    ldh [$FFAB], a                                  ; $5234: $E0 $AB
     ld a, $0A                                     ; $5236: $3E $0A
-    ldh [$AC], a                                  ; $5238: $E0 $AC
+    ldh [$FFAC], a                                  ; $5238: $E0 $AC
     ld a, $6D                                     ; $523A: $3E $6D
-    ldh [$A9], a                                  ; $523C: $E0 $A9
+    ldh [$FFA9], a                                  ; $523C: $E0 $A9
     ld a, $68                                     ; $523E: $3E $68
-    ldh [$AA], a                                  ; $5240: $E0 $AA
+    ldh [$FFAA], a                                  ; $5240: $E0 $AA
     ld a, $6F                                     ; $5242: $3E $6F
-    ldh [$8D], a                                  ; $5244: $E0 $8D
+    ldh [$FF8D], a                                  ; $5244: $E0 $8D
     ld a, $52                                     ; $5246: $3E $52
-    ldh [$8E], a                                  ; $5248: $E0 $8E
+    ldh [$FF8E], a                                  ; $5248: $E0 $8E
     jp Jump_001_634D                              ; $524A: $C3 $4D $63
 
 
@@ -3183,24 +3183,24 @@ Jump_001_522E:
 
 Jump_001_5250:
     ld a, $00                                     ; $5250: $3E $00
-    ldh [$8C], a                                  ; $5252: $E0 $8C
+    ldh [$FF8C], a                                  ; $5252: $E0 $8C
     ld a, $D3                                     ; $5254: $3E $D3
-    ldh [$AB], a                                  ; $5256: $E0 $AB
+    ldh [$FFAB], a                                  ; $5256: $E0 $AB
     ld a, $0A                                     ; $5258: $3E $0A
-    ldh [$AC], a                                  ; $525A: $E0 $AC
+    ldh [$FFAC], a                                  ; $525A: $E0 $AC
     ld a, $7E                                     ; $525C: $3E $7E
-    ldh [$A9], a                                  ; $525E: $E0 $A9
+    ldh [$FFA9], a                                  ; $525E: $E0 $A9
     ld a, $68                                     ; $5260: $3E $68
-    ldh [$AA], a                                  ; $5262: $E0 $AA
+    ldh [$FFAA], a                                  ; $5262: $E0 $AA
     ld a, $6F                                     ; $5264: $3E $6F
-    ldh [$8D], a                                  ; $5266: $E0 $8D
+    ldh [$FF8D], a                                  ; $5266: $E0 $8D
     ld a, $52                                     ; $5268: $3E $52
-    ldh [$8E], a                                  ; $526A: $E0 $8E
+    ldh [$FF8E], a                                  ; $526A: $E0 $8E
     jp Jump_001_634D                              ; $526C: $C3 $4D $63
 
 
     ld a, $00                                     ; $526F: $3E $00
-    ldh [$8C], a                                  ; $5271: $E0 $8C
+    ldh [$FF8C], a                                  ; $5271: $E0 $8C
     call Call_001_6393                            ; $5273: $CD $93 $63
     call Call_001_4FE6                            ; $5276: $CD $E6 $4F
     ld a, [$C9CD]                                 ; $5279: $FA $CD $C9
@@ -3240,9 +3240,9 @@ Jump_001_5250:
 
     call Call_001_4FDD                            ; $52BD: $CD $DD $4F
     ld a, $9D                                     ; $52C0: $3E $9D
-    ldh [$A9], a                                  ; $52C2: $E0 $A9
+    ldh [$FFA9], a                                  ; $52C2: $E0 $A9
     ld a, $66                                     ; $52C4: $3E $66
-    ldh [$AA], a                                  ; $52C6: $E0 $AA
+    ldh [$FFAA], a                                  ; $52C6: $E0 $AA
     jp Jump_001_6354                              ; $52C8: $C3 $54 $63
 
 
@@ -3440,19 +3440,19 @@ Jump_001_53B0:
 
 Jump_001_53CA:
     ld a, $03                                     ; $53CA: $3E $03
-    ldh [$8C], a                                  ; $53CC: $E0 $8C
+    ldh [$FF8C], a                                  ; $53CC: $E0 $8C
     ld a, $D3                                     ; $53CE: $3E $D3
-    ldh [$AB], a                                  ; $53D0: $E0 $AB
+    ldh [$FFAB], a                                  ; $53D0: $E0 $AB
     ld a, $0A                                     ; $53D2: $3E $0A
-    ldh [$AC], a                                  ; $53D4: $E0 $AC
+    ldh [$FFAC], a                                  ; $53D4: $E0 $AC
     ld a, $4D                                     ; $53D6: $3E $4D
-    ldh [$A9], a                                  ; $53D8: $E0 $A9
+    ldh [$FFA9], a                                  ; $53D8: $E0 $A9
     ld a, $5C                                     ; $53DA: $3E $5C
-    ldh [$AA], a                                  ; $53DC: $E0 $AA
+    ldh [$FFAA], a                                  ; $53DC: $E0 $AA
     ld a, $E9                                     ; $53DE: $3E $E9
-    ldh [$8D], a                                  ; $53E0: $E0 $8D
+    ldh [$FF8D], a                                  ; $53E0: $E0 $8D
     ld a, $53                                     ; $53E2: $3E $53
-    ldh [$8E], a                                  ; $53E4: $E0 $8E
+    ldh [$FF8E], a                                  ; $53E4: $E0 $8E
     jp Jump_001_634D                              ; $53E6: $C3 $4D $63
 
 
@@ -3535,19 +3535,19 @@ jr_001_5465:
 
 Jump_001_5468:
     ld a, $01                                     ; $5468: $3E $01
-    ldh [$8C], a                                  ; $546A: $E0 $8C
+    ldh [$FF8C], a                                  ; $546A: $E0 $8C
     ld a, $D3                                     ; $546C: $3E $D3
-    ldh [$AB], a                                  ; $546E: $E0 $AB
+    ldh [$FFAB], a                                  ; $546E: $E0 $AB
     ld a, $0A                                     ; $5470: $3E $0A
-    ldh [$AC], a                                  ; $5472: $E0 $AC
+    ldh [$FFAC], a                                  ; $5472: $E0 $AC
     ld a, $6D                                     ; $5474: $3E $6D
-    ldh [$A9], a                                  ; $5476: $E0 $A9
+    ldh [$FFA9], a                                  ; $5476: $E0 $A9
     ld a, $5C                                     ; $5478: $3E $5C
-    ldh [$AA], a                                  ; $547A: $E0 $AA
+    ldh [$FFAA], a                                  ; $547A: $E0 $AA
     ld a, $87                                     ; $547C: $3E $87
-    ldh [$8D], a                                  ; $547E: $E0 $8D
+    ldh [$FF8D], a                                  ; $547E: $E0 $8D
     ld a, $54                                     ; $5480: $3E $54
-    ldh [$8E], a                                  ; $5482: $E0 $8E
+    ldh [$FF8E], a                                  ; $5482: $E0 $8E
     jp Jump_001_634D                              ; $5484: $C3 $4D $63
 
 
@@ -3655,19 +3655,19 @@ jr_001_552B:
 
 Jump_001_552E:
     ld a, $02                                     ; $552E: $3E $02
-    ldh [$8C], a                                  ; $5530: $E0 $8C
+    ldh [$FF8C], a                                  ; $5530: $E0 $8C
     ld a, $D3                                     ; $5532: $3E $D3
-    ldh [$AB], a                                  ; $5534: $E0 $AB
+    ldh [$FFAB], a                                  ; $5534: $E0 $AB
     ld a, $0A                                     ; $5536: $3E $0A
-    ldh [$AC], a                                  ; $5538: $E0 $AC
+    ldh [$FFAC], a                                  ; $5538: $E0 $AC
     ld a, $8D                                     ; $553A: $3E $8D
-    ldh [$A9], a                                  ; $553C: $E0 $A9
+    ldh [$FFA9], a                                  ; $553C: $E0 $A9
     ld a, $5C                                     ; $553E: $3E $5C
-    ldh [$AA], a                                  ; $5540: $E0 $AA
+    ldh [$FFAA], a                                  ; $5540: $E0 $AA
     ld a, $4D                                     ; $5542: $3E $4D
-    ldh [$8D], a                                  ; $5544: $E0 $8D
+    ldh [$FF8D], a                                  ; $5544: $E0 $8D
     ld a, $55                                     ; $5546: $3E $55
-    ldh [$8E], a                                  ; $5548: $E0 $8E
+    ldh [$FF8E], a                                  ; $5548: $E0 $8E
     jp Jump_001_634D                              ; $554A: $C3 $4D $63
 
 
@@ -3775,19 +3775,19 @@ jr_001_55F1:
 
 Jump_001_55F4:
     ld a, $00                                     ; $55F4: $3E $00
-    ldh [$8C], a                                  ; $55F6: $E0 $8C
+    ldh [$FF8C], a                                  ; $55F6: $E0 $8C
     ld a, $D3                                     ; $55F8: $3E $D3
-    ldh [$AB], a                                  ; $55FA: $E0 $AB
+    ldh [$FFAB], a                                  ; $55FA: $E0 $AB
     ld a, $0A                                     ; $55FC: $3E $0A
-    ldh [$AC], a                                  ; $55FE: $E0 $AC
+    ldh [$FFAC], a                                  ; $55FE: $E0 $AC
     ld a, $23                                     ; $5600: $3E $23
-    ldh [$A9], a                                  ; $5602: $E0 $A9
+    ldh [$FFA9], a                                  ; $5602: $E0 $A9
     ld a, $5C                                     ; $5604: $3E $5C
-    ldh [$AA], a                                  ; $5606: $E0 $AA
+    ldh [$FFAA], a                                  ; $5606: $E0 $AA
     ld a, $13                                     ; $5608: $3E $13
-    ldh [$8D], a                                  ; $560A: $E0 $8D
+    ldh [$FF8D], a                                  ; $560A: $E0 $8D
     ld a, $56                                     ; $560C: $3E $56
-    ldh [$8E], a                                  ; $560E: $E0 $8E
+    ldh [$FF8E], a                                  ; $560E: $E0 $8E
     jp Jump_001_634D                              ; $5610: $C3 $4D $63
 
 
@@ -3870,19 +3870,19 @@ jr_001_568E:
 
 Jump_001_5691:
     ld a, $03                                     ; $5691: $3E $03
-    ldh [$8C], a                                  ; $5693: $E0 $8C
+    ldh [$FF8C], a                                  ; $5693: $E0 $8C
     ld a, $D3                                     ; $5695: $3E $D3
-    ldh [$AB], a                                  ; $5697: $E0 $AB
+    ldh [$FFAB], a                                  ; $5697: $E0 $AB
     ld a, $0A                                     ; $5699: $3E $0A
-    ldh [$AC], a                                  ; $569B: $E0 $AC
+    ldh [$FFAC], a                                  ; $569B: $E0 $AC
     ld a, $0D                                     ; $569D: $3E $0D
-    ldh [$A9], a                                  ; $569F: $E0 $A9
+    ldh [$FFA9], a                                  ; $569F: $E0 $A9
     ld a, $5D                                     ; $56A1: $3E $5D
-    ldh [$AA], a                                  ; $56A3: $E0 $AA
+    ldh [$FFAA], a                                  ; $56A3: $E0 $AA
     ld a, $B0                                     ; $56A5: $3E $B0
-    ldh [$8D], a                                  ; $56A7: $E0 $8D
+    ldh [$FF8D], a                                  ; $56A7: $E0 $8D
     ld a, $56                                     ; $56A9: $3E $56
-    ldh [$8E], a                                  ; $56AB: $E0 $8E
+    ldh [$FF8E], a                                  ; $56AB: $E0 $8E
     jp Jump_001_634D                              ; $56AD: $C3 $4D $63
 
 
@@ -3952,19 +3952,19 @@ jr_001_5719:
 
 Jump_001_5724:
     ld a, $01                                     ; $5724: $3E $01
-    ldh [$8C], a                                  ; $5726: $E0 $8C
+    ldh [$FF8C], a                                  ; $5726: $E0 $8C
     ld a, $D3                                     ; $5728: $3E $D3
-    ldh [$AB], a                                  ; $572A: $E0 $AB
+    ldh [$FFAB], a                                  ; $572A: $E0 $AB
     ld a, $0A                                     ; $572C: $3E $0A
-    ldh [$AC], a                                  ; $572E: $E0 $AC
+    ldh [$FFAC], a                                  ; $572E: $E0 $AC
     ld a, $27                                     ; $5730: $3E $27
-    ldh [$A9], a                                  ; $5732: $E0 $A9
+    ldh [$FFA9], a                                  ; $5732: $E0 $A9
     ld a, $5D                                     ; $5734: $3E $5D
-    ldh [$AA], a                                  ; $5736: $E0 $AA
+    ldh [$FFAA], a                                  ; $5736: $E0 $AA
     ld a, $43                                     ; $5738: $3E $43
-    ldh [$8D], a                                  ; $573A: $E0 $8D
+    ldh [$FF8D], a                                  ; $573A: $E0 $8D
     ld a, $57                                     ; $573C: $3E $57
-    ldh [$8E], a                                  ; $573E: $E0 $8E
+    ldh [$FF8E], a                                  ; $573E: $E0 $8E
     jp Jump_001_634D                              ; $5740: $C3 $4D $63
 
 
@@ -4063,19 +4063,19 @@ jr_001_57D1:
 
 Jump_001_57DC:
     ld a, $02                                     ; $57DC: $3E $02
-    ldh [$8C], a                                  ; $57DE: $E0 $8C
+    ldh [$FF8C], a                                  ; $57DE: $E0 $8C
     ld a, $D3                                     ; $57E0: $3E $D3
-    ldh [$AB], a                                  ; $57E2: $E0 $AB
+    ldh [$FFAB], a                                  ; $57E2: $E0 $AB
     ld a, $0A                                     ; $57E4: $3E $0A
-    ldh [$AC], a                                  ; $57E6: $E0 $AC
+    ldh [$FFAC], a                                  ; $57E6: $E0 $AC
     ld a, $41                                     ; $57E8: $3E $41
-    ldh [$A9], a                                  ; $57EA: $E0 $A9
+    ldh [$FFA9], a                                  ; $57EA: $E0 $A9
     ld a, $5D                                     ; $57EC: $3E $5D
-    ldh [$AA], a                                  ; $57EE: $E0 $AA
+    ldh [$FFAA], a                                  ; $57EE: $E0 $AA
     ld a, $FB                                     ; $57F0: $3E $FB
-    ldh [$8D], a                                  ; $57F2: $E0 $8D
+    ldh [$FF8D], a                                  ; $57F2: $E0 $8D
     ld a, $57                                     ; $57F4: $3E $57
-    ldh [$8E], a                                  ; $57F6: $E0 $8E
+    ldh [$FF8E], a                                  ; $57F6: $E0 $8E
     jp Jump_001_634D                              ; $57F8: $C3 $4D $63
 
 
@@ -4174,19 +4174,19 @@ jr_001_5889:
 
 Jump_001_5894:
     ld a, $00                                     ; $5894: $3E $00
-    ldh [$8C], a                                  ; $5896: $E0 $8C
+    ldh [$FF8C], a                                  ; $5896: $E0 $8C
     ld a, $D3                                     ; $5898: $3E $D3
-    ldh [$AB], a                                  ; $589A: $E0 $AB
+    ldh [$FFAB], a                                  ; $589A: $E0 $AB
     ld a, $0A                                     ; $589C: $3E $0A
-    ldh [$AC], a                                  ; $589E: $E0 $AC
+    ldh [$FFAC], a                                  ; $589E: $E0 $AC
     ld a, $FD                                     ; $58A0: $3E $FD
-    ldh [$A9], a                                  ; $58A2: $E0 $A9
+    ldh [$FFA9], a                                  ; $58A2: $E0 $A9
     ld a, $5C                                     ; $58A4: $3E $5C
-    ldh [$AA], a                                  ; $58A6: $E0 $AA
+    ldh [$FFAA], a                                  ; $58A6: $E0 $AA
     ld a, $B3                                     ; $58A8: $3E $B3
-    ldh [$8D], a                                  ; $58AA: $E0 $8D
+    ldh [$FF8D], a                                  ; $58AA: $E0 $8D
     ld a, $58                                     ; $58AC: $3E $58
-    ldh [$8E], a                                  ; $58AE: $E0 $8E
+    ldh [$FF8E], a                                  ; $58AE: $E0 $8E
     jp Jump_001_634D                              ; $58B0: $C3 $4D $63
 
 
@@ -4465,19 +4465,19 @@ jr_001_5AC4:
     ld [$C9C9], a                                 ; $5ACB: $EA $C9 $C9
     pop af                                        ; $5ACE: $F1
     ld a, $03                                     ; $5ACF: $3E $03
-    ldh [$8C], a                                  ; $5AD1: $E0 $8C
+    ldh [$FF8C], a                                  ; $5AD1: $E0 $8C
     ld a, $D3                                     ; $5AD3: $3E $D3
-    ldh [$AB], a                                  ; $5AD5: $E0 $AB
+    ldh [$FFAB], a                                  ; $5AD5: $E0 $AB
     ld a, $0A                                     ; $5AD7: $3E $0A
-    ldh [$AC], a                                  ; $5AD9: $E0 $AC
+    ldh [$FFAC], a                                  ; $5AD9: $E0 $AC
     ld a, $DE                                     ; $5ADB: $3E $DE
-    ldh [$A9], a                                  ; $5ADD: $E0 $A9
+    ldh [$FFA9], a                                  ; $5ADD: $E0 $A9
     ld a, $5F                                     ; $5ADF: $3E $5F
-    ldh [$AA], a                                  ; $5AE1: $E0 $AA
+    ldh [$FFAA], a                                  ; $5AE1: $E0 $AA
     ld a, $7F                                     ; $5AE3: $3E $7F
-    ldh [$8D], a                                  ; $5AE5: $E0 $8D
+    ldh [$FF8D], a                                  ; $5AE5: $E0 $8D
     ld a, $5C                                     ; $5AE7: $3E $5C
-    ldh [$8E], a                                  ; $5AE9: $E0 $8E
+    ldh [$FF8E], a                                  ; $5AE9: $E0 $8E
     jp Jump_001_634D                              ; $5AEB: $C3 $4D $63
 
 
@@ -4586,13 +4586,13 @@ Call_001_5BA4:
 
 Jump_001_5BAD:
     ld a, $D3                                     ; $5BAD: $3E $D3
-    ldh [$AB], a                                  ; $5BAF: $E0 $AB
+    ldh [$FFAB], a                                  ; $5BAF: $E0 $AB
     ld a, $0A                                     ; $5BB1: $3E $0A
-    ldh [$AC], a                                  ; $5BB3: $E0 $AC
+    ldh [$FFAC], a                                  ; $5BB3: $E0 $AC
     ld a, $C0                                     ; $5BB5: $3E $C0
-    ldh [$8D], a                                  ; $5BB7: $E0 $8D
+    ldh [$FF8D], a                                  ; $5BB7: $E0 $8D
     ld a, $5B                                     ; $5BB9: $3E $5B
-    ldh [$8E], a                                  ; $5BBB: $E0 $8E
+    ldh [$FF8E], a                                  ; $5BBB: $E0 $8E
     jp Jump_001_634D                              ; $5BBD: $C3 $4D $63
 
 
@@ -4695,19 +4695,19 @@ Call_001_5C45:
 
 Jump_001_5C60:
     ld a, $03                                     ; $5C60: $3E $03
-    ldh [$8C], a                                  ; $5C62: $E0 $8C
+    ldh [$FF8C], a                                  ; $5C62: $E0 $8C
     ld a, $D3                                     ; $5C64: $3E $D3
-    ldh [$AB], a                                  ; $5C66: $E0 $AB
+    ldh [$FFAB], a                                  ; $5C66: $E0 $AB
     ld a, $0A                                     ; $5C68: $3E $0A
-    ldh [$AC], a                                  ; $5C6A: $E0 $AC
+    ldh [$FFAC], a                                  ; $5C6A: $E0 $AC
     ld a, $8C                                     ; $5C6C: $3E $8C
-    ldh [$A9], a                                  ; $5C6E: $E0 $A9
+    ldh [$FFA9], a                                  ; $5C6E: $E0 $A9
     ld a, $5F                                     ; $5C70: $3E $5F
-    ldh [$AA], a                                  ; $5C72: $E0 $AA
+    ldh [$FFAA], a                                  ; $5C72: $E0 $AA
     ld a, $7F                                     ; $5C74: $3E $7F
-    ldh [$8D], a                                  ; $5C76: $E0 $8D
+    ldh [$FF8D], a                                  ; $5C76: $E0 $8D
     ld a, $5C                                     ; $5C78: $3E $5C
-    ldh [$8E], a                                  ; $5C7A: $E0 $8E
+    ldh [$FF8E], a                                  ; $5C7A: $E0 $8E
     jp Jump_001_634D                              ; $5C7C: $C3 $4D $63
 
 
@@ -4772,19 +4772,19 @@ jr_001_5CC9:
 
 Jump_001_5CE6:
     ld a, $01                                     ; $5CE6: $3E $01
-    ldh [$8C], a                                  ; $5CE8: $E0 $8C
+    ldh [$FF8C], a                                  ; $5CE8: $E0 $8C
     ld a, $D3                                     ; $5CEA: $3E $D3
-    ldh [$AB], a                                  ; $5CEC: $E0 $AB
+    ldh [$FFAB], a                                  ; $5CEC: $E0 $AB
     ld a, $0A                                     ; $5CEE: $3E $0A
-    ldh [$AC], a                                  ; $5CF0: $E0 $AC
+    ldh [$FFAC], a                                  ; $5CF0: $E0 $AC
     ld a, $A1                                     ; $5CF2: $3E $A1
-    ldh [$A9], a                                  ; $5CF4: $E0 $A9
+    ldh [$FFA9], a                                  ; $5CF4: $E0 $A9
     ld a, $5F                                     ; $5CF6: $3E $5F
-    ldh [$AA], a                                  ; $5CF8: $E0 $AA
+    ldh [$FFAA], a                                  ; $5CF8: $E0 $AA
     ld a, $05                                     ; $5CFA: $3E $05
-    ldh [$8D], a                                  ; $5CFC: $E0 $8D
+    ldh [$FF8D], a                                  ; $5CFC: $E0 $8D
     ld a, $5D                                     ; $5CFE: $3E $5D
-    ldh [$8E], a                                  ; $5D00: $E0 $8E
+    ldh [$FF8E], a                                  ; $5D00: $E0 $8E
     jp Jump_001_634D                              ; $5D02: $C3 $4D $63
 
 
@@ -4856,19 +4856,19 @@ jr_001_5D5E:
 
 Jump_001_5D7B:
     ld a, $02                                     ; $5D7B: $3E $02
-    ldh [$8C], a                                  ; $5D7D: $E0 $8C
+    ldh [$FF8C], a                                  ; $5D7D: $E0 $8C
     ld a, $D3                                     ; $5D7F: $3E $D3
-    ldh [$AB], a                                  ; $5D81: $E0 $AB
+    ldh [$FFAB], a                                  ; $5D81: $E0 $AB
     ld a, $0A                                     ; $5D83: $3E $0A
-    ldh [$AC], a                                  ; $5D85: $E0 $AC
+    ldh [$FFAC], a                                  ; $5D85: $E0 $AC
     ld a, $B5                                     ; $5D87: $3E $B5
-    ldh [$A9], a                                  ; $5D89: $E0 $A9
+    ldh [$FFA9], a                                  ; $5D89: $E0 $A9
     ld a, $5F                                     ; $5D8B: $3E $5F
-    ldh [$AA], a                                  ; $5D8D: $E0 $AA
+    ldh [$FFAA], a                                  ; $5D8D: $E0 $AA
     ld a, $9A                                     ; $5D8F: $3E $9A
-    ldh [$8D], a                                  ; $5D91: $E0 $8D
+    ldh [$FF8D], a                                  ; $5D91: $E0 $8D
     ld a, $5D                                     ; $5D93: $3E $5D
-    ldh [$8E], a                                  ; $5D95: $E0 $8E
+    ldh [$FF8E], a                                  ; $5D95: $E0 $8E
     jp Jump_001_634D                              ; $5D97: $C3 $4D $63
 
 
@@ -4940,19 +4940,19 @@ jr_001_5DF3:
 
 Jump_001_5E10:
     ld a, $00                                     ; $5E10: $3E $00
-    ldh [$8C], a                                  ; $5E12: $E0 $8C
+    ldh [$FF8C], a                                  ; $5E12: $E0 $8C
     ld a, $D3                                     ; $5E14: $3E $D3
-    ldh [$AB], a                                  ; $5E16: $E0 $AB
+    ldh [$FFAB], a                                  ; $5E16: $E0 $AB
     ld a, $0A                                     ; $5E18: $3E $0A
-    ldh [$AC], a                                  ; $5E1A: $E0 $AC
+    ldh [$FFAC], a                                  ; $5E1A: $E0 $AC
     ld a, $77                                     ; $5E1C: $3E $77
-    ldh [$A9], a                                  ; $5E1E: $E0 $A9
+    ldh [$FFA9], a                                  ; $5E1E: $E0 $A9
     ld a, $5F                                     ; $5E20: $3E $5F
-    ldh [$AA], a                                  ; $5E22: $E0 $AA
+    ldh [$FFAA], a                                  ; $5E22: $E0 $AA
     ld a, $2F                                     ; $5E24: $3E $2F
-    ldh [$8D], a                                  ; $5E26: $E0 $8D
+    ldh [$FF8D], a                                  ; $5E26: $E0 $8D
     ld a, $5E                                     ; $5E28: $3E $5E
-    ldh [$8E], a                                  ; $5E2A: $E0 $8E
+    ldh [$FF8E], a                                  ; $5E2A: $E0 $8E
     jp Jump_001_634D                              ; $5E2C: $C3 $4D $63
 
 
@@ -5155,19 +5155,19 @@ jr_001_5F64:
 
 Jump_001_5F65:
     ld a, $03                                     ; $5F65: $3E $03
-    ldh [$8C], a                                  ; $5F67: $E0 $8C
+    ldh [$FF8C], a                                  ; $5F67: $E0 $8C
     ld a, $D3                                     ; $5F69: $3E $D3
-    ldh [$AB], a                                  ; $5F6B: $E0 $AB
+    ldh [$FFAB], a                                  ; $5F6B: $E0 $AB
     ld a, $0A                                     ; $5F6D: $3E $0A
-    ldh [$AC], a                                  ; $5F6F: $E0 $AC
+    ldh [$FFAC], a                                  ; $5F6F: $E0 $AC
     ld a, $5C                                     ; $5F71: $3E $5C
-    ldh [$A9], a                                  ; $5F73: $E0 $A9
+    ldh [$FFA9], a                                  ; $5F73: $E0 $A9
     ld a, $5B                                     ; $5F75: $3E $5B
-    ldh [$AA], a                                  ; $5F77: $E0 $AA
+    ldh [$FFAA], a                                  ; $5F77: $E0 $AA
     ld a, $84                                     ; $5F79: $3E $84
-    ldh [$8D], a                                  ; $5F7B: $E0 $8D
+    ldh [$FF8D], a                                  ; $5F7B: $E0 $8D
     ld a, $5F                                     ; $5F7D: $3E $5F
-    ldh [$8E], a                                  ; $5F7F: $E0 $8E
+    ldh [$FF8E], a                                  ; $5F7F: $E0 $8E
     jp Jump_001_634D                              ; $5F81: $C3 $4D $63
 
 
@@ -5213,19 +5213,19 @@ jr_001_5FAB:
 
 Jump_001_5FBF:
     ld a, $01                                     ; $5FBF: $3E $01
-    ldh [$8C], a                                  ; $5FC1: $E0 $8C
+    ldh [$FF8C], a                                  ; $5FC1: $E0 $8C
     ld a, $D3                                     ; $5FC3: $3E $D3
-    ldh [$AB], a                                  ; $5FC5: $E0 $AB
+    ldh [$FFAB], a                                  ; $5FC5: $E0 $AB
     ld a, $0A                                     ; $5FC7: $3E $0A
-    ldh [$AC], a                                  ; $5FC9: $E0 $AC
+    ldh [$FFAC], a                                  ; $5FC9: $E0 $AC
     ld a, $6C                                     ; $5FCB: $3E $6C
-    ldh [$A9], a                                  ; $5FCD: $E0 $A9
+    ldh [$FFA9], a                                  ; $5FCD: $E0 $A9
     ld a, $5B                                     ; $5FCF: $3E $5B
-    ldh [$AA], a                                  ; $5FD1: $E0 $AA
+    ldh [$FFAA], a                                  ; $5FD1: $E0 $AA
     ld a, $DE                                     ; $5FD3: $3E $DE
-    ldh [$8D], a                                  ; $5FD5: $E0 $8D
+    ldh [$FF8D], a                                  ; $5FD5: $E0 $8D
     ld a, $5F                                     ; $5FD7: $3E $5F
-    ldh [$8E], a                                  ; $5FD9: $E0 $8E
+    ldh [$FF8E], a                                  ; $5FD9: $E0 $8E
     jp Jump_001_634D                              ; $5FDB: $C3 $4D $63
 
 
@@ -5273,19 +5273,19 @@ jr_001_600A:
 
 Jump_001_601E:
     ld a, $02                                     ; $601E: $3E $02
-    ldh [$8C], a                                  ; $6020: $E0 $8C
+    ldh [$FF8C], a                                  ; $6020: $E0 $8C
     ld a, $D3                                     ; $6022: $3E $D3
-    ldh [$AB], a                                  ; $6024: $E0 $AB
+    ldh [$FFAB], a                                  ; $6024: $E0 $AB
     ld a, $0A                                     ; $6026: $3E $0A
-    ldh [$AC], a                                  ; $6028: $E0 $AC
+    ldh [$FFAC], a                                  ; $6028: $E0 $AC
     ld a, $8C                                     ; $602A: $3E $8C
-    ldh [$A9], a                                  ; $602C: $E0 $A9
+    ldh [$FFA9], a                                  ; $602C: $E0 $A9
     ld a, $5B                                     ; $602E: $3E $5B
-    ldh [$AA], a                                  ; $6030: $E0 $AA
+    ldh [$FFAA], a                                  ; $6030: $E0 $AA
     ld a, $3D                                     ; $6032: $3E $3D
-    ldh [$8D], a                                  ; $6034: $E0 $8D
+    ldh [$FF8D], a                                  ; $6034: $E0 $8D
     ld a, $60                                     ; $6036: $3E $60
-    ldh [$8E], a                                  ; $6038: $E0 $8E
+    ldh [$FF8E], a                                  ; $6038: $E0 $8E
     jp Jump_001_634D                              ; $603A: $C3 $4D $63
 
 
@@ -5333,19 +5333,19 @@ jr_001_6069:
 
 Jump_001_607D:
     ld a, $00                                     ; $607D: $3E $00
-    ldh [$8C], a                                  ; $607F: $E0 $8C
+    ldh [$FF8C], a                                  ; $607F: $E0 $8C
     ld a, $D3                                     ; $6081: $3E $D3
-    ldh [$AB], a                                  ; $6083: $E0 $AB
+    ldh [$FFAB], a                                  ; $6083: $E0 $AB
     ld a, $0A                                     ; $6085: $3E $0A
-    ldh [$AC], a                                  ; $6087: $E0 $AC
+    ldh [$FFAC], a                                  ; $6087: $E0 $AC
     ld a, $4C                                     ; $6089: $3E $4C
-    ldh [$A9], a                                  ; $608B: $E0 $A9
+    ldh [$FFA9], a                                  ; $608B: $E0 $A9
     ld a, $5B                                     ; $608D: $3E $5B
-    ldh [$AA], a                                  ; $608F: $E0 $AA
+    ldh [$FFAA], a                                  ; $608F: $E0 $AA
     ld a, $9C                                     ; $6091: $3E $9C
-    ldh [$8D], a                                  ; $6093: $E0 $8D
+    ldh [$FF8D], a                                  ; $6093: $E0 $8D
     ld a, $60                                     ; $6095: $3E $60
-    ldh [$8E], a                                  ; $6097: $E0 $8E
+    ldh [$FF8E], a                                  ; $6097: $E0 $8E
     jp Jump_001_634D                              ; $6099: $C3 $4D $63
 
 
@@ -5391,9 +5391,9 @@ jr_001_60C2:
 
 Jump_001_60D6:
     ld a, $E1                                     ; $60D6: $3E $E1
-    ldh [$8D], a                                  ; $60D8: $E0 $8D
+    ldh [$FF8D], a                                  ; $60D8: $E0 $8D
     ld a, $60                                     ; $60DA: $3E $60
-    ldh [$8E], a                                  ; $60DC: $E0 $8E
+    ldh [$FF8E], a                                  ; $60DC: $E0 $8E
     jp Jump_001_634D                              ; $60DE: $C3 $4D $63
 
 
@@ -5430,13 +5430,13 @@ Jump_001_60D6:
 
 Jump_001_611D:
     ld a, $D3                                     ; $611D: $3E $D3
-    ldh [$AB], a                                  ; $611F: $E0 $AB
+    ldh [$FFAB], a                                  ; $611F: $E0 $AB
     ld a, $0A                                     ; $6121: $3E $0A
-    ldh [$AC], a                                  ; $6123: $E0 $AC
+    ldh [$FFAC], a                                  ; $6123: $E0 $AC
     ld a, $30                                     ; $6125: $3E $30
-    ldh [$8D], a                                  ; $6127: $E0 $8D
+    ldh [$FF8D], a                                  ; $6127: $E0 $8D
     ld a, $61                                     ; $6129: $3E $61
-    ldh [$8E], a                                  ; $612B: $E0 $8E
+    ldh [$FF8E], a                                  ; $612B: $E0 $8E
     jp Jump_001_634D                              ; $612D: $C3 $4D $63
 
 
@@ -5503,21 +5503,21 @@ jr_001_6183:
 
 Jump_001_6187:
     ld a, $03                                     ; $6187: $3E $03
-    ldh [$8C], a                                  ; $6189: $E0 $8C
+    ldh [$FF8C], a                                  ; $6189: $E0 $8C
     ld a, $D3                                     ; $618B: $3E $D3
-    ldh [$AB], a                                  ; $618D: $E0 $AB
+    ldh [$FFAB], a                                  ; $618D: $E0 $AB
     ld a, $0A                                     ; $618F: $3E $0A
-    ldh [$AC], a                                  ; $6191: $E0 $AC
+    ldh [$FFAC], a                                  ; $6191: $E0 $AC
     ld a, $14                                     ; $6193: $3E $14
-    ldh [$A8], a                                  ; $6195: $E0 $A8
+    ldh [$FFA8], a                                  ; $6195: $E0 $A8
     ld a, $34                                     ; $6197: $3E $34
-    ldh [$A9], a                                  ; $6199: $E0 $A9
+    ldh [$FFA9], a                                  ; $6199: $E0 $A9
     ld a, $67                                     ; $619B: $3E $67
-    ldh [$AA], a                                  ; $619D: $E0 $AA
+    ldh [$FFAA], a                                  ; $619D: $E0 $AA
     ld a, $AA                                     ; $619F: $3E $AA
-    ldh [$8D], a                                  ; $61A1: $E0 $8D
+    ldh [$FF8D], a                                  ; $61A1: $E0 $8D
     ld a, $61                                     ; $61A3: $3E $61
-    ldh [$8E], a                                  ; $61A5: $E0 $8E
+    ldh [$FF8E], a                                  ; $61A5: $E0 $8E
     jp Jump_001_634D                              ; $61A7: $C3 $4D $63
 
 
@@ -5562,21 +5562,21 @@ jr_001_61D0:
 
 Jump_001_61EB:
     ld a, $01                                     ; $61EB: $3E $01
-    ldh [$8C], a                                  ; $61ED: $E0 $8C
+    ldh [$FF8C], a                                  ; $61ED: $E0 $8C
     ld a, $D3                                     ; $61EF: $3E $D3
-    ldh [$AB], a                                  ; $61F1: $E0 $AB
+    ldh [$FFAB], a                                  ; $61F1: $E0 $AB
     ld a, $0A                                     ; $61F3: $3E $0A
-    ldh [$AC], a                                  ; $61F5: $E0 $AC
+    ldh [$FFAC], a                                  ; $61F5: $E0 $AC
     ld a, $14                                     ; $61F7: $3E $14
-    ldh [$A8], a                                  ; $61F9: $E0 $A8
+    ldh [$FFA8], a                                  ; $61F9: $E0 $A8
     ld a, $57                                     ; $61FB: $3E $57
-    ldh [$A9], a                                  ; $61FD: $E0 $A9
+    ldh [$FFA9], a                                  ; $61FD: $E0 $A9
     ld a, $67                                     ; $61FF: $3E $67
-    ldh [$AA], a                                  ; $6201: $E0 $AA
+    ldh [$FFAA], a                                  ; $6201: $E0 $AA
     ld a, $0E                                     ; $6203: $3E $0E
-    ldh [$8D], a                                  ; $6205: $E0 $8D
+    ldh [$FF8D], a                                  ; $6205: $E0 $8D
     ld a, $62                                     ; $6207: $3E $62
-    ldh [$8E], a                                  ; $6209: $E0 $8E
+    ldh [$FF8E], a                                  ; $6209: $E0 $8E
     jp Jump_001_634D                              ; $620B: $C3 $4D $63
 
 
@@ -5628,21 +5628,21 @@ jr_001_6243:
 
 Jump_001_625E:
     ld a, $02                                     ; $625E: $3E $02
-    ldh [$8C], a                                  ; $6260: $E0 $8C
+    ldh [$FF8C], a                                  ; $6260: $E0 $8C
     ld a, $D3                                     ; $6262: $3E $D3
-    ldh [$AB], a                                  ; $6264: $E0 $AB
+    ldh [$FFAB], a                                  ; $6264: $E0 $AB
     ld a, $0A                                     ; $6266: $3E $0A
-    ldh [$AC], a                                  ; $6268: $E0 $AC
+    ldh [$FFAC], a                                  ; $6268: $E0 $AC
     ld a, $14                                     ; $626A: $3E $14
-    ldh [$A8], a                                  ; $626C: $E0 $A8
+    ldh [$FFA8], a                                  ; $626C: $E0 $A8
     ld a, $84                                     ; $626E: $3E $84
-    ldh [$A9], a                                  ; $6270: $E0 $A9
+    ldh [$FFA9], a                                  ; $6270: $E0 $A9
     ld a, $67                                     ; $6272: $3E $67
-    ldh [$AA], a                                  ; $6274: $E0 $AA
+    ldh [$FFAA], a                                  ; $6274: $E0 $AA
     ld a, $81                                     ; $6276: $3E $81
-    ldh [$8D], a                                  ; $6278: $E0 $8D
+    ldh [$FF8D], a                                  ; $6278: $E0 $8D
     ld a, $62                                     ; $627A: $3E $62
-    ldh [$8E], a                                  ; $627C: $E0 $8E
+    ldh [$FF8E], a                                  ; $627C: $E0 $8E
     jp Jump_001_634D                              ; $627E: $C3 $4D $63
 
 
@@ -5694,21 +5694,21 @@ jr_001_62B6:
 
 Jump_001_62D1:
     ld a, $00                                     ; $62D1: $3E $00
-    ldh [$8C], a                                  ; $62D3: $E0 $8C
+    ldh [$FF8C], a                                  ; $62D3: $E0 $8C
     ld a, $D3                                     ; $62D5: $3E $D3
-    ldh [$AB], a                                  ; $62D7: $E0 $AB
+    ldh [$FFAB], a                                  ; $62D7: $E0 $AB
     ld a, $0A                                     ; $62D9: $3E $0A
-    ldh [$AC], a                                  ; $62DB: $E0 $AC
+    ldh [$FFAC], a                                  ; $62DB: $E0 $AC
     ld a, $14                                     ; $62DD: $3E $14
-    ldh [$A8], a                                  ; $62DF: $E0 $A8
+    ldh [$FFA8], a                                  ; $62DF: $E0 $A8
     ld a, $11                                     ; $62E1: $3E $11
-    ldh [$A9], a                                  ; $62E3: $E0 $A9
+    ldh [$FFA9], a                                  ; $62E3: $E0 $A9
     ld a, $67                                     ; $62E5: $3E $67
-    ldh [$AA], a                                  ; $62E7: $E0 $AA
+    ldh [$FFAA], a                                  ; $62E7: $E0 $AA
     ld a, $F4                                     ; $62E9: $3E $F4
-    ldh [$8D], a                                  ; $62EB: $E0 $8D
+    ldh [$FF8D], a                                  ; $62EB: $E0 $8D
     ld a, $62                                     ; $62ED: $3E $62
-    ldh [$8E], a                                  ; $62EF: $E0 $8E
+    ldh [$FF8E], a                                  ; $62EF: $E0 $8E
     jp Jump_001_634D                              ; $62F1: $C3 $4D $63
 
 
@@ -5771,13 +5771,13 @@ Jump_001_634D:
 
 Jump_001_6354:
     ld a, $D3                                     ; $6354: $3E $D3
-    ldh [$AB], a                                  ; $6356: $E0 $AB
+    ldh [$FFAB], a                                  ; $6356: $E0 $AB
     ld a, $0A                                     ; $6358: $3E $0A
-    ldh [$AC], a                                  ; $635A: $E0 $AC
+    ldh [$FFAC], a                                  ; $635A: $E0 $AC
     ld a, $67                                     ; $635C: $3E $67
-    ldh [$8D], a                                  ; $635E: $E0 $8D
+    ldh [$FF8D], a                                  ; $635E: $E0 $8D
     ld a, $63                                     ; $6360: $3E $63
-    ldh [$8E], a                                  ; $6362: $E0 $8E
+    ldh [$FF8E], a                                  ; $6362: $E0 $8E
     jp Jump_001_634D                              ; $6364: $C3 $4D $63
 
 
@@ -5795,9 +5795,9 @@ Jump_001_6354:
     and a                                         ; $6385: $A7
     jr z, jr_001_638F                             ; $6386: $28 $07
 
-    ldh [$8E], a                                  ; $6388: $E0 $8E
+    ldh [$FF8E], a                                  ; $6388: $E0 $8E
     ld a, [$C186]                                 ; $638A: $FA $86 $C1
-    ldh [$8D], a                                  ; $638D: $E0 $8D
+    ldh [$FF8D], a                                  ; $638D: $E0 $8D
 
 jr_001_638F:
     call Call_001_410A                            ; $638F: $CD $0A $41
@@ -5811,7 +5811,7 @@ Call_001_6393:
     ld hl, $FFB1                                  ; $639C: $21 $B1 $FF
     set 1, [hl]                                   ; $639F: $CB $CE
     ld a, $05                                     ; $63A1: $3E $05
-    ld [$C95A], a                                 ; $63A3: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $63A3: $EA $5A $C9
     ldh [rSVBK], a                                ; $63A6: $E0 $70
     ld hl, $FF93                                  ; $63A8: $21 $93 $FF
     ld a, [hl+]                                   ; $63AB: $2A
@@ -5867,13 +5867,13 @@ jr_001_63DD:
 
 Jump_001_640D:
     ld a, $D3                                     ; $640D: $3E $D3
-    ldh [$AB], a                                  ; $640F: $E0 $AB
+    ldh [$FFAB], a                                  ; $640F: $E0 $AB
     ld a, $0A                                     ; $6411: $3E $0A
-    ldh [$AC], a                                  ; $6413: $E0 $AC
+    ldh [$FFAC], a                                  ; $6413: $E0 $AC
     ld a, $20                                     ; $6415: $3E $20
-    ldh [$8D], a                                  ; $6417: $E0 $8D
+    ldh [$FF8D], a                                  ; $6417: $E0 $8D
     ld a, $64                                     ; $6419: $3E $64
-    ldh [$8E], a                                  ; $641B: $E0 $8E
+    ldh [$FF8E], a                                  ; $641B: $E0 $8E
     jp Jump_001_634D                              ; $641D: $C3 $4D $63
 
 
@@ -6176,7 +6176,7 @@ Call_001_65A8:
     call Call_000_0AA7                            ; $65B7: $CD $A7 $0A
     call Call_000_2B78                            ; $65BA: $CD $78 $2B
     ld a, $00                                     ; $65BD: $3E $00
-    ldh [$97], a                                  ; $65BF: $E0 $97
+    ldh [$FF97], a                                  ; $65BF: $E0 $97
     call Call_001_65D3                            ; $65C1: $CD $D3 $65
     ld hl, $42E8                                  ; $65C4: $21 $E8 $42
     ld e, $05                                     ; $65C7: $1E $05
@@ -6332,7 +6332,7 @@ Call_001_666F:
 
 
     ld a, $05                                     ; $6686: $3E $05
-    ld [$C95A], a                                 ; $6688: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $6688: $EA $5A $C9
     ldh [rSVBK], a                                ; $668B: $E0 $70
     ld a, [$FF94]                                 ; $668D: $FA $94 $FF
     ld h, a                                       ; $6690: $67
@@ -6342,7 +6342,7 @@ Call_001_666F:
     ld [hl], a                                    ; $6698: $77
     ld a, e                                       ; $6699: $7B
     res 5, a                                      ; $669A: $CB $AF
-    ldh [$8C], a                                  ; $669C: $E0 $8C
+    ldh [$FF8C], a                                  ; $669C: $E0 $8C
     ret                                           ; $669E: $C9
 
 
@@ -6424,7 +6424,7 @@ jr_001_6700:
 jr_001_6706:
     ldh a, [$8C]                                  ; $6706: $F0 $8C
     set 5, a                                      ; $6708: $CB $EF
-    ldh [$8C], a                                  ; $670A: $E0 $8C
+    ldh [$FF8C], a                                  ; $670A: $E0 $8C
     ret                                           ; $670C: $C9
 
 
@@ -6446,7 +6446,7 @@ jr_001_6706:
     ld [hl], a                                    ; $6724: $77
     ldh a, [$8C]                                  ; $6725: $F0 $8C
     set 5, a                                      ; $6727: $CB $EF
-    ldh [$8C], a                                  ; $6729: $E0 $8C
+    ldh [$FF8C], a                                  ; $6729: $E0 $8C
     ret                                           ; $672B: $C9
 
 
@@ -6611,7 +6611,7 @@ jr_001_67F3:
 
 jr_001_67F5:
     ld a, $05                                     ; $67F5: $3E $05
-    ld [$C95A], a                                 ; $67F7: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $67F7: $EA $5A $C9
     ldh [rSVBK], a                                ; $67FA: $E0 $70
     ld b, $00                                     ; $67FC: $06 $00
     ld a, [de]                                    ; $67FE: $1A
@@ -6700,7 +6700,7 @@ jr_001_6851:
 
 jr_001_6853:
     ld a, $05                                     ; $6853: $3E $05
-    ld [$C95A], a                                 ; $6855: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $6855: $EA $5A $C9
     ldh [rSVBK], a                                ; $6858: $E0 $70
     ld b, $00                                     ; $685A: $06 $00
     ld a, [de]                                    ; $685C: $1A
@@ -6783,7 +6783,7 @@ jr_001_68A7:
     dec de                                        ; $68AC: $1B
     dec c                                         ; $68AD: $0D
     ld a, $05                                     ; $68AE: $3E $05
-    ld [$C95A], a                                 ; $68B0: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $68B0: $EA $5A $C9
     ldh [rSVBK], a                                ; $68B3: $E0 $70
     ld b, $00                                     ; $68B5: $06 $00
     ld a, [de]                                    ; $68B7: $1A
@@ -6858,7 +6858,7 @@ jr_001_68F9:
     inc de                                        ; $68FE: $13
     inc c                                         ; $68FF: $0C
     ld a, $05                                     ; $6900: $3E $05
-    ld [$C95A], a                                 ; $6902: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $6902: $EA $5A $C9
     ldh [rSVBK], a                                ; $6905: $E0 $70
     ld b, $00                                     ; $6907: $06 $00
     ld a, [de]                                    ; $6909: $1A
@@ -6935,15 +6935,15 @@ jr_001_6945:
     ld de, $000E                                  ; $6956: $11 $0E $00
     add hl, de                                    ; $6959: $19
     ld a, [hl+]                                   ; $695A: $2A
-    ldh [$A8], a                                  ; $695B: $E0 $A8
+    ldh [$FFA8], a                                  ; $695B: $E0 $A8
     ld a, [hl+]                                   ; $695D: $2A
-    ldh [$A9], a                                  ; $695E: $E0 $A9
+    ldh [$FFA9], a                                  ; $695E: $E0 $A9
     ld a, [hl+]                                   ; $6960: $2A
-    ldh [$AA], a                                  ; $6961: $E0 $AA
+    ldh [$FFAA], a                                  ; $6961: $E0 $AA
     ld a, $D3                                     ; $6963: $3E $D3
-    ldh [$AB], a                                  ; $6965: $E0 $AB
+    ldh [$FFAB], a                                  ; $6965: $E0 $AB
     ld a, $0A                                     ; $6967: $3E $0A
-    ldh [$AC], a                                  ; $6969: $E0 $AC
+    ldh [$FFAC], a                                  ; $6969: $E0 $AC
     call Call_000_0AA7                            ; $696B: $CD $A7 $0A
     call Call_000_2B78                            ; $696E: $CD $78 $2B
     call Call_000_2B96                            ; $6971: $CD $96 $2B
@@ -6954,16 +6954,16 @@ jr_001_6945:
     ld e, $05                                     ; $6980: $1E $05
     call Call_000_07A9                            ; $6982: $CD $A9 $07
     ld a, $F8                                     ; $6985: $3E $F8
-    ldh [$8D], a                                  ; $6987: $E0 $8D
+    ldh [$FF8D], a                                  ; $6987: $E0 $8D
     ld a, $4A                                     ; $6989: $3E $4A
-    ldh [$8E], a                                  ; $698B: $E0 $8E
+    ldh [$FF8E], a                                  ; $698B: $E0 $8E
     call Call_001_410A                            ; $698D: $CD $0A $41
     ret                                           ; $6990: $C9
 
 
     call Call_001_4AF8                            ; $6991: $CD $F8 $4A
     ld a, $C8                                     ; $6994: $3E $C8
-    ldh [$97], a                                  ; $6996: $E0 $97
+    ldh [$FF97], a                                  ; $6996: $E0 $97
     ret                                           ; $6998: $C9
 
 
@@ -7001,37 +7001,37 @@ Call_001_69B2:
     ld [hl], c                                    ; $69D2: $71
     pop hl                                        ; $69D3: $E1
     ld a, $19                                     ; $69D4: $3E $19
-    ldh [$A8], a                                  ; $69D6: $E0 $A8
+    ldh [$FFA8], a                                  ; $69D6: $E0 $A8
     ld a, $D3                                     ; $69D8: $3E $D3
-    ldh [$AB], a                                  ; $69DA: $E0 $AB
+    ldh [$FFAB], a                                  ; $69DA: $E0 $AB
     ld a, $0A                                     ; $69DC: $3E $0A
-    ldh [$AC], a                                  ; $69DE: $E0 $AC
+    ldh [$FFAC], a                                  ; $69DE: $E0 $AC
     ld a, $EF                                     ; $69E0: $3E $EF
-    ldh [$A9], a                                  ; $69E2: $E0 $A9
+    ldh [$FFA9], a                                  ; $69E2: $E0 $A9
     ld a, $46                                     ; $69E4: $3E $46
-    ldh [$AA], a                                  ; $69E6: $E0 $AA
+    ldh [$FFAA], a                                  ; $69E6: $E0 $AA
     ld a, $B2                                     ; $69E8: $3E $B2
-    ldh [$8D], a                                  ; $69EA: $E0 $8D
+    ldh [$FF8D], a                                  ; $69EA: $E0 $8D
     ld a, $6E                                     ; $69EC: $3E $6E
-    ldh [$8E], a                                  ; $69EE: $E0 $8E
+    ldh [$FF8E], a                                  ; $69EE: $E0 $8E
     jp Jump_001_634D                              ; $69F0: $C3 $4D $63
 
 
 Jump_001_69F3:
     ld a, $03                                     ; $69F3: $3E $03
-    ldh [$8C], a                                  ; $69F5: $E0 $8C
+    ldh [$FF8C], a                                  ; $69F5: $E0 $8C
     ld a, $D3                                     ; $69F7: $3E $D3
-    ldh [$AB], a                                  ; $69F9: $E0 $AB
+    ldh [$FFAB], a                                  ; $69F9: $E0 $AB
     ld a, $0A                                     ; $69FB: $3E $0A
-    ldh [$AC], a                                  ; $69FD: $E0 $AC
+    ldh [$FFAC], a                                  ; $69FD: $E0 $AC
     ld a, $69                                     ; $69FF: $3E $69
-    ldh [$A9], a                                  ; $6A01: $E0 $A9
+    ldh [$FFA9], a                                  ; $6A01: $E0 $A9
     ld a, $73                                     ; $6A03: $3E $73
-    ldh [$AA], a                                  ; $6A05: $E0 $AA
+    ldh [$FFAA], a                                  ; $6A05: $E0 $AA
     ld a, $12                                     ; $6A07: $3E $12
-    ldh [$8D], a                                  ; $6A09: $E0 $8D
+    ldh [$FF8D], a                                  ; $6A09: $E0 $8D
     ld a, $6A                                     ; $6A0B: $3E $6A
-    ldh [$8E], a                                  ; $6A0D: $E0 $8E
+    ldh [$FF8E], a                                  ; $6A0D: $E0 $8E
     jp Jump_001_634D                              ; $6A0F: $C3 $4D $63
 
 
@@ -7077,19 +7077,19 @@ Jump_001_6A48:
 
 Jump_001_6A51:
     ld a, $01                                     ; $6A51: $3E $01
-    ldh [$8C], a                                  ; $6A53: $E0 $8C
+    ldh [$FF8C], a                                  ; $6A53: $E0 $8C
     ld a, $D3                                     ; $6A55: $3E $D3
-    ldh [$AB], a                                  ; $6A57: $E0 $AB
+    ldh [$FFAB], a                                  ; $6A57: $E0 $AB
     ld a, $0A                                     ; $6A59: $3E $0A
-    ldh [$AC], a                                  ; $6A5B: $E0 $AC
+    ldh [$FFAC], a                                  ; $6A5B: $E0 $AC
     ld a, $75                                     ; $6A5D: $3E $75
-    ldh [$A9], a                                  ; $6A5F: $E0 $A9
+    ldh [$FFA9], a                                  ; $6A5F: $E0 $A9
     ld a, $73                                     ; $6A61: $3E $73
-    ldh [$AA], a                                  ; $6A63: $E0 $AA
+    ldh [$FFAA], a                                  ; $6A63: $E0 $AA
     ld a, $70                                     ; $6A65: $3E $70
-    ldh [$8D], a                                  ; $6A67: $E0 $8D
+    ldh [$FF8D], a                                  ; $6A67: $E0 $8D
     ld a, $6A                                     ; $6A69: $3E $6A
-    ldh [$8E], a                                  ; $6A6B: $E0 $8E
+    ldh [$FF8E], a                                  ; $6A6B: $E0 $8E
     jp Jump_001_634D                              ; $6A6D: $C3 $4D $63
 
 
@@ -7137,19 +7137,19 @@ Jump_001_6AAB:
 
 Jump_001_6AB4:
     ld a, $02                                     ; $6AB4: $3E $02
-    ldh [$8C], a                                  ; $6AB6: $E0 $8C
+    ldh [$FF8C], a                                  ; $6AB6: $E0 $8C
     ld a, $D3                                     ; $6AB8: $3E $D3
-    ldh [$AB], a                                  ; $6ABA: $E0 $AB
+    ldh [$FFAB], a                                  ; $6ABA: $E0 $AB
     ld a, $0A                                     ; $6ABC: $3E $0A
-    ldh [$AC], a                                  ; $6ABE: $E0 $AC
+    ldh [$FFAC], a                                  ; $6ABE: $E0 $AC
     ld a, $81                                     ; $6AC0: $3E $81
-    ldh [$A9], a                                  ; $6AC2: $E0 $A9
+    ldh [$FFA9], a                                  ; $6AC2: $E0 $A9
     ld a, $73                                     ; $6AC4: $3E $73
-    ldh [$AA], a                                  ; $6AC6: $E0 $AA
+    ldh [$FFAA], a                                  ; $6AC6: $E0 $AA
     ld a, $D3                                     ; $6AC8: $3E $D3
-    ldh [$8D], a                                  ; $6ACA: $E0 $8D
+    ldh [$FF8D], a                                  ; $6ACA: $E0 $8D
     ld a, $6A                                     ; $6ACC: $3E $6A
-    ldh [$8E], a                                  ; $6ACE: $E0 $8E
+    ldh [$FF8E], a                                  ; $6ACE: $E0 $8E
     jp Jump_001_634D                              ; $6AD0: $C3 $4D $63
 
 
@@ -7197,19 +7197,19 @@ Jump_001_6B0E:
 
 Jump_001_6B17:
     ld a, $00                                     ; $6B17: $3E $00
-    ldh [$8C], a                                  ; $6B19: $E0 $8C
+    ldh [$FF8C], a                                  ; $6B19: $E0 $8C
     ld a, $D3                                     ; $6B1B: $3E $D3
-    ldh [$AB], a                                  ; $6B1D: $E0 $AB
+    ldh [$FFAB], a                                  ; $6B1D: $E0 $AB
     ld a, $0A                                     ; $6B1F: $3E $0A
-    ldh [$AC], a                                  ; $6B21: $E0 $AC
+    ldh [$FFAC], a                                  ; $6B21: $E0 $AC
     ld a, $5D                                     ; $6B23: $3E $5D
-    ldh [$A9], a                                  ; $6B25: $E0 $A9
+    ldh [$FFA9], a                                  ; $6B25: $E0 $A9
     ld a, $73                                     ; $6B27: $3E $73
-    ldh [$AA], a                                  ; $6B29: $E0 $AA
+    ldh [$FFAA], a                                  ; $6B29: $E0 $AA
     ld a, $36                                     ; $6B2B: $3E $36
-    ldh [$8D], a                                  ; $6B2D: $E0 $8D
+    ldh [$FF8D], a                                  ; $6B2D: $E0 $8D
     ld a, $6B                                     ; $6B2F: $3E $6B
-    ldh [$8E], a                                  ; $6B31: $E0 $8E
+    ldh [$FF8E], a                                  ; $6B31: $E0 $8E
     jp Jump_001_634D                              ; $6B33: $C3 $4D $63
 
 
@@ -7261,9 +7261,9 @@ Jump_001_6B6B:
 
 Jump_001_6B7F:
     ld a, $8A                                     ; $6B7F: $3E $8A
-    ldh [$8D], a                                  ; $6B81: $E0 $8D
+    ldh [$FF8D], a                                  ; $6B81: $E0 $8D
     ld a, $6B                                     ; $6B83: $3E $6B
-    ldh [$8E], a                                  ; $6B85: $E0 $8E
+    ldh [$FF8E], a                                  ; $6B85: $E0 $8E
     jp Jump_001_634D                              ; $6B87: $C3 $4D $63
 
 
@@ -7327,13 +7327,13 @@ jr_001_6BC4:
 
 Jump_001_6BE0:
     ld a, $D3                                     ; $6BE0: $3E $D3
-    ldh [$AB], a                                  ; $6BE2: $E0 $AB
+    ldh [$FFAB], a                                  ; $6BE2: $E0 $AB
     ld a, $0A                                     ; $6BE4: $3E $0A
-    ldh [$AC], a                                  ; $6BE6: $E0 $AC
+    ldh [$FFAC], a                                  ; $6BE6: $E0 $AC
     ld a, $F3                                     ; $6BE8: $3E $F3
-    ldh [$8D], a                                  ; $6BEA: $E0 $8D
+    ldh [$FF8D], a                                  ; $6BEA: $E0 $8D
     ld a, $6B                                     ; $6BEC: $3E $6B
-    ldh [$8E], a                                  ; $6BEE: $E0 $8E
+    ldh [$FF8E], a                                  ; $6BEE: $E0 $8E
     jp Jump_001_634D                              ; $6BF0: $C3 $4D $63
 
 
@@ -7399,21 +7399,21 @@ jr_001_6C43:
 
 Jump_001_6C47:
     ld a, $03                                     ; $6C47: $3E $03
-    ldh [$8C], a                                  ; $6C49: $E0 $8C
+    ldh [$FF8C], a                                  ; $6C49: $E0 $8C
     ld a, $D3                                     ; $6C4B: $3E $D3
-    ldh [$AB], a                                  ; $6C4D: $E0 $AB
+    ldh [$FFAB], a                                  ; $6C4D: $E0 $AB
     ld a, $0A                                     ; $6C4F: $3E $0A
-    ldh [$AC], a                                  ; $6C51: $E0 $AC
+    ldh [$FFAC], a                                  ; $6C51: $E0 $AC
     ld a, $11                                     ; $6C53: $3E $11
-    ldh [$A8], a                                  ; $6C55: $E0 $A8
+    ldh [$FFA8], a                                  ; $6C55: $E0 $A8
     ld a, $E0                                     ; $6C57: $3E $E0
-    ldh [$A9], a                                  ; $6C59: $E0 $A9
+    ldh [$FFA9], a                                  ; $6C59: $E0 $A9
     ld a, $73                                     ; $6C5B: $3E $73
-    ldh [$AA], a                                  ; $6C5D: $E0 $AA
+    ldh [$FFAA], a                                  ; $6C5D: $E0 $AA
     ld a, $6A                                     ; $6C5F: $3E $6A
-    ldh [$8D], a                                  ; $6C61: $E0 $8D
+    ldh [$FF8D], a                                  ; $6C61: $E0 $8D
     ld a, $6C                                     ; $6C63: $3E $6C
-    ldh [$8E], a                                  ; $6C65: $E0 $8E
+    ldh [$FF8E], a                                  ; $6C65: $E0 $8E
     jp Jump_001_634D                              ; $6C67: $C3 $4D $63
 
 
@@ -7457,21 +7457,21 @@ jr_001_6C90:
 
 Jump_001_6CA8:
     ld a, $01                                     ; $6CA8: $3E $01
-    ldh [$8C], a                                  ; $6CAA: $E0 $8C
+    ldh [$FF8C], a                                  ; $6CAA: $E0 $8C
     ld a, $D3                                     ; $6CAC: $3E $D3
-    ldh [$AB], a                                  ; $6CAE: $E0 $AB
+    ldh [$FFAB], a                                  ; $6CAE: $E0 $AB
     ld a, $0A                                     ; $6CB0: $3E $0A
-    ldh [$AC], a                                  ; $6CB2: $E0 $AC
+    ldh [$FFAC], a                                  ; $6CB2: $E0 $AC
     ld a, $11                                     ; $6CB4: $3E $11
-    ldh [$A8], a                                  ; $6CB6: $E0 $A8
+    ldh [$FFA8], a                                  ; $6CB6: $E0 $A8
     ld a, $03                                     ; $6CB8: $3E $03
-    ldh [$A9], a                                  ; $6CBA: $E0 $A9
+    ldh [$FFA9], a                                  ; $6CBA: $E0 $A9
     ld a, $74                                     ; $6CBC: $3E $74
-    ldh [$AA], a                                  ; $6CBE: $E0 $AA
+    ldh [$FFAA], a                                  ; $6CBE: $E0 $AA
     ld a, $CB                                     ; $6CC0: $3E $CB
-    ldh [$8D], a                                  ; $6CC2: $E0 $8D
+    ldh [$FF8D], a                                  ; $6CC2: $E0 $8D
     ld a, $6C                                     ; $6CC4: $3E $6C
-    ldh [$8E], a                                  ; $6CC6: $E0 $8E
+    ldh [$FF8E], a                                  ; $6CC6: $E0 $8E
     jp Jump_001_634D                              ; $6CC8: $C3 $4D $63
 
 
@@ -7522,21 +7522,21 @@ jr_001_6D00:
 
 Jump_001_6D18:
     ld a, $02                                     ; $6D18: $3E $02
-    ldh [$8C], a                                  ; $6D1A: $E0 $8C
+    ldh [$FF8C], a                                  ; $6D1A: $E0 $8C
     ld a, $D3                                     ; $6D1C: $3E $D3
-    ldh [$AB], a                                  ; $6D1E: $E0 $AB
+    ldh [$FFAB], a                                  ; $6D1E: $E0 $AB
     ld a, $0A                                     ; $6D20: $3E $0A
-    ldh [$AC], a                                  ; $6D22: $E0 $AC
+    ldh [$FFAC], a                                  ; $6D22: $E0 $AC
     ld a, $11                                     ; $6D24: $3E $11
-    ldh [$A8], a                                  ; $6D26: $E0 $A8
+    ldh [$FFA8], a                                  ; $6D26: $E0 $A8
     ld a, $26                                     ; $6D28: $3E $26
-    ldh [$A9], a                                  ; $6D2A: $E0 $A9
+    ldh [$FFA9], a                                  ; $6D2A: $E0 $A9
     ld a, $74                                     ; $6D2C: $3E $74
-    ldh [$AA], a                                  ; $6D2E: $E0 $AA
+    ldh [$FFAA], a                                  ; $6D2E: $E0 $AA
     ld a, $3B                                     ; $6D30: $3E $3B
-    ldh [$8D], a                                  ; $6D32: $E0 $8D
+    ldh [$FF8D], a                                  ; $6D32: $E0 $8D
     ld a, $6D                                     ; $6D34: $3E $6D
-    ldh [$8E], a                                  ; $6D36: $E0 $8E
+    ldh [$FF8E], a                                  ; $6D36: $E0 $8E
     jp Jump_001_634D                              ; $6D38: $C3 $4D $63
 
 
@@ -7587,21 +7587,21 @@ jr_001_6D70:
 
 Jump_001_6D88:
     ld a, $00                                     ; $6D88: $3E $00
-    ldh [$8C], a                                  ; $6D8A: $E0 $8C
+    ldh [$FF8C], a                                  ; $6D8A: $E0 $8C
     ld a, $D3                                     ; $6D8C: $3E $D3
-    ldh [$AB], a                                  ; $6D8E: $E0 $AB
+    ldh [$FFAB], a                                  ; $6D8E: $E0 $AB
     ld a, $0A                                     ; $6D90: $3E $0A
-    ldh [$AC], a                                  ; $6D92: $E0 $AC
+    ldh [$FFAC], a                                  ; $6D92: $E0 $AC
     ld a, $11                                     ; $6D94: $3E $11
-    ldh [$A8], a                                  ; $6D96: $E0 $A8
+    ldh [$FFA8], a                                  ; $6D96: $E0 $A8
     ld a, $BD                                     ; $6D98: $3E $BD
-    ldh [$A9], a                                  ; $6D9A: $E0 $A9
+    ldh [$FFA9], a                                  ; $6D9A: $E0 $A9
     ld a, $73                                     ; $6D9C: $3E $73
-    ldh [$AA], a                                  ; $6D9E: $E0 $AA
+    ldh [$FFAA], a                                  ; $6D9E: $E0 $AA
     ld a, $AB                                     ; $6DA0: $3E $AB
-    ldh [$8D], a                                  ; $6DA2: $E0 $8D
+    ldh [$FF8D], a                                  ; $6DA2: $E0 $8D
     ld a, $6D                                     ; $6DA4: $3E $6D
-    ldh [$8E], a                                  ; $6DA6: $E0 $8E
+    ldh [$FF8E], a                                  ; $6DA6: $E0 $8E
     jp Jump_001_634D                              ; $6DA8: $C3 $4D $63
 
 
@@ -7679,9 +7679,9 @@ jr_001_6DD0:
     and a                                         ; $6E22: $A7
     jr z, jr_001_6E2C                             ; $6E23: $28 $07
 
-    ldh [$8E], a                                  ; $6E25: $E0 $8E
+    ldh [$FF8E], a                                  ; $6E25: $E0 $8E
     ld a, [$C186]                                 ; $6E27: $FA $86 $C1
-    ldh [$8D], a                                  ; $6E2A: $E0 $8D
+    ldh [$FF8D], a                                  ; $6E2A: $E0 $8D
 
 jr_001_6E2C:
     call Call_001_410A                            ; $6E2C: $CD $0A $41
@@ -7962,15 +7962,15 @@ jr_001_6F81:
     ld de, $000E                                  ; $6F8E: $11 $0E $00
     add hl, de                                    ; $6F91: $19
     ld a, [hl+]                                   ; $6F92: $2A
-    ldh [$A8], a                                  ; $6F93: $E0 $A8
+    ldh [$FFA8], a                                  ; $6F93: $E0 $A8
     ld a, [hl+]                                   ; $6F95: $2A
-    ldh [$A9], a                                  ; $6F96: $E0 $A9
+    ldh [$FFA9], a                                  ; $6F96: $E0 $A9
     ld a, [hl+]                                   ; $6F98: $2A
-    ldh [$AA], a                                  ; $6F99: $E0 $AA
+    ldh [$FFAA], a                                  ; $6F99: $E0 $AA
     ld a, $D3                                     ; $6F9B: $3E $D3
-    ldh [$AB], a                                  ; $6F9D: $E0 $AB
+    ldh [$FFAB], a                                  ; $6F9D: $E0 $AB
     ld a, $0A                                     ; $6F9F: $3E $0A
-    ldh [$AC], a                                  ; $6FA1: $E0 $AC
+    ldh [$FFAC], a                                  ; $6FA1: $E0 $AC
     call Call_000_0AA7                            ; $6FA3: $CD $A7 $0A
     call Call_000_2B78                            ; $6FA6: $CD $78 $2B
     call Call_000_2B96                            ; $6FA9: $CD $96 $2B
@@ -7981,9 +7981,9 @@ jr_001_6F81:
     ld e, $05                                     ; $6FB8: $1E $05
     call Call_000_07A9                            ; $6FBA: $CD $A9 $07
     ld a, $F8                                     ; $6FBD: $3E $F8
-    ldh [$8D], a                                  ; $6FBF: $E0 $8D
+    ldh [$FF8D], a                                  ; $6FBF: $E0 $8D
     ld a, $4A                                     ; $6FC1: $3E $4A
-    ldh [$8E], a                                  ; $6FC3: $E0 $8E
+    ldh [$FF8E], a                                  ; $6FC3: $E0 $8E
     call Call_001_410A                            ; $6FC5: $CD $0A $41
     call Call_001_6FCC                            ; $6FC8: $CD $CC $6F
     ret                                           ; $6FCB: $C9
@@ -7991,8 +7991,8 @@ jr_001_6F81:
 
 Call_001_6FCC:
     xor a                                         ; $6FCC: $AF
-    ldh [$B1], a                                  ; $6FCD: $E0 $B1
-    ldh [$B2], a                                  ; $6FCF: $E0 $B2
+    ldh [$FFB1], a                                  ; $6FCD: $E0 $B1
+    ldh [$FFB2], a                                  ; $6FCF: $E0 $B2
     ld a, [$C189]                                 ; $6FD1: $FA $89 $C1
     and $03                                       ; $6FD4: $E6 $03
     cp $00                                        ; $6FD6: $FE $00
@@ -8174,9 +8174,9 @@ jr_001_70C1:
     ld e, $04                                     ; $70C9: $1E $04
     call Call_000_07A9                            ; $70CB: $CD $A9 $07
     ld a, $DA                                     ; $70CE: $3E $DA
-    ldh [$8D], a                                  ; $70D0: $E0 $8D
+    ldh [$FF8D], a                                  ; $70D0: $E0 $8D
     ld a, $70                                     ; $70D2: $3E $70
-    ldh [$8E], a                                  ; $70D4: $E0 $8E
+    ldh [$FF8E], a                                  ; $70D4: $E0 $8E
     call Call_001_410A                            ; $70D6: $CD $0A $41
     ret                                           ; $70D9: $C9
 

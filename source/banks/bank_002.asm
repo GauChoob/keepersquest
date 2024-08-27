@@ -398,7 +398,7 @@ Call_002_427E:
     ld a, [hl+]                                   ; $428F: $2A
     ld h, [hl]                                    ; $4290: $66
     ld l, a                                       ; $4291: $6F
-    call Call_000_07BF                            ; $4292: $CD $BF $07
+    call CallHL                            ; $4292: $CD $BF $07
 
 jr_002_4295:
     ld a, [$D392]                                 ; $4295: $FA $92 $D3

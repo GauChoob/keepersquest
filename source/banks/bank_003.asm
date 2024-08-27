@@ -29,7 +29,7 @@ jr_003_4017:
     call Call_003_422E                            ; $401C: $CD $2E $42
     pop de                                        ; $401F: $D1
     ld a, [$CCD5]                                 ; $4020: $FA $D5 $CC
-    ld [$C95A], a                                 ; $4023: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4023: $EA $5A $C9
     ldh [rSVBK], a                                ; $4026: $E0 $70
     ld hl, $CCD3                                  ; $4028: $21 $D3 $CC
     ld a, [hl+]                                   ; $402B: $2A
@@ -87,11 +87,11 @@ Call_003_4062:
     ld [hl+], a                                   ; $406C: $22
     inc bc                                        ; $406D: $03
     ld a, $CF                                     ; $406E: $3E $CF
-    ld [$C6E8], a                                 ; $4070: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $4070: $EA $E8 $C6
     ld a, $40                                     ; $4073: $3E $40
-    ld [$C6E9], a                                 ; $4075: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $4075: $EA $E9 $C6
     ld a, $03                                     ; $4078: $3E $03
-    ld [$C6EA], a                                 ; $407A: $EA $EA $C6
+    ld [wVBlank_Bank], a                                 ; $407A: $EA $EA $C6
     ld a, $82                                     ; $407D: $3E $82
     ld [$CCC5], a                                 ; $407F: $EA $C5 $CC
     ld a, [$CD9D]                                 ; $4082: $FA $9D $CD
@@ -161,9 +161,9 @@ jr_003_40B4:
     ld a, [$CCC5]                                 ; $40DE: $FA $C5 $CC
     ld [hl], a                                    ; $40E1: $77
     ld a, $12                                     ; $40E2: $3E $12
-    ld [$C6E8], a                                 ; $40E4: $EA $E8 $C6
+    ld [wVBlank_Func], a                                 ; $40E4: $EA $E8 $C6
     ld a, $2C                                     ; $40E7: $3E $2C
-    ld [$C6E9], a                                 ; $40E9: $EA $E9 $C6
+    ld [wVBlank_Func + 1], a                                 ; $40E9: $EA $E9 $C6
     ret                                           ; $40EC: $C9
 
 
@@ -266,7 +266,7 @@ jr_003_4146:
 
 jr_003_417E:
     ld a, [$CCD5]                                 ; $417E: $FA $D5 $CC
-    ld [$C95A], a                                 ; $4181: $EA $5A $C9
+    ld [wRAMBank], a                                 ; $4181: $EA $5A $C9
     ldh [rSVBK], a                                ; $4184: $E0 $70
     ld hl, $CCD3                                  ; $4186: $21 $D3 $CC
     ld a, [hl+]                                   ; $4189: $2A
@@ -327,7 +327,7 @@ jr_003_41C7:
     ld a, [hl+]                                   ; $41D6: $2A
     ld h, [hl]                                    ; $41D7: $66
     ld l, a                                       ; $41D8: $6F
-    call Call_000_07BF                            ; $41D9: $CD $BF $07
+    call CallHL                            ; $41D9: $CD $BF $07
     jr jr_003_422D                                ; $41DC: $18 $4F
 
 jr_003_41DE:
@@ -343,7 +343,7 @@ jr_003_41DE:
     ld a, [hl+]                                   ; $41ED: $2A
     ld h, [hl]                                    ; $41EE: $66
     ld l, a                                       ; $41EF: $6F
-    call Call_000_07BF                            ; $41F0: $CD $BF $07
+    call CallHL                            ; $41F0: $CD $BF $07
     jr jr_003_422D                                ; $41F3: $18 $38
 
 jr_003_41F5:
@@ -388,7 +388,7 @@ jr_003_4221:
     ld a, [hl+]                                   ; $4227: $2A
     ld h, [hl]                                    ; $4228: $66
     ld l, a                                       ; $4229: $6F
-    call Call_000_07BF                            ; $422A: $CD $BF $07
+    call CallHL                            ; $422A: $CD $BF $07
 
 jr_003_422D:
     ret                                           ; $422D: $C9

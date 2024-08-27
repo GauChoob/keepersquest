@@ -5238,7 +5238,7 @@ jr_006_546D:
 
     add b                                         ; $5473: $80
     add b                                         ; $5474: $80
-    ldh [$E1], a                                  ; $5475: $E0 $E1
+    ldh [$FFE1], a                                  ; $5475: $E0 $E1
     ld [c], a                                     ; $5477: $E2
     add b                                         ; $5478: $80
     add b                                         ; $5479: $80
@@ -5347,7 +5347,7 @@ jr_006_5495:
     add h                                         ; $54E1: $84
     add h                                         ; $54E2: $84
     sbc $DF                                       ; $54E3: $DE $DF
-    ldh [$E1], a                                  ; $54E5: $E0 $E1
+    ldh [$FFE1], a                                  ; $54E5: $E0 $E1
     add b                                         ; $54E7: $80
     dec d                                         ; $54E8: $15
     ld d, $17                                     ; $54E9: $16 $17
@@ -5594,7 +5594,7 @@ jr_006_5495:
     add b                                         ; $55EA: $80
     add b                                         ; $55EB: $80
     rst $18                                       ; $55EC: $DF
-    ldh [$E1], a                                  ; $55ED: $E0 $E1
+    ldh [$FFE1], a                                  ; $55ED: $E0 $E1
     ld [c], a                                     ; $55EF: $E2
     db $E3                                        ; $55F0: $E3
     db $E4                                        ; $55F1: $E4
@@ -5950,8 +5950,8 @@ jr_006_5495:
 
     db $DD                                        ; $5759: $DD
     sbc $DF                                       ; $575A: $DE $DF
-    ldh [$80], a                                  ; $575C: $E0 $80
-    ldh [$E1], a                                  ; $575E: $E0 $E1
+    ldh [$FF80], a                                  ; $575C: $E0 $80
+    ldh [$FFE1], a                                  ; $575E: $E0 $E1
     add b                                         ; $5760: $80
     add b                                         ; $5761: $80
     add b                                         ; $5762: $80
@@ -6173,7 +6173,7 @@ jr_006_5816:
     add b                                         ; $5843: $80
     ld a, d                                       ; $5844: $7A
     rst $18                                       ; $5845: $DF
-    ldh [$E1], a                                  ; $5846: $E0 $E1
+    ldh [$FFE1], a                                  ; $5846: $E0 $E1
     ld [c], a                                     ; $5848: $E2
     db $E3                                        ; $5849: $E3
     db $E4                                        ; $584A: $E4
@@ -6581,7 +6581,7 @@ jr_006_59D1:
     ret nz                                        ; $5A24: $C0
 
     cp a                                          ; $5A25: $BF
-    ldh [$9F], a                                  ; $5A26: $E0 $9F
+    ldh [$FF9F], a                                  ; $5A26: $E0 $9F
 
 jr_006_5A28:
     cp a                                          ; $5A28: $BF
@@ -7486,7 +7486,7 @@ jr_006_5D92:
     db $E3                                        ; $5DC0: $E3
     ld bc, $00F9                                  ; $5DC1: $01 $F9 $00
     inc e                                         ; $5DC4: $1C
-    ldh [$2E], a                                  ; $5DC5: $E0 $2E
+    ldh [$FF2E], a                                  ; $5DC5: $E0 $2E
     db $10                                        ; $5DC7: $10
     sub a                                         ; $5DC8: $97
     ld [$885F], sp                                ; $5DC9: $08 $5F $88
@@ -7552,7 +7552,7 @@ jr_006_5DE7:
     jr jr_006_5E8F                                ; $5E0F: $18 $7E
 
     ldh a, [rNR33]                                ; $5E11: $F0 $1D
-    ldh [$F2], a                                  ; $5E13: $E0 $F2
+    ldh [$FFF2], a                                  ; $5E13: $E0 $F2
     ld bc, $0708                                  ; $5E15: $01 $08 $07
     inc bc                                        ; $5E18: $03
     rst $38                                       ; $5E19: $FF
@@ -7603,7 +7603,7 @@ jr_006_5E2C:
     ret nz                                        ; $5E47: $C0
 
     ld d, e                                       ; $5E48: $53
-    ldh [$B4], a                                  ; $5E49: $E0 $B4
+    ldh [$FFB4], a                                  ; $5E49: $E0 $B4
     ld a, b                                       ; $5E4B: $78
     ld l, d                                       ; $5E4C: $6A
     sbc h                                         ; $5E4D: $9C
@@ -7675,16 +7675,16 @@ jr_006_5E7F:
 jr_006_5E8F:
     nop                                           ; $5E8F: $00
     sub b                                         ; $5E90: $90
-    ldh [$60], a                                  ; $5E91: $E0 $60
+    ldh [$FF60], a                                  ; $5E91: $E0 $60
     rst $38                                       ; $5E93: $FF
     sbc a                                         ; $5E94: $9F
     ld a, a                                       ; $5E95: $7F
-    ldh [$1F], a                                  ; $5E96: $E0 $1F
+    ldh [$FF1F], a                                  ; $5E96: $E0 $1F
     ld a, a                                       ; $5E98: $7F
     add b                                         ; $5E99: $80
     ld a, h                                       ; $5E9A: $7C
     add e                                         ; $5E9B: $83
-    ldh [$1F], a                                  ; $5E9C: $E0 $1F
+    ldh [$FF1F], a                                  ; $5E9C: $E0 $1F
     ld bc, $0000                                  ; $5E9E: $01 $00 $00
     nop                                           ; $5EA1: $00
     nop                                           ; $5EA2: $00
@@ -7751,7 +7751,7 @@ jr_006_5E8F:
     db $FC                                        ; $5EE7: $FC
     ld a, $C1                                     ; $5EE8: $3E $C1
     sbc a                                         ; $5EEA: $9F
-    ldh [$67], a                                  ; $5EEB: $E0 $67
+    ldh [$FF67], a                                  ; $5EEB: $E0 $67
     ld hl, sp-$40                                 ; $5EED: $F8 $C0
     ccf                                           ; $5EEF: $3F
     add b                                         ; $5EF0: $80
@@ -7838,7 +7838,7 @@ jr_006_5F48:
     ld e, $00                                     ; $5F4A: $1E $00
     rst $00                                       ; $5F4C: $C7
     nop                                           ; $5F4D: $00
-    ldh [$1F], a                                  ; $5F4E: $E0 $1F
+    ldh [$FF1F], a                                  ; $5F4E: $E0 $1F
     ld a, b                                       ; $5F50: $78
     add a                                         ; $5F51: $87
     ld e, $E1                                     ; $5F52: $1E $E1
@@ -8170,7 +8170,7 @@ jr_006_608C:
     ld b, h                                       ; $60B4: $44
     ld hl, sp-$38                                 ; $60B5: $F8 $C8
     ldh a, [$94]                                  ; $60B7: $F0 $94
-    ldh [$28], a                                  ; $60B9: $E0 $28
+    ldh [$FF28], a                                  ; $60B9: $E0 $28
     ret nz                                        ; $60BB: $C0
 
     jr nc, jr_006_607E                            ; $60BC: $30 $C0
@@ -8381,7 +8381,7 @@ jr_006_6171:
     ld e, $B0                                     ; $61A5: $1E $B0
     rrca                                          ; $61A7: $0F
     call z, Call_006_7183                         ; $61A8: $CC $83 $71
-    ldh [$8E], a                                  ; $61AB: $E0 $8E
+    ldh [$FF8E], a                                  ; $61AB: $E0 $8E
     ld a, l                                       ; $61AD: $7D
     add c                                         ; $61AE: $81
     nop                                           ; $61AF: $00
