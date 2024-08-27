@@ -1,5 +1,33 @@
 SECTION "WRAM", WRAM0[$C000]
 
+    ds $C1A4 - @
+wActor_Save::
+    ds $1B
+
+    ds $C6DE - @
+wHotspotCurrent::
+    ds 1
+    ;ds $C6DF - @
+wHotspot_Table::
+    ; Points to the address of the hotspot table
+    ds 2
+    ;ds $C6E1 - @
+wHotspot_TableSize:
+    ; The number of elements in the hotspot table
+    ds 1
+    ;ds $C6E2 - @
+wUnkspot_Current:
+    ; Possibly unused?
+    ds 1
+    ;ds $C6E3 - @
+wUnkspot_Table:
+    ; Points to the address of the unkspot table
+    ds 2
+    ;ds $C6E5 - @
+wUnkspot_TableSize:
+    ; The number of elements in the unkspot table
+    ds 1
+
     ds $C6E8 - @
 wVBlank_Func::
     ; Points to a VBlank function that should be run during VBlank
@@ -78,6 +106,37 @@ wScript_Text::
     ds 1
     ;ds $C726 - @
     
+    ds $C72B - @
+wScript_StartButtonScript:
+    .Bank:
+    ds 1
+    .Frame:
+    ds 2
+
+    ds $C736 - @
+wScript_CheatCode_TotalSteps:
+    ; Total number of steps in the sequence
+    ds 1
+    ;ds $C737 - @
+wScript_CheatCode_CurrentStep:
+    ; How far the player has progressed in pressing the cheat code buttons
+    ; Reset to 1 if a mistake is made
+    ; 1 = [wScript_CheatCode_AnswerBuffer + 0]
+    ; 2 = [wScript_CheatCode_AnswerBuffer + 1]
+    ; etc
+    ds 1
+    ;ds $C738 - @
+wScript_CheatCode_AnswerBuffer:
+    ; Each byte corresponds to 1 button that the player must press, in sequence
+    ds 12
+    ;ds $C744 - @
+
+    ds $C747 - @
+wScript_CheatCode_Succeeded:
+    ; 0 = Has not yet finished the sequence
+    ; 1 = Sequence successfully finished
+    ds 1
+
     ds $C954 - @
 wCnt1::
     ds 1

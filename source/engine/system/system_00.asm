@@ -153,9 +153,9 @@ System_Init::
     SwitchROMBank $05
     call $47AF                                    ; $086B: $CD $AF $47
     ld a, $FF                                     ; $086E: $3E $FF
-    ld [$C6DE], a                                 ; $0870: $EA $DE $C6
+    ld [wHotspotCurrent], a                                 ; $0870: $EA $DE $C6
     ld a, $FF                                     ; $0873: $3E $FF
-    ld [$C6E2], a                                 ; $0875: $EA $E2 $C6
+    ld [wUnkspot_Current], a                                 ; $0875: $EA $E2 $C6
     xor a                                         ; $0878: $AF
     xor a                                         ; $0879: $AF
     ld [wVBlank_Bank], a                                 ; $087A: $EA $EA $C6

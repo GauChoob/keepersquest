@@ -5344,7 +5344,7 @@ jr_007_5B9A:
 
     ld a, $01                                     ; $5F87: $3E $01
     ld [$D076], a                                 ; $5F89: $EA $76 $D0
-    call Call_000_0585                            ; $5F8C: $CD $85 $05
+    call Math_Rand8Inc                            ; $5F8C: $CD $85 $05
     ld c, a                                       ; $5F8F: $4F
     ld b, $1E                                     ; $5F90: $06 $1E
     call Call_000_04E2                            ; $5F92: $CD $E2 $04
@@ -5376,7 +5376,7 @@ jr_007_5B9A:
     ld hl, $405C                                  ; $5FC6: $21 $5C $40
     ld e, $05                                     ; $5FC9: $1E $05
     call CallForeign                            ; $5FCB: $CD $A9 $07
-    call Call_000_0585                            ; $5FCE: $CD $85 $05
+    call Math_Rand8Inc                            ; $5FCE: $CD $85 $05
     cp $E6                                        ; $5FD1: $FE $E6
     ret nc                                        ; $5FD3: $D0
 

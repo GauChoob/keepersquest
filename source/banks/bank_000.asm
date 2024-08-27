@@ -397,15 +397,16 @@ Game_Loop:
     ld [$C733], a                                 ; $0321: $EA $33 $C7
     ld [$C734], a                                 ; $0324: $EA $34 $C7
     ld [$C731], a                                 ; $0327: $EA $31 $C7
-    ld bc, $C72B                                  ; $032A: $01 $2B $C7
+    ld bc, wScript_StartButtonScript                                  ; $032A: $01 $2B $C7
     ld hl, wScript_Text                                  ; $032D: $21 $1F $C7
-    call Call_000_1903                            ; $0330: $CD $03 $19
+    call Global_KQ_SetScript                            ; $0330: $CD $03 $19
 
 jr_000_0333:
     call System_UpdateGame                            ; $0333: $CD $F7 $08
     jp Game_Loop                              ; $0336: $C3 $F7 $02
 
 
+Actor00_Table:
     adc c                                         ; $0339: $89
     pop bc                                        ; $033A: $C1
     and h                                         ; $033B: $A4
@@ -929,7 +930,7 @@ jr_000_057D:
     ret                                           ; $0584: $C9
 
 
-Call_000_0585:
+Math_Rand8Inc:
     ldh a, [rDIV]                                 ; $0585: $F0 $04
     swap a                                        ; $0587: $CB $37
     sra a                                         ; $0589: $CB $2F
@@ -1318,7 +1319,7 @@ Hotspot00_SetScript:
     SwitchROMBank $01
     ret                                           ; $0A75: $C9
 
-
+; Presumably a second type of hotspot system? KQ exclusive
     SwitchROMBank $13
     ld a, [hl+]                                   ; $0A7E: $2A
     ld e, a                                       ; $0A7F: $5F
@@ -1476,11 +1477,21 @@ Call_000_0B49:
     inc hl                                        ; $0B56: $23
     ret                                           ; $0B57: $C9
 
-Cmd_0B58:
-    SwitchROMBank $01
-    jp $441A                                      ; $0B60: $C3 $1A $44
+Cmd_Actor_HeroFromDoor:
+    ; Teleport the Hero to the X and Y coordinates specified by a Cmd_Actor_HeroToDoor
+    ; Useful to set the Hero to specific tile when loading a new scene
+    ; Also sets wHotspotCurrent to null
+    ; Arguments:
+    ;   None
+    SwitchROMBank BANK(ActorXX_HeroFromDoor)
+    jp ActorXX_HeroFromDoor                                      ; $0B60: $C3 $1A $44
 
-Cmd_0B63:
+Cmd_Actor_HeroToDoor:
+    ; Sets the X and Y door coordinates that can be retrieved by Cmd_Actor_HeroFromDoor
+    ; Useful to set the location of the next scene when exiting the current scene
+    ; Arguments:
+    ;   db  wHero_DoorX
+    ;   db  wHero_DoorY
     ld a, [bc]                                    ; $0B63: $0A
     inc bc                                        ; $0B64: $03
     ld [$C9C4], a                                 ; $0B65: $EA $C4 $C9
@@ -1489,7 +1500,18 @@ Cmd_0B63:
     ld [$C9C5], a                                 ; $0B6A: $EA $C5 $C9
     jp Script_Start                              ; $0B6D: $C3 $D3 $0A
 
-Cmd_0B70:
+Cmd_Actor_HeroToRelativeDoor:
+    ; Sets the X and Y door coordinates that can be retrieved by Cmd_Actor_HeroFromDoor
+    ; Useful to set the location of the next scene when exiting the current scene and there are multiple available tiles
+    ; The coordinates are set as relative offsets from the current position
+    ; Arguments:
+    ;   db Decrease X by # (Source X)
+    ;   db Increase X by # (Dest X)
+    ;   db Decrease Y by # (Source Y)
+    ;   db Increase Y by # (Dest Y)
+    ; Outputs:
+    ;   wHero_DoorX = wActor_Hero.XTile - SourceX + DestX
+    ;   wHero_DoorY = wActor_Hero.YTile - SourceY + DestY
     ld a, [bc]                                    ; $0B70: $0A
     inc bc                                        ; $0B71: $03
     ld l, a                                       ; $0B72: $6F
@@ -1512,10 +1534,19 @@ Cmd_0B70:
     ld [$C9C5], a                                 ; $0B89: $EA $C5 $C9
     jp Script_Start                              ; $0B8C: $C3 $D3 $0A
 
-Cmd_0B8F:
-    call Call_000_0E7A                            ; $0B8F: $CD $7A $0E
+Cmd_Actor_ThatActorDrawTile:
+    ; Draws a tile at the actor's position with an offset
+    ; Arguments:
+    ;   db  Actor id
+    ;   db  Y offset
+    ;   db  X offset
+    ;   dw  Tileaddress offset = Width*Yoffset + Xoffset
+    ;   db  Coll id
+    ;   db  Metatilemap id
+    call Actor_GetThatActor                            ; $0B8F: $CD $7A $0E
+    ; jp Actor_DrawTile
 
-Jump_000_0B92:
+Actor_DrawTile:
     ld de, $0005                                  ; $0B92: $11 $05 $00
     add hl, de                                    ; $0B95: $19
     ld a, [hl+]                                   ; $0B96: $2A
@@ -1562,6 +1593,7 @@ Jump_000_0B92:
     jp $4626                                      ; $0BDC: $C3 $26 $46
 
 
+    ; KQ exclusive
     inc bc                                        ; $0BDF: $03
     inc bc                                        ; $0BE0: $03
     inc bc                                        ; $0BE1: $03
@@ -1571,10 +1603,17 @@ Jump_000_0B92:
     inc bc                                        ; $0BE5: $03
     jp Script_Start                              ; $0BE6: $C3 $D3 $0A
 
-Cmd_0BE9:
-    call Call_000_0E7A                            ; $0BE9: $CD $7A $0E
+Cmd_Actor_ThatActorDrawMaskTile:
+    ; Modifies a tile in the wMaskMetatilemap at the actor's position with an offset
+    ; Arguments:
+    ;   db  Actor id
+    ;   dw  Tileaddress offset = Width*Yoffset + Xoffset
+    ;   db  Coll id
+    ;   db  Metatilemap id
+    call Actor_GetThatActor                            ; $0BE9: $CD $7A $0E
+    ;jp Actor_DrawMaskTile
 
-Jump_000_0BEC:
+Actor_DrawMaskTile:
     ld de, $0007                                  ; $0BEC: $11 $07 $00
     add hl, de                                    ; $0BEF: $19
     ld a, [bc]                                    ; $0BF0: $0A
@@ -1597,19 +1636,40 @@ Jump_000_0BEC:
     ld [hl], a                                    ; $0C0D: $77
     jp Script_Start                              ; $0C0E: $C3 $D3 $0A
 
-Cmd_0C11:
-    call Call_000_0E7A                            ; $0C11: $CD $7A $0E
+Cmd_Actor_ThatActorInit:
+    ; Initializes an actor
+    ; Arguments:
+    ;   db              Actor id
+    ;   dw              State (AI)
+    ;   db              XTile
+    ;   db              YTile
+    ;   dw              TileAddress
+    ;   db              SpriteBase
+    ;   BankAddress    Script0 
+    ;   BankAddress    Interrupt (Talk script or stand-on-tile script)
+    ; Outputs:
+    ;   Actor initialized but not activated
+    ;   XSubtile and YSubtile set to 8
+    ;   Script1 set to Null
+    call Actor_GetThatActor                            ; $0C11: $CD $7A $0E
     call Call_000_0B2A                            ; $0C14: $CD $2A $0B
     call Call_000_0B1E                            ; $0C17: $CD $1E $0B
     call Call_000_0B02                            ; $0C1A: $CD $02 $0B
     jp Script_Start                              ; $0C1D: $C3 $D3 $0A
 
-Cmd_0C20:
-    call Call_000_0E7A                            ; $0C20: $CD $7A $0E
+Cmd_Actor_ThatActorTeleportToThatActor:
+    ; Teleports Actor1 to Actor2
+    ; Arguments:
+    ;   db      Actor ID1
+    ;   db      Actor ID2
+    ; Outputs:
+    ;   Actor.X/YTile and Actor.TileAddress of Actor1 is changed to that of Actor2
+    ;   Actor.X/YSubtile is set to $08
+    call Actor_GetThatActor                            ; $0C20: $CD $7A $0E
     ld de, $0003                                  ; $0C23: $11 $03 $00
     add hl, de                                    ; $0C26: $19
     push hl                                       ; $0C27: $E5
-    call Call_000_0E7A                            ; $0C28: $CD $7A $0E
+    call Actor_GetThatActor                            ; $0C28: $CD $7A $0E
     ld de, $0005                                  ; $0C2B: $11 $05 $00
     add hl, de                                    ; $0C2E: $19
     pop de                                        ; $0C2F: $D1
@@ -1632,8 +1692,14 @@ Cmd_0C20:
     ld [de], a                                    ; $0C42: $12
     jp Script_Start                              ; $0C43: $C3 $D3 $0A
 
-Cmd_0C46:
-    call Call_000_0E7A                            ; $0C46: $CD $7A $0E
+Cmd_Actor_ThatActorSetAI:
+    ; Sets the State of an Actor
+    ; Arguments:
+    ;   db      Actor ID
+    ;   dw      Address
+    ; Output:
+    ;   Actor.State set to Address (always in bank 1)
+    call Actor_GetThatActor                            ; $0C46: $CD $7A $0E
     inc hl                                        ; $0C49: $23
     ld a, [bc]                                    ; $0C4A: $0A
     inc bc                                        ; $0C4B: $03
@@ -1643,12 +1709,27 @@ Cmd_0C46:
     ld [hl+], a                                   ; $0C4F: $22
     jp Script_Start                              ; $0C50: $C3 $D3 $0A
 
-Cmd_0C53:
-    call Call_000_0E7A                            ; $0C53: $CD $7A $0E
-    jp Jump_000_0E88                              ; $0C56: $C3 $88 $0E
+Cmd_Actor_ThatActorSetLoc:
+    ; Sets the position of an Actor
+    ; Arguments:
+    ;   db      Actor ID
+    ;   db      XSubtile
+    ;   db      YSubtile
+    ;   db      XTile
+    ;   db      YTile
+    ;   dw      TileAddress
+    ; Outputs:
+    ;   Values above are set for Actor
+    call Actor_GetThatActor                            ; $0C53: $CD $7A $0E
+    jp Actor_SetLoc                              ; $0C56: $C3 $88 $0E
 
-Cmd_0C59:
-    call Call_000_0E7A                            ; $0C59: $CD $7A $0E
+Cmd_Actor_ThatActorSetScript:
+    ; For an Actor, sets the BankAddress of Script0
+    ; Sets Script1 to Cmd_Flow_End
+    ; Arguments:
+    ;   db      Actor ID
+    ;   BankAddress
+    call Actor_GetThatActor                            ; $0C59: $CD $7A $0E
     ld de, $000A                                  ; $0C5C: $11 $0A $00
     add hl, de                                    ; $0C5F: $19
     ld a, [bc]                                    ; $0C60: $0A
@@ -1663,8 +1744,12 @@ Cmd_0C59:
     ld [hl], $15                                  ; $0C6C: $36 $15
     jp Script_Start                              ; $0C6E: $C3 $D3 $0A
 
-Cmd_0C71:
-    call Call_000_0E7A                            ; $0C71: $CD $7A $0E
+Cmd_Actor_ThatActorSetSpriteBase:
+    ; Sets the SpriteBase of the target Actor
+    ; Arguments:
+    ;   db      Actor ID
+    ;   db      New value of SpriteBase
+    call Actor_GetThatActor                            ; $0C71: $CD $7A $0E
     ld de, $0009                                  ; $0C74: $11 $09 $00
     add hl, de                                    ; $0C77: $19
     ld a, [bc]                                    ; $0C78: $0A
@@ -1672,8 +1757,17 @@ Cmd_0C71:
     inc bc                                        ; $0C7A: $03
     jp Script_Start                              ; $0C7B: $C3 $D3 $0A
 
-Cmd_0C7E:
-    call Call_000_0E7A                            ; $0C7E: $CD $7A $0E
+Cmd_Actor_ThatActorStart:
+    ; Activates an Actor
+    ; If Actor is already activated, it will also cancel a disable command before the actor is actually disabled
+    ; This will silently fail if there's already $10 actors activated
+    ; Arguments:
+    ;   db  Actor ID
+    ; Outputs:
+    ;   Actor_FLAGS_BIT_DELETE reset
+    ;   If Actor was not already enabled, ActorListXX_AddActor is run to add the actor to the wActorList_Table
+    ;       and Actor_FLAGS_BIT_ACTIVE is set
+    call Actor_GetThatActor                            ; $0C7E: $CD $7A $0E
     bit 6, [hl]                                   ; $0C81: $CB $76
     jr nz, jr_000_0C9D                            ; $0C83: $20 $18
 
@@ -1689,8 +1783,11 @@ jr_000_0C9D:
     res 7, [hl]                                   ; $0C9D: $CB $BE
     jp Script_Start                              ; $0C9F: $C3 $D3 $0A
 
-Cmd_0CA2:
-    call Call_000_0E7A                            ; $0CA2: $CD $7A $0E
+Cmd_Actor_ThatActorDelete:
+    ; Deletes the target Actor
+    ; Arguments:
+    ;   db  Actor ID
+    call Actor_GetThatActor                            ; $0CA2: $CD $7A $0E
     set 7, [hl]                                   ; $0CA5: $CB $FE
     ld a, b                                       ; $0CA7: $78
     ld [hScript.Frame + 1], a                                 ; $0CA8: $EA $AA $FF
@@ -1702,16 +1799,34 @@ Cmd_0CA2:
     ld [hScript.State + 1], a                                 ; $0CB6: $EA $AC $FF
     ret                                           ; $0CB9: $C9
 
-Cmd_0CBA:
+Cmd_Actor_ThisActorDrawTile:
+    ; Draws a tile at the actor's position with an offset
+    ; Arguments:
+    ;   db  Y offset
+    ;   db  X offset
+    ;   dw  Tileaddress offset = Width*Yoffset + Xoffset
+    ;   db  Coll id
+    ;   db  Metatilemap id
     ld hl, $FF8C                                  ; $0CBA: $21 $8C $FF
-    jp Jump_000_0B92                              ; $0CBD: $C3 $92 $0B
+    jp Actor_DrawTile                              ; $0CBD: $C3 $92 $0B
 
-Cmd_0CC0:
+Cmd_Actor_ThisActorDrawMaskTile:
+    ; Modifies a tile in the wMaskMetatilemap at the actor's position with an offset
+    ; Arguments:
+    ;   dw  Tileaddress offset = Width*Yoffset + Xoffset
+    ;   db  Coll id
+    ;   db  Metatilemap id
     ld hl, $FF8C                                  ; $0CC0: $21 $8C $FF
-    jp Jump_000_0BEC                              ; $0CC3: $C3 $EC $0B
+    jp Actor_DrawMaskTile                              ; $0CC3: $C3 $EC $0B
 
-Cmd_0CC6:
-    call Call_000_0E7A                            ; $0CC6: $CD $7A $0E
+Cmd_Actor_ThisActorTeleportToThatActor:
+    ; Teleports the current Actor to the location of the target actor
+    ; Arguments:
+    ;   db      Actor index id
+    ; Outputs:
+    ;   hActor.X/YTile and hActor.TileAddress of current Actor is changed to that of target Actor
+    ;   hActor.X/YSubtile is set to $08
+    call Actor_GetThatActor                            ; $0CC6: $CD $7A $0E
     ld de, $0005                                  ; $0CC9: $11 $05 $00
     add hl, de                                    ; $0CCC: $19
     ld a, $08                                     ; $0CCD: $3E $08
@@ -1728,7 +1843,10 @@ Cmd_0CC6:
     ldh [$FF94], a                                  ; $0CE7: $E0 $94
     jp Script_Start                              ; $0CE9: $C3 $D3 $0A
 
-Cmd_0CEC:
+Cmd_Actor_ThisActorNewState:
+    ; Only for wActor_Hero - Stores a new state for the actor to load for the next frame
+    ; Arguments:
+    ;   dw  NewState (AI)
     ld a, [bc]                                    ; $0CEC: $0A
     ld e, a                                       ; $0CED: $5F
     inc bc                                        ; $0CEE: $03
@@ -1741,7 +1859,14 @@ Cmd_0CEC:
     ld [$C186], a                                 ; $0CF7: $EA $86 $C1
     jp Script_Start                              ; $0CFA: $C3 $D3 $0A
 
-Cmd_0CFD:
+Cmd_Actor_ThisActorRaindrop:
+    ; Randomly select tiles on the screen until a tile meets the following criteria:
+    ;   a) Collision ID of the selected tile matches the argument
+    ;   b) The selected tile is not where the hero is currently located
+    ; Once a tile is found, continue the script
+    ; Used for lava bubbles, swirl to teleport to mush hyren, battle sparkles
+    ; Arguments:
+    ;   db  Collision ID
     ld a, $70                                     ; $0CFD: $3E $70
     ldh [$FF8D], a                                  ; $0CFF: $E0 $8D
     ld a, $6E                                     ; $0D01: $3E $6E
@@ -1803,16 +1928,28 @@ jr_000_0D53:
     ldh [hScript.State + 1], a                                  ; $0D59: $E0 $AC
     ret                                           ; $0D5B: $C9
 
-Cmd_0D5C:
+Cmd_Actor_RestoreActorState:
+    ; Restores the Actor's state after it was saved
+    ; The Actor is saved when Tony tries to talk to the Actor, so that the Actor
+    ; can go back to doing exactly what it was doing before Tony tried to talk to it
+    ; The hero also gets control again so he can move
+    
+    ; Although it is originally known as ThisActorRestoreState, technically the actor
+    ; that was saved will be restored, be it This actor or a different actor
     ld a, $03                                     ; $0D5C: $3E $03
     ld [$C188], a                                 ; $0D5E: $EA $88 $C1
     ld a, $20                                     ; $0D61: $3E $20
     ld [$C18A], a                                 ; $0D63: $EA $8A $C1
     ld a, $64                                     ; $0D66: $3E $64
     ld [$C18B], a                                 ; $0D68: $EA $8B $C1
-    jp Jump_000_1531                              ; $0D6B: $C3 $31 $15
+    jp Cmd_Flow_End                              ; $0D6B: $C3 $31 $15
 
-Cmd_0D6E:
+Cmd_Actor_ThisActorSetAI:
+    ; Sets the State AI of the current Object
+    ; Arguments:
+    ;   dw      Address
+    ; Output:
+    ;   hActor.State set to Address (always in bank 1)
     ld a, [bc]                                    ; $0D6E: $0A
     inc bc                                        ; $0D6F: $03
     ld [$FF8D], a                                 ; $0D70: $EA $8D $FF
@@ -1829,10 +1966,13 @@ Cmd_0D6E:
     ld [hScript.State + 1], a                                 ; $0D87: $EA $AC $FF
     ret                                           ; $0D8A: $C9
 
-Cmd_0D8B:
-    ld a, [$FF8B]                                 ; $0D8B: $FA $8B $FF
+Cmd_Actor_ThisActorSetAnimSingle:
+    ; Sets Script1 (with an animation)
+    ; Arguments:
+    ;   BankAddress - Script1 to run with animation
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0D8B: $FA $8B $FF
     ld h, a                                       ; $0D8E: $67
-    ld a, [$FF8A]                                 ; $0D8F: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0D8F: $FA $8A $FF
     ld l, a                                       ; $0D92: $6F
     ld de, $0011                                  ; $0D93: $11 $11 $00
     add hl, de                                    ; $0D96: $19
@@ -1842,11 +1982,18 @@ Cmd_0D8B:
     call Call_000_0B49                            ; $0D9A: $CD $49 $0B
     jp Script_Start                              ; $0D9D: $C3 $D3 $0A
 
-Cmd_0DA0:
-jr_000_0DA0:
-    ld a, [$FF8B]                                 ; $0DA0: $FA $8B $FF
+Cmd_Actor_ThisActorSetAnimDelay:
+    ; Sequentially sets Script1 with animations
+    ;
+    ; Arguments:
+    ;   {
+    ;       BankAddress - Script1 to run with animation
+    ;       db - Number of frames to run the animation
+    ;   }
+    ;   db $00 - End-of-command
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0DA0: $FA $8B $FF
     ld h, a                                       ; $0DA3: $67
-    ld a, [$FF8A]                                 ; $0DA4: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0DA4: $FA $8A $FF
     ld l, a                                       ; $0DA7: $6F
     ld de, $0011                                  ; $0DA8: $11 $11 $00
     add hl, de                                    ; $0DAB: $19
@@ -1860,7 +2007,7 @@ jr_000_0DA0:
     ld a, [bc]                                    ; $0DB6: $0A
     inc bc                                        ; $0DB7: $03
     and a                                         ; $0DB8: $A7
-    jr z, jr_000_0DA0                             ; $0DB9: $28 $E5
+    jr z, Cmd_Actor_ThisActorSetAnimDelay                             ; $0DB9: $28 $E5
 
     ldh [$FFAD], a                                  ; $0DBB: $E0 $AD
     ld a, b                                       ; $0DBD: $78
@@ -1886,11 +2033,22 @@ jr_000_0DD7:
     ld [hScript.State + 1], a                                 ; $0DDE: $EA $AC $FF
     ret                                           ; $0DE1: $C9
 
-Cmd_0DE2:
-jr_000_0DE2:
-    ld a, [$FF8B]                                 ; $0DE2: $FA $8B $FF
+Cmd_Actor_ThisActorSetAnimScroll:
+    ; Sequentially sets Script1 with animations
+    ; Additionally scrolls the tilemap during the animations
+    ;
+    ; Arguments:
+    ;   {
+    ;       BankAddress - Script1 to run with animation
+    ;       db - Number of frames to run the animation and scroll the tilemap
+    ;       db - wTilemap_XDelta per frame
+    ;       db - wTilemap_YDelta per frame
+    ;   }
+    ;   db $00 - End-of-command
+    ;
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0DE2: $FA $8B $FF
     ld h, a                                       ; $0DE5: $67
-    ld a, [$FF8A]                                 ; $0DE6: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0DE6: $FA $8A $FF
     ld l, a                                       ; $0DE9: $6F
     ld de, $0011                                  ; $0DEA: $11 $11 $00
     add hl, de                                    ; $0DED: $19
@@ -1908,7 +2066,7 @@ jr_000_0DE2:
 
     inc bc                                        ; $0DFE: $03
     inc bc                                        ; $0DFF: $03
-    jr jr_000_0DE2                                ; $0E00: $18 $E0
+    jr Cmd_Actor_ThisActorSetAnimScroll                                ; $0E00: $18 $E0
 
 Jump_000_0E02:
     ldh [$FFAD], a                                  ; $0E02: $E0 $AD
@@ -1951,17 +2109,32 @@ jr_000_0E32:
     ld [hScript.State + 1], a                                 ; $0E41: $EA $AC $FF
     ret                                           ; $0E44: $C9
 
-Cmd_0E45:
+Cmd_Actor_ThisActorSetLoc:
+    ; Sets the position of the current Actor
+    ; Arguments:
+    ;   db      XSubtile
+    ;   db      YSubtile
+    ;   db      XTile
+    ;   db      YTile
+    ;   dw      TileAddress
+    ; Outputs:
+    ;   Values above are set for current Actor
     ld hl, $FF8C                                  ; $0E45: $21 $8C $FF
-    jp Jump_000_0E88                              ; $0E48: $C3 $88 $0E
+    jp Actor_SetLoc                              ; $0E48: $C3 $88 $0E
 
-Cmd_0E4B:
+Cmd_Actor_ThisActorSetSpriteBase:
+    ; Sets the SpriteBase of the current Actor
+    ; Arguments:
+    ;   db      New value of SpriteBase
     ld a, [bc]                                    ; $0E4B: $0A
     inc bc                                        ; $0E4C: $03
     ldh [$FF95], a                                  ; $0E4D: $E0 $95
     jp Script_Start                              ; $0E4F: $C3 $D3 $0A
 
-Cmd_0E52:
+Cmd_Actor_ThisActorDelete:
+    ; Deletes the current actor
+    ; Arguments:
+    ;   None
     ldh a, [$FF8C]                                  ; $0E52: $F0 $8C
     set 7, a                                      ; $0E54: $CB $FF
     ldh [$FF8C], a                                  ; $0E56: $E0 $8C
@@ -1971,7 +2144,12 @@ Cmd_0E52:
     ld [hScript.State + 1], a                                 ; $0E5F: $EA $AC $FF
     ret                                           ; $0E62: $C9
 
-Cmd_0E63:
+Cmd_Actor_ThisActorWaitTile:
+    ; Loop and wait until the actor is standing on the specified pattern id
+    ; Arguments:
+    ;   db  Pattern ID
+    ; Outputs:
+    ;   If [hActor.TileAddress] == PatternID, read the next command, or else try again next frame
     ld a, [$FF94]                                 ; $0E63: $FA $94 $FF
     ld h, a                                       ; $0E66: $67
     ld a, [$FF93]                                 ; $0E67: $FA $93 $FF
@@ -1986,13 +2164,18 @@ Cmd_0E63:
     jp Script_Start                              ; $0E77: $C3 $D3 $0A
 
 
-Call_000_0E7A:
+Actor_GetThatActor:
+    ; Loads the Nth address in Actor00_Table and saves it to hl
+    ; Input:
+    ;   db - index id of the desired actor 0 = Hero, 1 = Save, 2 = 00, 3 = 01, etc
+    ; Output:
+    ;   hl = reference to the Actor's WRAM structure
     ld a, [bc]                                    ; $0E7A: $0A
     inc bc                                        ; $0E7B: $03
     add a                                         ; $0E7C: $87
     ld e, a                                       ; $0E7D: $5F
     ld d, $00                                     ; $0E7E: $16 $00
-    ld hl, $0339                                  ; $0E80: $21 $39 $03
+    ld hl, Actor00_Table                                  ; $0E80: $21 $39 $03
     add hl, de                                    ; $0E83: $19
     ld a, [hl+]                                   ; $0E84: $2A
     ld h, [hl]                                    ; $0E85: $66
@@ -2000,7 +2183,17 @@ Call_000_0E7A:
     ret                                           ; $0E87: $C9
 
 
-Jump_000_0E88:
+Actor_SetLoc:
+    ; Sets the position of an actor
+    ; Arguments:
+    ;   hl      Points to an actor structure (hActor or a WRAM actor struct)
+    ;   db      XSubtile
+    ;   db      YSubtile
+    ;   db      XTile
+    ;   db      YTile
+    ;   dw      TileAddress
+    ; Outputs:
+    ;   Values above are set for Actor
     ld de, $0003                                  ; $0E88: $11 $03 $00
     add hl, de                                    ; $0E8B: $19
     ld a, [bc]                                    ; $0E8C: $0A
@@ -2024,28 +2217,36 @@ Jump_000_0E88:
     jp Script_Start                              ; $0E9E: $C3 $D3 $0A
 
 
-Cmd_0EA1:
-    call Call_000_0E7A                            ; $0EA1: $CD $7A $0E
-    ld de, $0018                                  ; $0EA4: $11 $18 $00
+Cmd_Actor_KQ_ThatActorSetInterrupt:
+    ; Arguments
+    ;   db              Actor ID
+    ;   BankAddress     Interrupt
+    call Actor_GetThatActor                            ; $0EA1: $CD $7A $0E
+    ld de, $0018  ; Actor_OFFSET_Interrupt                                ; $0EA4: $11 $18 $00
     add hl, de                                    ; $0EA7: $19
+    ; Bank
     ld a, [bc]                                    ; $0EA8: $0A
     inc bc                                        ; $0EA9: $03
     ld [hl+], a                                   ; $0EAA: $22
+    ; State
     ld a, [bc]                                    ; $0EAB: $0A
     inc bc                                        ; $0EAC: $03
     ld [hl+], a                                   ; $0EAD: $22
     ld a, [bc]                                    ; $0EAE: $0A
     inc bc                                        ; $0EAF: $03
     ld [hl+], a                                   ; $0EB0: $22
+    ; [hl?] = Cmd_Flow_End
     ld a, $31                                     ; $0EB1: $3E $31
     ld [hl+], a                                   ; $0EB3: $22
     ld [hl], $15                                  ; $0EB4: $36 $15
     jp Script_Start                              ; $0EB6: $C3 $D3 $0A
 
-Cmd_0EB9:
-    ld a, [$FF8B]                                 ; $0EB9: $FA $8B $FF
+Cmd_Actor_KQ_ThisActorSetInterrupt:
+    ; Arguments
+    ;   BankAddress     Interrupt
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0EB9: $FA $8B $FF
     ld h, a                                       ; $0EBC: $67
-    ld a, [$FF8A]                                 ; $0EBD: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0EBD: $FA $8A $FF
     ld l, a                                       ; $0EC0: $6F
     ld de, $0018                                  ; $0EC1: $11 $18 $00
     add hl, de                                    ; $0EC4: $19
@@ -2060,22 +2261,33 @@ Cmd_0EB9:
     ld [hl+], a                                   ; $0ECD: $22
     jp Script_Start                              ; $0ECE: $C3 $D3 $0A
 
-Cmd_0ED1:
-    ld hl, $C1A4                                  ; $0ED1: $21 $A4 $C1
+Cmd_Actor_KQ_ThisActorSaveActorSetScriptMisaligned:
+    ; Tries to set the Script0 of the current actor and wActor_Save
+    ; However, the data seems to be incorrectly copied leading to a misalignment of
+    ;     the data for the current actor and the State
+    ; Arguments:
+    ;   4 bytes (misaligned, should only be 3 bytes):
+    ;   First 3 bytes: Bank Address of wActor_Save Script0 Frame
+    ;   Last 3 bytes: Bank Address of current actor Script0 Frame
+    ld hl, wActor_Save                                  ; $0ED1: $21 $A4 $C1
     ld de, $000A                                  ; $0ED4: $11 $0A $00
     add hl, de                                    ; $0ED7: $19
+    ; Script0.Bank
     ld a, [bc]                                    ; $0ED8: $0A
     inc bc                                        ; $0ED9: $03
     ld [hl+], a                                   ; $0EDA: $22
+    ; Script0.Frame
     ld a, [bc]                                    ; $0EDB: $0A
     inc bc                                        ; $0EDC: $03
     ld [hl+], a                                   ; $0EDD: $22
     ld a, [bc]                                    ; $0EDE: $0A
     inc bc                                        ; $0EDF: $03
     ld [hl+], a                                   ; $0EE0: $22
+    ; Misaligned?? Extra byte?
     ld a, [bc]                                    ; $0EE1: $0A
     inc bc                                        ; $0EE2: $03
     ld [hl+], a                                   ; $0EE3: $22
+    ; Script0_State = Script_Start, except it is misaligned by 1
     ld a, $D3                                     ; $0EE4: $3E $D3
     ld [hl+], a                                   ; $0EE6: $22
     ld [hl], $0A                                  ; $0EE7: $36 $0A
@@ -2084,18 +2296,23 @@ Cmd_0ED1:
     inc hl                                        ; $0EEB: $23
     inc hl                                        ; $0EEC: $23
     inc hl                                        ; $0EED: $23
+    ; Extra misalignment? So off by 2 now
     inc hl                                        ; $0EEE: $23
+    ; Misalignment? Script1.Script1_State = Cmd_Flow_End, except misaligned by 2
     ld a, $31                                     ; $0EEF: $3E $31
     ld [hl+], a                                   ; $0EF1: $22
     ld [hl], $15                                  ; $0EF2: $36 $15
     dec bc                                        ; $0EF4: $0B
     dec bc                                        ; $0EF5: $0B
     dec bc                                        ; $0EF6: $0B
-    ld a, [$FF8B]                                 ; $0EF7: $FA $8B $FF
+    ; Also copy the function to the WRAM of current actor
+    ; But since bc was read 4 times up there and we only go back 3
+    ; This is also misaligned??
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0EF7: $FA $8B $FF
     ld h, a                                       ; $0EFA: $67
-    ld a, [$FF8A]                                 ; $0EFB: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0EFB: $FA $8A $FF
     ld l, a                                       ; $0EFE: $6F
-    ld de, $000A                                  ; $0EFF: $11 $0A $00
+    ld de, $000A  ;Script0                                ; $0EFF: $11 $0A $00
     add hl, de                                    ; $0F02: $19
     ld a, [bc]                                    ; $0F03: $0A
     inc bc                                        ; $0F04: $03
@@ -2109,15 +2326,15 @@ Cmd_0ED1:
     jp Script_Start                              ; $0F0C: $C3 $D3 $0A
 
 
-    ld hl, $C1A4                                  ; $0F0F: $21 $A4 $C1
+    ld hl, wActor_Save                                  ; $0F0F: $21 $A4 $C1
     ld de, $000A                                  ; $0F12: $11 $0A $00
     add hl, de                                    ; $0F15: $19
     ld a, [bc]                                    ; $0F16: $0A
     inc bc                                        ; $0F17: $03
     ld [hl+], a                                   ; $0F18: $22
-    ld a, [$FF8B]                                 ; $0F19: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $0F19: $FA $8B $FF
     ld h, a                                       ; $0F1C: $67
-    ld a, [$FF8A]                                 ; $0F1D: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $0F1D: $FA $8A $FF
     ld l, a                                       ; $0F20: $6F
     ld de, $000A                                  ; $0F21: $11 $0A $00
     add hl, de                                    ; $0F24: $19
@@ -2158,29 +2375,42 @@ Cmd_0ED1:
     ld [hl+], a                                   ; $0F4F: $22
     ret                                           ; $0F50: $C9
 
-Cmd_0F51:
+Cmd_Sound_PlaySFX0:
+    ; Starts an SFX. Can be used simultaneously with SFX1
+    ; Arguments:
+    ;   db SFX ID
     ld a, [bc]                                    ; $0F51: $0A
     inc bc                                        ; $0F52: $03
     ld [$C944], a                                 ; $0F53: $EA $44 $C9
     jp Script_Start                              ; $0F56: $C3 $D3 $0A
 
-Cmd_0F59:
+Cmd_Sound_PlaySFX1:
+    ; Starts an SFX. Can be used simultaneously with SFX0
+    ; Arguments:
+    ;   db SFX ID
     ld a, [bc]                                    ; $0F59: $0A
     inc bc                                        ; $0F5A: $03
     ld [$C945], a                                 ; $0F5B: $EA $45 $C9
     jp Script_Start                              ; $0F5E: $C3 $D3 $0A
 
-Cmd_0F61:
+Cmd_Sound_SongPause_Bugged:
+    ; Supposed to pause a song, but due to a bug, stops a song instead
+    ; This is used a few times in the code, but the song is sometimes immediately stopped after, but in any case never resumed
     ld a, $02                                     ; $0F61: $3E $02
     ld [$C942], a                                 ; $0F63: $EA $42 $C9
     jp Script_Start                              ; $0F66: $C3 $D3 $0A
 
-Cmd_0F69:
+Cmd_Sound_SongResume:
+    ; Resumes a song, Not very useful because PauseSong is bugged
+    ; This command is unused
     ld a, $04                                     ; $0F69: $3E $04
     ld [$C942], a                                 ; $0F6B: $EA $42 $C9
     jp Script_Start                              ; $0F6E: $C3 $D3 $0A
 
-Cmd_0F71:
+Cmd_Sound_SongStart:
+    ; Starts a song based on ID
+    ; Arguments:
+    ;   db Song ID
     ld a, [bc]                                    ; $0F71: $0A
     inc bc                                        ; $0F72: $03
     push de                                       ; $0F73: $D5
@@ -2203,7 +2433,12 @@ jr_000_0F85:
     pop de                                        ; $0F8E: $D1
     jp Script_Start                              ; $0F8F: $C3 $D3 $0A
 
-Cmd_0F92:
+Cmd_Sound_FadeOutSong:
+    ; Fades a song out from current volume to 0 volume
+    ; Arguments:
+    ;   db Duration of fadeout in frames.
+    ; Output:
+    ;   The volume fades by 1 tick every (Duration//16+1) frames (From $0F to $00)
     ld a, [bc]                                    ; $0F92: $0A
     inc bc                                        ; $0F93: $03
     swap a                                        ; $0F94: $CB $37
@@ -2216,7 +2451,13 @@ Cmd_0F92:
     ld [$C94D], a                                 ; $0FA2: $EA $4D $C9
     jp Script_Start                              ; $0FA5: $C3 $D3 $0A
 
-Cmd_0FA8:
+Cmd_Sound_FadeInSong:
+    ; Fades a song in from current volume to max volume
+    ; Arguments:
+    ;   db Duration of fadein in frames
+    ; Output:
+    ;   The volume fades by 1 tick every (Duration//16+1) frames (From currentvol to $0F)
+    ;   The duration will be approximately the specified duration if it starts at $00
     ld a, [bc]                                    ; $0FA8: $0A
     inc bc                                        ; $0FA9: $03
     swap a                                        ; $0FAA: $CB $37
@@ -2230,7 +2471,10 @@ Cmd_0FA8:
     ld [$C94D], a                                 ; $0FBB: $EA $4D $C9
     jp Script_Start                              ; $0FBE: $C3 $D3 $0A
 
-Cmd_0FC1:
+Cmd_Sound_SetSongVolume:
+    ; Sets the song volume and pauses any fade effects
+    ; Arguments:
+    ;   db  Volume (0-F)
     ld a, [bc]                                    ; $0FC1: $0A
     inc bc                                        ; $0FC2: $03
     and $0F                                       ; $0FC3: $E6 $0F
@@ -2242,7 +2486,12 @@ Cmd_0FC1:
     ld [$C94D], a                                 ; $0FD1: $EA $4D $C9
     jp Script_Start                              ; $0FD4: $C3 $D3 $0A
 
-Cmd_0FD7:
+Cmd_Sound_FanfareStart:
+    ; A fanfare will pause the current song, play the song, then resume the old song
+    ; This command is bugged so that the song will just stop if a fanfare is already playing (it accidentally gotos Cmd_Sound_SongStop)
+    ; This command is also unused, but probably functional
+    ; Arguments:
+    ;   db Song ID (for the fanfare)
     ld a, [bc]                                    ; $0FD7: $0A
     inc bc                                        ; $0FD8: $03
     ld e, a                                       ; $0FD9: $5F
@@ -2256,12 +2505,20 @@ Cmd_0FD7:
     ld [$C948], a                                 ; $0FE6: $EA $48 $C9
     jp Script_Start                              ; $0FE9: $C3 $D3 $0A
 
-Cmd_0FEC:
+Cmd_Sound_SongStop:
+    ; Stops the current song
     ld a, $01                                     ; $0FEC: $3E $01
     ld [$C942], a                                 ; $0FEE: $EA $42 $C9
     jp Script_Start                              ; $0FF1: $C3 $D3 $0A
 
-Cmd_0FF4:
+Cmd_Battle_New:
+    ; Starts a battle
+    ; wScript_System - will continue running the script at the end of the battle (TODO to confirm)
+    ; Arguments:
+    ;   db          wFightscene_ArenaIndex
+    ;   db          wBattle_MagiCreatureID
+    ;   db          wBattle_Level
+    ;   BankAddress Script that sets up the cardscene - Originally I think it handled all of the battle logic, but now it always points to TODOBattle_Fade_In
     ld a, [$C18E]                                 ; $0FF4: $FA $8E $C1
     ld [$C9C4], a                                 ; $0FF7: $EA $C4 $C9
     ld a, [$C18F]                                 ; $0FFA: $FA $8F $C1
@@ -2319,12 +2576,21 @@ jr_000_101A:
     SwitchROMBank $04
     jp $415D                                      ; $105D: $C3 $5D $41
 
-Cmd_1060:
+Cmd_Battle_Attack:
+    ; Directs an enemy creature to do the specified attack.
+    ; Used only in Salafy's tutorial battle to make her creature Defend
+    ; Arguments:
+    ;   db  wBattle_Buffer_CreatureSlot, e.g. BATTLE_SLOT_ENEMY0
+    ;   dw  wBattle_Buffer_ItemSpellBattleCmdAddress, Address of an attack in BattleCmd_Table
+    ;   db  wBattle_Buffer_TargetAI - Desired target e.g. BattleAI_Target_AllyWeakPercent
     ld a, $04                                     ; $1060: $3E $04
-    call Call_000_114F                            ; $1062: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $1062: $CD $4F $11
     jp $4023                                      ; $1065: $C3 $23 $40
 
-Cmd_1068:
+Cmd_Battle_Auto:
+    ; No more script to run ever, permanently reset wBattle_ScriptBusy for the rest of the battle
+    ; Arguments:
+    ;   None
     ld a, $68                                     ; $1068: $3E $68
     ldh [hScript.State], a                                  ; $106A: $E0 $AB
     ld a, $10                                     ; $106C: $3E $10
@@ -2333,20 +2599,35 @@ Cmd_1068:
     ld [$D3C2], a                                 ; $1071: $EA $C2 $D3
     ret                                           ; $1074: $C9
 
-Cmd_1075:
+Cmd_Battle_Spell:
+    ; Directs an enemy magi to do the specified attack.
+    ; Unclear if there will be a bug if you try and make a creature cast a spell
+    ; Arguments:
+    ;   db  wBattle_Buffer_CreatureSlot, i.e. BATTLE_SLOT_MAGI
+    ;   dw  wBattle_Buffer_ItemSpellBattleCmdAddress, Address of an attack in Spell_Table
+    ;   db  wBattle_Buffer_TargetAI - Desired target e.g. BattleAI_Target_AllyWeakPercent
     ld a, $04                                     ; $1075: $3E $04
-    call Call_000_114F                            ; $1077: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $1077: $CD $4F $11
     jp $4054                                      ; $107A: $C3 $54 $40
 
-Cmd_107D:
+Cmd_Battle_Evaluate:
+    ; Unimplemented, unused command
+    ; Bug - bank is not set before jumping to function, will probably crash the game
     jp $40C0                                      ; $107D: $C3 $C0 $40
 
-Cmd_1080:
+Cmd_Battle_Focus:
+    ; Directs an enemy magi to focus.
+    ; Arguments:
+    ;   db  wBattle_Buffer_CreatureSlot, i.e. BATTLE_SLOT_MAGI
     ld a, $01                                     ; $1080: $3E $01
-    call Call_000_114F                            ; $1082: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $1082: $CD $4F $11
     jp $40C1                                      ; $1085: $C3 $C1 $40
 
-Cmd_1088:
+Cmd_Battle_NextTurn:
+    ; Declares the battle script to be done, and allows the next turn to be processed
+    ; The battle script will hold here until the script is allowed to turn for the next turn
+    ; Arguments:
+    ;   None
     xor a                                         ; $1088: $AF
     ld [$D3C2], a                                 ; $1089: $EA $C2 $D3
     ld a, $95                                     ; $108C: $3E $95
@@ -2362,29 +2643,61 @@ Cmd_1088:
 
     jp Script_Start                              ; $109A: $C3 $D3 $0A
 
-Cmd_109D:
+Cmd_Battle_ForgeRing:
+    ; Gives a ring to Tony
+    ; Not actually used in Battle, but shares some level-up code so I guess it's kept in this section
+    ; Arguments:
+    ;   db  Creature ID
+    ;   db  Creature level
     ld a, $02                                     ; $109D: $3E $02
-    call Call_000_114F                            ; $109F: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $109F: $CD $4F $11
     jp $40EE                                      ; $10A2: $C3 $EE $40
 
-Cmd_10A5:
+Cmd_Battle_SummonFast:
+    ; Deprecated function, equivalent to Cmd_Battle_SummonDelay with a delay of 0
+    ; Unused but functional, just hooks into same code as Cmd_Battle_SummonDelay
+    ; Inputs:
+    ;   db  wBattle_Buffer_CreatureSlot, i.e. BATTLE_SLOT_MAGI
+    ;   db  wBattle_Buffer_Summon_CreatureID
+    ;   db  wBattle_Buffer_Summon_CreatureLevel
+    ;   db  wBattle_Buffer_Summon_CreatureEnergy
     ld a, $04                                     ; $10A5: $3E $04
-    call Call_000_114F                            ; $10A7: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $10A7: $CD $4F $11
     xor a                                         ; $10AA: $AF
     ld [$D396], a                                 ; $10AB: $EA $96 $D3
     jp $41A4                                      ; $10AE: $C3 $A4 $41
 
-Cmd_10B1:
+Cmd_Battle_SummonDelay:
+    ; Makes the enemy magi summon a creature
+    ; Inputs:
+    ;   db  wBattle_Buffer_CreatureSlot, i.e. BATTLE_SLOT_MAGI
+    ;   db  wBattle_Buffer_Summon_CreatureID
+    ;   db  wBattle_Buffer_Summon_CreatureLevel
+    ;   db  wBattle_Buffer_Summon_CreatureEnergy
+    ;   db  wBattle_Buffer_Summon_Delay, turns before creature is summoned
     ld a, $05                                     ; $10B1: $3E $05
-    call Call_000_114F                            ; $10B3: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $10B3: $CD $4F $11
     jp $41A4                                      ; $10B6: $C3 $A4 $41
 
-Cmd_10B9:
+Cmd_Battle_Item:
+    ; Directs an enemy magi to use the specified item
+    ; Unclear if there will be a bug if you try and make a creature use an item
+    ; Arguments:
+    ;   db  wBattle_Buffer_CreatureSlot, i.e. BATTLE_SLOT_MAGI
+    ;   dw  wBattle_Buffer_ItemSpellBattleCmdAddress, Address of an item in Item_Table
+    ;   db  wBattle_Buffer_TargetAI - Desired target e.g. BattleAI_Target_AllyWeakPercent
     ld a, $04                                     ; $10B9: $3E $04
-    call Call_000_114F                            ; $10BB: $CD $4F $11
+    call Battle00_CopyDataFromFrame                            ; $10BB: $CD $4F $11
     jp $420C                                      ; $10BE: $C3 $0C $42
 
-Cmd_10C1:
+Cmd_Battle_ScreenWipe:
+    ; Pause the game and do a white swirl, indicating the start of a battle
+    ; Also, backup the current song and play a song for the battle
+    ; Arguments:
+    ;   dw Graphics_ScreenFX function (should be Graphics_ScreenFX_Swirl_Do) - todo are there any other valid inputs?
+    ;   db songid - battle song
+    ; Outputs:
+    ;   wSound_SceneSongBackupID - contains the old song
     ld a, [bc]                                    ; $10C1: $0A
     ld [$C863], a                                 ; $10C2: $EA $63 $C8
     inc bc                                        ; $10C5: $03
@@ -2431,7 +2744,11 @@ jr_000_10F4:
     SwitchROMBank $07
     jp $5873                                      ; $110B: $C3 $73 $58
 
-Cmd_110E:
+Cmd_Battle_SetReturn:
+    ; Sets the scripts to run at the end of the battle
+    ; Arguments:
+    ;   BankAddress     Win Script
+    ;   BankAddress     Lose Script
     SwitchRAMBank $07
     ld hl, $D3CD                                  ; $1115: $21 $CD $D3
     ld a, [bc]                                    ; $1118: $0A
@@ -2454,7 +2771,11 @@ Cmd_110E:
     inc bc                                        ; $1129: $03
     jp Script_Start                              ; $112A: $C3 $D3 $0A
 
-Cmd_112D:
+Cmd_Battle_SetEncounter:
+    ; Sets up random encounters, like those in shadow geysers
+    ; Arguments:
+    ;   BankAddress     wEncounter_Script = Script to run when encounter triggered
+    ;   Address         wEncounter_LookupTable = Table containing $10 values of random time to wait until triggering next battle (Encounter_RandomDelayTable_XX)
     ld a, $01                                     ; $112D: $3E $01
     ld [$C6D8], a                                 ; $112F: $EA $D8 $C6
     ld a, $FF                                     ; $1132: $3E $FF
@@ -2479,7 +2800,7 @@ Cmd_112D:
     jp Script_Start                              ; $114C: $C3 $D3 $0A
 
 
-Call_000_114F:
+Battle00_CopyDataFromFrame:
     ld l, c                                       ; $114F: $69
     ld h, b                                       ; $1150: $60
     ld de, $D392                                  ; $1151: $11 $92 $D3
@@ -2498,16 +2819,22 @@ Call_000_114F:
     SwitchROMBank $02
     ret                                           ; $1177: $C9
 
-Cmd_1178:
+Cmd_Fightscene_FightFX_BlowAway:
+    ; Inputs:
+    ;   None
     ld a, $30                                     ; $1178: $3E $30
     ld [$CA0D], a                                 ; $117A: $EA $0D $CA
     ld a, $60                                     ; $117D: $3E $60
     ld [$CA11], a                                 ; $117F: $EA $11 $CA
     ld a, $41                                     ; $1182: $3E $41
     ld [$CA12], a                                 ; $1184: $EA $12 $CA
-    jp Jump_000_1308                              ; $1187: $C3 $08 $13
+    jp Fightscene_FightFX_MoveTableInit                              ; $1187: $C3 $08 $13
 
-Cmd_118A:
+Cmd_Fightscene_LoadArena:
+    ; Loads the horizontally-scrolling part of the Start Screen
+    ; This erases some unimportant temporary variables in the WRAM
+    ; Arguments:
+    ;   db  The ID of the start screen e.g. FIGHTSCENE_ARENA_Arderial
     ld a, [$CA07]                                 ; $118A: $FA $07 $CA
     ld e, a                                       ; $118D: $5F
     push de                                       ; $118E: $D5
@@ -2529,7 +2856,10 @@ Cmd_118A:
     ld [$CA07], a                                 ; $11B3: $EA $07 $CA
     ret                                           ; $11B6: $C9
 
-Cmd_11B7:
+Cmd_Fightscene_LoadCreatureLeft:
+    ; Loads a creature into the left side of the fightscene
+    ; Arguments:
+    ;   db  CreatureID
     ld a, [bc]                                    ; $11B7: $0A
     ld [$C9FD], a                                 ; $11B8: $EA $FD $C9
     inc bc                                        ; $11BB: $03
@@ -2547,7 +2877,13 @@ Cmd_11B7:
     call $4190                                    ; $11DA: $CD $90 $41
     ret                                           ; $11DD: $C9
 
-Cmd_11DE:
+Cmd_Fightscene_New:
+    ; Starts a Fightscene.
+    ; TODO - Loops forever unless explicitly cancelled(?) by the script
+    ; Arguments
+    ;   db wFightscene_ArenaIndex
+    ;   db wFightscene_CreatureLeft_ID
+    ;   db wFightscene_CreatureRight_ID
     ld a, [bc]                                    ; $11DE: $0A
     ld [$CA07], a                                 ; $11DF: $EA $07 $CA
     inc bc                                        ; $11E2: $03
@@ -2586,7 +2922,11 @@ jr_000_122B:
     call $4190                                    ; $1236: $CD $90 $41
     jr jr_000_122B                                ; $1239: $18 $F0
 
-Cmd_123B:
+Cmd_Fightscene_FightFX_PanFromTable:
+    ; Pans the camera right, reading the data from the specified table for the specified number of frames
+    ; Arguments:
+    ;   ds 1  wFightscene_FightFX_Pan_RightDirection (nz = Right, z = Left)
+    ;   ds 2  Pointer to Fightscene_FightFX_PanTable_Regular, Fightscene_FightFX_PanTable_Fast or Fightscene_FightFX_PanTable_Slow
     ld a, $01                                     ; $123B: $3E $01
     ldh [$FFAE], a                                  ; $123D: $E0 $AE
     xor a                                         ; $123F: $AF
@@ -2624,25 +2964,34 @@ Cmd_123B:
     ld [hScript.State + 1], a                                 ; $127C: $EA $AC $FF
     ret                                           ; $127F: $C9
 
-Cmd_1280:
+Cmd_Fightscene_FightFX_Recoil:
+    ; Inputs:
+    ;   None
     ld a, $30                                     ; $1280: $3E $30
     ld [$CA0D], a                                 ; $1282: $EA $0D $CA
     ld a, $90                                     ; $1285: $3E $90
     ld [$CA11], a                                 ; $1287: $EA $11 $CA
     ld a, $41                                     ; $128A: $3E $41
     ld [$CA12], a                                 ; $128C: $EA $12 $CA
-    jr jr_000_1308                                ; $128F: $18 $77
+    jr Fightscene_FightFX_MoveTableInit                                ; $128F: $18 $77
 
-Cmd_1291:
+Cmd_Fightscene_FightFX_RecoilFast:
+    ; Inputs:
+    ;   None
     ld a, $24                                     ; $1291: $3E $24
     ld [$CA0D], a                                 ; $1293: $EA $0D $CA
     ld a, $90                                     ; $1296: $3E $90
     ld [$CA11], a                                 ; $1298: $EA $11 $CA
     ld a, $41                                     ; $129B: $3E $41
     ld [$CA12], a                                 ; $129D: $EA $12 $CA
-    jr jr_000_1308                                ; $12A0: $18 $66
+    jr Fightscene_FightFX_MoveTableInit                                ; $12A0: $18 $66
 
-Cmd_12A2:
+Cmd_Fightscene_FightFX_PanConstant:
+    ; Pan at a constant speed in a specified direction for a specified number of frames
+    ; Arguments:
+    ;   db   Direction; Right = 1, Left = 0
+    ;   db   DeltaX per frame
+    ;   db   Total number of frames
     ld a, [bc]                                    ; $12A2: $0A
     inc bc                                        ; $12A3: $03
     ld [$CA0B], a                                 ; $12A4: $EA $0B $CA
@@ -2670,34 +3019,40 @@ Cmd_12A2:
     call $4190                                    ; $12D3: $CD $90 $41
     ret                                           ; $12D6: $C9
 
-Cmd_12D7:
+Cmd_Fightscene_FightFX_Shake:
+    ; Inputs:
+    ;   None
     ld a, $54                                     ; $12D7: $3E $54
     ld [$CA0D], a                                 ; $12D9: $EA $0D $CA
     ld a, $90                                     ; $12DC: $3E $90
     ld [$CA11], a                                 ; $12DE: $EA $11 $CA
     ld a, $41                                     ; $12E1: $3E $41
     ld [$CA12], a                                 ; $12E3: $EA $12 $CA
-    jr jr_000_1308                                ; $12E6: $18 $20
+    jr Fightscene_FightFX_MoveTableInit                                ; $12E6: $18 $20
 
-Cmd_12E8:
+Cmd_Fightscene_FightFX_Sink:
+    ; Inputs:
+    ;   None
     ld a, $A8                                     ; $12E8: $3E $A8
     ld [$CA0D], a                                 ; $12EA: $EA $0D $CA
     ld a, $90                                     ; $12ED: $3E $90
     ld [$CA11], a                                 ; $12EF: $EA $11 $CA
     ld a, $41                                     ; $12F2: $3E $41
     ld [$CA12], a                                 ; $12F4: $EA $12 $CA
-    jr jr_000_1308                                ; $12F7: $18 $0F
+    jr Fightscene_FightFX_MoveTableInit                                ; $12F7: $18 $0F
 
-Cmd_12F9:
+Cmd_Fightscene_FightFX_Tremble:
+    ; Inputs:
+    ;   None
     ld a, $1D                                     ; $12F9: $3E $1D
     ld [$CA0D], a                                 ; $12FB: $EA $0D $CA
     ld a, $90                                     ; $12FE: $3E $90
     ld [$CA11], a                                 ; $1300: $EA $11 $CA
     ld a, $41                                     ; $1303: $3E $41
     ld [$CA12], a                                 ; $1305: $EA $12 $CA
+    ;jr Fightscene_FightFX_MoveTableInit
 
-Jump_000_1308:
-jr_000_1308:
+Fightscene_FightFX_MoveTableInit:
     xor a                                         ; $1308: $AF
     ld [$CA0C], a                                 ; $1309: $EA $0C $CA
     ld [$CA0F], a                                 ; $130C: $EA $0F $CA
@@ -2712,24 +3067,29 @@ jr_000_1308:
     ld [hScript.State + 1], a                                 ; $1321: $EA $AC $FF
     ret                                           ; $1324: $C9
 
-Cmd_1325:
+Cmd_Fightscene_TileFX_DissolveFast:
+    ; Inputs:
+    ;   None
     ld a, $08                                     ; $1325: $3E $08
     ld [$CA17], a                                 ; $1327: $EA $17 $CA
     ld a, $90                                     ; $132A: $3E $90
     ld [$CA13], a                                 ; $132C: $EA $13 $CA
     ld a, $41                                     ; $132F: $3E $41
     ld [$CA14], a                                 ; $1331: $EA $14 $CA
-    jr jr_000_1345                                ; $1334: $18 $0F
+    jr Fightscene_TileFX_MeltInit                                ; $1334: $18 $0F
 
-Cmd_1336:
+Cmd_Fightscene_TileFX_DissolveSlow:
+    ; Inputs:
+    ;   None
     ld a, $10                                     ; $1336: $3E $10
     ld [$CA17], a                                 ; $1338: $EA $17 $CA
     ld a, $90                                     ; $133B: $3E $90
     ld [$CA13], a                                 ; $133D: $EA $13 $CA
     ld a, $41                                     ; $1340: $3E $41
     ld [$CA14], a                                 ; $1342: $EA $14 $CA
+    ;jr Fightscene_TileFX_MeltInit
 
-jr_000_1345:
+Fightscene_TileFX_MeltInit:
     ld a, b                                       ; $1345: $78
     ld [hScript.Frame + 1], a                                 ; $1346: $EA $AA $FF
     ld a, c                                       ; $1349: $79
@@ -2745,7 +3105,10 @@ jr_000_1345:
 INCLUDE "source/engine/expression_00.asm"
 
 
-Cmd_14D4:
+Cmd_Flow_Delay:
+    ; Waits X frames before moving on to the next MagiOp
+    ; Arguments:
+    ;   ds 1    Number of frames to wait
     ld a, [bc]                                    ; $14D4: $0A
     inc bc                                        ; $14D5: $03
     ldh [$FFAD], a                                  ; $14D6: $E0 $AD
@@ -2765,7 +3128,13 @@ Cmd_14D4:
     ldh [$FFAD], a                                  ; $14F1: $E0 $AD
     ret                                           ; $14F3: $C9
 
-Cmd_14F4:
+Cmd_Flow_RandDelay:
+    ; This function will delay a random amount of time.
+    ; The input is a table of $10 bytes. Each byte specifies the amount of delay
+    ; A random byte from the table will be selected
+    ; The delay is val*4 frames
+    ; Arguments:
+    ;   dw  pointer to table of size $10 in encounter.asm (Encounter_RandomDelayTable_XX)
     ld a, [bc]                                    ; $14F4: $0A
     ld l, a                                       ; $14F5: $6F
     inc bc                                        ; $14F6: $03
@@ -2773,7 +3142,7 @@ Cmd_14F4:
     ld h, a                                       ; $14F8: $67
     inc bc                                        ; $14F9: $03
     SwitchROMBank $01
-    call Call_000_0585                            ; $1502: $CD $85 $05
+    call Math_Rand8Inc                            ; $1502: $CD $85 $05
     and $0F                                       ; $1505: $E6 $0F
     ld e, a                                       ; $1507: $5F
     ld d, $00                                     ; $1508: $16 $00
@@ -2801,8 +3170,7 @@ Cmd_14F4:
     ldh [$FFAD], a                                  ; $152E: $E0 $AD
     ret                                           ; $1530: $C9
 
-Cmd_1531:
-Jump_000_1531:
+Cmd_Flow_End:
     ld a, $01                                     ; $1531: $3E $01
     ld [$C6F8], a                                 ; $1533: $EA $F8 $C6
     ld a, $00                                     ; $1536: $3E $00
@@ -2815,7 +3183,13 @@ Jump_000_1531:
     ldh [hScript.State + 1], a                                  ; $1544: $E0 $AC
     ret                                           ; $1546: $C9
 
-Cmd_1547:
+Cmd_Flow_LongJumpIf:
+    ; Gets a result from Expr_GetValue
+    ; Will jump the bank and pointer to a new location if non-zero
+    ; Waits 1 cycle
+    ; Arguments:
+    ;   Expr
+    ;   ds 3    BankAddress
     Battery_SetBank $00
     Battery_On
     call Expr_GetValue                            ; $1553: $CD $C6 $14
@@ -2849,17 +3223,23 @@ jr_000_1571:
     ld [hScript.State + 1], a                                 ; $1583: $EA $AC $FF
     ret                                           ; $1586: $C9
 
-Cmd_1587:
+Cmd_Flow_InitSkip:
+    ; Jumps to a new address if LCD is off (i.e. in initialization phase)
+    ; Used to skip init code
+    ; Arguments:
+    ;   ds 2    Address
     ld a, [wScreenVisible]                                 ; $1587: $FA $59 $C9
     and a                                         ; $158A: $A7
-    jp z, Jump_000_15A9                           ; $158B: $CA $A9 $15
+    jp z, Cmd_Flow_LocalJump                           ; $158B: $CA $A9 $15
 
     inc bc                                        ; $158E: $03
     inc bc                                        ; $158F: $03
     jp Script_Start                              ; $1590: $C3 $D3 $0A
 
-Cmd_1593:
-Jump_000_1593:
+Cmd_Flow_LongJump:
+    ; Changes hScript.Frame and the hScript.Bank to a new value
+    ; Arguments:
+    ;   ds 3    BankAddress
     ld a, [bc]                                    ; $1593: $0A
     ld e, a                                       ; $1594: $5F
     ld [hScript.Bank], a                                 ; $1595: $EA $A8 $FF
@@ -2873,8 +3253,11 @@ Jump_000_1593:
     SwitchROMBank e
     jp Script_Start                              ; $15A6: $C3 $D3 $0A
 
-Cmd_15A9:
-Jump_000_15A9:
+Cmd_Flow_LocalJump:
+    ; Changes the bc pointer to a new value [bc]
+    ; i.e. stays in the same bank
+    ; Arguments:
+    ;   ds 2    Address
     ld a, [bc]                                    ; $15A9: $0A
     ld l, a                                       ; $15AA: $6F
     inc bc                                        ; $15AB: $03
@@ -2883,11 +3266,17 @@ Jump_000_15A9:
     ld c, l                                       ; $15AE: $4D
     jp Script_Start                              ; $15AF: $C3 $D3 $0A
 
-Cmd_15B2:
+Cmd_Flow_RandLongJump:
+    ; Jumps to a random address specified in a jump table
+    ; Arguments:
+    ;   ds 1        N = Number of entries in the table (1-16)
+    ;   N*(ds 3)    N x BankAddress
+    ;
+    ; First, do X = rand(16) mod N
     ld a, [bc]                                    ; $15B2: $0A
     inc bc                                        ; $15B3: $03
     ld l, a                                       ; $15B4: $6F
-    call Call_000_0585                            ; $15B5: $CD $85 $05
+    call Math_Rand8Inc                            ; $15B5: $CD $85 $05
     and $0F                                       ; $15B8: $E6 $0F
 
 jr_000_15BA:
@@ -2906,9 +3295,12 @@ jr_000_15C0:
     add hl, bc                                    ; $15C6: $09
     ld c, l                                       ; $15C7: $4D
     ld b, h                                       ; $15C8: $44
-    jp Jump_000_1593                              ; $15C9: $C3 $93 $15
+    jp Cmd_Flow_LongJump                              ; $15C9: $C3 $93 $15
 
-Cmd_15CC:
+Cmd_Flow_Pass:
+    ; Display 1 frame and then keep going
+    ; Arguments:
+    ;   None
     ld a, b                                       ; $15CC: $78
     ldh [hScript.State + 1], a                                  ; $15CD: $E0 $AC
     ld a, c                                       ; $15CF: $79
@@ -2919,7 +3311,19 @@ Cmd_15CC:
     ldh [hScript.State + 1], a                                  ; $15D8: $E0 $AC
     ret                                           ; $15DA: $C9
 
-Cmd_15DB:
+Cmd_Flow_SwitchRange:
+    ; Gets the result of an expression
+    ; Then if the value is within the inclusive range of any of the cases below, LongJump to the new value
+    ;
+    ; Arguments:
+    ;   ds ?    Expr
+    ;   {
+    ;       db      Bank                   \
+    ;       dw      LowerLimit              \
+    ;       dw      UpperLimit              /   Jump to BankAddress if   LowerLimit <= Expr <= UpperLimit
+    ;       dw      Address                /
+    ;   } x N
+    ;   db $FF (End of Switch)
     Battery_SetBank $00
     Battery_On
     call Expr_GetValue                            ; $15E7: $CD $C6 $14
@@ -2989,7 +3393,12 @@ jr_000_161C:
     SwitchROMBank l
     jp Script_Start                              ; $162E: $C3 $D3 $0A
 
-Cmd_1631:
+Cmd_Flow_ResetScript:
+    ; Deprecated function. previously used with AI_Raindrop to indicate that the raindrop could be reset to a new location
+    ; by setting wScript_Done, but this var is no longer used
+    ; Currently equivalent to Pass + LongJump
+    ; Arguments:
+    ;   BankAddress     LongJump destination
     ld a, [bc]                                    ; $1631: $0A
     ldh [hScript.Bank], a                                  ; $1632: $E0 $A8
     inc bc                                        ; $1634: $03
@@ -3006,7 +3415,18 @@ Cmd_1631:
     ld [hScript.State + 1], a                                 ; $1648: $EA $AC $FF
     ret                                           ; $164B: $C9
 
-Cmd_164C:
+Cmd_Flow_Switch:
+    ; Gets the result of an expression
+    ; Then if the value matches any of the cases below, LongJump to the new value
+    ;
+    ; Arguments:
+    ;   ds ?    Expr
+    ;   {
+    ;       db      Bank
+    ;       dw      case
+    ;       dw      Address
+    ;   } x N
+    ;   db $FF (End of Switch)
     Battery_SetBank $00
     Battery_On
     call Expr_GetValue                            ; $1658: $CD $C6 $14
@@ -3052,7 +3472,17 @@ jr_000_166E:
     SwitchROMBank l
     jp Script_Start                              ; $1689: $C3 $D3 $0A
 
-Cmd_168C:
+Cmd_Frame_SpriteDraw:
+    ; Moves the current Actor and then draws a sprite
+    ; This opcode takes a list of 5-byte commands
+    ; Arguments:
+    ;   {
+    ;       db  Number of frames to do the movement
+    ;       db  DeltaX per frame
+    ;       db  DeltaY per frame
+    ;       dw  Address of Actor Sprite data (must be in same bank as magiscript)
+    ;   } x N
+    ;   db $00 to terminate list of movement commands
     ld a, [bc]                                    ; $168C: $0A
     inc bc                                        ; $168D: $03
     and a                                         ; $168E: $A7
@@ -3102,7 +3532,13 @@ jr_000_16C1:
     ld [hScript.State + 1], a                                 ; $16D3: $EA $AC $FF
     ret                                           ; $16D6: $C9
 
-Cmd_16D7:
+Cmd_Frame_SpriteInvisible:
+    ; Moves the current Actor and but draws no sprite (invisible)
+    ; This opcode takes a list of 3-byte commands
+    ; Arguments:
+    ;   db  Number of frames to do the movement (0 is ignored)
+    ;   db  DeltaX per frame
+    ;   db  DeltaY per frame
     ld a, [bc]                                    ; $16D7: $0A
     inc bc                                        ; $16D8: $03
     and a                                         ; $16D9: $A7
@@ -3142,7 +3578,14 @@ jr_000_1701:
     ld [hScript.State + 1], a                                 ; $1710: $EA $AC $FF
     ret                                           ; $1713: $C9
 
-Cmd_1714:
+Cmd_Frame_SpriteBlock:
+    ; Moves the current Actor with a single command but with a set of various sprites
+    ; Arguments:
+    ;   db  (2*Number of different sprites), i.e. the length of the table
+    ;   db  Number of frames for each sprite
+    ;   db  DeltaX per frame
+    ;   db  DeltaY per frame
+    ;   dw*N  pointers to sprites
     xor a                                         ; $1714: $AF
     ldh [$FFAE], a                                  ; $1715: $E0 $AE
     inc bc                                        ; $1717: $03
@@ -3208,7 +3651,19 @@ jr_000_1768:
     call Call_000_05B9                            ; $176B: $CD $B9 $05
     ret                                           ; $176E: $C9
 
-Cmd_176F:
+Cmd_Frame_OverlayDraw:
+    ; Moves the current Actor and then draws a sprite related to the corner of the screen
+    ; This opcode takes a list of 5-byte commands
+    ; Inputs:
+    ;   I believe hActor.XTile and hActor.YTile are in absolute OAM coordinates. TODO confirm
+    ; Arguments:
+    ;   {
+    ;       db  Number of frames to do the movement
+    ;       db  Delta X per frame
+    ;       db  Delta Y per frame
+    ;       dw  Address of Actor Sprite data (must be in same bank as magiscript)
+    ;   } x N
+    ;   db $00 to terminate list of movement commands
     ld a, [bc]                                    ; $176F: $0A
     inc bc                                        ; $1770: $03
     and a                                         ; $1771: $A7
@@ -3267,7 +3722,14 @@ jr_000_17B1:
     ld [hScript.State + 1], a                                 ; $17C3: $EA $AC $FF
     ret                                           ; $17C6: $C9
 
-Cmd_17C7:
+Cmd_Frame_OverlayInit:
+    ; Sets up an overlay
+    ; Arguments:
+    ;   dw      Pointer to the desired Actor ?TODO hActor vs wActor vs both
+    ;   db      Actor.XTile
+    ;   db      Actor.YTile
+    ;   db      Actor.SpriteBase
+    ;   ds 3    BankAddress of script
     ld a, [bc]                                    ; $17C7: $0A
     inc bc                                        ; $17C8: $03
     ld l, a                                       ; $17C9: $6F
@@ -3296,10 +3758,18 @@ Cmd_17C7:
     call Call_000_0B1E                            ; $17E4: $CD $1E $0B
     jp Script_Start                              ; $17E7: $C3 $D3 $0A
 
-Cmd_17EA:
+Cmd_Frame_OverlayInvisible:
+    ; Equivalent to nop. It doesn't even delay a frame.
+    ; Possibly unfinished function vs just a placeholder for clearer code? TODO check
+    ; Arguments:
+    ;   None
     jp Script_Start                              ; $17EA: $C3 $D3 $0A
 
-Cmd_17ED:
+Cmd_Global_ClearSync:
+    ; Sets wScript_SyncCount to the specified value at the beginning of next frame
+    ;
+    ; Arguments:
+    ;   db      desired wScript_SyncCount
     ld hl, $C6F9                                  ; $17ED: $21 $F9 $C6
     ld a, $01                                     ; $17F0: $3E $01
     ld [hl+], a                                   ; $17F2: $22
@@ -3311,7 +3781,7 @@ Cmd_17ED:
     ld [hl+], a                                   ; $17F9: $22
     jp Script_Start                              ; $17FA: $C3 $D3 $0A
 
-Cmd_17FD:
+Cmd_Global_SetAnyEventMaster:
     ld a, [$C6FC]                                 ; $17FD: $FA $FC $C6
     and a                                         ; $1800: $A7
     ret nz                                        ; $1801: $C0
@@ -3320,7 +3790,7 @@ Cmd_17FD:
     ld [$C6FC], a                                 ; $1804: $EA $FC $C6
     jp Script_Start                              ; $1807: $C3 $D3 $0A
 
-Cmd_180A:
+Cmd_Global_SetAnyEventScroll:
     ld a, [$C6FE]                                 ; $180A: $FA $FE $C6
     and a                                         ; $180D: $A7
     ret nz                                        ; $180E: $C0
@@ -3329,7 +3799,7 @@ Cmd_180A:
     ld [$C6FE], a                                 ; $1811: $EA $FE $C6
     jp Script_Start                              ; $1814: $C3 $D3 $0A
 
-Cmd_1817:
+Cmd_Global_SetAnyEventText:
     ld a, [$C700]                                 ; $1817: $FA $00 $C7
     and a                                         ; $181A: $A7
     ret nz                                        ; $181B: $C0
@@ -3338,7 +3808,7 @@ Cmd_1817:
     ld [$C700], a                                 ; $181E: $EA $00 $C7
     jp Script_Start                              ; $1821: $C3 $D3 $0A
 
-Cmd_1824:
+Cmd_Global_SetEventMaster:
     ld a, [$C6FC]                                 ; $1824: $FA $FC $C6
     and a                                         ; $1827: $A7
     ret nz                                        ; $1828: $C0
@@ -3348,7 +3818,7 @@ Cmd_1824:
     ld [$C6FC], a                                 ; $182B: $EA $FC $C6
     jp Script_Start                              ; $182E: $C3 $D3 $0A
 
-Cmd_1831:
+Cmd_Global_SetEventScroll:
     ld a, [$C6FE]                                 ; $1831: $FA $FE $C6
     and a                                         ; $1834: $A7
     ret nz                                        ; $1835: $C0
@@ -3358,7 +3828,7 @@ Cmd_1831:
     ld [$C6FE], a                                 ; $1838: $EA $FE $C6
     jp Script_Start                              ; $183B: $C3 $D3 $0A
 
-Cmd_183E:
+Cmd_Global_SetEventText:
     ld a, [$C700]                                 ; $183E: $FA $00 $C7
     and a                                         ; $1841: $A7
     ret nz                                        ; $1842: $C0
@@ -3368,23 +3838,37 @@ Cmd_183E:
     ld [$C700], a                                 ; $1845: $EA $00 $C7
     jp Script_Start                              ; $1848: $C3 $D3 $0A
 
-Cmd_184B:
+Cmd_Global_SetScriptMaster:
+    ; Arguments:
+    ;   ds 3 BankAddress of script's new frame
     ld hl, wScript_Master                                  ; $184B: $21 $0A $C7
-    jp Jump_000_18CC                              ; $184E: $C3 $CC $18
+    jp Global_SetScript                              ; $184E: $C3 $CC $18
 
-Cmd_1851:
+Cmd_Global_SetScriptScroll:
+    ; Arguments:
+    ;   ds 3 BankAddress of script's new frame
     ld hl, wScript_Scroll                                  ; $1851: $21 $11 $C7
-    jp Jump_000_18CC                              ; $1854: $C3 $CC $18
+    jp Global_SetScript                              ; $1854: $C3 $CC $18
 
-Cmd_1857:
+Cmd_Global_SetScriptText:
+    ; Inputs:
+    ;   wTextbox_Position - command is refused if textbox is busy
+    ; Inputs:
+    ;   wTextbox_Position
+    ; Arguments:
+    ;   ds 3 BankAddress of script's new frame
     ld a, [$C6F2]                                 ; $1857: $FA $F2 $C6
     cp $01                                        ; $185A: $FE $01
     ret z                                         ; $185C: $C8
 
     ld hl, wScript_Text                                  ; $185D: $21 $1F $C7
-    jp Jump_000_18CC                              ; $1860: $C3 $CC $18
+    jp Global_SetScript                              ; $1860: $C3 $CC $18
 
-Cmd_1863:
+Cmd_Global_Sync:
+    ; TODO
+    ; Arguments:
+    ;   db  Sync parameter - must be <= SyncCount, or else waits
+    ;   db  Sync parameter - waits until == wScript_SyncCurrent, or else increments wScript_SyncCurrent
     ld a, [bc]                                    ; $1863: $0A
     ld e, a                                       ; $1864: $5F
     ld a, [$C6FB]                                 ; $1865: $FA $FB $C6
@@ -3434,32 +3918,55 @@ jr_000_1895:
     ld [hScript.State + 1], a                                 ; $18A4: $EA $AC $FF
     ret                                           ; $18A7: $C9
 
-Cmd_18A8:
+Cmd_Global_WaitAnyEventMaster:
+    ; Delays until EventID is non-zero
+    ; Arguments:
+    ;   None
     ld a, [$C6FD]                                 ; $18A8: $FA $FD $C6
-    jp Jump_000_18DE                              ; $18AB: $C3 $DE $18
+    jp Global_WaitAnyEvent                              ; $18AB: $C3 $DE $18
 
-Cmd_18AE:
+Cmd_Global_WaitAnyEventScroll:
+    ; Delays until EventID is non-zero
+    ; Arguments:
+    ;   None
     ld a, [$C6FF]                                 ; $18AE: $FA $FF $C6
-    jp Jump_000_18DE                              ; $18B1: $C3 $DE $18
+    jp Global_WaitAnyEvent                              ; $18B1: $C3 $DE $18
 
-Cmd_18B4:
+Cmd_Global_WaitAnyEventText:
+    ; Delays until EventID is non-zero
+    ; Arguments:
+    ;   None
     ld a, [$C701]                                 ; $18B4: $FA $01 $C7
-    jp Jump_000_18DE                              ; $18B7: $C3 $DE $18
+    jp Global_WaitAnyEvent                              ; $18B7: $C3 $DE $18
 
-Cmd_18BA:
+Cmd_Global_WaitEventMaster:
+    ; Delays until EventID is equal to argument
+    ; Arguments:
+    ;   db      Desired EventID
     ld a, [$C6FD]                                 ; $18BA: $FA $FD $C6
-    jp Jump_000_18EB                              ; $18BD: $C3 $EB $18
+    jp Global_WaitEvent                              ; $18BD: $C3 $EB $18
 
-Cmd_18C0:
+Cmd_Global_WaitEventScroll:
+    ; Delays until EventID is equal to argument
+    ; Arguments:
+    ;   db      Desired EventID
     ld a, [$C6FF]                                 ; $18C0: $FA $FF $C6
-    jp Jump_000_18EB                              ; $18C3: $C3 $EB $18
+    jp Global_WaitEvent                              ; $18C3: $C3 $EB $18
 
-Cmd_18C6:
+Cmd_Global_WaitEventText:
+    ; Delays until EventID is equal to argument
+    ; Arguments:
+    ;   db      Desired EventID
     ld a, [$C701]                                 ; $18C6: $FA $01 $C7
-    jp Jump_000_18EB                              ; $18C9: $C3 $EB $18
+    jp Global_WaitEvent                              ; $18C9: $C3 $EB $18
 
 
-Jump_000_18CC:
+Global_SetScript:
+    ; Sets a new reading Frame for a script (Master, Scroll or Text)
+    ; Inputs:
+    ;   hl = wScript.Bank
+    ; Arguments:
+    ;   ds 3 BankAddress of script's frame
     ld a, [bc]                                    ; $18CC: $0A
     ld [hl+], a                                   ; $18CD: $22
     inc bc                                        ; $18CE: $03
@@ -3476,7 +3983,10 @@ Jump_000_18CC:
     jp Script_Start                              ; $18DB: $C3 $D3 $0A
 
 
-Jump_000_18DE:
+Global_WaitAnyEvent:
+    ; Passes to the next command if wScript_???EventID is non-zero
+    ; Inputs:
+    ;   wScript_???EventID
     and a                                         ; $18DE: $A7
     ret z                                         ; $18DF: $C8
 
@@ -3487,7 +3997,12 @@ Jump_000_18DE:
     ret                                           ; $18EA: $C9
 
 
-Jump_000_18EB:
+Global_WaitEvent:
+    ; Passes to the next command if wScript_???EventID is equal to the Argument
+    ; Inputs:
+    ;   wScript_???EventID
+    ; Arguments:
+    ;   db  ID that must match the EventID
     ld d, a                                       ; $18EB: $57
     ld a, [bc]                                    ; $18EC: $0A
     cp d                                          ; $18ED: $BA
@@ -3505,16 +4020,23 @@ Jump_000_18EB:
     ret                                           ; $1902: $C9
 
 
-Call_000_1903:
+Global_KQ_SetScript:
+    ; Copies the 3 bytes at bc into hl to set a script
+    ; Inputs:
+    ;   bc = BankAddress to copy into script
+    ;   hl = wScript_Text
+    ; Script Bank
     ld a, [bc]                                    ; $1903: $0A
     ld [hl+], a                                   ; $1904: $22
     inc bc                                        ; $1905: $03
+    ; Script Frame
     ld a, [bc]                                    ; $1906: $0A
     ld [hl+], a                                   ; $1907: $22
     inc bc                                        ; $1908: $03
     ld a, [bc]                                    ; $1909: $0A
     ld [hl+], a                                   ; $190A: $22
     inc bc                                        ; $190B: $03
+    ; Script State = Script_Start
     ld a, $D3                                     ; $190C: $3E $D3
     ld [hl+], a                                   ; $190E: $22
     ld a, $0A                                     ; $190F: $3E $0A
@@ -3524,7 +4046,10 @@ Call_000_1903:
 
     jp Script_Start                              ; $1913: $C3 $D3 $0A
 
-Cmd_1916:
+Cmd_Load_LargeStaticTilemap:
+    ; Unpacks a $20 x $20 size static tilemap
+    ; Inputs:
+    ;   ds 3    AddressBank of STATICMAP
     ld a, [bc]                                    ; $1916: $0A
     ld l, a                                       ; $1917: $6F
     inc bc                                        ; $1918: $03
@@ -3542,7 +4067,7 @@ Cmd_1916:
     PopROMBank
     jp Script_Start                              ; $1936: $C3 $D3 $0A
 
-Cmd_1939:
+Cmd_Load_Hotspots:
     ld a, [bc]                                    ; $1939: $0A
     ld l, a                                       ; $193A: $6F
     inc bc                                        ; $193B: $03
@@ -3551,15 +4076,24 @@ Cmd_1939:
     inc bc                                        ; $193E: $03
     SwitchROMBank $13
     ld a, [hl+]                                   ; $1947: $2A
-    ld [$C6E1], a                                 ; $1948: $EA $E1 $C6
+    ld [wHotspot_TableSize], a                                 ; $1948: $EA $E1 $C6
     ld a, h                                       ; $194B: $7C
-    ld [$C6E0], a                                 ; $194C: $EA $E0 $C6
+    ld [wHotspot_Table + 1], a                                 ; $194C: $EA $E0 $C6
     ld a, l                                       ; $194F: $7D
-    ld [$C6DF], a                                 ; $1950: $EA $DF $C6
+    ld [wHotspot_Table], a                                 ; $1950: $EA $DF $C6
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $195C: $C3 $D3 $0A
 
-Cmd_195F:
+Cmd_Load_Scene:
+    ; Loads multiple data files of a scene
+    ; Arguments:
+    ;   AddressBank Scene file
+    ;       contains
+    ;           Background palette
+    ;           BitmapSet
+    ;           Pattern
+    ;           MetaTilemap
+    ;           CollisionMap
     ld a, [bc]                                    ; $195F: $0A
     ld l, a                                       ; $1960: $6F
     inc bc                                        ; $1961: $03
@@ -3577,7 +4111,12 @@ Cmd_195F:
     PopROMBank
     jp Script_Start                              ; $197F: $C3 $D3 $0A
 
-Cmd_1982:
+Cmd_Load_SpritePalette:
+    ; Loads an 8-palette sprite palette
+    ; It writes the data into wPalette_BaseBuffers.Sprite, wPalette_AnimBuffers.Sprite and rOCPS
+    ; Arguments:
+    ;   ds 3    AddressBank of a full set of 8 palettes
+    
     ld a, [bc]                                    ; $1982: $0A
     ld l, a                                       ; $1983: $6F
     inc bc                                        ; $1984: $03
@@ -3595,10 +4134,12 @@ Cmd_1982:
     PopROMBank
     jp Script_Start                              ; $19A2: $C3 $D3 $0A
 
-Cmd_19A5:
+Cmd_Load_Map:
+    ; Loads a map, without loading the base graphics (see Cmd_Load_Scene for comparison)
+    ; Arguments:
+    ;   AddressBank MetaTilemap
+    ;   AddressBank CollisionMap
     ld a, [bc]                                    ; $19A5: $0A
-
-Call_000_19A6:
     ld l, a                                       ; $19A6: $6F
     inc bc                                        ; $19A7: $03
     ld a, [bc]                                    ; $19A8: $0A
@@ -3630,7 +4171,16 @@ Call_000_19A6:
     PopROMBank
     jp Script_Start                              ; $19E5: $C3 $D3 $0A
 
-Cmd_19E8:
+Cmd_Load_MapMask:
+    ; Loads a map mask. The map mask contains alternative tiles that are copied over the main map
+    ; e.g. You can copy over an opened door, or remove an obstacle, depending on gameplay progression
+    ; The specified tiles are only copied when used in conjunction with Cmd_Scroll_TransplantMapMask
+    ; Usually, the map masks are identical size to the actual map.
+    ; The mask files are identical in format to regular MetaTilemaps and Collisionmaps, although the
+    ; headers are completely ignored.
+    ; Arguments:
+    ;   AddressBank MetaTilemap Mask
+    ;   AddressBank Collisionmap Mask
     ld a, [bc]                                    ; $19E8: $0A
     ld l, a                                       ; $19E9: $6F
     inc bc                                        ; $19EA: $03
@@ -3663,7 +4213,11 @@ Cmd_19E8:
     PopROMBank
     jp Script_Start                              ; $1A28: $C3 $D3 $0A
 
-Cmd_1A2B:
+Cmd_Load_Triggers:
+    ; Loads triggers and runs all the config triggers
+    ; Needs to be run by wScript_Master while the screen is off
+    ; Arguments:
+    ;   dw TriggerTable
     ld a, [bc]                                    ; $1A2B: $0A
     ld l, a                                       ; $1A2C: $6F
     inc bc                                        ; $1A2D: $03
@@ -3676,7 +4230,12 @@ Cmd_1A2B:
     pop bc                                        ; $1A3E: $C1
     jp Script_Start                              ; $1A3F: $C3 $D3 $0A
 
-Cmd_1A42:
+Cmd_Load_BitmapSet:
+    ; Loads a bitmaps collection and a corresponding palette for the background
+    ; The palette is copied into wPalette_BaseBuffers.Background, wPalette_AnimBuffers.Background and rBCPS
+    ; Arguments:
+    ;   AddressBank BitmapSet
+    ;   AddressBank Palette
     ld a, [bc]                                    ; $1A42: $0A
     ld l, a                                       ; $1A43: $6F
     inc bc                                        ; $1A44: $03
@@ -3709,7 +4268,16 @@ Cmd_1A42:
     PopROMBank
     jp Script_Start                              ; $1A82: $C3 $D3 $0A
 
-Cmd_1A85:
+Cmd_Load_Bitmap:
+    ; Copies a tileset into VRAM
+    ; You cannot specify width
+    ; This function can be run when the screen is visible
+    ;
+    ; Arguments:
+    ;   db Number of tiles to copy i.e. size
+    ;   BankAddress source tileset
+    ;   dw destination address
+    ;   db destination VBK bank
     ld a, [bc]                                    ; $1A85: $0A
     inc bc                                        ; $1A86: $03
     ldh [$FFAD], a                                  ; $1A87: $E0 $AD
@@ -3758,7 +4326,8 @@ jr_000_1ACB:
     ld [hScript.State + 1], a                                 ; $1AD2: $EA $AC $FF
     ret                                           ; $1AD5: $C9
 
-Cmd_1AD6:
+Cmd_Load_KQ_UnkSpot:
+    ; Hotspot-like data
     ld a, [bc]                                    ; $1AD6: $0A
     ld l, a                                       ; $1AD7: $6F
     inc bc                                        ; $1AD8: $03
@@ -3767,11 +4336,11 @@ Cmd_1AD6:
     inc bc                                        ; $1ADB: $03
     SwitchROMBank $13
     ld a, [hl+]                                   ; $1AE4: $2A
-    ld [$C6E5], a                                 ; $1AE5: $EA $E5 $C6
+    ld [wUnkspot_TableSize], a                                 ; $1AE5: $EA $E5 $C6
     ld a, h                                       ; $1AE8: $7C
-    ld [$C6E4], a                                 ; $1AE9: $EA $E4 $C6
+    ld [wUnkspot_Table + 1], a                                 ; $1AE9: $EA $E4 $C6
     ld a, l                                       ; $1AEC: $7D
-    ld [$C6E3], a                                 ; $1AED: $EA $E3 $C6
+    ld [wUnkspot_Table], a                                 ; $1AED: $EA $E3 $C6
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $1AF9: $C3 $D3 $0A
 
@@ -4826,7 +5395,7 @@ Cmd_System_MenuRingSmith:
     SwitchROMBank [hScript.Bank]
     ld a, [$CD3C]                                 ; $222E: $FA $3C $CD
     and a                                         ; $2231: $A7
-    jp nz, Jump_000_1593                          ; $2232: $C2 $93 $15
+    jp nz, Cmd_Flow_LongJump                          ; $2232: $C2 $93 $15
 
     inc bc                                        ; $2235: $03
     inc bc                                        ; $2236: $03
@@ -4841,7 +5410,7 @@ Cmd_System_MenuRingSmith:
     ret nz                                        ; $224C: $C0
 
     SwitchROMBank [hScript.Bank]
-    jp Jump_000_1593                              ; $2256: $C3 $93 $15
+    jp Cmd_Flow_LongJump                              ; $2256: $C3 $93 $15
 
 Cmd_System_MenuRingUpgrade:
     dec bc                                        ; $2259: $0B
@@ -4994,8 +5563,11 @@ Cmd_System_SaveLocation:
     Battery_Off
     jp Script_Start                              ; $2377: $C3 $D3 $0A
 
-Cmd_237A:
-    ld hl, $C72B                                  ; $237A: $21 $2B $C7
+Cmd_System_KQ_SetStartButtonScript:
+    ; Sets the script to run when the start button is pressed
+    ; Arguments:
+    ;   BankAddress
+    ld hl, wScript_StartButtonScript                                  ; $237A: $21 $2B $C7
     ld a, [bc]                                    ; $237D: $0A
     ld [hl+], a                                   ; $237E: $22
     inc bc                                        ; $237F: $03
@@ -5007,93 +5579,108 @@ Cmd_237A:
     inc bc                                        ; $2385: $03
     jp Script_Start                              ; $2386: $C3 $D3 $0A
 
-Cmd_2389:
+Cmd_System_KQ_AwaitCheatCode:
+    ; Freeze until the sequence is entered
+    ; Arguments:
+    ;   None
     push bc                                       ; $2389: $C5
 
-jr_000_238A:
-    ld hl, $C738                                  ; $238A: $21 $38 $C7
-    ld a, [$C737]                                 ; $238D: $FA $37 $C7
+    .AwaitButton:
+    ; Loop until any button (except Start) is pressed
 
-jr_000_2390:
-    dec a                                         ; $2390: $3D
-    cp $00                                        ; $2391: $FE $00
-    jr z, jr_000_2398                             ; $2393: $28 $03
+    ; Calculate hl = wScript_CheatCode_AnswerBuffer + ([wScript_CheatCode_CurrentStep] - 1)
+    ld hl, wScript_CheatCode_AnswerBuffer                                  ; $238A: $21 $38 $C7
+    ld a, [wScript_CheatCode_CurrentStep]                                 ; $238D: $FA $37 $C7
+    .CalculationLoop:
+        dec a                                         ; $2390: $3D
+        cp $00                                        ; $2391: $FE $00
+        jr z, .FinishedCalculation                             ; $2393: $28 $03
 
-    inc hl                                        ; $2395: $23
-    jr jr_000_2390                                ; $2396: $18 $F8
-
-jr_000_2398:
+        inc hl                                        ; $2395: $23
+        jr .CalculationLoop                                ; $2396: $18 $F8
+    .FinishedCalculation:
+    
+    ; Check which button is pressed
     ld a, [wCntDown]                                 ; $2398: $FA $55 $C9
     ld d, $00                                     ; $239B: $16 $00
+    ; d
+    ; 0 = Up
+    ; 1 = Right
+    ; 2 = Down
+    ; 3 = Left
+    ; 4 = A
+    ; 5 = B
+    ; 6 = Select
+    ; If Start is pressed, wait 1 frame and try again
     bit 6, a                                      ; $239D: $CB $77
-    jr nz, jr_000_23C4                            ; $239F: $20 $23
-
+    jr nz, .CheckMatch                            ; $239F: $20 $23
     inc d                                         ; $23A1: $14
     bit 4, a                                      ; $23A2: $CB $67
-    jr nz, jr_000_23C4                            ; $23A4: $20 $1E
-
+    jr nz, .CheckMatch                            ; $23A4: $20 $1E
     inc d                                         ; $23A6: $14
     bit 7, a                                      ; $23A7: $CB $7F
-    jr nz, jr_000_23C4                            ; $23A9: $20 $19
-
+    jr nz, .CheckMatch                            ; $23A9: $20 $19
     inc d                                         ; $23AB: $14
     bit 5, a                                      ; $23AC: $CB $6F
-    jr nz, jr_000_23C4                            ; $23AE: $20 $14
-
+    jr nz, .CheckMatch                            ; $23AE: $20 $14
     inc d                                         ; $23B0: $14
     bit 0, a                                      ; $23B1: $CB $47
-    jr nz, jr_000_23C4                            ; $23B3: $20 $0F
-
+    jr nz, .CheckMatch                            ; $23B3: $20 $0F
     inc d                                         ; $23B5: $14
     bit 1, a                                      ; $23B6: $CB $4F
-    jr nz, jr_000_23C4                            ; $23B8: $20 $0A
-
+    jr nz, .CheckMatch                            ; $23B8: $20 $0A
     inc d                                         ; $23BA: $14
     bit 2, a                                      ; $23BB: $CB $57
-    jr nz, jr_000_23C4                            ; $23BD: $20 $05
-
-    call System_UpdateGameNoScript                            ; $23BF: $CD $9B $09
-    jr jr_000_238A                                ; $23C2: $18 $C6
-
-jr_000_23C4:
+    jr nz, .CheckMatch                            ; $23BD: $20 $05
+    .StartOrNothingPressed:
+        call System_UpdateGameNoScript                            ; $23BF: $CD $9B $09
+        jr .AwaitButton                                ; $23C2: $18 $C6
+    .CheckMatch:
+    ; Check if d matches the correct id in this point in the sequence
     ld a, [hl]                                    ; $23C4: $7E
     cp d                                          ; $23C5: $BA
-    jr z, jr_000_23D5                             ; $23C6: $28 $0D
+    jr z, .CorrectButton                             ; $23C6: $28 $0D
+    .Failed:
+        ; Does not match.
+        xor a                                         ; $23C8: $AF
+        ld [wScript_CheatCode_Succeeded], a                                 ; $23C9: $EA $47 $C7
+        ; Reset the sequence back to the first item in the sequence, and start waiting again
+        inc a                                         ; $23CC: $3C
+        ld [wScript_CheatCode_CurrentStep], a                                 ; $23CD: $EA $37 $C7
+        call System_UpdateGameNoScript                            ; $23D0: $CD $9B $09
+        jr .AwaitButton                                ; $23D3: $18 $B5
 
-jr_000_23C8:
-    xor a                                         ; $23C8: $AF
-    ld [$C747], a                                 ; $23C9: $EA $47 $C7
-    inc a                                         ; $23CC: $3C
-    ld [$C737], a                                 ; $23CD: $EA $37 $C7
-    call System_UpdateGameNoScript                            ; $23D0: $CD $9B $09
-    jr jr_000_238A                                ; $23D3: $18 $B5
+    .CorrectButton:
+        ld a, [wScript_CheatCode_CurrentStep]                                 ; $23D5: $FA $37 $C7
+        ld e, a                                       ; $23D8: $5F
+        ld a, [wScript_CheatCode_TotalSteps]                                ; $23D9: $FA $36 $C7
+        cp e                                          ; $23DC: $BB
+        ; Somehow we are past the Total, so as a failsafe jump to Failed
+        jr c, .Failed                             ; $23DD: $38 $E9
+        jr z, .AllButtonsPressed                             ; $23DF: $28 $0A
+        .NotTheLastStep:
+            ; Increment the current step
+            ld a, e                                       ; $23E1: $7B
+            inc a                                         ; $23E2: $3C
+            ld [wScript_CheatCode_CurrentStep], a                                 ; $23E3: $EA $37 $C7
+            call System_UpdateGameNoScript                            ; $23E6: $CD $9B $09
+            jr .AwaitButton                                ; $23E9: $18 $9F
+        .AllButtonsPressed:
+            ld a, $01                                     ; $23EB: $3E $01
+            ld [wScript_CheatCode_Succeeded], a                                 ; $23ED: $EA $47 $C7
+            pop bc                                        ; $23F0: $C1
+            jp Script_Start                              ; $23F1: $C3 $D3 $0A
 
-jr_000_23D5:
-    ld a, [$C737]                                 ; $23D5: $FA $37 $C7
-    ld e, a                                       ; $23D8: $5F
-    ld a, [$C736]                                 ; $23D9: $FA $36 $C7
-    cp e                                          ; $23DC: $BB
-    jr c, jr_000_23C8                             ; $23DD: $38 $E9
+Cmd_System_KQ_SetCheatCode:
+    ; Sets up the cheat code to be verified by Cmd_System_KQ_AwaitCheatCode
+    ; Arguments:
+    ;   db  wScript_CheatCode_TotalSteps (up to 12)
+    ;   12 bytes  wScript_CheatCode_AnswerBuffer
 
-    jr z, jr_000_23EB                             ; $23DF: $28 $0A
-
-    ld a, e                                       ; $23E1: $7B
-    inc a                                         ; $23E2: $3C
-    ld [$C737], a                                 ; $23E3: $EA $37 $C7
-    call System_UpdateGameNoScript                            ; $23E6: $CD $9B $09
-    jr jr_000_238A                                ; $23E9: $18 $9F
-
-jr_000_23EB:
-    ld a, $01                                     ; $23EB: $3E $01
-    ld [$C747], a                                 ; $23ED: $EA $47 $C7
-    pop bc                                        ; $23F0: $C1
-    jp Script_Start                              ; $23F1: $C3 $D3 $0A
-
-Cmd_23F4:
     ld a, [bc]                                    ; $23F4: $0A
     inc bc                                        ; $23F5: $03
-    ld [$C736], a                                 ; $23F6: $EA $36 $C7
-    ld hl, $C738                                  ; $23F9: $21 $38 $C7
+    ld [wScript_CheatCode_TotalSteps], a                                 ; $23F6: $EA $36 $C7
+    ld hl, wScript_CheatCode_AnswerBuffer                                  ; $23F9: $21 $38 $C7
     ld a, [bc]                                    ; $23FC: $0A
     ld [hl+], a                                   ; $23FD: $22
     inc bc                                        ; $23FE: $03
@@ -5131,16 +5718,17 @@ Cmd_23F4:
     ld [hl+], a                                   ; $241E: $22
     inc bc                                        ; $241F: $03
     xor a                                         ; $2420: $AF
-    ld [$C747], a                                 ; $2421: $EA $47 $C7
+    ld [wScript_CheatCode_Succeeded], a                                 ; $2421: $EA $47 $C7
     inc a                                         ; $2424: $3C
-    ld [$C737], a                                 ; $2425: $EA $37 $C7
+    ld [wScript_CheatCode_CurrentStep], a                                 ; $2425: $EA $37 $C7
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $2431: $C3 $D3 $0A
 
-Cmd_2434:
+Cmd_System_KQ_ResetActorList:
+    ; Reinitializes the actor system, deleting all actors
     push bc                                       ; $2434: $C5
-    SwitchROMBank $01
-    call $40D3                                    ; $243D: $CD $D3 $40
+    SwitchROMBank BANK(ActorList_Init)
+    call ActorList_Init                                    ; $243D: $CD $D3 $40
     SwitchROMBank [hScript.Bank]
     pop bc                                        ; $2449: $C1
     jp Script_Start                              ; $244A: $C3 $D3 $0A
@@ -5674,7 +6262,7 @@ Cmd_Trigger_TriggerAlways:
 
     ld a, b                                       ; $27F8: $78
     and c                                         ; $27F9: $A1
-    jp z, Jump_000_1531                           ; $27FA: $CA $31 $15
+    jp z, Cmd_Flow_End                           ; $27FA: $CA $31 $15
 
     jp Trigger_TriggerSetUpdateTilemap                              ; $27FD: $C3 $D6 $28
 
@@ -5686,7 +6274,7 @@ jr_000_2800:
 
     ld b, h                                       ; $2805: $44
     ld c, l                                       ; $2806: $4D
-    jp Jump_000_1593                              ; $2807: $C3 $93 $15
+    jp Cmd_Flow_LongJump                              ; $2807: $C3 $93 $15
 
 Cmd_Trigger_TriggerOnce:
     ld hl, $0009                                  ; $280A: $21 $09 $00
@@ -5697,7 +6285,7 @@ Cmd_Trigger_TriggerOnce:
 
     ld a, b                                       ; $2816: $78
     and c                                         ; $2817: $A1
-    jp z, Jump_000_1531                           ; $2818: $CA $31 $15
+    jp z, Cmd_Flow_End                           ; $2818: $CA $31 $15
 
     ld a, $31                                     ; $281B: $3E $31
     ldh [hScript.State], a                                  ; $281D: $E0 $AB
@@ -5713,7 +6301,7 @@ jr_000_2826:
 
     ld b, h                                       ; $282B: $44
     ld c, l                                       ; $282C: $4D
-    jp Jump_000_1593                              ; $282D: $C3 $93 $15
+    jp Cmd_Flow_LongJump                              ; $282D: $C3 $93 $15
 
 Cmd_Trigger_Treasure:
     ld hl, $0007                                  ; $2830: $21 $07 $00
@@ -5726,7 +6314,7 @@ Cmd_Trigger_Treasure:
     inc hl                                        ; $283D: $23
     ld a, b                                       ; $283E: $78
     and c                                         ; $283F: $A1
-    jp z, Jump_000_1531                           ; $2840: $CA $31 $15
+    jp z, Cmd_Flow_End                           ; $2840: $CA $31 $15
 
     ld a, $31                                     ; $2843: $3E $31
     ldh [hScript.State], a                                  ; $2845: $E0 $AB

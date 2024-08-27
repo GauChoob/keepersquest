@@ -1,7 +1,7 @@
 
 SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
 
-Call_001_4000:
+Actor_CheckRestore:
     ld a, [$C188]                                 ; $4000: $FA $88 $C1
     cp $03                                        ; $4003: $FE $03
     ret nz                                        ; $4005: $C0
@@ -12,7 +12,7 @@ Call_001_4000:
     ld h, a                                       ; $400D: $67
     ld a, [$C174]                                 ; $400E: $FA $74 $C1
     ld l, a                                       ; $4011: $6F
-    ld bc, $C1A4                                  ; $4012: $01 $A4 $C1
+    ld bc, wActor_Save                                  ; $4012: $01 $A4 $C1
     ld e, $1B                                     ; $4015: $1E $1B
 
 jr_001_4017:
@@ -25,17 +25,17 @@ jr_001_4017:
     ret                                           ; $401D: $C9
 
 
-Call_001_401E:
+Actor_StoreCopy:
     ld a, $01                                     ; $401E: $3E $01
     ld [$C188], a                                 ; $4020: $EA $88 $C1
-    ldh a, [$FF8A]                                  ; $4023: $F0 $8A
+    ldh a, [hActor_CurrentAddress]                                  ; $4023: $F0 $8A
     ld l, a                                       ; $4025: $6F
     ld [$C174], a                                 ; $4026: $EA $74 $C1
-    ldh a, [$FF8B]                                  ; $4029: $F0 $8B
+    ldh a, [hActor_CurrentAddress + 1]                                  ; $4029: $F0 $8B
     ld h, a                                       ; $402B: $67
     ld [$C175], a                                 ; $402C: $EA $75 $C1
     push hl                                       ; $402F: $E5
-    ld bc, $C1A4                                  ; $4030: $01 $A4 $C1
+    ld bc, wActor_Save                                  ; $4030: $01 $A4 $C1
     ld e, $1B                                     ; $4033: $1E $1B
 
 jr_001_4035:
@@ -48,7 +48,7 @@ jr_001_4035:
     pop hl                                        ; $403B: $E1
     ret                                           ; $403C: $C9
 
-
+ActorListXX_AddActor:
     ld a, [bc]                                    ; $403D: $0A
     bit 7, a                                      ; $403E: $CB $7F
     ret z                                         ; $4040: $C8
@@ -79,7 +79,7 @@ jr_001_4035:
     ret                                           ; $4061: $C9
 
 
-Call_001_4062:
+ActorList_ReleaseActor:
     ld a, [$C133]                                 ; $4062: $FA $33 $C1
     ld b, a                                       ; $4065: $47
     ld a, [$C132]                                 ; $4066: $FA $32 $C1
@@ -100,7 +100,7 @@ Call_001_4062:
     ld [hl], a                                    ; $407B: $77
     ret                                           ; $407C: $C9
 
-
+ActorList_Run:
     ld a, $FF                                     ; $407D: $3E $FF
     ldh [$FF97], a                                  ; $407F: $E0 $97
     ldh [$FF98], a                                  ; $4081: $E0 $98
@@ -159,7 +159,7 @@ jr_001_40BB:
     ld [hl], a                                    ; $40BE: $77
     pop hl                                        ; $40BF: $E1
     pop de                                        ; $40C0: $D1
-    call Call_001_4062                            ; $40C1: $CD $62 $40
+    call ActorList_ReleaseActor                            ; $40C1: $CD $62 $40
     jr jr_001_40C8                                ; $40C4: $18 $02
 
 jr_001_40C6:
@@ -173,10 +173,10 @@ jr_001_40C8:
     cp l                                          ; $40CC: $BD
     jr nz, jr_001_4089                            ; $40CD: $20 $BA
 
-    call Call_001_4000                            ; $40CF: $CD $00 $40
+    call Actor_CheckRestore                            ; $40CF: $CD $00 $40
     ret                                           ; $40D2: $C9
 
-
+ActorList_Init:
     ld b, $10                                     ; $40D3: $06 $10
     xor a                                         ; $40D5: $AF
     ld hl, $C154                                  ; $40D6: $21 $54 $C1
@@ -220,9 +220,9 @@ jr_001_4101:
 
 
 Call_001_410A:
-    ldh a, [$FF8A]                                  ; $410A: $F0 $8A
+    ldh a, [hActor_CurrentAddress]                                  ; $410A: $F0 $8A
     ld l, a                                       ; $410C: $6F
-    ldh a, [$FF8B]                                  ; $410D: $F0 $8B
+    ldh a, [hActor_CurrentAddress + 1]                                  ; $410D: $F0 $8B
     ld h, a                                       ; $410F: $67
     ldh a, [$FF8C]                                  ; $4110: $F0 $8C
     ld [hl+], a                                   ; $4112: $22
@@ -251,9 +251,9 @@ Call_001_412F:
     ld h, b                                       ; $412F: $60
     ld l, c                                       ; $4130: $69
     ld a, l                                       ; $4131: $7D
-    ldh [$FF8A], a                                  ; $4132: $E0 $8A
+    ldh [hActor_CurrentAddress], a                                  ; $4132: $E0 $8A
     ld a, h                                       ; $4134: $7C
-    ldh [$FF8B], a                                  ; $4135: $E0 $8B
+    ldh [hActor_CurrentAddress + 1], a                                  ; $4135: $E0 $8B
     ld a, [hl+]                                   ; $4137: $2A
     ldh [$FF8C], a                                  ; $4138: $E0 $8C
     ld a, [hl+]                                   ; $413A: $2A
@@ -402,7 +402,7 @@ jr_001_41FE:
     ld a, [hl+]                                   ; $4201: $2A
     ld h, [hl]                                    ; $4202: $66
     ld l, a                                       ; $4203: $6F
-    call Call_000_0585                            ; $4204: $CD $85 $05
+    call Math_Rand8Inc                            ; $4204: $CD $85 $05
     and $0F                                       ; $4207: $E6 $0F
     ld e, a                                       ; $4209: $5F
     ld d, $00                                     ; $420A: $16 $00
@@ -441,7 +441,7 @@ Call_001_422E:
     ret nz                                        ; $4232: $C0
 
     SwitchRAMBank $05
-    ld a, [$C6E1]                                 ; $423A: $FA $E1 $C6
+    ld a, [wHotspot_TableSize]                                 ; $423A: $FA $E1 $C6
     ld e, a                                       ; $423D: $5F
     ld a, [$FF9F]                                 ; $423E: $FA $9F $FF
     ld h, a                                       ; $4241: $67
@@ -459,9 +459,9 @@ Call_001_422E:
     cp e                                          ; $4252: $BB
     ret nc                                        ; $4253: $D0
 
-    ld a, [$C6E0]                                 ; $4254: $FA $E0 $C6
+    ld a, [wHotspot_Table + 1]                                 ; $4254: $FA $E0 $C6
     ld h, a                                       ; $4257: $67
-    ld a, [$C6DF]                                 ; $4258: $FA $DF $C6
+    ld a, [wHotspot_Table]                                 ; $4258: $FA $DF $C6
     ld l, a                                       ; $425B: $6F
     ld a, d                                       ; $425C: $7A
     add a                                         ; $425D: $87
@@ -524,7 +524,7 @@ jr_001_428D:
 
 jr_001_4294:
     ld a, d                                       ; $4294: $7A
-    ld [$C6DE], a                                 ; $4295: $EA $DE $C6
+    ld [wHotspotCurrent], a                                 ; $4295: $EA $DE $C6
     call Hotspot00_SetScript                            ; $4298: $CD $59 $0A
     ld a, $D3                                     ; $429B: $3E $D3
     ld [$C71B], a                                 ; $429D: $EA $1B $C7
@@ -535,123 +535,132 @@ jr_001_4294:
 
 jr_001_42A6:
     ld a, $FF                                     ; $42A6: $3E $FF
-    ld [$C6DE], a                                 ; $42A8: $EA $DE $C6
+    ld [wHotspotCurrent], a                                 ; $42A8: $EA $DE $C6
     ret                                           ; $42AB: $C9
 
 
 Script_Table::
-    dw Cmd_0B58
-    dw Cmd_0B63
-    dw Cmd_0B70
-    dw Cmd_0B8F
-    dw Cmd_0BE9
-    dw Cmd_0C11
-    dw Cmd_0C20
-    dw Cmd_0C46
-    dw Cmd_0C53
-    dw Cmd_0C59
-    dw Cmd_0C71
-    dw Cmd_0C7E
-    dw Cmd_0CA2
-    dw Cmd_0CBA
-    dw Cmd_0CC0
-    dw Cmd_0CC6
-    dw Cmd_0CEC
-    dw Cmd_0CFD
-    dw Cmd_0D5C
-    dw Cmd_0D6E
-    dw Cmd_0D8B
-    dw Cmd_0DA0
-    dw Cmd_0DE2
-    dw Cmd_0E45
-    dw Cmd_0E4B
-    dw Cmd_0E52
-    dw Cmd_0E63
-    dw Cmd_0EA1
-    dw Cmd_0EB9
-    dw Cmd_0ED1
-    dw Cmd_0F51
-    dw Cmd_0F59
-    dw Cmd_0F61
-    dw Cmd_0F69
-    dw Cmd_0F71
-    dw Cmd_0FD7
-    dw Cmd_0FEC
-    dw Cmd_0FC1
-    dw Cmd_0FA8
-    dw Cmd_0F92
-    dw Cmd_0FF4
-    dw Cmd_1060
-    dw Cmd_1068
-    dw Cmd_1075
-    dw Cmd_107D
-    dw Cmd_1080
-    dw Cmd_1088
-    dw Cmd_109D
-    dw Cmd_10A5
-    dw Cmd_10B1
-    dw Cmd_10B9
-    dw Cmd_10C1
-    dw Cmd_110E
-    dw Cmd_112D
-    dw Cmd_1178
-    dw Cmd_118A
-    dw Cmd_11B7
-    dw Cmd_1325
-    dw Cmd_1336
-    dw Cmd_11DE
-    dw Cmd_123B
-    dw Cmd_1280
-    dw Cmd_1291
-    dw Cmd_12A2
-    dw Cmd_12D7
-    dw Cmd_12E8
-    dw Cmd_12F9
-    dw Cmd_14D4
-    dw Cmd_14F4
-    dw Cmd_1531
-    dw Cmd_1547
-    dw Cmd_1587
-    dw Cmd_1593
-    dw Cmd_15A9
-    dw Cmd_15B2
-    dw Cmd_15CC
-    dw Cmd_15DB
-    dw Cmd_1631
-    dw Cmd_164C
-    dw Cmd_168C
-    dw Cmd_1714
-    dw Cmd_16D7
-    dw Cmd_176F
-    dw Cmd_17C7
-    dw Cmd_17EA
-    dw Cmd_17ED
-    dw Cmd_17FD
-    dw Cmd_180A
-    dw Cmd_1817
-    dw Cmd_1824
-    dw Cmd_1831
-    dw Cmd_183E
-    dw Cmd_184B
-    dw Cmd_1851
-    dw Cmd_1857
-    dw Cmd_1863
-    dw Cmd_18A8
-    dw Cmd_18AE
-    dw Cmd_18B4
-    dw Cmd_18BA
-    dw Cmd_18C0
-    dw Cmd_18C6
-    dw Cmd_1916
-    dw Cmd_1939
-    dw Cmd_195F
-    dw Cmd_1982
-    dw Cmd_19A5
-    dw Cmd_19E8
-    dw Cmd_1A2B
-    dw Cmd_1A42
-    dw Cmd_1A85
-    dw Cmd_1AD6
+    dw Cmd_Actor_HeroFromDoor
+    dw Cmd_Actor_HeroToDoor
+    dw Cmd_Actor_HeroToRelativeDoor
+    dw Cmd_Actor_ThatActorDrawTile
+    dw Cmd_Actor_ThatActorDrawMaskTile
+    dw Cmd_Actor_ThatActorInit
+    dw Cmd_Actor_ThatActorTeleportToThatActor
+    dw Cmd_Actor_ThatActorSetAI
+    dw Cmd_Actor_ThatActorSetLoc
+    dw Cmd_Actor_ThatActorSetScript
+    dw Cmd_Actor_ThatActorSetSpriteBase
+    dw Cmd_Actor_ThatActorStart
+    dw Cmd_Actor_ThatActorDelete
+    dw Cmd_Actor_ThisActorDrawTile
+    dw Cmd_Actor_ThisActorDrawMaskTile
+    dw Cmd_Actor_ThisActorTeleportToThatActor
+    dw Cmd_Actor_ThisActorNewState
+    dw Cmd_Actor_ThisActorRaindrop
+    dw Cmd_Actor_RestoreActorState
+    dw Cmd_Actor_ThisActorSetAI
+    dw Cmd_Actor_ThisActorSetAnimSingle
+    dw Cmd_Actor_ThisActorSetAnimDelay
+    dw Cmd_Actor_ThisActorSetAnimScroll
+    dw Cmd_Actor_ThisActorSetLoc
+    dw Cmd_Actor_ThisActorSetSpriteBase
+    dw Cmd_Actor_ThisActorDelete
+    dw Cmd_Actor_ThisActorWaitTile
+
+        dw Cmd_Actor_KQ_ThatActorSetInterrupt
+        dw Cmd_Actor_KQ_ThisActorSetInterrupt
+        dw Cmd_Actor_KQ_ThisActorSaveActorSetScriptMisaligned
+
+    dw Cmd_Sound_PlaySFX0
+    dw Cmd_Sound_PlaySFX1
+    dw Cmd_Sound_SongPause_Bugged
+    dw Cmd_Sound_SongResume
+    dw Cmd_Sound_SongStart
+    dw Cmd_Sound_FanfareStart
+    dw Cmd_Sound_SongStop
+    dw Cmd_Sound_SetSongVolume
+    dw Cmd_Sound_FadeInSong
+    dw Cmd_Sound_FadeOutSong
+
+    dw Cmd_Battle_New
+    dw Cmd_Battle_Attack
+    dw Cmd_Battle_Auto
+    dw Cmd_Battle_Spell
+    dw Cmd_Battle_Evaluate
+    dw Cmd_Battle_Focus
+    dw Cmd_Battle_NextTurn
+    dw Cmd_Battle_ForgeRing
+    dw Cmd_Battle_SummonFast
+    dw Cmd_Battle_SummonDelay
+    dw Cmd_Battle_Item
+    dw Cmd_Battle_ScreenWipe
+    dw Cmd_Battle_SetReturn
+    dw Cmd_Battle_SetEncounter
+
+    dw Cmd_Fightscene_FightFX_BlowAway
+    dw Cmd_Fightscene_LoadArena
+    dw Cmd_Fightscene_LoadCreatureLeft
+    dw Cmd_Fightscene_TileFX_DissolveFast
+    dw Cmd_Fightscene_TileFX_DissolveSlow
+    dw Cmd_Fightscene_New
+    dw Cmd_Fightscene_FightFX_PanFromTable
+    dw Cmd_Fightscene_FightFX_Recoil
+    dw Cmd_Fightscene_FightFX_RecoilFast
+    dw Cmd_Fightscene_FightFX_PanConstant
+    dw Cmd_Fightscene_FightFX_Shake
+    dw Cmd_Fightscene_FightFX_Sink
+    dw Cmd_Fightscene_FightFX_Tremble
+
+    dw Cmd_Flow_Delay
+    dw Cmd_Flow_RandDelay
+    dw Cmd_Flow_End
+    dw Cmd_Flow_LongJumpIf
+    dw Cmd_Flow_InitSkip
+    dw Cmd_Flow_LongJump
+    dw Cmd_Flow_LocalJump
+    dw Cmd_Flow_RandLongJump
+    dw Cmd_Flow_Pass
+    dw Cmd_Flow_SwitchRange
+    dw Cmd_Flow_ResetScript
+    dw Cmd_Flow_Switch
+
+    dw Cmd_Frame_SpriteDraw
+    dw Cmd_Frame_SpriteBlock
+    dw Cmd_Frame_SpriteInvisible
+    dw Cmd_Frame_OverlayDraw
+    dw Cmd_Frame_OverlayInit
+    dw Cmd_Frame_OverlayInvisible
+
+    dw Cmd_Global_ClearSync
+    dw Cmd_Global_SetAnyEventMaster
+    dw Cmd_Global_SetAnyEventScroll
+    dw Cmd_Global_SetAnyEventText
+    dw Cmd_Global_SetEventMaster
+    dw Cmd_Global_SetEventScroll
+    dw Cmd_Global_SetEventText
+    dw Cmd_Global_SetScriptMaster
+    dw Cmd_Global_SetScriptScroll
+    dw Cmd_Global_SetScriptText
+    dw Cmd_Global_Sync
+    dw Cmd_Global_WaitAnyEventMaster
+    dw Cmd_Global_WaitAnyEventScroll
+    dw Cmd_Global_WaitAnyEventText
+    dw Cmd_Global_WaitEventMaster
+    dw Cmd_Global_WaitEventScroll
+    dw Cmd_Global_WaitEventText
+
+    dw Cmd_Load_LargeStaticTilemap
+    dw Cmd_Load_Hotspots
+    dw Cmd_Load_Scene
+    dw Cmd_Load_SpritePalette
+    dw Cmd_Load_Map
+    dw Cmd_Load_MapMask
+    dw Cmd_Load_Triggers
+    dw Cmd_Load_BitmapSet
+    dw Cmd_Load_Bitmap
+
+        dw Cmd_Load_KQ_UnkSpot
 
     dw Cmd_Palette_ArenaFadeToColor
     dw Cmd_Palette_ArenaFadeToBase
@@ -699,10 +708,10 @@ Script_Table::
     dw Cmd_System_SetItemSpellMapError
     dw Cmd_System_SaveLocation
 
-    dw Cmd_237A
-    dw Cmd_23F4
-    dw Cmd_2389
-    dw Cmd_2434
+        dw Cmd_System_KQ_SetStartButtonScript
+        dw Cmd_System_KQ_SetCheatCode
+        dw Cmd_System_KQ_AwaitCheatCode
+        dw Cmd_System_KQ_ResetActorList
 
     dw Cmd_Textbox_FormatChar
     dw Cmd_Textbox_Clear
@@ -732,6 +741,7 @@ Script_Table::
     dw Cmd_Ram_OrXramByte
 
 
+ActorXX_HeroFromDoor:
     ld a, [$C9C4]                                 ; $441A: $FA $C4 $C9
     ld [$C18E], a                                 ; $441D: $EA $8E $C1
     ld a, [$C9C5]                                 ; $4420: $FA $C5 $C9
@@ -751,7 +761,7 @@ jr_001_4433:
     ld a, l                                       ; $4439: $7D
     ld [$C190], a                                 ; $443A: $EA $90 $C1
     ld a, $FF                                     ; $443D: $3E $FF
-    ld [$C6DE], a                                 ; $443F: $EA $DE $C6
+    ld [wHotspotCurrent], a                                 ; $443F: $EA $DE $C6
     ld a, $D3                                     ; $4442: $3E $D3
     ld [hScript.State], a                                 ; $4444: $EA $AB $FF
     ld a, $0A                                     ; $4447: $3E $0A
@@ -1756,7 +1766,7 @@ Call_001_4A34:
     or c                                          ; $4A58: $B1
     ret z                                         ; $4A59: $C8
 
-    ld a, [$C6E5]                                 ; $4A5A: $FA $E5 $C6
+    ld a, [wUnkspot_TableSize]                                 ; $4A5A: $FA $E5 $C6
     ld e, a                                       ; $4A5D: $5F
     ld d, [hl]                                    ; $4A5E: $56
     ld a, d                                       ; $4A5F: $7A
@@ -1774,9 +1784,9 @@ Call_001_4A34:
     cp e                                          ; $4A6F: $BB
     ret nc                                        ; $4A70: $D0
 
-    ld a, [$C6E4]                                 ; $4A71: $FA $E4 $C6
+    ld a, [wUnkspot_Table + 1]                                 ; $4A71: $FA $E4 $C6
     ld h, a                                       ; $4A74: $67
-    ld a, [$C6E3]                                 ; $4A75: $FA $E3 $C6
+    ld a, [wUnkspot_Table]                                 ; $4A75: $FA $E3 $C6
     ld l, a                                       ; $4A78: $6F
     ld a, d                                       ; $4A79: $7A
     add a                                         ; $4A7A: $87
@@ -5869,9 +5879,9 @@ jr_001_6567:
     cp d                                          ; $658C: $BA
     ret nz                                        ; $658D: $C0
 
-    ldh a, [$FF8B]                                  ; $658E: $F0 $8B
+    ldh a, [hActor_CurrentAddress + 1]                                  ; $658E: $F0 $8B
     ld h, a                                       ; $6590: $67
-    ldh a, [$FF8A]                                  ; $6591: $F0 $8A
+    ldh a, [hActor_CurrentAddress]                                  ; $6591: $F0 $8A
     ld l, a                                       ; $6593: $6F
     ld bc, $0005                                  ; $6594: $01 $05 $00
     add hl, bc                                    ; $6597: $09
@@ -6172,8 +6182,8 @@ jr_001_6706:
     ret                                           ; $672B: $C9
 
 
-    ld hl, $C738                                  ; $672C: $21 $38 $C7
-    ld a, [$C737]                                 ; $672F: $FA $37 $C7
+    ld hl, wScript_CheatCode_AnswerBuffer                                  ; $672C: $21 $38 $C7
+    ld a, [wScript_CheatCode_CurrentStep]                                 ; $672F: $FA $37 $C7
 
 jr_001_6732:
     dec a                                         ; $6732: $3D
@@ -6223,16 +6233,16 @@ jr_001_6762:
 
 jr_001_6766:
     xor a                                         ; $6766: $AF
-    ld [$C747], a                                 ; $6767: $EA $47 $C7
+    ld [wScript_CheatCode_Succeeded], a                                 ; $6767: $EA $47 $C7
     inc a                                         ; $676A: $3C
-    ld [$C737], a                                 ; $676B: $EA $37 $C7
+    ld [wScript_CheatCode_CurrentStep], a                                 ; $676B: $EA $37 $C7
     ret                                           ; $676E: $C9
 
 
 jr_001_676F:
-    ld a, [$C737]                                 ; $676F: $FA $37 $C7
+    ld a, [wScript_CheatCode_CurrentStep]                                 ; $676F: $FA $37 $C7
     ld e, a                                       ; $6772: $5F
-    ld a, [$C736]                                 ; $6773: $FA $36 $C7
+    ld a, [wScript_CheatCode_TotalSteps]                                 ; $6773: $FA $36 $C7
     cp e                                          ; $6776: $BB
     jr c, jr_001_6766                             ; $6777: $38 $ED
 
@@ -6240,13 +6250,13 @@ jr_001_676F:
 
     ld a, e                                       ; $677B: $7B
     inc a                                         ; $677C: $3C
-    ld [$C737], a                                 ; $677D: $EA $37 $C7
+    ld [wScript_CheatCode_CurrentStep], a                                 ; $677D: $EA $37 $C7
     ret                                           ; $6780: $C9
 
 
 jr_001_6781:
     ld a, $01                                     ; $6781: $3E $01
-    ld [$C747], a                                 ; $6783: $EA $47 $C7
+    ld [wScript_CheatCode_Succeeded], a                                 ; $6783: $EA $47 $C7
     ret                                           ; $6786: $C9
 
 
@@ -6266,9 +6276,9 @@ jr_001_6781:
     bit 1, a                                      ; $679E: $CB $4F
     ret z                                         ; $67A0: $C8
 
-    ld a, [$FF8B]                                 ; $67A1: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $67A1: $FA $8B $FF
     ld h, a                                       ; $67A4: $67
-    ld a, [$FF8A]                                 ; $67A5: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $67A5: $FA $8A $FF
     ld l, a                                       ; $67A8: $6F
     inc hl                                        ; $67A9: $23
     ld a, $4B                                     ; $67AA: $3E $4B
@@ -7364,7 +7374,7 @@ jr_001_6DD0:
     and a                                         ; $6DF1: $A7
     ret nz                                        ; $6DF2: $C0
 
-    call Call_001_401E                            ; $6DF3: $CD $1E $40
+    call Actor_StoreCopy                            ; $6DF3: $CD $1E $40
     inc hl                                        ; $6DF6: $23
     ld a, $83                                     ; $6DF7: $3E $83
     ld [hl+], a                                   ; $6DF9: $22
@@ -7487,7 +7497,7 @@ jr_001_6E2C:
 
     ld a, $01                                     ; $6EA2: $3E $01
     ld [$C735], a                                 ; $6EA4: $EA $35 $C7
-    call Call_001_401E                            ; $6EA7: $CD $1E $40
+    call Actor_StoreCopy                            ; $6EA7: $CD $1E $40
     inc hl                                        ; $6EAA: $23
     ld a, $83                                     ; $6EAB: $3E $83
     ld [hl+], a                                   ; $6EAD: $22
@@ -7503,9 +7513,9 @@ jr_001_6E2C:
 
     ld a, $01                                     ; $6EBA: $3E $01
     ld [$C188], a                                 ; $6EBC: $EA $88 $C1
-    ld a, [$FF8B]                                 ; $6EBF: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $6EBF: $FA $8B $FF
     ld h, a                                       ; $6EC2: $67
-    ld a, [$FF8A]                                 ; $6EC3: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $6EC3: $FA $8A $FF
     ld l, a                                       ; $6EC6: $6F
     inc hl                                        ; $6EC7: $23
     ld a, $83                                     ; $6EC8: $3E $83
@@ -7532,9 +7542,9 @@ Call_001_6ECF:
     and a                                         ; $6EE9: $A7
     jp nz, Jump_001_6F81                          ; $6EEA: $C2 $81 $6F
 
-    ld a, [$FF8B]                                 ; $6EED: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $6EED: $FA $8B $FF
     ld h, a                                       ; $6EF0: $67
-    ld a, [$FF8A]                                 ; $6EF1: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $6EF1: $FA $8A $FF
     ld l, a                                       ; $6EF4: $6F
     ld de, $0005                                  ; $6EF5: $11 $05 $00
     add hl, de                                    ; $6EF8: $19
@@ -7779,9 +7789,9 @@ Call_001_7038:
     and a                                         ; $7052: $A7
     jp nz, Jump_001_70C1                          ; $7053: $C2 $C1 $70
 
-    ld a, [$FF8B]                                 ; $7056: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $7056: $FA $8B $FF
     ld h, a                                       ; $7059: $67
-    ld a, [$FF8A]                                 ; $705A: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $705A: $FA $8A $FF
     ld l, a                                       ; $705D: $6F
     ld de, $0005                                  ; $705E: $11 $05 $00
     add hl, de                                    ; $7061: $19
@@ -7921,9 +7931,9 @@ jr_001_70C1:
     cp $00                                        ; $7102: $FE $00
     ret nz                                        ; $7104: $C0
 
-    ld a, [$FF8B]                                 ; $7105: $FA $8B $FF
+    ld a, [hActor_CurrentAddress + 1]                                 ; $7105: $FA $8B $FF
     ld h, a                                       ; $7108: $67
-    ld a, [$FF8A]                                 ; $7109: $FA $8A $FF
+    ld a, [hActor_CurrentAddress]                                 ; $7109: $FA $8A $FF
     ld l, a                                       ; $710C: $6F
     inc hl                                        ; $710D: $23
     ld a, $83                                     ; $710E: $3E $83

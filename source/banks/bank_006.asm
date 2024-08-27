@@ -7530,7 +7530,7 @@ jr_006_5DE7:
     rst $20                                       ; $5DFA: $E7
     jr jr_006_5E28                                ; $5DFB: $18 $2B
 
-    call c, Call_000_19A6                         ; $5DFD: $DC $A6 $19
+    db $DC, $A6, $19
     xor [hl]                                      ; $5E00: $AE
     add hl, de                                    ; $5E01: $19
     xor l                                         ; $5E02: $AD
