@@ -1,7 +1,3 @@
-; Disassembly of "kq.gbc"
-; This file was created with:
-; mgbdis v2.0 - Game Boy ROM disassembler by Matt Currie and contributors.
-; https://github.com/mattcurrie/mgbdis
 
 SECTION "ROM Bank $007", ROMX[$4000], BANK[$7]
 
@@ -257,7 +253,7 @@ jr_007_414E:
     ld bc, $2000                                  ; $4157: $01 $00 $20
     ld a, $00                                     ; $415A: $3E $00
     ld e, a                                       ; $415C: $5F
-    call Call_000_07E8                            ; $415D: $CD $E8 $07
+    call MemSet                            ; $415D: $CD $E8 $07
     pop bc                                        ; $4160: $C1
     dec c                                         ; $4161: $0D
     jr nz, jr_007_414E                            ; $4162: $20 $EA
@@ -437,7 +433,7 @@ jr_007_427F:
     PushROMBank
     ld hl, $4190                                  ; $429A: $21 $90 $41
     ld e, $04                                     ; $429D: $1E $04
-    call Call_000_07A9                            ; $429F: $CD $A9 $07
+    call CallForeign                            ; $429F: $CD $A9 $07
     ld bc, $0008                                  ; $42A2: $01 $08 $00
     add hl, bc                                    ; $42A5: $09
     ld b, $00                                     ; $42A6: $06 $00
@@ -4415,7 +4411,7 @@ Call_007_5707:
     ld a, $81                                     ; $58A6: $3E $81
     ld hl, $44EF                                  ; $58A8: $21 $EF $44
     ld e, $30                                     ; $58AB: $1E $30
-    call Call_000_07A9                            ; $58AD: $CD $A9 $07
+    call CallForeign                            ; $58AD: $CD $A9 $07
     ld a, $55                                     ; $58B0: $3E $55
     ld [$C940], a                                 ; $58B2: $EA $40 $C9
     ld a, $8F                                     ; $58B5: $3E $8F
@@ -5478,7 +5474,7 @@ jr_007_5B9A:
     add hl, bc                                    ; $5F5B: $09
     ld bc, $000D                                  ; $5F5C: $01 $0D $00
     ld de, $C96C                                  ; $5F5F: $11 $6C $C9
-    call Call_000_07D6                            ; $5F62: $CD $D6 $07
+    call MemMov                            ; $5F62: $CD $D6 $07
     ld a, $FC                                     ; $5F65: $3E $FC
     ld [de], a                                    ; $5F67: $12
     pop hl                                        ; $5F68: $E1
@@ -5496,7 +5492,7 @@ jr_007_5B9A:
     ld [$D077], a                                 ; $5F7B: $EA $77 $D0
     ld hl, $405C                                  ; $5F7E: $21 $5C $40
     ld e, $05                                     ; $5F81: $1E $05
-    call Call_000_07A9                            ; $5F83: $CD $A9 $07
+    call CallForeign                            ; $5F83: $CD $A9 $07
     ret                                           ; $5F86: $C9
 
 
@@ -5511,10 +5507,10 @@ jr_007_5B9A:
     ld [$D077], a                                 ; $5F98: $EA $77 $D0
     ld hl, $405C                                  ; $5F9B: $21 $5C $40
     ld e, $05                                     ; $5F9E: $1E $05
-    call Call_000_07A9                            ; $5FA0: $CD $A9 $07
+    call CallForeign                            ; $5FA0: $CD $A9 $07
     ld a, $01                                     ; $5FA3: $3E $01
     ld [$D071], a                                 ; $5FA5: $EA $71 $D0
-    ld hl, $C71F                                  ; $5FA8: $21 $1F $C7
+    ld hl, wScript_Text                                  ; $5FA8: $21 $1F $C7
     ld a, [$CDC7]                                 ; $5FAB: $FA $C7 $CD
     ld [hl+], a                                   ; $5FAE: $22
     ld a, [$CDC8]                                 ; $5FAF: $FA $C8 $CD
@@ -5527,13 +5523,13 @@ jr_007_5B9A:
     ld [hl+], a                                   ; $5FBC: $22
     ld hl, $405C                                  ; $5FBD: $21 $5C $40
     ld e, $05                                     ; $5FC0: $1E $05
-    call Call_000_07A9                            ; $5FC2: $CD $A9 $07
+    call CallForeign                            ; $5FC2: $CD $A9 $07
     ret                                           ; $5FC5: $C9
 
 
     ld hl, $405C                                  ; $5FC6: $21 $5C $40
     ld e, $05                                     ; $5FC9: $1E $05
-    call Call_000_07A9                            ; $5FCB: $CD $A9 $07
+    call CallForeign                            ; $5FCB: $CD $A9 $07
     call Call_000_0585                            ; $5FCE: $CD $85 $05
     cp $E6                                        ; $5FD1: $FE $E6
     ret nc                                        ; $5FD3: $D0
@@ -5551,7 +5547,7 @@ jr_007_5B9A:
     add hl, bc                                    ; $5FE3: $09
     ld bc, $000D                                  ; $5FE4: $01 $0D $00
     ld de, $C96C                                  ; $5FE7: $11 $6C $C9
-    call Call_000_07D6                            ; $5FEA: $CD $D6 $07
+    call MemMov                            ; $5FEA: $CD $D6 $07
     ld a, $FC                                     ; $5FED: $3E $FC
     ld [de], a                                    ; $5FEF: $12
     ld bc, $FFEB                                  ; $5FF0: $01 $EB $FF
@@ -5669,7 +5665,7 @@ jr_007_6061:
     ld [$CDAC], a                                 ; $6091: $EA $AC $CD
     ld hl, $527F                                  ; $6094: $21 $7F $52
     ld e, $06                                     ; $6097: $1E $06
-    call Call_000_07A9                            ; $6099: $CD $A9 $07
+    call CallForeign                            ; $6099: $CD $A9 $07
     ld a, $FC                                     ; $609C: $3E $FC
     ld [bc], a                                    ; $609E: $02
     pop hl                                        ; $609F: $E1

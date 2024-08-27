@@ -1,7 +1,3 @@
-; Disassembly of "kq.gbc"
-; This file was created with:
-; mgbdis v2.0 - Game Boy ROM disassembler by Matt Currie and contributors.
-; https://github.com/mattcurrie/mgbdis
 
 SECTION "ROM Bank $006", ROMX[$4000], BANK[$6]
 
@@ -5110,7 +5106,7 @@ jr_006_537E:
     add b                                         ; $53EC: $80
     add b                                         ; $53ED: $80
     rst $28                                       ; $53EE: $EF
-    ldh a, [$F1]                                  ; $53EF: $F0 $F1
+    ldh a, [$FFF1]                                  ; $53EF: $F0 $F1
     add h                                         ; $53F1: $84
     add h                                         ; $53F2: $84
     or b                                          ; $53F3: $B0
@@ -6010,7 +6006,7 @@ jr_006_5495:
     add b                                         ; $579D: $80
     add b                                         ; $579E: $80
     add b                                         ; $579F: $80
-    ldh a, [$F1]                                  ; $57A0: $F0 $F1
+    ldh a, [$FFF1]                                  ; $57A0: $F0 $F1
     ld a, [c]                                     ; $57A2: $F2
     di                                            ; $57A3: $F3
     db $F4                                        ; $57A4: $F4
@@ -6431,7 +6427,7 @@ jr_006_5963:
     ld h, h                                       ; $596B: $64
     rst $10                                       ; $596C: $D7
     ld l, b                                       ; $596D: $68
-    ldh a, [$E1]                                  ; $596E: $F0 $E1
+    ldh a, [$FFE1]                                  ; $596E: $F0 $E1
     jr nc, jr_006_5963                            ; $5970: $30 $F1
 
     ret c                                         ; $5972: $D8
@@ -6821,7 +6817,7 @@ Call_006_5A29:
     add c                                         ; $5B2D: $81
     ld h, c                                       ; $5B2E: $61
     or b                                          ; $5B2F: $B0
-    ldh a, [$59]                                  ; $5B30: $F0 $59
+    ldh a, [$FF59]                                  ; $5B30: $F0 $59
     jp c, $D44B                                   ; $5B32: $DA $4B $D4
 
     ld d, [hl]                                    ; $5B35: $56
@@ -7494,7 +7490,7 @@ jr_006_5D92:
     ld [$FF02], sp                                ; $5DCD: $08 $02 $FF
     dec e                                         ; $5DD0: $1D
     cp $2F                                        ; $5DD1: $FE $2F
-    ldh a, [$F0]                                  ; $5DD3: $F0 $F0
+    ldh a, [$FFF0]                                  ; $5DD3: $F0 $F0
     ld c, a                                       ; $5DD5: $4F
     nop                                           ; $5DD6: $00
     ld a, a                                       ; $5DD7: $7F
@@ -8123,7 +8119,7 @@ jr_006_6083:
 
     ld d, h                                       ; $6084: $54
     add sp, $2C                                   ; $6085: $E8 $2C
-    ldh a, [$DA]                                  ; $6087: $F0 $DA
+    ldh a, [$FFDA]                                  ; $6087: $F0 $DA
     db $E4                                        ; $6089: $E4
     ld h, l                                       ; $608A: $65
     sbc d                                         ; $608B: $9A
@@ -8158,10 +8154,10 @@ jr_006_608C:
     and b                                         ; $60A5: $A0
     jr z, jr_006_6078                             ; $60A6: $28 $D0
 
-    ldh a, [$E8]                                  ; $60A8: $F0 $E8
+    ldh a, [$FFE8]                                  ; $60A8: $F0 $E8
     jr jr_006_608C                                ; $60AA: $18 $E0
 
-    ldh a, [$08]                                  ; $60AC: $F0 $08
+    ldh a, [$FF08]                                  ; $60AC: $F0 $08
     ld l, $71                                     ; $60AE: $2E $71
     and b                                         ; $60B0: $A0
     ld a, a                                       ; $60B1: $7F
@@ -8169,7 +8165,7 @@ jr_006_608C:
     db $FC                                        ; $60B3: $FC
     ld b, h                                       ; $60B4: $44
     ld hl, sp-$38                                 ; $60B5: $F8 $C8
-    ldh a, [$94]                                  ; $60B7: $F0 $94
+    ldh a, [$FF94]                                  ; $60B7: $F0 $94
     ldh [$FF28], a                                  ; $60B9: $E0 $28
     ret nz                                        ; $60BB: $C0
 

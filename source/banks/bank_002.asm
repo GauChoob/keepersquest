@@ -1,7 +1,3 @@
-; Disassembly of "kq.gbc"
-; This file was created with:
-; mgbdis v2.0 - Game Boy ROM disassembler by Matt Currie and contributors.
-; https://github.com/mattcurrie/mgbdis
 
 SECTION "ROM Bank $002", ROMX[$4000], BANK[$2]
 
@@ -60,10 +56,10 @@ Call_002_4001:
     ld [hl], b                                    ; $403A: $70
     ld hl, $405D                                  ; $403B: $21 $5D $40
     ld e, $05                                     ; $403E: $1E $05
-    call Call_000_07A9                            ; $4040: $CD $A9 $07
+    call CallForeign                            ; $4040: $CD $A9 $07
     ld hl, $405C                                  ; $4043: $21 $5C $40
     ld e, $05                                     ; $4046: $1E $05
-    call Call_000_07A9                            ; $4048: $CD $A9 $07
+    call CallForeign                            ; $4048: $CD $A9 $07
     ld a, [$D0AF]                                 ; $404B: $FA $AF $D0
     and a                                         ; $404E: $A7
     ret z                                         ; $404F: $C8
@@ -85,7 +81,7 @@ Call_002_4001:
     ld [hl], b                                    ; $4068: $70
     ld hl, $405D                                  ; $4069: $21 $5D $40
     ld e, $05                                     ; $406C: $1E $05
-    call Call_000_07A9                            ; $406E: $CD $A9 $07
+    call CallForeign                            ; $406E: $CD $A9 $07
     ld hl, $D393                                  ; $4071: $21 $93 $D3
     ld a, [hl+]                                   ; $4074: $2A
     ld b, [hl]                                    ; $4075: $46
@@ -105,7 +101,7 @@ Call_002_4001:
     ld [hl], b                                    ; $408B: $70
     ld hl, $5B1B                                  ; $408C: $21 $1B $5B
     ld e, $07                                     ; $408F: $1E $07
-    call Call_000_07A9                            ; $4091: $CD $A9 $07
+    call CallForeign                            ; $4091: $CD $A9 $07
     ld hl, $CDAE                                  ; $4094: $21 $AE $CD
     ld bc, $0005                                  ; $4097: $01 $05 $00
     add hl, bc                                    ; $409A: $09
@@ -120,7 +116,7 @@ Call_002_4001:
     ld [$D0B1], a                                 ; $40AC: $EA $B1 $D0
     ld hl, $405C                                  ; $40AF: $21 $5C $40
     ld e, $05                                     ; $40B2: $1E $05
-    call Call_000_07A9                            ; $40B4: $CD $A9 $07
+    call CallForeign                            ; $40B4: $CD $A9 $07
     ld a, [$D0AF]                                 ; $40B7: $FA $AF $D0
     and a                                         ; $40BA: $A7
     ret z                                         ; $40BB: $C8
@@ -145,7 +141,7 @@ Call_002_4001:
     ld [hl], b                                    ; $40D5: $70
     ld hl, $405D                                  ; $40D6: $21 $5D $40
     ld e, $05                                     ; $40D9: $1E $05
-    call Call_000_07A9                            ; $40DB: $CD $A9 $07
+    call CallForeign                            ; $40DB: $CD $A9 $07
     ld a, [$D392]                                 ; $40DE: $FA $92 $D3
     ld [$D103], a                                 ; $40E1: $EA $03 $D1
     call Call_002_4273                            ; $40E4: $CD $73 $42
@@ -161,7 +157,7 @@ Call_002_4001:
     ld [$CD6D], a                                 ; $40F6: $EA $6D $CD
     ld hl, $415B                                  ; $40F9: $21 $5B $41
     ld e, $04                                     ; $40FC: $1E $04
-    call Call_000_07A9                            ; $40FE: $CD $A9 $07
+    call CallForeign                            ; $40FE: $CD $A9 $07
     ret                                           ; $4101: $C9
 
 
@@ -179,7 +175,7 @@ Call_002_4102:
     ld [hl], b                                    ; $4116: $70
     ld hl, $405D                                  ; $4117: $21 $5D $40
     ld e, $05                                     ; $411A: $1E $05
-    call Call_000_07A9                            ; $411C: $CD $A9 $07
+    call CallForeign                            ; $411C: $CD $A9 $07
     ld a, $09                                     ; $411F: $3E $09
     set 7, a                                      ; $4121: $CB $FF
     ld [$D0B1], a                                 ; $4123: $EA $B1 $D0
@@ -189,7 +185,7 @@ Call_002_4102:
     ld [$D102], a                                 ; $412E: $EA $02 $D1
     ld hl, $405C                                  ; $4131: $21 $5C $40
     ld e, $05                                     ; $4134: $1E $05
-    call Call_000_07A9                            ; $4136: $CD $A9 $07
+    call CallForeign                            ; $4136: $CD $A9 $07
     ld a, [$D0AF]                                 ; $4139: $FA $AF $D0
     and a                                         ; $413C: $A7
     ret z                                         ; $413D: $C8
@@ -262,7 +258,7 @@ jr_002_417B:
     ld [$D0C0], a                                 ; $4198: $EA $C0 $D0
     ld hl, $405C                                  ; $419B: $21 $5C $40
     ld e, $05                                     ; $419E: $1E $05
-    call Call_000_07A9                            ; $41A0: $CD $A9 $07
+    call CallForeign                            ; $41A0: $CD $A9 $07
     ret                                           ; $41A3: $C9
 
 
@@ -293,7 +289,7 @@ jr_002_41C0:
     ld [$D0C1], a                                 ; $41CD: $EA $C1 $D0
     ld hl, $405C                                  ; $41D0: $21 $5C $40
     ld e, $05                                     ; $41D3: $1E $05
-    call Call_000_07A9                            ; $41D5: $CD $A9 $07
+    call CallForeign                            ; $41D5: $CD $A9 $07
     call Call_002_4000                            ; $41D8: $CD $00 $40
     ld hl, $D07B                                  ; $41DB: $21 $7B $D0
     ld a, [hl+]                                   ; $41DE: $2A
@@ -334,7 +330,7 @@ jr_002_41C0:
     ld [hl], b                                    ; $4220: $70
     ld hl, $405D                                  ; $4221: $21 $5D $40
     ld e, $05                                     ; $4224: $1E $05
-    call Call_000_07A9                            ; $4226: $CD $A9 $07
+    call CallForeign                            ; $4226: $CD $A9 $07
     ld hl, $D393                                  ; $4229: $21 $93 $D3
     ld a, [hl+]                                   ; $422C: $2A
     ld b, [hl]                                    ; $422D: $46
@@ -354,7 +350,7 @@ jr_002_41C0:
     ld [hl], b                                    ; $4243: $70
     ld hl, $5B1B                                  ; $4244: $21 $1B $5B
     ld e, $07                                     ; $4247: $1E $07
-    call Call_000_07A9                            ; $4249: $CD $A9 $07
+    call CallForeign                            ; $4249: $CD $A9 $07
     ld hl, $CDAE                                  ; $424C: $21 $AE $CD
     ld bc, $0005                                  ; $424F: $01 $05 $00
     add hl, bc                                    ; $4252: $09
@@ -367,7 +363,7 @@ jr_002_41C0:
     ld [$D102], a                                 ; $425F: $EA $02 $D1
     ld hl, $405C                                  ; $4262: $21 $5C $40
     ld e, $05                                     ; $4265: $1E $05
-    call Call_000_07A9                            ; $4267: $CD $A9 $07
+    call CallForeign                            ; $4267: $CD $A9 $07
     ld a, [$D0AF]                                 ; $426A: $FA $AF $D0
     and a                                         ; $426D: $A7
     ret z                                         ; $426E: $C8

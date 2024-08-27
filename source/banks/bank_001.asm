@@ -1,7 +1,3 @@
-; Disassembly of "kq.gbc"
-; This file was created with:
-; mgbdis v2.0 - Game Boy ROM disassembler by Matt Currie and contributors.
-; https://github.com/mattcurrie/mgbdis
 
 SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
 
@@ -32,10 +28,10 @@ jr_001_4017:
 Call_001_401E:
     ld a, $01                                     ; $401E: $3E $01
     ld [$C188], a                                 ; $4020: $EA $88 $C1
-    ldh a, [$8A]                                  ; $4023: $F0 $8A
+    ldh a, [$FF8A]                                  ; $4023: $F0 $8A
     ld l, a                                       ; $4025: $6F
     ld [$C174], a                                 ; $4026: $EA $74 $C1
-    ldh a, [$8B]                                  ; $4029: $F0 $8B
+    ldh a, [$FF8B]                                  ; $4029: $F0 $8B
     ld h, a                                       ; $402B: $67
     ld [$C175], a                                 ; $402C: $EA $75 $C1
     push hl                                       ; $402F: $E5
@@ -134,9 +130,9 @@ jr_001_4089:
     call CallHL                            ; $409D: $CD $BF $07
     pop hl                                        ; $40A0: $E1
     pop de                                        ; $40A1: $D1
-    ldh a, [$97]                                  ; $40A2: $F0 $97
+    ldh a, [$FF97]                                  ; $40A2: $F0 $97
     ld b, a                                       ; $40A4: $47
-    ldh a, [$98]                                  ; $40A5: $F0 $98
+    ldh a, [$FF98]                                  ; $40A5: $F0 $98
     sub b                                         ; $40A7: $90
     jr nc, jr_001_40C6                            ; $40A8: $30 $1C
 
@@ -224,29 +220,29 @@ jr_001_4101:
 
 
 Call_001_410A:
-    ldh a, [$8A]                                  ; $410A: $F0 $8A
+    ldh a, [$FF8A]                                  ; $410A: $F0 $8A
     ld l, a                                       ; $410C: $6F
-    ldh a, [$8B]                                  ; $410D: $F0 $8B
+    ldh a, [$FF8B]                                  ; $410D: $F0 $8B
     ld h, a                                       ; $410F: $67
-    ldh a, [$8C]                                  ; $4110: $F0 $8C
+    ldh a, [$FF8C]                                  ; $4110: $F0 $8C
     ld [hl+], a                                   ; $4112: $22
-    ldh a, [$8D]                                  ; $4113: $F0 $8D
+    ldh a, [$FF8D]                                  ; $4113: $F0 $8D
     ld [hl+], a                                   ; $4115: $22
-    ldh a, [$8E]                                  ; $4116: $F0 $8E
+    ldh a, [$FF8E]                                  ; $4116: $F0 $8E
     ld [hl+], a                                   ; $4118: $22
-    ldh a, [$8F]                                  ; $4119: $F0 $8F
+    ldh a, [$FF8F]                                  ; $4119: $F0 $8F
     ld [hl+], a                                   ; $411B: $22
-    ldh a, [$90]                                  ; $411C: $F0 $90
+    ldh a, [$FF90]                                  ; $411C: $F0 $90
     ld [hl+], a                                   ; $411E: $22
-    ldh a, [$91]                                  ; $411F: $F0 $91
+    ldh a, [$FF91]                                  ; $411F: $F0 $91
     ld [hl+], a                                   ; $4121: $22
-    ldh a, [$92]                                  ; $4122: $F0 $92
+    ldh a, [$FF92]                                  ; $4122: $F0 $92
     ld [hl+], a                                   ; $4124: $22
-    ldh a, [$93]                                  ; $4125: $F0 $93
+    ldh a, [$FF93]                                  ; $4125: $F0 $93
     ld [hl+], a                                   ; $4127: $22
-    ldh a, [$94]                                  ; $4128: $F0 $94
+    ldh a, [$FF94]                                  ; $4128: $F0 $94
     ld [hl+], a                                   ; $412A: $22
-    ldh a, [$95]                                  ; $412B: $F0 $95
+    ldh a, [$FF95]                                  ; $412B: $F0 $95
     ld [hl+], a                                   ; $412D: $22
     ret                                           ; $412E: $C9
 
@@ -363,7 +359,7 @@ Call_001_412F:
     ld a, $FF                                     ; $41B6: $3E $FF
     ld [$C6D7], a                                 ; $41B8: $EA $D7 $C6
     ld a, [$C6DB]                                 ; $41BB: $FA $DB $C6
-    ld [$C718], a                                 ; $41BE: $EA $18 $C7
+    ld [wScript_System], a                                 ; $41BE: $EA $18 $C7
     ld a, [$C6DC]                                 ; $41C1: $FA $DC $C6
     ld [$C719], a                                 ; $41C4: $EA $19 $C7
     ld a, [$C6DD]                                 ; $41C7: $FA $DD $C6
@@ -376,9 +372,9 @@ Call_001_412F:
 
 
 Jump_001_41D8:
-    ldh a, [$94]                                  ; $41D8: $F0 $94
+    ldh a, [$FF94]                                  ; $41D8: $F0 $94
     ld h, a                                       ; $41DA: $67
-    ldh a, [$93]                                  ; $41DB: $F0 $93
+    ldh a, [$FF93]                                  ; $41DB: $F0 $93
     ld l, a                                       ; $41DD: $6F
     ld a, $05                                     ; $41DE: $3E $05
     ld [wRAMBank], a                                 ; $41E0: $EA $5A $C9
@@ -422,7 +418,7 @@ jr_001_41FE:
     and a                                         ; $4215: $A7
     ret z                                         ; $4216: $C8
 
-    ldh a, [$AF]                                  ; $4217: $F0 $AF
+    ldh a, [$FFAF]                                  ; $4217: $F0 $AF
     and $03                                       ; $4219: $E6 $03
     cp $03                                        ; $421B: $FE $03
     ret nz                                        ; $421D: $C0
@@ -434,7 +430,7 @@ jr_001_41FE:
     and a                                         ; $4224: $A7
     ret z                                         ; $4225: $C8
 
-    ldh a, [$AF]                                  ; $4226: $F0 $AF
+    ldh a, [$FFAF]                                  ; $4226: $F0 $AF
     and $01                                       ; $4228: $E6 $01
     ret nz                                        ; $422A: $C0
 
@@ -1008,7 +1004,7 @@ jr_001_44E3:
     ld [$C748], a                                 ; $44E4: $EA $48 $C7
     pop bc                                        ; $44E7: $C1
     pop de                                        ; $44E8: $D1
-    ldh a, [$AD]                                  ; $44E9: $F0 $AD
+    ldh a, [$FFAD]                                  ; $44E9: $F0 $AD
     dec a                                         ; $44EB: $3D
     jr z, jr_001_4512                             ; $44EC: $28 $24
 
@@ -1029,15 +1025,15 @@ jr_001_44E3:
     and a                                         ; $4509: $A7
     ret nz                                        ; $450A: $C0
 
-    ldh a, [$AC]                                  ; $450B: $F0 $AC
+    ldh a, [$FFAC]                                  ; $450B: $F0 $AC
     ld h, a                                       ; $450D: $67
-    ldh a, [$AB]                                  ; $450E: $F0 $AB
+    ldh a, [$FFAB]                                  ; $450E: $F0 $AB
     ld l, a                                       ; $4510: $6F
     jp hl                                         ; $4511: $E9
 
 
 jr_001_4512:
-    ldh a, [$AE]                                  ; $4512: $F0 $AE
+    ldh a, [$FFAE]                                  ; $4512: $F0 $AE
     ldh [$FFAD], a                                  ; $4514: $E0 $AD
     dec a                                         ; $4516: $3D
     ld l, a                                       ; $4517: $6F
@@ -1113,7 +1109,7 @@ jr_001_4548:
     jp Jump_001_44C4                              ; $4593: $C3 $C4 $44
 
 
-    ldh a, [$AD]                                  ; $4596: $F0 $AD
+    ldh a, [$FFAD]                                  ; $4596: $F0 $AD
     ld e, a                                       ; $4598: $5F
     ld a, [$C882]                                 ; $4599: $FA $82 $C8
     cp e                                          ; $459C: $BB
@@ -1147,7 +1143,7 @@ jr_001_45B3:
     ld [$C866], a                                 ; $45B7: $EA $66 $C8
 
 jr_001_45BA:
-    ldh a, [$AE]                                  ; $45BA: $F0 $AE
+    ldh a, [$FFAE]                                  ; $45BA: $F0 $AE
     ld e, a                                       ; $45BC: $5F
     ld a, [$C883]                                 ; $45BD: $FA $83 $C8
     cp e                                          ; $45C0: $BB
@@ -1276,7 +1272,7 @@ Call_001_4626:
     ld [$C8EA], a                                 ; $4654: $EA $EA $C8
     ld hl, $4ADB                                  ; $4657: $21 $DB $4A
     ld e, $07                                     ; $465A: $1E $07
-    call Call_000_07A9                            ; $465C: $CD $A9 $07
+    call CallForeign                            ; $465C: $CD $A9 $07
     pop bc                                        ; $465F: $C1
     ld a, b                                       ; $4660: $78
     and a                                         ; $4661: $A7
@@ -1319,12 +1315,12 @@ jr_001_4680:
     ld hl, $A018                                  ; $468D: $21 $18 $A0
     ld bc, $0313                                  ; $4690: $01 $13 $03
     ld e, $00                                     ; $4693: $1E $00
-    call Call_000_07E8                            ; $4695: $CD $E8 $07
+    call MemSet                            ; $4695: $CD $E8 $07
     ld hl, $A01B                                  ; $4698: $21 $1B $A0
     ld bc, $000A                                  ; $469B: $01 $0A $00
     ld a, $FF                                     ; $469E: $3E $FF
     ld e, a                                       ; $46A0: $5F
-    call Call_000_07E8                            ; $46A1: $CD $E8 $07
+    call MemSet                            ; $46A1: $CD $E8 $07
     xor a                                         ; $46A4: $AF
     ld [$0000], a                                 ; $46A5: $EA $00 $00
     ret                                           ; $46A8: $C9
@@ -1338,7 +1334,7 @@ jr_001_4680:
     ld hl, $A026                                  ; $46B5: $21 $26 $A0
     ld bc, $0305                                  ; $46B8: $01 $05 $03
     ld e, $00                                     ; $46BB: $1E $00
-    call Call_000_07E8                            ; $46BD: $CD $E8 $07
+    call MemSet                            ; $46BD: $CD $E8 $07
     xor a                                         ; $46C0: $AF
     ld [$0000], a                                 ; $46C1: $EA $00 $00
     ret                                           ; $46C4: $C9
@@ -2064,32 +2060,32 @@ Call_001_4AC0:
 
 Call_001_4AF8:
     call Call_001_412F                            ; $4AF8: $CD $2F $41
-    call Call_000_2B96                            ; $4AFB: $CD $96 $2B
-    call Call_000_0AA7                            ; $4AFE: $CD $A7 $0A
-    call Call_000_2B78                            ; $4B01: $CD $78 $2B
-    call Call_000_2B96                            ; $4B04: $CD $96 $2B
-    call Call_000_0AA7                            ; $4B07: $CD $A7 $0A
-    call Call_000_2B78                            ; $4B0A: $CD $78 $2B
+    call Script_Open                            ; $4AFB: $CD $96 $2B
+    call Script_Play                            ; $4AFE: $CD $A7 $0A
+    call Script_Close                            ; $4B01: $CD $78 $2B
+    call Script_Open                            ; $4B04: $CD $96 $2B
+    call Script_Play                            ; $4B07: $CD $A7 $0A
+    call Script_Close                            ; $4B0A: $CD $78 $2B
     call Call_001_4B43                            ; $4B0D: $CD $43 $4B
     ld hl, $42E8                                  ; $4B10: $21 $E8 $42
     ld e, $05                                     ; $4B13: $1E $05
-    call Call_000_07A9                            ; $4B15: $CD $A9 $07
+    call CallForeign                            ; $4B15: $CD $A9 $07
     call Call_001_410A                            ; $4B18: $CD $0A $41
     ret                                           ; $4B1B: $C9
 
 
 Call_001_4B1C:
     call Call_001_412F                            ; $4B1C: $CD $2F $41
-    call Call_000_2B96                            ; $4B1F: $CD $96 $2B
-    call Call_000_0AA7                            ; $4B22: $CD $A7 $0A
-    call Call_000_2B78                            ; $4B25: $CD $78 $2B
-    call Call_000_2B96                            ; $4B28: $CD $96 $2B
-    call Call_000_0AA7                            ; $4B2B: $CD $A7 $0A
-    call Call_000_2B78                            ; $4B2E: $CD $78 $2B
+    call Script_Open                            ; $4B1F: $CD $96 $2B
+    call Script_Play                            ; $4B22: $CD $A7 $0A
+    call Script_Close                            ; $4B25: $CD $78 $2B
+    call Script_Open                            ; $4B28: $CD $96 $2B
+    call Script_Play                            ; $4B2B: $CD $A7 $0A
+    call Script_Close                            ; $4B2E: $CD $78 $2B
     call Call_001_4B43                            ; $4B31: $CD $43 $4B
     ld hl, $42E8                                  ; $4B34: $21 $E8 $42
     ld e, $05                                     ; $4B37: $1E $05
-    call Call_000_07A9                            ; $4B39: $CD $A9 $07
+    call CallForeign                            ; $4B39: $CD $A9 $07
     call Call_001_4B62                            ; $4B3C: $CD $62 $4B
     call Call_001_410A                            ; $4B3F: $CD $0A $41
     ret                                           ; $4B42: $C9
@@ -2099,7 +2095,7 @@ Call_001_4B43:
     ld a, $05                                     ; $4B43: $3E $05
     ld [wRAMBank], a                                 ; $4B45: $EA $5A $C9
     ldh [rSVBK], a                                ; $4B48: $E0 $70
-    ldh a, [$8C]                                  ; $4B4A: $F0 $8C
+    ldh a, [$FF8C]                                  ; $4B4A: $F0 $8C
     ld e, a                                       ; $4B4C: $5F
     bit 5, e                                      ; $4B4D: $CB $6B
     jr z, jr_001_4B5C                             ; $4B4F: $28 $0B
@@ -2119,7 +2115,7 @@ jr_001_4B5C:
 
 
 Call_001_4B62:
-    ldh a, [$B2]                                  ; $4B62: $F0 $B2
+    ldh a, [$FFB2]                                  ; $4B62: $F0 $B2
     bit 1, a                                      ; $4B64: $CB $4F
     ret z                                         ; $4B66: $C8
 
@@ -2133,7 +2129,7 @@ Call_001_4B62:
 
     ld a, $08                                     ; $4B73: $3E $08
     ld [hl], a                                    ; $4B75: $77
-    ldh a, [$8C]                                  ; $4B76: $F0 $8C
+    ldh a, [$FF8C]                                  ; $4B76: $F0 $8C
     set 5, a                                      ; $4B78: $CB $EF
     ldh [$FF8C], a                                  ; $4B7A: $E0 $8C
     ret                                           ; $4B7C: $C9
@@ -2143,7 +2139,7 @@ Call_001_4B7D:
     ld a, [$C6D2]                                 ; $4B7D: $FA $D2 $C6
     ld e, a                                       ; $4B80: $5F
     bit 7, a                                      ; $4B81: $CB $7F
-    ldh a, [$96]                                  ; $4B83: $F0 $96
+    ldh a, [$FF96]                                  ; $4B83: $F0 $96
     jr z, jr_001_4B8F                             ; $4B85: $28 $08
 
     sub $54                                       ; $4B87: $D6 $54
@@ -2166,7 +2162,7 @@ jr_001_4B9C:
     ld a, [$C6D3]                                 ; $4B9C: $FA $D3 $C6
     ld e, a                                       ; $4B9F: $5F
     bit 7, a                                      ; $4BA0: $CB $7F
-    ldh a, [$97]                                  ; $4BA2: $F0 $97
+    ldh a, [$FF97]                                  ; $4BA2: $F0 $97
     jr z, jr_001_4BAD                             ; $4BA4: $28 $07
 
     sub $58                                       ; $4BA6: $D6 $58
@@ -2211,7 +2207,7 @@ Jump_001_4BBA:
     ld [hl], a                                    ; $4BE2: $77
     ld hl, $4B0F                                  ; $4BE3: $21 $0F $4B
     ld e, $07                                     ; $4BE6: $1E $07
-    call Call_000_07A9                            ; $4BE8: $CD $A9 $07
+    call CallForeign                            ; $4BE8: $CD $A9 $07
     jp Jump_001_6354                              ; $4BEB: $C3 $54 $63
 
 
@@ -2238,7 +2234,7 @@ Jump_001_4C08:
     ret z                                         ; $4C10: $C8
 
     pop af                                        ; $4C11: $F1
-    ldh a, [$B1]                                  ; $4C12: $F0 $B1
+    ldh a, [$FFB1]                                  ; $4C12: $F0 $B1
     set 2, a                                      ; $4C14: $CB $D7
     ldh [$FFB1], a                                  ; $4C16: $E0 $B1
     ld a, [hl]                                    ; $4C18: $7E
@@ -2290,7 +2286,7 @@ Jump_001_4C59:
     ret z                                         ; $4C61: $C8
 
     pop af                                        ; $4C62: $F1
-    ldh a, [$B1]                                  ; $4C63: $F0 $B1
+    ldh a, [$FFB1]                                  ; $4C63: $F0 $B1
     set 2, a                                      ; $4C65: $CB $D7
     ldh [$FFB1], a                                  ; $4C67: $E0 $B1
     ld a, [hl]                                    ; $4C69: $7E
@@ -2342,7 +2338,7 @@ Jump_001_4CAA:
     ret z                                         ; $4CB2: $C8
 
     pop af                                        ; $4CB3: $F1
-    ldh a, [$B1]                                  ; $4CB4: $F0 $B1
+    ldh a, [$FFB1]                                  ; $4CB4: $F0 $B1
     set 2, a                                      ; $4CB6: $CB $D7
     ldh [$FFB1], a                                  ; $4CB8: $E0 $B1
     ld a, [hl]                                    ; $4CBA: $7E
@@ -2394,7 +2390,7 @@ Jump_001_4CFB:
     ret z                                         ; $4D03: $C8
 
     pop af                                        ; $4D04: $F1
-    ldh a, [$B1]                                  ; $4D05: $F0 $B1
+    ldh a, [$FFB1]                                  ; $4D05: $F0 $B1
     set 2, a                                      ; $4D07: $CB $D7
     ldh [$FFB1], a                                  ; $4D09: $E0 $B1
     ld a, [hl]                                    ; $4D0B: $7E
@@ -2439,9 +2435,9 @@ jr_001_4D3F:
 
 
 Call_001_4D4C:
-    ldh a, [$9D]                                  ; $4D4C: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4D4C: $F0 $9D
     ld b, a                                       ; $4D4E: $47
-    ldh a, [$9C]                                  ; $4D4F: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4D4F: $F0 $9C
     inc a                                         ; $4D51: $3C
     ld c, a                                       ; $4D52: $4F
     ld a, [$C86A]                                 ; $4D53: $FA $6A $C8
@@ -2459,10 +2455,10 @@ Call_001_4D4C:
 
 
 Call_001_4D6A:
-    ldh a, [$9D]                                  ; $4D6A: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4D6A: $F0 $9D
     dec a                                         ; $4D6C: $3D
     ld b, a                                       ; $4D6D: $47
-    ldh a, [$9C]                                  ; $4D6E: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4D6E: $F0 $9C
     ld c, a                                       ; $4D70: $4F
     ld de, $FFFF                                  ; $4D71: $11 $FF $FF
     ld a, [$FF9F]                                 ; $4D74: $FA $9F $FF
@@ -2477,10 +2473,10 @@ Call_001_4D6A:
 
 
 Call_001_4D85:
-    ldh a, [$9D]                                  ; $4D85: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4D85: $F0 $9D
     inc a                                         ; $4D87: $3C
     ld b, a                                       ; $4D88: $47
-    ldh a, [$9C]                                  ; $4D89: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4D89: $F0 $9C
     ld c, a                                       ; $4D8B: $4F
     ld de, $0001                                  ; $4D8C: $11 $01 $00
     ld a, [$FF9F]                                 ; $4D8F: $FA $9F $FF
@@ -2495,9 +2491,9 @@ Call_001_4D85:
 
 
 Call_001_4DA0:
-    ldh a, [$9D]                                  ; $4DA0: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4DA0: $F0 $9D
     ld b, a                                       ; $4DA2: $47
-    ldh a, [$9C]                                  ; $4DA3: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4DA3: $F0 $9C
     dec a                                         ; $4DA5: $3D
     ld c, a                                       ; $4DA6: $4F
     ld a, [$C86A]                                 ; $4DA7: $FA $6A $C8
@@ -2517,9 +2513,9 @@ Call_001_4DA0:
 
 
 Call_001_4DC0:
-    ldh a, [$91]                                  ; $4DC0: $F0 $91
+    ldh a, [$FF91]                                  ; $4DC0: $F0 $91
     ld b, a                                       ; $4DC2: $47
-    ldh a, [$92]                                  ; $4DC3: $F0 $92
+    ldh a, [$FF92]                                  ; $4DC3: $F0 $92
     inc a                                         ; $4DC5: $3C
     ld c, a                                       ; $4DC6: $4F
     ld a, [$C86A]                                 ; $4DC7: $FA $6A $C8
@@ -2537,10 +2533,10 @@ Call_001_4DC0:
 
 
 Call_001_4DDE:
-    ldh a, [$91]                                  ; $4DDE: $F0 $91
+    ldh a, [$FF91]                                  ; $4DDE: $F0 $91
     dec a                                         ; $4DE0: $3D
     ld b, a                                       ; $4DE1: $47
-    ldh a, [$92]                                  ; $4DE2: $F0 $92
+    ldh a, [$FF92]                                  ; $4DE2: $F0 $92
     ld c, a                                       ; $4DE4: $4F
     ld de, $FFFF                                  ; $4DE5: $11 $FF $FF
     ld a, [$FF94]                                 ; $4DE8: $FA $94 $FF
@@ -2555,10 +2551,10 @@ Call_001_4DDE:
 
 
 Call_001_4DF9:
-    ldh a, [$91]                                  ; $4DF9: $F0 $91
+    ldh a, [$FF91]                                  ; $4DF9: $F0 $91
     inc a                                         ; $4DFB: $3C
     ld b, a                                       ; $4DFC: $47
-    ldh a, [$92]                                  ; $4DFD: $F0 $92
+    ldh a, [$FF92]                                  ; $4DFD: $F0 $92
     ld c, a                                       ; $4DFF: $4F
     ld de, $0001                                  ; $4E00: $11 $01 $00
     ld a, [$FF94]                                 ; $4E03: $FA $94 $FF
@@ -2573,9 +2569,9 @@ Call_001_4DF9:
 
 
 Call_001_4E14:
-    ldh a, [$91]                                  ; $4E14: $F0 $91
+    ldh a, [$FF91]                                  ; $4E14: $F0 $91
     ld b, a                                       ; $4E16: $47
-    ldh a, [$92]                                  ; $4E17: $F0 $92
+    ldh a, [$FF92]                                  ; $4E17: $F0 $92
     dec a                                         ; $4E19: $3D
     ld c, a                                       ; $4E1A: $4F
     ld a, [$C86A]                                 ; $4E1B: $FA $6A $C8
@@ -2629,7 +2625,7 @@ Jump_001_4E3D:
     ld [hl], c                                    ; $4E6D: $71
     ld hl, $4B0F                                  ; $4E6E: $21 $0F $4B
     ld e, $07                                     ; $4E71: $1E $07
-    call Call_000_07A9                            ; $4E73: $CD $A9 $07
+    call CallForeign                            ; $4E73: $CD $A9 $07
     pop bc                                        ; $4E76: $C1
     pop de                                        ; $4E77: $D1
     pop hl                                        ; $4E78: $E1
@@ -2657,7 +2653,7 @@ Jump_001_4E3D:
     ld [hl], a                                    ; $4EA4: $77
     ld hl, $4B0F                                  ; $4EA5: $21 $0F $4B
     ld e, $07                                     ; $4EA8: $1E $07
-    call Call_000_07A9                            ; $4EAA: $CD $A9 $07
+    call CallForeign                            ; $4EAA: $CD $A9 $07
     ld hl, $FFB1                                  ; $4EAD: $21 $B1 $FF
     set 3, [hl]                                   ; $4EB0: $CB $DE
     jp Jump_001_634D                              ; $4EB2: $C3 $4D $63
@@ -2666,7 +2662,7 @@ Jump_001_4E3D:
     call Call_001_6393                            ; $4EB5: $CD $93 $63
     ld hl, $4372                                  ; $4EB8: $21 $72 $43
     ld e, $05                                     ; $4EBB: $1E $05
-    call Call_000_07A9                            ; $4EBD: $CD $A9 $07
+    call CallForeign                            ; $4EBD: $CD $A9 $07
     call Call_001_4B7D                            ; $4EC0: $CD $7D $4B
     ld a, $34                                     ; $4EC3: $3E $34
     ldh [$FF8D], a                                  ; $4EC5: $E0 $8D
@@ -2693,9 +2689,9 @@ Jump_001_4E3D:
     cp $81                                        ; $4EEC: $FE $81
     jp nz, Jump_001_4E34                          ; $4EEE: $C2 $34 $4E
 
-    ldh a, [$9D]                                  ; $4EF1: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4EF1: $F0 $9D
     ld d, a                                       ; $4EF3: $57
-    ldh a, [$9C]                                  ; $4EF4: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4EF4: $F0 $9C
     inc a                                         ; $4EF6: $3C
     ld e, a                                       ; $4EF7: $5F
     push de                                       ; $4EF8: $D5
@@ -2706,7 +2702,7 @@ Jump_001_4E3D:
     call Call_001_6393                            ; $4EFD: $CD $93 $63
     ld hl, $4372                                  ; $4F00: $21 $72 $43
     ld e, $05                                     ; $4F03: $1E $05
-    call Call_000_07A9                            ; $4F05: $CD $A9 $07
+    call CallForeign                            ; $4F05: $CD $A9 $07
     call Call_001_4B7D                            ; $4F08: $CD $7D $4B
     ld a, $34                                     ; $4F0B: $3E $34
     ldh [$FF8D], a                                  ; $4F0D: $E0 $8D
@@ -2734,10 +2730,10 @@ Jump_001_4E3D:
     cp $81                                        ; $4F34: $FE $81
     jp nz, Jump_001_4E34                          ; $4F36: $C2 $34 $4E
 
-    ldh a, [$9D]                                  ; $4F39: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4F39: $F0 $9D
     dec a                                         ; $4F3B: $3D
     ld d, a                                       ; $4F3C: $57
-    ldh a, [$9C]                                  ; $4F3D: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4F3D: $F0 $9C
     ld e, a                                       ; $4F3F: $5F
     push de                                       ; $4F40: $D5
     dec d                                         ; $4F41: $15
@@ -2747,7 +2743,7 @@ Jump_001_4E3D:
     call Call_001_6393                            ; $4F45: $CD $93 $63
     ld hl, $4372                                  ; $4F48: $21 $72 $43
     ld e, $05                                     ; $4F4B: $1E $05
-    call Call_000_07A9                            ; $4F4D: $CD $A9 $07
+    call CallForeign                            ; $4F4D: $CD $A9 $07
     call Call_001_4B7D                            ; $4F50: $CD $7D $4B
     ld a, $34                                     ; $4F53: $3E $34
     ldh [$FF8D], a                                  ; $4F55: $E0 $8D
@@ -2775,10 +2771,10 @@ Jump_001_4E3D:
     cp $81                                        ; $4F7C: $FE $81
     jp nz, Jump_001_4E34                          ; $4F7E: $C2 $34 $4E
 
-    ldh a, [$9D]                                  ; $4F81: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4F81: $F0 $9D
     inc a                                         ; $4F83: $3C
     ld d, a                                       ; $4F84: $57
-    ldh a, [$9C]                                  ; $4F85: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4F85: $F0 $9C
     ld e, a                                       ; $4F87: $5F
     push de                                       ; $4F88: $D5
     inc d                                         ; $4F89: $14
@@ -2788,7 +2784,7 @@ Jump_001_4E3D:
     call Call_001_6393                            ; $4F8D: $CD $93 $63
     ld hl, $4372                                  ; $4F90: $21 $72 $43
     ld e, $05                                     ; $4F93: $1E $05
-    call Call_000_07A9                            ; $4F95: $CD $A9 $07
+    call CallForeign                            ; $4F95: $CD $A9 $07
     call Call_001_4B7D                            ; $4F98: $CD $7D $4B
     ld a, $34                                     ; $4F9B: $3E $34
     ldh [$FF8D], a                                  ; $4F9D: $E0 $8D
@@ -2821,9 +2817,9 @@ Jump_001_4E3D:
     cp $81                                        ; $4FCC: $FE $81
     jp nz, Jump_001_4E34                          ; $4FCE: $C2 $34 $4E
 
-    ldh a, [$9D]                                  ; $4FD1: $F0 $9D
+    ldh a, [$FF9D]                                  ; $4FD1: $F0 $9D
     ld d, a                                       ; $4FD3: $57
-    ldh a, [$9C]                                  ; $4FD4: $F0 $9C
+    ldh a, [$FF9C]                                  ; $4FD4: $F0 $9C
     dec a                                         ; $4FD6: $3D
     ld e, a                                       ; $4FD7: $5F
     push de                                       ; $4FD8: $D5
@@ -2876,7 +2872,7 @@ Jump_001_4FEF:
     call Call_001_64A0                            ; $501C: $CD $A0 $64
     ld hl, $4372                                  ; $501F: $21 $72 $43
     ld e, $05                                     ; $5022: $1E $05
-    call Call_000_07A9                            ; $5024: $CD $A9 $07
+    call CallForeign                            ; $5024: $CD $A9 $07
     call Call_001_422E                            ; $5027: $CD $2E $42
     call Call_001_4B7D                            ; $502A: $CD $7D $4B
     jp Jump_001_634D                              ; $502D: $C3 $4D $63
@@ -2941,7 +2937,7 @@ Jump_001_5052:
 
     ld hl, $4372                                  ; $5097: $21 $72 $43
     ld e, $05                                     ; $509A: $1E $05
-    call Call_000_07A9                            ; $509C: $CD $A9 $07
+    call CallForeign                            ; $509C: $CD $A9 $07
     call Call_001_422E                            ; $509F: $CD $2E $42
     call Call_001_4B7D                            ; $50A2: $CD $7D $4B
     ld a, [$C6D3]                                 ; $50A5: $FA $D3 $C6
@@ -3034,7 +3030,7 @@ Jump_001_50FC:
 
     ld hl, $4372                                  ; $5141: $21 $72 $43
     ld e, $05                                     ; $5144: $1E $05
-    call Call_000_07A9                            ; $5146: $CD $A9 $07
+    call CallForeign                            ; $5146: $CD $A9 $07
     call Call_001_422E                            ; $5149: $CD $2E $42
     call Call_001_4B7D                            ; $514C: $CD $7D $4B
     ld a, [$C6D2]                                 ; $514F: $FA $D2 $C6
@@ -3127,7 +3123,7 @@ Jump_001_51A6:
 
     ld hl, $4372                                  ; $51EB: $21 $72 $43
     ld e, $05                                     ; $51EE: $1E $05
-    call Call_000_07A9                            ; $51F0: $CD $A9 $07
+    call CallForeign                            ; $51F0: $CD $A9 $07
     call Call_001_422E                            ; $51F3: $CD $2E $42
     call Call_001_4B7D                            ; $51F6: $CD $7D $4B
     ld a, [$C6D2]                                 ; $51F9: $FA $D2 $C6
@@ -3220,7 +3216,7 @@ Jump_001_5250:
 
     ld hl, $4372                                  ; $5295: $21 $72 $43
     ld e, $05                                     ; $5298: $1E $05
-    call Call_000_07A9                            ; $529A: $CD $A9 $07
+    call CallForeign                            ; $529A: $CD $A9 $07
     call Call_001_422E                            ; $529D: $CD $2E $42
     call Call_001_4B7D                            ; $52A0: $CD $7D $4B
     ld a, [$C6D3]                                 ; $52A3: $FA $D3 $C6
@@ -3489,7 +3485,7 @@ jr_001_540F:
 
     ld hl, $4372                                  ; $5417: $21 $72 $43
     ld e, $05                                     ; $541A: $1E $05
-    call Call_000_07A9                            ; $541C: $CD $A9 $07
+    call CallForeign                            ; $541C: $CD $A9 $07
     ld a, [$C9C6]                                 ; $541F: $FA $C6 $C9
     cp $01                                        ; $5422: $FE $01
     jr nz, jr_001_544A                            ; $5424: $20 $24
@@ -3508,7 +3504,7 @@ jr_001_540F:
     ld [$C9C6], a                                 ; $543D: $EA $C6 $C9
     ld hl, $4372                                  ; $5440: $21 $72 $43
     ld e, $05                                     ; $5443: $1E $05
-    call Call_000_07A9                            ; $5445: $CD $A9 $07
+    call CallForeign                            ; $5445: $CD $A9 $07
     jr jr_001_544D                                ; $5448: $18 $03
 
 jr_001_544A:
@@ -3564,7 +3560,7 @@ Jump_001_5468:
 
 
 jr_001_549E:
-    ldh a, [$AF]                                  ; $549E: $F0 $AF
+    ldh a, [$FFAF]                                  ; $549E: $F0 $AF
     and $01                                       ; $54A0: $E6 $01
     jp z, Jump_001_54C4                           ; $54A2: $CA $C4 $54
 
@@ -3609,7 +3605,7 @@ jr_001_54D6:
 jr_001_54DD:
     ld hl, $4372                                  ; $54DD: $21 $72 $43
     ld e, $05                                     ; $54E0: $1E $05
-    call Call_000_07A9                            ; $54E2: $CD $A9 $07
+    call CallForeign                            ; $54E2: $CD $A9 $07
     ld a, [$C9C6]                                 ; $54E5: $FA $C6 $C9
     cp $01                                        ; $54E8: $FE $01
     jr nz, jr_001_5510                            ; $54EA: $20 $24
@@ -3628,7 +3624,7 @@ jr_001_54DD:
     ld [$C9C6], a                                 ; $5503: $EA $C6 $C9
     ld hl, $4372                                  ; $5506: $21 $72 $43
     ld e, $05                                     ; $5509: $1E $05
-    call Call_000_07A9                            ; $550B: $CD $A9 $07
+    call CallForeign                            ; $550B: $CD $A9 $07
     jr jr_001_5513                                ; $550E: $18 $03
 
 jr_001_5510:
@@ -3684,7 +3680,7 @@ Jump_001_552E:
 
 
 jr_001_5564:
-    ldh a, [$AF]                                  ; $5564: $F0 $AF
+    ldh a, [$FFAF]                                  ; $5564: $F0 $AF
     and $01                                       ; $5566: $E6 $01
     jp z, Jump_001_558A                           ; $5568: $CA $8A $55
 
@@ -3729,7 +3725,7 @@ jr_001_559C:
 jr_001_55A3:
     ld hl, $4372                                  ; $55A3: $21 $72 $43
     ld e, $05                                     ; $55A6: $1E $05
-    call Call_000_07A9                            ; $55A8: $CD $A9 $07
+    call CallForeign                            ; $55A8: $CD $A9 $07
     ld a, [$C9C6]                                 ; $55AB: $FA $C6 $C9
     cp $01                                        ; $55AE: $FE $01
     jr nz, jr_001_55D6                            ; $55B0: $20 $24
@@ -3748,7 +3744,7 @@ jr_001_55A3:
     ld [$C9C6], a                                 ; $55C9: $EA $C6 $C9
     ld hl, $4372                                  ; $55CC: $21 $72 $43
     ld e, $05                                     ; $55CF: $1E $05
-    call Call_000_07A9                            ; $55D1: $CD $A9 $07
+    call CallForeign                            ; $55D1: $CD $A9 $07
     jr jr_001_55D9                                ; $55D4: $18 $03
 
 jr_001_55D6:
@@ -3824,7 +3820,7 @@ jr_001_5638:
 
     ld hl, $4372                                  ; $5640: $21 $72 $43
     ld e, $05                                     ; $5643: $1E $05
-    call Call_000_07A9                            ; $5645: $CD $A9 $07
+    call CallForeign                            ; $5645: $CD $A9 $07
     ld a, [$C9C6]                                 ; $5648: $FA $C6 $C9
     cp $01                                        ; $564B: $FE $01
     jr nz, jr_001_5673                            ; $564D: $20 $24
@@ -3843,7 +3839,7 @@ jr_001_5638:
     ld [$C9C6], a                                 ; $5666: $EA $C6 $C9
     ld hl, $4372                                  ; $5669: $21 $72 $43
     ld e, $05                                     ; $566C: $1E $05
-    call Call_000_07A9                            ; $566E: $CD $A9 $07
+    call CallForeign                            ; $566E: $CD $A9 $07
     jr jr_001_5676                                ; $5671: $18 $03
 
 jr_001_5673:
@@ -3907,7 +3903,7 @@ jr_001_56C7:
 
     ld hl, $4372                                  ; $56D1: $21 $72 $43
     ld e, $05                                     ; $56D4: $1E $05
-    call Call_000_07A9                            ; $56D6: $CD $A9 $07
+    call CallForeign                            ; $56D6: $CD $A9 $07
     ld a, [$C9C6]                                 ; $56D9: $FA $C6 $C9
     cp $01                                        ; $56DC: $FE $01
     jr nz, jr_001_5704                            ; $56DE: $20 $24
@@ -3926,7 +3922,7 @@ jr_001_56C7:
     ld [$C9C6], a                                 ; $56F7: $EA $C6 $C9
     ld hl, $4372                                  ; $56FA: $21 $72 $43
     ld e, $05                                     ; $56FD: $1E $05
-    call Call_000_07A9                            ; $56FF: $CD $A9 $07
+    call CallForeign                            ; $56FF: $CD $A9 $07
     jr jr_001_5707                                ; $5702: $18 $03
 
 jr_001_5704:
@@ -4018,7 +4014,7 @@ jr_001_5781:
 jr_001_5789:
     ld hl, $4372                                  ; $5789: $21 $72 $43
     ld e, $05                                     ; $578C: $1E $05
-    call Call_000_07A9                            ; $578E: $CD $A9 $07
+    call CallForeign                            ; $578E: $CD $A9 $07
     ld a, [$C9C6]                                 ; $5791: $FA $C6 $C9
     cp $01                                        ; $5794: $FE $01
     jr nz, jr_001_57BC                            ; $5796: $20 $24
@@ -4037,7 +4033,7 @@ jr_001_5789:
     ld [$C9C6], a                                 ; $57AF: $EA $C6 $C9
     ld hl, $4372                                  ; $57B2: $21 $72 $43
     ld e, $05                                     ; $57B5: $1E $05
-    call Call_000_07A9                            ; $57B7: $CD $A9 $07
+    call CallForeign                            ; $57B7: $CD $A9 $07
     jr jr_001_57BF                                ; $57BA: $18 $03
 
 jr_001_57BC:
@@ -4129,7 +4125,7 @@ jr_001_5839:
 jr_001_5841:
     ld hl, $4372                                  ; $5841: $21 $72 $43
     ld e, $05                                     ; $5844: $1E $05
-    call Call_000_07A9                            ; $5846: $CD $A9 $07
+    call CallForeign                            ; $5846: $CD $A9 $07
     ld a, [$C9C6]                                 ; $5849: $FA $C6 $C9
     cp $01                                        ; $584C: $FE $01
     jr nz, jr_001_5874                            ; $584E: $20 $24
@@ -4148,7 +4144,7 @@ jr_001_5841:
     ld [$C9C6], a                                 ; $5867: $EA $C6 $C9
     ld hl, $4372                                  ; $586A: $21 $72 $43
     ld e, $05                                     ; $586D: $1E $05
-    call Call_000_07A9                            ; $586F: $CD $A9 $07
+    call CallForeign                            ; $586F: $CD $A9 $07
     jr jr_001_5877                                ; $5872: $18 $03
 
 jr_001_5874:
@@ -4211,7 +4207,7 @@ jr_001_58CA:
 
     ld hl, $4372                                  ; $58D4: $21 $72 $43
     ld e, $05                                     ; $58D7: $1E $05
-    call Call_000_07A9                            ; $58D9: $CD $A9 $07
+    call CallForeign                            ; $58D9: $CD $A9 $07
     ld a, [$C9C6]                                 ; $58DC: $FA $C6 $C9
     cp $01                                        ; $58DF: $FE $01
     jr nz, jr_001_5907                            ; $58E1: $20 $24
@@ -4230,7 +4226,7 @@ jr_001_58CA:
     ld [$C9C6], a                                 ; $58FA: $EA $C6 $C9
     ld hl, $4372                                  ; $58FD: $21 $72 $43
     ld e, $05                                     ; $5900: $1E $05
-    call Call_000_07A9                            ; $5902: $CD $A9 $07
+    call CallForeign                            ; $5902: $CD $A9 $07
     jr jr_001_590A                                ; $5905: $18 $03
 
 jr_001_5907:
@@ -4614,7 +4610,7 @@ Jump_001_5BAD:
     call Call_001_64A0                            ; $5BDD: $CD $A0 $64
     ld hl, $4372                                  ; $5BE0: $21 $72 $43
     ld e, $05                                     ; $5BE3: $1E $05
-    call Call_000_07A9                            ; $5BE5: $CD $A9 $07
+    call CallForeign                            ; $5BE5: $CD $A9 $07
     call Call_001_422E                            ; $5BE8: $CD $2E $42
     call Call_001_4B7D                            ; $5BEB: $CD $7D $4B
     call Call_001_5E95                            ; $5BEE: $CD $95 $5E
@@ -4742,7 +4738,7 @@ jr_001_5CA8:
     call Call_001_64A0                            ; $5CA8: $CD $A0 $64
     ld hl, $4372                                  ; $5CAB: $21 $72 $43
     ld e, $05                                     ; $5CAE: $1E $05
-    call Call_000_07A9                            ; $5CB0: $CD $A9 $07
+    call CallForeign                            ; $5CB0: $CD $A9 $07
     call Call_001_422E                            ; $5CB3: $CD $2E $42
     call Call_001_4B7D                            ; $5CB6: $CD $7D $4B
     call Call_001_5E95                            ; $5CB9: $CD $95 $5E
@@ -4802,7 +4798,7 @@ Jump_001_5CE6:
 
 
 jr_001_5D1F:
-    ldh a, [$AF]                                  ; $5D1F: $F0 $AF
+    ldh a, [$FFAF]                                  ; $5D1F: $F0 $AF
     and $01                                       ; $5D21: $E6 $01
     jp z, Jump_001_5D3D                           ; $5D23: $CA $3D $5D
 
@@ -4826,7 +4822,7 @@ jr_001_5D3D:
     call Call_001_64A0                            ; $5D3D: $CD $A0 $64
     ld hl, $4372                                  ; $5D40: $21 $72 $43
     ld e, $05                                     ; $5D43: $1E $05
-    call Call_000_07A9                            ; $5D45: $CD $A9 $07
+    call CallForeign                            ; $5D45: $CD $A9 $07
     call Call_001_422E                            ; $5D48: $CD $2E $42
     call Call_001_4B7D                            ; $5D4B: $CD $7D $4B
     call Call_001_5E95                            ; $5D4E: $CD $95 $5E
@@ -4886,7 +4882,7 @@ Jump_001_5D7B:
 
 
 jr_001_5DB4:
-    ldh a, [$AF]                                  ; $5DB4: $F0 $AF
+    ldh a, [$FFAF]                                  ; $5DB4: $F0 $AF
     and $01                                       ; $5DB6: $E6 $01
     jp z, Jump_001_5DD2                           ; $5DB8: $CA $D2 $5D
 
@@ -4910,7 +4906,7 @@ jr_001_5DD2:
     call Call_001_64A0                            ; $5DD2: $CD $A0 $64
     ld hl, $4372                                  ; $5DD5: $21 $72 $43
     ld e, $05                                     ; $5DD8: $1E $05
-    call Call_000_07A9                            ; $5DDA: $CD $A9 $07
+    call CallForeign                            ; $5DDA: $CD $A9 $07
     call Call_001_422E                            ; $5DDD: $CD $2E $42
     call Call_001_4B7D                            ; $5DE0: $CD $7D $4B
     call Call_001_5E95                            ; $5DE3: $CD $95 $5E
@@ -4987,7 +4983,7 @@ jr_001_5E57:
     call Call_001_64A0                            ; $5E57: $CD $A0 $64
     ld hl, $4372                                  ; $5E5A: $21 $72 $43
     ld e, $05                                     ; $5E5D: $1E $05
-    call Call_000_07A9                            ; $5E5F: $CD $A9 $07
+    call CallForeign                            ; $5E5F: $CD $A9 $07
     call Call_001_422E                            ; $5E62: $CD $2E $42
     call Call_001_4B7D                            ; $5E65: $CD $7D $4B
     call Call_001_5E95                            ; $5E68: $CD $95 $5E
@@ -5172,7 +5168,7 @@ Jump_001_5F65:
 
 
     call Call_001_6393                            ; $5F84: $CD $93 $63
-    ldh a, [$AF]                                  ; $5F87: $F0 $AF
+    ldh a, [$FFAF]                                  ; $5F87: $F0 $AF
     and $01                                       ; $5F89: $E6 $01
     jr z, jr_001_5FAB                             ; $5F8B: $28 $1E
 
@@ -5204,7 +5200,7 @@ jr_001_5FA6:
 jr_001_5FAB:
     ld hl, $4372                                  ; $5FAB: $21 $72 $43
     ld e, $05                                     ; $5FAE: $1E $05
-    call Call_000_07A9                            ; $5FB0: $CD $A9 $07
+    call CallForeign                            ; $5FB0: $CD $A9 $07
     call Call_001_422E                            ; $5FB3: $CD $2E $42
     call Call_001_4B7D                            ; $5FB6: $CD $7D $4B
     call Call_001_4C08                            ; $5FB9: $CD $08 $4C
@@ -5230,7 +5226,7 @@ Jump_001_5FBF:
 
 
     call Call_001_6393                            ; $5FDE: $CD $93 $63
-    ldh a, [$AF]                                  ; $5FE1: $F0 $AF
+    ldh a, [$FFAF]                                  ; $5FE1: $F0 $AF
     and $01                                       ; $5FE3: $E6 $01
     jr z, jr_001_600A                             ; $5FE5: $28 $23
 
@@ -5264,7 +5260,7 @@ jr_001_6001:
 jr_001_600A:
     ld hl, $4372                                  ; $600A: $21 $72 $43
     ld e, $05                                     ; $600D: $1E $05
-    call Call_000_07A9                            ; $600F: $CD $A9 $07
+    call CallForeign                            ; $600F: $CD $A9 $07
     call Call_001_422E                            ; $6012: $CD $2E $42
     call Call_001_4B7D                            ; $6015: $CD $7D $4B
     call Call_001_4C59                            ; $6018: $CD $59 $4C
@@ -5290,7 +5286,7 @@ Jump_001_601E:
 
 
     call Call_001_6393                            ; $603D: $CD $93 $63
-    ldh a, [$AF]                                  ; $6040: $F0 $AF
+    ldh a, [$FFAF]                                  ; $6040: $F0 $AF
     and $01                                       ; $6042: $E6 $01
     jr z, jr_001_6069                             ; $6044: $28 $23
 
@@ -5324,7 +5320,7 @@ jr_001_6060:
 jr_001_6069:
     ld hl, $4372                                  ; $6069: $21 $72 $43
     ld e, $05                                     ; $606C: $1E $05
-    call Call_000_07A9                            ; $606E: $CD $A9 $07
+    call CallForeign                            ; $606E: $CD $A9 $07
     call Call_001_422E                            ; $6071: $CD $2E $42
     call Call_001_4B7D                            ; $6074: $CD $7D $4B
     call Call_001_4CAA                            ; $6077: $CD $AA $4C
@@ -5350,7 +5346,7 @@ Jump_001_607D:
 
 
     call Call_001_6393                            ; $609C: $CD $93 $63
-    ldh a, [$AF]                                  ; $609F: $F0 $AF
+    ldh a, [$FFAF]                                  ; $609F: $F0 $AF
     and $01                                       ; $60A1: $E6 $01
     jr z, jr_001_60C2                             ; $60A3: $28 $1D
 
@@ -5382,7 +5378,7 @@ jr_001_60BD:
 jr_001_60C2:
     ld hl, $4372                                  ; $60C2: $21 $72 $43
     ld e, $05                                     ; $60C5: $1E $05
-    call Call_000_07A9                            ; $60C7: $CD $A9 $07
+    call CallForeign                            ; $60C7: $CD $A9 $07
     call Call_001_422E                            ; $60CA: $CD $2E $42
     call Call_001_4B7D                            ; $60CD: $CD $7D $4B
     call Call_001_4CFB                            ; $60D0: $CD $FB $4C
@@ -5458,7 +5454,7 @@ Jump_001_6130:
     call Call_001_64A0                            ; $614A: $CD $A0 $64
     ld hl, $4372                                  ; $614D: $21 $72 $43
     ld e, $05                                     ; $6150: $1E $05
-    call Call_000_07A9                            ; $6152: $CD $A9 $07
+    call CallForeign                            ; $6152: $CD $A9 $07
     call Call_001_422E                            ; $6155: $CD $2E $42
     call Call_001_4B7D                            ; $6158: $CD $7D $4B
     ld a, [$C9CD]                                 ; $615B: $FA $CD $C9
@@ -5468,7 +5464,7 @@ Jump_001_6130:
 
 
 Call_001_6166:
-    ldh a, [$8C]                                  ; $6166: $F0 $8C
+    ldh a, [$FF8C]                                  ; $6166: $F0 $8C
     and $03                                       ; $6168: $E6 $03
     cp $00                                        ; $616A: $FE $00
     jr z, jr_001_617A                             ; $616C: $28 $0C
@@ -5551,7 +5547,7 @@ jr_001_61D0:
     call Call_001_64A0                            ; $61D0: $CD $A0 $64
     ld hl, $4372                                  ; $61D3: $21 $72 $43
     ld e, $05                                     ; $61D6: $1E $05
-    call Call_000_07A9                            ; $61D8: $CD $A9 $07
+    call CallForeign                            ; $61D8: $CD $A9 $07
     call Call_001_422E                            ; $61DB: $CD $2E $42
     call Call_001_4B7D                            ; $61DE: $CD $7D $4B
     ld a, [$C6D3]                                 ; $61E1: $FA $D3 $C6
@@ -5593,7 +5589,7 @@ Jump_001_61EB:
 
 
 jr_001_6225:
-    ldh a, [$AF]                                  ; $6225: $F0 $AF
+    ldh a, [$FFAF]                                  ; $6225: $F0 $AF
     and $01                                       ; $6227: $E6 $01
     jp z, Jump_001_6243                           ; $6229: $CA $43 $62
 
@@ -5617,7 +5613,7 @@ jr_001_6243:
     call Call_001_64A0                            ; $6243: $CD $A0 $64
     ld hl, $4372                                  ; $6246: $21 $72 $43
     ld e, $05                                     ; $6249: $1E $05
-    call Call_000_07A9                            ; $624B: $CD $A9 $07
+    call CallForeign                            ; $624B: $CD $A9 $07
     call Call_001_422E                            ; $624E: $CD $2E $42
     call Call_001_4B7D                            ; $6251: $CD $7D $4B
     ld a, [$C6D2]                                 ; $6254: $FA $D2 $C6
@@ -5659,7 +5655,7 @@ Jump_001_625E:
 
 
 jr_001_6298:
-    ldh a, [$AF]                                  ; $6298: $F0 $AF
+    ldh a, [$FFAF]                                  ; $6298: $F0 $AF
     and $01                                       ; $629A: $E6 $01
     jp z, Jump_001_62B6                           ; $629C: $CA $B6 $62
 
@@ -5683,7 +5679,7 @@ jr_001_62B6:
     call Call_001_64A0                            ; $62B6: $CD $A0 $64
     ld hl, $4372                                  ; $62B9: $21 $72 $43
     ld e, $05                                     ; $62BC: $1E $05
-    call Call_000_07A9                            ; $62BE: $CD $A9 $07
+    call CallForeign                            ; $62BE: $CD $A9 $07
     call Call_001_422E                            ; $62C1: $CD $2E $42
     call Call_001_4B7D                            ; $62C4: $CD $7D $4B
     ld a, [$C6D2]                                 ; $62C7: $FA $D2 $C6
@@ -5742,7 +5738,7 @@ jr_001_6319:
     call Call_001_64A0                            ; $6319: $CD $A0 $64
     ld hl, $4372                                  ; $631C: $21 $72 $43
     ld e, $05                                     ; $631F: $1E $05
-    call Call_000_07A9                            ; $6321: $CD $A9 $07
+    call CallForeign                            ; $6321: $CD $A9 $07
     call Call_001_422E                            ; $6324: $CD $2E $42
     call Call_001_4B7D                            ; $6327: $CD $7D $4B
     ld a, [$C6D3]                                 ; $632A: $FA $D3 $C6
@@ -5764,7 +5760,7 @@ jr_001_6319:
 
 
 Jump_001_634D:
-    call Call_000_2B78                            ; $634D: $CD $78 $2B
+    call Script_Close                            ; $634D: $CD $78 $2B
     call Call_001_410A                            ; $6350: $CD $0A $41
     ret                                           ; $6353: $C9
 
@@ -5784,12 +5780,12 @@ Jump_001_6354:
     call Call_001_412F                            ; $6367: $CD $2F $41
     xor a                                         ; $636A: $AF
     ld [$C187], a                                 ; $636B: $EA $87 $C1
-    call Call_000_2B96                            ; $636E: $CD $96 $2B
-    call Call_000_0AA7                            ; $6371: $CD $A7 $0A
-    call Call_000_2B78                            ; $6374: $CD $78 $2B
+    call Script_Open                            ; $636E: $CD $96 $2B
+    call Script_Play                            ; $6371: $CD $A7 $0A
+    call Script_Close                            ; $6374: $CD $78 $2B
     ld hl, $42E8                                  ; $6377: $21 $E8 $42
     ld e, $05                                     ; $637A: $1E $05
-    call Call_000_07A9                            ; $637C: $CD $A9 $07
+    call CallForeign                            ; $637C: $CD $A9 $07
     call Call_001_4B7D                            ; $637F: $CD $7D $4B
     ld a, [$C187]                                 ; $6382: $FA $87 $C1
     and a                                         ; $6385: $A7
@@ -5806,8 +5802,8 @@ jr_001_638F:
 
 Call_001_6393:
     call Call_001_412F                            ; $6393: $CD $2F $41
-    call Call_000_2B96                            ; $6396: $CD $96 $2B
-    call Call_000_0AA7                            ; $6399: $CD $A7 $0A
+    call Script_Open                            ; $6396: $CD $96 $2B
+    call Script_Play                            ; $6399: $CD $A7 $0A
     ld hl, $FFB1                                  ; $639C: $21 $B1 $FF
     set 1, [hl]                                   ; $639F: $CB $CE
     ld a, $05                                     ; $63A1: $3E $05
@@ -5910,13 +5906,13 @@ Jump_001_6420:
     ld [$C9C6], a                                 ; $6458: $EA $C6 $C9
     ld hl, $4372                                  ; $645B: $21 $72 $43
     ld e, $05                                     ; $645E: $1E $05
-    call Call_000_07A9                            ; $6460: $CD $A9 $07
+    call CallForeign                            ; $6460: $CD $A9 $07
     jr jr_001_6470                                ; $6463: $18 $0B
 
 jr_001_6465:
     ld hl, $4372                                  ; $6465: $21 $72 $43
     ld e, $05                                     ; $6468: $1E $05
-    call Call_000_07A9                            ; $646A: $CD $A9 $07
+    call CallForeign                            ; $646A: $CD $A9 $07
     call Call_001_422E                            ; $646D: $CD $2E $42
 
 jr_001_6470:
@@ -5930,7 +5926,7 @@ Call_001_6479:
     bit 0, a                                      ; $647C: $CB $47
     ret z                                         ; $647E: $C8
 
-    ldh a, [$8C]                                  ; $647F: $F0 $8C
+    ldh a, [$FF8C]                                  ; $647F: $F0 $8C
     and $03                                       ; $6481: $E6 $03
     cp $00                                        ; $6483: $FE $00
     jr z, jr_001_6493                             ; $6485: $28 $0C
@@ -6129,13 +6125,13 @@ jr_001_6567:
 
 
     call Call_001_4AF8                            ; $6576: $CD $F8 $4A
-    ldh a, [$B2]                                  ; $6579: $F0 $B2
+    ldh a, [$FFB2]                                  ; $6579: $F0 $B2
     bit 3, a                                      ; $657B: $CB $5F
     ret z                                         ; $657D: $C8
 
-    ldh a, [$94]                                  ; $657E: $F0 $94
+    ldh a, [$FF94]                                  ; $657E: $F0 $94
     ld d, a                                       ; $6580: $57
-    ldh a, [$93]                                  ; $6581: $F0 $93
+    ldh a, [$FF93]                                  ; $6581: $F0 $93
     ld e, a                                       ; $6583: $5F
     ld a, [$C9D0]                                 ; $6584: $FA $D0 $C9
     cp e                                          ; $6587: $BB
@@ -6145,9 +6141,9 @@ jr_001_6567:
     cp d                                          ; $658C: $BA
     ret nz                                        ; $658D: $C0
 
-    ldh a, [$8B]                                  ; $658E: $F0 $8B
+    ldh a, [$FF8B]                                  ; $658E: $F0 $8B
     ld h, a                                       ; $6590: $67
-    ldh a, [$8A]                                  ; $6591: $F0 $8A
+    ldh a, [$FF8A]                                  ; $6591: $F0 $8A
     ld l, a                                       ; $6593: $6F
     ld bc, $0005                                  ; $6594: $01 $05 $00
     add hl, bc                                    ; $6597: $09
@@ -6169,18 +6165,18 @@ jr_001_6567:
 
 Call_001_65A8:
     call Call_001_412F                            ; $65A8: $CD $2F $41
-    call Call_000_2B96                            ; $65AB: $CD $96 $2B
-    call Call_000_0AA7                            ; $65AE: $CD $A7 $0A
-    call Call_000_2B78                            ; $65B1: $CD $78 $2B
-    call Call_000_2B96                            ; $65B4: $CD $96 $2B
-    call Call_000_0AA7                            ; $65B7: $CD $A7 $0A
-    call Call_000_2B78                            ; $65BA: $CD $78 $2B
+    call Script_Open                            ; $65AB: $CD $96 $2B
+    call Script_Play                            ; $65AE: $CD $A7 $0A
+    call Script_Close                            ; $65B1: $CD $78 $2B
+    call Script_Open                            ; $65B4: $CD $96 $2B
+    call Script_Play                            ; $65B7: $CD $A7 $0A
+    call Script_Close                            ; $65BA: $CD $78 $2B
     ld a, $00                                     ; $65BD: $3E $00
     ldh [$FF97], a                                  ; $65BF: $E0 $97
     call Call_001_65D3                            ; $65C1: $CD $D3 $65
     ld hl, $42E8                                  ; $65C4: $21 $E8 $42
     ld e, $05                                     ; $65C7: $1E $05
-    call Call_000_07A9                            ; $65C9: $CD $A9 $07
+    call CallForeign                            ; $65C9: $CD $A9 $07
     call Call_001_666F                            ; $65CC: $CD $6F $66
     call Call_001_410A                            ; $65CF: $CD $0A $41
     ret                                           ; $65D2: $C9
@@ -6346,7 +6342,7 @@ Call_001_666F:
     ret                                           ; $669E: $C9
 
 
-    ldh a, [$B2]                                  ; $669F: $F0 $B2
+    ldh a, [$FFB2]                                  ; $669F: $F0 $B2
     bit 1, a                                      ; $66A1: $CB $4F
     ret z                                         ; $66A3: $C8
 
@@ -6422,13 +6418,13 @@ jr_001_6700:
     ld [hl], $A8                                  ; $6704: $36 $A8
 
 jr_001_6706:
-    ldh a, [$8C]                                  ; $6706: $F0 $8C
+    ldh a, [$FF8C]                                  ; $6706: $F0 $8C
     set 5, a                                      ; $6708: $CB $EF
     ldh [$FF8C], a                                  ; $670A: $E0 $8C
     ret                                           ; $670C: $C9
 
 
-    ldh a, [$B2]                                  ; $670D: $F0 $B2
+    ldh a, [$FFB2]                                  ; $670D: $F0 $B2
     bit 1, a                                      ; $670F: $CB $4F
     ret z                                         ; $6711: $C8
 
@@ -6444,7 +6440,7 @@ jr_001_6706:
     ld [$C9D6], a                                 ; $671F: $EA $D6 $C9
     ld a, $00                                     ; $6722: $3E $00
     ld [hl], a                                    ; $6724: $77
-    ldh a, [$8C]                                  ; $6725: $F0 $8C
+    ldh a, [$FF8C]                                  ; $6725: $F0 $8C
     set 5, a                                      ; $6727: $CB $EF
     ldh [$FF8C], a                                  ; $6729: $E0 $8C
     ret                                           ; $672B: $C9
@@ -6540,7 +6536,7 @@ jr_001_6781:
     cp $00                                        ; $6799: $FE $00
     ret nz                                        ; $679B: $C0
 
-    ldh a, [$B2]                                  ; $679C: $F0 $B2
+    ldh a, [$FFB2]                                  ; $679C: $F0 $B2
     bit 1, a                                      ; $679E: $CB $4F
     ret z                                         ; $67A0: $C8
 
@@ -6944,15 +6940,15 @@ jr_001_6945:
     ldh [$FFAB], a                                  ; $6965: $E0 $AB
     ld a, $0A                                     ; $6967: $3E $0A
     ldh [$FFAC], a                                  ; $6969: $E0 $AC
-    call Call_000_0AA7                            ; $696B: $CD $A7 $0A
-    call Call_000_2B78                            ; $696E: $CD $78 $2B
-    call Call_000_2B96                            ; $6971: $CD $96 $2B
-    call Call_000_0AA7                            ; $6974: $CD $A7 $0A
-    call Call_000_2B78                            ; $6977: $CD $78 $2B
+    call Script_Play                            ; $696B: $CD $A7 $0A
+    call Script_Close                            ; $696E: $CD $78 $2B
+    call Script_Open                            ; $6971: $CD $96 $2B
+    call Script_Play                            ; $6974: $CD $A7 $0A
+    call Script_Close                            ; $6977: $CD $78 $2B
     call Call_001_4B43                            ; $697A: $CD $43 $4B
     ld hl, $42E8                                  ; $697D: $21 $E8 $42
     ld e, $05                                     ; $6980: $1E $05
-    call Call_000_07A9                            ; $6982: $CD $A9 $07
+    call CallForeign                            ; $6982: $CD $A9 $07
     ld a, $F8                                     ; $6985: $3E $F8
     ldh [$FF8D], a                                  ; $6987: $E0 $8D
     ld a, $4A                                     ; $6989: $3E $4A
@@ -6968,12 +6964,12 @@ jr_001_6945:
 
 
     call Call_001_412F                            ; $6999: $CD $2F $41
-    call Call_000_2B96                            ; $699C: $CD $96 $2B
-    call Call_000_0AA7                            ; $699F: $CD $A7 $0A
-    call Call_000_2B78                            ; $69A2: $CD $78 $2B
-    call Call_000_2B96                            ; $69A5: $CD $96 $2B
-    call Call_000_0AA7                            ; $69A8: $CD $A7 $0A
-    call Call_000_2B78                            ; $69AB: $CD $78 $2B
+    call Script_Open                            ; $699C: $CD $96 $2B
+    call Script_Play                            ; $699F: $CD $A7 $0A
+    call Script_Close                            ; $69A2: $CD $78 $2B
+    call Script_Open                            ; $69A5: $CD $96 $2B
+    call Script_Play                            ; $69A8: $CD $A7 $0A
+    call Script_Close                            ; $69AB: $CD $78 $2B
     call Call_001_410A                            ; $69AE: $CD $0A $41
     ret                                           ; $69B1: $C9
 
@@ -7062,7 +7058,7 @@ jr_001_6A2E:
     ld [$C6D3], a                                 ; $6A30: $EA $D3 $C6
     ld hl, $4372                                  ; $6A33: $21 $72 $43
     ld e, $05                                     ; $6A36: $1E $05
-    call Call_000_07A9                            ; $6A38: $CD $A9 $07
+    call CallForeign                            ; $6A38: $CD $A9 $07
     call Call_001_422E                            ; $6A3B: $CD $2E $42
     call Call_001_4B7D                            ; $6A3E: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6A41: $FA $D3 $C6
@@ -7122,7 +7118,7 @@ jr_001_6A8D:
     ld [$C6D3], a                                 ; $6A93: $EA $D3 $C6
     ld hl, $4372                                  ; $6A96: $21 $72 $43
     ld e, $05                                     ; $6A99: $1E $05
-    call Call_000_07A9                            ; $6A9B: $CD $A9 $07
+    call CallForeign                            ; $6A9B: $CD $A9 $07
     call Call_001_422E                            ; $6A9E: $CD $2E $42
     call Call_001_4B7D                            ; $6AA1: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6AA4: $FA $D3 $C6
@@ -7182,7 +7178,7 @@ jr_001_6AF0:
     ld [$C6D3], a                                 ; $6AF6: $EA $D3 $C6
     ld hl, $4372                                  ; $6AF9: $21 $72 $43
     ld e, $05                                     ; $6AFC: $1E $05
-    call Call_000_07A9                            ; $6AFE: $CD $A9 $07
+    call CallForeign                            ; $6AFE: $CD $A9 $07
     call Call_001_422E                            ; $6B01: $CD $2E $42
     call Call_001_4B7D                            ; $6B04: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6B07: $FA $D3 $C6
@@ -7240,7 +7236,7 @@ jr_001_6B51:
     ld [$C6D3], a                                 ; $6B53: $EA $D3 $C6
     ld hl, $4372                                  ; $6B56: $21 $72 $43
     ld e, $05                                     ; $6B59: $1E $05
-    call Call_000_07A9                            ; $6B5B: $CD $A9 $07
+    call CallForeign                            ; $6B5B: $CD $A9 $07
     call Call_001_422E                            ; $6B5E: $CD $2E $42
     call Call_001_4B7D                            ; $6B61: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6B64: $FA $D3 $C6
@@ -7283,7 +7279,7 @@ jr_001_6B8A:
     jp nz, Jump_001_69F3                          ; $6BA1: $C2 $F3 $69
 
     call Call_001_4B7D                            ; $6BA4: $CD $7D $4B
-    ldh a, [$8C]                                  ; $6BA7: $F0 $8C
+    ldh a, [$FF8C]                                  ; $6BA7: $F0 $8C
     and $03                                       ; $6BA9: $E6 $03
     cp $00                                        ; $6BAB: $FE $00
     jr z, jr_001_6BBB                             ; $6BAD: $28 $0C
@@ -7354,7 +7350,7 @@ Jump_001_6BF3:
 
     ld hl, $4372                                  ; $6C0D: $21 $72 $43
     ld e, $05                                     ; $6C10: $1E $05
-    call Call_000_07A9                            ; $6C12: $CD $A9 $07
+    call CallForeign                            ; $6C12: $CD $A9 $07
     call Call_001_422E                            ; $6C15: $CD $2E $42
     call Call_001_4B7D                            ; $6C18: $CD $7D $4B
     ld a, [$C9CD]                                 ; $6C1B: $FA $CD $C9
@@ -7364,7 +7360,7 @@ Jump_001_6BF3:
 
 
 Call_001_6C26:
-    ldh a, [$8C]                                  ; $6C26: $F0 $8C
+    ldh a, [$FF8C]                                  ; $6C26: $F0 $8C
     and $03                                       ; $6C28: $E6 $03
     cp $00                                        ; $6C2A: $FE $00
     jr z, jr_001_6C3A                             ; $6C2C: $28 $0C
@@ -7446,7 +7442,7 @@ jr_001_6C89:
 jr_001_6C90:
     ld hl, $4372                                  ; $6C90: $21 $72 $43
     ld e, $05                                     ; $6C93: $1E $05
-    call Call_000_07A9                            ; $6C95: $CD $A9 $07
+    call CallForeign                            ; $6C95: $CD $A9 $07
     call Call_001_422E                            ; $6C98: $CD $2E $42
     call Call_001_4B7D                            ; $6C9B: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6C9E: $FA $D3 $C6
@@ -7488,7 +7484,7 @@ Jump_001_6CA8:
 
 
 jr_001_6CE2:
-    ldh a, [$AF]                                  ; $6CE2: $F0 $AF
+    ldh a, [$FFAF]                                  ; $6CE2: $F0 $AF
     and $01                                       ; $6CE4: $E6 $01
     jp z, Jump_001_6D00                           ; $6CE6: $CA $00 $6D
 
@@ -7511,7 +7507,7 @@ Jump_001_6D00:
 jr_001_6D00:
     ld hl, $4372                                  ; $6D00: $21 $72 $43
     ld e, $05                                     ; $6D03: $1E $05
-    call Call_000_07A9                            ; $6D05: $CD $A9 $07
+    call CallForeign                            ; $6D05: $CD $A9 $07
     call Call_001_422E                            ; $6D08: $CD $2E $42
     call Call_001_4B7D                            ; $6D0B: $CD $7D $4B
     ld a, [$C6D2]                                 ; $6D0E: $FA $D2 $C6
@@ -7553,7 +7549,7 @@ Jump_001_6D18:
 
 
 jr_001_6D52:
-    ldh a, [$AF]                                  ; $6D52: $F0 $AF
+    ldh a, [$FFAF]                                  ; $6D52: $F0 $AF
     and $01                                       ; $6D54: $E6 $01
     jp z, Jump_001_6D70                           ; $6D56: $CA $70 $6D
 
@@ -7576,7 +7572,7 @@ Jump_001_6D70:
 jr_001_6D70:
     ld hl, $4372                                  ; $6D70: $21 $72 $43
     ld e, $05                                     ; $6D73: $1E $05
-    call Call_000_07A9                            ; $6D75: $CD $A9 $07
+    call CallForeign                            ; $6D75: $CD $A9 $07
     call Call_001_422E                            ; $6D78: $CD $2E $42
     call Call_001_4B7D                            ; $6D7B: $CD $7D $4B
     ld a, [$C6D2]                                 ; $6D7E: $FA $D2 $C6
@@ -7634,7 +7630,7 @@ jr_001_6DC9:
 jr_001_6DD0:
     ld hl, $4372                                  ; $6DD0: $21 $72 $43
     ld e, $05                                     ; $6DD3: $1E $05
-    call Call_000_07A9                            ; $6DD5: $CD $A9 $07
+    call CallForeign                            ; $6DD5: $CD $A9 $07
     call Call_001_422E                            ; $6DD8: $CD $2E $42
     call Call_001_4B7D                            ; $6DDB: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6DDE: $FA $D3 $C6
@@ -7666,15 +7662,15 @@ jr_001_6DD0:
     call Call_001_412F                            ; $6DFE: $CD $2F $41
     xor a                                         ; $6E01: $AF
     ld [$C187], a                                 ; $6E02: $EA $87 $C1
-    call Call_000_2B96                            ; $6E05: $CD $96 $2B
-    call Call_000_0AA7                            ; $6E08: $CD $A7 $0A
-    call Call_000_2B78                            ; $6E0B: $CD $78 $2B
-    call Call_000_2B96                            ; $6E0E: $CD $96 $2B
-    call Call_000_0AA7                            ; $6E11: $CD $A7 $0A
-    call Call_000_2B78                            ; $6E14: $CD $78 $2B
+    call Script_Open                            ; $6E05: $CD $96 $2B
+    call Script_Play                            ; $6E08: $CD $A7 $0A
+    call Script_Close                            ; $6E0B: $CD $78 $2B
+    call Script_Open                            ; $6E0E: $CD $96 $2B
+    call Script_Play                            ; $6E11: $CD $A7 $0A
+    call Script_Close                            ; $6E14: $CD $78 $2B
     ld hl, $42E8                                  ; $6E17: $21 $E8 $42
     ld e, $05                                     ; $6E1A: $1E $05
-    call Call_000_07A9                            ; $6E1C: $CD $A9 $07
+    call CallForeign                            ; $6E1C: $CD $A9 $07
     ld a, [$C187]                                 ; $6E1F: $FA $87 $C1
     and a                                         ; $6E22: $A7
     jr z, jr_001_6E2C                             ; $6E23: $28 $07
@@ -7747,12 +7743,12 @@ jr_001_6E2C:
     ld [$C87E], sp                                ; $6E6A: $08 $7E $C8
     ld [$C87E], sp                                ; $6E6D: $08 $7E $C8
     call Call_001_412F                            ; $6E70: $CD $2F $41
-    call Call_000_2B96                            ; $6E73: $CD $96 $2B
-    call Call_000_0AA7                            ; $6E76: $CD $A7 $0A
-    call Call_000_2B78                            ; $6E79: $CD $78 $2B
+    call Script_Open                            ; $6E73: $CD $96 $2B
+    call Script_Play                            ; $6E76: $CD $A7 $0A
+    call Script_Close                            ; $6E79: $CD $78 $2B
     ld hl, $42E8                                  ; $6E7C: $21 $E8 $42
     ld e, $05                                     ; $6E7F: $1E $05
-    call Call_000_07A9                            ; $6E81: $CD $A9 $07
+    call CallForeign                            ; $6E81: $CD $A9 $07
     call Call_001_410A                            ; $6E84: $CD $0A $41
     ret                                           ; $6E87: $C9
 
@@ -7806,7 +7802,7 @@ jr_001_6E2C:
 
 
 Call_001_6ECF:
-    ldh a, [$B2]                                  ; $6ECF: $F0 $B2
+    ldh a, [$FFB2]                                  ; $6ECF: $F0 $B2
     bit 2, a                                      ; $6ED1: $CB $57
     jp z, Jump_001_6F81                           ; $6ED3: $CA $81 $6F
 
@@ -7971,15 +7967,15 @@ jr_001_6F81:
     ldh [$FFAB], a                                  ; $6F9D: $E0 $AB
     ld a, $0A                                     ; $6F9F: $3E $0A
     ldh [$FFAC], a                                  ; $6FA1: $E0 $AC
-    call Call_000_0AA7                            ; $6FA3: $CD $A7 $0A
-    call Call_000_2B78                            ; $6FA6: $CD $78 $2B
-    call Call_000_2B96                            ; $6FA9: $CD $96 $2B
-    call Call_000_0AA7                            ; $6FAC: $CD $A7 $0A
-    call Call_000_2B78                            ; $6FAF: $CD $78 $2B
+    call Script_Play                            ; $6FA3: $CD $A7 $0A
+    call Script_Close                            ; $6FA6: $CD $78 $2B
+    call Script_Open                            ; $6FA9: $CD $96 $2B
+    call Script_Play                            ; $6FAC: $CD $A7 $0A
+    call Script_Close                            ; $6FAF: $CD $78 $2B
     call Call_001_4B43                            ; $6FB2: $CD $43 $4B
     ld hl, $42E8                                  ; $6FB5: $21 $E8 $42
     ld e, $05                                     ; $6FB8: $1E $05
-    call Call_000_07A9                            ; $6FBA: $CD $A9 $07
+    call CallForeign                            ; $6FBA: $CD $A9 $07
     ld a, $F8                                     ; $6FBD: $3E $F8
     ldh [$FF8D], a                                  ; $6FBF: $E0 $8D
     ld a, $4A                                     ; $6FC1: $3E $4A
@@ -8053,7 +8049,7 @@ jr_001_7014:
 
 
 Call_001_7038:
-    ldh a, [$B2]                                  ; $7038: $F0 $B2
+    ldh a, [$FFB2]                                  ; $7038: $F0 $B2
     bit 2, a                                      ; $703A: $CB $57
     jp z, Jump_001_70C1                           ; $703C: $CA $C1 $70
 
@@ -8172,7 +8168,7 @@ jr_001_70C1:
     call Call_001_412F                            ; $70C3: $CD $2F $41
     ld hl, $4191                                  ; $70C6: $21 $91 $41
     ld e, $04                                     ; $70C9: $1E $04
-    call Call_000_07A9                            ; $70CB: $CD $A9 $07
+    call CallForeign                            ; $70CB: $CD $A9 $07
     ld a, $DA                                     ; $70CE: $3E $DA
     ldh [$FF8D], a                                  ; $70D0: $E0 $8D
     ld a, $70                                     ; $70D2: $3E $70
@@ -8191,17 +8187,17 @@ jr_001_70C1:
     cp $00                                        ; $70E7: $FE $00
     ret nz                                        ; $70E9: $C0
 
-    ldh a, [$B2]                                  ; $70EA: $F0 $B2
+    ldh a, [$FFB2]                                  ; $70EA: $F0 $B2
     bit 1, a                                      ; $70EC: $CB $4F
     ret z                                         ; $70EE: $C8
 
-    ldh a, [$91]                                  ; $70EF: $F0 $91
+    ldh a, [$FF91]                                  ; $70EF: $F0 $91
     ld e, a                                       ; $70F1: $5F
     ld a, [$FF9D]                                 ; $70F2: $FA $9D $FF
     cp e                                          ; $70F5: $BB
     ret nz                                        ; $70F6: $C0
 
-    ldh a, [$92]                                  ; $70F7: $F0 $92
+    ldh a, [$FF92]                                  ; $70F7: $F0 $92
     ld e, a                                       ; $70F9: $5F
     ld a, [$FF9C]                                 ; $70FA: $FA $9C $FF
     cp e                                          ; $70FD: $BB
@@ -8224,15 +8220,15 @@ jr_001_70C1:
 
 
     call Call_001_412F                            ; $7115: $CD $2F $41
-    call Call_000_2B96                            ; $7118: $CD $96 $2B
-    call Call_000_0AA7                            ; $711B: $CD $A7 $0A
-    call Call_000_2B78                            ; $711E: $CD $78 $2B
-    call Call_000_2B96                            ; $7121: $CD $96 $2B
-    call Call_000_0AA7                            ; $7124: $CD $A7 $0A
-    call Call_000_2B78                            ; $7127: $CD $78 $2B
+    call Script_Open                            ; $7118: $CD $96 $2B
+    call Script_Play                            ; $711B: $CD $A7 $0A
+    call Script_Close                            ; $711E: $CD $78 $2B
+    call Script_Open                            ; $7121: $CD $96 $2B
+    call Script_Play                            ; $7124: $CD $A7 $0A
+    call Script_Close                            ; $7127: $CD $78 $2B
     ld hl, $4372                                  ; $712A: $21 $72 $43
     ld e, $05                                     ; $712D: $1E $05
-    call Call_000_07A9                            ; $712F: $CD $A9 $07
+    call CallForeign                            ; $712F: $CD $A9 $07
     call Call_001_422E                            ; $7132: $CD $2E $42
     ld hl, $FFB1                                  ; $7135: $21 $B1 $FF
     set 1, [hl]                                   ; $7138: $CB $CE

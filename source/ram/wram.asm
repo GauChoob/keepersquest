@@ -12,6 +12,73 @@ wVBlank_Bank::
     ;                    2) The bank of assets that will be copied by a ROM0 vblank function
     ds 1
 
+    ds $C70A - @
+wScript_Master::
+    .Bank:
+    ds 1
+    ;ds $C70B - @
+    .Frame:
+    ds 2
+    ;ds $C70D - @
+    .State:
+    ds 2
+    ;ds $C70F - @
+    .SmallCounter:
+    ds 1
+    ;ds $C710 - @
+    .BigCounter:
+    ds 1
+    ;ds $C711 - @
+wScript_Scroll::
+    .Bank:
+    ds 1
+    ;ds $C712 - @
+    .Frame:
+    ds 2
+    ;ds $C714 - @
+    .State:
+    ds 2
+    ;ds $C716 - @
+    .SmallCounter:
+    ds 1
+    ;ds $C717 - @
+    .BigCounter:
+    ds 1
+    ;ds $C718 - @
+wScript_System::
+    .Bank:
+    ds 1
+    ;ds $C719 - @
+    .Frame:
+    ds 2
+    ;ds $C71B - @
+    .State:
+    ds 2
+    ;ds $C71D - @
+    .SmallCounter:
+    ds 1
+    ;ds $C71E - @
+    .BigCounter:
+    ds 1
+    ;ds $C71F - @
+wScript_Text::
+    .Bank:
+    ds 1
+    ;ds $C720 - @
+    .Frame:
+    ds 2
+    ;ds $C722 - @
+    .State:
+    ds 2
+    ;ds $C724 - @
+    .SmallCounter:
+    ds 1
+    ;ds $C725 - @
+    .BigCounter:
+    ds 1
+    ;ds $C726 - @
+    
+
     ds $C959 - @
 wScreenVisible::
     ds 1

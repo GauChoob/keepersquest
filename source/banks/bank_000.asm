@@ -1,7 +1,3 @@
-; Disassembly of "kq.gbc"
-; This file was created with:
-; mgbdis v2.0 - Game Boy ROM disassembler by Matt Currie and contributors.
-; https://github.com/mattcurrie/mgbdis
 
 SECTION "ROM Bank $000", ROM0[$0]
 
@@ -115,7 +111,7 @@ Jump_000_0195:
     ld bc, $0DF5                                  ; $0198: $01 $F5 $0D
     ld a, $00                                     ; $019B: $3E $00
     ld e, a                                       ; $019D: $5F
-    call Call_000_07E8                            ; $019E: $CD $E8 $07
+    call MemSet                            ; $019E: $CD $E8 $07
     SwitchROMBank $07
     call $587D                                    ; $01A9: $CD $7D $58
     call System_Init                            ; $01AC: $CD $63 $08
@@ -316,7 +312,7 @@ jr_000_0284:
     ld hl, $2BB7                                  ; $028E: $21 $B7 $2B
 
 jr_000_0291:
-    call Call_000_07A9                            ; $0291: $CD $A9 $07
+    call CallForeign                            ; $0291: $CD $A9 $07
     pop hl                                        ; $0294: $E1
     ld bc, $0010                                  ; $0295: $01 $10 $00
     add hl, bc                                    ; $0298: $09
@@ -374,7 +370,7 @@ jr_000_02F1:
 
 
 Jump_000_02F7:
-    ldh a, [$AF]                                  ; $02F7: $F0 $AF
+    ldh a, [$FFAF]                                  ; $02F7: $F0 $AF
     inc a                                         ; $02F9: $3C
     ldh [$FFAF], a                                  ; $02FA: $E0 $AF
     ld a, [$C955]                                 ; $02FC: $FA $55 $C9
@@ -402,11 +398,11 @@ Jump_000_02F7:
     ld [$C734], a                                 ; $0324: $EA $34 $C7
     ld [$C731], a                                 ; $0327: $EA $31 $C7
     ld bc, $C72B                                  ; $032A: $01 $2B $C7
-    ld hl, $C71F                                  ; $032D: $21 $1F $C7
+    ld hl, wScript_Text                                  ; $032D: $21 $1F $C7
     call Call_000_1903                            ; $0330: $CD $03 $19
 
 jr_000_0333:
-    call Call_000_08F7                            ; $0333: $CD $F7 $08
+    call System_UpdateGame                            ; $0333: $CD $F7 $08
     jp Jump_000_02F7                              ; $0336: $C3 $F7 $02
 
 
@@ -945,7 +941,7 @@ Call_000_0585:
     dec a                                         ; $0592: $3D
     dec a                                         ; $0593: $3D
     ld e, a                                       ; $0594: $5F
-    ldh a, [$B0]                                  ; $0595: $F0 $B0
+    ldh a, [$FFB0]                                  ; $0595: $F0 $B0
     add e                                         ; $0597: $83
     ldh [$FFB0], a                                  ; $0598: $E0 $B0
     ret                                           ; $059A: $C9
@@ -979,7 +975,7 @@ jr_000_05B3:
 
 
 Call_000_05B9:
-    ldh a, [$97]                                  ; $05B9: $F0 $97
+    ldh a, [$FF97]                                  ; $05B9: $F0 $97
     ldh [$FF98], a                                  ; $05BB: $E0 $98
     ld a, $FF                                     ; $05BD: $3E $FF
     ldh [$FF97], a                                  ; $05BF: $E0 $97
@@ -1057,7 +1053,7 @@ jr_000_0617:
     add d                                         ; $0620: $82
     ld [bc], a                                    ; $0621: $02
     inc c                                         ; $0622: $0C
-    ldh a, [$95]                                  ; $0623: $F0 $95
+    ldh a, [$FF95]                                  ; $0623: $F0 $95
     add [hl]                                      ; $0625: $86
     inc hl                                        ; $0626: $23
     ld [bc], a                                    ; $0627: $02
@@ -1091,7 +1087,7 @@ Call_000_0633:
 
 
 Call_000_0646:
-    ldh a, [$97]                                  ; $0646: $F0 $97
+    ldh a, [$FF97]                                  ; $0646: $F0 $97
     ldh [$FF98], a                                  ; $0648: $E0 $98
     ld a, $FF                                     ; $064A: $3E $FF
     ldh [$FF97], a                                  ; $064C: $E0 $97
@@ -1298,320 +1294,7 @@ jr_000_07A8:
     ret                                           ; $07A8: $C9
 
 
-Call_000_07A9:
-    PushROMBank
-    SwitchROMBank e
-    call CallHL                            ; $07B4: $CD $BF $07
-    PopROMBank
-    ret                                           ; $07BE: $C9
-
-
-CallHL:
-    jp hl                                         ; $07BF: $E9
-
-
-jr_000_07C0:
-    ld a, [hl]                                    ; $07C0: $7E
-    add e                                         ; $07C1: $83
-    cp d                                          ; $07C2: $BA
-    jr c, jr_000_07C6                             ; $07C3: $38 $01
-
-    ld a, d                                       ; $07C5: $7A
-
-jr_000_07C6:
-    ld [hl+], a                                   ; $07C6: $22
-    dec bc                                        ; $07C7: $0B
-    ld a, c                                       ; $07C8: $79
-    or b                                          ; $07C9: $B0
-    jr nz, jr_000_07C0                            ; $07CA: $20 $F4
-
-    ret                                           ; $07CC: $C9
-
-
-jr_000_07CD:
-    ld a, [hl]                                    ; $07CD: $7E
-    and e                                         ; $07CE: $A3
-    ld [hl+], a                                   ; $07CF: $22
-    dec bc                                        ; $07D0: $0B
-    ld a, c                                       ; $07D1: $79
-    or b                                          ; $07D2: $B0
-    jr nz, jr_000_07CD                            ; $07D3: $20 $F8
-
-    ret                                           ; $07D5: $C9
-
-
-Call_000_07D6:
-jr_000_07D6:
-    ld a, [hl+]                                   ; $07D6: $2A
-    ld [de], a                                    ; $07D7: $12
-    inc de                                        ; $07D8: $13
-    dec bc                                        ; $07D9: $0B
-    ld a, b                                       ; $07DA: $78
-    or c                                          ; $07DB: $B1
-    jr nz, jr_000_07D6                            ; $07DC: $20 $F8
-
-    ret                                           ; $07DE: $C9
-
-
-jr_000_07DF:
-    ld a, [hl]                                    ; $07DF: $7E
-    or e                                          ; $07E0: $B3
-    ld [hl+], a                                   ; $07E1: $22
-    dec bc                                        ; $07E2: $0B
-    ld a, c                                       ; $07E3: $79
-    or b                                          ; $07E4: $B0
-    jr nz, jr_000_07DF                            ; $07E5: $20 $F8
-
-    ret                                           ; $07E7: $C9
-
-
-Call_000_07E8:
-jr_000_07E8:
-    ld a, e                                       ; $07E8: $7B
-    ld [hl+], a                                   ; $07E9: $22
-    dec bc                                        ; $07EA: $0B
-    ld a, c                                       ; $07EB: $79
-    or b                                          ; $07EC: $B0
-    jr nz, jr_000_07E8                            ; $07ED: $20 $F9
-
-    ret                                           ; $07EF: $C9
-
-
-jr_000_07F0:
-    ld a, [hl]                                    ; $07F0: $7E
-    xor e                                         ; $07F1: $AB
-    ld [hl+], a                                   ; $07F2: $22
-    dec bc                                        ; $07F3: $0B
-    ld a, c                                       ; $07F4: $79
-    or b                                          ; $07F5: $B0
-    jr nz, jr_000_07F0                            ; $07F6: $20 $F8
-
-    ret                                           ; $07F8: $C9
-
-
-ScreenHide::
-    xor a                                         ; $07F9: $AF
-    ld [wScreenVisible], a                                 ; $07FA: $EA $59 $C9
-    ld a, [rLCDC]                                 ; $07FD: $FA $40 $FF
-    bit 7, a                                      ; $0800: $CB $7F
-    ret z                                         ; $0802: $C8
-
-    xor a                                         ; $0803: $AF
-    ld [rIF], a                                 ; $0804: $EA $0F $FF
-    ld [rIE], a                                 ; $0807: $EA $FF $FF
-
-    .WaitForVBlankLoop:
-        ld a, [rLY]                                 ; $080A: $FA $44 $FF
-        cp $91                                        ; $080D: $FE $91
-        jr nz, .WaitForVBlankLoop                            ; $080F: $20 $F9
-
-    xor a                                         ; $0811: $AF
-    ld [rLCDC], a                                 ; $0812: $EA $40 $FF
-    ld [rIF], a                                 ; $0815: $EA $0F $FF
-    ld [rIE], a                                 ; $0818: $EA $FF $FF
-    ei                                            ; $081B: $FB
-    call Interrupt_Timer_Start                            ; $081C: $CD $61 $2C
-    ret                                           ; $081F: $C9
-
-
-ScreenShow::
-    ld a, [wScreenVisible]                                 ; $0820: $FA $59 $C9
-    and a                                         ; $0823: $A7
-    ret nz                                        ; $0824: $C0
-
-    ld a, $40                                     ; $0825: $3E $40
-    ld [rSTAT], a                                 ; $0827: $EA $41 $FF
-    xor a                                         ; $082A: $AF
-    ld [rIF], a                                 ; $082B: $EA $0F $FF
-    ld [hInterrupt_VBlank_Control], a                                 ; $082E: $EA $A5 $FF
-    ld a, $03                                     ; $0831: $3E $03
-    ld [rIE], a                                 ; $0833: $EA $FF $FF
-    ld a, $E3                                     ; $0836: $3E $E3
-    ld [rLCDC], a                                 ; $0838: $EA $40 $FF
-    ld [wScreenVisible], a                                 ; $083B: $EA $59 $C9
-    ei                                            ; $083E: $FB
-    ret                                           ; $083F: $C9
-
-
-System_DoVFunc::
-    ld a, [wScreenVisible]                                 ; $0840: $FA $59 $C9
-    and a                                         ; $0843: $A7
-    jr nz, .Visible                            ; $0844: $20 $15
-    .Invisible:
-        SwitchROMBank [wVBlank_Bank]
-        ld a, [wVBlank_Func + 1]                                 ; $084F: $FA $E9 $C6
-        ld h, a                                       ; $0852: $67
-        ld a, [wVBlank_Func]                                 ; $0853: $FA $E8 $C6
-        ld l, a                                       ; $0856: $6F
-        call CallHL                            ; $0857: $CD $BF $07
-        ret                                           ; $085A: $C9
-    .Visible:
-        ld a, $06                                     ; $085B: $3E $06
-        ldh [hInterrupt_VBlank_Control], a                                  ; $085D: $E0 $A5
-        call System_WaitVBlank                            ; $085F: $CD $DC $09
-        ret                                           ; $0862: $C9
-
-
-System_Init::
-    SwitchROMBank $05
-    call $47AF                                    ; $086B: $CD $AF $47
-    ld a, $FF                                     ; $086E: $3E $FF
-    ld [$C6DE], a                                 ; $0870: $EA $DE $C6
-    ld a, $FF                                     ; $0873: $3E $FF
-    ld [$C6E2], a                                 ; $0875: $EA $E2 $C6
-    xor a                                         ; $0878: $AF
-    xor a                                         ; $0879: $AF
-    ld [wVBlank_Bank], a                                 ; $087A: $EA $EA $C6
-    ld a, $12                                     ; $087D: $3E $12
-    ld [wVBlank_Func], a                                 ; $087F: $EA $E8 $C6
-    ld a, $2C                                     ; $0882: $3E $2C
-    ld [wVBlank_Func + 1], a                                 ; $0884: $EA $E9 $C6
-    ld a, $B7                                     ; $0887: $3E $B7
-    ld [$C6E6], a                                 ; $0889: $EA $E6 $C6
-    ld a, $2C                                     ; $088C: $3E $2C
-    ld [$C6E7], a                                 ; $088E: $EA $E7 $C6
-    ld a, $25                                     ; $0891: $3E $25
-    ld [$FFA0], a                                 ; $0893: $EA $A0 $FF
-    ld a, $2D                                     ; $0896: $3E $2D
-    ld [$FFA1], a                                 ; $0898: $EA $A1 $FF
-    ld a, $00                                     ; $089B: $3E $00
-    ld [$C74B], a                                 ; $089D: $EA $4B $C7
-    ld [$C74C], a                                 ; $08A0: $EA $4C $C7
-    call Call_000_059B                            ; $08A3: $CD $9B $05
-    ld hl, $244D                                  ; $08A6: $21 $4D $24
-    ld e, $00                                     ; $08A9: $1E $00
-    call Call_000_07A9                            ; $08AB: $CD $A9 $07
-    SwitchROMBank $01
-    call $40D3                                    ; $08B6: $CD $D3 $40
-    xor a                                         ; $08B9: $AF
-    ld [$C954], a                                 ; $08BA: $EA $54 $C9
-    ld [$C955], a                                 ; $08BD: $EA $55 $C9
-    ld [$C956], a                                 ; $08C0: $EA $56 $C9
-    ld a, $00                                     ; $08C3: $3E $00
-    ld [$C9EB], a                                 ; $08C5: $EA $EB $C9
-    ld a, $00                                     ; $08C8: $3E $00
-    ld [$C9EC], a                                 ; $08CA: $EA $EC $C9
-    ld hl, $CA1C                                  ; $08CD: $21 $1C $CA
-    ld a, $19                                     ; $08D0: $3E $19
-    ld [hl+], a                                   ; $08D2: $22
-    ld a, $E9                                     ; $08D3: $3E $E9
-    ld [hl+], a                                   ; $08D5: $22
-    ld a, $46                                     ; $08D6: $3E $46
-    ld [hl+], a                                   ; $08D8: $22
-    xor a                                         ; $08D9: $AF
-    ld [wRAMBank], a                                 ; $08DA: $EA $5A $C9
-    ld [wROMBank], a                                 ; $08DD: $EA $5B $C9
-    ld [$C188], a                                 ; $08E0: $EA $88 $C1
-    ld [$C6D8], a                                 ; $08E3: $EA $D8 $C6
-    ld [$CCC3], a                                 ; $08E6: $EA $C3 $CC
-    ld [$C6F7], a                                 ; $08E9: $EA $F7 $C6
-    ld a, $03                                     ; $08EC: $3E $03
-    ld [$C6F3], a                                 ; $08EE: $EA $F3 $C6
-    ld hl, $FFB1                                  ; $08F1: $21 $B1 $FF
-    ld [hl+], a                                   ; $08F4: $22
-    ld [hl+], a                                   ; $08F5: $22
-    ret                                           ; $08F6: $C9
-
-
-Call_000_08F7:
-    PushRAMBank
-    PushROMBank
-    SwitchROMBank $07
-    call $4D1E                                    ; $0907: $CD $1E $4D
-    call $51C1                                    ; $090A: $CD $C1 $51
-    xor a                                         ; $090D: $AF
-    ld [$C866], a                                 ; $090E: $EA $66 $C8
-    ld [$C867], a                                 ; $0911: $EA $67 $C8
-    call Call_000_2B53                            ; $0914: $CD $53 $2B
-    ld hl, $C70A                                  ; $0917: $21 $0A $C7
-    call Call_000_2B96                            ; $091A: $CD $96 $2B
-    call Call_000_0AA7                            ; $091D: $CD $A7 $0A
-    call Call_000_2B78                            ; $0920: $CD $78 $2B
-    ld hl, $C711                                  ; $0923: $21 $11 $C7
-    call Call_000_2B96                            ; $0926: $CD $96 $2B
-    call Call_000_0AA7                            ; $0929: $CD $A7 $0A
-    call Call_000_2B78                            ; $092C: $CD $78 $2B
-    ld hl, $C718                                  ; $092F: $21 $18 $C7
-    call Call_000_2B96                            ; $0932: $CD $96 $2B
-    call Call_000_0AA7                            ; $0935: $CD $A7 $0A
-    call Call_000_2B78                            ; $0938: $CD $78 $2B
-    ld hl, $C71F                                  ; $093B: $21 $1F $C7
-    call Call_000_2B96                            ; $093E: $CD $96 $2B
-    call Call_000_0AA7                            ; $0941: $CD $A7 $0A
-    call Call_000_2B78                            ; $0944: $CD $78 $2B
-    ld a, [$C6F2]                                 ; $0947: $FA $F2 $C6
-    and a                                         ; $094A: $A7
-    jr z, jr_000_0956                             ; $094B: $28 $09
-
-    xor a                                         ; $094D: $AF
-    ld hl, $C9CC                                  ; $094E: $21 $CC $C9
-    ld [hl+], a                                   ; $0951: $22
-    ld [hl+], a                                   ; $0952: $22
-    ld [hl+], a                                   ; $0953: $22
-    jr jr_000_0965                                ; $0954: $18 $0F
-
-jr_000_0956:
-    ld hl, $C9CC                                  ; $0956: $21 $CC $C9
-    ld a, [$C954]                                 ; $0959: $FA $54 $C9
-    ld [hl+], a                                   ; $095C: $22
-    ld a, [$C955]                                 ; $095D: $FA $55 $C9
-    ld [hl+], a                                   ; $0960: $22
-    ld a, [$C956]                                 ; $0961: $FA $56 $C9
-    ld [hl+], a                                   ; $0964: $22
-
-jr_000_0965:
-    ld hl, $FFB1                                  ; $0965: $21 $B1 $FF
-    ld a, [hl+]                                   ; $0968: $2A
-    ld [hl-], a                                   ; $0969: $32
-    xor a                                         ; $096A: $AF
-    ld [hl], a                                    ; $096B: $77
-    SwitchROMBank $01
-    call $407D                                    ; $0974: $CD $7D $40
-    call Call_000_065B                            ; $0977: $CD $5B $06
-    SwitchROMBank $07
-    call $58C0                                    ; $0982: $CD $C0 $58
-    ld a, $07                                     ; $0985: $3E $07
-    ldh [hInterrupt_VBlank_Control], a                                  ; $0987: $E0 $A5
-    call System_WaitVBlank                            ; $0989: $CD $DC $09
-    PopROMBank
-    PopRAMBank
-    ret                                           ; $099A: $C9
-
-
-Call_000_099B:
-    PushRAMBank
-    PushROMBank
-    SwitchROMBank $07
-    call $4D1E                                    ; $09AB: $CD $1E $4D
-    call $51C1                                    ; $09AE: $CD $C1 $51
-    xor a                                         ; $09B1: $AF
-    ld [$C866], a                                 ; $09B2: $EA $66 $C8
-    ld [$C867], a                                 ; $09B5: $EA $67 $C8
-    call Call_000_065B                            ; $09B8: $CD $5B $06
-    SwitchROMBank $07
-    call $58C0                                    ; $09C3: $CD $C0 $58
-    ld a, $07                                     ; $09C6: $3E $07
-    ldh [hInterrupt_VBlank_Control], a                                  ; $09C8: $E0 $A5
-    call System_WaitVBlank                            ; $09CA: $CD $DC $09
-    PopROMBank
-    PopRAMBank
-    ret                                           ; $09DB: $C9
-
-
-System_WaitVBlank:
-    ldh a, [$A5]                                  ; $09DC: $F0 $A5
-    set 7, a                                      ; $09DE: $CB $FF
-    ldh [hInterrupt_VBlank_Control], a                                  ; $09E0: $E0 $A5
-    halt                                          ; $09E2: $76
-    nop                                           ; $09E3: $00
-
-jr_000_09E4:
-    ldh a, [$A5]                                  ; $09E4: $F0 $A5
-    bit 7, a                                      ; $09E6: $CB $7F
-    jr nz, jr_000_09E4                            ; $09E8: $20 $FA
-
-    ret                                           ; $09EA: $C9
-
+INCLUDE "source/engine/system/system_00.asm"
 
 Call_000_09EB:
 Jump_000_09EB:
@@ -1732,7 +1415,7 @@ Call_000_0A51:
 Call_000_0A59:
     SwitchROMBank $13
     ld a, [hl+]                                   ; $0A61: $2A
-    ld [$C718], a                                 ; $0A62: $EA $18 $C7
+    ld [wScript_System], a                                 ; $0A62: $EA $18 $C7
     ld a, [hl+]                                   ; $0A65: $2A
     ld [$C719], a                                 ; $0A66: $EA $19 $C7
     ld a, [hl+]                                   ; $0A69: $2A
@@ -1752,7 +1435,7 @@ Call_000_0A59:
 Call_000_0A8A:
     SwitchROMBank $13
     ld a, [hl+]                                   ; $0A92: $2A
-    ld [$C718], a                                 ; $0A93: $EA $18 $C7
+    ld [wScript_System], a                                 ; $0A93: $EA $18 $C7
     ld a, [hl+]                                   ; $0A96: $2A
     ld [$C719], a                                 ; $0A97: $EA $19 $C7
     ld a, [hl+]                                   ; $0A9A: $2A
@@ -1761,9 +1444,9 @@ Call_000_0A8A:
     ret                                           ; $0AA6: $C9
 
 
-Call_000_0AA7:
+Script_Play:
     PushROMBank
-    ldh a, [$A8]                                  ; $0AAB: $F0 $A8
+    ldh a, [$FFA8]                                  ; $0AAB: $F0 $A8
     bit 7, a                                      ; $0AAD: $CB $7F
     jr z, jr_000_0AB3                             ; $0AAF: $28 $02
 
@@ -2193,9 +1876,9 @@ jr_000_0C9D:
     ld a, [hl+]                                   ; $0D1C: $2A
     ld d, [hl]                                    ; $0D1D: $56
     ld e, a                                       ; $0D1E: $5F
-    ldh a, [$94]                                  ; $0D1F: $F0 $94
+    ldh a, [$FF94]                                  ; $0D1F: $F0 $94
     ld h, a                                       ; $0D21: $67
-    ldh a, [$93]                                  ; $0D22: $F0 $93
+    ldh a, [$FF93]                                  ; $0D22: $F0 $93
     ld l, a                                       ; $0D24: $6F
     ld a, l                                       ; $0D25: $7D
     cp e                                          ; $0D26: $BB
@@ -2305,7 +1988,7 @@ jr_000_0DA0:
     ld [$FFAB], a                                 ; $0DC7: $EA $AB $FF
     ld a, $0D                                     ; $0DCA: $3E $0D
     ld [$FFAC], a                                 ; $0DCC: $EA $AC $FF
-    ldh a, [$AD]                                  ; $0DCF: $F0 $AD
+    ldh a, [$FFAD]                                  ; $0DCF: $F0 $AD
     dec a                                         ; $0DD1: $3D
     jr z, jr_000_0DD7                             ; $0DD2: $28 $03
 
@@ -2366,7 +2049,7 @@ Jump_000_0E02:
     ld a, [$C867]                                 ; $0E23: $FA $67 $C8
     add l                                         ; $0E26: $85
     ld [$C867], a                                 ; $0E27: $EA $67 $C8
-    ldh a, [$AD]                                  ; $0E2A: $F0 $AD
+    ldh a, [$FFAD]                                  ; $0E2A: $F0 $AD
     dec a                                         ; $0E2C: $3D
     jr z, jr_000_0E32                             ; $0E2D: $28 $03
 
@@ -2396,7 +2079,7 @@ jr_000_0E32:
     jp Jump_000_0AD3                              ; $0E4F: $C3 $D3 $0A
 
 
-    ldh a, [$8C]                                  ; $0E52: $F0 $8C
+    ldh a, [$FF8C]                                  ; $0E52: $F0 $8C
     set 7, a                                      ; $0E54: $CB $FF
     ldh [$FF8C], a                                  ; $0E56: $E0 $8C
     ld a, $D3                                     ; $0E58: $3E $D3
@@ -2724,7 +2407,7 @@ jr_000_101A:
     ld a, [bc]                                    ; $101D: $0A
     inc bc                                        ; $101E: $03
     ld [$D36D], a                                 ; $101F: $EA $6D $D3
-    ld hl, $C70A                                  ; $1022: $21 $0A $C7
+    ld hl, wScript_Master                                  ; $1022: $21 $0A $C7
     ld a, [bc]                                    ; $1025: $0A
     ld [hl+], a                                   ; $1026: $22
     inc bc                                        ; $1027: $03
@@ -2752,7 +2435,7 @@ jr_000_101A:
     ldh [$FFA6], a                                  ; $104C: $E0 $A6
     ld a, $C7                                     ; $104E: $3E $C7
     ldh [$FFA7], a                                  ; $1050: $E0 $A7
-    call Call_000_2B78                            ; $1052: $CD $78 $2B
+    call Script_Close                            ; $1052: $CD $78 $2B
     SwitchROMBank $04
     jp $415D                                      ; $105D: $C3 $5D $41
 
@@ -2927,7 +2610,7 @@ Call_000_114F:
     ld a, $07                                     ; $1157: $3E $07
     ld [wRAMBank], a                                 ; $1159: $EA $5A $C9
     ldh [rSVBK], a                                ; $115C: $E0 $70
-    call Call_000_07D6                            ; $115E: $CD $D6 $07
+    call MemMov                            ; $115E: $CD $D6 $07
     ld a, h                                       ; $1161: $7C
     ldh [$FFAA], a                                  ; $1162: $E0 $AA
     ld a, l                                       ; $1164: $7D
@@ -3012,7 +2695,7 @@ Call_000_114F:
     ld [$FFAB], a                                 ; $1206: $EA $AB $FF
     ld a, $0A                                     ; $1209: $3E $0A
     ld [$FFAC], a                                 ; $120B: $EA $AC $FF
-    call Call_000_2B78                            ; $120E: $CD $78 $2B
+    call Script_Close                            ; $120E: $CD $78 $2B
     call ScreenHide                            ; $1211: $CD $F9 $07
     call Interrupt_Timer_Start                            ; $1214: $CD $61 $2C
     call Call_000_2B17                            ; $1217: $CD $17 $2B
@@ -3098,7 +2781,7 @@ jr_000_122B:
     ld [$FFAB], a                                 ; $12BA: $EA $AB $FF
     ld a, $12                                     ; $12BD: $3E $12
     ld [$FFAC], a                                 ; $12BF: $EA $AC $FF
-    ldh a, [$AD]                                  ; $12C2: $F0 $AD
+    ldh a, [$FFAD]                                  ; $12C2: $F0 $AD
     and a                                         ; $12C4: $A7
     jp z, Jump_000_0AD3                           ; $12C5: $CA $D3 $0A
 
@@ -3534,7 +3217,7 @@ Call_000_14C6:
     ld [$FFAB], a                                 ; $14E2: $EA $AB $FF
     ld a, $14                                     ; $14E5: $3E $14
     ld [$FFAC], a                                 ; $14E7: $EA $AC $FF
-    ldh a, [$AD]                                  ; $14EA: $F0 $AD
+    ldh a, [$FFAD]                                  ; $14EA: $F0 $AD
     and a                                         ; $14EC: $A7
     jp z, Jump_000_0AD3                           ; $14ED: $CA $D3 $0A
 
@@ -3565,12 +3248,12 @@ Call_000_14C6:
     ld [$FFAB], a                                 ; $1518: $EA $AB $FF
     ld a, $15                                     ; $151B: $3E $15
     ld [$FFAC], a                                 ; $151D: $EA $AC $FF
-    ldh a, [$AF]                                  ; $1520: $F0 $AF
+    ldh a, [$FFAF]                                  ; $1520: $F0 $AF
     and $03                                       ; $1522: $E6 $03
     cp $03                                        ; $1524: $FE $03
     ret nz                                        ; $1526: $C0
 
-    ldh a, [$AD]                                  ; $1527: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1527: $F0 $AD
     and a                                         ; $1529: $A7
     jp z, Jump_000_0AD3                           ; $152A: $CA $D3 $0A
 
@@ -3870,7 +3553,7 @@ jr_000_166E:
     ld b, h                                       ; $16B3: $44
     ld l, e                                       ; $16B4: $6B
     ld h, d                                       ; $16B5: $62
-    ldh a, [$AD]                                  ; $16B6: $F0 $AD
+    ldh a, [$FFAD]                                  ; $16B6: $F0 $AD
     dec a                                         ; $16B8: $3D
     jr z, jr_000_16C1                             ; $16B9: $28 $06
 
@@ -3912,7 +3595,7 @@ jr_000_16C1:
     ld [$C6D2], a                                 ; $16F2: $EA $D2 $C6
     ld a, [hl+]                                   ; $16F5: $2A
     ld [$C6D3], a                                 ; $16F6: $EA $D3 $C6
-    ldh a, [$AD]                                  ; $16F9: $F0 $AD
+    ldh a, [$FFAD]                                  ; $16F9: $F0 $AD
     dec a                                         ; $16FB: $3D
     jr z, jr_000_1701                             ; $16FC: $28 $03
 
@@ -3950,11 +3633,11 @@ jr_000_1701:
     ld [$C6D2], a                                 ; $172B: $EA $D2 $C6
     ld a, [hl+]                                   ; $172E: $2A
     ld [$C6D3], a                                 ; $172F: $EA $D3 $C6
-    ldh a, [$AE]                                  ; $1732: $F0 $AE
+    ldh a, [$FFAE]                                  ; $1732: $F0 $AE
     ld e, a                                       ; $1734: $5F
     ld d, $00                                     ; $1735: $16 $00
     add hl, de                                    ; $1737: $19
-    ldh a, [$AD]                                  ; $1738: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1738: $F0 $AD
     dec a                                         ; $173A: $3D
     jr z, jr_000_1741                             ; $173B: $28 $04
 
@@ -3965,7 +3648,7 @@ jr_000_1741:
     ld a, [bc]                                    ; $1741: $0A
     inc bc                                        ; $1742: $03
     ld e, a                                       ; $1743: $5F
-    ldh a, [$AE]                                  ; $1744: $F0 $AE
+    ldh a, [$FFAE]                                  ; $1744: $F0 $AE
     inc a                                         ; $1746: $3C
     inc a                                         ; $1747: $3C
     cp e                                          ; $1748: $BB
@@ -4019,12 +3702,12 @@ jr_000_1768:
     ld l, c                                       ; $178F: $69
     ld a, [hl+]                                   ; $1790: $2A
     ld b, a                                       ; $1791: $47
-    ldh a, [$91]                                  ; $1792: $F0 $91
+    ldh a, [$FF91]                                  ; $1792: $F0 $91
     add b                                         ; $1794: $80
     ldh [$FF91], a                                  ; $1795: $E0 $91
     ld a, [hl+]                                   ; $1797: $2A
     ld b, a                                       ; $1798: $47
-    ldh a, [$92]                                  ; $1799: $F0 $92
+    ldh a, [$FF92]                                  ; $1799: $F0 $92
     add b                                         ; $179B: $80
     ldh [$FF92], a                                  ; $179C: $E0 $92
     ld a, [hl+]                                   ; $179E: $2A
@@ -4035,7 +3718,7 @@ jr_000_1768:
     ld b, h                                       ; $17A3: $44
     ld l, e                                       ; $17A4: $6B
     ld h, d                                       ; $17A5: $62
-    ldh a, [$AD]                                  ; $17A6: $F0 $AD
+    ldh a, [$FFAD]                                  ; $17A6: $F0 $AD
     dec a                                         ; $17A8: $3D
     jr z, jr_000_17B1                             ; $17A9: $28 $06
 
@@ -4158,11 +3841,11 @@ jr_000_17B1:
     jp Jump_000_0AD3                              ; $1848: $C3 $D3 $0A
 
 
-    ld hl, $C70A                                  ; $184B: $21 $0A $C7
+    ld hl, wScript_Master                                  ; $184B: $21 $0A $C7
     jp Jump_000_18CC                              ; $184E: $C3 $CC $18
 
 
-    ld hl, $C711                                  ; $1851: $21 $11 $C7
+    ld hl, wScript_Scroll                                  ; $1851: $21 $11 $C7
     jp Jump_000_18CC                              ; $1854: $C3 $CC $18
 
 
@@ -4170,7 +3853,7 @@ jr_000_17B1:
     cp $01                                        ; $185A: $FE $01
     ret z                                         ; $185C: $C8
 
-    ld hl, $C71F                                  ; $185D: $21 $1F $C7
+    ld hl, wScript_Text                                  ; $185D: $21 $1F $C7
     jp Jump_000_18CC                              ; $1860: $C3 $CC $18
 
 
@@ -4532,7 +4215,7 @@ Call_000_19A6:
     ld [wVBlank_Func], a                                 ; $1ABB: $EA $E8 $C6
     ld a, $2B                                     ; $1ABE: $3E $2B
     ld [wVBlank_Func + 1], a                                 ; $1AC0: $EA $E9 $C6
-    ldh a, [$AD]                                  ; $1AC3: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1AC3: $F0 $AD
     dec a                                         ; $1AC5: $3D
     jr z, jr_000_1ACB                             ; $1AC6: $28 $03
 
@@ -4636,7 +4319,7 @@ Jump_000_1B4D:
     ld [wVBlank_Func], a                                 ; $1B54: $EA $E8 $C6
     ld a, $45                                     ; $1B57: $3E $45
     ld [wVBlank_Func + 1], a                                 ; $1B59: $EA $E9 $C6
-    ldh a, [$AE]                                  ; $1B5C: $F0 $AE
+    ldh a, [$FFAE]                                  ; $1B5C: $F0 $AE
     dec a                                         ; $1B5E: $3D
     jr z, jr_000_1B64                             ; $1B5F: $28 $03
 
@@ -4670,7 +4353,7 @@ jr_000_1B73:
     ld a, $1B                                     ; $1B8B: $3E $1B
     ld [$FFAC], a                                 ; $1B8D: $EA $AC $FF
     call Call_000_1AFC                            ; $1B90: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1B93: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1B93: $F0 $AD
     dec a                                         ; $1B95: $3D
     ldh [$FFAD], a                                  ; $1B96: $E0 $AD
     ret nz                                        ; $1B98: $C0
@@ -4691,7 +4374,7 @@ jr_000_1B73:
     ld a, $1B                                     ; $1BB9: $3E $1B
     ld [$FFAC], a                                 ; $1BBB: $EA $AC $FF
     call Call_000_1AFC                            ; $1BBE: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1BC1: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1BC1: $F0 $AD
     dec a                                         ; $1BC3: $3D
     ldh [$FFAD], a                                  ; $1BC4: $E0 $AD
     ret nz                                        ; $1BC6: $C0
@@ -4737,7 +4420,7 @@ jr_000_1B73:
     ld a, $1C                                     ; $1C25: $3E $1C
     ld [$FFAC], a                                 ; $1C27: $EA $AC $FF
     call Call_000_1AFC                            ; $1C2A: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1C2D: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1C2D: $F0 $AD
     dec a                                         ; $1C2F: $3D
     ldh [$FFAD], a                                  ; $1C30: $E0 $AD
     ret nz                                        ; $1C32: $C0
@@ -4758,7 +4441,7 @@ jr_000_1B73:
     ld a, $1C                                     ; $1C50: $3E $1C
     ld [$FFAC], a                                 ; $1C52: $EA $AC $FF
     call Call_000_1AFC                            ; $1C55: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1C58: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1C58: $F0 $AD
     dec a                                         ; $1C5A: $3D
     ldh [$FFAD], a                                  ; $1C5B: $E0 $AD
     ret nz                                        ; $1C5D: $C0
@@ -4782,7 +4465,7 @@ jr_000_1B73:
     ld a, $1C                                     ; $1C83: $3E $1C
     ld [$FFAC], a                                 ; $1C85: $EA $AC $FF
     call Call_000_1AFC                            ; $1C88: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1C8B: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1C8B: $F0 $AD
     dec a                                         ; $1C8D: $3D
     ldh [$FFAD], a                                  ; $1C8E: $E0 $AD
     ret nz                                        ; $1C90: $C0
@@ -4830,7 +4513,7 @@ jr_000_1B73:
     ld a, $1C                                     ; $1CE5: $3E $1C
     ld [$FFAC], a                                 ; $1CE7: $EA $AC $FF
     call Call_000_1AFC                            ; $1CEA: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1CED: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1CED: $F0 $AD
     dec a                                         ; $1CEF: $3D
     ldh [$FFAD], a                                  ; $1CF0: $E0 $AD
     ret nz                                        ; $1CF2: $C0
@@ -4880,7 +4563,7 @@ jr_000_1B73:
     ld a, $1D                                     ; $1D52: $3E $1D
     ld [$FFAC], a                                 ; $1D54: $EA $AC $FF
     call Call_000_1AFC                            ; $1D57: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1D5A: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1D5A: $F0 $AD
     dec a                                         ; $1D5C: $3D
     ldh [$FFAD], a                                  ; $1D5D: $E0 $AD
     ret nz                                        ; $1D5F: $C0
@@ -4906,7 +4589,7 @@ jr_000_1B73:
     ld a, $1D                                     ; $1D8B: $3E $1D
     ld [$FFAC], a                                 ; $1D8D: $EA $AC $FF
     call Call_000_1AFC                            ; $1D90: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1D93: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1D93: $F0 $AD
     dec a                                         ; $1D95: $3D
     ldh [$FFAD], a                                  ; $1D96: $E0 $AD
     ret nz                                        ; $1D98: $C0
@@ -4931,7 +4614,7 @@ jr_000_1B73:
     ld a, $1D                                     ; $1DC4: $3E $1D
     ld [$FFAC], a                                 ; $1DC6: $EA $AC $FF
     call Call_000_1AFC                            ; $1DC9: $CD $FC $1A
-    ldh a, [$AD]                                  ; $1DCC: $F0 $AD
+    ldh a, [$FFAD]                                  ; $1DCC: $F0 $AD
     dec a                                         ; $1DCE: $3D
     ldh [$FFAD], a                                  ; $1DCF: $E0 $AD
     ret nz                                        ; $1DD1: $C0
@@ -5242,7 +4925,7 @@ Call_000_1FE0:
     ld a, [$C867]                                 ; $1FFE: $FA $67 $C8
     add l                                         ; $2001: $85
     ld [$C867], a                                 ; $2002: $EA $67 $C8
-    ldh a, [$AD]                                  ; $2005: $F0 $AD
+    ldh a, [$FFAD]                                  ; $2005: $F0 $AD
     dec a                                         ; $2007: $3D
     jr z, jr_000_200D                             ; $2008: $28 $03
 
@@ -5344,7 +5027,7 @@ Call_000_2087:
     ld a, $06                                     ; $2093: $3E $06
     ld [wRAMBank], a                                 ; $2095: $EA $5A $C9
     ldh [rSVBK], a                                ; $2098: $E0 $70
-    call Call_000_07D6                            ; $209A: $CD $D6 $07
+    call MemMov                            ; $209A: $CD $D6 $07
     ld a, $D3                                     ; $209D: $3E $D3
     ldh [$FFAB], a                                  ; $209F: $E0 $AB
     ld a, $0A                                     ; $20A1: $3E $0A
@@ -5362,10 +5045,10 @@ Call_000_20AC:
     ld [$C709], a                                 ; $20B1: $EA $09 $C7
 
 jr_000_20B4:
-    ld hl, $C70A                                  ; $20B4: $21 $0A $C7
-    call Call_000_2B96                            ; $20B7: $CD $96 $2B
-    call Call_000_0AA7                            ; $20BA: $CD $A7 $0A
-    call Call_000_2B78                            ; $20BD: $CD $78 $2B
+    ld hl, wScript_Master                                  ; $20B4: $21 $0A $C7
+    call Script_Open                            ; $20B7: $CD $96 $2B
+    call Script_Play                            ; $20BA: $CD $A7 $0A
+    call Script_Close                            ; $20BD: $CD $78 $2B
     SwitchROMBank [wVBlank_Bank]
     ld a, [wVBlank_Func + 1]                                 ; $20C9: $FA $E9 $C6
     ld h, a                                       ; $20CC: $67
@@ -5390,7 +5073,7 @@ jr_000_20B4:
     ld [$FFAB], a                                 ; $20F4: $EA $AB $FF
     ld a, $0A                                     ; $20F7: $3E $0A
     ld [$FFAC], a                                 ; $20F9: $EA $AC $FF
-    call Call_000_2B78                            ; $20FC: $CD $78 $2B
+    call Script_Close                            ; $20FC: $CD $78 $2B
     call System_Init                            ; $20FF: $CD $63 $08
     call Call_000_2B17                            ; $2102: $CD $17 $2B
     ld a, $00                                     ; $2105: $3E $00
@@ -5607,7 +5290,7 @@ Jump_000_22D6:
     ld [$FFAB], a                                 ; $22E8: $EA $AB $FF
     ld a, $0A                                     ; $22EB: $3E $0A
     ld [$FFAC], a                                 ; $22ED: $EA $AC $FF
-    call Call_000_2B78                            ; $22F0: $CD $78 $2B
+    call Script_Close                            ; $22F0: $CD $78 $2B
     xor a                                         ; $22F3: $AF
     ld [$CCC2], a                                 ; $22F4: $EA $C2 $CC
     call System_Init                            ; $22F7: $CD $63 $08
@@ -5732,7 +5415,7 @@ jr_000_2398:
     bit 2, a                                      ; $23BB: $CB $57
     jr nz, jr_000_23C4                            ; $23BD: $20 $05
 
-    call Call_000_099B                            ; $23BF: $CD $9B $09
+    call System_UpdateGameNoScript                            ; $23BF: $CD $9B $09
     jr jr_000_238A                                ; $23C2: $18 $C6
 
 jr_000_23C4:
@@ -5745,7 +5428,7 @@ jr_000_23C8:
     ld [$C747], a                                 ; $23C9: $EA $47 $C7
     inc a                                         ; $23CC: $3C
     ld [$C737], a                                 ; $23CD: $EA $37 $C7
-    call Call_000_099B                            ; $23D0: $CD $9B $09
+    call System_UpdateGameNoScript                            ; $23D0: $CD $9B $09
     jr jr_000_238A                                ; $23D3: $18 $B5
 
 jr_000_23D5:
@@ -5760,7 +5443,7 @@ jr_000_23D5:
     ld a, e                                       ; $23E1: $7B
     inc a                                         ; $23E2: $3C
     ld [$C737], a                                 ; $23E3: $EA $37 $C7
-    call Call_000_099B                            ; $23E6: $CD $9B $09
+    call System_UpdateGameNoScript                            ; $23E6: $CD $9B $09
     jr jr_000_238A                                ; $23E9: $18 $9F
 
 jr_000_23EB:
@@ -5841,19 +5524,19 @@ jr_000_23EB:
     ld hl, $50B0                                  ; $2471: $21 $B0 $50
     ld de, $8800                                  ; $2474: $11 $00 $88
     ld bc, $0060                                  ; $2477: $01 $60 $00
-    call Call_000_07D6                            ; $247A: $CD $D6 $07
+    call MemMov                            ; $247A: $CD $D6 $07
     ld hl, $9C00                                  ; $247D: $21 $00 $9C
     ld bc, $00A0                                  ; $2480: $01 $A0 $00
     ld a, $8F                                     ; $2483: $3E $8F
     ld e, a                                       ; $2485: $5F
-    call Call_000_07E8                            ; $2486: $CD $E8 $07
+    call MemSet                            ; $2486: $CD $E8 $07
     xor a                                         ; $2489: $AF
     ld [$FF4F], a                                 ; $248A: $EA $4F $FF
     ld hl, $9C00                                  ; $248D: $21 $00 $9C
     ld bc, $00A0                                  ; $2490: $01 $A0 $00
     ld a, $80                                     ; $2493: $3E $80
     ld e, a                                       ; $2495: $5F
-    call Call_000_07E8                            ; $2496: $CD $E8 $07
+    call MemSet                            ; $2496: $CD $E8 $07
     ret                                           ; $2499: $C9
 
 
@@ -6045,7 +5728,7 @@ jr_000_25A3:
     ld [$CCD7], a                                 ; $25DE: $EA $D7 $CC
     ld hl, $414A                                  ; $25E1: $21 $4A $41
     ld e, $03                                     ; $25E4: $1E $03
-    call Call_000_07A9                            ; $25E6: $CD $A9 $07
+    call CallForeign                            ; $25E6: $CD $A9 $07
     ld a, $FF                                     ; $25E9: $3E $FF
     ld [$CCC4], a                                 ; $25EB: $EA $C4 $CC
     ld a, $F7                                     ; $25EE: $3E $F7
@@ -6058,7 +5741,7 @@ jr_000_25A3:
     push bc                                       ; $25F7: $C5
     ld hl, $412E                                  ; $25F8: $21 $2E $41
     ld e, $03                                     ; $25FB: $1E $03
-    call Call_000_07A9                            ; $25FD: $CD $A9 $07
+    call CallForeign                            ; $25FD: $CD $A9 $07
     ld a, [$CCC4]                                 ; $2600: $FA $C4 $CC
     ld l, a                                       ; $2603: $6F
     cp $FF                                        ; $2604: $FE $FF
@@ -6952,29 +6635,29 @@ jr_000_2B62:
     ret                                           ; $2B77: $C9
 
 
-Call_000_2B78:
+Script_Close:
     ld a, [$FFA7]                                 ; $2B78: $FA $A7 $FF
     ld h, a                                       ; $2B7B: $67
     ld a, [$FFA6]                                 ; $2B7C: $FA $A6 $FF
     ld l, a                                       ; $2B7F: $6F
-    ldh a, [$A8]                                  ; $2B80: $F0 $A8
+    ldh a, [$FFA8]                                  ; $2B80: $F0 $A8
     ld [hl+], a                                   ; $2B82: $22
-    ldh a, [$A9]                                  ; $2B83: $F0 $A9
+    ldh a, [$FFA9]                                  ; $2B83: $F0 $A9
     ld [hl+], a                                   ; $2B85: $22
-    ldh a, [$AA]                                  ; $2B86: $F0 $AA
+    ldh a, [$FFAA]                                  ; $2B86: $F0 $AA
     ld [hl+], a                                   ; $2B88: $22
-    ldh a, [$AB]                                  ; $2B89: $F0 $AB
+    ldh a, [$FFAB]                                  ; $2B89: $F0 $AB
     ld [hl+], a                                   ; $2B8B: $22
-    ldh a, [$AC]                                  ; $2B8C: $F0 $AC
+    ldh a, [$FFAC]                                  ; $2B8C: $F0 $AC
     ld [hl+], a                                   ; $2B8E: $22
-    ldh a, [$AD]                                  ; $2B8F: $F0 $AD
+    ldh a, [$FFAD]                                  ; $2B8F: $F0 $AD
     ld [hl+], a                                   ; $2B91: $22
-    ldh a, [$AE]                                  ; $2B92: $F0 $AE
+    ldh a, [$FFAE]                                  ; $2B92: $F0 $AE
     ld [hl+], a                                   ; $2B94: $22
     ret                                           ; $2B95: $C9
 
 
-Call_000_2B96:
+Script_Open:
     ld a, h                                       ; $2B96: $7C
     ld [$FFA7], a                                 ; $2B97: $EA $A7 $FF
     ld a, l                                       ; $2B9A: $7D
@@ -7124,9 +6807,9 @@ Interrupt_Timer_Start:
 Jump_000_2C75:
     push af                                       ; $2C75: $F5
     push hl                                       ; $2C76: $E5
-    ldh a, [$A0]                                  ; $2C77: $F0 $A0
+    ldh a, [$FFA0]                                  ; $2C77: $F0 $A0
     ld l, a                                       ; $2C79: $6F
-    ldh a, [$A1]                                  ; $2C7A: $F0 $A1
+    ldh a, [$FFA1]                                  ; $2C7A: $F0 $A1
     ld h, a                                       ; $2C7C: $67
     jp hl                                         ; $2C7D: $E9
 
@@ -7157,7 +6840,7 @@ Jump_000_2C7E:
     reti                                          ; $2CB6: $D9
 
 
-    ldh a, [$A5]                                  ; $2CB7: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $2CB7: $F0 $A5
     bit 0, a                                      ; $2CB9: $CB $47
     jr z, jr_000_2CD0                             ; $2CBB: $28 $13
 
@@ -7168,7 +6851,7 @@ Jump_000_2C7E:
     call $4B46                                    ; $2CCD: $CD $46 $4B
 
 jr_000_2CD0:
-    ldh a, [$A5]                                  ; $2CD0: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $2CD0: $F0 $A5
     bit 1, a                                      ; $2CD2: $CB $4F
     jr z, jr_000_2CEA                             ; $2CD4: $28 $14
 
@@ -7184,7 +6867,7 @@ jr_000_2CEA:
     ld a, $01                                     ; $2CF2: $3E $01
     ld [wRAMBank], a                                 ; $2CF4: $EA $5A $C9
     ldh [rSVBK], a                                ; $2CF7: $E0 $70
-    ldh a, [$A5]                                  ; $2CF9: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $2CF9: $F0 $A5
     bit 2, a                                      ; $2CFB: $CB $57
     jr z, jr_000_2D0A                             ; $2CFD: $28 $0B
 
@@ -7200,11 +6883,11 @@ jr_000_2D0A:
     ret                                           ; $2D15: $C9
 
 
-    ldh a, [$A2]                                  ; $2D16: $F0 $A2
+    ldh a, [$FFA2]                                  ; $2D16: $F0 $A2
     ldh [rLCDC], a                                ; $2D18: $E0 $40
-    ldh a, [$A3]                                  ; $2D1A: $F0 $A3
+    ldh a, [$FFA3]                                  ; $2D1A: $F0 $A3
     ldh [rSCX], a                                 ; $2D1C: $E0 $43
-    ldh a, [$A4]                                  ; $2D1E: $F0 $A4
+    ldh a, [$FFA4]                                  ; $2D1E: $F0 $A4
     ldh [rSCY], a                                 ; $2D20: $E0 $42
     pop hl                                        ; $2D22: $E1
     pop af                                        ; $2D23: $F1
@@ -7531,7 +7214,7 @@ Call_000_2EE9:
 
 Call_000_2F05:
     push hl                                       ; $2F05: $E5
-    call Call_000_2B78                            ; $2F06: $CD $78 $2B
+    call Script_Close                            ; $2F06: $CD $78 $2B
     SwitchROMBank $13
     pop hl                                        ; $2F11: $E1
     ld a, [hl+]                                   ; $2F12: $2A
@@ -7552,7 +7235,7 @@ jr_000_2F23:
     jr nz, jr_000_2F75                            ; $2F2E: $20 $45
 
     ld a, [hl+]                                   ; $2F30: $2A
-    ld [$C718], a                                 ; $2F31: $EA $18 $C7
+    ld [wScript_System], a                                 ; $2F31: $EA $18 $C7
     ld a, [hl+]                                   ; $2F34: $2A
     ld [$C719], a                                 ; $2F35: $EA $19 $C7
     ld a, [hl+]                                   ; $2F38: $2A
@@ -7565,10 +7248,10 @@ jr_000_2F23:
     push bc                                       ; $2F47: $C5
 
 jr_000_2F48:
-    ld hl, $C718                                  ; $2F48: $21 $18 $C7
-    call Call_000_2B96                            ; $2F4B: $CD $96 $2B
-    call Call_000_0AA7                            ; $2F4E: $CD $A7 $0A
-    call Call_000_2B78                            ; $2F51: $CD $78 $2B
+    ld hl, wScript_System                                  ; $2F48: $21 $18 $C7
+    call Script_Open                            ; $2F4B: $CD $96 $2B
+    call Script_Play                            ; $2F4E: $CD $A7 $0A
+    call Script_Close                            ; $2F51: $CD $78 $2B
     SwitchROMBank [wVBlank_Bank]
     ld a, [wVBlank_Func + 1]                                 ; $2F5D: $FA $E9 $C6
     ld h, a                                       ; $2F60: $67
@@ -7595,8 +7278,8 @@ jr_000_2F75:
 
 Jump_000_2F7B:
 jr_000_2F7B:
-    ld hl, $C70A                                  ; $2F7B: $21 $0A $C7
-    call Call_000_2B96                            ; $2F7E: $CD $96 $2B
+    ld hl, wScript_Master                                  ; $2F7B: $21 $0A $C7
+    call Script_Open                            ; $2F7E: $CD $96 $2B
     ret                                           ; $2F81: $C9
 
 
@@ -8176,7 +7859,7 @@ Call_000_32BE:
     reti                                          ; $32F3: $D9
 
 
-    ldh a, [$A5]                                  ; $32F4: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $32F4: $F0 $A5
     bit 0, a                                      ; $32F6: $CB $47
     jr z, jr_000_3311                             ; $32F8: $28 $17
 
@@ -8193,7 +7876,7 @@ Call_000_32BE:
     ldh [rLYC], a                                 ; $330F: $E0 $45
 
 jr_000_3311:
-    ldh a, [$A5]                                  ; $3311: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $3311: $F0 $A5
     bit 1, a                                      ; $3313: $CB $4F
     jr z, jr_000_3328                             ; $3315: $28 $11
 
@@ -8210,7 +7893,7 @@ jr_000_3328:
     ld a, $01                                     ; $3330: $3E $01
     ld [wRAMBank], a                                 ; $3332: $EA $5A $C9
     ldh [rSVBK], a                                ; $3335: $E0 $70
-    ldh a, [$A5]                                  ; $3337: $F0 $A5
+    ldh a, [hInterrupt_VBlank_Control]                                  ; $3337: $F0 $A5
     bit 2, a                                      ; $3339: $CB $57
     jr z, jr_000_3348                             ; $333B: $28 $0B
 
