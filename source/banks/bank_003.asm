@@ -24,9 +24,7 @@ jr_003_4017:
     push hl                                       ; $401B: $E5
     call Call_003_422E                            ; $401C: $CD $2E $42
     pop de                                        ; $401F: $D1
-    ld a, [$CCD5]                                 ; $4020: $FA $D5 $CC
-    ld [wRAMBank], a                                 ; $4023: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4026: $E0 $70
+    SwitchRAMBank [$CCD5]
     ld hl, $CCD3                                  ; $4028: $21 $D3 $CC
     ld a, [hl+]                                   ; $402B: $2A
     ld h, [hl]                                    ; $402C: $66
@@ -261,9 +259,7 @@ jr_003_4146:
     call Call_003_422E                            ; $417B: $CD $2E $42
 
 jr_003_417E:
-    ld a, [$CCD5]                                 ; $417E: $FA $D5 $CC
-    ld [wRAMBank], a                                 ; $4181: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4184: $E0 $70
+    SwitchRAMBank [$CCD5]
     ld hl, $CCD3                                  ; $4186: $21 $D3 $CC
     ld a, [hl+]                                   ; $4189: $2A
     ld h, [hl]                                    ; $418A: $66

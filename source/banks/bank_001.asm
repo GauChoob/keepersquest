@@ -376,9 +376,7 @@ Jump_001_41D8:
     ld h, a                                       ; $41DA: $67
     ldh a, [$FF93]                                  ; $41DB: $F0 $93
     ld l, a                                       ; $41DD: $6F
-    ld a, $05                                     ; $41DE: $3E $05
-    ld [wRAMBank], a                                 ; $41E0: $EA $5A $C9
-    ldh [rSVBK], a                                ; $41E3: $E0 $70
+    SwitchRAMBank $05
     ld a, [hl]                                    ; $41E5: $7E
     cp $82                                        ; $41E6: $FE $82
     ret nz                                        ; $41E8: $C0
@@ -442,9 +440,7 @@ Call_001_422E:
     and a                                         ; $4231: $A7
     ret nz                                        ; $4232: $C0
 
-    ld a, $05                                     ; $4233: $3E $05
-    ld [wRAMBank], a                                 ; $4235: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4238: $E0 $70
+    SwitchRAMBank $05
     ld a, [$C6E1]                                 ; $423A: $FA $E1 $C6
     ld e, a                                       ; $423D: $5F
     ld a, [$FF9F]                                 ; $423E: $FA $9F $FF
@@ -719,14 +715,14 @@ Script_Table::
     dw Cmd_299C
     dw Cmd_29D2
     dw Cmd_29F1
-    dw Cmd_2A12
-    dw Cmd_2A18
-    dw Cmd_2A52
-    dw Cmd_2A66
-    dw Cmd_2A7D
-    dw Cmd_2A99
-    dw Cmd_2AB8
-    dw Cmd_2AD7
+    dw Cmd_Ram_NextGameCount
+    dw Cmd_Ram_SetGameCount
+    dw Cmd_Ram_SetWramByte
+    dw Cmd_Ram_SetWramWord
+    dw Cmd_Ram_SetXramByte
+    dw Cmd_Ram_SetXramWord
+    dw Cmd_Ram_AndXramByte
+    dw Cmd_Ram_OrXramByte
 
 
     ld a, [$C9C4]                                 ; $441A: $FA $C4 $C9
@@ -756,7 +752,7 @@ jr_001_4433:
     ret                                           ; $444C: $C9
 
 
-    ld a, [$FF04]                                 ; $444D: $FA $04 $FF
+    ld a, [rDIV]                                 ; $444D: $FA $04 $FF
     and $0F                                       ; $4450: $E6 $0F
     ld b, a                                       ; $4452: $47
     add a                                         ; $4453: $87
@@ -776,7 +772,7 @@ jr_001_4433:
     ld a, [hl+]                                   ; $4467: $2A
     ld d, [hl]                                    ; $4468: $56
     ld e, a                                       ; $4469: $5F
-    ld a, [$FF04]                                 ; $446A: $FA $04 $FF
+    ld a, [rDIV]                                 ; $446A: $FA $04 $FF
     swap a                                        ; $446D: $CB $37
     and $0F                                       ; $446F: $E6 $0F
     ld c, a                                       ; $4471: $4F
@@ -816,14 +812,10 @@ jr_001_4433:
     ld h, a                                       ; $44AD: $67
     ld a, [$C704]                                 ; $44AE: $FA $04 $C7
     ld l, a                                       ; $44B1: $6F
-    ld a, $05                                     ; $44B2: $3E $05
-    ld [wRAMBank], a                                 ; $44B4: $EA $5A $C9
-    ldh [rSVBK], a                                ; $44B7: $E0 $70
+    SwitchRAMBank $05
     ld a, [de]                                    ; $44B9: $1A
     ld [hl], a                                    ; $44BA: $77
-    ld a, $03                                     ; $44BB: $3E $03
-    ld [wRAMBank], a                                 ; $44BD: $EA $5A $C9
-    ldh [rSVBK], a                                ; $44C0: $E0 $70
+    SwitchRAMBank $03
     ld a, [de]                                    ; $44C2: $1A
     ld [hl], a                                    ; $44C3: $77
 
@@ -938,23 +930,15 @@ jr_001_4548:
     ld h, a                                       ; $456C: $67
     ld a, [$C704]                                 ; $456D: $FA $04 $C7
     ld l, a                                       ; $4570: $6F
-    ld a, $06                                     ; $4571: $3E $06
-    ld [wRAMBank], a                                 ; $4573: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4576: $E0 $70
+    SwitchRAMBank $06
     ld a, [de]                                    ; $4578: $1A
     ld c, a                                       ; $4579: $4F
-    ld a, $05                                     ; $457A: $3E $05
-    ld [wRAMBank], a                                 ; $457C: $EA $5A $C9
-    ldh [rSVBK], a                                ; $457F: $E0 $70
+    SwitchRAMBank $05
     ld [hl], c                                    ; $4581: $71
-    ld a, $04                                     ; $4582: $3E $04
-    ld [wRAMBank], a                                 ; $4584: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4587: $E0 $70
+    SwitchRAMBank $04
     ld a, [de]                                    ; $4589: $1A
     ld c, a                                       ; $458A: $4F
-    ld a, $03                                     ; $458B: $3E $03
-    ld [wRAMBank], a                                 ; $458D: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4590: $E0 $70
+    SwitchRAMBank $03
     ld [hl], c                                    ; $4592: $71
     jp Jump_001_44C4                              ; $4593: $C3 $C4 $44
 
@@ -1033,7 +1017,7 @@ jr_001_45DE:
 
     inc bc                                        ; $45E1: $03
     ld a, b                                       ; $45E2: $78
-    ld [$FFAA], a                                 ; $45E3: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $45E3: $EA $AA $FF
     ld a, c                                       ; $45E6: $79
     ld [hScript.Frame], a                                 ; $45E7: $EA $A9 $FF
     ld a, $D3                                     ; $45EA: $3E $D3
@@ -1078,7 +1062,7 @@ jr_001_460F:
 
 jr_001_4615:
     ld a, b                                       ; $4615: $78
-    ld [$FFAA], a                                 ; $4616: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4616: $EA $AA $FF
     ld a, c                                       ; $4619: $79
     ld [hScript.Frame], a                                 ; $461A: $EA $A9 $FF
     ld a, $D3                                     ; $461D: $3E $D3
@@ -1157,11 +1141,8 @@ jr_001_4680:
     ret                                           ; $4680: $C9
 
 
-    ld a, $00                                     ; $4681: $3E $00
-    add $00                                       ; $4683: $C6 $00
-    ld [$4000], a                                 ; $4685: $EA $00 $40
-    ld a, $0A                                     ; $4688: $3E $0A
-    ld [$0000], a                                 ; $468A: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld hl, $A018                                  ; $468D: $21 $18 $A0
     ld bc, $0313                                  ; $4690: $01 $13 $03
     ld e, $00                                     ; $4693: $1E $00
@@ -1171,22 +1152,17 @@ jr_001_4680:
     ld a, $FF                                     ; $469E: $3E $FF
     ld e, a                                       ; $46A0: $5F
     call MemSet                            ; $46A1: $CD $E8 $07
-    xor a                                         ; $46A4: $AF
-    ld [$0000], a                                 ; $46A5: $EA $00 $00
+    Battery_Off
     ret                                           ; $46A8: $C9
 
-
-    ld a, $00                                     ; $46A9: $3E $00
-    add $00                                       ; $46AB: $C6 $00
-    ld [$4000], a                                 ; $46AD: $EA $00 $40
-    ld a, $0A                                     ; $46B0: $3E $0A
-    ld [$0000], a                                 ; $46B2: $EA $00 $00
-    ld hl, $A026                                  ; $46B5: $21 $26 $A0
+SystemXX_NewGamePlusInit::
+    Battery_SetBank $00
+    Battery_On
+    ld hl, xGamestate_RAM_NEW_GAME_PLUS_START                                  ; $46B5: $21 $26 $A0
     ld bc, $0305                                  ; $46B8: $01 $05 $03
     ld e, $00                                     ; $46BB: $1E $00
     call MemSet                            ; $46BD: $CD $E8 $07
-    xor a                                         ; $46C0: $AF
-    ld [$0000], a                                 ; $46C1: $EA $00 $00
+    Battery_Off
     ret                                           ; $46C4: $C9
 
 
@@ -1759,9 +1735,7 @@ Call_001_4A34:
     and a                                         ; $4A3D: $A7
     ret nz                                        ; $4A3E: $C0
 
-    ld a, $05                                     ; $4A3F: $3E $05
-    ld [wRAMBank], a                                 ; $4A41: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4A44: $E0 $70
+    SwitchRAMBank $05
     ld a, [$C6D2]                                 ; $4A46: $FA $D2 $C6
     ld c, a                                       ; $4A49: $4F
     ld a, [$C6D0]                                 ; $4A4A: $FA $D0 $C6
@@ -1942,9 +1916,7 @@ Call_001_4B1C:
 
 
 Call_001_4B43:
-    ld a, $05                                     ; $4B43: $3E $05
-    ld [wRAMBank], a                                 ; $4B45: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4B48: $E0 $70
+    SwitchRAMBank $05
     ldh a, [$FF8C]                                  ; $4B4A: $F0 $8C
     ld e, a                                       ; $4B4C: $5F
     bit 5, e                                      ; $4B4D: $CB $6B
@@ -2045,14 +2017,10 @@ Jump_001_4BBA:
     ld [$C8E9], a                                 ; $4BC8: $EA $E9 $C8
     ld a, l                                       ; $4BCB: $7D
     ld [$C8E8], a                                 ; $4BCC: $EA $E8 $C8
-    ld a, $05                                     ; $4BCF: $3E $05
-    ld [wRAMBank], a                                 ; $4BD1: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4BD4: $E0 $70
+    SwitchRAMBank $05
     ld a, $00                                     ; $4BD6: $3E $00
     ld [hl], a                                    ; $4BD8: $77
-    ld a, $03                                     ; $4BD9: $3E $03
-    ld [wRAMBank], a                                 ; $4BDB: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4BDE: $E0 $70
+    SwitchRAMBank $03
     ld a, $FC                                     ; $4BE0: $3E $FC
     ld [hl], a                                    ; $4BE2: $77
     ld hl, $4B0F                                  ; $4BE3: $21 $0F $4B
@@ -2099,7 +2067,7 @@ Jump_001_4C08:
     ld a, $B3                                     ; $4C26: $3E $B3
     ld [hScript.Frame], a                                 ; $4C28: $EA $A9 $FF
     ld a, $61                                     ; $4C2B: $3E $61
-    ld [$FFAA], a                                 ; $4C2D: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4C2D: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4C30: $C3 $BA $4B
 
 
@@ -2114,7 +2082,7 @@ jr_001_4C33:
     ld a, $67                                     ; $4C3F: $3E $67
     ld [hScript.Frame], a                                 ; $4C41: $EA $A9 $FF
     ld a, $61                                     ; $4C44: $3E $61
-    ld [$FFAA], a                                 ; $4C46: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4C46: $EA $AA $FF
     jp Jump_001_6354                              ; $4C49: $C3 $54 $63
 
 
@@ -2151,7 +2119,7 @@ Jump_001_4C59:
     ld a, $D9                                     ; $4C77: $3E $D9
     ld [hScript.Frame], a                                 ; $4C79: $EA $A9 $FF
     ld a, $61                                     ; $4C7C: $3E $61
-    ld [$FFAA], a                                 ; $4C7E: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4C7E: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4C81: $C3 $BA $4B
 
 
@@ -2166,7 +2134,7 @@ jr_001_4C84:
     ld a, $F5                                     ; $4C90: $3E $F5
     ld [hScript.Frame], a                                 ; $4C92: $EA $A9 $FF
     ld a, $60                                     ; $4C95: $3E $60
-    ld [$FFAA], a                                 ; $4C97: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4C97: $EA $AA $FF
     jp Jump_001_6354                              ; $4C9A: $C3 $54 $63
 
 
@@ -2203,7 +2171,7 @@ Jump_001_4CAA:
     ld a, $FF                                     ; $4CC8: $3E $FF
     ld [hScript.Frame], a                                 ; $4CCA: $EA $A9 $FF
     ld a, $61                                     ; $4CCD: $3E $61
-    ld [$FFAA], a                                 ; $4CCF: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4CCF: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4CD2: $C3 $BA $4B
 
 
@@ -2218,7 +2186,7 @@ jr_001_4CD5:
     ld a, $1B                                     ; $4CE1: $3E $1B
     ld [hScript.Frame], a                                 ; $4CE3: $EA $A9 $FF
     ld a, $61                                     ; $4CE6: $3E $61
-    ld [$FFAA], a                                 ; $4CE8: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4CE8: $EA $AA $FF
     jp Jump_001_6354                              ; $4CEB: $C3 $54 $63
 
 
@@ -2255,7 +2223,7 @@ Jump_001_4CFB:
     ld a, $8D                                     ; $4D19: $3E $8D
     ld [hScript.Frame], a                                 ; $4D1B: $EA $A9 $FF
     ld a, $61                                     ; $4D1E: $3E $61
-    ld [$FFAA], a                                 ; $4D20: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4D20: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4D23: $C3 $BA $4B
 
 
@@ -2270,7 +2238,7 @@ jr_001_4D26:
     ld a, $41                                     ; $4D32: $3E $41
     ld [hScript.Frame], a                                 ; $4D34: $EA $A9 $FF
     ld a, $61                                     ; $4D37: $3E $61
-    ld [$FFAA], a                                 ; $4D39: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $4D39: $EA $AA $FF
     jp Jump_001_6354                              ; $4D3C: $C3 $54 $63
 
 
@@ -2298,9 +2266,7 @@ Call_001_4D4C:
     ld a, [$FF9E]                                 ; $4D5D: $FA $9E $FF
     ld l, a                                       ; $4D60: $6F
     add hl, de                                    ; $4D61: $19
-    ld a, $05                                     ; $4D62: $3E $05
-    ld [wRAMBank], a                                 ; $4D64: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4D67: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4D69: $C9
 
 
@@ -2316,9 +2282,7 @@ Call_001_4D6A:
     ld a, [$FF9E]                                 ; $4D78: $FA $9E $FF
     ld l, a                                       ; $4D7B: $6F
     add hl, de                                    ; $4D7C: $19
-    ld a, $05                                     ; $4D7D: $3E $05
-    ld [wRAMBank], a                                 ; $4D7F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4D82: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4D84: $C9
 
 
@@ -2334,9 +2298,7 @@ Call_001_4D85:
     ld a, [$FF9E]                                 ; $4D93: $FA $9E $FF
     ld l, a                                       ; $4D96: $6F
     add hl, de                                    ; $4D97: $19
-    ld a, $05                                     ; $4D98: $3E $05
-    ld [wRAMBank], a                                 ; $4D9A: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4D9D: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4D9F: $C9
 
 
@@ -2356,9 +2318,7 @@ Call_001_4DA0:
     ld a, [$FF9E]                                 ; $4DB3: $FA $9E $FF
     ld l, a                                       ; $4DB6: $6F
     add hl, de                                    ; $4DB7: $19
-    ld a, $05                                     ; $4DB8: $3E $05
-    ld [wRAMBank], a                                 ; $4DBA: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4DBD: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4DBF: $C9
 
 
@@ -2376,9 +2336,7 @@ Call_001_4DC0:
     ld a, [$FF93]                                 ; $4DD1: $FA $93 $FF
     ld l, a                                       ; $4DD4: $6F
     add hl, de                                    ; $4DD5: $19
-    ld a, $05                                     ; $4DD6: $3E $05
-    ld [wRAMBank], a                                 ; $4DD8: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4DDB: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4DDD: $C9
 
 
@@ -2394,9 +2352,7 @@ Call_001_4DDE:
     ld a, [$FF93]                                 ; $4DEC: $FA $93 $FF
     ld l, a                                       ; $4DEF: $6F
     add hl, de                                    ; $4DF0: $19
-    ld a, $05                                     ; $4DF1: $3E $05
-    ld [wRAMBank], a                                 ; $4DF3: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4DF6: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4DF8: $C9
 
 
@@ -2412,9 +2368,7 @@ Call_001_4DF9:
     ld a, [$FF93]                                 ; $4E07: $FA $93 $FF
     ld l, a                                       ; $4E0A: $6F
     add hl, de                                    ; $4E0B: $19
-    ld a, $05                                     ; $4E0C: $3E $05
-    ld [wRAMBank], a                                 ; $4E0E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4E11: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4E13: $C9
 
 
@@ -2434,9 +2388,7 @@ Call_001_4E14:
     ld a, [$FF93]                                 ; $4E27: $FA $93 $FF
     ld l, a                                       ; $4E2A: $6F
     add hl, de                                    ; $4E2B: $19
-    ld a, $05                                     ; $4E2C: $3E $05
-    ld [wRAMBank], a                                 ; $4E2E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4E31: $E0 $70
+    SwitchRAMBank $05
     ret                                           ; $4E33: $C9
 
 
@@ -2469,9 +2421,7 @@ Jump_001_4E3D:
     ld [$C9D4], a                                 ; $4E60: $EA $D4 $C9
     ld a, $09                                     ; $4E63: $3E $09
     ld [hl], a                                    ; $4E65: $77
-    ld a, $03                                     ; $4E66: $3E $03
-    ld [wRAMBank], a                                 ; $4E68: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4E6B: $E0 $70
+    SwitchRAMBank $03
     ld [hl], c                                    ; $4E6D: $71
     ld hl, $4B0F                                  ; $4E6E: $21 $0F $4B
     ld e, $07                                     ; $4E71: $1E $07
@@ -2491,14 +2441,10 @@ Jump_001_4E3D:
     ld [$C9D1], a                                 ; $4E8A: $EA $D1 $C9
     ld a, l                                       ; $4E8D: $7D
     ld [$C9D0], a                                 ; $4E8E: $EA $D0 $C9
-    ld a, $05                                     ; $4E91: $3E $05
-    ld [wRAMBank], a                                 ; $4E93: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4E96: $E0 $70
+    SwitchRAMBank $05
     ld a, $81                                     ; $4E98: $3E $81
     ld [hl], a                                    ; $4E9A: $77
-    ld a, $03                                     ; $4E9B: $3E $03
-    ld [wRAMBank], a                                 ; $4E9D: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4EA0: $E0 $70
+    SwitchRAMBank $03
     ld a, $FD                                     ; $4EA2: $3E $FD
     ld [hl], a                                    ; $4EA4: $77
     ld hl, $4B0F                                  ; $4EA5: $21 $0F $4B
@@ -2518,9 +2464,7 @@ Jump_001_4E3D:
     ldh [$FF8D], a                                  ; $4EC5: $E0 $8D
     ld a, $63                                     ; $4EC7: $3E $63
     ldh [$FF8E], a                                  ; $4EC9: $E0 $8E
-    ld a, $03                                     ; $4ECB: $3E $03
-    ld [wRAMBank], a                                 ; $4ECD: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4ED0: $E0 $70
+    SwitchRAMBank $03
     ld a, [$FF9F]                                 ; $4ED2: $FA $9F $FF
     ld h, a                                       ; $4ED5: $67
     ld a, [$FF9E]                                 ; $4ED6: $FA $9E $FF
@@ -2532,9 +2476,7 @@ Jump_001_4E3D:
     ld c, [hl]                                    ; $4EE1: $4E
     push hl                                       ; $4EE2: $E5
     add hl, de                                    ; $4EE3: $19
-    ld a, $05                                     ; $4EE4: $3E $05
-    ld [wRAMBank], a                                 ; $4EE6: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4EE9: $E0 $70
+    SwitchRAMBank $05
     ld a, [hl]                                    ; $4EEB: $7E
     cp $81                                        ; $4EEC: $FE $81
     jp nz, Jump_001_4E34                          ; $4EEE: $C2 $34 $4E
@@ -2558,9 +2500,7 @@ Jump_001_4E3D:
     ldh [$FF8D], a                                  ; $4F0D: $E0 $8D
     ld a, $63                                     ; $4F0F: $3E $63
     ldh [$FF8E], a                                  ; $4F11: $E0 $8E
-    ld a, $03                                     ; $4F13: $3E $03
-    ld [wRAMBank], a                                 ; $4F15: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4F18: $E0 $70
+    SwitchRAMBank $03
     ld hl, $FF93                                  ; $4F1A: $21 $93 $FF
     ld a, [hl+]                                   ; $4F1D: $2A
     ld h, [hl]                                    ; $4F1E: $66
@@ -2573,9 +2513,7 @@ Jump_001_4E3D:
     ld c, [hl]                                    ; $4F29: $4E
     push hl                                       ; $4F2A: $E5
     dec hl                                        ; $4F2B: $2B
-    ld a, $05                                     ; $4F2C: $3E $05
-    ld [wRAMBank], a                                 ; $4F2E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4F31: $E0 $70
+    SwitchRAMBank $05
     ld a, [hl]                                    ; $4F33: $7E
     cp $81                                        ; $4F34: $FE $81
     jp nz, Jump_001_4E34                          ; $4F36: $C2 $34 $4E
@@ -2599,9 +2537,7 @@ Jump_001_4E3D:
     ldh [$FF8D], a                                  ; $4F55: $E0 $8D
     ld a, $63                                     ; $4F57: $3E $63
     ldh [$FF8E], a                                  ; $4F59: $E0 $8E
-    ld a, $03                                     ; $4F5B: $3E $03
-    ld [wRAMBank], a                                 ; $4F5D: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4F60: $E0 $70
+    SwitchRAMBank $03
     ld hl, $FF93                                  ; $4F62: $21 $93 $FF
     ld a, [hl+]                                   ; $4F65: $2A
     ld h, [hl]                                    ; $4F66: $66
@@ -2614,9 +2550,7 @@ Jump_001_4E3D:
     ld c, [hl]                                    ; $4F71: $4E
     push hl                                       ; $4F72: $E5
     inc hl                                        ; $4F73: $23
-    ld a, $05                                     ; $4F74: $3E $05
-    ld [wRAMBank], a                                 ; $4F76: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4F79: $E0 $70
+    SwitchRAMBank $05
     ld a, [hl]                                    ; $4F7B: $7E
     cp $81                                        ; $4F7C: $FE $81
     jp nz, Jump_001_4E34                          ; $4F7E: $C2 $34 $4E
@@ -2640,9 +2574,7 @@ Jump_001_4E3D:
     ldh [$FF8D], a                                  ; $4F9D: $E0 $8D
     ld a, $63                                     ; $4F9F: $3E $63
     ldh [$FF8E], a                                  ; $4FA1: $E0 $8E
-    ld a, $03                                     ; $4FA3: $3E $03
-    ld [wRAMBank], a                                 ; $4FA5: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4FA8: $E0 $70
+    SwitchRAMBank $03
     ld hl, $FF93                                  ; $4FAA: $21 $93 $FF
     ld a, [hl+]                                   ; $4FAD: $2A
     ld h, [hl]                                    ; $4FAE: $66
@@ -2660,9 +2592,7 @@ Jump_001_4E3D:
     ld c, [hl]                                    ; $4FC1: $4E
     push hl                                       ; $4FC2: $E5
     add hl, de                                    ; $4FC3: $19
-    ld a, $05                                     ; $4FC4: $3E $05
-    ld [wRAMBank], a                                 ; $4FC6: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4FC9: $E0 $70
+    SwitchRAMBank $05
     ld a, [hl]                                    ; $4FCB: $7E
     cp $81                                        ; $4FCC: $FE $81
     jp nz, Jump_001_4E34                          ; $4FCE: $C2 $34 $4E
@@ -2738,7 +2668,7 @@ Jump_001_5030:
     ld a, $C9                                     ; $503C: $3E $C9
     ldh [hScript.Frame], a                                  ; $503E: $E0 $A9
     ld a, $68                                     ; $5040: $3E $68
-    ldh [$FFAA], a                                  ; $5042: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5042: $E0 $AA
     ld a, $71                                     ; $5044: $3E $71
     ldh [$FF8D], a                                  ; $5046: $E0 $8D
     ld a, $50                                     ; $5048: $3E $50
@@ -2758,7 +2688,7 @@ Jump_001_5052:
     ld a, $DA                                     ; $505E: $3E $DA
     ldh [hScript.Frame], a                                  ; $5060: $E0 $A9
     ld a, $68                                     ; $5062: $3E $68
-    ldh [$FFAA], a                                  ; $5064: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5064: $E0 $AA
     ld a, $71                                     ; $5066: $3E $71
     ldh [$FF8D], a                                  ; $5068: $E0 $8D
     ld a, $50                                     ; $506A: $3E $50
@@ -2809,7 +2739,7 @@ Jump_001_5052:
     ld a, $AF                                     ; $50C2: $3E $AF
     ldh [hScript.Frame], a                                  ; $50C4: $E0 $A9
     ld a, $66                                     ; $50C6: $3E $66
-    ldh [$FFAA], a                                  ; $50C8: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $50C8: $E0 $AA
     jp Jump_001_6354                              ; $50CA: $C3 $54 $63
 
 
@@ -2817,7 +2747,7 @@ Jump_001_50CD:
     ld a, $08                                     ; $50CD: $3E $08
     ld [hScript.Frame], a                                 ; $50CF: $EA $A9 $FF
     ld a, $6A                                     ; $50D2: $3E $6A
-    ld [$FFAA], a                                 ; $50D4: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $50D4: $EA $AA $FF
     jp Jump_001_4FEF                              ; $50D7: $C3 $EF $4F
 
 
@@ -2831,7 +2761,7 @@ Jump_001_50DA:
     ld a, $E7                                     ; $50E6: $3E $E7
     ldh [hScript.Frame], a                                  ; $50E8: $E0 $A9
     ld a, $67                                     ; $50EA: $3E $67
-    ldh [$FFAA], a                                  ; $50EC: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $50EC: $E0 $AA
     ld a, $1B                                     ; $50EE: $3E $1B
     ldh [$FF8D], a                                  ; $50F0: $E0 $8D
     ld a, $51                                     ; $50F2: $3E $51
@@ -2851,7 +2781,7 @@ Jump_001_50FC:
     ld a, $F8                                     ; $5108: $3E $F8
     ldh [hScript.Frame], a                                  ; $510A: $E0 $A9
     ld a, $67                                     ; $510C: $3E $67
-    ldh [$FFAA], a                                  ; $510E: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $510E: $E0 $AA
     ld a, $1B                                     ; $5110: $3E $1B
     ldh [$FF8D], a                                  ; $5112: $E0 $8D
     ld a, $51                                     ; $5114: $3E $51
@@ -2902,7 +2832,7 @@ Jump_001_50FC:
     ld a, $79                                     ; $516C: $3E $79
     ldh [hScript.Frame], a                                  ; $516E: $E0 $A9
     ld a, $66                                     ; $5170: $3E $66
-    ldh [$FFAA], a                                  ; $5172: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5172: $E0 $AA
     jp Jump_001_6354                              ; $5174: $C3 $54 $63
 
 
@@ -2910,7 +2840,7 @@ Jump_001_5177:
     ld a, $27                                     ; $5177: $3E $27
     ld [hScript.Frame], a                                 ; $5179: $EA $A9 $FF
     ld a, $69                                     ; $517C: $3E $69
-    ld [$FFAA], a                                 ; $517E: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $517E: $EA $AA $FF
     jp Jump_001_4FEF                              ; $5181: $C3 $EF $4F
 
 
@@ -2924,7 +2854,7 @@ Jump_001_5184:
     ld a, $43                                     ; $5190: $3E $43
     ldh [hScript.Frame], a                                  ; $5192: $E0 $A9
     ld a, $68                                     ; $5194: $3E $68
-    ldh [$FFAA], a                                  ; $5196: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5196: $E0 $AA
     ld a, $C5                                     ; $5198: $3E $C5
     ldh [$FF8D], a                                  ; $519A: $E0 $8D
     ld a, $51                                     ; $519C: $3E $51
@@ -2944,7 +2874,7 @@ Jump_001_51A6:
     ld a, $54                                     ; $51B2: $3E $54
     ldh [hScript.Frame], a                                  ; $51B4: $E0 $A9
     ld a, $68                                     ; $51B6: $3E $68
-    ldh [$FFAA], a                                  ; $51B8: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $51B8: $E0 $AA
     ld a, $C5                                     ; $51BA: $3E $C5
     ldh [$FF8D], a                                  ; $51BC: $E0 $8D
     ld a, $51                                     ; $51BE: $3E $51
@@ -2995,7 +2925,7 @@ Jump_001_51A6:
     ld a, $8B                                     ; $5216: $3E $8B
     ldh [hScript.Frame], a                                  ; $5218: $E0 $A9
     ld a, $66                                     ; $521A: $3E $66
-    ldh [$FFAA], a                                  ; $521C: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $521C: $E0 $AA
     jp Jump_001_6354                              ; $521E: $C3 $54 $63
 
 
@@ -3003,7 +2933,7 @@ Jump_001_5221:
     ld a, $72                                     ; $5221: $3E $72
     ld [hScript.Frame], a                                 ; $5223: $EA $A9 $FF
     ld a, $69                                     ; $5226: $3E $69
-    ld [$FFAA], a                                 ; $5228: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5228: $EA $AA $FF
     jp Jump_001_4FEF                              ; $522B: $C3 $EF $4F
 
 
@@ -3017,7 +2947,7 @@ Jump_001_522E:
     ld a, $6D                                     ; $523A: $3E $6D
     ldh [hScript.Frame], a                                  ; $523C: $E0 $A9
     ld a, $68                                     ; $523E: $3E $68
-    ldh [$FFAA], a                                  ; $5240: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5240: $E0 $AA
     ld a, $6F                                     ; $5242: $3E $6F
     ldh [$FF8D], a                                  ; $5244: $E0 $8D
     ld a, $52                                     ; $5246: $3E $52
@@ -3037,7 +2967,7 @@ Jump_001_5250:
     ld a, $7E                                     ; $525C: $3E $7E
     ldh [hScript.Frame], a                                  ; $525E: $E0 $A9
     ld a, $68                                     ; $5260: $3E $68
-    ldh [$FFAA], a                                  ; $5262: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5262: $E0 $AA
     ld a, $6F                                     ; $5264: $3E $6F
     ldh [$FF8D], a                                  ; $5266: $E0 $8D
     ld a, $52                                     ; $5268: $3E $52
@@ -3088,7 +3018,7 @@ Jump_001_5250:
     ld a, $9D                                     ; $52C0: $3E $9D
     ldh [hScript.Frame], a                                  ; $52C2: $E0 $A9
     ld a, $66                                     ; $52C4: $3E $66
-    ldh [$FFAA], a                                  ; $52C6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $52C6: $E0 $AA
     jp Jump_001_6354                              ; $52C8: $C3 $54 $63
 
 
@@ -3096,7 +3026,7 @@ Jump_001_52CB:
     ld a, $BD                                     ; $52CB: $3E $BD
     ld [hScript.Frame], a                                 ; $52CD: $EA $A9 $FF
     ld a, $69                                     ; $52D0: $3E $69
-    ld [$FFAA], a                                 ; $52D2: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $52D2: $EA $AA $FF
     jp Jump_001_4FEF                              ; $52D5: $C3 $EF $4F
 
 
@@ -3177,14 +3107,14 @@ Jump_001_5326:
     ld a, $E2                                     ; $5326: $3E $E2
     ld [hScript.Frame], a                                 ; $5328: $EA $A9 $FF
     ld a, $62                                     ; $532B: $3E $62
-    ld [$FFAA], a                                 ; $532D: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $532D: $EA $AA $FF
     jp Jump_001_6354                              ; $5330: $C3 $54 $63
 
 
     ld a, $06                                     ; $5333: $3E $06
     ld [hScript.Frame], a                                 ; $5335: $EA $A9 $FF
     ld a, $64                                     ; $5338: $3E $64
-    ld [$FFAA], a                                 ; $533A: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $533A: $EA $AA $FF
     jp Jump_001_6354                              ; $533D: $C3 $54 $63
 
 
@@ -3209,14 +3139,14 @@ Jump_001_5354:
     ld a, $25                                     ; $5354: $3E $25
     ld [hScript.Frame], a                                 ; $5356: $EA $A9 $FF
     ld a, $62                                     ; $5359: $3E $62
-    ld [$FFAA], a                                 ; $535B: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $535B: $EA $AA $FF
     jp Jump_001_6354                              ; $535E: $C3 $54 $63
 
 
     ld a, $21                                     ; $5361: $3E $21
     ld [hScript.Frame], a                                 ; $5363: $EA $A9 $FF
     ld a, $63                                     ; $5366: $3E $63
-    ld [$FFAA], a                                 ; $5368: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5368: $EA $AA $FF
     jp Jump_001_6354                              ; $536B: $C3 $54 $63
 
 
@@ -3241,14 +3171,14 @@ Jump_001_5382:
     ld a, $64                                     ; $5382: $3E $64
     ld [hScript.Frame], a                                 ; $5384: $EA $A9 $FF
     ld a, $62                                     ; $5387: $3E $62
-    ld [$FFAA], a                                 ; $5389: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5389: $EA $AA $FF
     jp Jump_001_6354                              ; $538C: $C3 $54 $63
 
 
     ld a, $6F                                     ; $538F: $3E $6F
     ld [hScript.Frame], a                                 ; $5391: $EA $A9 $FF
     ld a, $63                                     ; $5394: $3E $63
-    ld [$FFAA], a                                 ; $5396: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5396: $EA $AA $FF
     jp Jump_001_6354                              ; $5399: $C3 $54 $63
 
 
@@ -3273,14 +3203,14 @@ Jump_001_53B0:
     ld a, $A3                                     ; $53B0: $3E $A3
     ld [hScript.Frame], a                                 ; $53B2: $EA $A9 $FF
     ld a, $62                                     ; $53B5: $3E $62
-    ld [$FFAA], a                                 ; $53B7: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $53B7: $EA $AA $FF
     jp Jump_001_6354                              ; $53BA: $C3 $54 $63
 
 
     ld a, $BD                                     ; $53BD: $3E $BD
     ld [hScript.Frame], a                                 ; $53BF: $EA $A9 $FF
     ld a, $63                                     ; $53C2: $3E $63
-    ld [$FFAA], a                                 ; $53C4: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $53C4: $EA $AA $FF
     jp Jump_001_6354                              ; $53C7: $C3 $54 $63
 
 
@@ -3294,7 +3224,7 @@ Jump_001_53CA:
     ld a, $4D                                     ; $53D6: $3E $4D
     ldh [hScript.Frame], a                                  ; $53D8: $E0 $A9
     ld a, $5C                                     ; $53DA: $3E $5C
-    ldh [$FFAA], a                                  ; $53DC: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $53DC: $E0 $AA
     ld a, $E9                                     ; $53DE: $3E $E9
     ldh [$FF8D], a                                  ; $53E0: $E0 $8D
     ld a, $53                                     ; $53E2: $3E $53
@@ -3310,7 +3240,7 @@ Jump_001_53CA:
     ld a, $A1                                     ; $53F4: $3E $A1
     ld [hScript.Frame], a                                 ; $53F6: $EA $A9 $FF
     ld a, $5D                                     ; $53F9: $3E $5D
-    ld [$FFAA], a                                 ; $53FB: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $53FB: $EA $AA $FF
     jp Jump_001_640D                              ; $53FE: $C3 $0D $64
 
 
@@ -3389,7 +3319,7 @@ Jump_001_5468:
     ld a, $6D                                     ; $5474: $3E $6D
     ldh [hScript.Frame], a                                  ; $5476: $E0 $A9
     ld a, $5C                                     ; $5478: $3E $5C
-    ldh [$FFAA], a                                  ; $547A: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $547A: $E0 $AA
     ld a, $87                                     ; $547C: $3E $87
     ldh [$FF8D], a                                  ; $547E: $E0 $8D
     ld a, $54                                     ; $5480: $3E $54
@@ -3405,7 +3335,7 @@ Jump_001_5468:
     ld a, $57                                     ; $5491: $3E $57
     ld [hScript.Frame], a                                 ; $5493: $EA $A9 $FF
     ld a, $5E                                     ; $5496: $3E $5E
-    ld [$FFAA], a                                 ; $5498: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5498: $EA $AA $FF
     jp Jump_001_640D                              ; $549B: $C3 $0D $64
 
 
@@ -3509,7 +3439,7 @@ Jump_001_552E:
     ld a, $8D                                     ; $553A: $3E $8D
     ldh [hScript.Frame], a                                  ; $553C: $E0 $A9
     ld a, $5C                                     ; $553E: $3E $5C
-    ldh [$FFAA], a                                  ; $5540: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5540: $E0 $AA
     ld a, $4D                                     ; $5542: $3E $4D
     ldh [$FF8D], a                                  ; $5544: $E0 $8D
     ld a, $55                                     ; $5546: $3E $55
@@ -3525,7 +3455,7 @@ Jump_001_552E:
     ld a, $74                                     ; $5557: $3E $74
     ld [hScript.Frame], a                                 ; $5559: $EA $A9 $FF
     ld a, $5E                                     ; $555C: $3E $5E
-    ld [$FFAA], a                                 ; $555E: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $555E: $EA $AA $FF
     jp Jump_001_640D                              ; $5561: $C3 $0D $64
 
 
@@ -3629,7 +3559,7 @@ Jump_001_55F4:
     ld a, $23                                     ; $5600: $3E $23
     ldh [hScript.Frame], a                                  ; $5602: $E0 $A9
     ld a, $5C                                     ; $5604: $3E $5C
-    ldh [$FFAA], a                                  ; $5606: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5606: $E0 $AA
     ld a, $13                                     ; $5608: $3E $13
     ldh [$FF8D], a                                  ; $560A: $E0 $8D
     ld a, $56                                     ; $560C: $3E $56
@@ -3645,7 +3575,7 @@ Jump_001_55F4:
     ld a, $97                                     ; $561D: $3E $97
     ld [hScript.Frame], a                                 ; $561F: $EA $A9 $FF
     ld a, $5D                                     ; $5622: $3E $5D
-    ld [$FFAA], a                                 ; $5624: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5624: $EA $AA $FF
     jp Jump_001_640D                              ; $5627: $C3 $0D $64
 
 
@@ -3724,7 +3654,7 @@ Jump_001_5691:
     ld a, $0D                                     ; $569D: $3E $0D
     ldh [hScript.Frame], a                                  ; $569F: $E0 $A9
     ld a, $5D                                     ; $56A1: $3E $5D
-    ldh [$FFAA], a                                  ; $56A3: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $56A3: $E0 $AA
     ld a, $B0                                     ; $56A5: $3E $B0
     ldh [$FF8D], a                                  ; $56A7: $E0 $8D
     ld a, $56                                     ; $56A9: $3E $56
@@ -3740,7 +3670,7 @@ Jump_001_5691:
     ld a, $A1                                     ; $56BA: $3E $A1
     ld [hScript.Frame], a                                 ; $56BC: $EA $A9 $FF
     ld a, $5D                                     ; $56BF: $3E $5D
-    ld [$FFAA], a                                 ; $56C1: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $56C1: $EA $AA $FF
     jp Jump_001_640D                              ; $56C4: $C3 $0D $64
 
 
@@ -3806,7 +3736,7 @@ Jump_001_5724:
     ld a, $27                                     ; $5730: $3E $27
     ldh [hScript.Frame], a                                  ; $5732: $E0 $A9
     ld a, $5D                                     ; $5734: $3E $5D
-    ldh [$FFAA], a                                  ; $5736: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5736: $E0 $AA
     ld a, $43                                     ; $5738: $3E $43
     ldh [$FF8D], a                                  ; $573A: $E0 $8D
     ld a, $57                                     ; $573C: $3E $57
@@ -3822,7 +3752,7 @@ Jump_001_5724:
     ld a, $57                                     ; $574D: $3E $57
     ld [hScript.Frame], a                                 ; $574F: $EA $A9 $FF
     ld a, $5E                                     ; $5752: $3E $5E
-    ld [$FFAA], a                                 ; $5754: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5754: $EA $AA $FF
     jp Jump_001_640D                              ; $5757: $C3 $0D $64
 
 
@@ -3917,7 +3847,7 @@ Jump_001_57DC:
     ld a, $41                                     ; $57E8: $3E $41
     ldh [hScript.Frame], a                                  ; $57EA: $E0 $A9
     ld a, $5D                                     ; $57EC: $3E $5D
-    ldh [$FFAA], a                                  ; $57EE: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $57EE: $E0 $AA
     ld a, $FB                                     ; $57F0: $3E $FB
     ldh [$FF8D], a                                  ; $57F2: $E0 $8D
     ld a, $57                                     ; $57F4: $3E $57
@@ -3933,7 +3863,7 @@ Jump_001_57DC:
     ld a, $74                                     ; $5805: $3E $74
     ld [hScript.Frame], a                                 ; $5807: $EA $A9 $FF
     ld a, $5E                                     ; $580A: $3E $5E
-    ld [$FFAA], a                                 ; $580C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $580C: $EA $AA $FF
     jp Jump_001_640D                              ; $580F: $C3 $0D $64
 
 
@@ -4028,7 +3958,7 @@ Jump_001_5894:
     ld a, $FD                                     ; $58A0: $3E $FD
     ldh [hScript.Frame], a                                  ; $58A2: $E0 $A9
     ld a, $5C                                     ; $58A4: $3E $5C
-    ldh [$FFAA], a                                  ; $58A6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $58A6: $E0 $AA
     ld a, $B3                                     ; $58A8: $3E $B3
     ldh [$FF8D], a                                  ; $58AA: $E0 $8D
     ld a, $58                                     ; $58AC: $3E $58
@@ -4044,7 +3974,7 @@ Jump_001_5894:
     ld a, $97                                     ; $58BD: $3E $97
     ld [hScript.Frame], a                                 ; $58BF: $EA $A9 $FF
     ld a, $5D                                     ; $58C2: $3E $5D
-    ld [$FFAA], a                                 ; $58C4: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $58C4: $EA $AA $FF
     jp Jump_001_640D                              ; $58C7: $C3 $0D $64
 
 
@@ -4102,157 +4032,125 @@ jr_001_591C:
 
     ld a, $19                                     ; $5927: $3E $19
     ld [$C944], a                                 ; $5929: $EA $44 $C9
-    ld a, $00                                     ; $592C: $3E $00
-    add $00                                       ; $592E: $C6 $00
-    ld [$4000], a                                 ; $5930: $EA $00 $40
-    ld a, $0A                                     ; $5933: $3E $0A
-    ld [$0000], a                                 ; $5935: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5938: $FA $2A $A2
     dec a                                         ; $593B: $3D
     ld [$A22A], a                                 ; $593C: $EA $2A $A2
-    xor a                                         ; $593F: $AF
-    ld [$0000], a                                 ; $5940: $EA $00 $00
+    Battery_Off
     ld a, $23                                     ; $5943: $3E $23
     ld [hScript.Frame], a                                 ; $5945: $EA $A9 $FF
     ld a, $5E                                     ; $5948: $3E $5E
-    ld [$FFAA], a                                 ; $594A: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $594A: $EA $AA $FF
     jp Jump_001_6354                              ; $594D: $C3 $54 $63
 
 
     ld a, $19                                     ; $5950: $3E $19
     ld [$C944], a                                 ; $5952: $EA $44 $C9
-    ld a, $00                                     ; $5955: $3E $00
-    add $00                                       ; $5957: $C6 $00
-    ld [$4000], a                                 ; $5959: $EA $00 $40
-    ld a, $0A                                     ; $595C: $3E $0A
-    ld [$0000], a                                 ; $595E: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5961: $FA $2A $A2
     dec a                                         ; $5964: $3D
     ld [$A22A], a                                 ; $5965: $EA $2A $A2
-    xor a                                         ; $5968: $AF
-    ld [$0000], a                                 ; $5969: $EA $00 $00
+    Battery_Off
     ld a, $30                                     ; $596C: $3E $30
     ld [hScript.Frame], a                                 ; $596E: $EA $A9 $FF
     ld a, $5E                                     ; $5971: $3E $5E
-    ld [$FFAA], a                                 ; $5973: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5973: $EA $AA $FF
     jp Jump_001_6354                              ; $5976: $C3 $54 $63
 
 
     ld a, $19                                     ; $5979: $3E $19
     ld [$C944], a                                 ; $597B: $EA $44 $C9
-    ld a, $00                                     ; $597E: $3E $00
-    add $00                                       ; $5980: $C6 $00
-    ld [$4000], a                                 ; $5982: $EA $00 $40
-    ld a, $0A                                     ; $5985: $3E $0A
-    ld [$0000], a                                 ; $5987: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $598A: $FA $2A $A2
     dec a                                         ; $598D: $3D
     ld [$A22A], a                                 ; $598E: $EA $2A $A2
-    xor a                                         ; $5991: $AF
-    ld [$0000], a                                 ; $5992: $EA $00 $00
+    Battery_Off
     ld a, $3D                                     ; $5995: $3E $3D
     ld [hScript.Frame], a                                 ; $5997: $EA $A9 $FF
     ld a, $5E                                     ; $599A: $3E $5E
-    ld [$FFAA], a                                 ; $599C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $599C: $EA $AA $FF
     jp Jump_001_6354                              ; $599F: $C3 $54 $63
 
 
     ld a, $19                                     ; $59A2: $3E $19
     ld [$C944], a                                 ; $59A4: $EA $44 $C9
-    ld a, $00                                     ; $59A7: $3E $00
-    add $00                                       ; $59A9: $C6 $00
-    ld [$4000], a                                 ; $59AB: $EA $00 $40
-    ld a, $0A                                     ; $59AE: $3E $0A
-    ld [$0000], a                                 ; $59B0: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $59B3: $FA $2A $A2
     dec a                                         ; $59B6: $3D
     ld [$A22A], a                                 ; $59B7: $EA $2A $A2
-    xor a                                         ; $59BA: $AF
-    ld [$0000], a                                 ; $59BB: $EA $00 $00
+    Battery_Off
     ld a, $4A                                     ; $59BE: $3E $4A
     ld [hScript.Frame], a                                 ; $59C0: $EA $A9 $FF
     ld a, $5E                                     ; $59C3: $3E $5E
-    ld [$FFAA], a                                 ; $59C5: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $59C5: $EA $AA $FF
     jp Jump_001_6354                              ; $59C8: $C3 $54 $63
 
 
 Jump_001_59CB:
     ld a, $19                                     ; $59CB: $3E $19
     ld [$C944], a                                 ; $59CD: $EA $44 $C9
-    ld a, $00                                     ; $59D0: $3E $00
-    add $00                                       ; $59D2: $C6 $00
-    ld [$4000], a                                 ; $59D4: $EA $00 $40
-    ld a, $0A                                     ; $59D7: $3E $0A
-    ld [$0000], a                                 ; $59D9: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $59DC: $FA $2A $A2
     dec a                                         ; $59DF: $3D
     ld [$A22A], a                                 ; $59E0: $EA $2A $A2
-    xor a                                         ; $59E3: $AF
-    ld [$0000], a                                 ; $59E4: $EA $00 $00
+    Battery_Off
     ld a, $1A                                     ; $59E7: $3E $1A
     ld [hScript.Frame], a                                 ; $59E9: $EA $A9 $FF
     ld a, $69                                     ; $59EC: $3E $69
-    ld [$FFAA], a                                 ; $59EE: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $59EE: $EA $AA $FF
     jp Jump_001_6354                              ; $59F1: $C3 $54 $63
 
 
 Jump_001_59F4:
     ld a, $19                                     ; $59F4: $3E $19
     ld [$C944], a                                 ; $59F6: $EA $44 $C9
-    ld a, $00                                     ; $59F9: $3E $00
-    add $00                                       ; $59FB: $C6 $00
-    ld [$4000], a                                 ; $59FD: $EA $00 $40
-    ld a, $0A                                     ; $5A00: $3E $0A
-    ld [$0000], a                                 ; $5A02: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5A05: $FA $2A $A2
     dec a                                         ; $5A08: $3D
     ld [$A22A], a                                 ; $5A09: $EA $2A $A2
-    xor a                                         ; $5A0C: $AF
-    ld [$0000], a                                 ; $5A0D: $EA $00 $00
+    Battery_Off
     ld a, $0D                                     ; $5A10: $3E $0D
     ld [hScript.Frame], a                                 ; $5A12: $EA $A9 $FF
     ld a, $69                                     ; $5A15: $3E $69
-    ld [$FFAA], a                                 ; $5A17: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5A17: $EA $AA $FF
     jp Jump_001_6354                              ; $5A1A: $C3 $54 $63
 
 
 Jump_001_5A1D:
     ld a, $19                                     ; $5A1D: $3E $19
     ld [$C944], a                                 ; $5A1F: $EA $44 $C9
-    ld a, $00                                     ; $5A22: $3E $00
-    add $00                                       ; $5A24: $C6 $00
-    ld [$4000], a                                 ; $5A26: $EA $00 $40
-    ld a, $0A                                     ; $5A29: $3E $0A
-    ld [$0000], a                                 ; $5A2B: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5A2E: $FA $2A $A2
     dec a                                         ; $5A31: $3D
     ld [$A22A], a                                 ; $5A32: $EA $2A $A2
-    xor a                                         ; $5A35: $AF
-    ld [$0000], a                                 ; $5A36: $EA $00 $00
+    Battery_Off
     ld a, $F3                                     ; $5A39: $3E $F3
     ld [hScript.Frame], a                                 ; $5A3B: $EA $A9 $FF
     ld a, $68                                     ; $5A3E: $3E $68
-    ld [$FFAA], a                                 ; $5A40: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5A40: $EA $AA $FF
     jp Jump_001_6354                              ; $5A43: $C3 $54 $63
 
 
 Jump_001_5A46:
     ld a, $19                                     ; $5A46: $3E $19
     ld [$C944], a                                 ; $5A48: $EA $44 $C9
-    ld a, $00                                     ; $5A4B: $3E $00
-    add $00                                       ; $5A4D: $C6 $00
-    ld [$4000], a                                 ; $5A4F: $EA $00 $40
-    ld a, $0A                                     ; $5A52: $3E $0A
-    ld [$0000], a                                 ; $5A54: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5A57: $FA $2A $A2
     dec a                                         ; $5A5A: $3D
     ld [$A22A], a                                 ; $5A5B: $EA $2A $A2
-    xor a                                         ; $5A5E: $AF
-    ld [$0000], a                                 ; $5A5F: $EA $00 $00
+    Battery_Off
     ld a, $00                                     ; $5A62: $3E $00
     ld [hScript.Frame], a                                 ; $5A64: $EA $A9 $FF
     ld a, $69                                     ; $5A67: $3E $69
-    ld [$FFAA], a                                 ; $5A69: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5A69: $EA $AA $FF
     jp Jump_001_6354                              ; $5A6C: $C3 $54 $63
 
 
@@ -4266,19 +4164,15 @@ Jump_001_5A46:
 
     ld a, $19                                     ; $5A7A: $3E $19
     ld [$C944], a                                 ; $5A7C: $EA $44 $C9
-    ld a, $00                                     ; $5A7F: $3E $00
-    add $00                                       ; $5A81: $C6 $00
-    ld [$4000], a                                 ; $5A83: $EA $00 $40
-    ld a, $0A                                     ; $5A86: $3E $0A
-    ld [$0000], a                                 ; $5A88: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A019]                                 ; $5A8B: $FA $19 $A0
     bit 1, a                                      ; $5A8E: $CB $4F
     jr z, jr_001_5AA2                             ; $5A90: $28 $10
 
     res 1, a                                      ; $5A92: $CB $8F
     ld [$A019], a                                 ; $5A94: $EA $19 $A0
-    xor a                                         ; $5A97: $AF
-    ld [$0000], a                                 ; $5A98: $EA $00 $00
+    Battery_Off
     ld a, $20                                     ; $5A9B: $3E $20
     ld [$C9C9], a                                 ; $5A9D: $EA $C9 $C9
     jr jr_001_5AEE                                ; $5AA0: $18 $4C
@@ -4293,12 +4187,11 @@ jr_001_5AA2:
     jp z, Jump_001_5B13                           ; $5AAD: $CA $13 $5B
 
     ld [$A22A], a                                 ; $5AB0: $EA $2A $A2
-    xor a                                         ; $5AB3: $AF
-    ld [$0000], a                                 ; $5AB4: $EA $00 $00
+    Battery_Off
     ld a, $35                                     ; $5AB7: $3E $35
     ld [hScript.Frame], a                                 ; $5AB9: $EA $A9 $FF
     ld a, $5F                                     ; $5ABC: $3E $5F
-    ld [$FFAA], a                                 ; $5ABE: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5ABE: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5AC1: $C3 $AD $5B
 
 
@@ -4319,7 +4212,7 @@ jr_001_5AC4:
     ld a, $DE                                     ; $5ADB: $3E $DE
     ldh [hScript.Frame], a                                  ; $5ADD: $E0 $A9
     ld a, $5F                                     ; $5ADF: $3E $5F
-    ldh [$FFAA], a                                  ; $5AE1: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5AE1: $E0 $AA
     ld a, $7F                                     ; $5AE3: $3E $7F
     ldh [$FF8D], a                                  ; $5AE5: $E0 $8D
     ld a, $5C                                     ; $5AE7: $3E $5C
@@ -4337,7 +4230,7 @@ jr_001_5AEE:
     ld a, $05                                     ; $5AF9: $3E $05
     ld [hScript.Frame], a                                 ; $5AFB: $EA $A9 $FF
     ld a, $5F                                     ; $5AFE: $3E $5F
-    ld [$FFAA], a                                 ; $5B00: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B00: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B03: $C3 $AD $5B
 
 
@@ -4345,7 +4238,7 @@ jr_001_5B06:
     ld a, $35                                     ; $5B06: $3E $35
     ld [hScript.Frame], a                                 ; $5B08: $EA $A9 $FF
     ld a, $5F                                     ; $5B0B: $3E $5F
-    ld [$FFAA], a                                 ; $5B0D: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B0D: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B10: $C3 $AD $5B
 
 
@@ -4353,64 +4246,52 @@ Jump_001_5B13:
     ld a, $9C                                     ; $5B13: $3E $9C
     ld [hScript.Frame], a                                 ; $5B15: $EA $A9 $FF
     ld a, $5B                                     ; $5B18: $3E $5B
-    ld [$FFAA], a                                 ; $5B1A: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B1A: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B1D: $C3 $AD $5B
 
 
     ld a, $19                                     ; $5B20: $3E $19
     ld [$C944], a                                 ; $5B22: $EA $44 $C9
-    ld a, $00                                     ; $5B25: $3E $00
-    add $00                                       ; $5B27: $C6 $00
-    ld [$4000], a                                 ; $5B29: $EA $00 $40
-    ld a, $0A                                     ; $5B2C: $3E $0A
-    ld [$0000], a                                 ; $5B2E: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5B31: $FA $2A $A2
     dec a                                         ; $5B34: $3D
     ld [$A22A], a                                 ; $5B35: $EA $2A $A2
-    xor a                                         ; $5B38: $AF
-    ld [$0000], a                                 ; $5B39: $EA $00 $00
+    Battery_Off
     ld a, $0D                                     ; $5B3C: $3E $0D
     ld [hScript.Frame], a                                 ; $5B3E: $EA $A9 $FF
     ld a, $69                                     ; $5B41: $3E $69
-    ld [$FFAA], a                                 ; $5B43: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B43: $EA $AA $FF
     jp Jump_001_6354                              ; $5B46: $C3 $54 $63
 
 
     ld a, $19                                     ; $5B49: $3E $19
     ld [$C944], a                                 ; $5B4B: $EA $44 $C9
-    ld a, $00                                     ; $5B4E: $3E $00
-    add $00                                       ; $5B50: $C6 $00
-    ld [$4000], a                                 ; $5B52: $EA $00 $40
-    ld a, $0A                                     ; $5B55: $3E $0A
-    ld [$0000], a                                 ; $5B57: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5B5A: $FA $2A $A2
     dec a                                         ; $5B5D: $3D
     ld [$A22A], a                                 ; $5B5E: $EA $2A $A2
-    xor a                                         ; $5B61: $AF
-    ld [$0000], a                                 ; $5B62: $EA $00 $00
+    Battery_Off
     ld a, $F3                                     ; $5B65: $3E $F3
     ld [hScript.Frame], a                                 ; $5B67: $EA $A9 $FF
     ld a, $68                                     ; $5B6A: $3E $68
-    ld [$FFAA], a                                 ; $5B6C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B6C: $EA $AA $FF
     jp Jump_001_6354                              ; $5B6F: $C3 $54 $63
 
 
     ld a, $19                                     ; $5B72: $3E $19
     ld [$C944], a                                 ; $5B74: $EA $44 $C9
-    ld a, $00                                     ; $5B77: $3E $00
-    add $00                                       ; $5B79: $C6 $00
-    ld [$4000], a                                 ; $5B7B: $EA $00 $40
-    ld a, $0A                                     ; $5B7E: $3E $0A
-    ld [$0000], a                                 ; $5B80: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A22A]                                 ; $5B83: $FA $2A $A2
     dec a                                         ; $5B86: $3D
     ld [$A22A], a                                 ; $5B87: $EA $2A $A2
-    xor a                                         ; $5B8A: $AF
-    ld [$0000], a                                 ; $5B8B: $EA $00 $00
+    Battery_Off
     ld a, $00                                     ; $5B8E: $3E $00
     ld [hScript.Frame], a                                 ; $5B90: $EA $A9 $FF
     ld a, $69                                     ; $5B93: $3E $69
-    ld [$FFAA], a                                 ; $5B95: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5B95: $EA $AA $FF
     jp Jump_001_6354                              ; $5B98: $C3 $54 $63
 
 
@@ -4481,7 +4362,7 @@ Call_001_5BF4:
     ld a, $52                                     ; $5C02: $3E $52
     ld [hScript.Frame], a                                 ; $5C04: $EA $A9 $FF
     ld a, $65                                     ; $5C07: $3E $65
-    ld [$FFAA], a                                 ; $5C09: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5C09: $EA $AA $FF
     jp Jump_001_6354                              ; $5C0C: $C3 $54 $63
 
 
@@ -4499,7 +4380,7 @@ Call_001_5C0F:
     ld a, $9F                                     ; $5C1D: $3E $9F
     ld [hScript.Frame], a                                 ; $5C1F: $EA $A9 $FF
     ld a, $64                                     ; $5C22: $3E $64
-    ld [$FFAA], a                                 ; $5C24: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5C24: $EA $AA $FF
     jp Jump_001_6354                              ; $5C27: $C3 $54 $63
 
 
@@ -4517,7 +4398,7 @@ Call_001_5C2A:
     ld a, $D9                                     ; $5C38: $3E $D9
     ld [hScript.Frame], a                                 ; $5C3A: $EA $A9 $FF
     ld a, $64                                     ; $5C3D: $3E $64
-    ld [$FFAA], a                                 ; $5C3F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5C3F: $EA $AA $FF
     jp Jump_001_6354                              ; $5C42: $C3 $54 $63
 
 
@@ -4535,7 +4416,7 @@ Call_001_5C45:
     ld a, $13                                     ; $5C53: $3E $13
     ld [hScript.Frame], a                                 ; $5C55: $EA $A9 $FF
     ld a, $65                                     ; $5C58: $3E $65
-    ld [$FFAA], a                                 ; $5C5A: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5C5A: $EA $AA $FF
     jp Jump_001_6354                              ; $5C5D: $C3 $54 $63
 
 
@@ -4549,7 +4430,7 @@ Jump_001_5C60:
     ld a, $8C                                     ; $5C6C: $3E $8C
     ldh [hScript.Frame], a                                  ; $5C6E: $E0 $A9
     ld a, $5F                                     ; $5C70: $3E $5F
-    ldh [$FFAA], a                                  ; $5C72: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5C72: $E0 $AA
     ld a, $7F                                     ; $5C74: $3E $7F
     ldh [$FF8D], a                                  ; $5C76: $E0 $8D
     ld a, $5C                                     ; $5C78: $3E $5C
@@ -4566,7 +4447,7 @@ Jump_001_5C60:
     ld a, $35                                     ; $5C8D: $3E $35
     ld [hScript.Frame], a                                 ; $5C8F: $EA $A9 $FF
     ld a, $5F                                     ; $5C92: $3E $5F
-    ld [$FFAA], a                                 ; $5C94: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5C94: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5C97: $C3 $AD $5B
 
 
@@ -4612,7 +4493,7 @@ jr_001_5CC9:
     ld a, $3A                                     ; $5CD9: $3E $3A
     ld [hScript.Frame], a                                 ; $5CDB: $EA $A9 $FF
     ld a, $66                                     ; $5CDE: $3E $66
-    ld [$FFAA], a                                 ; $5CE0: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5CE0: $EA $AA $FF
     jp Jump_001_6354                              ; $5CE3: $C3 $54 $63
 
 
@@ -4626,7 +4507,7 @@ Jump_001_5CE6:
     ld a, $A1                                     ; $5CF2: $3E $A1
     ldh [hScript.Frame], a                                  ; $5CF4: $E0 $A9
     ld a, $5F                                     ; $5CF6: $3E $5F
-    ldh [$FFAA], a                                  ; $5CF8: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5CF8: $E0 $AA
     ld a, $05                                     ; $5CFA: $3E $05
     ldh [$FF8D], a                                  ; $5CFC: $E0 $8D
     ld a, $5D                                     ; $5CFE: $3E $5D
@@ -4643,7 +4524,7 @@ Jump_001_5CE6:
     ld a, $11                                     ; $5D12: $3E $11
     ld [hScript.Frame], a                                 ; $5D14: $EA $A9 $FF
     ld a, $5F                                     ; $5D17: $3E $5F
-    ld [$FFAA], a                                 ; $5D19: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5D19: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5D1C: $C3 $AD $5B
 
 
@@ -4696,7 +4577,7 @@ jr_001_5D5E:
     ld a, $91                                     ; $5D6E: $3E $91
     ld [hScript.Frame], a                                 ; $5D70: $EA $A9 $FF
     ld a, $65                                     ; $5D73: $3E $65
-    ld [$FFAA], a                                 ; $5D75: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5D75: $EA $AA $FF
     jp Jump_001_6354                              ; $5D78: $C3 $54 $63
 
 
@@ -4710,7 +4591,7 @@ Jump_001_5D7B:
     ld a, $B5                                     ; $5D87: $3E $B5
     ldh [hScript.Frame], a                                  ; $5D89: $E0 $A9
     ld a, $5F                                     ; $5D8B: $3E $5F
-    ldh [$FFAA], a                                  ; $5D8D: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5D8D: $E0 $AA
     ld a, $9A                                     ; $5D8F: $3E $9A
     ldh [$FF8D], a                                  ; $5D91: $E0 $8D
     ld a, $5D                                     ; $5D93: $3E $5D
@@ -4727,7 +4608,7 @@ Jump_001_5D7B:
     ld a, $1D                                     ; $5DA7: $3E $1D
     ld [hScript.Frame], a                                 ; $5DA9: $EA $A9 $FF
     ld a, $5F                                     ; $5DAC: $3E $5F
-    ld [$FFAA], a                                 ; $5DAE: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5DAE: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5DB1: $C3 $AD $5B
 
 
@@ -4780,7 +4661,7 @@ jr_001_5DF3:
     ld a, $C6                                     ; $5E03: $3E $C6
     ld [hScript.Frame], a                                 ; $5E05: $EA $A9 $FF
     ld a, $65                                     ; $5E08: $3E $65
-    ld [$FFAA], a                                 ; $5E0A: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5E0A: $EA $AA $FF
     jp Jump_001_6354                              ; $5E0D: $C3 $54 $63
 
 
@@ -4794,7 +4675,7 @@ Jump_001_5E10:
     ld a, $77                                     ; $5E1C: $3E $77
     ldh [hScript.Frame], a                                  ; $5E1E: $E0 $A9
     ld a, $5F                                     ; $5E20: $3E $5F
-    ldh [$FFAA], a                                  ; $5E22: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5E22: $E0 $AA
     ld a, $2F                                     ; $5E24: $3E $2F
     ldh [$FF8D], a                                  ; $5E26: $E0 $8D
     ld a, $5E                                     ; $5E28: $3E $5E
@@ -4811,7 +4692,7 @@ Jump_001_5E10:
     ld a, $29                                     ; $5E3C: $3E $29
     ld [hScript.Frame], a                                 ; $5E3E: $EA $A9 $FF
     ld a, $5F                                     ; $5E41: $3E $5F
-    ld [$FFAA], a                                 ; $5E43: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5E43: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5E46: $C3 $AD $5B
 
 
@@ -4857,7 +4738,7 @@ jr_001_5E78:
     ld a, $FB                                     ; $5E88: $3E $FB
     ld [hScript.Frame], a                                 ; $5E8A: $EA $A9 $FF
     ld a, $65                                     ; $5E8D: $3E $65
-    ld [$FFAA], a                                 ; $5E8F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $5E8F: $EA $AA $FF
     jp Jump_001_6354                              ; $5E92: $C3 $54 $63
 
 
@@ -5009,7 +4890,7 @@ Jump_001_5F65:
     ld a, $5C                                     ; $5F71: $3E $5C
     ldh [hScript.Frame], a                                  ; $5F73: $E0 $A9
     ld a, $5B                                     ; $5F75: $3E $5B
-    ldh [$FFAA], a                                  ; $5F77: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5F77: $E0 $AA
     ld a, $84                                     ; $5F79: $3E $84
     ldh [$FF8D], a                                  ; $5F7B: $E0 $8D
     ld a, $5F                                     ; $5F7D: $3E $5F
@@ -5067,7 +4948,7 @@ Jump_001_5FBF:
     ld a, $6C                                     ; $5FCB: $3E $6C
     ldh [hScript.Frame], a                                  ; $5FCD: $E0 $A9
     ld a, $5B                                     ; $5FCF: $3E $5B
-    ldh [$FFAA], a                                  ; $5FD1: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $5FD1: $E0 $AA
     ld a, $DE                                     ; $5FD3: $3E $DE
     ldh [$FF8D], a                                  ; $5FD5: $E0 $8D
     ld a, $5F                                     ; $5FD7: $3E $5F
@@ -5127,7 +5008,7 @@ Jump_001_601E:
     ld a, $8C                                     ; $602A: $3E $8C
     ldh [hScript.Frame], a                                  ; $602C: $E0 $A9
     ld a, $5B                                     ; $602E: $3E $5B
-    ldh [$FFAA], a                                  ; $6030: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6030: $E0 $AA
     ld a, $3D                                     ; $6032: $3E $3D
     ldh [$FF8D], a                                  ; $6034: $E0 $8D
     ld a, $60                                     ; $6036: $3E $60
@@ -5187,7 +5068,7 @@ Jump_001_607D:
     ld a, $4C                                     ; $6089: $3E $4C
     ldh [hScript.Frame], a                                  ; $608B: $E0 $A9
     ld a, $5B                                     ; $608D: $3E $5B
-    ldh [$FFAA], a                                  ; $608F: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $608F: $E0 $AA
     ld a, $9C                                     ; $6091: $3E $9C
     ldh [$FF8D], a                                  ; $6093: $E0 $8D
     ld a, $60                                     ; $6095: $3E $60
@@ -5262,15 +5143,11 @@ Jump_001_60D6:
     jp Jump_001_634D                              ; $6101: $C3 $4D $63
 
 
-    ld a, $00                                     ; $6104: $3E $00
-    add $00                                       ; $6106: $C6 $00
-    ld [$4000], a                                 ; $6108: $EA $00 $40
-    ld a, $0A                                     ; $610B: $3E $0A
-    ld [$0000], a                                 ; $610D: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A227]                                 ; $6110: $FA $27 $A2
     ld [$C9CF], a                                 ; $6113: $EA $CF $C9
-    xor a                                         ; $6116: $AF
-    ld [$0000], a                                 ; $6117: $EA $00 $00
+    Battery_Off
     jp Jump_001_6130                              ; $611A: $C3 $30 $61
 
 
@@ -5359,7 +5236,7 @@ Jump_001_6187:
     ld a, $34                                     ; $6197: $3E $34
     ldh [hScript.Frame], a                                  ; $6199: $E0 $A9
     ld a, $67                                     ; $619B: $3E $67
-    ldh [$FFAA], a                                  ; $619D: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $619D: $E0 $AA
     ld a, $AA                                     ; $619F: $3E $AA
     ldh [$FF8D], a                                  ; $61A1: $E0 $8D
     ld a, $61                                     ; $61A3: $3E $61
@@ -5375,7 +5252,7 @@ Jump_001_6187:
     ld a, $B7                                     ; $61B5: $3E $B7
     ld [hScript.Frame], a                                 ; $61B7: $EA $A9 $FF
     ld a, $67                                     ; $61BA: $3E $67
-    ld [$FFAA], a                                 ; $61BC: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $61BC: $EA $AA $FF
     jp Jump_001_611D                              ; $61BF: $C3 $1D $61
 
 
@@ -5418,7 +5295,7 @@ Jump_001_61EB:
     ld a, $57                                     ; $61FB: $3E $57
     ldh [hScript.Frame], a                                  ; $61FD: $E0 $A9
     ld a, $67                                     ; $61FF: $3E $67
-    ldh [$FFAA], a                                  ; $6201: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6201: $E0 $AA
     ld a, $0E                                     ; $6203: $3E $0E
     ldh [$FF8D], a                                  ; $6205: $E0 $8D
     ld a, $62                                     ; $6207: $3E $62
@@ -5434,7 +5311,7 @@ Jump_001_61EB:
     ld a, $C7                                     ; $6218: $3E $C7
     ld [hScript.Frame], a                                 ; $621A: $EA $A9 $FF
     ld a, $67                                     ; $621D: $3E $67
-    ld [$FFAA], a                                 ; $621F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $621F: $EA $AA $FF
     jp Jump_001_611D                              ; $6222: $C3 $1D $61
 
 
@@ -5484,7 +5361,7 @@ Jump_001_625E:
     ld a, $84                                     ; $626E: $3E $84
     ldh [hScript.Frame], a                                  ; $6270: $E0 $A9
     ld a, $67                                     ; $6272: $3E $67
-    ldh [$FFAA], a                                  ; $6274: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6274: $E0 $AA
     ld a, $81                                     ; $6276: $3E $81
     ldh [$FF8D], a                                  ; $6278: $E0 $8D
     ld a, $62                                     ; $627A: $3E $62
@@ -5500,7 +5377,7 @@ Jump_001_625E:
     ld a, $D7                                     ; $628B: $3E $D7
     ld [hScript.Frame], a                                 ; $628D: $EA $A9 $FF
     ld a, $67                                     ; $6290: $3E $67
-    ld [$FFAA], a                                 ; $6292: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6292: $EA $AA $FF
     jp Jump_001_611D                              ; $6295: $C3 $1D $61
 
 
@@ -5550,7 +5427,7 @@ Jump_001_62D1:
     ld a, $11                                     ; $62E1: $3E $11
     ldh [hScript.Frame], a                                  ; $62E3: $E0 $A9
     ld a, $67                                     ; $62E5: $3E $67
-    ldh [$FFAA], a                                  ; $62E7: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $62E7: $E0 $AA
     ld a, $F4                                     ; $62E9: $3E $F4
     ldh [$FF8D], a                                  ; $62EB: $E0 $8D
     ld a, $62                                     ; $62ED: $3E $62
@@ -5566,7 +5443,7 @@ Jump_001_62D1:
     ld a, $A7                                     ; $62FE: $3E $A7
     ld [hScript.Frame], a                                 ; $6300: $EA $A9 $FF
     ld a, $67                                     ; $6303: $3E $67
-    ld [$FFAA], a                                 ; $6305: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6305: $EA $AA $FF
     jp Jump_001_611D                              ; $6308: $C3 $1D $61
 
 
@@ -5597,15 +5474,11 @@ jr_001_6319:
     jp Jump_001_634D                              ; $6331: $C3 $4D $63
 
 
-    ld a, $00                                     ; $6334: $3E $00
-    add $00                                       ; $6336: $C6 $00
-    ld [$4000], a                                 ; $6338: $EA $00 $40
-    ld a, $0A                                     ; $633B: $3E $0A
-    ld [$0000], a                                 ; $633D: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A227]                                 ; $6340: $FA $27 $A2
     ld [$C9CF], a                                 ; $6343: $EA $CF $C9
-    xor a                                         ; $6346: $AF
-    ld [$0000], a                                 ; $6347: $EA $00 $00
+    Battery_Off
     jp Jump_001_6420                              ; $634A: $C3 $20 $64
 
 
@@ -5656,9 +5529,7 @@ Call_001_6393:
     call Script_Play                            ; $6399: $CD $A7 $0A
     ld hl, $FFB1                                  ; $639C: $21 $B1 $FF
     set 1, [hl]                                   ; $639F: $CB $CE
-    ld a, $05                                     ; $63A1: $3E $05
-    ld [wRAMBank], a                                 ; $63A3: $EA $5A $C9
-    ldh [rSVBK], a                                ; $63A6: $E0 $70
+    SwitchRAMBank $05
     ld hl, $FF93                                  ; $63A8: $21 $93 $FF
     ld a, [hl+]                                   ; $63AB: $2A
     ld h, [hl]                                    ; $63AC: $66
@@ -6177,9 +6048,7 @@ Call_001_666F:
     ret                                           ; $6685: $C9
 
 
-    ld a, $05                                     ; $6686: $3E $05
-    ld [wRAMBank], a                                 ; $6688: $EA $5A $C9
-    ldh [rSVBK], a                                ; $668B: $E0 $70
+    SwitchRAMBank $05
     ld a, [$FF94]                                 ; $668D: $FA $94 $FF
     ld h, a                                       ; $6690: $67
     ld a, [$FF93]                                 ; $6691: $FA $93 $FF
@@ -6456,9 +6325,7 @@ jr_001_67F3:
     ld e, a                                       ; $67F4: $5F
 
 jr_001_67F5:
-    ld a, $05                                     ; $67F5: $3E $05
-    ld [wRAMBank], a                                 ; $67F7: $EA $5A $C9
-    ldh [rSVBK], a                                ; $67FA: $E0 $70
+    SwitchRAMBank $05
     ld b, $00                                     ; $67FC: $06 $00
     ld a, [de]                                    ; $67FE: $1A
     cp $00                                        ; $67FF: $FE $00
@@ -6545,9 +6412,7 @@ jr_001_6851:
     ld e, a                                       ; $6852: $5F
 
 jr_001_6853:
-    ld a, $05                                     ; $6853: $3E $05
-    ld [wRAMBank], a                                 ; $6855: $EA $5A $C9
-    ldh [rSVBK], a                                ; $6858: $E0 $70
+    SwitchRAMBank $05
     ld b, $00                                     ; $685A: $06 $00
     ld a, [de]                                    ; $685C: $1A
     cp $00                                        ; $685D: $FE $00
@@ -6628,9 +6493,7 @@ jr_001_68A7:
     ld [$C9D9], a                                 ; $68A9: $EA $D9 $C9
     dec de                                        ; $68AC: $1B
     dec c                                         ; $68AD: $0D
-    ld a, $05                                     ; $68AE: $3E $05
-    ld [wRAMBank], a                                 ; $68B0: $EA $5A $C9
-    ldh [rSVBK], a                                ; $68B3: $E0 $70
+    SwitchRAMBank $05
     ld b, $00                                     ; $68B5: $06 $00
     ld a, [de]                                    ; $68B7: $1A
     cp $00                                        ; $68B8: $FE $00
@@ -6703,9 +6566,7 @@ jr_001_68F9:
     ld [$C9D9], a                                 ; $68FB: $EA $D9 $C9
     inc de                                        ; $68FE: $13
     inc c                                         ; $68FF: $0C
-    ld a, $05                                     ; $6900: $3E $05
-    ld [wRAMBank], a                                 ; $6902: $EA $5A $C9
-    ldh [rSVBK], a                                ; $6905: $E0 $70
+    SwitchRAMBank $05
     ld b, $00                                     ; $6907: $06 $00
     ld a, [de]                                    ; $6909: $1A
     cp $00                                        ; $690A: $FE $00
@@ -6785,7 +6646,7 @@ jr_001_6945:
     ld a, [hl+]                                   ; $695D: $2A
     ldh [hScript.Frame], a                                  ; $695E: $E0 $A9
     ld a, [hl+]                                   ; $6960: $2A
-    ldh [$FFAA], a                                  ; $6961: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6961: $E0 $AA
     ld a, $D3                                     ; $6963: $3E $D3
     ldh [hScript.State], a                                  ; $6965: $E0 $AB
     ld a, $0A                                     ; $6967: $3E $0A
@@ -6855,7 +6716,7 @@ Call_001_69B2:
     ld a, $EF                                     ; $69E0: $3E $EF
     ldh [hScript.Frame], a                                  ; $69E2: $E0 $A9
     ld a, $46                                     ; $69E4: $3E $46
-    ldh [$FFAA], a                                  ; $69E6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $69E6: $E0 $AA
     ld a, $B2                                     ; $69E8: $3E $B2
     ldh [$FF8D], a                                  ; $69EA: $E0 $8D
     ld a, $6E                                     ; $69EC: $3E $6E
@@ -6873,7 +6734,7 @@ Jump_001_69F3:
     ld a, $69                                     ; $69FF: $3E $69
     ldh [hScript.Frame], a                                  ; $6A01: $E0 $A9
     ld a, $73                                     ; $6A03: $3E $73
-    ldh [$FFAA], a                                  ; $6A05: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6A05: $E0 $AA
     ld a, $12                                     ; $6A07: $3E $12
     ldh [$FF8D], a                                  ; $6A09: $E0 $8D
     ld a, $6A                                     ; $6A0B: $3E $6A
@@ -6931,7 +6792,7 @@ Jump_001_6A51:
     ld a, $75                                     ; $6A5D: $3E $75
     ldh [hScript.Frame], a                                  ; $6A5F: $E0 $A9
     ld a, $73                                     ; $6A61: $3E $73
-    ldh [$FFAA], a                                  ; $6A63: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6A63: $E0 $AA
     ld a, $70                                     ; $6A65: $3E $70
     ldh [$FF8D], a                                  ; $6A67: $E0 $8D
     ld a, $6A                                     ; $6A69: $3E $6A
@@ -6991,7 +6852,7 @@ Jump_001_6AB4:
     ld a, $81                                     ; $6AC0: $3E $81
     ldh [hScript.Frame], a                                  ; $6AC2: $E0 $A9
     ld a, $73                                     ; $6AC4: $3E $73
-    ldh [$FFAA], a                                  ; $6AC6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6AC6: $E0 $AA
     ld a, $D3                                     ; $6AC8: $3E $D3
     ldh [$FF8D], a                                  ; $6ACA: $E0 $8D
     ld a, $6A                                     ; $6ACC: $3E $6A
@@ -7051,7 +6912,7 @@ Jump_001_6B17:
     ld a, $5D                                     ; $6B23: $3E $5D
     ldh [hScript.Frame], a                                  ; $6B25: $E0 $A9
     ld a, $73                                     ; $6B27: $3E $73
-    ldh [$FFAA], a                                  ; $6B29: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6B29: $E0 $AA
     ld a, $36                                     ; $6B2B: $3E $36
     ldh [$FF8D], a                                  ; $6B2D: $E0 $8D
     ld a, $6B                                     ; $6B2F: $3E $6B
@@ -7159,15 +7020,11 @@ jr_001_6BC4:
     jp Jump_001_6B0E                              ; $6BC4: $C3 $0E $6B
 
 
-    ld a, $00                                     ; $6BC7: $3E $00
-    add $00                                       ; $6BC9: $C6 $00
-    ld [$4000], a                                 ; $6BCB: $EA $00 $40
-    ld a, $0A                                     ; $6BCE: $3E $0A
-    ld [$0000], a                                 ; $6BD0: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A227]                                 ; $6BD3: $FA $27 $A2
     ld [$C9CF], a                                 ; $6BD6: $EA $CF $C9
-    xor a                                         ; $6BD9: $AF
-    ld [$0000], a                                 ; $6BDA: $EA $00 $00
+    Battery_Off
     jp Jump_001_6BF3                              ; $6BDD: $C3 $F3 $6B
 
 
@@ -7255,7 +7112,7 @@ Jump_001_6C47:
     ld a, $E0                                     ; $6C57: $3E $E0
     ldh [hScript.Frame], a                                  ; $6C59: $E0 $A9
     ld a, $73                                     ; $6C5B: $3E $73
-    ldh [$FFAA], a                                  ; $6C5D: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6C5D: $E0 $AA
     ld a, $6A                                     ; $6C5F: $3E $6A
     ldh [$FF8D], a                                  ; $6C61: $E0 $8D
     ld a, $6C                                     ; $6C63: $3E $6C
@@ -7271,7 +7128,7 @@ Jump_001_6C47:
     ld a, $99                                     ; $6C75: $3E $99
     ld [hScript.Frame], a                                 ; $6C77: $EA $A9 $FF
     ld a, $73                                     ; $6C7A: $3E $73
-    ld [$FFAA], a                                 ; $6C7C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6C7C: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6C7F: $C3 $E0 $6B
 
 
@@ -7313,7 +7170,7 @@ Jump_001_6CA8:
     ld a, $03                                     ; $6CB8: $3E $03
     ldh [hScript.Frame], a                                  ; $6CBA: $E0 $A9
     ld a, $74                                     ; $6CBC: $3E $74
-    ldh [$FFAA], a                                  ; $6CBE: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6CBE: $E0 $AA
     ld a, $CB                                     ; $6CC0: $3E $CB
     ldh [$FF8D], a                                  ; $6CC2: $E0 $8D
     ld a, $6C                                     ; $6CC4: $3E $6C
@@ -7329,7 +7186,7 @@ Jump_001_6CA8:
     ld a, $A5                                     ; $6CD5: $3E $A5
     ld [hScript.Frame], a                                 ; $6CD7: $EA $A9 $FF
     ld a, $73                                     ; $6CDA: $3E $73
-    ld [$FFAA], a                                 ; $6CDC: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6CDC: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6CDF: $C3 $E0 $6B
 
 
@@ -7378,7 +7235,7 @@ Jump_001_6D18:
     ld a, $26                                     ; $6D28: $3E $26
     ldh [hScript.Frame], a                                  ; $6D2A: $E0 $A9
     ld a, $74                                     ; $6D2C: $3E $74
-    ldh [$FFAA], a                                  ; $6D2E: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6D2E: $E0 $AA
     ld a, $3B                                     ; $6D30: $3E $3B
     ldh [$FF8D], a                                  ; $6D32: $E0 $8D
     ld a, $6D                                     ; $6D34: $3E $6D
@@ -7394,7 +7251,7 @@ Jump_001_6D18:
     ld a, $B1                                     ; $6D45: $3E $B1
     ld [hScript.Frame], a                                 ; $6D47: $EA $A9 $FF
     ld a, $73                                     ; $6D4A: $3E $73
-    ld [$FFAA], a                                 ; $6D4C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6D4C: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6D4F: $C3 $E0 $6B
 
 
@@ -7443,7 +7300,7 @@ Jump_001_6D88:
     ld a, $BD                                     ; $6D98: $3E $BD
     ldh [hScript.Frame], a                                  ; $6D9A: $E0 $A9
     ld a, $73                                     ; $6D9C: $3E $73
-    ldh [$FFAA], a                                  ; $6D9E: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6D9E: $E0 $AA
     ld a, $AB                                     ; $6DA0: $3E $AB
     ldh [$FF8D], a                                  ; $6DA2: $E0 $8D
     ld a, $6D                                     ; $6DA4: $3E $6D
@@ -7459,7 +7316,7 @@ Jump_001_6D88:
     ld a, $8D                                     ; $6DB5: $3E $8D
     ld [hScript.Frame], a                                 ; $6DB7: $EA $A9 $FF
     ld a, $73                                     ; $6DBA: $3E $73
-    ld [$FFAA], a                                 ; $6DBC: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $6DBC: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6DBF: $C3 $E0 $6B
 
 
@@ -7812,7 +7669,7 @@ jr_001_6F81:
     ld a, [hl+]                                   ; $6F95: $2A
     ldh [hScript.Frame], a                                  ; $6F96: $E0 $A9
     ld a, [hl+]                                   ; $6F98: $2A
-    ldh [$FFAA], a                                  ; $6F99: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $6F99: $E0 $AA
     ld a, $D3                                     ; $6F9B: $3E $D3
     ldh [hScript.State], a                                  ; $6F9D: $E0 $AB
     ld a, $0A                                     ; $6F9F: $3E $0A

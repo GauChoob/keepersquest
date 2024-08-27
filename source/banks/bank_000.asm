@@ -52,13 +52,13 @@ HeaderSGBFlag::
     db $00
 
 HeaderCartridgeType::
-    db $1B
+    db $1B ; MBC5+RAM+BATTERY
 
 HeaderROMSize::
-    db $05
+    db $05 ; 1 MiB	64 banks
 
 HeaderRAMSize::
-    db $03
+    db $03 ; 32 KiB	4 banks of 8 KiB each
 
 HeaderDestinationCode::
     db $01
@@ -93,7 +93,7 @@ Boot_SoftReset:
 
     xor a                                         ; $0168: $AF
     ld [$FF56], a                                 ; $0169: $EA $56 $FF
-    ld [$0000], a                                 ; $016C: $EA $00 $00
+    ld [rRAMG], a                                 ; $016C: $EA $00 $00
     ld [$3000], a                                 ; $016F: $EA $00 $30
     ld a, $BF                                     ; $0172: $3E $BF
     ld [rTMA], a                                 ; $0174: $EA $06 $FF
@@ -128,7 +128,7 @@ Jump_000_0195:
     ld a, $12                                     ; $01CA: $3E $12
     ld [hScript.Frame], a                                 ; $01CC: $EA $A9 $FF
     ld a, $47                                     ; $01CF: $3E $47
-    ld [$FFAA], a                                 ; $01D1: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $01D1: $EA $AA $FF
     jp Jump_000_22D6                              ; $01D4: $C3 $D6 $22
 
 
@@ -909,7 +909,7 @@ jr_000_0559:
     ret                                           ; $056F: $C9
 
 
-    ld a, [$FF04]                                 ; $0570: $FA $04 $FF
+    ld a, [rDIV]                                 ; $0570: $FA $04 $FF
     rra                                           ; $0573: $1F
     bit 0, a                                      ; $0574: $CB $47
     jr nz, jr_000_057A                            ; $0576: $20 $02
@@ -924,7 +924,7 @@ jr_000_057D:
     dec a                                         ; $057D: $3D
     jr nz, jr_000_057D                            ; $057E: $20 $FD
 
-    ld a, [$FF04]                                 ; $0580: $FA $04 $FF
+    ld a, [rDIV]                                 ; $0580: $FA $04 $FF
     and c                                         ; $0583: $A1
     ret                                           ; $0584: $C9
 
@@ -1541,20 +1541,16 @@ Jump_000_0B92:
     ld h, [hl]                                    ; $0BAA: $66
     ld l, a                                       ; $0BAB: $6F
     add hl, de                                    ; $0BAC: $19
-    ld a, $05                                     ; $0BAD: $3E $05
-    ld [wRAMBank], a                                 ; $0BAF: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0BB2: $E0 $70
+    SwitchRAMBank $05
     ld a, [bc]                                    ; $0BB4: $0A
     inc bc                                        ; $0BB5: $03
     ld [hl], a                                    ; $0BB6: $77
-    ld a, $03                                     ; $0BB7: $3E $03
-    ld [wRAMBank], a                                 ; $0BB9: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0BBC: $E0 $70
+    SwitchRAMBank $03
     ld a, [bc]                                    ; $0BBE: $0A
     inc bc                                        ; $0BBF: $03
     ld [hl], a                                    ; $0BC0: $77
     ld a, b                                       ; $0BC1: $78
-    ld [$FFAA], a                                 ; $0BC2: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0BC2: $EA $AA $FF
     ld a, c                                       ; $0BC5: $79
     ld [hScript.Frame], a                                 ; $0BC6: $EA $A9 $FF
     ld a, $D3                                     ; $0BC9: $3E $D3
@@ -1591,15 +1587,11 @@ Jump_000_0BEC:
     ld h, [hl]                                    ; $0BF7: $66
     ld l, a                                       ; $0BF8: $6F
     add hl, de                                    ; $0BF9: $19
-    ld a, $06                                     ; $0BFA: $3E $06
-    ld [wRAMBank], a                                 ; $0BFC: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0BFF: $E0 $70
+    SwitchRAMBank $06
     ld a, [bc]                                    ; $0C01: $0A
     inc bc                                        ; $0C02: $03
     ld [hl], a                                    ; $0C03: $77
-    ld a, $04                                     ; $0C04: $3E $04
-    ld [wRAMBank], a                                 ; $0C06: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0C09: $E0 $70
+    SwitchRAMBank $04
     ld a, [bc]                                    ; $0C0B: $0A
     inc bc                                        ; $0C0C: $03
     ld [hl], a                                    ; $0C0D: $77
@@ -1701,7 +1693,7 @@ Cmd_0CA2:
     call Call_000_0E7A                            ; $0CA2: $CD $7A $0E
     set 7, [hl]                                   ; $0CA5: $CB $FE
     ld a, b                                       ; $0CA7: $78
-    ld [$FFAA], a                                 ; $0CA8: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0CA8: $EA $AA $FF
     ld a, c                                       ; $0CAB: $79
     ld [hScript.Frame], a                                 ; $0CAC: $EA $A9 $FF
     ld a, $D3                                     ; $0CAF: $3E $D3
@@ -1782,9 +1774,7 @@ Cmd_0CFD:
     jr z, jr_000_0D53                             ; $0D2B: $28 $26
 
 jr_000_0D2D:
-    ld a, $05                                     ; $0D2D: $3E $05
-    ld [wRAMBank], a                                 ; $0D2F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0D32: $E0 $70
+    SwitchRAMBank $05
     ld e, [hl]                                    ; $0D34: $5E
     ld a, [bc]                                    ; $0D35: $0A
     inc bc                                        ; $0D36: $03
@@ -1792,7 +1782,7 @@ jr_000_0D2D:
     jr nz, jr_000_0D53                            ; $0D38: $20 $19
 
     ld a, b                                       ; $0D3A: $78
-    ld [$FFAA], a                                 ; $0D3B: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0D3B: $EA $AA $FF
     ld a, c                                       ; $0D3E: $79
     ld [hScript.Frame], a                                 ; $0D3F: $EA $A9 $FF
     ld a, $D3                                     ; $0D42: $3E $D3
@@ -1830,7 +1820,7 @@ Cmd_0D6E:
     inc bc                                        ; $0D74: $03
     ld [$FF8E], a                                 ; $0D75: $EA $8E $FF
     ld a, b                                       ; $0D78: $78
-    ld [$FFAA], a                                 ; $0D79: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0D79: $EA $AA $FF
     ld a, c                                       ; $0D7C: $79
     ld [hScript.Frame], a                                 ; $0D7D: $EA $A9 $FF
     ld a, $D3                                     ; $0D80: $3E $D3
@@ -1874,7 +1864,7 @@ jr_000_0DA0:
 
     ldh [$FFAD], a                                  ; $0DBB: $E0 $AD
     ld a, b                                       ; $0DBD: $78
-    ld [$FFAA], a                                 ; $0DBE: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0DBE: $EA $AA $FF
     ld a, c                                       ; $0DC1: $79
     ld [hScript.Frame], a                                 ; $0DC2: $EA $A9 $FF
     ld a, $CF                                     ; $0DC5: $3E $CF
@@ -1923,7 +1913,7 @@ jr_000_0DE2:
 Jump_000_0E02:
     ldh [$FFAD], a                                  ; $0E02: $E0 $AD
     ld a, b                                       ; $0E04: $78
-    ld [$FFAA], a                                 ; $0E05: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0E05: $EA $AA $FF
     ld a, c                                       ; $0E08: $79
     ld [hScript.Frame], a                                 ; $0E09: $EA $A9 $FF
     ld a, $16                                     ; $0E0C: $3E $16
@@ -1952,7 +1942,7 @@ Jump_000_0E02:
 
 jr_000_0E32:
     ld a, b                                       ; $0E32: $78
-    ld [$FFAA], a                                 ; $0E33: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0E33: $EA $AA $FF
     ld a, c                                       ; $0E36: $79
     ld [hScript.Frame], a                                 ; $0E37: $EA $A9 $FF
     ld a, $E2                                     ; $0E3A: $3E $E2
@@ -1986,9 +1976,7 @@ Cmd_0E63:
     ld h, a                                       ; $0E66: $67
     ld a, [$FF93]                                 ; $0E67: $FA $93 $FF
     ld l, a                                       ; $0E6A: $6F
-    ld a, $03                                     ; $0E6B: $3E $03
-    ld [wRAMBank], a                                 ; $0E6D: $EA $5A $C9
-    ldh [rSVBK], a                                ; $0E70: $E0 $70
+    SwitchRAMBank $03
     ld e, [hl]                                    ; $0E72: $5E
     ld a, [bc]                                    ; $0E73: $0A
     cp e                                          ; $0E74: $BB
@@ -2143,7 +2131,7 @@ Cmd_0ED1:
     ld a, [bc]                                    ; $0F2E: $0A
     inc bc                                        ; $0F2F: $03
     ld [hl+], a                                   ; $0F30: $22
-    ld [$FFAA], a                                 ; $0F31: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $0F31: $EA $AA $FF
     ld a, $D3                                     ; $0F34: $3E $D3
     ld [hl+], a                                   ; $0F36: $22
     ld [hl], $0A                                  ; $0F37: $36 $0A
@@ -2278,9 +2266,7 @@ Cmd_0FF4:
     ld [$C9C4], a                                 ; $0FF7: $EA $C4 $C9
     ld a, [$C18F]                                 ; $0FFA: $FA $8F $C1
     ld [$C9C5], a                                 ; $0FFD: $EA $C5 $C9
-    ld a, $07                                     ; $1000: $3E $07
-    ld [wRAMBank], a                                 ; $1002: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1005: $E0 $70
+    SwitchRAMBank $07
     ld a, [bc]                                    ; $1007: $0A
     inc bc                                        ; $1008: $03
     ld [$CA07], a                                 ; $1009: $EA $07 $CA
@@ -2318,7 +2304,7 @@ jr_000_101A:
     ld a, $0A                                     ; $1037: $3E $0A
     ld [$C70E], a                                 ; $1039: $EA $0E $C7
     ld a, b                                       ; $103C: $78
-    ldh [$FFAA], a                                  ; $103D: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $103D: $E0 $AA
     ld a, c                                       ; $103F: $79
     ldh [hScript.Frame], a                                  ; $1040: $E0 $A9
     ld a, $88                                     ; $1042: $3E $88
@@ -2435,7 +2421,7 @@ jr_000_10EA:
 jr_000_10F4:
     pop bc                                        ; $10F4: $C1
     ld a, b                                       ; $10F5: $78
-    ldh [$FFAA], a                                  ; $10F6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $10F6: $E0 $AA
     ld a, c                                       ; $10F8: $79
     ldh [hScript.Frame], a                                  ; $10F9: $E0 $A9
     ld a, $D3                                     ; $10FB: $3E $D3
@@ -2446,9 +2432,7 @@ jr_000_10F4:
     jp $5873                                      ; $110B: $C3 $73 $58
 
 Cmd_110E:
-    ld a, $07                                     ; $110E: $3E $07
-    ld [wRAMBank], a                                 ; $1110: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1113: $E0 $70
+    SwitchRAMBank $07
     ld hl, $D3CD                                  ; $1115: $21 $CD $D3
     ld a, [bc]                                    ; $1118: $0A
     ld [hl+], a                                   ; $1119: $22
@@ -2501,12 +2485,10 @@ Call_000_114F:
     ld de, $D392                                  ; $1151: $11 $92 $D3
     ld c, a                                       ; $1154: $4F
     ld b, $00                                     ; $1155: $06 $00
-    ld a, $07                                     ; $1157: $3E $07
-    ld [wRAMBank], a                                 ; $1159: $EA $5A $C9
-    ldh [rSVBK], a                                ; $115C: $E0 $70
+    SwitchRAMBank $07
     call MemMov                            ; $115E: $CD $D6 $07
     ld a, h                                       ; $1161: $7C
-    ldh [$FFAA], a                                  ; $1162: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $1162: $E0 $AA
     ld a, l                                       ; $1164: $7D
     ldh [hScript.Frame], a                                  ; $1165: $E0 $A9
     ld a, $D3                                     ; $1167: $3E $D3
@@ -2533,7 +2515,7 @@ Cmd_118A:
     ld [$CA07], a                                 ; $1190: $EA $07 $CA
     inc bc                                        ; $1193: $03
     ld a, b                                       ; $1194: $78
-    ld [$FFAA], a                                 ; $1195: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1195: $EA $AA $FF
     ld a, c                                       ; $1198: $79
     ld [hScript.Frame], a                                 ; $1199: $EA $A9 $FF
     ld a, $D3                                     ; $119C: $3E $D3
@@ -2552,7 +2534,7 @@ Cmd_11B7:
     ld [$C9FD], a                                 ; $11B8: $EA $FD $C9
     inc bc                                        ; $11BB: $03
     ld a, b                                       ; $11BC: $78
-    ld [$FFAA], a                                 ; $11BD: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $11BD: $EA $AA $FF
     ld a, c                                       ; $11C0: $79
     ld [hScript.Frame], a                                 ; $11C1: $EA $A9 $FF
     ld a, $D3                                     ; $11C4: $3E $D3
@@ -2578,7 +2560,7 @@ Cmd_11DE:
     ld a, $01                                     ; $11ED: $3E $01
     ld [$C9EB], a                                 ; $11EF: $EA $EB $C9
     ld a, b                                       ; $11F2: $78
-    ld [$FFAA], a                                 ; $11F3: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $11F3: $EA $AA $FF
     ld a, c                                       ; $11F6: $79
     ld [hScript.Frame], a                                 ; $11F7: $EA $A9 $FF
     ld a, $0A                                     ; $11FA: $3E $0A
@@ -2614,7 +2596,7 @@ Cmd_123B:
     ld a, $12                                     ; $1247: $3E $12
     ld [hScript.State + 1], a                                 ; $1249: $EA $AC $FF
     ld a, b                                       ; $124C: $78
-    ld [$FFAA], a                                 ; $124D: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $124D: $EA $AA $FF
     ld a, c                                       ; $1250: $79
     ld [hScript.Frame], a                                 ; $1251: $EA $A9 $FF
     ret                                           ; $1254: $C9
@@ -2671,7 +2653,7 @@ Cmd_12A2:
     inc bc                                        ; $12AD: $03
     ldh [$FFAD], a                                  ; $12AE: $E0 $AD
     ld a, b                                       ; $12B0: $78
-    ld [$FFAA], a                                 ; $12B1: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $12B1: $EA $AA $FF
     ld a, c                                       ; $12B4: $79
     ld [hScript.Frame], a                                 ; $12B5: $EA $A9 $FF
     ld a, $C2                                     ; $12B8: $3E $C2
@@ -2721,7 +2703,7 @@ jr_000_1308:
     ld [$CA0F], a                                 ; $130C: $EA $0F $CA
     ld [$CA10], a                                 ; $130F: $EA $10 $CA
     ld a, b                                       ; $1312: $78
-    ld [$FFAA], a                                 ; $1313: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1313: $EA $AA $FF
     ld a, c                                       ; $1316: $79
     ld [hScript.Frame], a                                 ; $1317: $EA $A9 $FF
     ld a, $D3                                     ; $131A: $3E $D3
@@ -2749,7 +2731,7 @@ Cmd_1336:
 
 jr_000_1345:
     ld a, b                                       ; $1345: $78
-    ld [$FFAA], a                                 ; $1346: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1346: $EA $AA $FF
     ld a, c                                       ; $1349: $79
     ld [hScript.Frame], a                                 ; $134A: $EA $A9 $FF
     ld a, $D3                                     ; $134D: $3E $D3
@@ -2760,350 +2742,7 @@ jr_000_1345:
     call $415F                                    ; $135F: $CD $5F $41
     ret                                           ; $1362: $C9
 
-
-    sub c                                         ; $1363: $91
-    inc de                                        ; $1364: $13
-    and [hl]                                      ; $1365: $A6
-    inc de                                        ; $1366: $13
-    or b                                          ; $1367: $B0
-    inc de                                        ; $1368: $13
-    cp d                                          ; $1369: $BA
-    inc de                                        ; $136A: $13
-    call nz, $CD13                                ; $136B: $C4 $13 $CD
-    inc de                                        ; $136E: $13
-    db $D3                                        ; $136F: $D3
-    inc de                                        ; $1370: $13
-    jp c, $E413                                   ; $1371: $DA $13 $E4
-
-    inc de                                        ; $1374: $13
-    db $F4                                        ; $1375: $F4
-    inc de                                        ; $1376: $13
-    rlca                                          ; $1377: $07
-    inc d                                         ; $1378: $14
-    ld d, $14                                     ; $1379: $16 $14
-    jr nz, jr_000_1391                            ; $137B: $20 $14
-
-    ld a, [hl+]                                   ; $137D: $2A
-    inc d                                         ; $137E: $14
-    cpl                                           ; $137F: $2F
-    inc d                                         ; $1380: $14
-    inc [hl]                                      ; $1381: $34
-    inc d                                         ; $1382: $14
-    ld b, a                                       ; $1383: $47
-    inc d                                         ; $1384: $14
-    ld e, d                                       ; $1385: $5A
-    inc d                                         ; $1386: $14
-    ld l, e                                       ; $1387: $6B
-    inc d                                         ; $1388: $14
-    ld a, h                                       ; $1389: $7C
-    inc d                                         ; $138A: $14
-    adc l                                         ; $138B: $8D
-    inc d                                         ; $138C: $14
-    sbc [hl]                                      ; $138D: $9E
-    inc d                                         ; $138E: $14
-    and a                                         ; $138F: $A7
-    inc d                                         ; $1390: $14
-
-jr_000_1391:
-    ld a, [bc]                                    ; $1391: $0A
-    ld l, a                                       ; $1392: $6F
-    inc bc                                        ; $1393: $03
-    ld a, [bc]                                    ; $1394: $0A
-    ld h, a                                       ; $1395: $67
-    inc bc                                        ; $1396: $03
-    ld a, [hl]                                    ; $1397: $7E
-    ld e, a                                       ; $1398: $5F
-    ld a, [bc]                                    ; $1399: $0A
-    inc bc                                        ; $139A: $03
-    and e                                         ; $139B: $A3
-    jr z, jr_000_13A2                             ; $139C: $28 $04
-
-    ld de, rIE                                  ; $139E: $11 $FF $FF
-    ret                                           ; $13A1: $C9
-
-
-jr_000_13A2:
-    ld de, $0000                                  ; $13A2: $11 $00 $00
-    ret                                           ; $13A5: $C9
-
-
-    ld a, [bc]                                    ; $13A6: $0A
-    ld l, a                                       ; $13A7: $6F
-    inc bc                                        ; $13A8: $03
-    ld a, [bc]                                    ; $13A9: $0A
-    ld h, a                                       ; $13AA: $67
-    inc bc                                        ; $13AB: $03
-    ld e, [hl]                                    ; $13AC: $5E
-    ld d, $00                                     ; $13AD: $16 $00
-    ret                                           ; $13AF: $C9
-
-
-    ld a, [bc]                                    ; $13B0: $0A
-    ld l, a                                       ; $13B1: $6F
-    inc bc                                        ; $13B2: $03
-    ld a, [bc]                                    ; $13B3: $0A
-    ld h, a                                       ; $13B4: $67
-    inc bc                                        ; $13B5: $03
-    ld a, [hl+]                                   ; $13B6: $2A
-    ld e, a                                       ; $13B7: $5F
-    ld d, [hl]                                    ; $13B8: $56
-    ret                                           ; $13B9: $C9
-
-
-    ld a, [$C189]                                 ; $13BA: $FA $89 $C1
-    cpl                                           ; $13BD: $2F
-    and $03                                       ; $13BE: $E6 $03
-    ld e, a                                       ; $13C0: $5F
-    ld d, $00                                     ; $13C1: $16 $00
-    ret                                           ; $13C3: $C9
-
-
-    ld a, [$A026]                                 ; $13C4: $FA $26 $A0
-    ld e, a                                       ; $13C7: $5F
-    ld a, [$A027]                                 ; $13C8: $FA $27 $A0
-    ld d, a                                       ; $13CB: $57
-    ret                                           ; $13CC: $C9
-
-
-    ld a, [bc]                                    ; $13CD: $0A
-    inc bc                                        ; $13CE: $03
-    ld e, a                                       ; $13CF: $5F
-    ld d, $00                                     ; $13D0: $16 $00
-    ret                                           ; $13D2: $C9
-
-
-    ld a, [bc]                                    ; $13D3: $0A
-    inc bc                                        ; $13D4: $03
-    ld e, a                                       ; $13D5: $5F
-    ld a, [bc]                                    ; $13D6: $0A
-    inc bc                                        ; $13D7: $03
-    ld d, a                                       ; $13D8: $57
-    ret                                           ; $13D9: $C9
-
-
-    call Call_000_14BD                            ; $13DA: $CD $BD $14
-    ld a, e                                       ; $13DD: $7B
-    and l                                         ; $13DE: $A5
-    ld e, a                                       ; $13DF: $5F
-    ld a, d                                       ; $13E0: $7A
-    and h                                         ; $13E1: $A4
-    ld d, a                                       ; $13E2: $57
-    ret                                           ; $13E3: $C9
-
-
-    call Call_000_14BD                            ; $13E4: $CD $BD $14
-    ld a, e                                       ; $13E7: $7B
-    or d                                          ; $13E8: $B2
-    ld de, $0000                                  ; $13E9: $11 $00 $00
-    ret z                                         ; $13EC: $C8
-
-    ld a, l                                       ; $13ED: $7D
-    or h                                          ; $13EE: $B4
-    ret z                                         ; $13EF: $C8
-
-    ld de, rIE                                  ; $13F0: $11 $FF $FF
-    ret                                           ; $13F3: $C9
-
-
-    call Call_000_14BD                            ; $13F4: $CD $BD $14
-    ld a, e                                       ; $13F7: $7B
-    or l                                          ; $13F8: $B5
-    jr nz, jr_000_1403                            ; $13F9: $20 $08
-
-    ld a, d                                       ; $13FB: $7A
-    or h                                          ; $13FC: $B4
-    jr nz, jr_000_1403                            ; $13FD: $20 $04
-
-    ld de, $0000                                  ; $13FF: $11 $00 $00
-    ret                                           ; $1402: $C9
-
-
-jr_000_1403:
-    ld de, rIE                                  ; $1403: $11 $FF $FF
-    ret                                           ; $1406: $C9
-
-
-    call Call_000_14C6                            ; $1407: $CD $C6 $14
-    ld a, d                                       ; $140A: $7A
-    or e                                          ; $140B: $B3
-    jr z, jr_000_1412                             ; $140C: $28 $04
-
-    ld de, $0000                                  ; $140E: $11 $00 $00
-    ret                                           ; $1411: $C9
-
-
-jr_000_1412:
-    ld de, rIE                                  ; $1412: $11 $FF $FF
-    ret                                           ; $1415: $C9
-
-
-    call Call_000_14BD                            ; $1416: $CD $BD $14
-    ld a, e                                       ; $1419: $7B
-    add l                                         ; $141A: $85
-    ld e, a                                       ; $141B: $5F
-    ld a, d                                       ; $141C: $7A
-    adc h                                         ; $141D: $8C
-    ld d, a                                       ; $141E: $57
-    ret                                           ; $141F: $C9
-
-
-    call Call_000_14BD                            ; $1420: $CD $BD $14
-    ld a, l                                       ; $1423: $7D
-    sub e                                         ; $1424: $93
-    ld e, a                                       ; $1425: $5F
-    ld a, h                                       ; $1426: $7C
-    sbc d                                         ; $1427: $9A
-    ld d, a                                       ; $1428: $57
-    ret                                           ; $1429: $C9
-
-
-    call Call_000_14C6                            ; $142A: $CD $C6 $14
-    inc de                                        ; $142D: $13
-    ret                                           ; $142E: $C9
-
-
-    call Call_000_14C6                            ; $142F: $CD $C6 $14
-    dec de                                        ; $1432: $1B
-    ret                                           ; $1433: $C9
-
-
-    call Call_000_14BD                            ; $1434: $CD $BD $14
-    ld a, e                                       ; $1437: $7B
-    cp l                                          ; $1438: $BD
-    jr nz, jr_000_1443                            ; $1439: $20 $08
-
-    ld a, d                                       ; $143B: $7A
-    cp h                                          ; $143C: $BC
-    jr nz, jr_000_1443                            ; $143D: $20 $04
-
-    ld de, rIE                                  ; $143F: $11 $FF $FF
-    ret                                           ; $1442: $C9
-
-
-jr_000_1443:
-    ld de, $0000                                  ; $1443: $11 $00 $00
-    ret                                           ; $1446: $C9
-
-
-    call Call_000_14BD                            ; $1447: $CD $BD $14
-    ld a, e                                       ; $144A: $7B
-    cp l                                          ; $144B: $BD
-    jr nz, jr_000_1456                            ; $144C: $20 $08
-
-    ld a, d                                       ; $144E: $7A
-    cp h                                          ; $144F: $BC
-    jr nz, jr_000_1456                            ; $1450: $20 $04
-
-    ld de, $0000                                  ; $1452: $11 $00 $00
-    ret                                           ; $1455: $C9
-
-
-jr_000_1456:
-    ld de, rIE                                  ; $1456: $11 $FF $FF
-    ret                                           ; $1459: $C9
-
-
-    call Call_000_14BD                            ; $145A: $CD $BD $14
-    ld a, e                                       ; $145D: $7B
-    sub l                                         ; $145E: $95
-    ld a, d                                       ; $145F: $7A
-    sbc h                                         ; $1460: $9C
-    jr nc, jr_000_1467                            ; $1461: $30 $04
-
-    ld de, rIE                                  ; $1463: $11 $FF $FF
-    ret                                           ; $1466: $C9
-
-
-jr_000_1467:
-    ld de, $0000                                  ; $1467: $11 $00 $00
-    ret                                           ; $146A: $C9
-
-
-    call Call_000_14BD                            ; $146B: $CD $BD $14
-    ld a, l                                       ; $146E: $7D
-    sub e                                         ; $146F: $93
-    ld a, h                                       ; $1470: $7C
-    sbc d                                         ; $1471: $9A
-    jr nc, jr_000_1478                            ; $1472: $30 $04
-
-    ld de, $0000                                  ; $1474: $11 $00 $00
-    ret                                           ; $1477: $C9
-
-
-jr_000_1478:
-    ld de, rIE                                  ; $1478: $11 $FF $FF
-    ret                                           ; $147B: $C9
-
-
-    call Call_000_14BD                            ; $147C: $CD $BD $14
-    ld a, l                                       ; $147F: $7D
-    sub e                                         ; $1480: $93
-    ld a, h                                       ; $1481: $7C
-    sbc d                                         ; $1482: $9A
-    jr nc, jr_000_1489                            ; $1483: $30 $04
-
-    ld de, rIE                                  ; $1485: $11 $FF $FF
-    ret                                           ; $1488: $C9
-
-
-jr_000_1489:
-    ld de, $0000                                  ; $1489: $11 $00 $00
-    ret                                           ; $148C: $C9
-
-
-    call Call_000_14BD                            ; $148D: $CD $BD $14
-    ld a, e                                       ; $1490: $7B
-    sub l                                         ; $1491: $95
-    ld a, d                                       ; $1492: $7A
-    sbc h                                         ; $1493: $9C
-    jr nc, jr_000_149A                            ; $1494: $30 $04
-
-    ld de, $0000                                  ; $1496: $11 $00 $00
-    ret                                           ; $1499: $C9
-
-
-jr_000_149A:
-    ld de, rIE                                  ; $149A: $11 $FF $FF
-    ret                                           ; $149D: $C9
-
-
-    ld a, [$FF04]                                 ; $149E: $FA $04 $FF
-    and $0F                                       ; $14A1: $E6 $0F
-    ld e, a                                       ; $14A3: $5F
-    ld d, $00                                     ; $14A4: $16 $00
-    ret                                           ; $14A6: $C9
-
-
-    PushRAMBank
-    ld a, [bc]                                    ; $14AB: $0A
-    ld [wRAMBank], a                                 ; $14AC: $EA $5A $C9
-    ldh [rSVBK], a                                ; $14AF: $E0 $70
-    inc bc                                        ; $14B1: $03
-    call Call_000_14C6                            ; $14B2: $CD $C6 $14
-    PopRAMBank
-    ret                                           ; $14BC: $C9
-
-
-Call_000_14BD:
-    call Call_000_14C6                            ; $14BD: $CD $C6 $14
-    push de                                       ; $14C0: $D5
-    call Call_000_14C6                            ; $14C1: $CD $C6 $14
-    pop hl                                        ; $14C4: $E1
-    ret                                           ; $14C5: $C9
-
-
-Call_000_14C6:
-    ld a, [bc]                                    ; $14C6: $0A
-    inc bc                                        ; $14C7: $03
-    add a                                         ; $14C8: $87
-    ld e, a                                       ; $14C9: $5F
-    ld d, $00                                     ; $14CA: $16 $00
-    ld hl, $1363                                  ; $14CC: $21 $63 $13
-    add hl, de                                    ; $14CF: $19
-    ld a, [hl+]                                   ; $14D0: $2A
-    ld h, [hl]                                    ; $14D1: $66
-    ld l, a                                       ; $14D2: $6F
-    jp hl                                         ; $14D3: $E9
+INCLUDE "source/engine/expression_00.asm"
 
 
 Cmd_14D4:
@@ -3111,7 +2750,7 @@ Cmd_14D4:
     inc bc                                        ; $14D5: $03
     ldh [$FFAD], a                                  ; $14D6: $E0 $AD
     ld a, b                                       ; $14D8: $78
-    ld [$FFAA], a                                 ; $14D9: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $14D9: $EA $AA $FF
     ld a, c                                       ; $14DC: $79
     ld [hScript.Frame], a                                 ; $14DD: $EA $A9 $FF
     ld a, $EA                                     ; $14E0: $3E $EA
@@ -3142,7 +2781,7 @@ Cmd_14F4:
     ld a, [hl]                                    ; $150B: $7E
     ldh [$FFAD], a                                  ; $150C: $E0 $AD
     ld a, b                                       ; $150E: $78
-    ld [$FFAA], a                                 ; $150F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $150F: $EA $AA $FF
     ld a, c                                       ; $1512: $79
     ld [hScript.Frame], a                                 ; $1513: $EA $A9 $FF
     ld a, $20                                     ; $1516: $3E $20
@@ -3169,7 +2808,7 @@ Jump_000_1531:
     ld a, $00                                     ; $1536: $3E $00
     ldh [hScript.Frame], a                                  ; $1538: $E0 $A9
     ld a, $00                                     ; $153A: $3E $00
-    ldh [$FFAA], a                                  ; $153C: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $153C: $E0 $AA
     ld a, $31                                     ; $153E: $3E $31
     ldh [hScript.State], a                                  ; $1540: $E0 $AB
     ld a, $15                                     ; $1542: $3E $15
@@ -3177,20 +2816,16 @@ Jump_000_1531:
     ret                                           ; $1546: $C9
 
 Cmd_1547:
-    ld a, $00                                     ; $1547: $3E $00
-    add $00                                       ; $1549: $C6 $00
-    ld [$4000], a                                 ; $154B: $EA $00 $40
-    ld a, $0A                                     ; $154E: $3E $0A
-    ld [$0000], a                                 ; $1550: $EA $00 $00
-    call Call_000_14C6                            ; $1553: $CD $C6 $14
-    xor a                                         ; $1556: $AF
-    ld [$0000], a                                 ; $1557: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $1553: $CD $C6 $14
+    Battery_Off
     ld a, e                                       ; $155A: $7B
     or d                                          ; $155B: $B2
     jr z, jr_000_1571                             ; $155C: $28 $13
 
     ld a, b                                       ; $155E: $78
-    ld [$FFAA], a                                 ; $155F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $155F: $EA $AA $FF
     ld a, c                                       ; $1562: $79
     ld [hScript.Frame], a                                 ; $1563: $EA $A9 $FF
     ld a, $93                                     ; $1566: $3E $93
@@ -3205,7 +2840,7 @@ jr_000_1571:
     inc bc                                        ; $1572: $03
     inc bc                                        ; $1573: $03
     ld a, b                                       ; $1574: $78
-    ld [$FFAA], a                                 ; $1575: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1575: $EA $AA $FF
     ld a, c                                       ; $1578: $79
     ld [hScript.Frame], a                                 ; $1579: $EA $A9 $FF
     ld a, $D3                                     ; $157C: $3E $D3
@@ -3285,14 +2920,10 @@ Cmd_15CC:
     ret                                           ; $15DA: $C9
 
 Cmd_15DB:
-    ld a, $00                                     ; $15DB: $3E $00
-    add $00                                       ; $15DD: $C6 $00
-    ld [$4000], a                                 ; $15DF: $EA $00 $40
-    ld a, $0A                                     ; $15E2: $3E $0A
-    ld [$0000], a                                 ; $15E4: $EA $00 $00
-    call Call_000_14C6                            ; $15E7: $CD $C6 $14
-    xor a                                         ; $15EA: $AF
-    ld [$0000], a                                 ; $15EB: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $15E7: $CD $C6 $14
+    Battery_Off
     jr jr_000_15F5                                ; $15EE: $18 $05
 
 jr_000_15F0:
@@ -3366,7 +2997,7 @@ Cmd_1631:
     ldh [hScript.Frame], a                                  ; $1636: $E0 $A9
     inc bc                                        ; $1638: $03
     ld a, [bc]                                    ; $1639: $0A
-    ldh [$FFAA], a                                  ; $163A: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $163A: $E0 $AA
     ld a, $01                                     ; $163C: $3E $01
     ld [$C6F8], a                                 ; $163E: $EA $F8 $C6
     ld a, $D3                                     ; $1641: $3E $D3
@@ -3376,14 +3007,10 @@ Cmd_1631:
     ret                                           ; $164B: $C9
 
 Cmd_164C:
-    ld a, $00                                     ; $164C: $3E $00
-    add $00                                       ; $164E: $C6 $00
-    ld [$4000], a                                 ; $1650: $EA $00 $40
-    ld a, $0A                                     ; $1653: $3E $0A
-    ld [$0000], a                                 ; $1655: $EA $00 $00
-    call Call_000_14C6                            ; $1658: $CD $C6 $14
-    xor a                                         ; $165B: $AF
-    ld [$0000], a                                 ; $165C: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $1658: $CD $C6 $14
+    Battery_Off
     jr jr_000_1664                                ; $165F: $18 $03
 
 jr_000_1661:
@@ -3465,7 +3092,7 @@ Cmd_168C:
 
 jr_000_16C1:
     ld a, b                                       ; $16C1: $78
-    ld [$FFAA], a                                 ; $16C2: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $16C2: $EA $AA $FF
     ld a, c                                       ; $16C5: $79
     ld [hScript.Frame], a                                 ; $16C6: $EA $A9 $FF
     call Call_000_05B9                            ; $16C9: $CD $B9 $05
@@ -3506,7 +3133,7 @@ Cmd_16D7:
 
 jr_000_1701:
     ld a, h                                       ; $1701: $7C
-    ld [$FFAA], a                                 ; $1702: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1702: $EA $AA $FF
     ld a, l                                       ; $1705: $7D
     ld [hScript.Frame], a                                 ; $1706: $EA $A9 $FF
     ld a, $D3                                     ; $1709: $3E $D3
@@ -3566,7 +3193,7 @@ jr_000_1752:
     inc bc                                        ; $1754: $03
     inc bc                                        ; $1755: $03
     ld a, b                                       ; $1756: $78
-    ld [$FFAA], a                                 ; $1757: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1757: $EA $AA $FF
     ld a, c                                       ; $175A: $79
     ld [hScript.Frame], a                                 ; $175B: $EA $A9 $FF
     ld a, $D3                                     ; $175E: $3E $D3
@@ -3630,7 +3257,7 @@ Cmd_176F:
 
 jr_000_17B1:
     ld a, b                                       ; $17B1: $78
-    ld [$FFAA], a                                 ; $17B2: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $17B2: $EA $AA $FF
     ld a, c                                       ; $17B5: $79
     ld [hScript.Frame], a                                 ; $17B6: $EA $A9 $FF
     call Call_000_0646                            ; $17B9: $CD $46 $06
@@ -3766,7 +3393,7 @@ Cmd_1863:
 
     inc bc                                        ; $186A: $03
     ld a, b                                       ; $186B: $78
-    ld [$FFAA], a                                 ; $186C: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $186C: $EA $AA $FF
     ld a, c                                       ; $186F: $79
     ld [hScript.Frame], a                                 ; $1870: $EA $A9 $FF
     ld hl, $C6F9                                  ; $1873: $21 $F9 $C6
@@ -3798,7 +3425,7 @@ Cmd_1863:
 
 jr_000_1895:
     ld a, b                                       ; $1895: $78
-    ld [$FFAA], a                                 ; $1896: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1896: $EA $AA $FF
     ld a, c                                       ; $1899: $79
     ld [hScript.Frame], a                                 ; $189A: $EA $A9 $FF
     ld a, $D3                                     ; $189D: $3E $D3
@@ -3868,7 +3495,7 @@ Jump_000_18EB:
 
     inc bc                                        ; $18EF: $03
     ld a, b                                       ; $18F0: $78
-    ld [$FFAA], a                                 ; $18F1: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $18F1: $EA $AA $FF
     ld a, c                                       ; $18F4: $79
     ld [hScript.Frame], a                                 ; $18F5: $EA $A9 $FF
     ld a, $D3                                     ; $18F8: $3E $D3
@@ -4105,7 +3732,7 @@ Cmd_1A85:
     ld [$C6EF], a                                 ; $1AA3: $EA $EF $C6
     inc bc                                        ; $1AA6: $03
     ld a, b                                       ; $1AA7: $78
-    ld [$FFAA], a                                 ; $1AA8: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1AA8: $EA $AA $FF
     ld a, c                                       ; $1AAB: $79
     ld [hScript.Frame], a                                 ; $1AAC: $EA $A9 $FF
     ld a, $B9                                     ; $1AAF: $3E $B9
@@ -4151,7 +3778,7 @@ Cmd_1AD6:
 
 Call_000_1AFC:
     ld a, b                                       ; $1AFC: $78
-    ld [$FFAA], a                                 ; $1AFD: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1AFD: $EA $AA $FF
     ld a, c                                       ; $1B00: $79
     ld [hScript.Frame], a                                 ; $1B01: $EA $A9 $FF
     call Call_000_1B0C                            ; $1B04: $CD $0C $1B
@@ -4207,7 +3834,7 @@ Call_000_1B3E:
     call Call_000_1B38                            ; $1B3E: $CD $38 $1B
     call Call_000_1B1E                            ; $1B41: $CD $1E $1B
     ld a, b                                       ; $1B44: $78
-    ld [$FFAA], a                                 ; $1B45: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1B45: $EA $AA $FF
     ld a, c                                       ; $1B48: $79
     ld [hScript.Frame], a                                 ; $1B49: $EA $A9 $FF
     ret                                           ; $1B4C: $C9
@@ -4239,7 +3866,7 @@ jr_000_1B64:
 
 jr_000_1B73:
     ld a, b                                       ; $1B73: $78
-    ld [$FFAA], a                                 ; $1B74: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1B74: $EA $AA $FF
     ld a, c                                       ; $1B77: $79
     ld [hScript.Frame], a                                 ; $1B78: $EA $A9 $FF
     ld a, $D3                                     ; $1B7B: $3E $D3
@@ -4397,7 +4024,7 @@ Cmd_1CAE:
     inc bc                                        ; $1CBE: $03
     ld [$C9FE], a                                 ; $1CBF: $EA $FE $C9
     ld a, b                                       ; $1CC2: $78
-    ld [$FFAA], a                                 ; $1CC3: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1CC3: $EA $AA $FF
     ld a, c                                       ; $1CC6: $79
     ld [hScript.Frame], a                                 ; $1CC7: $EA $A9 $FF
     SwitchROMBank $00
@@ -4437,7 +4064,7 @@ Cmd_1D10:
     ld [$C9FE], a                                 ; $1D11: $EA $FE $C9
     inc bc                                        ; $1D14: $03
     ld a, b                                       ; $1D15: $78
-    ld [$FFAA], a                                 ; $1D16: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1D16: $EA $AA $FF
     ld a, c                                       ; $1D19: $79
     ld [hScript.Frame], a                                 ; $1D1A: $EA $A9 $FF
     SwitchROMBank $07
@@ -4543,7 +4170,7 @@ Cmd_1DF0:
     ld [$C9FC], a                                 ; $1DFC: $EA $FC $C9
     call Call_000_1B38                            ; $1DFF: $CD $38 $1B
     ld a, b                                       ; $1E02: $78
-    ld [$FFAA], a                                 ; $1E03: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1E03: $EA $AA $FF
     ld a, c                                       ; $1E06: $79
     ld [hScript.Frame], a                                 ; $1E07: $EA $A9 $FF
     SwitchROMBank $07
@@ -4571,7 +4198,7 @@ Cmd_1DF0:
 Cmd_1E4C:
     call Call_000_1B38                            ; $1E4C: $CD $38 $1B
     ld a, b                                       ; $1E4F: $78
-    ld [$FFAA], a                                 ; $1E50: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1E50: $EA $AA $FF
     ld a, c                                       ; $1E53: $79
     ld [hScript.Frame], a                                 ; $1E54: $EA $A9 $FF
     SwitchROMBank $07
@@ -4591,7 +4218,7 @@ Cmd_1E4C:
 Cmd_1E7C:
     call Call_000_1B38                            ; $1E7C: $CD $38 $1B
     ld a, b                                       ; $1E7F: $78
-    ld [$FFAA], a                                 ; $1E80: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1E80: $EA $AA $FF
     ld a, c                                       ; $1E83: $79
     ld [hScript.Frame], a                                 ; $1E84: $EA $A9 $FF
     SwitchROMBank $07
@@ -4639,7 +4266,7 @@ Cmd_1ECE:
     add l                                         ; $1ED7: $85
     ldh [$FFAE], a                                  ; $1ED8: $E0 $AE
     ld a, b                                       ; $1EDA: $78
-    ld [$FFAA], a                                 ; $1EDB: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1EDB: $EA $AA $FF
     ld a, c                                       ; $1EDE: $79
     ld [hScript.Frame], a                                 ; $1EDF: $EA $A9 $FF
     ld a, $AC                                     ; $1EE2: $3E $AC
@@ -4681,7 +4308,7 @@ jr_000_1F03:
 jr_000_1F10:
     ld [$FFAE], a                                 ; $1F10: $EA $AE $FF
     ld a, b                                       ; $1F13: $78
-    ld [$FFAA], a                                 ; $1F14: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1F14: $EA $AA $FF
     ld a, c                                       ; $1F17: $79
     ld [hScript.Frame], a                                 ; $1F18: $EA $A9 $FF
     ld a, $AC                                     ; $1F1B: $3E $AC
@@ -4707,20 +4334,16 @@ Cmd_1F26:
     ld a, [bc]                                    ; $1F36: $0A
     ld h, a                                       ; $1F37: $67
     inc bc                                        ; $1F38: $03
-    ld a, $05                                     ; $1F39: $3E $05
-    ld [wRAMBank], a                                 ; $1F3B: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1F3E: $E0 $70
+    SwitchRAMBank $05
     ld a, [bc]                                    ; $1F40: $0A
     inc bc                                        ; $1F41: $03
     ld [hl], a                                    ; $1F42: $77
-    ld a, $03                                     ; $1F43: $3E $03
-    ld [wRAMBank], a                                 ; $1F45: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1F48: $E0 $70
+    SwitchRAMBank $03
     ld a, [bc]                                    ; $1F4A: $0A
     inc bc                                        ; $1F4B: $03
     ld [hl], a                                    ; $1F4C: $77
     ld a, b                                       ; $1F4D: $78
-    ld [$FFAA], a                                 ; $1F4E: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1F4E: $EA $AA $FF
     ld a, c                                       ; $1F51: $79
     ld [hScript.Frame], a                                 ; $1F52: $EA $A9 $FF
     ld a, $D3                                     ; $1F55: $3E $D3
@@ -4754,29 +4377,21 @@ Cmd_1F73:
     ld h, a                                       ; $1F7D: $67
     inc bc                                        ; $1F7E: $03
     push de                                       ; $1F7F: $D5
-    ld a, $06                                     ; $1F80: $3E $06
-    ld [wRAMBank], a                                 ; $1F82: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1F85: $E0 $70
+    SwitchRAMBank $06
     ld a, [bc]                                    ; $1F87: $0A
     ld e, a                                       ; $1F88: $5F
     inc bc                                        ; $1F89: $03
-    ld a, $05                                     ; $1F8A: $3E $05
-    ld [wRAMBank], a                                 ; $1F8C: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1F8F: $E0 $70
+    SwitchRAMBank $05
     ld [hl], e                                    ; $1F91: $73
-    ld a, $04                                     ; $1F92: $3E $04
-    ld [wRAMBank], a                                 ; $1F94: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1F97: $E0 $70
+    SwitchRAMBank $04
     ld a, [bc]                                    ; $1F99: $0A
     ld e, a                                       ; $1F9A: $5F
     inc bc                                        ; $1F9B: $03
-    ld a, $03                                     ; $1F9C: $3E $03
-    ld [wRAMBank], a                                 ; $1F9E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $1FA1: $E0 $70
+    SwitchRAMBank $03
     ld [hl], e                                    ; $1FA3: $73
     pop de                                        ; $1FA4: $D1
     ld a, b                                       ; $1FA5: $78
-    ld [$FFAA], a                                 ; $1FA6: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1FA6: $EA $AA $FF
     ld a, c                                       ; $1FA9: $79
     ld [hScript.Frame], a                                 ; $1FAA: $EA $A9 $FF
     ld a, $D3                                     ; $1FAD: $3E $D3
@@ -4807,7 +4422,7 @@ Cmd_1FD7:
     ld a, b                                       ; $1FDF: $78
 
 Call_000_1FE0:
-    ld [$FFAA], a                                 ; $1FE0: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $1FE0: $EA $AA $FF
     ld a, c                                       ; $1FE3: $79
     ld [hScript.Frame], a                                 ; $1FE4: $EA $A9 $FF
     ld a, $F1                                     ; $1FE7: $3E $F1
@@ -4836,7 +4451,7 @@ Call_000_1FE0:
 
 jr_000_200D:
     ld a, b                                       ; $200D: $78
-    ld [$FFAA], a                                 ; $200E: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $200E: $EA $AA $FF
     ld a, c                                       ; $2011: $79
     ld [hScript.Frame], a                                 ; $2012: $EA $A9 $FF
     ld a, $D7                                     ; $2015: $3E $D7
@@ -4892,7 +4507,7 @@ Jump_000_203B:
     ld [hl+], a                                   ; $205C: $22
     inc bc                                        ; $205D: $03
     ld a, b                                       ; $205E: $78
-    ld [$FFAA], a                                 ; $205F: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $205F: $EA $AA $FF
     ld a, c                                       ; $2062: $79
     ld [hScript.Frame], a                                 ; $2063: $EA $A9 $FF
     ld hl, hScript.Bank                                  ; $2066: $21 $A8 $FF
@@ -4925,16 +4540,14 @@ Call_000_2087:
     ld a, [hl+]                                   ; $208E: $2A
     ld b, a                                       ; $208F: $47
     ld de, $D000                                  ; $2090: $11 $00 $D0
-    ld a, $06                                     ; $2093: $3E $06
-    ld [wRAMBank], a                                 ; $2095: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2098: $E0 $70
+    SwitchRAMBank $06
     call MemMov                            ; $209A: $CD $D6 $07
     ld a, $D3                                     ; $209D: $3E $D3
     ldh [hScript.State], a                                  ; $209F: $E0 $AB
     ld a, $0A                                     ; $20A1: $3E $0A
     ldh [hScript.State + 1], a                                  ; $20A3: $E0 $AC
     ld a, h                                       ; $20A5: $7C
-    ldh [$FFAA], a                                  ; $20A6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $20A6: $E0 $AA
     ld a, l                                       ; $20A8: $7D
     ldh [hScript.Frame], a                                  ; $20A9: $E0 $A9
     ret                                           ; $20AB: $C9
@@ -5036,11 +4649,8 @@ Cmd_2166:
 
 Cmd_218B:
 Jump_000_218B:
-    ld a, $00                                     ; $218B: $3E $00
-    add $00                                       ; $218D: $C6 $00
-    ld [$4000], a                                 ; $218F: $EA $00 $40
-    ld a, $0A                                     ; $2192: $3E $0A
-    ld [$0000], a                                 ; $2194: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$A015]                                 ; $2197: $FA $15 $A0
     ld [$C9C4], a                                 ; $219A: $EA $C4 $C9
     ld a, [$A016]                                 ; $219D: $FA $16 $A0
@@ -5051,8 +4661,7 @@ Jump_000_218B:
     ld l, a                                       ; $21AA: $6F
     ld a, [$A014]                                 ; $21AB: $FA $14 $A0
     ld h, a                                       ; $21AE: $67
-    xor a                                         ; $21AF: $AF
-    ld [$0000], a                                 ; $21B0: $EA $00 $00
+    Battery_Off
     ld a, h                                       ; $21B3: $7C
     or l                                          ; $21B4: $B5
     jr z, jr_000_21C3                             ; $21B5: $28 $0C
@@ -5145,7 +4754,7 @@ Cmd_227A:
     inc bc                                        ; $2283: $03
     and a                                         ; $2284: $A7
     ld a, b                                       ; $2285: $78
-    ldh [$FFAA], a                                  ; $2286: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $2286: $E0 $AA
     ld a, c                                       ; $2288: $79
     ldh [hScript.Frame], a                                  ; $2289: $E0 $A9
     SwitchROMBank $01
@@ -5154,18 +4763,13 @@ Cmd_227A:
     jp $46A9                                      ; $2296: $C3 $A9 $46
 
 Cmd_2299:
-    ld a, $0A                                     ; $2299: $3E $0A
-    ld [$0000], a                                 ; $229B: $EA $00 $00
-    ld a, $00                                     ; $229E: $3E $00
-    add $00                                       ; $22A0: $C6 $00
-    ld [$4000], a                                 ; $22A2: $EA $00 $40
+    Battery_On
+    Battery_SetBank $00
     ld a, [$C18E]                                 ; $22A5: $FA $8E $C1
     ld [$A015], a                                 ; $22A8: $EA $15 $A0
     ld a, [$C18F]                                 ; $22AB: $FA $8F $C1
     ld [$A016], a                                 ; $22AE: $EA $16 $A0
-    ld a, $00                                     ; $22B1: $3E $00
-    add $01                                       ; $22B3: $C6 $01
-    ld [$4000], a                                 ; $22B5: $EA $00 $40
+    Battery_SetBank $01
     ld a, [bc]                                    ; $22B8: $0A
     inc bc                                        ; $22B9: $03
     and a                                         ; $22BA: $A7
@@ -5238,9 +4842,8 @@ Cmd_2340:
 
 Cmd_234F:
     xor a                                         ; $234F: $AF
-    ld [$4000], a                                 ; $2350: $EA $00 $40
-    ld a, $0A                                     ; $2353: $3E $0A
-    ld [$0000], a                                 ; $2355: $EA $00 $00
+    ld [rRAMB], a                                 ; $2350: $EA $00 $40
+    Battery_On
     ld a, [$C18E]                                 ; $2358: $FA $8E $C1
     ld [$A015], a                                 ; $235B: $EA $15 $A0
     ld a, [$C18F]                                 ; $235E: $FA $8F $C1
@@ -5254,8 +4857,7 @@ Cmd_234F:
     ld a, [bc]                                    ; $236E: $0A
     inc bc                                        ; $236F: $03
     ld [$A014], a                                 ; $2370: $EA $14 $A0
-    xor a                                         ; $2373: $AF
-    ld [$0000], a                                 ; $2374: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2377: $C3 $D3 $0A
 
 Cmd_237A:
@@ -5450,11 +5052,8 @@ Cmd_2434:
     adc e                                         ; $249F: $8B
 
 Cmd_24A0:
-    ld a, $00                                     ; $24A0: $3E $00
-    add $00                                       ; $24A2: $C6 $00
-    ld [$4000], a                                 ; $24A4: $EA $00 $40
-    ld a, $0A                                     ; $24A7: $3E $0A
-    ld [$0000], a                                 ; $24A9: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [bc]                                    ; $24AC: $0A
     ld l, a                                       ; $24AD: $6F
     inc bc                                        ; $24AE: $03
@@ -5464,8 +5063,7 @@ Cmd_24A0:
     push bc                                       ; $24B2: $C5
     call Call_000_2EA1                            ; $24B3: $CD $A1 $2E
     pop bc                                        ; $24B6: $C1
-    xor a                                         ; $24B7: $AF
-    ld [$0000], a                                 ; $24B8: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $24BB: $C3 $D3 $0A
 
 Cmd_24BE:
@@ -5521,7 +5119,7 @@ Cmd_24F7:
     ld a, [hl+]                                   ; $251D: $2A
     ld [$C6EC], a                                 ; $251E: $EA $EC $C6
     ld a, h                                       ; $2521: $7C
-    ld [$FFAA], a                                 ; $2522: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $2522: $EA $AA $FF
     ld a, l                                       ; $2525: $7D
     ld [hScript.Frame], a                                 ; $2526: $EA $A9 $FF
     ld a, e                                       ; $2529: $7B
@@ -5661,7 +5259,7 @@ jr_000_25A3:
     ld [$C734], a                                 ; $2610: $EA $34 $C7
     ld [$C735], a                                 ; $2613: $EA $35 $C7
     ld a, h                                       ; $2616: $7C
-    ld [$FFAA], a                                 ; $2617: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $2617: $EA $AA $FF
     ld a, l                                       ; $261A: $7D
     ld [hScript.Frame], a                                 ; $261B: $EA $A9 $FF
     ld a, $93                                     ; $261E: $3E $93
@@ -5680,11 +5278,8 @@ Cmd_2629:
     ret                                           ; $2638: $C9
 
 Cmd_2639:
-    ld a, $00                                     ; $2639: $3E $00
-    add $00                                       ; $263B: $C6 $00
-    ld [$4000], a                                 ; $263D: $EA $00 $40
-    ld a, $0A                                     ; $2640: $3E $0A
-    ld [$0000], a                                 ; $2642: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [bc]                                    ; $2645: $0A
     ld l, a                                       ; $2646: $6F
     inc bc                                        ; $2647: $03
@@ -5694,8 +5289,7 @@ Cmd_2639:
     push bc                                       ; $264B: $C5
     call Call_000_2EC5                            ; $264C: $CD $C5 $2E
     pop bc                                        ; $264F: $C1
-    xor a                                         ; $2650: $AF
-    ld [$0000], a                                 ; $2651: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2654: $C3 $D3 $0A
 
 Cmd_2657:
@@ -5731,7 +5325,7 @@ Cmd_2657:
     ld a, [$C95E]                                 ; $268D: $FA $5E $C9
     ldh [hScript.Frame], a                                  ; $2690: $E0 $A9
     ld a, [$C95F]                                 ; $2692: $FA $5F $C9
-    ldh [$FFAA], a                                  ; $2695: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $2695: $E0 $AA
     ld a, d                                       ; $2697: $7A
     cp $FD                                        ; $2698: $FE $FD
     jr nz, jr_000_26A7                            ; $269A: $20 $0B
@@ -5840,7 +5434,7 @@ Call_000_2742:
 
     dec bc                                        ; $2749: $0B
     ld a, b                                       ; $274A: $78
-    ldh [$FFAA], a                                  ; $274B: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $274B: $E0 $AA
     ld a, c                                       ; $274D: $79
     ldh [hScript.Frame], a                                  ; $274E: $E0 $A9
     ld a, $29                                     ; $2750: $3E $29
@@ -6039,16 +5633,14 @@ jr_000_2850:
     ld a, $EB                                     ; $2893: $3E $EB
     ldh [hScript.Frame], a                                  ; $2895: $E0 $A9
     ld a, $46                                     ; $2897: $3E $46
-    ldh [$FFAA], a                                  ; $2899: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $2899: $E0 $AA
     pop de                                        ; $289B: $D1
     pop bc                                        ; $289C: $C1
-    ld a, $0A                                     ; $289D: $3E $0A
-    ld [$0000], a                                 ; $289F: $EA $00 $00
+    Battery_On
     ld a, b                                       ; $28A2: $78
     or c                                          ; $28A3: $B1
     ld [de], a                                    ; $28A4: $12
-    xor a                                         ; $28A5: $AF
-    ld [$0000], a                                 ; $28A6: $EA $00 $00
+    Battery_Off
     ld e, $FF                                     ; $28A9: $1E $FF
     jp Jump_000_2922                              ; $28AB: $C3 $22 $29
 
@@ -6059,7 +5651,7 @@ Jump_000_28AE:
     ld a, $EC                                     ; $28B2: $3E $EC
     ldh [hScript.Frame], a                                  ; $28B4: $E0 $A9
     ld a, $46                                     ; $28B6: $3E $46
-    ldh [$FFAA], a                                  ; $28B8: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $28B8: $E0 $AA
     ret                                           ; $28BA: $C9
 
 
@@ -6071,18 +5663,16 @@ jr_000_28BB:
     ld a, $ED                                     ; $28C1: $3E $ED
     ldh [hScript.Frame], a                                  ; $28C3: $E0 $A9
     ld a, $46                                     ; $28C5: $3E $46
-    ldh [$FFAA], a                                  ; $28C7: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $28C7: $E0 $AA
     ret                                           ; $28C9: $C9
 
 
 Jump_000_28CA:
-    ld a, $0A                                     ; $28CA: $3E $0A
-    ld [$0000], a                                 ; $28CC: $EA $00 $00
+    Battery_On
     ld a, b                                       ; $28CF: $78
     or c                                          ; $28D0: $B1
     ld [de], a                                    ; $28D1: $12
-    xor a                                         ; $28D2: $AF
-    ld [$0000], a                                 ; $28D3: $EA $00 $00
+    Battery_Off
 
 Jump_000_28D6:
     ld de, $0003                                  ; $28D6: $11 $03 $00
@@ -6093,13 +5683,11 @@ Jump_000_28D6:
 
 
 Jump_000_28DF:
-    ld a, $0A                                     ; $28DF: $3E $0A
-    ld [$0000], a                                 ; $28E1: $EA $00 $00
+    Battery_On
     ld a, b                                       ; $28E4: $78
     or c                                          ; $28E5: $B1
     ld [de], a                                    ; $28E6: $12
-    xor a                                         ; $28E7: $AF
-    ld [$0000], a                                 ; $28E8: $EA $00 $00
+    Battery_Off
 
 Jump_000_28EB:
     ld a, [hl+]                                   ; $28EB: $2A
@@ -6109,7 +5697,7 @@ Jump_000_28EB:
     ld a, [hl+]                                   ; $28F1: $2A
     ld b, a                                       ; $28F2: $47
     ld a, b                                       ; $28F3: $78
-    ld [$FFAA], a                                 ; $28F4: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $28F4: $EA $AA $FF
     ld a, c                                       ; $28F7: $79
     ld [hScript.Frame], a                                 ; $28F8: $EA $A9 $FF
     ld a, [hl+]                                   ; $28FB: $2A
@@ -6119,13 +5707,11 @@ Jump_000_28EB:
 
 
 Jump_000_2901:
-    ld a, $0A                                     ; $2901: $3E $0A
-    ld [$0000], a                                 ; $2903: $EA $00 $00
+    Battery_On
     ld a, b                                       ; $2906: $78
     xor c                                         ; $2907: $A9
     ld [de], a                                    ; $2908: $12
-    xor a                                         ; $2909: $AF
-    ld [$0000], a                                 ; $290A: $EA $00 $00
+    Battery_Off
 
 Jump_000_290D:
     ld de, $0004                                  ; $290D: $11 $04 $00
@@ -6135,7 +5721,7 @@ Jump_000_290D:
     inc hl                                        ; $2913: $23
     inc hl                                        ; $2914: $23
     ld a, h                                       ; $2915: $7C
-    ld [$FFAA], a                                 ; $2916: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $2916: $EA $AA $FF
     ld a, l                                       ; $2919: $7D
     ld [hScript.Frame], a                                 ; $291A: $EA $A9 $FF
     dec hl                                        ; $291D: $2B
@@ -6144,9 +5730,7 @@ Jump_000_290D:
 
 
 Jump_000_2922:
-    ld a, $03                                     ; $2922: $3E $03
-    ld [wRAMBank], a                                 ; $2924: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2927: $E0 $70
+    SwitchRAMBank $03
     ld a, [hl+]                                   ; $2929: $2A
     ld h, [hl]                                    ; $292A: $66
     ld l, a                                       ; $292B: $6F
@@ -6186,18 +5770,15 @@ Jump_000_2922:
 Call_000_296E:
     add hl, bc                                    ; $296E: $09
     ld a, h                                       ; $296F: $7C
-    ld [$FFAA], a                                 ; $2970: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $2970: $EA $AA $FF
     ld a, l                                       ; $2973: $7D
     ld [hScript.Frame], a                                 ; $2974: $EA $A9 $FF
     ld a, $D3                                     ; $2977: $3E $D3
     ld [hScript.State], a                                 ; $2979: $EA $AB $FF
     ld a, $0A                                     ; $297C: $3E $0A
     ld [hScript.State + 1], a                                 ; $297E: $EA $AC $FF
-    ld a, $00                                     ; $2981: $3E $00
-    add $00                                       ; $2983: $C6 $00
-    ld [$4000], a                                 ; $2985: $EA $00 $40
-    ld a, $0A                                     ; $2988: $3E $0A
-    ld [$0000], a                                 ; $298A: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld l, c                                       ; $298D: $69
     ld h, b                                       ; $298E: $60
     ld a, [hl+]                                   ; $298F: $2A
@@ -6208,8 +5789,7 @@ Call_000_296E:
     ld c, a                                       ; $2994: $4F
     ld a, [hl+]                                   ; $2995: $2A
     ld b, a                                       ; $2996: $47
-    xor a                                         ; $2997: $AF
-    ld [$0000], a                                 ; $2998: $EA $00 $00
+    Battery_Off
     ret                                           ; $299B: $C9
 
 Cmd_299C:
@@ -6224,12 +5804,9 @@ Cmd_299C:
     inc bc                                        ; $29A4: $03
     push hl                                       ; $29A5: $E5
     push de                                       ; $29A6: $D5
-    ld a, $00                                     ; $29A7: $3E $00
-    add $00                                       ; $29A9: $C6 $00
-    ld [$4000], a                                 ; $29AB: $EA $00 $40
-    ld a, $0A                                     ; $29AE: $3E $0A
-    ld [$0000], a                                 ; $29B0: $EA $00 $00
-    call Call_000_14C6                            ; $29B3: $CD $C6 $14
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $29B3: $CD $C6 $14
     ld a, e                                       ; $29B6: $7B
     or d                                          ; $29B7: $B2
     pop de                                        ; $29B8: $D1
@@ -6239,8 +5816,7 @@ Cmd_299C:
     ld a, [hl]                                    ; $29BC: $7E
     or e                                          ; $29BD: $B3
     ld [hl], a                                    ; $29BE: $77
-    xor a                                         ; $29BF: $AF
-    ld [$0000], a                                 ; $29C0: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $29C3: $C3 $D3 $0A
 
 
@@ -6250,8 +5826,7 @@ jr_000_29C6:
     ld e, [hl]                                    ; $29C8: $5E
     and e                                         ; $29C9: $A3
     ld [hl], a                                    ; $29CA: $77
-    xor a                                         ; $29CB: $AF
-    ld [$0000], a                                 ; $29CC: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $29CF: $C3 $D3 $0A
 
 Cmd_29D2:
@@ -6262,16 +5837,12 @@ Cmd_29D2:
     ld h, a                                       ; $29D6: $67
     inc bc                                        ; $29D7: $03
     push hl                                       ; $29D8: $E5
-    ld a, $00                                     ; $29D9: $3E $00
-    add $00                                       ; $29DB: $C6 $00
-    ld [$4000], a                                 ; $29DD: $EA $00 $40
-    ld a, $0A                                     ; $29E0: $3E $0A
-    ld [$0000], a                                 ; $29E2: $EA $00 $00
-    call Call_000_14C6                            ; $29E5: $CD $C6 $14
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $29E5: $CD $C6 $14
     pop hl                                        ; $29E8: $E1
     ld [hl], e                                    ; $29E9: $73
-    xor a                                         ; $29EA: $AF
-    ld [$0000], a                                 ; $29EB: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $29EE: $C3 $D3 $0A
 
 Cmd_29F1:
@@ -6282,44 +5853,49 @@ Cmd_29F1:
     ld h, a                                       ; $29F5: $67
     inc bc                                        ; $29F6: $03
     push hl                                       ; $29F7: $E5
-    ld a, $00                                     ; $29F8: $3E $00
-    add $00                                       ; $29FA: $C6 $00
-    ld [$4000], a                                 ; $29FC: $EA $00 $40
-    ld a, $0A                                     ; $29FF: $3E $0A
-    ld [$0000], a                                 ; $2A01: $EA $00 $00
-    call Call_000_14C6                            ; $2A04: $CD $C6 $14
+    Battery_SetBank $00
+    Battery_On
+    call Expr_GetValue                            ; $2A04: $CD $C6 $14
     pop hl                                        ; $2A07: $E1
     ld a, e                                       ; $2A08: $7B
     ld [hl+], a                                   ; $2A09: $22
     ld [hl], d                                    ; $2A0A: $72
-    xor a                                         ; $2A0B: $AF
-    ld [$0000], a                                 ; $2A0C: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2A0F: $C3 $D3 $0A
 
-Cmd_2A12:
-    call $40F2                                    ; $2A12: $CD $F2 $40
+Cmd_Ram_NextGameCount:
+    ; Increments xGameCount by 1
+    ; This also erases the temporary xScript_SaveBits and xScript_SaveVars
+    ;
+    ; Arguments:
+    ;   None
+    ;
+    ; BUG - Does not verify that the right bank is loaded when doing the call, likely crashes the game
+    ; This command is unused and deprecated, it was replaced with Cmd_Ram_SetGameCount
+    call Battery_NextGameCount                                    ; $2A12: $CD $F2 $40
     jp Script_Start                              ; $2A15: $C3 $D3 $0A
 
-Cmd_2A18:
-    ld a, $00                                     ; $2A18: $3E $00
-    add $00                                       ; $2A1A: $C6 $00
-    ld [$4000], a                                 ; $2A1C: $EA $00 $40
-    ld a, $0A                                     ; $2A1F: $3E $0A
-    ld [$0000], a                                 ; $2A21: $EA $00 $00
+Cmd_Ram_SetGameCount:
+    ; Sets the xGameCount to a specified value.
+    ; This also erases the temporary xScript_SaveBits and xScript_SaveVars
+    ;
+    ; Arguments:
+    ;   dw      New xGameCount value
+    Battery_SetBank $00
+    Battery_On
     ld a, [bc]                                    ; $2A24: $0A
     ld e, a                                       ; $2A25: $5F
     inc bc                                        ; $2A26: $03
     ld a, [bc]                                    ; $2A27: $0A
     ld d, a                                       ; $2A28: $57
     inc bc                                        ; $2A29: $03
-    ld hl, $A026                                  ; $2A2A: $21 $26 $A0
+    ld hl, xGameCount                                  ; $2A2A: $21 $26 $A0
     ld a, e                                       ; $2A2D: $7B
     ld [hl+], a                                   ; $2A2E: $22
     ld [hl], d                                    ; $2A2F: $72
-    xor a                                         ; $2A30: $AF
-    ld [$0000], a                                 ; $2A31: $EA $00 $00
+    Battery_Off
     ld a, b                                       ; $2A34: $78
-    ld [$FFAA], a                                 ; $2A35: $EA $AA $FF
+    ld [hScript.Frame + 1], a                                 ; $2A35: $EA $AA $FF
     ld a, c                                       ; $2A38: $79
     ld [hScript.Frame], a                                 ; $2A39: $EA $A9 $FF
     ld a, $D3                                     ; $2A3C: $3E $D3
@@ -6327,10 +5903,15 @@ Cmd_2A18:
     ld a, $0A                                     ; $2A41: $3E $0A
     ld [hScript.State + 1], a                                 ; $2A43: $EA $AC $FF
     SwitchROMBank $07
-    call $4123                                    ; $2A4E: $CD $23 $41
+    call Battery_SetGameCount                                    ; $2A4E: $CD $23 $41
     ret                                           ; $2A51: $C9
 
-Cmd_2A52:
+Cmd_Ram_SetWramByte:
+    ; Sets a byte at address X in WRAM bank Y
+    ; Arguments:
+    ;   dw      Address
+    ;   db      WRAMBank
+    ;   db      NewValue
     ld a, [bc]                                    ; $2A52: $0A
     ld l, a                                       ; $2A53: $6F
     inc bc                                        ; $2A54: $03
@@ -6339,15 +5920,18 @@ Cmd_2A52:
     inc bc                                        ; $2A57: $03
     ld a, [bc]                                    ; $2A58: $0A
     inc bc                                        ; $2A59: $03
-    ld a, a                                       ; $2A5A: $7F
-    ld [wRAMBank], a                                 ; $2A5B: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2A5E: $E0 $70
+    SwitchRAMBank a
     ld a, [bc]                                    ; $2A60: $0A
     ld [hl], a                                    ; $2A61: $77
     inc bc                                        ; $2A62: $03
     jp Script_Start                              ; $2A63: $C3 $D3 $0A
 
-Cmd_2A66:
+Cmd_Ram_SetWramWord:
+    ; Sets a word at address X in WRAM bank Y
+    ; Arguments:
+    ;   dw      Address
+    ;   db      WRAMBank
+    ;   dw      NewValue
     ld a, [bc]                                    ; $2A66: $0A
     ld l, a                                       ; $2A67: $6F
     inc bc                                        ; $2A68: $03
@@ -6356,9 +5940,7 @@ Cmd_2A66:
     inc bc                                        ; $2A6B: $03
     ld a, [bc]                                    ; $2A6C: $0A
     inc bc                                        ; $2A6D: $03
-    ld a, a                                       ; $2A6E: $7F
-    ld [wRAMBank], a                                 ; $2A6F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2A72: $E0 $70
+    SwitchRAMBank a
     ld a, [bc]                                    ; $2A74: $0A
     ld [hl+], a                                   ; $2A75: $22
     inc bc                                        ; $2A76: $03
@@ -6367,48 +5949,52 @@ Cmd_2A66:
     inc bc                                        ; $2A79: $03
     jp Script_Start                              ; $2A7A: $C3 $D3 $0A
 
-Cmd_2A7D:
+Cmd_Ram_SetXramByte:
+    ; Sets a byte at address X in XRAM (or close WRAM bank I guess, although the bank isn't set)
+    ; Arguments:
+    ;   dw      Address
+    ;   db      NewValue
     ld a, [bc]                                    ; $2A7D: $0A
     ld l, a                                       ; $2A7E: $6F
     inc bc                                        ; $2A7F: $03
     ld a, [bc]                                    ; $2A80: $0A
     ld h, a                                       ; $2A81: $67
     inc bc                                        ; $2A82: $03
-    ld a, $00                                     ; $2A83: $3E $00
-    add $00                                       ; $2A85: $C6 $00
-    ld [$4000], a                                 ; $2A87: $EA $00 $40
-    ld a, $0A                                     ; $2A8A: $3E $0A
-    ld [$0000], a                                 ; $2A8C: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [bc]                                    ; $2A8F: $0A
     ld [hl], a                                    ; $2A90: $77
     inc bc                                        ; $2A91: $03
-    xor a                                         ; $2A92: $AF
-    ld [$0000], a                                 ; $2A93: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2A96: $C3 $D3 $0A
 
-Cmd_2A99:
+Cmd_Ram_SetXramWord:
+    ; Sets a word at address X in XRAM (or close WRAM bank I guess, although the bank isn't set)
+    ; Arguments:
+    ;   dw      Address
+    ;   dw      NewValue
     ld a, [bc]                                    ; $2A99: $0A
     ld l, a                                       ; $2A9A: $6F
     inc bc                                        ; $2A9B: $03
     ld a, [bc]                                    ; $2A9C: $0A
     ld h, a                                       ; $2A9D: $67
     inc bc                                        ; $2A9E: $03
-    ld a, $00                                     ; $2A9F: $3E $00
-    add $00                                       ; $2AA1: $C6 $00
-    ld [$4000], a                                 ; $2AA3: $EA $00 $40
-    ld a, $0A                                     ; $2AA6: $3E $0A
-    ld [$0000], a                                 ; $2AA8: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [bc]                                    ; $2AAB: $0A
     ld [hl+], a                                   ; $2AAC: $22
     inc bc                                        ; $2AAD: $03
     ld a, [bc]                                    ; $2AAE: $0A
     ld [hl], a                                    ; $2AAF: $77
     inc bc                                        ; $2AB0: $03
-    xor a                                         ; $2AB1: $AF
-    ld [$0000], a                                 ; $2AB2: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2AB5: $C3 $D3 $0A
 
-Cmd_2AB8:
+Cmd_Ram_AndXramByte:
+    ; Applies a bitwise & at address X in XRAM (or WRAM0)
+    ; Arguments:
+    ;   dw      Address
+    ;   db      Operand
     ld a, [bc]                                    ; $2AB8: $0A
     ld l, a                                       ; $2AB9: $6F
     inc bc                                        ; $2ABA: $03
@@ -6418,19 +6004,19 @@ Cmd_2AB8:
     ld a, [bc]                                    ; $2ABE: $0A
     ld e, a                                       ; $2ABF: $5F
     inc bc                                        ; $2AC0: $03
-    ld a, $00                                     ; $2AC1: $3E $00
-    add $00                                       ; $2AC3: $C6 $00
-    ld [$4000], a                                 ; $2AC5: $EA $00 $40
-    ld a, $0A                                     ; $2AC8: $3E $0A
-    ld [$0000], a                                 ; $2ACA: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [hl]                                    ; $2ACD: $7E
     and e                                         ; $2ACE: $A3
     ld [hl], a                                    ; $2ACF: $77
-    xor a                                         ; $2AD0: $AF
-    ld [$0000], a                                 ; $2AD1: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2AD4: $C3 $D3 $0A
 
-Cmd_2AD7:
+Cmd_Ram_OrXramByte:
+    ; Applies a bitwise | at address X in XRAM (or WRAM0)
+    ; Arguments:
+    ;   dw      Address
+    ;   db      Operand
     ld a, [bc]                                    ; $2AD7: $0A
     ld l, a                                       ; $2AD8: $6F
     inc bc                                        ; $2AD9: $03
@@ -6440,16 +6026,12 @@ Cmd_2AD7:
     ld a, [bc]                                    ; $2ADD: $0A
     ld e, a                                       ; $2ADE: $5F
     inc bc                                        ; $2ADF: $03
-    ld a, $00                                     ; $2AE0: $3E $00
-    add $00                                       ; $2AE2: $C6 $00
-    ld [$4000], a                                 ; $2AE4: $EA $00 $40
-    ld a, $0A                                     ; $2AE7: $3E $0A
-    ld [$0000], a                                 ; $2AE9: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [hl]                                    ; $2AEC: $7E
     or e                                          ; $2AED: $B3
     ld [hl], a                                    ; $2AEE: $77
-    xor a                                         ; $2AEF: $AF
-    ld [$0000], a                                 ; $2AF0: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2AF3: $C3 $D3 $0A
 
 
@@ -6465,15 +6047,11 @@ Cmd_2AD7:
     ld a, [bc]                                    ; $2AFF: $0A
     ld h, a                                       ; $2B00: $67
     inc bc                                        ; $2B01: $03
-    ld a, $00                                     ; $2B02: $3E $00
-    add $00                                       ; $2B04: $C6 $00
-    ld [$4000], a                                 ; $2B06: $EA $00 $40
-    ld a, $0A                                     ; $2B09: $3E $0A
-    ld [$0000], a                                 ; $2B0B: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [hl]                                    ; $2B0E: $7E
     ld [de], a                                    ; $2B0F: $12
-    xor a                                         ; $2B10: $AF
-    ld [$0000], a                                 ; $2B11: $EA $00 $00
+    Battery_Off
     jp Script_Start                              ; $2B14: $C3 $D3 $0A
 
 
@@ -6547,7 +6125,7 @@ Script_Close:
     ld [hl+], a                                   ; $2B82: $22
     ldh a, [hScript.Frame]                                  ; $2B83: $F0 $A9
     ld [hl+], a                                   ; $2B85: $22
-    ldh a, [$FFAA]                                  ; $2B86: $F0 $AA
+    ldh a, [hScript.Frame + 1]                                  ; $2B86: $F0 $AA
     ld [hl+], a                                   ; $2B88: $22
     ldh a, [hScript.State]                                  ; $2B89: $F0 $AB
     ld [hl+], a                                   ; $2B8B: $22
@@ -6571,7 +6149,7 @@ Script_Open:
     ldh [hScript.Frame], a                                  ; $2BA2: $E0 $A9
     ld c, a                                       ; $2BA4: $4F
     ld a, [hl+]                                   ; $2BA5: $2A
-    ldh [$FFAA], a                                  ; $2BA6: $E0 $AA
+    ldh [hScript.Frame + 1], a                                  ; $2BA6: $E0 $AA
     ld b, a                                       ; $2BA8: $47
     ld a, [hl+]                                   ; $2BA9: $2A
     ldh [hScript.State], a                                  ; $2BAA: $E0 $AB
@@ -6676,9 +6254,7 @@ Jump_000_2C1D:
     PushROMBank
     PushRAMBank
     SwitchROMBank $30
-    ld a, $01                                     ; $2C31: $3E $01
-    ld [wRAMBank], a                                 ; $2C33: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2C36: $E0 $70
+    SwitchRAMBank $01
     ld a, [$C93F]                                 ; $2C38: $FA $3F $C9
     ld h, a                                       ; $2C3B: $67
     ld a, [$C93E]                                 ; $2C3C: $FA $3E $C9
@@ -6767,9 +6343,7 @@ jr_000_2CD0:
 
 jr_000_2CEA:
     SwitchROMBank $30
-    ld a, $01                                     ; $2CF2: $3E $01
-    ld [wRAMBank], a                                 ; $2CF4: $EA $5A $C9
-    ldh [rSVBK], a                                ; $2CF7: $E0 $70
+    SwitchRAMBank $01
     ldh a, [hInterrupt_VBlank_Control]                                  ; $2CF9: $F0 $A5
     bit 2, a                                      ; $2CFB: $CB $57
     jr z, jr_000_2D0A                             ; $2CFD: $28 $0B
@@ -7312,9 +6886,7 @@ Call_000_2FFA:
 
 
     PushRAMBank
-    ld a, $06                                     ; $301C: $3E $06
-    ld [wRAMBank], a                                 ; $301E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3021: $E0 $70
+    SwitchRAMBank $06
     call Call_000_2FFA                            ; $3023: $CD $FA $2F
     call Call_000_2F9A                            ; $3026: $CD $9A $2F
     PopRAMBank
@@ -7322,9 +6894,7 @@ Call_000_2FFA:
 
 
     PushRAMBank
-    ld a, $06                                     ; $3035: $3E $06
-    ld [wRAMBank], a                                 ; $3037: $EA $5A $C9
-    ldh [rSVBK], a                                ; $303A: $E0 $70
+    SwitchRAMBank $06
     call Call_000_2FFA                            ; $303C: $CD $FA $2F
     call Call_000_2FC3                            ; $303F: $CD $C3 $2F
     PopRAMBank
@@ -7333,9 +6903,7 @@ Call_000_2FFA:
 
 Call_000_304A:
     PushRAMBank
-    ld a, $05                                     ; $304E: $3E $05
-    ld [wRAMBank], a                                 ; $3050: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3053: $E0 $70
+    SwitchRAMBank $05
     ld h, b                                       ; $3055: $60
     ld l, c                                       ; $3056: $69
     xor a                                         ; $3057: $AF
@@ -7355,9 +6923,7 @@ Jump_000_3062:
 
 Call_000_3072:
     PushRAMBank
-    ld a, $06                                     ; $3076: $3E $06
-    ld [wRAMBank], a                                 ; $3078: $EA $5A $C9
-    ldh [rSVBK], a                                ; $307B: $E0 $70
+    SwitchRAMBank $06
     ld h, b                                       ; $307D: $60
     ld l, c                                       ; $307E: $69
     inc hl                                        ; $307F: $23
@@ -7502,9 +7068,7 @@ Call_000_3187:
     ld h, b                                       ; $3187: $60
     ld l, c                                       ; $3188: $69
     PushRAMBank
-    ld a, $02                                     ; $318D: $3E $02
-    ld [wRAMBank], a                                 ; $318F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3192: $E0 $70
+    SwitchRAMBank $02
     ld de, $D000                                  ; $3194: $11 $00 $D0
     ld bc, $1000                                  ; $3197: $01 $00 $10
     call RLE_Decompress                            ; $319A: $CD $EB $09
@@ -7514,9 +7078,7 @@ Call_000_3187:
 
 Call_000_31A5:
     PushRAMBank
-    ld a, $03                                     ; $31A9: $3E $03
-    ld [wRAMBank], a                                 ; $31AB: $EA $5A $C9
-    ldh [rSVBK], a                                ; $31AE: $E0 $70
+    SwitchRAMBank $03
     ld h, b                                       ; $31B0: $60
     ld l, c                                       ; $31B1: $69
     xor a                                         ; $31B2: $AF
@@ -7575,9 +7137,7 @@ jr_000_320D:
 
 Call_000_321A:
     PushRAMBank
-    ld a, $04                                     ; $321E: $3E $04
-    ld [wRAMBank], a                                 ; $3220: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3223: $E0 $70
+    SwitchRAMBank $04
     ld h, b                                       ; $3225: $60
     ld l, c                                       ; $3226: $69
     ld de, $0005                                  ; $3227: $11 $05 $00
@@ -7793,9 +7353,7 @@ jr_000_3311:
 
 jr_000_3328:
     SwitchROMBank $30
-    ld a, $01                                     ; $3330: $3E $01
-    ld [wRAMBank], a                                 ; $3332: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3335: $E0 $70
+    SwitchRAMBank $01
     ldh a, [hInterrupt_VBlank_Control]                                  ; $3337: $F0 $A5
     bit 2, a                                      ; $3339: $CB $57
     jr z, jr_000_3348                             ; $333B: $28 $0B
@@ -7848,9 +7406,7 @@ jr_000_337B:
     xor a                                         ; $338C: $AF
     ld [$FF4F], a                                 ; $338D: $EA $4F $FF
     PushRAMBank
-    ld a, $07                                     ; $3394: $3E $07
-    ld [wRAMBank], a                                 ; $3396: $EA $5A $C9
-    ldh [rSVBK], a                                ; $3399: $E0 $70
+    SwitchRAMBank $07
     ld a, [$D0A0]                                 ; $339B: $FA $A0 $D0
     and a                                         ; $339E: $A7
     jr z, jr_000_33A5                             ; $339F: $28 $04

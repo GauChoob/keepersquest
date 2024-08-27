@@ -15,8 +15,7 @@ SECTION "ROM Bank $007", ROMX[$4000], BANK[$7]
     call $EAAF                                    ; $400F: $CD $AF $EA
     nop                                           ; $4012: $00
     ld b, b                                       ; $4013: $40
-    ld a, $0A                                     ; $4014: $3E $0A
-    ld [$0000], a                                 ; $4016: $EA $00 $00
+    Battery_On
     ld a, [$A000]                                 ; $4019: $FA $00 $A0
     ld b, a                                       ; $401C: $47
     and a                                         ; $401D: $A7
@@ -27,19 +26,16 @@ SECTION "ROM Bank $007", ROMX[$4000], BANK[$7]
 
 jr_007_4025:
     ld a, $02                                     ; $4025: $3E $02
-    ld [$4000], a                                 ; $4027: $EA $00 $40
+    ld [rRAMB], a                                 ; $4027: $EA $00 $40
     ld a, b                                       ; $402A: $78
     ld [$A000], a                                 ; $402B: $EA $00 $A0
     ld d, a                                       ; $402E: $57
     ld a, b                                       ; $402F: $78
     xor $02                                       ; $4030: $EE $02
     ld e, a                                       ; $4032: $5F
-    ld a, $06                                     ; $4033: $3E $06
-    ld [wRAMBank], a                                 ; $4035: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4038: $E0 $70
+    SwitchRAMBank $06
     call Call_007_4042                            ; $403A: $CD $42 $40
-    xor a                                         ; $403D: $AF
-    ld [$0000], a                                 ; $403E: $EA $00 $00
+    Battery_Off
     ret                                           ; $4041: $C9
 
 
@@ -81,7 +77,7 @@ jr_007_4062:
 Call_007_406C:
     ld hl, $D000                                  ; $406C: $21 $00 $D0
     ld a, d                                       ; $406F: $7A
-    ld [$4000], a                                 ; $4070: $EA $00 $40
+    ld [rRAMB], a                                 ; $4070: $EA $00 $40
 
 jr_007_4073:
     ld a, [bc]                                    ; $4073: $0A
@@ -110,14 +106,14 @@ jr_007_4073:
 
     ld bc, $B000                                  ; $4092: $01 $00 $B0
     ld a, e                                       ; $4095: $7B
-    ld [$4000], a                                 ; $4096: $EA $00 $40
+    ld [rRAMB], a                                 ; $4096: $EA $00 $40
     dec bc                                        ; $4099: $0B
     dec hl                                        ; $409A: $2B
     jr jr_007_40A6                                ; $409B: $18 $09
 
 jr_007_409D:
     ld a, e                                       ; $409D: $7B
-    ld [$4000], a                                 ; $409E: $EA $00 $40
+    ld [rRAMB], a                                 ; $409E: $EA $00 $40
     ld bc, $A800                                  ; $40A1: $01 $00 $A8
     dec bc                                        ; $40A4: $0B
     dec hl                                        ; $40A5: $2B
@@ -143,9 +139,8 @@ jr_007_40A6:
 
 
     xor a                                         ; $40B8: $AF
-    ld [$4000], a                                 ; $40B9: $EA $00 $40
-    ld a, $0A                                     ; $40BC: $3E $0A
-    ld [$0000], a                                 ; $40BE: $EA $00 $00
+    ld [rRAMB], a                                 ; $40B9: $EA $00 $40
+    Battery_On
     ld d, $10                                     ; $40C1: $16 $10
     ld bc, $A002                                  ; $40C3: $01 $02 $A0
     ld hl, $4000                                  ; $40C6: $21 $00 $40
@@ -182,28 +177,24 @@ jr_007_40DA:
     ld [$A000], a                                 ; $40EC: $EA $00 $A0
     jp $4010                                      ; $40EF: $C3 $10 $40
 
-
-    ld a, $00                                     ; $40F2: $3E $00
-    add $00                                       ; $40F4: $C6 $00
-    ld [$4000], a                                 ; $40F6: $EA $00 $40
-    ld a, $0A                                     ; $40F9: $3E $0A
-    ld [$0000], a                                 ; $40FB: $EA $00 $00
-    ld hl, $A026                                  ; $40FE: $21 $26 $A0
+Battery_NextGameCount:
+    Battery_SetBank $00
+    Battery_On
+    ld hl, xGameCount                                  ; $40FE: $21 $26 $A0
     ld a, [hl+]                                   ; $4101: $2A
     ld d, [hl]                                    ; $4102: $56
     ld e, a                                       ; $4103: $5F
     inc de                                        ; $4104: $13
-    ld hl, $A026                                  ; $4105: $21 $26 $A0
+    ld hl, xGameCount                                  ; $4105: $21 $26 $A0
     ld a, e                                       ; $4108: $7B
     ld [hl+], a                                   ; $4109: $22
     ld [hl], d                                    ; $410A: $72
-    jp Jump_007_4123                              ; $410B: $C3 $23 $41
+    jp Battery_SetGameCount                              ; $410B: $C3 $23 $41
 
 
-    ld a, $0A                                     ; $410E: $3E $0A
-    ld [$0000], a                                 ; $4110: $EA $00 $00
+    Battery_On
     xor a                                         ; $4113: $AF
-    ld [$4000], a                                 ; $4114: $EA $00 $40
+    ld [rRAMB], a                                 ; $4114: $EA $00 $40
     ld a, $00                                     ; $4117: $3E $00
     ld [$A000], a                                 ; $4119: $EA $00 $A0
     xor a                                         ; $411C: $AF
@@ -211,12 +202,9 @@ jr_007_40DA:
     jp $4010                                      ; $4120: $C3 $10 $40
 
 
-Jump_007_4123:
-    ld a, $00                                     ; $4123: $3E $00
-    add $00                                       ; $4125: $C6 $00
-    ld [$4000], a                                 ; $4127: $EA $00 $40
-    ld a, $0A                                     ; $412A: $3E $0A
-    ld [$0000], a                                 ; $412C: $EA $00 $00
+Battery_SetGameCount:
+    Battery_SetBank $00
+    Battery_On
     xor a                                         ; $412F: $AF
     ld d, $7F                                     ; $4130: $16 $7F
     ld hl, $A028                                  ; $4132: $21 $28 $A0
@@ -234,21 +222,19 @@ jr_007_413E:
     dec d                                         ; $413F: $15
     jr nz, jr_007_413E                            ; $4140: $20 $FC
 
-    xor a                                         ; $4142: $AF
-    ld [$0000], a                                 ; $4143: $EA $00 $00
+    Battery_Off
     ret                                           ; $4146: $C9
 
 
 Jump_007_4147:
-    ld a, $0A                                     ; $4147: $3E $0A
-    ld [$0000], a                                 ; $4149: $EA $00 $00
+    Battery_On
     ld c, $04                                     ; $414C: $0E $04
 
 jr_007_414E:
     push bc                                       ; $414E: $C5
     ld a, c                                       ; $414F: $79
     dec a                                         ; $4150: $3D
-    ld [$4000], a                                 ; $4151: $EA $00 $40
+    ld [rRAMB], a                                 ; $4151: $EA $00 $40
     ld hl, $A000                                  ; $4154: $21 $00 $A0
     ld bc, $2000                                  ; $4157: $01 $00 $20
     ld a, $00                                     ; $415A: $3E $00
@@ -259,13 +245,12 @@ jr_007_414E:
     jr nz, jr_007_414E                            ; $4162: $20 $EA
 
     xor a                                         ; $4164: $AF
-    ld [$4000], a                                 ; $4165: $EA $00 $40
+    ld [rRAMB], a                                 ; $4165: $EA $00 $40
     call Call_007_4178                            ; $4168: $CD $78 $41
     ld a, $02                                     ; $416B: $3E $02
-    ld [$4000], a                                 ; $416D: $EA $00 $40
+    ld [rRAMB], a                                 ; $416D: $EA $00 $40
     call Call_007_4178                            ; $4170: $CD $78 $41
-    xor a                                         ; $4173: $AF
-    ld [$0000], a                                 ; $4174: $EA $00 $00
+    Battery_Off
     ret                                           ; $4177: $C9
 
 
@@ -1933,9 +1918,7 @@ Jump_007_4AA5:
     push bc                                       ; $4AA5: $C5
     push de                                       ; $4AA6: $D5
     push hl                                       ; $4AA7: $E5
-    ld a, $03                                     ; $4AA8: $3E $03
-    ld [wRAMBank], a                                 ; $4AAA: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4AAD: $E0 $70
+    SwitchRAMBank $03
     ld a, [hl]                                    ; $4AAF: $7E
     ld c, a                                       ; $4AB0: $4F
     call Call_007_4C7C                            ; $4AB1: $CD $7C $4C
@@ -1962,9 +1945,7 @@ Jump_007_4AA5:
 
     xor a                                         ; $4AD0: $AF
     ld [$FF4F], a                                 ; $4AD1: $EA $4F $FF
-    ld a, a                                       ; $4AD4: $7F
-    ld [wRAMBank], a                                 ; $4AD5: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4AD8: $E0 $70
+    SwitchRAMBank a
     ret                                           ; $4ADA: $C9
 
 
@@ -2369,9 +2350,7 @@ Call_007_4C7C:
     ld [wVBlank_Func + 1], a                                 ; $4CE1: $EA $E9 $C6
 
 Call_007_4CE4:
-    ld a, $02                                     ; $4CE4: $3E $02
-    ld [wRAMBank], a                                 ; $4CE6: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4CE9: $E0 $70
+    SwitchRAMBank $02
     xor a                                         ; $4CEB: $AF
     ldh [rVBK], a                                 ; $4CEC: $E0 $4F
     ld b, a                                       ; $4CEE: $47
@@ -2641,9 +2620,7 @@ Jump_007_4E54:
     ld d, $00                                     ; $4E57: $16 $00
     ld a, [$C8B6]                                 ; $4E59: $FA $B6 $C8
     ld e, a                                       ; $4E5C: $5F
-    ld a, $02                                     ; $4E5D: $3E $02
-    ld [wRAMBank], a                                 ; $4E5F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4E62: $E0 $70
+    SwitchRAMBank $02
     ld bc, $C116                                  ; $4E64: $01 $16 $C1
     ld a, [$C8B8]                                 ; $4E67: $FA $B8 $C8
     ld l, a                                       ; $4E6A: $6F
@@ -2861,9 +2838,7 @@ Jump_007_4F61:
     ld h, a                                       ; $4F77: $67
     ld a, [$C8B0]                                 ; $4F78: $FA $B0 $C8
     ld l, a                                       ; $4F7B: $6F
-    ld a, $03                                     ; $4F7C: $3E $03
-    ld [wRAMBank], a                                 ; $4F7E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4F81: $E0 $70
+    SwitchRAMBank $03
     ld a, [hl]                                    ; $4F83: $7E
     ld [$C8B8], a                                 ; $4F84: $EA $B8 $C8
     add hl, bc                                    ; $4F87: $09
@@ -2906,9 +2881,7 @@ jr_007_4FC1:
     ld [$C8B6], a                                 ; $4FC2: $EA $B6 $C8
     ld a, [$C881]                                 ; $4FC5: $FA $81 $C8
     ld [$C8B7], a                                 ; $4FC8: $EA $B7 $C8
-    ld a, $02                                     ; $4FCB: $3E $02
-    ld [wRAMBank], a                                 ; $4FCD: $EA $5A $C9
-    ldh [rSVBK], a                                ; $4FD0: $E0 $70
+    SwitchRAMBank $02
     ld bc, $C116                                  ; $4FD2: $01 $16 $C1
     ld a, [$C8B8]                                 ; $4FD5: $FA $B8 $C8
     ld l, a                                       ; $4FD8: $6F
@@ -3512,9 +3485,7 @@ Jump_007_5323:
     ld de, $0000                                  ; $5326: $11 $00 $00
     ld a, [$C88F]                                 ; $5329: $FA $8F $C8
     ld e, a                                       ; $532C: $5F
-    ld a, $02                                     ; $532D: $3E $02
-    ld [wRAMBank], a                                 ; $532F: $EA $5A $C9
-    ldh [rSVBK], a                                ; $5332: $E0 $70
+    SwitchRAMBank $02
     ld bc, $C100                                  ; $5334: $01 $00 $C1
     ld a, [$C890]                                 ; $5337: $FA $90 $C8
     ld l, a                                       ; $533A: $6F
@@ -3737,9 +3708,7 @@ Jump_007_543E:
     ld h, a                                       ; $544E: $67
     ld a, [$C888]                                 ; $544F: $FA $88 $C8
     ld l, a                                       ; $5452: $6F
-    ld a, $03                                     ; $5453: $3E $03
-    ld [wRAMBank], a                                 ; $5455: $EA $5A $C9
-    ldh [rSVBK], a                                ; $5458: $E0 $70
+    SwitchRAMBank $03
     ld a, [hl+]                                   ; $545A: $2A
     ld [$C890], a                                 ; $545B: $EA $90 $C8
     ld a, [hl+]                                   ; $545E: $2A
@@ -3774,9 +3743,7 @@ jr_007_5492:
     ld [$C88F], a                                 ; $5493: $EA $8F $C8
     ld a, [$C880]                                 ; $5496: $FA $80 $C8
     ld [$C88E], a                                 ; $5499: $EA $8E $C8
-    ld a, $02                                     ; $549C: $3E $02
-    ld [wRAMBank], a                                 ; $549E: $EA $5A $C9
-    ldh [rSVBK], a                                ; $54A1: $E0 $70
+    SwitchRAMBank $02
     ld bc, $C100                                  ; $54A3: $01 $00 $C1
     ld a, [$C890]                                 ; $54A6: $FA $90 $C8
     ld l, a                                       ; $54A9: $6F
@@ -5430,16 +5397,12 @@ jr_007_5B9A:
     ld [de], a                                    ; $5FEF: $12
     ld bc, $FFEB                                  ; $5FF0: $01 $EB $FF
     add hl, bc                                    ; $5FF3: $09
-    ld a, $00                                     ; $5FF4: $3E $00
-    add $00                                       ; $5FF6: $C6 $00
-    ld [$4000], a                                 ; $5FF8: $EA $00 $40
-    ld a, $0A                                     ; $5FFB: $3E $0A
-    ld [$0000], a                                 ; $5FFD: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [hl]                                    ; $6000: $7E
     pop hl                                        ; $6001: $E1
     ld [hl], a                                    ; $6002: $77
-    xor a                                         ; $6003: $AF
-    ld [$0000], a                                 ; $6004: $EA $00 $00
+    Battery_Off
     ld a, $01                                     ; $6007: $3E $01
     ld [$CA1A], a                                 ; $6009: $EA $1A $CA
     ret                                           ; $600C: $C9
@@ -5447,15 +5410,11 @@ jr_007_5B9A:
 
     ld hl, $A01A                                  ; $600D: $21 $1A $A0
     add hl, de                                    ; $6010: $19
-    ld a, $00                                     ; $6011: $3E $00
-    add $00                                       ; $6013: $C6 $00
-    ld [$4000], a                                 ; $6015: $EA $00 $40
-    ld a, $0A                                     ; $6018: $3E $0A
-    ld [$0000], a                                 ; $601A: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     xor a                                         ; $601D: $AF
     ld [hl], a                                    ; $601E: $77
-    xor a                                         ; $601F: $AF
-    ld [$0000], a                                 ; $6020: $EA $00 $00
+    Battery_Off
     ret                                           ; $6023: $C9
 
 
@@ -5480,11 +5439,8 @@ Jump_007_6027:
     ret                                           ; $603B: $C9
 
 
-    ld a, $00                                     ; $603C: $3E $00
-    add $00                                       ; $603E: $C6 $00
-    ld [$4000], a                                 ; $6040: $EA $00 $40
-    ld a, $0A                                     ; $6043: $3E $0A
-    ld [$0000], a                                 ; $6045: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$CA1B]                                 ; $6048: $FA $1B $CA
     ld e, a                                       ; $604B: $5F
     ld d, $00                                     ; $604C: $16 $00
@@ -5507,8 +5463,7 @@ jr_007_6061:
     ld [$A22A], a                                 ; $6062: $EA $2A $A2
     ld a, l                                       ; $6065: $7D
     ld [$A229], a                                 ; $6066: $EA $29 $A2
-    xor a                                         ; $6069: $AF
-    ld [$0000], a                                 ; $606A: $EA $00 $00
+    Battery_Off
     pop bc                                        ; $606D: $C1
     ld a, c                                       ; $606E: $79
     cpl                                           ; $606F: $2F
@@ -5549,11 +5504,8 @@ jr_007_6061:
     pop hl                                        ; $609F: $E1
 
 Jump_007_60A0:
-    ld a, $00                                     ; $60A0: $3E $00
-    add $00                                       ; $60A2: $C6 $00
-    ld [$4000], a                                 ; $60A4: $EA $00 $40
-    ld a, $0A                                     ; $60A7: $3E $0A
-    ld [$0000], a                                 ; $60A9: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [hl]                                    ; $60AC: $7E
     ld c, a                                       ; $60AD: $4F
     ld a, [$CA1B]                                 ; $60AE: $FA $1B $CA
@@ -5572,8 +5524,7 @@ jr_007_60BD:
     ld [$CA1A], a                                 ; $60C0: $EA $1A $CA
 
 jr_007_60C3:
-    xor a                                         ; $60C3: $AF
-    ld [$0000], a                                 ; $60C4: $EA $00 $00
+    Battery_Off
     ret                                           ; $60C7: $C9
 
 
@@ -5583,11 +5534,8 @@ jr_007_60C3:
 
     ld hl, $A22C                                  ; $60CE: $21 $2C $A2
     add hl, de                                    ; $60D1: $19
-    ld a, $00                                     ; $60D2: $3E $00
-    add $00                                       ; $60D4: $C6 $00
-    ld [$4000], a                                 ; $60D6: $EA $00 $40
-    ld a, $0A                                     ; $60D9: $3E $0A
-    ld [$0000], a                                 ; $60DB: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$CA1B]                                 ; $60DE: $FA $1B $CA
     ld e, a                                       ; $60E1: $5F
     ld d, $00                                     ; $60E2: $16 $00
@@ -5612,8 +5560,7 @@ jr_007_60F7:
     ld [$A22A], a                                 ; $60F8: $EA $2A $A2
     ld a, l                                       ; $60FB: $7D
     ld [$A229], a                                 ; $60FC: $EA $29 $A2
-    xor a                                         ; $60FF: $AF
-    ld [$0000], a                                 ; $6100: $EA $00 $00
+    Battery_Off
     ret                                           ; $6103: $C9
 
 
@@ -5621,11 +5568,8 @@ jr_007_60F7:
     add hl, de                                    ; $6107: $19
 
 Jump_007_6108:
-    ld a, $00                                     ; $6108: $3E $00
-    add $00                                       ; $610A: $C6 $00
-    ld [$4000], a                                 ; $610C: $EA $00 $40
-    ld a, $0A                                     ; $610F: $3E $0A
-    ld [$0000], a                                 ; $6111: $EA $00 $00
+    Battery_SetBank $00
+    Battery_On
     ld a, [$CA1B]                                 ; $6114: $FA $1B $CA
     ld c, a                                       ; $6117: $4F
     ld a, [hl]                                    ; $6118: $7E
@@ -5636,8 +5580,7 @@ Jump_007_6108:
 
 jr_007_611D:
     ld [hl], a                                    ; $611D: $77
-    xor a                                         ; $611E: $AF
-    ld [$0000], a                                 ; $611F: $EA $00 $00
+    Battery_Off
     ret                                           ; $6122: $C9
 
 
