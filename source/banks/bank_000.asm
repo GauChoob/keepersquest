@@ -3776,25 +3776,25 @@ Cmd_1AD6:
     jp Script_Start                              ; $1AF9: $C3 $D3 $0A
 
 
-Call_000_1AFC:
+Palette_ReadPackedLoop:
     ld a, b                                       ; $1AFC: $78
     ld [hScript.Frame + 1], a                                 ; $1AFD: $EA $AA $FF
     ld a, c                                       ; $1B00: $79
     ld [hScript.Frame], a                                 ; $1B01: $EA $A9 $FF
-    call Call_000_1B0C                            ; $1B04: $CD $0C $1B
-    call Call_000_1B12                            ; $1B07: $CD $12 $1B
+    call Palette_ReadPackedLoop_BigCounter                            ; $1B04: $CD $0C $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1B07: $CD $12 $1B
     dec bc                                        ; $1B0A: $0B
     ret                                           ; $1B0B: $C9
 
 
-Call_000_1B0C:
+Palette_ReadPackedLoop_BigCounter:
     ld a, [bc]                                    ; $1B0C: $0A
     and $3F                                       ; $1B0D: $E6 $3F
     ldh [$FFAE], a                                  ; $1B0F: $E0 $AE
     ret                                           ; $1B11: $C9
 
 
-Call_000_1B12:
+Palette_ReadPackedLoop_SmallCounter:
     ld a, [bc]                                    ; $1B12: $0A
     and $C0                                       ; $1B13: $E6 $C0
     swap a                                        ; $1B15: $CB $37
@@ -3806,7 +3806,7 @@ Call_000_1B12:
     ret                                           ; $1B1D: $C9
 
 
-Call_000_1B1E:
+Palette_ReadColor:
     ld a, [bc]                                    ; $1B1E: $0A
     inc bc                                        ; $1B1F: $03
     ld [$C9FF], a                                 ; $1B20: $EA $FF $C9
@@ -3823,16 +3823,16 @@ Call_000_1B1E:
     ret                                           ; $1B37: $C9
 
 
-Call_000_1B38:
+Palette_ReadPackedInterval:
     ld a, [bc]                                    ; $1B38: $0A
     ld [$C9FD], a                                 ; $1B39: $EA $FD $C9
     inc bc                                        ; $1B3C: $03
     ret                                           ; $1B3D: $C9
 
 
-Call_000_1B3E:
-    call Call_000_1B38                            ; $1B3E: $CD $38 $1B
-    call Call_000_1B1E                            ; $1B41: $CD $1E $1B
+Palette_ReadClearArguments:
+    call Palette_ReadPackedInterval                            ; $1B3E: $CD $38 $1B
+    call Palette_ReadColor                            ; $1B41: $CD $1E $1B
     ld a, b                                       ; $1B44: $78
     ld [hScript.Frame + 1], a                                 ; $1B45: $EA $AA $FF
     ld a, c                                       ; $1B48: $79
@@ -3840,7 +3840,8 @@ Call_000_1B3E:
     ret                                           ; $1B4C: $C9
 
 
-Jump_000_1B4D:
+Palette_LoopFinally:
+    ; Function has been slightly modified
     ld a, $07                                     ; $1B4D: $3E $07
     ld [wVBlank_Bank], a                                 ; $1B4F: $EA $EA $C6
     ld a, $AC                                     ; $1B52: $3E $AC
@@ -3875,49 +3876,62 @@ jr_000_1B73:
     ld [hScript.State + 1], a                                 ; $1B82: $EA $AC $FF
     ret                                           ; $1B85: $C9
 
-Cmd_1B86:
+Cmd_Palette_ArenaFadeToColor:
+    ; Fades the Arena palettes to a single color
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   dw  wTemp_A.Palette_SetColor - Target color
     ld a, $93                                     ; $1B86: $3E $93
     ld [hScript.State], a                                 ; $1B88: $EA $AB $FF
     ld a, $1B                                     ; $1B8B: $3E $1B
     ld [hScript.State + 1], a                                 ; $1B8D: $EA $AC $FF
-    call Call_000_1AFC                            ; $1B90: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1B90: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1B93: $F0 $AD
     dec a                                         ; $1B95: $3D
     ldh [$FFAD], a                                  ; $1B96: $E0 $AD
     ret nz                                        ; $1B98: $C0
 
-    call Call_000_1B12                            ; $1B99: $CD $12 $1B
-    call Call_000_1B1E                            ; $1B9C: $CD $1E $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1B99: $CD $12 $1B
+    call Palette_ReadColor                            ; $1B9C: $CD $1E $1B
     ld a, $01                                     ; $1B9F: $3E $01
     ld [$CA01], a                                 ; $1BA1: $EA $01 $CA
     push bc                                       ; $1BA4: $C5
     SwitchROMBank $07
     call $5AEB                                    ; $1BAD: $CD $EB $5A
     pop bc                                        ; $1BB0: $C1
-    jp Jump_000_1B4D                              ; $1BB1: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1BB1: $C3 $4D $1B
 
-Cmd_1BB4:
+Cmd_Palette_ArenaFadeToBase:
+    ; Fades the Arena palettes to a new palette
+    ; The new palette needs to already be loaded into wPalette_BaseBuffers with a previous command
+    ; Arguments:
+    ;   db  Palette_PackedLoop
     ld a, $C1                                     ; $1BB4: $3E $C1
     ld [hScript.State], a                                 ; $1BB6: $EA $AB $FF
     ld a, $1B                                     ; $1BB9: $3E $1B
     ld [hScript.State + 1], a                                 ; $1BBB: $EA $AC $FF
-    call Call_000_1AFC                            ; $1BBE: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1BBE: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1BC1: $F0 $AD
     dec a                                         ; $1BC3: $3D
     ldh [$FFAD], a                                  ; $1BC4: $E0 $AD
     ret nz                                        ; $1BC6: $C0
 
-    call Call_000_1B12                            ; $1BC7: $CD $12 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1BC7: $CD $12 $1B
     ld a, $01                                     ; $1BCA: $3E $01
     ld [$CA01], a                                 ; $1BCC: $EA $01 $CA
     push bc                                       ; $1BCF: $C5
     SwitchROMBank $07
     call $5AEB                                    ; $1BD8: $CD $EB $5A
     pop bc                                        ; $1BDB: $C1
-    jp Jump_000_1B4D                              ; $1BDC: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1BDC: $C3 $4D $1B
 
-Cmd_1BDF:
-    call Call_000_1B3E                            ; $1BDF: $CD $3E $1B
+Cmd_Palette_ClearBase:
+    ; Replaces the specified palettes in wPalette_BaseBuffers with a single Color
+    ;
+    ; Arguments:
+    ;   db      wTemp_8.Palette_PackedInterval - Represents the palettes that should be modified
+    ;   dw      wTemp_A.Palette_SetColor - The 16th bit signifies transparency (wFightscene_ArenaColor is used instead)
+    call Palette_ReadClearArguments                            ; $1BDF: $CD $3E $1B
     SwitchROMBank $07
     call $4887                                    ; $1BEA: $CD $87 $48
     ld a, $D3                                     ; $1BED: $3E $D3
@@ -3926,8 +3940,13 @@ Cmd_1BDF:
     ld [hScript.State + 1], a                                 ; $1BF4: $EA $AC $FF
     ret                                           ; $1BF7: $C9
 
-Cmd_1BF8:
-    call Call_000_1B3E                            ; $1BF8: $CD $3E $1B
+Cmd_Palette_ClearAnim:
+    ; Replaces the specified palettes in wPalette_AnimBuffers with a single Color
+    ;
+    ; Arguments:
+    ;   db  [wTemp_8.Palette_PackedInterval]
+    ;   dw  [wTemp_A.Palette_SetColor]
+    call Palette_ReadClearArguments                            ; $1BF8: $CD $3E $1B
     SwitchROMBank $07
     call $486E                                    ; $1C03: $CD $6E $48
     ld a, $07                                     ; $1C06: $3E $07
@@ -3942,18 +3961,22 @@ Cmd_1BF8:
     ld [hScript.State + 1], a                                 ; $1C1C: $EA $AC $FF
     ret                                           ; $1C1F: $C9
 
-Cmd_1C20:
+Cmd_Palette_CreatureCycle:
+    ; BattleFX - cycles a creature's palette
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, $2D                                     ; $1C20: $3E $2D
     ld [hScript.State], a                                 ; $1C22: $EA $AB $FF
     ld a, $1C                                     ; $1C25: $3E $1C
     ld [hScript.State + 1], a                                 ; $1C27: $EA $AC $FF
-    call Call_000_1AFC                            ; $1C2A: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1C2A: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1C2D: $F0 $AD
     dec a                                         ; $1C2F: $3D
     ldh [$FFAD], a                                  ; $1C30: $E0 $AD
     ret nz                                        ; $1C32: $C0
 
-    call Call_000_1B12                            ; $1C33: $CD $12 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1C33: $CD $12 $1B
     ld a, [bc]                                    ; $1C36: $0A
     inc bc                                        ; $1C37: $03
     ld [$C9FE], a                                 ; $1C38: $EA $FE $C9
@@ -3961,21 +3984,26 @@ Cmd_1C20:
     SwitchROMBank $07
     call $41A2                                    ; $1C44: $CD $A2 $41
     pop bc                                        ; $1C47: $C1
-    jp Jump_000_1B4D                              ; $1C48: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1C48: $C3 $4D $1B
 
-Cmd_1C4B:
+Cmd_Palette_CreatureFadeToColor:
+    ; BattleFX - fades a creature's palette to a Color
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   dw  wTemp_A.Palette_SetColor
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, $58                                     ; $1C4B: $3E $58
     ld [hScript.State], a                                 ; $1C4D: $EA $AB $FF
     ld a, $1C                                     ; $1C50: $3E $1C
     ld [hScript.State + 1], a                                 ; $1C52: $EA $AC $FF
-    call Call_000_1AFC                            ; $1C55: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1C55: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1C58: $F0 $AD
     dec a                                         ; $1C5A: $3D
     ldh [$FFAD], a                                  ; $1C5B: $E0 $AD
     ret nz                                        ; $1C5D: $C0
 
-    call Call_000_1B12                            ; $1C5E: $CD $12 $1B
-    call Call_000_1B1E                            ; $1C61: $CD $1E $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1C5E: $CD $12 $1B
+    call Palette_ReadColor                            ; $1C61: $CD $1E $1B
     ld a, [bc]                                    ; $1C64: $0A
     inc bc                                        ; $1C65: $03
     ld [$C9FE], a                                 ; $1C66: $EA $FE $C9
@@ -3985,20 +4013,25 @@ Cmd_1C4B:
     SwitchROMBank $07
     call $4202                                    ; $1C77: $CD $02 $42
     pop bc                                        ; $1C7A: $C1
-    jp Jump_000_1B4D                              ; $1C7B: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1C7B: $C3 $4D $1B
 
-Cmd_1C7E:
+Cmd_Palette_CreatureFadeToBase:
+    ; Fades the target creature's colors from Anim to Base Buffers
+    ; The CreatureLeft function has a few bugs, although CreatureRight works well
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, $8B                                     ; $1C7E: $3E $8B
     ld [hScript.State], a                                 ; $1C80: $EA $AB $FF
     ld a, $1C                                     ; $1C83: $3E $1C
     ld [hScript.State + 1], a                                 ; $1C85: $EA $AC $FF
-    call Call_000_1AFC                            ; $1C88: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1C88: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1C8B: $F0 $AD
     dec a                                         ; $1C8D: $3D
     ldh [$FFAD], a                                  ; $1C8E: $E0 $AD
     ret nz                                        ; $1C90: $C0
 
-    call Call_000_1B12                            ; $1C91: $CD $12 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1C91: $CD $12 $1B
     ld a, [bc]                                    ; $1C94: $0A
     inc bc                                        ; $1C95: $03
     ld [$C9FE], a                                 ; $1C96: $EA $FE $C9
@@ -4008,9 +4041,13 @@ Cmd_1C7E:
     SwitchROMBank $07
     call $41F4                                    ; $1CA7: $CD $F4 $41
     pop bc                                        ; $1CAA: $C1
-    jp Jump_000_1B4D                              ; $1CAB: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1CAB: $C3 $4D $1B
 
-Cmd_1CAE:
+Cmd_Palette_CreatureLoad:
+    ; Loads a palette of a creature
+    ; Arguments:
+    ;   AddressBank - Creature palette
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, [bc]                                    ; $1CAE: $0A
     inc bc                                        ; $1CAF: $03
     ld [$C9FA], a                                 ; $1CB0: $EA $FA $C9
@@ -4035,18 +4072,23 @@ Cmd_1CAE:
     ld [hScript.State + 1], a                                 ; $1CDC: $EA $AC $FF
     ret                                           ; $1CDF: $C9
 
-Cmd_1CE0:
+Cmd_Palette_CreatureFlash:
+    ; Swaps a creature's palette's RGB values
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  wTemp_8.Palette_ColorSwapType - PALETTE_SWAP_RB, PALETTE_SWAP_BG, PALETTE_SWAP_RG_Bugged, PALETTE_SWAP_RGB
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, $ED                                     ; $1CE0: $3E $ED
     ld [hScript.State], a                                 ; $1CE2: $EA $AB $FF
     ld a, $1C                                     ; $1CE5: $3E $1C
     ld [hScript.State + 1], a                                 ; $1CE7: $EA $AC $FF
-    call Call_000_1AFC                            ; $1CEA: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1CEA: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1CED: $F0 $AD
     dec a                                         ; $1CEF: $3D
     ldh [$FFAD], a                                  ; $1CF0: $E0 $AD
     ret nz                                        ; $1CF2: $C0
 
-    call Call_000_1B12                            ; $1CF3: $CD $12 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1CF3: $CD $12 $1B
     ld a, [bc]                                    ; $1CF6: $0A
     inc bc                                        ; $1CF7: $03
     ld [$C9FD], a                                 ; $1CF8: $EA $FD $C9
@@ -4057,9 +4099,12 @@ Cmd_1CE0:
     SwitchROMBank $07
     call $431A                                    ; $1D09: $CD $1A $43
     pop bc                                        ; $1D0C: $C1
-    jp Jump_000_1B4D                              ; $1D0D: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1D0D: $C3 $4D $1B
 
-Cmd_1D10:
+Cmd_Palette_CreatureInvert:
+    ; BattleFX - Inverts a creature's palette once
+    ; Arguments:
+    ;   db  wTemp_9.Palette_BattleFX_CreatureIsRight (0=left creature, 1=right creature)
     ld a, [bc]                                    ; $1D10: $0A
     ld [$C9FE], a                                 ; $1D11: $EA $FE $C9
     inc bc                                        ; $1D14: $03
@@ -4081,7 +4126,12 @@ Cmd_1D10:
     ld [hScript.State + 1], a                                 ; $1D3E: $EA $AC $FF
     ret                                           ; $1D41: $C9
 
-Cmd_1D42:
+Cmd_Palette_Cycle:
+    ; Cycles wPalette_AnimBuffers
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  Palette_PackedInterval
+    ;   db  wTemp_9.Palette_CyclePattern -> Number of Colors to cycle in each Palette (2 to 4, starting from the right)
     ld a, [$C6F2]                                 ; $1D42: $FA $F2 $C6
     ld [$C6F3], a                                 ; $1D45: $EA $F3 $C6
     ld a, $01                                     ; $1D48: $3E $01
@@ -4090,14 +4140,14 @@ Cmd_1D42:
     ld [hScript.State], a                                 ; $1D4F: $EA $AB $FF
     ld a, $1D                                     ; $1D52: $3E $1D
     ld [hScript.State + 1], a                                 ; $1D54: $EA $AC $FF
-    call Call_000_1AFC                            ; $1D57: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1D57: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1D5A: $F0 $AD
     dec a                                         ; $1D5C: $3D
     ldh [$FFAD], a                                  ; $1D5D: $E0 $AD
     ret nz                                        ; $1D5F: $C0
 
-    call Call_000_1B12                            ; $1D60: $CD $12 $1B
-    call Call_000_1B38                            ; $1D63: $CD $38 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1D60: $CD $12 $1B
+    call Palette_ReadPackedInterval                            ; $1D63: $CD $38 $1B
     ld a, [bc]                                    ; $1D66: $0A
     ld [$C9FE], a                                 ; $1D67: $EA $FE $C9
     inc bc                                        ; $1D6A: $03
@@ -4105,9 +4155,15 @@ Cmd_1D42:
     SwitchROMBank $07
     call $48A7                                    ; $1D74: $CD $A7 $48
     pop bc                                        ; $1D77: $C1
-    jp Jump_000_1B4D                              ; $1D78: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1D78: $C3 $4D $1B
 
-Cmd_1D7B:
+Cmd_Palette_FadeAnimToBase:
+    ; Fades wPalette_AnimBuffers towards wPalette_BaseBuffers, magnitude 1 at a time
+    ; Every hScript.SmallCounter cycles, apply a fade. Do the fade effect hScript.BigCounter times
+    ;
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  Palette_PackedInterval
     ld a, [$C6F2]                                 ; $1D7B: $FA $F2 $C6
     ld [$C6F3], a                                 ; $1D7E: $EA $F3 $C6
     ld a, $01                                     ; $1D81: $3E $01
@@ -4116,23 +4172,28 @@ Cmd_1D7B:
     ld [hScript.State], a                                 ; $1D88: $EA $AB $FF
     ld a, $1D                                     ; $1D8B: $3E $1D
     ld [hScript.State + 1], a                                 ; $1D8D: $EA $AC $FF
-    call Call_000_1AFC                            ; $1D90: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1D90: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1D93: $F0 $AD
     dec a                                         ; $1D95: $3D
     ldh [$FFAD], a                                  ; $1D96: $E0 $AD
     ret nz                                        ; $1D98: $C0
 
-    call Call_000_1B12                            ; $1D99: $CD $12 $1B
-    call Call_000_1B38                            ; $1D9C: $CD $38 $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1D99: $CD $12 $1B
+    call Palette_ReadPackedInterval                            ; $1D9C: $CD $38 $1B
     ld a, $01                                     ; $1D9F: $3E $01
     ld [$CA01], a                                 ; $1DA1: $EA $01 $CA
     push bc                                       ; $1DA4: $C5
     SwitchROMBank $07
     call $48D4                                    ; $1DAD: $CD $D4 $48
     pop bc                                        ; $1DB0: $C1
-    jp Jump_000_1B4D                              ; $1DB1: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1DB1: $C3 $4D $1B
 
-Cmd_1DB4:
+Cmd_Palette_FadeAnimToColor:
+    ; Fades to a specific Color
+    ; Arguments:
+    ;   db  Palette_PackedLoop
+    ;   db  Palette_PackedInterval
+    ;   dw  Color
     ld a, [$C6F2]                                 ; $1DB4: $FA $F2 $C6
     ld [$C6F3], a                                 ; $1DB7: $EA $F3 $C6
     ld a, $01                                     ; $1DBA: $3E $01
@@ -4141,24 +4202,28 @@ Cmd_1DB4:
     ld [hScript.State], a                                 ; $1DC1: $EA $AB $FF
     ld a, $1D                                     ; $1DC4: $3E $1D
     ld [hScript.State + 1], a                                 ; $1DC6: $EA $AC $FF
-    call Call_000_1AFC                            ; $1DC9: $CD $FC $1A
+    call Palette_ReadPackedLoop                            ; $1DC9: $CD $FC $1A
     ldh a, [$FFAD]                                  ; $1DCC: $F0 $AD
     dec a                                         ; $1DCE: $3D
     ldh [$FFAD], a                                  ; $1DCF: $E0 $AD
     ret nz                                        ; $1DD1: $C0
 
-    call Call_000_1B12                            ; $1DD2: $CD $12 $1B
-    call Call_000_1B38                            ; $1DD5: $CD $38 $1B
-    call Call_000_1B1E                            ; $1DD8: $CD $1E $1B
+    call Palette_ReadPackedLoop_SmallCounter                            ; $1DD2: $CD $12 $1B
+    call Palette_ReadPackedInterval                            ; $1DD5: $CD $38 $1B
+    call Palette_ReadColor                            ; $1DD8: $CD $1E $1B
     ld a, $01                                     ; $1DDB: $3E $01
     ld [$CA01], a                                 ; $1DDD: $EA $01 $CA
     push bc                                       ; $1DE0: $C5
     SwitchROMBank $07
     call $4934                                    ; $1DE9: $CD $34 $49
     pop bc                                        ; $1DEC: $C1
-    jp Jump_000_1B4D                              ; $1DED: $C3 $4D $1B
+    jp Palette_LoopFinally                              ; $1DED: $C3 $4D $1B
 
-Cmd_1DF0:
+Cmd_Palette_Load:
+    ; Loads a palette
+    ; Arguments:
+    ;   ds 3    Palette AddressBank
+    ;   db      Palette_PackedInterval
     ld a, [bc]                                    ; $1DF0: $0A
     inc bc                                        ; $1DF1: $03
     ld [$C9FA], a                                 ; $1DF2: $EA $FA $C9
@@ -4168,7 +4233,7 @@ Cmd_1DF0:
     ld a, [bc]                                    ; $1DFA: $0A
     inc bc                                        ; $1DFB: $03
     ld [$C9FC], a                                 ; $1DFC: $EA $FC $C9
-    call Call_000_1B38                            ; $1DFF: $CD $38 $1B
+    call Palette_ReadPackedInterval                            ; $1DFF: $CD $38 $1B
     ld a, b                                       ; $1E02: $78
     ld [hScript.Frame + 1], a                                 ; $1E03: $EA $AA $FF
     ld a, c                                       ; $1E06: $79
@@ -4195,8 +4260,11 @@ Cmd_1DF0:
     ld [hScript.State + 1], a                                 ; $1E48: $EA $AC $FF
     ret                                           ; $1E4B: $C9
 
-Cmd_1E4C:
-    call Call_000_1B38                            ; $1E4C: $CD $38 $1B
+Cmd_Palette_Refresh:
+    ; Copies the base palette buffer to the anim palette buffer
+    ; Arguments:
+    ;   db      Palette_PackedInterval
+    call Palette_ReadPackedInterval                            ; $1E4C: $CD $38 $1B
     ld a, b                                       ; $1E4F: $78
     ld [hScript.Frame + 1], a                                 ; $1E50: $EA $AA $FF
     ld a, c                                       ; $1E53: $79
@@ -4215,8 +4283,11 @@ Cmd_1E4C:
     ld [hScript.State + 1], a                                 ; $1E78: $EA $AC $FF
     ret                                           ; $1E7B: $C9
 
-Cmd_1E7C:
-    call Call_000_1B38                            ; $1E7C: $CD $38 $1B
+Cmd_Palette_Invert:
+    ; Inverts wPalette_AnimBuffers
+    ; Arguments:
+    ;   db  Palette_PackedInterval
+    call Palette_ReadPackedInterval                            ; $1E7C: $CD $38 $1B
     ld a, b                                       ; $1E7F: $78
     ld [hScript.Frame + 1], a                                 ; $1E80: $EA $AA $FF
     ld a, c                                       ; $1E83: $79
@@ -4235,7 +4306,7 @@ Cmd_1E7C:
     ld [hScript.State + 1], a                                 ; $1EA8: $EA $AC $FF
     ret                                           ; $1EAB: $C9
 
-
+Scroll_TrackCamera:
     ld a, [$C865]                                 ; $1EAC: $FA $65 $C8
     ld h, a                                       ; $1EAF: $67
     ld l, $02                                     ; $1EB0: $2E $02
@@ -4245,7 +4316,7 @@ Cmd_1E7C:
     jp $4596                                      ; $1EBC: $C3 $96 $45
 
 
-Jump_000_1EBF:
+Scroll_CenterCamera:
     ld l, $FB                                     ; $1EBF: $2E $FB
     ld a, l                                       ; $1EC1: $7D
     add e                                         ; $1EC2: $83
@@ -4255,7 +4326,13 @@ Jump_000_1EBF:
     ld [$C883], a                                 ; $1EC8: $EA $83 $C8
     jp Script_Start                              ; $1ECB: $C3 $D3 $0A
 
-Cmd_1ECE:
+Cmd_Scroll_CameraSeekPos:
+    ; TODO
+    ; Does this loop until the camera is done panning?
+    ; Arguments:
+    ;   db  XTile target
+    ;   db  YTile target
+    ;   db ??? (? pan speed maybe)
     ld l, $FB                                     ; $1ECE: $2E $FB
     ld a, [bc]                                    ; $1ED0: $0A
     inc bc                                        ; $1ED1: $03
@@ -4275,7 +4352,10 @@ Cmd_1ECE:
     ld [hScript.State + 1], a                                 ; $1EE9: $EA $AC $FF
     ret                                           ; $1EEC: $C9
 
-Cmd_1EED:
+Cmd_Scroll_CameraSeekActor:
+    ; TODO
+    ; Arguments:
+    ;   dw  Pointer to Actor structure
     ld a, [bc]                                    ; $1EED: $0A
     ld l, a                                       ; $1EEE: $6F
     inc bc                                        ; $1EEF: $03
@@ -4317,7 +4397,8 @@ jr_000_1F10:
     ld [hScript.State + 1], a                                 ; $1F22: $EA $AC $FF
     ret                                           ; $1F25: $C9
 
-Cmd_1F26:
+Cmd_Scroll_TransplantTile:
+    ; TODO - NEW CONDITION WAS ADDED HERE
     ld a, [$C733]                                 ; $1F26: $FA $33 $C7
     cp $01                                        ; $1F29: $FE $01
     jr z, jr_000_1F6A                             ; $1F2B: $28 $3D
@@ -4363,7 +4444,7 @@ jr_000_1F6A:
     inc bc                                        ; $1F6F: $03
     jp Script_Start                              ; $1F70: $C3 $D3 $0A
 
-Cmd_1F73:
+Cmd_Scroll_TransplantMaskTile:
     ld a, [bc]                                    ; $1F73: $0A
     ld e, a                                       ; $1F74: $5F
     inc bc                                        ; $1F75: $03
@@ -4401,7 +4482,10 @@ Cmd_1F73:
     SwitchROMBank $01
     jp $4626                                      ; $1FBF: $C3 $26 $46
 
-Cmd_1FC2:
+Cmd_Scroll_HeroSetCamera:
+    ; Instantly centers camera on hero
+    ; Arguments:
+    ;   None
     ld a, [$C18E]                                 ; $1FC2: $FA $8E $C1
     ld e, a                                       ; $1FC5: $5F
     ld a, [$C18F]                                 ; $1FC6: $FA $8F $C1
@@ -4410,9 +4494,17 @@ Cmd_1FC2:
     ld [$C880], a                                 ; $1FCC: $EA $80 $C8
     ld a, $08                                     ; $1FCF: $3E $08
     ld [$C881], a                                 ; $1FD1: $EA $81 $C8
-    jp Jump_000_1EBF                              ; $1FD4: $C3 $BF $1E
+    jp Scroll_CenterCamera                              ; $1FD4: $C3 $BF $1E
 
-Cmd_1FD7:
+Cmd_Scroll_ScrollMap:
+    ; TODO
+    ; Arguments:
+    ;   {
+    ;       db  Number of frames
+    ;       db  X-scroll per frame
+    ;       db  Y-scroll per frame
+    ;   } X N
+    ;   db $00 -> End of instructions
     ld a, [bc]                                    ; $1FD7: $0A
     inc bc                                        ; $1FD8: $03
     and a                                         ; $1FD9: $A7
@@ -4460,7 +4552,10 @@ jr_000_200D:
     ld [hScript.State + 1], a                                 ; $201C: $EA $AC $FF
     ret                                           ; $201F: $C9
 
-Cmd_2020:
+Cmd_Scroll_SetCamera:
+    ; Arguments:
+    ;   db      XPos
+    ;   db      YPos
     ld a, [bc]                                    ; $2020: $0A
     ld e, a                                       ; $2021: $5F
     inc bc                                        ; $2022: $03
@@ -4470,9 +4565,18 @@ Cmd_2020:
     ld a, $08                                     ; $2026: $3E $08
     ld [$C880], a                                 ; $2028: $EA $80 $C8
     ld [$C881], a                                 ; $202B: $EA $81 $C8
-    jp Jump_000_1EBF                              ; $202E: $C3 $BF $1E
+    jp Scroll_CenterCamera                              ; $202E: $C3 $BF $1E
 
-Cmd_2031:
+Cmd_Scroll_TransplantMap:
+    ; Copy a part of the metatilemap/collisionmap to a different part
+    ; of the map
+    ; Arguments:
+    ;   dw  Source address from the metatilemap and collisionmap
+    ;   db  Width (tiles) of portion to copy
+    ;   db  Height (tiles) of portion to copy
+    ;   dw  Destination address onto metatilemap and collisionmap
+    ;   db  Y-coordinate
+    ;   db  X-coordinate
     ld a, $9D                                     ; $2031: $3E $9D
     ld [hScript.State], a                                 ; $2033: $EA $AB $FF
     ld a, $44                                     ; $2036: $3E $44
@@ -4514,14 +4618,24 @@ Jump_000_203B:
     set 7, [hl]                                   ; $2069: $CB $FE
     ret                                           ; $206B: $C9
 
-Cmd_206C:
+Cmd_Scroll_TransplantMapMask:
+    ; With a map mask loaded via Cmd_Load_MapMask,
+    ; Copy a part of the map mask onto the real metatilemap and collisionmap
+    ; Arguments:
+    ;   dw  Source address from the map masks
+    ;   db  Width (tiles) of portion to copy
+    ;   db  Height (tiles) of portion to copy
+    ;   dw  Destination address onto metatilemap and collisionmap
+    ;   db  Y-coordinate
+    ;   db  X-coordinate
     ld a, $5C                                     ; $206C: $3E $5C
     ld [hScript.State], a                                 ; $206E: $EA $AB $FF
     ld a, $45                                     ; $2071: $3E $45
     ld [hScript.State + 1], a                                 ; $2073: $EA $AC $FF
     jp Jump_000_203B                              ; $2076: $C3 $3B $20
 
-Cmd_2079:
+Cmd_Scroll_SetCollMask:
+    ; Underneath geyser button-related
     ld a, [bc]                                    ; $2079: $0A
     inc bc                                        ; $207A: $03
     ld e, a                                       ; $207B: $5F

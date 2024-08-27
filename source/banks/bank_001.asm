@@ -652,32 +652,35 @@ Script_Table::
     dw Cmd_1A42
     dw Cmd_1A85
     dw Cmd_1AD6
-    dw Cmd_1B86
-    dw Cmd_1BB4
-    dw Cmd_1BDF
-    dw Cmd_1BF8
-    dw Cmd_1C20
-    dw Cmd_1C4B
-    dw Cmd_1C7E
-    dw Cmd_1CAE
-    dw Cmd_1CE0
-    dw Cmd_1D10
-    dw Cmd_1D7B
-    dw Cmd_1DB4
-    dw Cmd_1DF0
-    dw Cmd_1E4C
-    dw Cmd_1D42
-    dw Cmd_1E7C
-    dw Cmd_1ECE
-    dw Cmd_1EED
-    dw Cmd_2031
-    dw Cmd_206C
-    dw Cmd_1F26
-    dw Cmd_1F73
-    dw Cmd_1FC2
-    dw Cmd_1FD7
-    dw Cmd_2020
-    dw Cmd_2079
+
+    dw Cmd_Palette_ArenaFadeToColor
+    dw Cmd_Palette_ArenaFadeToBase
+    dw Cmd_Palette_ClearBase
+    dw Cmd_Palette_ClearAnim
+    dw Cmd_Palette_CreatureCycle
+    dw Cmd_Palette_CreatureFadeToColor
+    dw Cmd_Palette_CreatureFadeToBase
+    dw Cmd_Palette_CreatureLoad
+    dw Cmd_Palette_CreatureFlash
+    dw Cmd_Palette_CreatureInvert
+    dw Cmd_Palette_FadeAnimToBase
+    dw Cmd_Palette_FadeAnimToColor
+    dw Cmd_Palette_Load
+    dw Cmd_Palette_Refresh
+    dw Cmd_Palette_Cycle
+    dw Cmd_Palette_Invert
+
+    dw Cmd_Scroll_CameraSeekPos
+    dw Cmd_Scroll_CameraSeekActor
+    dw Cmd_Scroll_TransplantMap
+    dw Cmd_Scroll_TransplantMapMask
+    dw Cmd_Scroll_TransplantTile
+    dw Cmd_Scroll_TransplantMaskTile
+    dw Cmd_Scroll_HeroSetCamera
+    dw Cmd_Scroll_ScrollMap
+    dw Cmd_Scroll_SetCamera
+    dw Cmd_Scroll_SetCollMask
+
     dw Cmd_System_BackgroundSceneNew
     dw Cmd_System_InventoryGive
     dw Cmd_System_InventoryTake
@@ -695,10 +698,12 @@ Script_Table::
     dw Cmd_System_SceneReady
     dw Cmd_System_SetItemSpellMapError
     dw Cmd_System_SaveLocation
+
     dw Cmd_237A
     dw Cmd_23F4
     dw Cmd_2389
     dw Cmd_2434
+
     dw Cmd_Textbox_FormatChar
     dw Cmd_Textbox_Clear
     dw Cmd_Textbox_Close
@@ -707,11 +712,13 @@ Script_Table::
     dw Cmd_Textbox_Open
     dw Cmd_Textbox_FormatWord
     dw Cmd_Textbox_Write
+
     dw Cmd_Trigger_ToggleAlways
     dw Cmd_Trigger_ToggleOnce
     dw Cmd_Trigger_TriggerAlways
     dw Cmd_Trigger_TriggerOnce
     dw Cmd_Trigger_Treasure
+
     dw Cmd_Ram_VarBitExpr
     dw Cmd_Ram_VarByteExpr
     dw Cmd_Ram_VarWordExpr
