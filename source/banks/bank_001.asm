@@ -326,7 +326,7 @@ Call_001_412F:
 
     or h                                          ; $418D: $B4
     inc a                                         ; $418E: $3C
-    jp nc, Jump_000_36E1                          ; $418F: $D2 $E1 $36
+    db $D2, $E1, $36
 
     pop hl                                        ; $4192: $E1
     inc [hl]                                      ; $4193: $34
@@ -1025,7 +1025,7 @@ jr_001_44E3:
     ld [$C704], a                                 ; $44FF: $EA $04 $C7
     ld hl, $C707                                  ; $4502: $21 $07 $C7
     inc [hl]                                      ; $4505: $34
-    ld a, [$C959]                                 ; $4506: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $4506: $FA $59 $C9
     and a                                         ; $4509: $A7
     ret nz                                        ; $450A: $C0
 
@@ -1243,7 +1243,7 @@ jr_001_4615:
 
 
 Call_001_4626:
-    ld a, [$C959]                                 ; $4626: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $4626: $FA $59 $C9
     and a                                         ; $4629: $A7
     jr z, jr_001_4680                             ; $462A: $28 $54
 

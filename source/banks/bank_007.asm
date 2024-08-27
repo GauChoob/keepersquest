@@ -4697,7 +4697,7 @@ jr_007_5A24:
     cp $0F                                        ; $5A5E: $FE $0F
     jr nz, jr_007_5A65                            ; $5A60: $20 $03
 
-    jp Jump_000_015B                              ; $5A62: $C3 $5B $01
+    jp Boot_SoftReset                              ; $5A62: $C3 $5B $01
 
 
 jr_007_5A65:
@@ -4721,10 +4721,10 @@ jr_007_5A65:
 
     ld a, $01                                     ; $5A7E: $3E $01
     ld [$FF4D], a                                 ; $5A80: $EA $4D $FF
-    ld a, [$FFFF]                                 ; $5A83: $FA $FF $FF
+    ld a, [rIE]                                 ; $5A83: $FA $FF $FF
     push af                                       ; $5A86: $F5
     xor a                                         ; $5A87: $AF
-    ld [$FFFF], a                                 ; $5A88: $EA $FF $FF
+    ld [rIE], a                                 ; $5A88: $EA $FF $FF
     ld a, $30                                     ; $5A8B: $3E $30
     ld [$FF00], a                                 ; $5A8D: $EA $00 $FF
     stop                                          ; $5A90: $10 $00
@@ -4736,9 +4736,9 @@ jr_007_5A92:
 
     xor a                                         ; $5A99: $AF
     ld [$FF00], a                                 ; $5A9A: $EA $00 $FF
-    ld [$FF0F], a                                 ; $5A9D: $EA $0F $FF
+    ld [rIF], a                                 ; $5A9D: $EA $0F $FF
     pop af                                        ; $5AA0: $F1
-    ld [$FFFF], a                                 ; $5AA1: $EA $FF $FF
+    ld [rIE], a                                 ; $5AA1: $EA $FF $FF
     ret                                           ; $5AA4: $C9
 
 
@@ -4748,10 +4748,10 @@ jr_007_5A92:
 
     ld a, $01                                     ; $5AAB: $3E $01
     ld [$FF4D], a                                 ; $5AAD: $EA $4D $FF
-    ld a, [$FFFF]                                 ; $5AB0: $FA $FF $FF
+    ld a, [rIE]                                 ; $5AB0: $FA $FF $FF
     push af                                       ; $5AB3: $F5
     xor a                                         ; $5AB4: $AF
-    ld [$FFFF], a                                 ; $5AB5: $EA $FF $FF
+    ld [rIE], a                                 ; $5AB5: $EA $FF $FF
     ld a, $30                                     ; $5AB8: $3E $30
     ld [$FF00], a                                 ; $5ABA: $EA $00 $FF
     stop                                          ; $5ABD: $10 $00
@@ -4763,9 +4763,9 @@ jr_007_5ABF:
 
     xor a                                         ; $5AC6: $AF
     ld [$FF00], a                                 ; $5AC7: $EA $00 $FF
-    ld [$FF0F], a                                 ; $5ACA: $EA $0F $FF
+    ld [rIF], a                                 ; $5ACA: $EA $0F $FF
     pop af                                        ; $5ACD: $F1
-    ld [$FFFF], a                                 ; $5ACE: $EA $FF $FF
+    ld [rIE], a                                 ; $5ACE: $EA $FF $FF
     ret                                           ; $5AD1: $C9
 
 

@@ -6,295 +6,33 @@
 SECTION "ROM Bank $000", ROM0[$0]
 
 RST_00::
-    jp Jump_000_015B                              ; $0000: $C3 $5B $01
+    jp Boot_SoftReset                              ; $0000: $C3 $5B $01
 
-
-    rst $38                                       ; $0003: $FF
-    rst $38                                       ; $0004: $FF
-    rst $38                                       ; $0005: $FF
-    rst $38                                       ; $0006: $FF
-    rst $38                                       ; $0007: $FF
-
-RST_08::
-    rst $38                                       ; $0008: $FF
-    rst $38                                       ; $0009: $FF
-    rst $38                                       ; $000A: $FF
-    rst $38                                       ; $000B: $FF
-    rst $38                                       ; $000C: $FF
-    rst $38                                       ; $000D: $FF
-    rst $38                                       ; $000E: $FF
-    rst $38                                       ; $000F: $FF
-
-RST_10::
-    rst $38                                       ; $0010: $FF
-    rst $38                                       ; $0011: $FF
-    rst $38                                       ; $0012: $FF
-    rst $38                                       ; $0013: $FF
-    rst $38                                       ; $0014: $FF
-    rst $38                                       ; $0015: $FF
-    rst $38                                       ; $0016: $FF
-    rst $38                                       ; $0017: $FF
-
-RST_18::
-    rst $38                                       ; $0018: $FF
-    rst $38                                       ; $0019: $FF
-    rst $38                                       ; $001A: $FF
-    rst $38                                       ; $001B: $FF
-    rst $38                                       ; $001C: $FF
-    rst $38                                       ; $001D: $FF
-    rst $38                                       ; $001E: $FF
-    rst $38                                       ; $001F: $FF
-
-RST_20::
-    rst $38                                       ; $0020: $FF
-    rst $38                                       ; $0021: $FF
-    rst $38                                       ; $0022: $FF
-    rst $38                                       ; $0023: $FF
-    rst $38                                       ; $0024: $FF
-    rst $38                                       ; $0025: $FF
-    rst $38                                       ; $0026: $FF
-    rst $38                                       ; $0027: $FF
-
-RST_28::
-    rst $38                                       ; $0028: $FF
-    rst $38                                       ; $0029: $FF
-    rst $38                                       ; $002A: $FF
-    rst $38                                       ; $002B: $FF
-    rst $38                                       ; $002C: $FF
-    rst $38                                       ; $002D: $FF
-    rst $38                                       ; $002E: $FF
-    rst $38                                       ; $002F: $FF
-
-RST_30::
-    rst $38                                       ; $0030: $FF
-    rst $38                                       ; $0031: $FF
-    rst $38                                       ; $0032: $FF
-    rst $38                                       ; $0033: $FF
-    rst $38                                       ; $0034: $FF
-    rst $38                                       ; $0035: $FF
-    rst $38                                       ; $0036: $FF
-    rst $38                                       ; $0037: $FF
-
-RST_38::
-    rst $38                                       ; $0038: $FF
-    rst $38                                       ; $0039: $FF
-    rst $38                                       ; $003A: $FF
-    rst $38                                       ; $003B: $FF
-    rst $38                                       ; $003C: $FF
-    rst $38                                       ; $003D: $FF
-    rst $38                                       ; $003E: $FF
-    rst $38                                       ; $003F: $FF
-
+    ds $40 - @, $FF
 VBlankInterrupt::
     jp Jump_000_2C7E                              ; $0040: $C3 $7E $2C
 
-
-    rst $38                                       ; $0043: $FF
-    rst $38                                       ; $0044: $FF
-    rst $38                                       ; $0045: $FF
-    rst $38                                       ; $0046: $FF
-    rst $38                                       ; $0047: $FF
-
+    ds $48 - @, $FF
 LCDCInterrupt::
     jp Jump_000_2C75                              ; $0048: $C3 $75 $2C
 
-
-    rst $38                                       ; $004B: $FF
-    rst $38                                       ; $004C: $FF
-    rst $38                                       ; $004D: $FF
-    rst $38                                       ; $004E: $FF
-    rst $38                                       ; $004F: $FF
-
+    ds $50 - @, $FF
 TimerOverflowInterrupt::
     jp Jump_000_2C1D                              ; $0050: $C3 $1D $2C
 
-
-    rst $38                                       ; $0053: $FF
-    rst $38                                       ; $0054: $FF
-    rst $38                                       ; $0055: $FF
-    rst $38                                       ; $0056: $FF
-    rst $38                                       ; $0057: $FF
-
+    ds $58 - @, $FF
 SerialTransferCompleteInterrupt::
     reti                                          ; $0058: $D9
 
-
-    rst $38                                       ; $0059: $FF
-    rst $38                                       ; $005A: $FF
-    rst $38                                       ; $005B: $FF
-    rst $38                                       ; $005C: $FF
-    rst $38                                       ; $005D: $FF
-    rst $38                                       ; $005E: $FF
-    rst $38                                       ; $005F: $FF
-
+    ds $60 - @, $FF
 JoypadTransitionInterrupt::
     reti                                          ; $0060: $D9
+    ds $100 - @, $FF
 
-
-    rst $38                                       ; $0061: $FF
-    rst $38                                       ; $0062: $FF
-    rst $38                                       ; $0063: $FF
-    rst $38                                       ; $0064: $FF
-    rst $38                                       ; $0065: $FF
-    rst $38                                       ; $0066: $FF
-    rst $38                                       ; $0067: $FF
-
-    rst $38                                       ; $0068: $FF
-    rst $38                                       ; $0069: $FF
-    rst $38                                       ; $006A: $FF
-    rst $38                                       ; $006B: $FF
-    rst $38                                       ; $006C: $FF
-    rst $38                                       ; $006D: $FF
-    rst $38                                       ; $006E: $FF
-    rst $38                                       ; $006F: $FF
-    rst $38                                       ; $0070: $FF
-    rst $38                                       ; $0071: $FF
-    rst $38                                       ; $0072: $FF
-    rst $38                                       ; $0073: $FF
-    rst $38                                       ; $0074: $FF
-    rst $38                                       ; $0075: $FF
-    rst $38                                       ; $0076: $FF
-    rst $38                                       ; $0077: $FF
-    rst $38                                       ; $0078: $FF
-    rst $38                                       ; $0079: $FF
-    rst $38                                       ; $007A: $FF
-    rst $38                                       ; $007B: $FF
-    rst $38                                       ; $007C: $FF
-    rst $38                                       ; $007D: $FF
-    rst $38                                       ; $007E: $FF
-    rst $38                                       ; $007F: $FF
-    rst $38                                       ; $0080: $FF
-    rst $38                                       ; $0081: $FF
-    rst $38                                       ; $0082: $FF
-    rst $38                                       ; $0083: $FF
-    rst $38                                       ; $0084: $FF
-    rst $38                                       ; $0085: $FF
-    rst $38                                       ; $0086: $FF
-    rst $38                                       ; $0087: $FF
-    rst $38                                       ; $0088: $FF
-    rst $38                                       ; $0089: $FF
-    rst $38                                       ; $008A: $FF
-    rst $38                                       ; $008B: $FF
-    rst $38                                       ; $008C: $FF
-    rst $38                                       ; $008D: $FF
-    rst $38                                       ; $008E: $FF
-    rst $38                                       ; $008F: $FF
-    rst $38                                       ; $0090: $FF
-    rst $38                                       ; $0091: $FF
-    rst $38                                       ; $0092: $FF
-    rst $38                                       ; $0093: $FF
-    rst $38                                       ; $0094: $FF
-    rst $38                                       ; $0095: $FF
-    rst $38                                       ; $0096: $FF
-    rst $38                                       ; $0097: $FF
-    rst $38                                       ; $0098: $FF
-    rst $38                                       ; $0099: $FF
-    rst $38                                       ; $009A: $FF
-    rst $38                                       ; $009B: $FF
-    rst $38                                       ; $009C: $FF
-    rst $38                                       ; $009D: $FF
-    rst $38                                       ; $009E: $FF
-    rst $38                                       ; $009F: $FF
-    rst $38                                       ; $00A0: $FF
-    rst $38                                       ; $00A1: $FF
-    rst $38                                       ; $00A2: $FF
-    rst $38                                       ; $00A3: $FF
-    rst $38                                       ; $00A4: $FF
-    rst $38                                       ; $00A5: $FF
-    rst $38                                       ; $00A6: $FF
-    rst $38                                       ; $00A7: $FF
-    rst $38                                       ; $00A8: $FF
-    rst $38                                       ; $00A9: $FF
-    rst $38                                       ; $00AA: $FF
-    rst $38                                       ; $00AB: $FF
-    rst $38                                       ; $00AC: $FF
-    rst $38                                       ; $00AD: $FF
-    rst $38                                       ; $00AE: $FF
-    rst $38                                       ; $00AF: $FF
-    rst $38                                       ; $00B0: $FF
-    rst $38                                       ; $00B1: $FF
-    rst $38                                       ; $00B2: $FF
-    rst $38                                       ; $00B3: $FF
-    rst $38                                       ; $00B4: $FF
-    rst $38                                       ; $00B5: $FF
-    rst $38                                       ; $00B6: $FF
-    rst $38                                       ; $00B7: $FF
-    rst $38                                       ; $00B8: $FF
-    rst $38                                       ; $00B9: $FF
-    rst $38                                       ; $00BA: $FF
-    rst $38                                       ; $00BB: $FF
-    rst $38                                       ; $00BC: $FF
-    rst $38                                       ; $00BD: $FF
-    rst $38                                       ; $00BE: $FF
-    rst $38                                       ; $00BF: $FF
-    rst $38                                       ; $00C0: $FF
-    rst $38                                       ; $00C1: $FF
-    rst $38                                       ; $00C2: $FF
-    rst $38                                       ; $00C3: $FF
-    rst $38                                       ; $00C4: $FF
-    rst $38                                       ; $00C5: $FF
-    rst $38                                       ; $00C6: $FF
-    rst $38                                       ; $00C7: $FF
-    rst $38                                       ; $00C8: $FF
-    rst $38                                       ; $00C9: $FF
-    rst $38                                       ; $00CA: $FF
-    rst $38                                       ; $00CB: $FF
-    rst $38                                       ; $00CC: $FF
-    rst $38                                       ; $00CD: $FF
-    rst $38                                       ; $00CE: $FF
-    rst $38                                       ; $00CF: $FF
-    rst $38                                       ; $00D0: $FF
-    rst $38                                       ; $00D1: $FF
-    rst $38                                       ; $00D2: $FF
-    rst $38                                       ; $00D3: $FF
-    rst $38                                       ; $00D4: $FF
-    rst $38                                       ; $00D5: $FF
-    rst $38                                       ; $00D6: $FF
-    rst $38                                       ; $00D7: $FF
-    rst $38                                       ; $00D8: $FF
-    rst $38                                       ; $00D9: $FF
-    rst $38                                       ; $00DA: $FF
-    rst $38                                       ; $00DB: $FF
-    rst $38                                       ; $00DC: $FF
-    rst $38                                       ; $00DD: $FF
-    rst $38                                       ; $00DE: $FF
-    rst $38                                       ; $00DF: $FF
-    rst $38                                       ; $00E0: $FF
-    rst $38                                       ; $00E1: $FF
-    rst $38                                       ; $00E2: $FF
-    rst $38                                       ; $00E3: $FF
-    rst $38                                       ; $00E4: $FF
-    rst $38                                       ; $00E5: $FF
-    rst $38                                       ; $00E6: $FF
-    rst $38                                       ; $00E7: $FF
-    rst $38                                       ; $00E8: $FF
-    rst $38                                       ; $00E9: $FF
-    rst $38                                       ; $00EA: $FF
-    rst $38                                       ; $00EB: $FF
-    rst $38                                       ; $00EC: $FF
-    rst $38                                       ; $00ED: $FF
-    rst $38                                       ; $00EE: $FF
-    rst $38                                       ; $00EF: $FF
-    rst $38                                       ; $00F0: $FF
-    rst $38                                       ; $00F1: $FF
-    rst $38                                       ; $00F2: $FF
-    rst $38                                       ; $00F3: $FF
-    rst $38                                       ; $00F4: $FF
-    rst $38                                       ; $00F5: $FF
-    rst $38                                       ; $00F6: $FF
-    rst $38                                       ; $00F7: $FF
-    rst $38                                       ; $00F8: $FF
-    rst $38                                       ; $00F9: $FF
-    rst $38                                       ; $00FA: $FF
-    rst $38                                       ; $00FB: $FF
-    rst $38                                       ; $00FC: $FF
-    rst $38                                       ; $00FD: $FF
-    rst $38                                       ; $00FE: $FF
-    rst $38                                       ; $00FF: $FF
 
 Boot::
     nop                                           ; $0100: $00
-    jp Jump_000_0150                              ; $0101: $C3 $50 $01
+    jp Boot_HardReset                              ; $0101: $C3 $50 $01
 
 
 HeaderLogo::
@@ -341,23 +79,19 @@ HeaderComplementCheck::
 HeaderGlobalChecksum::
     db $A8, $CB
 
-Jump_000_0150:
+Boot_HardReset:
     and a                                         ; $0150: $A7
-
-Jump_000_0151:
     cp $11                                        ; $0151: $FE $11
     ld a, $00                                     ; $0153: $3E $00
-    jr nz, jr_000_0158                            ; $0155: $20 $01
+    jr nz, .NotCGB                            ; $0155: $20 $01
+        inc a                                         ; $0157: $3C
+    .NotCGB:
+    ld [hCGBFlag], a                                 ; $0158: $EA $FE $FF
 
-    inc a                                         ; $0157: $3C
-
-jr_000_0158:
-    ld [$FFFE], a                                 ; $0158: $EA $FE $FF
-
-Jump_000_015B:
-    ld sp, $CEF5                                  ; $015B: $31 $F5 $CE
-    call Call_000_07F9                            ; $015E: $CD $F9 $07
-    ld a, [$FFFE]                                 ; $0161: $FA $FE $FF
+Boot_SoftReset:
+    ld sp, wStackTop                                  ; $015B: $31 $F5 $CE
+    call ScreenHide                            ; $015E: $CD $F9 $07
+    ld a, [hCGBFlag]                                 ; $0161: $FA $FE $FF
     and a                                         ; $0164: $A7
     jp z, $024E                                   ; $0165: $CA $4E $02
 
@@ -366,9 +100,9 @@ Jump_000_015B:
     ld [$0000], a                                 ; $016C: $EA $00 $00
     ld [$3000], a                                 ; $016F: $EA $00 $30
     ld a, $BF                                     ; $0172: $3E $BF
-    ld [$FF06], a                                 ; $0174: $EA $06 $FF
+    ld [rTMA], a                                 ; $0174: $EA $06 $FF
     ld a, $04                                     ; $0177: $3E $04
-    ld [$FF07], a                                 ; $0179: $EA $07 $FF
+    ld [rTAC], a                                 ; $0179: $EA $07 $FF
     ld a, $07                                     ; $017C: $3E $07
     ld [$C95B], a                                 ; $017E: $EA $5B $C9
     ld [$2000], a                                 ; $0181: $EA $00 $20
@@ -628,14 +362,14 @@ jr_000_0299:
     ld hl, $9E06                                  ; $02D5: $21 $06 $9E
     call Call_000_02F1                            ; $02D8: $CD $F1 $02
     xor a                                         ; $02DB: $AF
-    ld [$FF0F], a                                 ; $02DC: $EA $0F $FF
-    ld [$FFA5], a                                 ; $02DF: $EA $A5 $FF
+    ld [rIF], a                                 ; $02DC: $EA $0F $FF
+    ld [hInterrupt_VBlank_Control], a                                 ; $02DF: $EA $A5 $FF
     ld a, $03                                     ; $02E2: $3E $03
-    ld [$FFFF], a                                 ; $02E4: $EA $FF $FF
+    ld [rIE], a                                 ; $02E4: $EA $FF $FF
     ld a, $E1                                     ; $02E7: $3E $E1
-    ld [$FF40], a                                 ; $02E9: $EA $40 $FF
+    ld [rLCDC], a                                 ; $02E9: $EA $40 $FF
     xor a                                         ; $02EC: $AF
-    ld [$FFFF], a                                 ; $02ED: $EA $FF $FF
+    ld [rIE], a                                 ; $02ED: $EA $FF $FF
     ret                                           ; $02F0: $C9
 
 
@@ -1678,52 +1412,52 @@ jr_000_07F0:
     ret                                           ; $07F8: $C9
 
 
-Call_000_07F9:
+ScreenHide:
     xor a                                         ; $07F9: $AF
-    ld [$C959], a                                 ; $07FA: $EA $59 $C9
-    ld a, [$FF40]                                 ; $07FD: $FA $40 $FF
+    ld [wScreenVisible], a                                 ; $07FA: $EA $59 $C9
+    ld a, [rLCDC]                                 ; $07FD: $FA $40 $FF
     bit 7, a                                      ; $0800: $CB $7F
     ret z                                         ; $0802: $C8
 
     xor a                                         ; $0803: $AF
-    ld [$FF0F], a                                 ; $0804: $EA $0F $FF
-    ld [$FFFF], a                                 ; $0807: $EA $FF $FF
+    ld [rIF], a                                 ; $0804: $EA $0F $FF
+    ld [rIE], a                                 ; $0807: $EA $FF $FF
 
-jr_000_080A:
-    ld a, [$FF44]                                 ; $080A: $FA $44 $FF
-    cp $91                                        ; $080D: $FE $91
-    jr nz, jr_000_080A                            ; $080F: $20 $F9
+    .WaitForVBlankLoop:
+        ld a, [rLY]                                 ; $080A: $FA $44 $FF
+        cp $91                                        ; $080D: $FE $91
+        jr nz, .WaitForVBlankLoop                            ; $080F: $20 $F9
 
     xor a                                         ; $0811: $AF
-    ld [$FF40], a                                 ; $0812: $EA $40 $FF
-    ld [$FF0F], a                                 ; $0815: $EA $0F $FF
-    ld [$FFFF], a                                 ; $0818: $EA $FF $FF
+    ld [rLCDC], a                                 ; $0812: $EA $40 $FF
+    ld [rIF], a                                 ; $0815: $EA $0F $FF
+    ld [rIE], a                                 ; $0818: $EA $FF $FF
     ei                                            ; $081B: $FB
-    call Call_000_2C61                            ; $081C: $CD $61 $2C
+    call Interrupt_Timer_Start                            ; $081C: $CD $61 $2C
     ret                                           ; $081F: $C9
 
 
-Call_000_0820:
-    ld a, [$C959]                                 ; $0820: $FA $59 $C9
+ScreenShow:
+    ld a, [wScreenVisible]                                 ; $0820: $FA $59 $C9
     and a                                         ; $0823: $A7
     ret nz                                        ; $0824: $C0
 
     ld a, $40                                     ; $0825: $3E $40
-    ld [$FF41], a                                 ; $0827: $EA $41 $FF
+    ld [rSTAT], a                                 ; $0827: $EA $41 $FF
     xor a                                         ; $082A: $AF
-    ld [$FF0F], a                                 ; $082B: $EA $0F $FF
-    ld [$FFA5], a                                 ; $082E: $EA $A5 $FF
+    ld [rIF], a                                 ; $082B: $EA $0F $FF
+    ld [hInterrupt_VBlank_Control], a                                 ; $082E: $EA $A5 $FF
     ld a, $03                                     ; $0831: $3E $03
-    ld [$FFFF], a                                 ; $0833: $EA $FF $FF
+    ld [rIE], a                                 ; $0833: $EA $FF $FF
     ld a, $E3                                     ; $0836: $3E $E3
-    ld [$FF40], a                                 ; $0838: $EA $40 $FF
-    ld [$C959], a                                 ; $083B: $EA $59 $C9
+    ld [rLCDC], a                                 ; $0838: $EA $40 $FF
+    ld [wScreenVisible], a                                 ; $083B: $EA $59 $C9
     ei                                            ; $083E: $FB
     ret                                           ; $083F: $C9
 
 
 Call_000_0840:
-    ld a, [$C959]                                 ; $0840: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $0840: $FA $59 $C9
     and a                                         ; $0843: $A7
     jr nz, jr_000_085B                            ; $0844: $20 $15
 
@@ -3375,15 +3109,15 @@ Call_000_114F:
     ld a, $0A                                     ; $1209: $3E $0A
     ld [$FFAC], a                                 ; $120B: $EA $AC $FF
     call Call_000_2B78                            ; $120E: $CD $78 $2B
-    call Call_000_07F9                            ; $1211: $CD $F9 $07
-    call Call_000_2C61                            ; $1214: $CD $61 $2C
+    call ScreenHide                            ; $1211: $CD $F9 $07
+    call Interrupt_Timer_Start                            ; $1214: $CD $61 $2C
     call Call_000_2B17                            ; $1217: $CD $17 $2B
     ld a, $04                                     ; $121A: $3E $04
     ld [$C95B], a                                 ; $121C: $EA $5B $C9
     ld [$2000], a                                 ; $121F: $EA $00 $20
     call $4190                                    ; $1222: $CD $90 $41
     call Call_000_20AC                            ; $1225: $CD $AC $20
-    call Call_000_0820                            ; $1228: $CD $20 $08
+    call ScreenShow                            ; $1228: $CD $20 $08
 
 jr_000_122B:
     ld a, $04                                     ; $122B: $3E $04
@@ -3607,7 +3341,7 @@ jr_000_1391:
     and e                                         ; $139B: $A3
     jr z, jr_000_13A2                             ; $139C: $28 $04
 
-    ld de, $FFFF                                  ; $139E: $11 $FF $FF
+    ld de, rIE                                  ; $139E: $11 $FF $FF
     ret                                           ; $13A1: $C9
 
 
@@ -3690,7 +3424,7 @@ jr_000_13A2:
     or h                                          ; $13EE: $B4
     ret z                                         ; $13EF: $C8
 
-    ld de, $FFFF                                  ; $13F0: $11 $FF $FF
+    ld de, rIE                                  ; $13F0: $11 $FF $FF
     ret                                           ; $13F3: $C9
 
 
@@ -3708,7 +3442,7 @@ jr_000_13A2:
 
 
 jr_000_1403:
-    ld de, $FFFF                                  ; $1403: $11 $FF $FF
+    ld de, rIE                                  ; $1403: $11 $FF $FF
     ret                                           ; $1406: $C9
 
 
@@ -3722,7 +3456,7 @@ jr_000_1403:
 
 
 jr_000_1412:
-    ld de, $FFFF                                  ; $1412: $11 $FF $FF
+    ld de, rIE                                  ; $1412: $11 $FF $FF
     ret                                           ; $1415: $C9
 
 
@@ -3765,7 +3499,7 @@ jr_000_1412:
     cp h                                          ; $143C: $BC
     jr nz, jr_000_1443                            ; $143D: $20 $04
 
-    ld de, $FFFF                                  ; $143F: $11 $FF $FF
+    ld de, rIE                                  ; $143F: $11 $FF $FF
     ret                                           ; $1442: $C9
 
 
@@ -3788,7 +3522,7 @@ jr_000_1443:
 
 
 jr_000_1456:
-    ld de, $FFFF                                  ; $1456: $11 $FF $FF
+    ld de, rIE                                  ; $1456: $11 $FF $FF
     ret                                           ; $1459: $C9
 
 
@@ -3799,7 +3533,7 @@ jr_000_1456:
     sbc h                                         ; $1460: $9C
     jr nc, jr_000_1467                            ; $1461: $30 $04
 
-    ld de, $FFFF                                  ; $1463: $11 $FF $FF
+    ld de, rIE                                  ; $1463: $11 $FF $FF
     ret                                           ; $1466: $C9
 
 
@@ -3820,7 +3554,7 @@ jr_000_1467:
 
 
 jr_000_1478:
-    ld de, $FFFF                                  ; $1478: $11 $FF $FF
+    ld de, rIE                                  ; $1478: $11 $FF $FF
     ret                                           ; $147B: $C9
 
 
@@ -3831,7 +3565,7 @@ jr_000_1478:
     sbc d                                         ; $1482: $9A
     jr nc, jr_000_1489                            ; $1483: $30 $04
 
-    ld de, $FFFF                                  ; $1485: $11 $FF $FF
+    ld de, rIE                                  ; $1485: $11 $FF $FF
     ret                                           ; $1488: $C9
 
 
@@ -3852,7 +3586,7 @@ jr_000_1489:
 
 
 jr_000_149A:
-    ld de, $FFFF                                  ; $149A: $11 $FF $FF
+    ld de, rIE                                  ; $149A: $11 $FF $FF
     ret                                           ; $149D: $C9
 
 
@@ -4008,7 +3742,7 @@ jr_000_1571:
     ret                                           ; $1586: $C9
 
 
-    ld a, [$C959]                                 ; $1587: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $1587: $FA $59 $C9
     and a                                         ; $158A: $A7
     jp z, Jump_000_15A9                           ; $158B: $CA $A9 $15
 
@@ -5868,8 +5602,8 @@ jr_000_20B4:
     ret                                           ; $20E1: $C9
 
 
-    call Call_000_07F9                            ; $20E2: $CD $F9 $07
-    call Call_000_2C61                            ; $20E5: $CD $61 $2C
+    call ScreenHide                            ; $20E2: $CD $F9 $07
+    call Interrupt_Timer_Start                            ; $20E5: $CD $61 $2C
     ld a, $0A                                     ; $20E8: $3E $0A
     ld [$FFA6], a                                 ; $20EA: $EA $A6 $FF
     ld a, $C7                                     ; $20ED: $3E $C7
@@ -5889,7 +5623,7 @@ jr_000_20B4:
     ld [$C71B], a                                 ; $2111: $EA $1B $C7
     ld a, $15                                     ; $2114: $3E $15
     ld [$C71C], a                                 ; $2116: $EA $1C $C7
-    ld sp, $CEF5                                  ; $2119: $31 $F5 $CE
+    ld sp, wStackTop                                  ; $2119: $31 $F5 $CE
     call Call_000_20AC                            ; $211C: $CD $AC $20
     ld a, $20                                     ; $211F: $3E $20
     ld [$C86A], a                                 ; $2121: $EA $6A $C8
@@ -5900,8 +5634,8 @@ jr_000_20B4:
     ld [$C95B], a                                 ; $212F: $EA $5B $C9
     ld [$2000], a                                 ; $2132: $EA $00 $20
     call $4956                                    ; $2135: $CD $56 $49
-    ld sp, $CEF5                                  ; $2138: $31 $F5 $CE
-    call Call_000_0820                            ; $213B: $CD $20 $08
+    ld sp, wStackTop                                  ; $2138: $31 $F5 $CE
+    call ScreenShow                            ; $213B: $CD $20 $08
     jp Jump_000_02F7                              ; $213E: $C3 $F7 $02
 
 
@@ -6127,8 +5861,8 @@ jr_000_22BD:
 
 
 Jump_000_22D6:
-    call Call_000_07F9                            ; $22D6: $CD $F9 $07
-    call Call_000_2C61                            ; $22D9: $CD $61 $2C
+    call ScreenHide                            ; $22D6: $CD $F9 $07
+    call Interrupt_Timer_Start                            ; $22D9: $CD $61 $2C
     ld a, $0A                                     ; $22DC: $3E $0A
     ld [$FFA6], a                                 ; $22DE: $EA $A6 $FF
     ld a, $C7                                     ; $22E1: $3E $C7
@@ -6150,16 +5884,16 @@ Jump_000_22D6:
     ld [$C71B], a                                 ; $2309: $EA $1B $C7
     ld a, $15                                     ; $230C: $3E $15
     ld [$C71C], a                                 ; $230E: $EA $1C $C7
-    ld sp, $CEF5                                  ; $2311: $31 $F5 $CE
+    ld sp, wStackTop                                  ; $2311: $31 $F5 $CE
     call Call_000_20AC                            ; $2314: $CD $AC $20
     ld a, $07                                     ; $2317: $3E $07
     ld [$C95B], a                                 ; $2319: $EA $5B $C9
     ld [$2000], a                                 ; $231C: $EA $00 $20
     call $4A8C                                    ; $231F: $CD $8C $4A
-    ld sp, $CEF5                                  ; $2322: $31 $F5 $CE
+    ld sp, wStackTop                                  ; $2322: $31 $F5 $CE
     ld a, $01                                     ; $2325: $3E $01
     ld [$C6F7], a                                 ; $2327: $EA $F7 $C6
-    call Call_000_0820                            ; $232A: $CD $20 $08
+    call ScreenShow                            ; $232A: $CD $20 $08
     jp Jump_000_02F7                              ; $232D: $C3 $F7 $02
 
 
@@ -6841,7 +6575,7 @@ jr_000_275C:
 
     ld hl, $0009                                  ; $27A5: $21 $09 $00
     call Call_000_296E                            ; $27A8: $CD $6E $29
-    ld a, [$C959]                                 ; $27AB: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $27AB: $FA $59 $C9
     and a                                         ; $27AE: $A7
     jr nz, jr_000_27B9                            ; $27AF: $20 $08
 
@@ -6862,7 +6596,7 @@ jr_000_27B9:
 
     ld hl, $0009                                  ; $27C1: $21 $09 $00
     call Call_000_296E                            ; $27C4: $CD $6E $29
-    ld a, [$C959]                                 ; $27C7: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $27C7: $FA $59 $C9
     and a                                         ; $27CA: $A7
     jr nz, jr_000_27E4                            ; $27CB: $20 $17
 
@@ -6892,7 +6626,7 @@ jr_000_27E4:
 
     ld hl, $0009                                  ; $27EC: $21 $09 $00
     call Call_000_296E                            ; $27EF: $CD $6E $29
-    ld a, [$C959]                                 ; $27F2: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $27F2: $FA $59 $C9
     and a                                         ; $27F5: $A7
     jr nz, jr_000_2800                            ; $27F6: $20 $08
 
@@ -6915,7 +6649,7 @@ jr_000_2800:
 
     ld hl, $0009                                  ; $280A: $21 $09 $00
     call Call_000_296E                            ; $280D: $CD $6E $29
-    ld a, [$C959]                                 ; $2810: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $2810: $FA $59 $C9
     and a                                         ; $2813: $A7
     jr nz, jr_000_2826                            ; $2814: $20 $10
 
@@ -6942,7 +6676,7 @@ jr_000_2826:
 
     ld hl, $0007                                  ; $2830: $21 $07 $00
     call Call_000_296E                            ; $2833: $CD $6E $29
-    ld a, [$C959]                                 ; $2836: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $2836: $FA $59 $C9
     and a                                         ; $2839: $A7
     jr nz, jr_000_2850                            ; $283A: $20 $14
 
@@ -7109,7 +6843,7 @@ Jump_000_2922:
     ld h, [hl]                                    ; $292A: $66
     ld l, a                                       ; $292B: $6F
     ld [hl], e                                    ; $292C: $73
-    ld a, [$C959]                                 ; $292D: $FA $59 $C9
+    ld a, [wScreenVisible]                                 ; $292D: $FA $59 $C9
     and a                                         ; $2930: $A7
     ret z                                         ; $2931: $C8
 
@@ -7667,15 +7401,15 @@ Jump_000_2C1D:
     reti                                          ; $2C60: $D9
 
 
-Call_000_2C61:
+Interrupt_Timer_Start:
     ld a, $80                                     ; $2C61: $3E $80
-    ld [$FF06], a                                 ; $2C63: $EA $06 $FF
+    ld [rTMA], a                                 ; $2C63: $EA $06 $FF
     ld a, $04                                     ; $2C66: $3E $04
-    ld [$FF07], a                                 ; $2C68: $EA $07 $FF
+    ld [rTAC], a                                 ; $2C68: $EA $07 $FF
     xor a                                         ; $2C6B: $AF
-    ld [$FF0F], a                                 ; $2C6C: $EA $0F $FF
+    ld [rIF], a                                 ; $2C6C: $EA $0F $FF
     ld a, $04                                     ; $2C6F: $3E $04
-    ld [$FFFF], a                                 ; $2C71: $EA $FF $FF
+    ld [rIE], a                                 ; $2C71: $EA $FF $FF
     ret                                           ; $2C74: $C9
 
 
@@ -7728,7 +7462,7 @@ Jump_000_2C7E:
     jr z, jr_000_2CD0                             ; $2CBB: $28 $13
 
     ld a, $E3                                     ; $2CBD: $3E $E3
-    ld [$FF40], a                                 ; $2CBF: $EA $40 $FF
+    ld [rLCDC], a                                 ; $2CBF: $EA $40 $FF
     call $FF80                                    ; $2CC2: $CD $80 $FF
     ld a, $07                                     ; $2CC5: $3E $07
     ld [$C95B], a                                 ; $2CC7: $EA $5B $C9
@@ -8023,7 +7757,7 @@ jr_000_2E82:
 
 jr_000_2E8D:
     dec e                                         ; $2E8D: $1D
-    jp z, Jump_000_015B                           ; $2E8E: $CA $5B $01
+    jp z, Boot_SoftReset                           ; $2E8E: $CA $5B $01
 
     ld a, [hl+]                                   ; $2E91: $2A
     cp $FC                                        ; $2E92: $FE $FC
@@ -8816,7 +8550,7 @@ Call_000_32BE:
     jr z, jr_000_3311                             ; $32F8: $28 $17
 
     ld a, $E3                                     ; $32FA: $3E $E3
-    ld [$FF40], a                                 ; $32FC: $EA $40 $FF
+    ld [rLCDC], a                                 ; $32FC: $EA $40 $FF
     call $FF80                                    ; $32FF: $CD $80 $FF
     ld a, $A7                                     ; $3302: $3E $A7
     ldh [rWX], a                                  ; $3304: $E0 $4B
@@ -8965,1750 +8699,7 @@ Call_000_33CE:
     rst $38                                       ; $33E1: $FF
     rst $38                                       ; $33E2: $FF
     rst $38                                       ; $33E3: $FF
-    rst $38                                       ; $33E4: $FF
-    rst $38                                       ; $33E5: $FF
-    rst $38                                       ; $33E6: $FF
-    rst $38                                       ; $33E7: $FF
-    rst $38                                       ; $33E8: $FF
-    rst $38                                       ; $33E9: $FF
-    rst $38                                       ; $33EA: $FF
-    rst $38                                       ; $33EB: $FF
-    rst $38                                       ; $33EC: $FF
-    rst $38                                       ; $33ED: $FF
-    rst $38                                       ; $33EE: $FF
-    rst $38                                       ; $33EF: $FF
-    rst $38                                       ; $33F0: $FF
-    rst $38                                       ; $33F1: $FF
-    rst $38                                       ; $33F2: $FF
-    rst $38                                       ; $33F3: $FF
-    rst $38                                       ; $33F4: $FF
-    rst $38                                       ; $33F5: $FF
-    rst $38                                       ; $33F6: $FF
-    rst $38                                       ; $33F7: $FF
-    rst $38                                       ; $33F8: $FF
-    rst $38                                       ; $33F9: $FF
-    rst $38                                       ; $33FA: $FF
-    rst $38                                       ; $33FB: $FF
-    rst $38                                       ; $33FC: $FF
-    rst $38                                       ; $33FD: $FF
-    rst $38                                       ; $33FE: $FF
-    rst $38                                       ; $33FF: $FF
-    rst $38                                       ; $3400: $FF
-    rst $38                                       ; $3401: $FF
-    rst $38                                       ; $3402: $FF
-    rst $38                                       ; $3403: $FF
-    rst $38                                       ; $3404: $FF
-    rst $38                                       ; $3405: $FF
-    rst $38                                       ; $3406: $FF
-    rst $38                                       ; $3407: $FF
-    rst $38                                       ; $3408: $FF
-    rst $38                                       ; $3409: $FF
-    rst $38                                       ; $340A: $FF
-    rst $38                                       ; $340B: $FF
-    rst $38                                       ; $340C: $FF
-    rst $38                                       ; $340D: $FF
-    rst $38                                       ; $340E: $FF
-    rst $38                                       ; $340F: $FF
-    rst $38                                       ; $3410: $FF
-    rst $38                                       ; $3411: $FF
-    rst $38                                       ; $3412: $FF
-    rst $38                                       ; $3413: $FF
-    rst $38                                       ; $3414: $FF
-    rst $38                                       ; $3415: $FF
-    rst $38                                       ; $3416: $FF
-    rst $38                                       ; $3417: $FF
-    rst $38                                       ; $3418: $FF
-    rst $38                                       ; $3419: $FF
-    rst $38                                       ; $341A: $FF
-    rst $38                                       ; $341B: $FF
-    rst $38                                       ; $341C: $FF
-    rst $38                                       ; $341D: $FF
-    rst $38                                       ; $341E: $FF
-    rst $38                                       ; $341F: $FF
-    rst $38                                       ; $3420: $FF
-    rst $38                                       ; $3421: $FF
-    rst $38                                       ; $3422: $FF
-    rst $38                                       ; $3423: $FF
-    rst $38                                       ; $3424: $FF
-    rst $38                                       ; $3425: $FF
-    rst $38                                       ; $3426: $FF
-    rst $38                                       ; $3427: $FF
-    rst $38                                       ; $3428: $FF
-    rst $38                                       ; $3429: $FF
-    rst $38                                       ; $342A: $FF
-    rst $38                                       ; $342B: $FF
-    rst $38                                       ; $342C: $FF
-    rst $38                                       ; $342D: $FF
-    rst $38                                       ; $342E: $FF
-    rst $38                                       ; $342F: $FF
-    rst $38                                       ; $3430: $FF
-    rst $38                                       ; $3431: $FF
-    rst $38                                       ; $3432: $FF
-    rst $38                                       ; $3433: $FF
-    rst $38                                       ; $3434: $FF
-    rst $38                                       ; $3435: $FF
-    rst $38                                       ; $3436: $FF
-    rst $38                                       ; $3437: $FF
-    rst $38                                       ; $3438: $FF
-    rst $38                                       ; $3439: $FF
-    rst $38                                       ; $343A: $FF
-    rst $38                                       ; $343B: $FF
-    rst $38                                       ; $343C: $FF
-    rst $38                                       ; $343D: $FF
-    rst $38                                       ; $343E: $FF
-    rst $38                                       ; $343F: $FF
-    rst $38                                       ; $3440: $FF
-    rst $38                                       ; $3441: $FF
-    rst $38                                       ; $3442: $FF
-    rst $38                                       ; $3443: $FF
-    rst $38                                       ; $3444: $FF
-    rst $38                                       ; $3445: $FF
-    rst $38                                       ; $3446: $FF
-    rst $38                                       ; $3447: $FF
-    rst $38                                       ; $3448: $FF
-    rst $38                                       ; $3449: $FF
-    rst $38                                       ; $344A: $FF
-    rst $38                                       ; $344B: $FF
-    rst $38                                       ; $344C: $FF
-    rst $38                                       ; $344D: $FF
-    rst $38                                       ; $344E: $FF
-    rst $38                                       ; $344F: $FF
-    rst $38                                       ; $3450: $FF
-    rst $38                                       ; $3451: $FF
-    rst $38                                       ; $3452: $FF
-    rst $38                                       ; $3453: $FF
-    rst $38                                       ; $3454: $FF
-    rst $38                                       ; $3455: $FF
-    rst $38                                       ; $3456: $FF
-    rst $38                                       ; $3457: $FF
-    rst $38                                       ; $3458: $FF
-    rst $38                                       ; $3459: $FF
-    rst $38                                       ; $345A: $FF
-    rst $38                                       ; $345B: $FF
-    rst $38                                       ; $345C: $FF
-    rst $38                                       ; $345D: $FF
-    rst $38                                       ; $345E: $FF
-    rst $38                                       ; $345F: $FF
-    rst $38                                       ; $3460: $FF
-    rst $38                                       ; $3461: $FF
-    rst $38                                       ; $3462: $FF
-    rst $38                                       ; $3463: $FF
-    rst $38                                       ; $3464: $FF
-    rst $38                                       ; $3465: $FF
-    rst $38                                       ; $3466: $FF
-    rst $38                                       ; $3467: $FF
-    rst $38                                       ; $3468: $FF
-    rst $38                                       ; $3469: $FF
-    rst $38                                       ; $346A: $FF
-    rst $38                                       ; $346B: $FF
-    rst $38                                       ; $346C: $FF
-    rst $38                                       ; $346D: $FF
-    rst $38                                       ; $346E: $FF
-    rst $38                                       ; $346F: $FF
-    rst $38                                       ; $3470: $FF
-    rst $38                                       ; $3471: $FF
-    rst $38                                       ; $3472: $FF
-    rst $38                                       ; $3473: $FF
-    rst $38                                       ; $3474: $FF
-    rst $38                                       ; $3475: $FF
-    rst $38                                       ; $3476: $FF
-    rst $38                                       ; $3477: $FF
-    rst $38                                       ; $3478: $FF
-    rst $38                                       ; $3479: $FF
-    rst $38                                       ; $347A: $FF
-    rst $38                                       ; $347B: $FF
-    rst $38                                       ; $347C: $FF
-    rst $38                                       ; $347D: $FF
-    rst $38                                       ; $347E: $FF
-    rst $38                                       ; $347F: $FF
-    rst $38                                       ; $3480: $FF
-    rst $38                                       ; $3481: $FF
-    rst $38                                       ; $3482: $FF
-    rst $38                                       ; $3483: $FF
-    rst $38                                       ; $3484: $FF
-    rst $38                                       ; $3485: $FF
-    rst $38                                       ; $3486: $FF
-    rst $38                                       ; $3487: $FF
-    rst $38                                       ; $3488: $FF
-    rst $38                                       ; $3489: $FF
-    rst $38                                       ; $348A: $FF
-    rst $38                                       ; $348B: $FF
-    rst $38                                       ; $348C: $FF
-    rst $38                                       ; $348D: $FF
-    rst $38                                       ; $348E: $FF
-    rst $38                                       ; $348F: $FF
-    rst $38                                       ; $3490: $FF
-    rst $38                                       ; $3491: $FF
-    rst $38                                       ; $3492: $FF
-    rst $38                                       ; $3493: $FF
-    rst $38                                       ; $3494: $FF
-    rst $38                                       ; $3495: $FF
-    rst $38                                       ; $3496: $FF
-    rst $38                                       ; $3497: $FF
-    rst $38                                       ; $3498: $FF
-    rst $38                                       ; $3499: $FF
-    rst $38                                       ; $349A: $FF
-    rst $38                                       ; $349B: $FF
-    rst $38                                       ; $349C: $FF
-    rst $38                                       ; $349D: $FF
-    rst $38                                       ; $349E: $FF
-    rst $38                                       ; $349F: $FF
-    rst $38                                       ; $34A0: $FF
-    rst $38                                       ; $34A1: $FF
-    rst $38                                       ; $34A2: $FF
-    rst $38                                       ; $34A3: $FF
-    rst $38                                       ; $34A4: $FF
-    rst $38                                       ; $34A5: $FF
-    rst $38                                       ; $34A6: $FF
-    rst $38                                       ; $34A7: $FF
-    rst $38                                       ; $34A8: $FF
-    rst $38                                       ; $34A9: $FF
-    rst $38                                       ; $34AA: $FF
-    rst $38                                       ; $34AB: $FF
-    rst $38                                       ; $34AC: $FF
-    rst $38                                       ; $34AD: $FF
-    rst $38                                       ; $34AE: $FF
-    rst $38                                       ; $34AF: $FF
-    rst $38                                       ; $34B0: $FF
-    rst $38                                       ; $34B1: $FF
-    rst $38                                       ; $34B2: $FF
-    rst $38                                       ; $34B3: $FF
-    rst $38                                       ; $34B4: $FF
-    rst $38                                       ; $34B5: $FF
-    rst $38                                       ; $34B6: $FF
-    rst $38                                       ; $34B7: $FF
-    rst $38                                       ; $34B8: $FF
-    rst $38                                       ; $34B9: $FF
-    rst $38                                       ; $34BA: $FF
-    rst $38                                       ; $34BB: $FF
-    rst $38                                       ; $34BC: $FF
-    rst $38                                       ; $34BD: $FF
-    rst $38                                       ; $34BE: $FF
-    rst $38                                       ; $34BF: $FF
-    rst $38                                       ; $34C0: $FF
-    rst $38                                       ; $34C1: $FF
-    rst $38                                       ; $34C2: $FF
-    rst $38                                       ; $34C3: $FF
-    rst $38                                       ; $34C4: $FF
-    rst $38                                       ; $34C5: $FF
-    rst $38                                       ; $34C6: $FF
-    rst $38                                       ; $34C7: $FF
-    rst $38                                       ; $34C8: $FF
-    rst $38                                       ; $34C9: $FF
-    rst $38                                       ; $34CA: $FF
-    rst $38                                       ; $34CB: $FF
-    rst $38                                       ; $34CC: $FF
-    rst $38                                       ; $34CD: $FF
-    rst $38                                       ; $34CE: $FF
-    rst $38                                       ; $34CF: $FF
-    rst $38                                       ; $34D0: $FF
-    rst $38                                       ; $34D1: $FF
-    rst $38                                       ; $34D2: $FF
-    rst $38                                       ; $34D3: $FF
-    rst $38                                       ; $34D4: $FF
-    rst $38                                       ; $34D5: $FF
-    rst $38                                       ; $34D6: $FF
-    rst $38                                       ; $34D7: $FF
-    rst $38                                       ; $34D8: $FF
-    rst $38                                       ; $34D9: $FF
-    rst $38                                       ; $34DA: $FF
-    rst $38                                       ; $34DB: $FF
-    rst $38                                       ; $34DC: $FF
-    rst $38                                       ; $34DD: $FF
-    rst $38                                       ; $34DE: $FF
-    rst $38                                       ; $34DF: $FF
-    rst $38                                       ; $34E0: $FF
-    rst $38                                       ; $34E1: $FF
-    rst $38                                       ; $34E2: $FF
-    rst $38                                       ; $34E3: $FF
-    rst $38                                       ; $34E4: $FF
-    rst $38                                       ; $34E5: $FF
-    rst $38                                       ; $34E6: $FF
-    rst $38                                       ; $34E7: $FF
-    rst $38                                       ; $34E8: $FF
-    rst $38                                       ; $34E9: $FF
-    rst $38                                       ; $34EA: $FF
-    rst $38                                       ; $34EB: $FF
-    rst $38                                       ; $34EC: $FF
-    rst $38                                       ; $34ED: $FF
-    rst $38                                       ; $34EE: $FF
-    rst $38                                       ; $34EF: $FF
-    rst $38                                       ; $34F0: $FF
-    rst $38                                       ; $34F1: $FF
-    rst $38                                       ; $34F2: $FF
-    rst $38                                       ; $34F3: $FF
-    rst $38                                       ; $34F4: $FF
-    rst $38                                       ; $34F5: $FF
-    rst $38                                       ; $34F6: $FF
-    rst $38                                       ; $34F7: $FF
-    rst $38                                       ; $34F8: $FF
-    rst $38                                       ; $34F9: $FF
-    rst $38                                       ; $34FA: $FF
-    rst $38                                       ; $34FB: $FF
-    rst $38                                       ; $34FC: $FF
-    rst $38                                       ; $34FD: $FF
-    rst $38                                       ; $34FE: $FF
-    rst $38                                       ; $34FF: $FF
-    rst $38                                       ; $3500: $FF
-    rst $38                                       ; $3501: $FF
-    rst $38                                       ; $3502: $FF
-    rst $38                                       ; $3503: $FF
-    rst $38                                       ; $3504: $FF
-    rst $38                                       ; $3505: $FF
-    rst $38                                       ; $3506: $FF
-    rst $38                                       ; $3507: $FF
-    rst $38                                       ; $3508: $FF
-    rst $38                                       ; $3509: $FF
-    rst $38                                       ; $350A: $FF
-    rst $38                                       ; $350B: $FF
-    rst $38                                       ; $350C: $FF
-    rst $38                                       ; $350D: $FF
-    rst $38                                       ; $350E: $FF
-    rst $38                                       ; $350F: $FF
-    rst $38                                       ; $3510: $FF
-    rst $38                                       ; $3511: $FF
-    rst $38                                       ; $3512: $FF
-    rst $38                                       ; $3513: $FF
-    rst $38                                       ; $3514: $FF
-    rst $38                                       ; $3515: $FF
-    rst $38                                       ; $3516: $FF
-    rst $38                                       ; $3517: $FF
-    rst $38                                       ; $3518: $FF
-    rst $38                                       ; $3519: $FF
-    rst $38                                       ; $351A: $FF
-    rst $38                                       ; $351B: $FF
-    rst $38                                       ; $351C: $FF
-    rst $38                                       ; $351D: $FF
-    rst $38                                       ; $351E: $FF
-    rst $38                                       ; $351F: $FF
-    rst $38                                       ; $3520: $FF
-    rst $38                                       ; $3521: $FF
-    rst $38                                       ; $3522: $FF
-    rst $38                                       ; $3523: $FF
-    rst $38                                       ; $3524: $FF
-    rst $38                                       ; $3525: $FF
-    rst $38                                       ; $3526: $FF
-    rst $38                                       ; $3527: $FF
-    rst $38                                       ; $3528: $FF
-    rst $38                                       ; $3529: $FF
-    rst $38                                       ; $352A: $FF
-    rst $38                                       ; $352B: $FF
-    rst $38                                       ; $352C: $FF
-    rst $38                                       ; $352D: $FF
-    rst $38                                       ; $352E: $FF
-    rst $38                                       ; $352F: $FF
-    rst $38                                       ; $3530: $FF
-    rst $38                                       ; $3531: $FF
-    rst $38                                       ; $3532: $FF
-    rst $38                                       ; $3533: $FF
-    rst $38                                       ; $3534: $FF
-    rst $38                                       ; $3535: $FF
-    rst $38                                       ; $3536: $FF
-    rst $38                                       ; $3537: $FF
-    rst $38                                       ; $3538: $FF
-    rst $38                                       ; $3539: $FF
-    rst $38                                       ; $353A: $FF
-    rst $38                                       ; $353B: $FF
 
-Jump_000_353C:
-    rst $38                                       ; $353C: $FF
-    rst $38                                       ; $353D: $FF
-    rst $38                                       ; $353E: $FF
-    rst $38                                       ; $353F: $FF
-    rst $38                                       ; $3540: $FF
-    rst $38                                       ; $3541: $FF
-    rst $38                                       ; $3542: $FF
-    rst $38                                       ; $3543: $FF
-    rst $38                                       ; $3544: $FF
-    rst $38                                       ; $3545: $FF
-    rst $38                                       ; $3546: $FF
-    rst $38                                       ; $3547: $FF
-    rst $38                                       ; $3548: $FF
-    rst $38                                       ; $3549: $FF
-    rst $38                                       ; $354A: $FF
-    rst $38                                       ; $354B: $FF
-    rst $38                                       ; $354C: $FF
-    rst $38                                       ; $354D: $FF
-    rst $38                                       ; $354E: $FF
-    rst $38                                       ; $354F: $FF
-    rst $38                                       ; $3550: $FF
-    rst $38                                       ; $3551: $FF
-    rst $38                                       ; $3552: $FF
-    rst $38                                       ; $3553: $FF
-    rst $38                                       ; $3554: $FF
-    rst $38                                       ; $3555: $FF
-    rst $38                                       ; $3556: $FF
-    rst $38                                       ; $3557: $FF
-    rst $38                                       ; $3558: $FF
-    rst $38                                       ; $3559: $FF
-    rst $38                                       ; $355A: $FF
-    rst $38                                       ; $355B: $FF
-    rst $38                                       ; $355C: $FF
-    rst $38                                       ; $355D: $FF
-    rst $38                                       ; $355E: $FF
-    rst $38                                       ; $355F: $FF
-    rst $38                                       ; $3560: $FF
-    rst $38                                       ; $3561: $FF
-    rst $38                                       ; $3562: $FF
-    rst $38                                       ; $3563: $FF
-    rst $38                                       ; $3564: $FF
-    rst $38                                       ; $3565: $FF
-    rst $38                                       ; $3566: $FF
-    rst $38                                       ; $3567: $FF
-    rst $38                                       ; $3568: $FF
-    rst $38                                       ; $3569: $FF
-    rst $38                                       ; $356A: $FF
-    rst $38                                       ; $356B: $FF
-    rst $38                                       ; $356C: $FF
-    rst $38                                       ; $356D: $FF
-    rst $38                                       ; $356E: $FF
-    rst $38                                       ; $356F: $FF
-    rst $38                                       ; $3570: $FF
-    rst $38                                       ; $3571: $FF
-    rst $38                                       ; $3572: $FF
-    rst $38                                       ; $3573: $FF
-    rst $38                                       ; $3574: $FF
-    rst $38                                       ; $3575: $FF
-    rst $38                                       ; $3576: $FF
-    rst $38                                       ; $3577: $FF
-    rst $38                                       ; $3578: $FF
-    rst $38                                       ; $3579: $FF
-    rst $38                                       ; $357A: $FF
-    rst $38                                       ; $357B: $FF
-    rst $38                                       ; $357C: $FF
-    rst $38                                       ; $357D: $FF
-    rst $38                                       ; $357E: $FF
-    rst $38                                       ; $357F: $FF
-    rst $38                                       ; $3580: $FF
-    rst $38                                       ; $3581: $FF
-    rst $38                                       ; $3582: $FF
-    rst $38                                       ; $3583: $FF
-    rst $38                                       ; $3584: $FF
-    rst $38                                       ; $3585: $FF
-    rst $38                                       ; $3586: $FF
-    rst $38                                       ; $3587: $FF
-    rst $38                                       ; $3588: $FF
-    rst $38                                       ; $3589: $FF
-    rst $38                                       ; $358A: $FF
-    rst $38                                       ; $358B: $FF
-    rst $38                                       ; $358C: $FF
-    rst $38                                       ; $358D: $FF
-    rst $38                                       ; $358E: $FF
-    rst $38                                       ; $358F: $FF
-    rst $38                                       ; $3590: $FF
-    rst $38                                       ; $3591: $FF
-    rst $38                                       ; $3592: $FF
-    rst $38                                       ; $3593: $FF
-    rst $38                                       ; $3594: $FF
-    rst $38                                       ; $3595: $FF
-    rst $38                                       ; $3596: $FF
-    rst $38                                       ; $3597: $FF
-    rst $38                                       ; $3598: $FF
-    rst $38                                       ; $3599: $FF
-    rst $38                                       ; $359A: $FF
-    rst $38                                       ; $359B: $FF
-    rst $38                                       ; $359C: $FF
-    rst $38                                       ; $359D: $FF
-    rst $38                                       ; $359E: $FF
-    rst $38                                       ; $359F: $FF
-    rst $38                                       ; $35A0: $FF
-    rst $38                                       ; $35A1: $FF
-    rst $38                                       ; $35A2: $FF
-    rst $38                                       ; $35A3: $FF
-    rst $38                                       ; $35A4: $FF
-    rst $38                                       ; $35A5: $FF
-    rst $38                                       ; $35A6: $FF
-    rst $38                                       ; $35A7: $FF
-    rst $38                                       ; $35A8: $FF
-    rst $38                                       ; $35A9: $FF
-    rst $38                                       ; $35AA: $FF
-    rst $38                                       ; $35AB: $FF
-    rst $38                                       ; $35AC: $FF
-    rst $38                                       ; $35AD: $FF
-    rst $38                                       ; $35AE: $FF
-    rst $38                                       ; $35AF: $FF
-    rst $38                                       ; $35B0: $FF
-    rst $38                                       ; $35B1: $FF
-    rst $38                                       ; $35B2: $FF
-    rst $38                                       ; $35B3: $FF
-    rst $38                                       ; $35B4: $FF
-    rst $38                                       ; $35B5: $FF
-    rst $38                                       ; $35B6: $FF
-    rst $38                                       ; $35B7: $FF
-    rst $38                                       ; $35B8: $FF
-    rst $38                                       ; $35B9: $FF
-    rst $38                                       ; $35BA: $FF
-    rst $38                                       ; $35BB: $FF
-    rst $38                                       ; $35BC: $FF
-    rst $38                                       ; $35BD: $FF
-    rst $38                                       ; $35BE: $FF
-    rst $38                                       ; $35BF: $FF
-    rst $38                                       ; $35C0: $FF
-    rst $38                                       ; $35C1: $FF
-    rst $38                                       ; $35C2: $FF
-    rst $38                                       ; $35C3: $FF
-    rst $38                                       ; $35C4: $FF
-    rst $38                                       ; $35C5: $FF
-    rst $38                                       ; $35C6: $FF
-    rst $38                                       ; $35C7: $FF
-    rst $38                                       ; $35C8: $FF
-    rst $38                                       ; $35C9: $FF
-    rst $38                                       ; $35CA: $FF
-    rst $38                                       ; $35CB: $FF
-    rst $38                                       ; $35CC: $FF
-    rst $38                                       ; $35CD: $FF
-    rst $38                                       ; $35CE: $FF
-    rst $38                                       ; $35CF: $FF
-    rst $38                                       ; $35D0: $FF
-    rst $38                                       ; $35D1: $FF
-    rst $38                                       ; $35D2: $FF
-    rst $38                                       ; $35D3: $FF
-    rst $38                                       ; $35D4: $FF
-    rst $38                                       ; $35D5: $FF
-    rst $38                                       ; $35D6: $FF
-    rst $38                                       ; $35D7: $FF
-    rst $38                                       ; $35D8: $FF
-    rst $38                                       ; $35D9: $FF
-    rst $38                                       ; $35DA: $FF
-    rst $38                                       ; $35DB: $FF
-    rst $38                                       ; $35DC: $FF
-    rst $38                                       ; $35DD: $FF
-    rst $38                                       ; $35DE: $FF
-    rst $38                                       ; $35DF: $FF
-    rst $38                                       ; $35E0: $FF
-    rst $38                                       ; $35E1: $FF
-    rst $38                                       ; $35E2: $FF
-    rst $38                                       ; $35E3: $FF
-    rst $38                                       ; $35E4: $FF
-    rst $38                                       ; $35E5: $FF
-    rst $38                                       ; $35E6: $FF
-    rst $38                                       ; $35E7: $FF
-    rst $38                                       ; $35E8: $FF
-    rst $38                                       ; $35E9: $FF
-    rst $38                                       ; $35EA: $FF
-    rst $38                                       ; $35EB: $FF
-    rst $38                                       ; $35EC: $FF
-    rst $38                                       ; $35ED: $FF
-    rst $38                                       ; $35EE: $FF
-    rst $38                                       ; $35EF: $FF
-    rst $38                                       ; $35F0: $FF
-    rst $38                                       ; $35F1: $FF
-    rst $38                                       ; $35F2: $FF
-    rst $38                                       ; $35F3: $FF
-    rst $38                                       ; $35F4: $FF
-    rst $38                                       ; $35F5: $FF
-    rst $38                                       ; $35F6: $FF
-    rst $38                                       ; $35F7: $FF
-    rst $38                                       ; $35F8: $FF
-    rst $38                                       ; $35F9: $FF
-    rst $38                                       ; $35FA: $FF
-    rst $38                                       ; $35FB: $FF
-    rst $38                                       ; $35FC: $FF
-    rst $38                                       ; $35FD: $FF
-    rst $38                                       ; $35FE: $FF
-    rst $38                                       ; $35FF: $FF
-    rst $38                                       ; $3600: $FF
-    rst $38                                       ; $3601: $FF
-    rst $38                                       ; $3602: $FF
-    rst $38                                       ; $3603: $FF
-    rst $38                                       ; $3604: $FF
-    rst $38                                       ; $3605: $FF
-    rst $38                                       ; $3606: $FF
-    rst $38                                       ; $3607: $FF
-    rst $38                                       ; $3608: $FF
-    rst $38                                       ; $3609: $FF
-    rst $38                                       ; $360A: $FF
-    rst $38                                       ; $360B: $FF
-    rst $38                                       ; $360C: $FF
-    rst $38                                       ; $360D: $FF
-    rst $38                                       ; $360E: $FF
-    rst $38                                       ; $360F: $FF
-    rst $38                                       ; $3610: $FF
-    rst $38                                       ; $3611: $FF
-    rst $38                                       ; $3612: $FF
-    rst $38                                       ; $3613: $FF
-    rst $38                                       ; $3614: $FF
-    rst $38                                       ; $3615: $FF
-    rst $38                                       ; $3616: $FF
-    rst $38                                       ; $3617: $FF
-    rst $38                                       ; $3618: $FF
-    rst $38                                       ; $3619: $FF
-    rst $38                                       ; $361A: $FF
-    rst $38                                       ; $361B: $FF
-    rst $38                                       ; $361C: $FF
-    rst $38                                       ; $361D: $FF
-    rst $38                                       ; $361E: $FF
-    rst $38                                       ; $361F: $FF
-    rst $38                                       ; $3620: $FF
-    rst $38                                       ; $3621: $FF
-    rst $38                                       ; $3622: $FF
-    rst $38                                       ; $3623: $FF
-    rst $38                                       ; $3624: $FF
-    rst $38                                       ; $3625: $FF
-    rst $38                                       ; $3626: $FF
-    rst $38                                       ; $3627: $FF
-    rst $38                                       ; $3628: $FF
-    rst $38                                       ; $3629: $FF
-    rst $38                                       ; $362A: $FF
-    rst $38                                       ; $362B: $FF
-    rst $38                                       ; $362C: $FF
-    rst $38                                       ; $362D: $FF
-    rst $38                                       ; $362E: $FF
-    rst $38                                       ; $362F: $FF
-    rst $38                                       ; $3630: $FF
-    rst $38                                       ; $3631: $FF
-    rst $38                                       ; $3632: $FF
-    rst $38                                       ; $3633: $FF
-    rst $38                                       ; $3634: $FF
-    rst $38                                       ; $3635: $FF
-    rst $38                                       ; $3636: $FF
-    rst $38                                       ; $3637: $FF
-    rst $38                                       ; $3638: $FF
-    rst $38                                       ; $3639: $FF
-    rst $38                                       ; $363A: $FF
-    rst $38                                       ; $363B: $FF
-    rst $38                                       ; $363C: $FF
-    rst $38                                       ; $363D: $FF
-    rst $38                                       ; $363E: $FF
-    rst $38                                       ; $363F: $FF
-    rst $38                                       ; $3640: $FF
-    rst $38                                       ; $3641: $FF
-    rst $38                                       ; $3642: $FF
-    rst $38                                       ; $3643: $FF
-    rst $38                                       ; $3644: $FF
-    rst $38                                       ; $3645: $FF
-    rst $38                                       ; $3646: $FF
-    rst $38                                       ; $3647: $FF
-    rst $38                                       ; $3648: $FF
-    rst $38                                       ; $3649: $FF
-    rst $38                                       ; $364A: $FF
-    rst $38                                       ; $364B: $FF
-    rst $38                                       ; $364C: $FF
-    rst $38                                       ; $364D: $FF
-    rst $38                                       ; $364E: $FF
-    rst $38                                       ; $364F: $FF
-    rst $38                                       ; $3650: $FF
-    rst $38                                       ; $3651: $FF
-    rst $38                                       ; $3652: $FF
-    rst $38                                       ; $3653: $FF
-    rst $38                                       ; $3654: $FF
-    rst $38                                       ; $3655: $FF
-    rst $38                                       ; $3656: $FF
-    rst $38                                       ; $3657: $FF
-    rst $38                                       ; $3658: $FF
-    rst $38                                       ; $3659: $FF
-    rst $38                                       ; $365A: $FF
-    rst $38                                       ; $365B: $FF
-    rst $38                                       ; $365C: $FF
-    rst $38                                       ; $365D: $FF
-    rst $38                                       ; $365E: $FF
-    rst $38                                       ; $365F: $FF
-    rst $38                                       ; $3660: $FF
-    rst $38                                       ; $3661: $FF
-    rst $38                                       ; $3662: $FF
-    rst $38                                       ; $3663: $FF
-    rst $38                                       ; $3664: $FF
-    rst $38                                       ; $3665: $FF
-    rst $38                                       ; $3666: $FF
-    rst $38                                       ; $3667: $FF
-    rst $38                                       ; $3668: $FF
-    rst $38                                       ; $3669: $FF
-    rst $38                                       ; $366A: $FF
-    rst $38                                       ; $366B: $FF
-    rst $38                                       ; $366C: $FF
-    rst $38                                       ; $366D: $FF
-    rst $38                                       ; $366E: $FF
-    rst $38                                       ; $366F: $FF
-    rst $38                                       ; $3670: $FF
-    rst $38                                       ; $3671: $FF
-    rst $38                                       ; $3672: $FF
-    rst $38                                       ; $3673: $FF
-    rst $38                                       ; $3674: $FF
-    rst $38                                       ; $3675: $FF
-    rst $38                                       ; $3676: $FF
-    rst $38                                       ; $3677: $FF
-    rst $38                                       ; $3678: $FF
-    rst $38                                       ; $3679: $FF
-    rst $38                                       ; $367A: $FF
-    rst $38                                       ; $367B: $FF
-    rst $38                                       ; $367C: $FF
-    rst $38                                       ; $367D: $FF
-    rst $38                                       ; $367E: $FF
-    rst $38                                       ; $367F: $FF
-    rst $38                                       ; $3680: $FF
-    rst $38                                       ; $3681: $FF
-    rst $38                                       ; $3682: $FF
-    rst $38                                       ; $3683: $FF
-    rst $38                                       ; $3684: $FF
-    rst $38                                       ; $3685: $FF
-    rst $38                                       ; $3686: $FF
-    rst $38                                       ; $3687: $FF
-    rst $38                                       ; $3688: $FF
-    rst $38                                       ; $3689: $FF
-    rst $38                                       ; $368A: $FF
-    rst $38                                       ; $368B: $FF
-    rst $38                                       ; $368C: $FF
-    rst $38                                       ; $368D: $FF
-    rst $38                                       ; $368E: $FF
-    rst $38                                       ; $368F: $FF
-    rst $38                                       ; $3690: $FF
-    rst $38                                       ; $3691: $FF
-    rst $38                                       ; $3692: $FF
-    rst $38                                       ; $3693: $FF
-    rst $38                                       ; $3694: $FF
-    rst $38                                       ; $3695: $FF
-    rst $38                                       ; $3696: $FF
-    rst $38                                       ; $3697: $FF
-    rst $38                                       ; $3698: $FF
-    rst $38                                       ; $3699: $FF
-    rst $38                                       ; $369A: $FF
-    rst $38                                       ; $369B: $FF
-    rst $38                                       ; $369C: $FF
-    rst $38                                       ; $369D: $FF
-    rst $38                                       ; $369E: $FF
-    rst $38                                       ; $369F: $FF
-    rst $38                                       ; $36A0: $FF
-    rst $38                                       ; $36A1: $FF
-    rst $38                                       ; $36A2: $FF
-    rst $38                                       ; $36A3: $FF
-    rst $38                                       ; $36A4: $FF
-    rst $38                                       ; $36A5: $FF
-    rst $38                                       ; $36A6: $FF
-    rst $38                                       ; $36A7: $FF
-    rst $38                                       ; $36A8: $FF
-    rst $38                                       ; $36A9: $FF
-    rst $38                                       ; $36AA: $FF
-    rst $38                                       ; $36AB: $FF
-    rst $38                                       ; $36AC: $FF
-    rst $38                                       ; $36AD: $FF
-    rst $38                                       ; $36AE: $FF
-    rst $38                                       ; $36AF: $FF
-    rst $38                                       ; $36B0: $FF
-    rst $38                                       ; $36B1: $FF
-    rst $38                                       ; $36B2: $FF
-    rst $38                                       ; $36B3: $FF
-    rst $38                                       ; $36B4: $FF
-    rst $38                                       ; $36B5: $FF
-    rst $38                                       ; $36B6: $FF
-    rst $38                                       ; $36B7: $FF
-    rst $38                                       ; $36B8: $FF
-    rst $38                                       ; $36B9: $FF
-    rst $38                                       ; $36BA: $FF
-    rst $38                                       ; $36BB: $FF
-    rst $38                                       ; $36BC: $FF
-    rst $38                                       ; $36BD: $FF
-    rst $38                                       ; $36BE: $FF
-    rst $38                                       ; $36BF: $FF
-    rst $38                                       ; $36C0: $FF
-    rst $38                                       ; $36C1: $FF
-    rst $38                                       ; $36C2: $FF
-    rst $38                                       ; $36C3: $FF
-    rst $38                                       ; $36C4: $FF
-    rst $38                                       ; $36C5: $FF
-    rst $38                                       ; $36C6: $FF
-    rst $38                                       ; $36C7: $FF
-    rst $38                                       ; $36C8: $FF
-    rst $38                                       ; $36C9: $FF
-    rst $38                                       ; $36CA: $FF
-    rst $38                                       ; $36CB: $FF
-    rst $38                                       ; $36CC: $FF
-    rst $38                                       ; $36CD: $FF
-    rst $38                                       ; $36CE: $FF
-    rst $38                                       ; $36CF: $FF
-    rst $38                                       ; $36D0: $FF
-    rst $38                                       ; $36D1: $FF
-    rst $38                                       ; $36D2: $FF
-    rst $38                                       ; $36D3: $FF
-    rst $38                                       ; $36D4: $FF
-    rst $38                                       ; $36D5: $FF
-    rst $38                                       ; $36D6: $FF
-    rst $38                                       ; $36D7: $FF
-    rst $38                                       ; $36D8: $FF
-    rst $38                                       ; $36D9: $FF
-    rst $38                                       ; $36DA: $FF
-    rst $38                                       ; $36DB: $FF
-    rst $38                                       ; $36DC: $FF
-    rst $38                                       ; $36DD: $FF
-    rst $38                                       ; $36DE: $FF
-    rst $38                                       ; $36DF: $FF
-    rst $38                                       ; $36E0: $FF
-
-Jump_000_36E1:
-    rst $38                                       ; $36E1: $FF
-    rst $38                                       ; $36E2: $FF
-    rst $38                                       ; $36E3: $FF
-    rst $38                                       ; $36E4: $FF
-    rst $38                                       ; $36E5: $FF
-    rst $38                                       ; $36E6: $FF
-    rst $38                                       ; $36E7: $FF
-    rst $38                                       ; $36E8: $FF
-    rst $38                                       ; $36E9: $FF
-    rst $38                                       ; $36EA: $FF
-    rst $38                                       ; $36EB: $FF
-    rst $38                                       ; $36EC: $FF
-    rst $38                                       ; $36ED: $FF
-    rst $38                                       ; $36EE: $FF
-    rst $38                                       ; $36EF: $FF
-    rst $38                                       ; $36F0: $FF
-    rst $38                                       ; $36F1: $FF
-    rst $38                                       ; $36F2: $FF
-    rst $38                                       ; $36F3: $FF
-    rst $38                                       ; $36F4: $FF
-    rst $38                                       ; $36F5: $FF
-    rst $38                                       ; $36F6: $FF
-    rst $38                                       ; $36F7: $FF
-    rst $38                                       ; $36F8: $FF
-    rst $38                                       ; $36F9: $FF
-    rst $38                                       ; $36FA: $FF
-    rst $38                                       ; $36FB: $FF
-    rst $38                                       ; $36FC: $FF
-    rst $38                                       ; $36FD: $FF
-    rst $38                                       ; $36FE: $FF
-    rst $38                                       ; $36FF: $FF
-    rst $38                                       ; $3700: $FF
-    rst $38                                       ; $3701: $FF
-    rst $38                                       ; $3702: $FF
-    rst $38                                       ; $3703: $FF
-    rst $38                                       ; $3704: $FF
-    rst $38                                       ; $3705: $FF
-    rst $38                                       ; $3706: $FF
-    rst $38                                       ; $3707: $FF
-    rst $38                                       ; $3708: $FF
-    rst $38                                       ; $3709: $FF
-    rst $38                                       ; $370A: $FF
-    rst $38                                       ; $370B: $FF
-    rst $38                                       ; $370C: $FF
-    rst $38                                       ; $370D: $FF
-    rst $38                                       ; $370E: $FF
-    rst $38                                       ; $370F: $FF
-    rst $38                                       ; $3710: $FF
-    rst $38                                       ; $3711: $FF
-    rst $38                                       ; $3712: $FF
-    rst $38                                       ; $3713: $FF
-    rst $38                                       ; $3714: $FF
-    rst $38                                       ; $3715: $FF
-    rst $38                                       ; $3716: $FF
-    rst $38                                       ; $3717: $FF
-    rst $38                                       ; $3718: $FF
-    rst $38                                       ; $3719: $FF
-    rst $38                                       ; $371A: $FF
-    rst $38                                       ; $371B: $FF
-    rst $38                                       ; $371C: $FF
-    rst $38                                       ; $371D: $FF
-    rst $38                                       ; $371E: $FF
-    rst $38                                       ; $371F: $FF
-    rst $38                                       ; $3720: $FF
-    rst $38                                       ; $3721: $FF
-    rst $38                                       ; $3722: $FF
-    rst $38                                       ; $3723: $FF
-    rst $38                                       ; $3724: $FF
-    rst $38                                       ; $3725: $FF
-    rst $38                                       ; $3726: $FF
-    rst $38                                       ; $3727: $FF
-    rst $38                                       ; $3728: $FF
-    rst $38                                       ; $3729: $FF
-    rst $38                                       ; $372A: $FF
-    rst $38                                       ; $372B: $FF
-    rst $38                                       ; $372C: $FF
-    rst $38                                       ; $372D: $FF
-    rst $38                                       ; $372E: $FF
-    rst $38                                       ; $372F: $FF
-    rst $38                                       ; $3730: $FF
-    rst $38                                       ; $3731: $FF
-    rst $38                                       ; $3732: $FF
-    rst $38                                       ; $3733: $FF
-    rst $38                                       ; $3734: $FF
-    rst $38                                       ; $3735: $FF
-    rst $38                                       ; $3736: $FF
-    rst $38                                       ; $3737: $FF
-    rst $38                                       ; $3738: $FF
-    rst $38                                       ; $3739: $FF
-    rst $38                                       ; $373A: $FF
-    rst $38                                       ; $373B: $FF
-    rst $38                                       ; $373C: $FF
-    rst $38                                       ; $373D: $FF
-    rst $38                                       ; $373E: $FF
-    rst $38                                       ; $373F: $FF
-    rst $38                                       ; $3740: $FF
-    rst $38                                       ; $3741: $FF
-    rst $38                                       ; $3742: $FF
-    rst $38                                       ; $3743: $FF
-    rst $38                                       ; $3744: $FF
-    rst $38                                       ; $3745: $FF
-    rst $38                                       ; $3746: $FF
-    rst $38                                       ; $3747: $FF
-    rst $38                                       ; $3748: $FF
-    rst $38                                       ; $3749: $FF
-    rst $38                                       ; $374A: $FF
-    rst $38                                       ; $374B: $FF
-    rst $38                                       ; $374C: $FF
-    rst $38                                       ; $374D: $FF
-    rst $38                                       ; $374E: $FF
-    rst $38                                       ; $374F: $FF
-    rst $38                                       ; $3750: $FF
-    rst $38                                       ; $3751: $FF
-    rst $38                                       ; $3752: $FF
-    rst $38                                       ; $3753: $FF
-    rst $38                                       ; $3754: $FF
-    rst $38                                       ; $3755: $FF
-    rst $38                                       ; $3756: $FF
-    rst $38                                       ; $3757: $FF
-    rst $38                                       ; $3758: $FF
-    rst $38                                       ; $3759: $FF
-    rst $38                                       ; $375A: $FF
-    rst $38                                       ; $375B: $FF
-    rst $38                                       ; $375C: $FF
-    rst $38                                       ; $375D: $FF
-    rst $38                                       ; $375E: $FF
-    rst $38                                       ; $375F: $FF
-    rst $38                                       ; $3760: $FF
-    rst $38                                       ; $3761: $FF
-    rst $38                                       ; $3762: $FF
-    rst $38                                       ; $3763: $FF
-    rst $38                                       ; $3764: $FF
-    rst $38                                       ; $3765: $FF
-    rst $38                                       ; $3766: $FF
-    rst $38                                       ; $3767: $FF
-    rst $38                                       ; $3768: $FF
-    rst $38                                       ; $3769: $FF
-    rst $38                                       ; $376A: $FF
-    rst $38                                       ; $376B: $FF
-    rst $38                                       ; $376C: $FF
-    rst $38                                       ; $376D: $FF
-    rst $38                                       ; $376E: $FF
-    rst $38                                       ; $376F: $FF
-    rst $38                                       ; $3770: $FF
-    rst $38                                       ; $3771: $FF
-    rst $38                                       ; $3772: $FF
-    rst $38                                       ; $3773: $FF
-    rst $38                                       ; $3774: $FF
-    rst $38                                       ; $3775: $FF
-    rst $38                                       ; $3776: $FF
-    rst $38                                       ; $3777: $FF
-    rst $38                                       ; $3778: $FF
-    rst $38                                       ; $3779: $FF
-    rst $38                                       ; $377A: $FF
-    rst $38                                       ; $377B: $FF
-    rst $38                                       ; $377C: $FF
-    rst $38                                       ; $377D: $FF
-    rst $38                                       ; $377E: $FF
-    rst $38                                       ; $377F: $FF
-    rst $38                                       ; $3780: $FF
-    rst $38                                       ; $3781: $FF
-    rst $38                                       ; $3782: $FF
-    rst $38                                       ; $3783: $FF
-    rst $38                                       ; $3784: $FF
-    rst $38                                       ; $3785: $FF
-    rst $38                                       ; $3786: $FF
-    rst $38                                       ; $3787: $FF
-    rst $38                                       ; $3788: $FF
-    rst $38                                       ; $3789: $FF
-    rst $38                                       ; $378A: $FF
-    rst $38                                       ; $378B: $FF
-    rst $38                                       ; $378C: $FF
-    rst $38                                       ; $378D: $FF
-    rst $38                                       ; $378E: $FF
-    rst $38                                       ; $378F: $FF
-    rst $38                                       ; $3790: $FF
-    rst $38                                       ; $3791: $FF
-    rst $38                                       ; $3792: $FF
-    rst $38                                       ; $3793: $FF
-    rst $38                                       ; $3794: $FF
-    rst $38                                       ; $3795: $FF
-    rst $38                                       ; $3796: $FF
-    rst $38                                       ; $3797: $FF
-    rst $38                                       ; $3798: $FF
-    rst $38                                       ; $3799: $FF
-    rst $38                                       ; $379A: $FF
-    rst $38                                       ; $379B: $FF
-    rst $38                                       ; $379C: $FF
-    rst $38                                       ; $379D: $FF
-    rst $38                                       ; $379E: $FF
-    rst $38                                       ; $379F: $FF
-    rst $38                                       ; $37A0: $FF
-    rst $38                                       ; $37A1: $FF
-    rst $38                                       ; $37A2: $FF
-    rst $38                                       ; $37A3: $FF
-    rst $38                                       ; $37A4: $FF
-    rst $38                                       ; $37A5: $FF
-    rst $38                                       ; $37A6: $FF
-    rst $38                                       ; $37A7: $FF
-    rst $38                                       ; $37A8: $FF
-    rst $38                                       ; $37A9: $FF
-    rst $38                                       ; $37AA: $FF
-    rst $38                                       ; $37AB: $FF
-    rst $38                                       ; $37AC: $FF
-    rst $38                                       ; $37AD: $FF
-    rst $38                                       ; $37AE: $FF
-    rst $38                                       ; $37AF: $FF
-    rst $38                                       ; $37B0: $FF
-    rst $38                                       ; $37B1: $FF
-    rst $38                                       ; $37B2: $FF
-    rst $38                                       ; $37B3: $FF
-    rst $38                                       ; $37B4: $FF
-    rst $38                                       ; $37B5: $FF
-    rst $38                                       ; $37B6: $FF
-    rst $38                                       ; $37B7: $FF
-    rst $38                                       ; $37B8: $FF
-    rst $38                                       ; $37B9: $FF
-    rst $38                                       ; $37BA: $FF
-    rst $38                                       ; $37BB: $FF
-    rst $38                                       ; $37BC: $FF
-    rst $38                                       ; $37BD: $FF
-    rst $38                                       ; $37BE: $FF
-    rst $38                                       ; $37BF: $FF
-    rst $38                                       ; $37C0: $FF
-    rst $38                                       ; $37C1: $FF
-    rst $38                                       ; $37C2: $FF
-    rst $38                                       ; $37C3: $FF
-    rst $38                                       ; $37C4: $FF
-    rst $38                                       ; $37C5: $FF
-    rst $38                                       ; $37C6: $FF
-    rst $38                                       ; $37C7: $FF
-    rst $38                                       ; $37C8: $FF
-    rst $38                                       ; $37C9: $FF
-    rst $38                                       ; $37CA: $FF
-    rst $38                                       ; $37CB: $FF
-    rst $38                                       ; $37CC: $FF
-    rst $38                                       ; $37CD: $FF
-    rst $38                                       ; $37CE: $FF
-    rst $38                                       ; $37CF: $FF
-    rst $38                                       ; $37D0: $FF
-    rst $38                                       ; $37D1: $FF
-    rst $38                                       ; $37D2: $FF
-    rst $38                                       ; $37D3: $FF
-    rst $38                                       ; $37D4: $FF
-    rst $38                                       ; $37D5: $FF
-    rst $38                                       ; $37D6: $FF
-    rst $38                                       ; $37D7: $FF
-    rst $38                                       ; $37D8: $FF
-    rst $38                                       ; $37D9: $FF
-    rst $38                                       ; $37DA: $FF
-    rst $38                                       ; $37DB: $FF
-    rst $38                                       ; $37DC: $FF
-    rst $38                                       ; $37DD: $FF
-    rst $38                                       ; $37DE: $FF
-    rst $38                                       ; $37DF: $FF
-    rst $38                                       ; $37E0: $FF
-    rst $38                                       ; $37E1: $FF
-    rst $38                                       ; $37E2: $FF
-    rst $38                                       ; $37E3: $FF
-    rst $38                                       ; $37E4: $FF
-    rst $38                                       ; $37E5: $FF
-    rst $38                                       ; $37E6: $FF
-    rst $38                                       ; $37E7: $FF
-    rst $38                                       ; $37E8: $FF
-    rst $38                                       ; $37E9: $FF
-    rst $38                                       ; $37EA: $FF
-    rst $38                                       ; $37EB: $FF
-    rst $38                                       ; $37EC: $FF
-    rst $38                                       ; $37ED: $FF
-    rst $38                                       ; $37EE: $FF
-    rst $38                                       ; $37EF: $FF
-    rst $38                                       ; $37F0: $FF
-    rst $38                                       ; $37F1: $FF
-    rst $38                                       ; $37F2: $FF
-    rst $38                                       ; $37F3: $FF
-    rst $38                                       ; $37F4: $FF
-    rst $38                                       ; $37F5: $FF
-    rst $38                                       ; $37F6: $FF
-    rst $38                                       ; $37F7: $FF
-    rst $38                                       ; $37F8: $FF
-    rst $38                                       ; $37F9: $FF
-    rst $38                                       ; $37FA: $FF
-    rst $38                                       ; $37FB: $FF
-    rst $38                                       ; $37FC: $FF
-    rst $38                                       ; $37FD: $FF
-    rst $38                                       ; $37FE: $FF
-    rst $38                                       ; $37FF: $FF
-    rst $38                                       ; $3800: $FF
-    rst $38                                       ; $3801: $FF
-    rst $38                                       ; $3802: $FF
-    rst $38                                       ; $3803: $FF
-    rst $38                                       ; $3804: $FF
-    rst $38                                       ; $3805: $FF
-    rst $38                                       ; $3806: $FF
-    rst $38                                       ; $3807: $FF
-    rst $38                                       ; $3808: $FF
-    rst $38                                       ; $3809: $FF
-    rst $38                                       ; $380A: $FF
-    rst $38                                       ; $380B: $FF
-    rst $38                                       ; $380C: $FF
-    rst $38                                       ; $380D: $FF
-    rst $38                                       ; $380E: $FF
-    rst $38                                       ; $380F: $FF
-    rst $38                                       ; $3810: $FF
-    rst $38                                       ; $3811: $FF
-    rst $38                                       ; $3812: $FF
-    rst $38                                       ; $3813: $FF
-    rst $38                                       ; $3814: $FF
-    rst $38                                       ; $3815: $FF
-    rst $38                                       ; $3816: $FF
-    rst $38                                       ; $3817: $FF
-    rst $38                                       ; $3818: $FF
-    rst $38                                       ; $3819: $FF
-    rst $38                                       ; $381A: $FF
-    rst $38                                       ; $381B: $FF
-    rst $38                                       ; $381C: $FF
-    rst $38                                       ; $381D: $FF
-    rst $38                                       ; $381E: $FF
-    rst $38                                       ; $381F: $FF
-    rst $38                                       ; $3820: $FF
-    rst $38                                       ; $3821: $FF
-    rst $38                                       ; $3822: $FF
-    rst $38                                       ; $3823: $FF
-    rst $38                                       ; $3824: $FF
-    rst $38                                       ; $3825: $FF
-    rst $38                                       ; $3826: $FF
-    rst $38                                       ; $3827: $FF
-    rst $38                                       ; $3828: $FF
-    rst $38                                       ; $3829: $FF
-    rst $38                                       ; $382A: $FF
-    rst $38                                       ; $382B: $FF
-    rst $38                                       ; $382C: $FF
-    rst $38                                       ; $382D: $FF
-    rst $38                                       ; $382E: $FF
-    rst $38                                       ; $382F: $FF
-    rst $38                                       ; $3830: $FF
-    rst $38                                       ; $3831: $FF
-    rst $38                                       ; $3832: $FF
-    rst $38                                       ; $3833: $FF
-    rst $38                                       ; $3834: $FF
-    rst $38                                       ; $3835: $FF
-    rst $38                                       ; $3836: $FF
-    rst $38                                       ; $3837: $FF
-    rst $38                                       ; $3838: $FF
-    rst $38                                       ; $3839: $FF
-    rst $38                                       ; $383A: $FF
-    rst $38                                       ; $383B: $FF
-    rst $38                                       ; $383C: $FF
-    rst $38                                       ; $383D: $FF
-    rst $38                                       ; $383E: $FF
-    rst $38                                       ; $383F: $FF
-    rst $38                                       ; $3840: $FF
-    rst $38                                       ; $3841: $FF
-    rst $38                                       ; $3842: $FF
-    rst $38                                       ; $3843: $FF
-    rst $38                                       ; $3844: $FF
-    rst $38                                       ; $3845: $FF
-    rst $38                                       ; $3846: $FF
-    rst $38                                       ; $3847: $FF
-    rst $38                                       ; $3848: $FF
-    rst $38                                       ; $3849: $FF
-    rst $38                                       ; $384A: $FF
-    rst $38                                       ; $384B: $FF
-    rst $38                                       ; $384C: $FF
-    rst $38                                       ; $384D: $FF
-    rst $38                                       ; $384E: $FF
-    rst $38                                       ; $384F: $FF
-    rst $38                                       ; $3850: $FF
-    rst $38                                       ; $3851: $FF
-    rst $38                                       ; $3852: $FF
-    rst $38                                       ; $3853: $FF
-    rst $38                                       ; $3854: $FF
-    rst $38                                       ; $3855: $FF
-    rst $38                                       ; $3856: $FF
-    rst $38                                       ; $3857: $FF
-    rst $38                                       ; $3858: $FF
-    rst $38                                       ; $3859: $FF
-    rst $38                                       ; $385A: $FF
-    rst $38                                       ; $385B: $FF
-    rst $38                                       ; $385C: $FF
-    rst $38                                       ; $385D: $FF
-    rst $38                                       ; $385E: $FF
-    rst $38                                       ; $385F: $FF
-    rst $38                                       ; $3860: $FF
-    rst $38                                       ; $3861: $FF
-    rst $38                                       ; $3862: $FF
-    rst $38                                       ; $3863: $FF
-    rst $38                                       ; $3864: $FF
-    rst $38                                       ; $3865: $FF
-    rst $38                                       ; $3866: $FF
-    rst $38                                       ; $3867: $FF
-    rst $38                                       ; $3868: $FF
-    rst $38                                       ; $3869: $FF
-    rst $38                                       ; $386A: $FF
-    rst $38                                       ; $386B: $FF
-    rst $38                                       ; $386C: $FF
-    rst $38                                       ; $386D: $FF
-    rst $38                                       ; $386E: $FF
-    rst $38                                       ; $386F: $FF
-    rst $38                                       ; $3870: $FF
-    rst $38                                       ; $3871: $FF
-    rst $38                                       ; $3872: $FF
-    rst $38                                       ; $3873: $FF
-    rst $38                                       ; $3874: $FF
-    rst $38                                       ; $3875: $FF
-    rst $38                                       ; $3876: $FF
-    rst $38                                       ; $3877: $FF
-    rst $38                                       ; $3878: $FF
-    rst $38                                       ; $3879: $FF
-    rst $38                                       ; $387A: $FF
-    rst $38                                       ; $387B: $FF
-    rst $38                                       ; $387C: $FF
-    rst $38                                       ; $387D: $FF
-    rst $38                                       ; $387E: $FF
-    rst $38                                       ; $387F: $FF
-    rst $38                                       ; $3880: $FF
-    rst $38                                       ; $3881: $FF
-    rst $38                                       ; $3882: $FF
-    rst $38                                       ; $3883: $FF
-    rst $38                                       ; $3884: $FF
-    rst $38                                       ; $3885: $FF
-    rst $38                                       ; $3886: $FF
-    rst $38                                       ; $3887: $FF
-    rst $38                                       ; $3888: $FF
-    rst $38                                       ; $3889: $FF
-    rst $38                                       ; $388A: $FF
-    rst $38                                       ; $388B: $FF
-    rst $38                                       ; $388C: $FF
-    rst $38                                       ; $388D: $FF
-    rst $38                                       ; $388E: $FF
-    rst $38                                       ; $388F: $FF
-    rst $38                                       ; $3890: $FF
-    rst $38                                       ; $3891: $FF
-    rst $38                                       ; $3892: $FF
-    rst $38                                       ; $3893: $FF
-    rst $38                                       ; $3894: $FF
-    rst $38                                       ; $3895: $FF
-    rst $38                                       ; $3896: $FF
-    rst $38                                       ; $3897: $FF
-    rst $38                                       ; $3898: $FF
-    rst $38                                       ; $3899: $FF
-    rst $38                                       ; $389A: $FF
-    rst $38                                       ; $389B: $FF
-    rst $38                                       ; $389C: $FF
-    rst $38                                       ; $389D: $FF
-    rst $38                                       ; $389E: $FF
-    rst $38                                       ; $389F: $FF
-    rst $38                                       ; $38A0: $FF
-    rst $38                                       ; $38A1: $FF
-    rst $38                                       ; $38A2: $FF
-    rst $38                                       ; $38A3: $FF
-    rst $38                                       ; $38A4: $FF
-    rst $38                                       ; $38A5: $FF
-    rst $38                                       ; $38A6: $FF
-    rst $38                                       ; $38A7: $FF
-    rst $38                                       ; $38A8: $FF
-    rst $38                                       ; $38A9: $FF
-    rst $38                                       ; $38AA: $FF
-    rst $38                                       ; $38AB: $FF
-    rst $38                                       ; $38AC: $FF
-    rst $38                                       ; $38AD: $FF
-    rst $38                                       ; $38AE: $FF
-    rst $38                                       ; $38AF: $FF
-    rst $38                                       ; $38B0: $FF
-    rst $38                                       ; $38B1: $FF
-    rst $38                                       ; $38B2: $FF
-    rst $38                                       ; $38B3: $FF
-    rst $38                                       ; $38B4: $FF
-    rst $38                                       ; $38B5: $FF
-    rst $38                                       ; $38B6: $FF
-    rst $38                                       ; $38B7: $FF
-    rst $38                                       ; $38B8: $FF
-    rst $38                                       ; $38B9: $FF
-    rst $38                                       ; $38BA: $FF
-    rst $38                                       ; $38BB: $FF
-    rst $38                                       ; $38BC: $FF
-    rst $38                                       ; $38BD: $FF
-    rst $38                                       ; $38BE: $FF
-    rst $38                                       ; $38BF: $FF
-    rst $38                                       ; $38C0: $FF
-    rst $38                                       ; $38C1: $FF
-    rst $38                                       ; $38C2: $FF
-    rst $38                                       ; $38C3: $FF
-    rst $38                                       ; $38C4: $FF
-    rst $38                                       ; $38C5: $FF
-    rst $38                                       ; $38C6: $FF
-    rst $38                                       ; $38C7: $FF
-    rst $38                                       ; $38C8: $FF
-    rst $38                                       ; $38C9: $FF
-    rst $38                                       ; $38CA: $FF
-    rst $38                                       ; $38CB: $FF
-    rst $38                                       ; $38CC: $FF
-    rst $38                                       ; $38CD: $FF
-    rst $38                                       ; $38CE: $FF
-    rst $38                                       ; $38CF: $FF
-    rst $38                                       ; $38D0: $FF
-    rst $38                                       ; $38D1: $FF
-    rst $38                                       ; $38D2: $FF
-    rst $38                                       ; $38D3: $FF
-    rst $38                                       ; $38D4: $FF
-    rst $38                                       ; $38D5: $FF
-    rst $38                                       ; $38D6: $FF
-    rst $38                                       ; $38D7: $FF
-    rst $38                                       ; $38D8: $FF
-    rst $38                                       ; $38D9: $FF
-    rst $38                                       ; $38DA: $FF
-    rst $38                                       ; $38DB: $FF
-    rst $38                                       ; $38DC: $FF
-    rst $38                                       ; $38DD: $FF
-    rst $38                                       ; $38DE: $FF
-    rst $38                                       ; $38DF: $FF
-    rst $38                                       ; $38E0: $FF
-    rst $38                                       ; $38E1: $FF
-    rst $38                                       ; $38E2: $FF
-    rst $38                                       ; $38E3: $FF
-    rst $38                                       ; $38E4: $FF
-    rst $38                                       ; $38E5: $FF
-    rst $38                                       ; $38E6: $FF
-    rst $38                                       ; $38E7: $FF
-    rst $38                                       ; $38E8: $FF
-    rst $38                                       ; $38E9: $FF
-    rst $38                                       ; $38EA: $FF
-    rst $38                                       ; $38EB: $FF
-    rst $38                                       ; $38EC: $FF
-    rst $38                                       ; $38ED: $FF
-    rst $38                                       ; $38EE: $FF
-    rst $38                                       ; $38EF: $FF
-    rst $38                                       ; $38F0: $FF
-    rst $38                                       ; $38F1: $FF
-    rst $38                                       ; $38F2: $FF
-    rst $38                                       ; $38F3: $FF
-    rst $38                                       ; $38F4: $FF
-    rst $38                                       ; $38F5: $FF
-    rst $38                                       ; $38F6: $FF
-    rst $38                                       ; $38F7: $FF
-    rst $38                                       ; $38F8: $FF
-    rst $38                                       ; $38F9: $FF
-    rst $38                                       ; $38FA: $FF
-    rst $38                                       ; $38FB: $FF
-    rst $38                                       ; $38FC: $FF
-    rst $38                                       ; $38FD: $FF
-    rst $38                                       ; $38FE: $FF
-    rst $38                                       ; $38FF: $FF
-    rst $38                                       ; $3900: $FF
-    rst $38                                       ; $3901: $FF
-    rst $38                                       ; $3902: $FF
-    rst $38                                       ; $3903: $FF
-    rst $38                                       ; $3904: $FF
-    rst $38                                       ; $3905: $FF
-    rst $38                                       ; $3906: $FF
-    rst $38                                       ; $3907: $FF
-    rst $38                                       ; $3908: $FF
-    rst $38                                       ; $3909: $FF
-    rst $38                                       ; $390A: $FF
-    rst $38                                       ; $390B: $FF
-    rst $38                                       ; $390C: $FF
-    rst $38                                       ; $390D: $FF
-    rst $38                                       ; $390E: $FF
-    rst $38                                       ; $390F: $FF
-    rst $38                                       ; $3910: $FF
-    rst $38                                       ; $3911: $FF
-    rst $38                                       ; $3912: $FF
-    rst $38                                       ; $3913: $FF
-    rst $38                                       ; $3914: $FF
-    rst $38                                       ; $3915: $FF
-    rst $38                                       ; $3916: $FF
-    rst $38                                       ; $3917: $FF
-    rst $38                                       ; $3918: $FF
-    rst $38                                       ; $3919: $FF
-    rst $38                                       ; $391A: $FF
-    rst $38                                       ; $391B: $FF
-    rst $38                                       ; $391C: $FF
-    rst $38                                       ; $391D: $FF
-    rst $38                                       ; $391E: $FF
-    rst $38                                       ; $391F: $FF
-    rst $38                                       ; $3920: $FF
-    rst $38                                       ; $3921: $FF
-    rst $38                                       ; $3922: $FF
-    rst $38                                       ; $3923: $FF
-    rst $38                                       ; $3924: $FF
-    rst $38                                       ; $3925: $FF
-    rst $38                                       ; $3926: $FF
-    rst $38                                       ; $3927: $FF
-    rst $38                                       ; $3928: $FF
-    rst $38                                       ; $3929: $FF
-    rst $38                                       ; $392A: $FF
-    rst $38                                       ; $392B: $FF
-    rst $38                                       ; $392C: $FF
-    rst $38                                       ; $392D: $FF
-    rst $38                                       ; $392E: $FF
-    rst $38                                       ; $392F: $FF
-    rst $38                                       ; $3930: $FF
-    rst $38                                       ; $3931: $FF
-    rst $38                                       ; $3932: $FF
-    rst $38                                       ; $3933: $FF
-    rst $38                                       ; $3934: $FF
-    rst $38                                       ; $3935: $FF
-    rst $38                                       ; $3936: $FF
-    rst $38                                       ; $3937: $FF
-    rst $38                                       ; $3938: $FF
-    rst $38                                       ; $3939: $FF
-    rst $38                                       ; $393A: $FF
-    rst $38                                       ; $393B: $FF
-    rst $38                                       ; $393C: $FF
-    rst $38                                       ; $393D: $FF
-    rst $38                                       ; $393E: $FF
-    rst $38                                       ; $393F: $FF
-    rst $38                                       ; $3940: $FF
-    rst $38                                       ; $3941: $FF
-    rst $38                                       ; $3942: $FF
-    rst $38                                       ; $3943: $FF
-    rst $38                                       ; $3944: $FF
-    rst $38                                       ; $3945: $FF
-    rst $38                                       ; $3946: $FF
-    rst $38                                       ; $3947: $FF
-    rst $38                                       ; $3948: $FF
-    rst $38                                       ; $3949: $FF
-    rst $38                                       ; $394A: $FF
-    rst $38                                       ; $394B: $FF
-    rst $38                                       ; $394C: $FF
-    rst $38                                       ; $394D: $FF
-    rst $38                                       ; $394E: $FF
-    rst $38                                       ; $394F: $FF
-    rst $38                                       ; $3950: $FF
-    rst $38                                       ; $3951: $FF
-    rst $38                                       ; $3952: $FF
-    rst $38                                       ; $3953: $FF
-    rst $38                                       ; $3954: $FF
-    rst $38                                       ; $3955: $FF
-    rst $38                                       ; $3956: $FF
-    rst $38                                       ; $3957: $FF
-    rst $38                                       ; $3958: $FF
-    rst $38                                       ; $3959: $FF
-    rst $38                                       ; $395A: $FF
-    rst $38                                       ; $395B: $FF
-    rst $38                                       ; $395C: $FF
-    rst $38                                       ; $395D: $FF
-    rst $38                                       ; $395E: $FF
-    rst $38                                       ; $395F: $FF
-    rst $38                                       ; $3960: $FF
-    rst $38                                       ; $3961: $FF
-    rst $38                                       ; $3962: $FF
-    rst $38                                       ; $3963: $FF
-    rst $38                                       ; $3964: $FF
-    rst $38                                       ; $3965: $FF
-    rst $38                                       ; $3966: $FF
-    rst $38                                       ; $3967: $FF
-    rst $38                                       ; $3968: $FF
-    rst $38                                       ; $3969: $FF
-    rst $38                                       ; $396A: $FF
-    rst $38                                       ; $396B: $FF
-    rst $38                                       ; $396C: $FF
-    rst $38                                       ; $396D: $FF
-    rst $38                                       ; $396E: $FF
-    rst $38                                       ; $396F: $FF
-    rst $38                                       ; $3970: $FF
-    rst $38                                       ; $3971: $FF
-    rst $38                                       ; $3972: $FF
-    rst $38                                       ; $3973: $FF
-    rst $38                                       ; $3974: $FF
-    rst $38                                       ; $3975: $FF
-    rst $38                                       ; $3976: $FF
-    rst $38                                       ; $3977: $FF
-    rst $38                                       ; $3978: $FF
-    rst $38                                       ; $3979: $FF
-    rst $38                                       ; $397A: $FF
-    rst $38                                       ; $397B: $FF
-    rst $38                                       ; $397C: $FF
-    rst $38                                       ; $397D: $FF
-    rst $38                                       ; $397E: $FF
-    rst $38                                       ; $397F: $FF
-    rst $38                                       ; $3980: $FF
-    rst $38                                       ; $3981: $FF
-    rst $38                                       ; $3982: $FF
-    rst $38                                       ; $3983: $FF
-    rst $38                                       ; $3984: $FF
-    rst $38                                       ; $3985: $FF
-    rst $38                                       ; $3986: $FF
-    rst $38                                       ; $3987: $FF
-    rst $38                                       ; $3988: $FF
-    rst $38                                       ; $3989: $FF
-    rst $38                                       ; $398A: $FF
-    rst $38                                       ; $398B: $FF
-    rst $38                                       ; $398C: $FF
-    rst $38                                       ; $398D: $FF
-    rst $38                                       ; $398E: $FF
-    rst $38                                       ; $398F: $FF
-    rst $38                                       ; $3990: $FF
-    rst $38                                       ; $3991: $FF
-    rst $38                                       ; $3992: $FF
-    rst $38                                       ; $3993: $FF
-    rst $38                                       ; $3994: $FF
-    rst $38                                       ; $3995: $FF
-    rst $38                                       ; $3996: $FF
-    rst $38                                       ; $3997: $FF
-    rst $38                                       ; $3998: $FF
-    rst $38                                       ; $3999: $FF
-    rst $38                                       ; $399A: $FF
-    rst $38                                       ; $399B: $FF
-    rst $38                                       ; $399C: $FF
-    rst $38                                       ; $399D: $FF
-    rst $38                                       ; $399E: $FF
-    rst $38                                       ; $399F: $FF
-    rst $38                                       ; $39A0: $FF
-    rst $38                                       ; $39A1: $FF
-    rst $38                                       ; $39A2: $FF
-    rst $38                                       ; $39A3: $FF
-    rst $38                                       ; $39A4: $FF
-    rst $38                                       ; $39A5: $FF
-    rst $38                                       ; $39A6: $FF
-    rst $38                                       ; $39A7: $FF
-    rst $38                                       ; $39A8: $FF
-    rst $38                                       ; $39A9: $FF
-    rst $38                                       ; $39AA: $FF
-    rst $38                                       ; $39AB: $FF
-    rst $38                                       ; $39AC: $FF
-    rst $38                                       ; $39AD: $FF
-    rst $38                                       ; $39AE: $FF
-    rst $38                                       ; $39AF: $FF
-    rst $38                                       ; $39B0: $FF
-    rst $38                                       ; $39B1: $FF
-    rst $38                                       ; $39B2: $FF
-    rst $38                                       ; $39B3: $FF
-    rst $38                                       ; $39B4: $FF
-    rst $38                                       ; $39B5: $FF
-    rst $38                                       ; $39B6: $FF
-    rst $38                                       ; $39B7: $FF
-    rst $38                                       ; $39B8: $FF
-    rst $38                                       ; $39B9: $FF
-    rst $38                                       ; $39BA: $FF
-    rst $38                                       ; $39BB: $FF
-    rst $38                                       ; $39BC: $FF
-    rst $38                                       ; $39BD: $FF
-    rst $38                                       ; $39BE: $FF
-    rst $38                                       ; $39BF: $FF
-    rst $38                                       ; $39C0: $FF
-    rst $38                                       ; $39C1: $FF
-    rst $38                                       ; $39C2: $FF
-    rst $38                                       ; $39C3: $FF
-    rst $38                                       ; $39C4: $FF
-    rst $38                                       ; $39C5: $FF
-    rst $38                                       ; $39C6: $FF
-    rst $38                                       ; $39C7: $FF
-    rst $38                                       ; $39C8: $FF
-    rst $38                                       ; $39C9: $FF
-    rst $38                                       ; $39CA: $FF
-    rst $38                                       ; $39CB: $FF
-    rst $38                                       ; $39CC: $FF
-    rst $38                                       ; $39CD: $FF
-    rst $38                                       ; $39CE: $FF
-    rst $38                                       ; $39CF: $FF
-    rst $38                                       ; $39D0: $FF
-    rst $38                                       ; $39D1: $FF
-    rst $38                                       ; $39D2: $FF
-    rst $38                                       ; $39D3: $FF
-    rst $38                                       ; $39D4: $FF
-    rst $38                                       ; $39D5: $FF
-    rst $38                                       ; $39D6: $FF
-    rst $38                                       ; $39D7: $FF
-    rst $38                                       ; $39D8: $FF
-    rst $38                                       ; $39D9: $FF
-    rst $38                                       ; $39DA: $FF
-    rst $38                                       ; $39DB: $FF
-    rst $38                                       ; $39DC: $FF
-    rst $38                                       ; $39DD: $FF
-    rst $38                                       ; $39DE: $FF
-    rst $38                                       ; $39DF: $FF
-    rst $38                                       ; $39E0: $FF
-    rst $38                                       ; $39E1: $FF
-    rst $38                                       ; $39E2: $FF
-    rst $38                                       ; $39E3: $FF
-    rst $38                                       ; $39E4: $FF
-    rst $38                                       ; $39E5: $FF
-    rst $38                                       ; $39E6: $FF
-    rst $38                                       ; $39E7: $FF
-    rst $38                                       ; $39E8: $FF
-    rst $38                                       ; $39E9: $FF
-    rst $38                                       ; $39EA: $FF
-    rst $38                                       ; $39EB: $FF
-    rst $38                                       ; $39EC: $FF
-    rst $38                                       ; $39ED: $FF
-    rst $38                                       ; $39EE: $FF
-    rst $38                                       ; $39EF: $FF
-    rst $38                                       ; $39F0: $FF
-    rst $38                                       ; $39F1: $FF
-    rst $38                                       ; $39F2: $FF
-    rst $38                                       ; $39F3: $FF
-    rst $38                                       ; $39F4: $FF
-    rst $38                                       ; $39F5: $FF
-    rst $38                                       ; $39F6: $FF
-    rst $38                                       ; $39F7: $FF
-    rst $38                                       ; $39F8: $FF
-    rst $38                                       ; $39F9: $FF
-    rst $38                                       ; $39FA: $FF
-    rst $38                                       ; $39FB: $FF
-    rst $38                                       ; $39FC: $FF
-    rst $38                                       ; $39FD: $FF
-    rst $38                                       ; $39FE: $FF
-    rst $38                                       ; $39FF: $FF
-    rst $38                                       ; $3A00: $FF
-    rst $38                                       ; $3A01: $FF
-    rst $38                                       ; $3A02: $FF
-    rst $38                                       ; $3A03: $FF
-    rst $38                                       ; $3A04: $FF
-    rst $38                                       ; $3A05: $FF
-    rst $38                                       ; $3A06: $FF
-    rst $38                                       ; $3A07: $FF
-    rst $38                                       ; $3A08: $FF
-    rst $38                                       ; $3A09: $FF
-    rst $38                                       ; $3A0A: $FF
-    rst $38                                       ; $3A0B: $FF
-    rst $38                                       ; $3A0C: $FF
-    rst $38                                       ; $3A0D: $FF
-    rst $38                                       ; $3A0E: $FF
-    rst $38                                       ; $3A0F: $FF
-    rst $38                                       ; $3A10: $FF
-    rst $38                                       ; $3A11: $FF
-    rst $38                                       ; $3A12: $FF
-    rst $38                                       ; $3A13: $FF
-    rst $38                                       ; $3A14: $FF
-    rst $38                                       ; $3A15: $FF
-    rst $38                                       ; $3A16: $FF
-    rst $38                                       ; $3A17: $FF
-    rst $38                                       ; $3A18: $FF
-    rst $38                                       ; $3A19: $FF
-    rst $38                                       ; $3A1A: $FF
-    rst $38                                       ; $3A1B: $FF
-    rst $38                                       ; $3A1C: $FF
-    rst $38                                       ; $3A1D: $FF
-    rst $38                                       ; $3A1E: $FF
-    rst $38                                       ; $3A1F: $FF
-    rst $38                                       ; $3A20: $FF
-    rst $38                                       ; $3A21: $FF
-    rst $38                                       ; $3A22: $FF
-    rst $38                                       ; $3A23: $FF
-    rst $38                                       ; $3A24: $FF
-    rst $38                                       ; $3A25: $FF
-    rst $38                                       ; $3A26: $FF
-    rst $38                                       ; $3A27: $FF
-    rst $38                                       ; $3A28: $FF
-    rst $38                                       ; $3A29: $FF
-    rst $38                                       ; $3A2A: $FF
-    rst $38                                       ; $3A2B: $FF
-    rst $38                                       ; $3A2C: $FF
-    rst $38                                       ; $3A2D: $FF
-    rst $38                                       ; $3A2E: $FF
-    rst $38                                       ; $3A2F: $FF
-    rst $38                                       ; $3A30: $FF
-    rst $38                                       ; $3A31: $FF
-    rst $38                                       ; $3A32: $FF
-    rst $38                                       ; $3A33: $FF
-    rst $38                                       ; $3A34: $FF
-    rst $38                                       ; $3A35: $FF
-    rst $38                                       ; $3A36: $FF
-    rst $38                                       ; $3A37: $FF
-    rst $38                                       ; $3A38: $FF
-    rst $38                                       ; $3A39: $FF
-    rst $38                                       ; $3A3A: $FF
-    rst $38                                       ; $3A3B: $FF
-    rst $38                                       ; $3A3C: $FF
-    rst $38                                       ; $3A3D: $FF
-    rst $38                                       ; $3A3E: $FF
-    rst $38                                       ; $3A3F: $FF
-    rst $38                                       ; $3A40: $FF
-    rst $38                                       ; $3A41: $FF
-    rst $38                                       ; $3A42: $FF
-    rst $38                                       ; $3A43: $FF
-    rst $38                                       ; $3A44: $FF
-    rst $38                                       ; $3A45: $FF
-    rst $38                                       ; $3A46: $FF
-    rst $38                                       ; $3A47: $FF
-    rst $38                                       ; $3A48: $FF
-    rst $38                                       ; $3A49: $FF
-    rst $38                                       ; $3A4A: $FF
-    rst $38                                       ; $3A4B: $FF
-    rst $38                                       ; $3A4C: $FF
-    rst $38                                       ; $3A4D: $FF
-    rst $38                                       ; $3A4E: $FF
-    rst $38                                       ; $3A4F: $FF
-    rst $38                                       ; $3A50: $FF
-    rst $38                                       ; $3A51: $FF
-    rst $38                                       ; $3A52: $FF
-    rst $38                                       ; $3A53: $FF
-    rst $38                                       ; $3A54: $FF
-    rst $38                                       ; $3A55: $FF
-    rst $38                                       ; $3A56: $FF
-    rst $38                                       ; $3A57: $FF
-    rst $38                                       ; $3A58: $FF
-    rst $38                                       ; $3A59: $FF
-    rst $38                                       ; $3A5A: $FF
-    rst $38                                       ; $3A5B: $FF
-    rst $38                                       ; $3A5C: $FF
-    rst $38                                       ; $3A5D: $FF
-    rst $38                                       ; $3A5E: $FF
-    rst $38                                       ; $3A5F: $FF
-    rst $38                                       ; $3A60: $FF
-    rst $38                                       ; $3A61: $FF
-    rst $38                                       ; $3A62: $FF
-    rst $38                                       ; $3A63: $FF
-    rst $38                                       ; $3A64: $FF
-    rst $38                                       ; $3A65: $FF
-    rst $38                                       ; $3A66: $FF
-    rst $38                                       ; $3A67: $FF
-    rst $38                                       ; $3A68: $FF
-    rst $38                                       ; $3A69: $FF
-    rst $38                                       ; $3A6A: $FF
-    rst $38                                       ; $3A6B: $FF
-    rst $38                                       ; $3A6C: $FF
-    rst $38                                       ; $3A6D: $FF
-    rst $38                                       ; $3A6E: $FF
-    rst $38                                       ; $3A6F: $FF
-    rst $38                                       ; $3A70: $FF
-    rst $38                                       ; $3A71: $FF
-    rst $38                                       ; $3A72: $FF
-    rst $38                                       ; $3A73: $FF
-    rst $38                                       ; $3A74: $FF
-    rst $38                                       ; $3A75: $FF
-    rst $38                                       ; $3A76: $FF
-    rst $38                                       ; $3A77: $FF
-    rst $38                                       ; $3A78: $FF
-    rst $38                                       ; $3A79: $FF
-    rst $38                                       ; $3A7A: $FF
-    rst $38                                       ; $3A7B: $FF
-    rst $38                                       ; $3A7C: $FF
-    rst $38                                       ; $3A7D: $FF
-    rst $38                                       ; $3A7E: $FF
-    rst $38                                       ; $3A7F: $FF
-    rst $38                                       ; $3A80: $FF
-    rst $38                                       ; $3A81: $FF
-    rst $38                                       ; $3A82: $FF
-    rst $38                                       ; $3A83: $FF
-    rst $38                                       ; $3A84: $FF
-    rst $38                                       ; $3A85: $FF
-    rst $38                                       ; $3A86: $FF
-    rst $38                                       ; $3A87: $FF
-    rst $38                                       ; $3A88: $FF
-    rst $38                                       ; $3A89: $FF
-    rst $38                                       ; $3A8A: $FF
-    rst $38                                       ; $3A8B: $FF
-    rst $38                                       ; $3A8C: $FF
-    rst $38                                       ; $3A8D: $FF
-    rst $38                                       ; $3A8E: $FF
-    rst $38                                       ; $3A8F: $FF
-    rst $38                                       ; $3A90: $FF
-    rst $38                                       ; $3A91: $FF
-    rst $38                                       ; $3A92: $FF
-    rst $38                                       ; $3A93: $FF
-    rst $38                                       ; $3A94: $FF
-    rst $38                                       ; $3A95: $FF
-    rst $38                                       ; $3A96: $FF
-    rst $38                                       ; $3A97: $FF
-    rst $38                                       ; $3A98: $FF
-    rst $38                                       ; $3A99: $FF
-    rst $38                                       ; $3A9A: $FF
-    rst $38                                       ; $3A9B: $FF
-    rst $38                                       ; $3A9C: $FF
-    rst $38                                       ; $3A9D: $FF
-    rst $38                                       ; $3A9E: $FF
-    rst $38                                       ; $3A9F: $FF
-    rst $38                                       ; $3AA0: $FF
-    rst $38                                       ; $3AA1: $FF
-    rst $38                                       ; $3AA2: $FF
-    rst $38                                       ; $3AA3: $FF
-    rst $38                                       ; $3AA4: $FF
-    rst $38                                       ; $3AA5: $FF
-    rst $38                                       ; $3AA6: $FF
-    rst $38                                       ; $3AA7: $FF
-    rst $38                                       ; $3AA8: $FF
-    rst $38                                       ; $3AA9: $FF
-    rst $38                                       ; $3AAA: $FF
-    rst $38                                       ; $3AAB: $FF
-    rst $38                                       ; $3AAC: $FF
-    rst $38                                       ; $3AAD: $FF
-    rst $38                                       ; $3AAE: $FF
-    rst $38                                       ; $3AAF: $FF
 
     ; $3AB0
 INCLUDE "musyx/musyxb0.asm"
