@@ -1295,108 +1295,7 @@ jr_000_07A8:
 
 
 INCLUDE "source/engine/system/system_00.asm"
-
-Call_000_09EB:
-Jump_000_09EB:
-    ld a, [hl]                                    ; $09EB: $7E
-    bit 6, a                                      ; $09EC: $CB $77
-    jr nz, jr_000_09FA                            ; $09EE: $20 $0A
-
-    bit 7, a                                      ; $09F0: $CB $7F
-    jr nz, jr_000_09F7                            ; $09F2: $20 $03
-
-    jp Jump_000_0A04                              ; $09F4: $C3 $04 $0A
-
-
-jr_000_09F7:
-    jp Jump_000_0A24                              ; $09F7: $C3 $24 $0A
-
-
-jr_000_09FA:
-    bit 7, a                                      ; $09FA: $CB $7F
-    jr nz, jr_000_0A01                            ; $09FC: $20 $03
-
-    jp Jump_000_0A13                              ; $09FE: $C3 $13 $0A
-
-
-jr_000_0A01:
-    jp Jump_000_0A33                              ; $0A01: $C3 $33 $0A
-
-
-Jump_000_0A04:
-    ld a, [hl+]                                   ; $0A04: $2A
-    and $3F                                       ; $0A05: $E6 $3F
-    and a                                         ; $0A07: $A7
-    ret z                                         ; $0A08: $C8
-
-Jump_000_0A09:
-    ld c, a                                       ; $0A09: $4F
-
-jr_000_0A0A:
-    ld a, [hl+]                                   ; $0A0A: $2A
-    ld [de], a                                    ; $0A0B: $12
-    inc de                                        ; $0A0C: $13
-    dec c                                         ; $0A0D: $0D
-    jr nz, jr_000_0A0A                            ; $0A0E: $20 $FA
-
-    jp Jump_000_09EB                              ; $0A10: $C3 $EB $09
-
-
-Jump_000_0A13:
-    ld a, [hl+]                                   ; $0A13: $2A
-    and $3F                                       ; $0A14: $E6 $3F
-    ld b, a                                       ; $0A16: $47
-    ld a, [hl+]                                   ; $0A17: $2A
-    ld c, a                                       ; $0A18: $4F
-
-jr_000_0A19:
-    ld a, [hl+]                                   ; $0A19: $2A
-    ld [de], a                                    ; $0A1A: $12
-    inc de                                        ; $0A1B: $13
-    dec bc                                        ; $0A1C: $0B
-    ld a, c                                       ; $0A1D: $79
-    or b                                          ; $0A1E: $B0
-    jr nz, jr_000_0A19                            ; $0A1F: $20 $F8
-
-    jp Jump_000_09EB                              ; $0A21: $C3 $EB $09
-
-
-Jump_000_0A24:
-    ld a, [hl+]                                   ; $0A24: $2A
-    and $3F                                       ; $0A25: $E6 $3F
-    and a                                         ; $0A27: $A7
-    ret z                                         ; $0A28: $C8
-
-    ld c, a                                       ; $0A29: $4F
-    ld a, [hl+]                                   ; $0A2A: $2A
-
-jr_000_0A2B:
-    ld [de], a                                    ; $0A2B: $12
-    inc de                                        ; $0A2C: $13
-    dec c                                         ; $0A2D: $0D
-    jr nz, jr_000_0A2B                            ; $0A2E: $20 $FB
-
-    jp Jump_000_09EB                              ; $0A30: $C3 $EB $09
-
-
-Jump_000_0A33:
-    ld a, [hl+]                                   ; $0A33: $2A
-    and $3F                                       ; $0A34: $E6 $3F
-    ld b, a                                       ; $0A36: $47
-    ld a, [hl+]                                   ; $0A37: $2A
-    ld c, a                                       ; $0A38: $4F
-
-jr_000_0A39:
-    ld a, [hl]                                    ; $0A39: $7E
-    ld [de], a                                    ; $0A3A: $12
-    inc de                                        ; $0A3B: $13
-    dec bc                                        ; $0A3C: $0B
-    ld a, c                                       ; $0A3D: $79
-    or b                                          ; $0A3E: $B0
-    jr nz, jr_000_0A39                            ; $0A3F: $20 $F8
-
-    inc hl                                        ; $0A41: $23
-    jp Jump_000_09EB                              ; $0A42: $C3 $EB $09
+INCLUDE "source/engine/rle_decompress_00.asm"
 
 
 Call_000_0A45:
@@ -7289,11 +7188,11 @@ Call_000_2F82:
     ld a, $01                                     ; $2F84: $3E $01
     ld [$FF4F], a                                 ; $2F86: $EA $4F $FF
     ld de, $9800                                  ; $2F89: $11 $00 $98
-    call Call_000_09EB                            ; $2F8C: $CD $EB $09
+    call RLE_Decompress                            ; $2F8C: $CD $EB $09
     xor a                                         ; $2F8F: $AF
     ld [$FF4F], a                                 ; $2F90: $EA $4F $FF
     ld de, $9800                                  ; $2F93: $11 $00 $98
-    call Call_000_09EB                            ; $2F96: $CD $EB $09
+    call RLE_Decompress                            ; $2F96: $CD $EB $09
     ret                                           ; $2F99: $C9
 
 
@@ -7399,9 +7298,9 @@ Call_000_2FFA:
     ld d, h                                       ; $3006: $54
     ld e, l                                       ; $3007: $5D
     pop hl                                        ; $3008: $E1
-    call Call_000_09EB                            ; $3009: $CD $EB $09
+    call RLE_Decompress                            ; $3009: $CD $EB $09
     ld de, $D000                                  ; $300C: $11 $00 $D0
-    call Call_000_09EB                            ; $300F: $CD $EB $09
+    call RLE_Decompress                            ; $300F: $CD $EB $09
     ld bc, $D000                                  ; $3012: $01 $00 $D0
     pop de                                        ; $3015: $D1
     pop hl                                        ; $3016: $E1
@@ -7445,7 +7344,7 @@ Jump_000_3062:
     inc hl                                        ; $3062: $23
     inc hl                                        ; $3063: $23
     ld de, $D000                                  ; $3064: $11 $00 $D0
-    call Call_000_09EB                            ; $3067: $CD $EB $09
+    call RLE_Decompress                            ; $3067: $CD $EB $09
     PopRAMBank
     ret                                           ; $3071: $C9
 
@@ -7604,7 +7503,7 @@ Call_000_3187:
     ldh [rSVBK], a                                ; $3192: $E0 $70
     ld de, $D000                                  ; $3194: $11 $00 $D0
     ld bc, $1000                                  ; $3197: $01 $00 $10
-    call Call_000_09EB                            ; $319A: $CD $EB $09
+    call RLE_Decompress                            ; $319A: $CD $EB $09
     PopRAMBank
     ret                                           ; $31A4: $C9
 
@@ -7644,7 +7543,7 @@ Call_000_31A5:
     inc hl                                        ; $31EF: $23
     inc hl                                        ; $31F0: $23
     ld de, $D000                                  ; $31F1: $11 $00 $D0
-    call Call_000_09EB                            ; $31F4: $CD $EB $09
+    call RLE_Decompress                            ; $31F4: $CD $EB $09
     PopRAMBank
     ld hl, $C86E                                  ; $31FE: $21 $6E $C8
     xor a                                         ; $3201: $AF
