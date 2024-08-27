@@ -361,9 +361,9 @@ Call_001_412F:
     ld a, [$C6DB]                                 ; $41BB: $FA $DB $C6
     ld [wScript_System], a                                 ; $41BE: $EA $18 $C7
     ld a, [$C6DC]                                 ; $41C1: $FA $DC $C6
-    ld [$C719], a                                 ; $41C4: $EA $19 $C7
+    ld [wScript_System.Frame], a                                 ; $41C4: $EA $19 $C7
     ld a, [$C6DD]                                 ; $41C7: $FA $DD $C6
-    ld [$C71A], a                                 ; $41CA: $EA $1A $C7
+    ld [wScript_System.Frame + 1], a                                 ; $41CA: $EA $1A $C7
     ld a, $D3                                     ; $41CD: $3E $D3
     ld [$C71B], a                                 ; $41CF: $EA $1B $C7
     ld a, $0A                                     ; $41D2: $3E $0A
@@ -383,7 +383,7 @@ Jump_001_41D8:
     cp $82                                        ; $41E6: $FE $82
     ret nz                                        ; $41E8: $C0
 
-    ld a, [$C71A]                                 ; $41E9: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $41E9: $FA $1A $C7
     and a                                         ; $41EC: $A7
     ret nz                                        ; $41ED: $C0
 
@@ -438,7 +438,7 @@ jr_001_41FE:
 
 
 Call_001_422E:
-    ld a, [$C71A]                                 ; $422E: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $422E: $FA $1A $C7
     and a                                         ; $4231: $A7
     ret nz                                        ; $4232: $C0
 
@@ -475,7 +475,7 @@ Call_001_422E:
     ld a, $00                                     ; $4261: $3E $00
     adc h                                         ; $4263: $8C
     ld h, a                                       ; $4264: $67
-    call Call_000_0A45                            ; $4265: $CD $45 $0A
+    call Hotspot00_GetType                            ; $4265: $CD $45 $0A
     cp $01                                        ; $4268: $FE $01
     jr z, jr_001_427A                             ; $426A: $28 $0E
 
@@ -529,7 +529,7 @@ jr_001_428D:
 jr_001_4294:
     ld a, d                                       ; $4294: $7A
     ld [$C6DE], a                                 ; $4295: $EA $DE $C6
-    call Call_000_0A59                            ; $4298: $CD $59 $0A
+    call Hotspot00_SetScript                            ; $4298: $CD $59 $0A
     ld a, $D3                                     ; $429B: $3E $D3
     ld [$C71B], a                                 ; $429D: $EA $1B $C7
     ld a, $0A                                     ; $42A0: $3E $0A
@@ -543,342 +543,192 @@ jr_001_42A6:
     ret                                           ; $42AB: $C9
 
 
-    ld e, b                                       ; $42AC: $58
-    dec bc                                        ; $42AD: $0B
-    ld h, e                                       ; $42AE: $63
-    dec bc                                        ; $42AF: $0B
-    ld [hl], b                                    ; $42B0: $70
-    dec bc                                        ; $42B1: $0B
-    adc a                                         ; $42B2: $8F
-    dec bc                                        ; $42B3: $0B
-    jp hl                                         ; $42B4: $E9
+Script_Table::
+    dw Cmd_0B58
+    dw Cmd_0B63
+    dw Cmd_0B70
+    dw Cmd_0B8F
+    dw Cmd_0BE9
+    dw Cmd_0C11
+    dw Cmd_0C20
+    dw Cmd_0C46
+    dw Cmd_0C53
+    dw Cmd_0C59
+    dw Cmd_0C71
+    dw Cmd_0C7E
+    dw Cmd_0CA2
+    dw Cmd_0CBA
+    dw Cmd_0CC0
+    dw Cmd_0CC6
+    dw Cmd_0CEC
+    dw Cmd_0CFD
+    dw Cmd_0D5C
+    dw Cmd_0D6E
+    dw Cmd_0D8B
+    dw Cmd_0DA0
+    dw Cmd_0DE2
+    dw Cmd_0E45
+    dw Cmd_0E4B
+    dw Cmd_0E52
+    dw Cmd_0E63
+    dw Cmd_0EA1
+    dw Cmd_0EB9
+    dw Cmd_0ED1
+    dw Cmd_0F51
+    dw Cmd_0F59
+    dw Cmd_0F61
+    dw Cmd_0F69
+    dw Cmd_0F71
+    dw Cmd_0FD7
+    dw Cmd_0FEC
+    dw Cmd_0FC1
+    dw Cmd_0FA8
+    dw Cmd_0F92
+    dw Cmd_0FF4
+    dw Cmd_1060
+    dw Cmd_1068
+    dw Cmd_1075
+    dw Cmd_107D
+    dw Cmd_1080
+    dw Cmd_1088
+    dw Cmd_109D
+    dw Cmd_10A5
+    dw Cmd_10B1
+    dw Cmd_10B9
+    dw Cmd_10C1
+    dw Cmd_110E
+    dw Cmd_112D
+    dw Cmd_1178
+    dw Cmd_118A
+    dw Cmd_11B7
+    dw Cmd_1325
+    dw Cmd_1336
+    dw Cmd_11DE
+    dw Cmd_123B
+    dw Cmd_1280
+    dw Cmd_1291
+    dw Cmd_12A2
+    dw Cmd_12D7
+    dw Cmd_12E8
+    dw Cmd_12F9
+    dw Cmd_14D4
+    dw Cmd_14F4
+    dw Cmd_1531
+    dw Cmd_1547
+    dw Cmd_1587
+    dw Cmd_1593
+    dw Cmd_15A9
+    dw Cmd_15B2
+    dw Cmd_15CC
+    dw Cmd_15DB
+    dw Cmd_1631
+    dw Cmd_164C
+    dw Cmd_168C
+    dw Cmd_1714
+    dw Cmd_16D7
+    dw Cmd_176F
+    dw Cmd_17C7
+    dw Cmd_17EA
+    dw Cmd_17ED
+    dw Cmd_17FD
+    dw Cmd_180A
+    dw Cmd_1817
+    dw Cmd_1824
+    dw Cmd_1831
+    dw Cmd_183E
+    dw Cmd_184B
+    dw Cmd_1851
+    dw Cmd_1857
+    dw Cmd_1863
+    dw Cmd_18A8
+    dw Cmd_18AE
+    dw Cmd_18B4
+    dw Cmd_18BA
+    dw Cmd_18C0
+    dw Cmd_18C6
+    dw Cmd_1916
+    dw Cmd_1939
+    dw Cmd_195F
+    dw Cmd_1982
+    dw Cmd_19A5
+    dw Cmd_19E8
+    dw Cmd_1A2B
+    dw Cmd_1A42
+    dw Cmd_1A85
+    dw Cmd_1AD6
+    dw Cmd_1B86
+    dw Cmd_1BB4
+    dw Cmd_1BDF
+    dw Cmd_1BF8
+    dw Cmd_1C20
+    dw Cmd_1C4B
+    dw Cmd_1C7E
+    dw Cmd_1CAE
+    dw Cmd_1CE0
+    dw Cmd_1D10
+    dw Cmd_1D7B
+    dw Cmd_1DB4
+    dw Cmd_1DF0
+    dw Cmd_1E4C
+    dw Cmd_1D42
+    dw Cmd_1E7C
+    dw Cmd_1ECE
+    dw Cmd_1EED
+    dw Cmd_2031
+    dw Cmd_206C
+    dw Cmd_1F26
+    dw Cmd_1F73
+    dw Cmd_1FC2
+    dw Cmd_1FD7
+    dw Cmd_2020
+    dw Cmd_2079
+    dw Cmd_20E2
+    dw Cmd_2141
+    dw Cmd_2166
+    dw Cmd_218B
+    dw Cmd_21C6
+    dw Cmd_21D6
+    dw Cmd_21EF
+    dw Cmd_2201
+    dw Cmd_221A
+    dw Cmd_2259
+    dw Cmd_226B
+    dw Cmd_227A
+    dw Cmd_2299
+    dw Cmd_22D6
+    dw Cmd_2330
+    dw Cmd_2340
+    dw Cmd_234F
+    dw Cmd_237A
+    dw Cmd_23F4
+    dw Cmd_2389
+    dw Cmd_2434
+    dw Cmd_24A0
+    dw Cmd_24BE
+    dw Cmd_24E0
+    dw Cmd_24F7
+    dw Cmd_2588
+    dw Cmd_2629
+    dw Cmd_2639
+    dw Cmd_2657
+    dw Cmd_27A5
+    dw Cmd_27C1
+    dw Cmd_27EC
+    dw Cmd_280A
+    dw Cmd_2830
+    dw Cmd_299C
+    dw Cmd_29D2
+    dw Cmd_29F1
+    dw Cmd_2A12
+    dw Cmd_2A18
+    dw Cmd_2A52
+    dw Cmd_2A66
+    dw Cmd_2A7D
+    dw Cmd_2A99
+    dw Cmd_2AB8
+    dw Cmd_2AD7
 
 
-    dec bc                                        ; $42B5: $0B
-    ld de, $200C                                  ; $42B6: $11 $0C $20
-    inc c                                         ; $42B9: $0C
-    ld b, [hl]                                    ; $42BA: $46
-    inc c                                         ; $42BB: $0C
-    ld d, e                                       ; $42BC: $53
-    inc c                                         ; $42BD: $0C
-    ld e, c                                       ; $42BE: $59
-    inc c                                         ; $42BF: $0C
-    ld [hl], c                                    ; $42C0: $71
-    inc c                                         ; $42C1: $0C
-    ld a, [hl]                                    ; $42C2: $7E
-    inc c                                         ; $42C3: $0C
-    and d                                         ; $42C4: $A2
-    inc c                                         ; $42C5: $0C
-    cp d                                          ; $42C6: $BA
-    inc c                                         ; $42C7: $0C
-    ret nz                                        ; $42C8: $C0
-
-    inc c                                         ; $42C9: $0C
-    add $0C                                       ; $42CA: $C6 $0C
-    db $EC                                        ; $42CC: $EC
-    inc c                                         ; $42CD: $0C
-    db $FD                                        ; $42CE: $FD
-    inc c                                         ; $42CF: $0C
-    ld e, h                                       ; $42D0: $5C
-    dec c                                         ; $42D1: $0D
-    ld l, [hl]                                    ; $42D2: $6E
-    dec c                                         ; $42D3: $0D
-    adc e                                         ; $42D4: $8B
-    dec c                                         ; $42D5: $0D
-    and b                                         ; $42D6: $A0
-    dec c                                         ; $42D7: $0D
-    ld [c], a                                     ; $42D8: $E2
-    dec c                                         ; $42D9: $0D
-    ld b, l                                       ; $42DA: $45
-    ld c, $4B                                     ; $42DB: $0E $4B
-    ld c, $52                                     ; $42DD: $0E $52
-    ld c, $63                                     ; $42DF: $0E $63
-    ld c, $A1                                     ; $42E1: $0E $A1
-    ld c, $B9                                     ; $42E3: $0E $B9
-    ld c, $D1                                     ; $42E5: $0E $D1
-    ld c, $51                                     ; $42E7: $0E $51
-    rrca                                          ; $42E9: $0F
-    ld e, c                                       ; $42EA: $59
-    rrca                                          ; $42EB: $0F
-    ld h, c                                       ; $42EC: $61
-    rrca                                          ; $42ED: $0F
-    ld l, c                                       ; $42EE: $69
-    rrca                                          ; $42EF: $0F
-    ld [hl], c                                    ; $42F0: $71
-    rrca                                          ; $42F1: $0F
-    rst $10                                       ; $42F2: $D7
-    rrca                                          ; $42F3: $0F
-    db $EC                                        ; $42F4: $EC
-    rrca                                          ; $42F5: $0F
-    pop bc                                        ; $42F6: $C1
-    rrca                                          ; $42F7: $0F
-    xor b                                         ; $42F8: $A8
-    rrca                                          ; $42F9: $0F
-    sub d                                         ; $42FA: $92
-    rrca                                          ; $42FB: $0F
-    db $F4                                        ; $42FC: $F4
-    rrca                                          ; $42FD: $0F
-    ld h, b                                       ; $42FE: $60
-    db $10                                        ; $42FF: $10
-    ld l, b                                       ; $4300: $68
-    db $10                                        ; $4301: $10
-    ld [hl], l                                    ; $4302: $75
-    db $10                                        ; $4303: $10
-    ld a, l                                       ; $4304: $7D
-    db $10                                        ; $4305: $10
-    add b                                         ; $4306: $80
-    db $10                                        ; $4307: $10
-    adc b                                         ; $4308: $88
-    db $10                                        ; $4309: $10
-    sbc l                                         ; $430A: $9D
-    db $10                                        ; $430B: $10
-    and l                                         ; $430C: $A5
-    db $10                                        ; $430D: $10
-    or c                                          ; $430E: $B1
-    db $10                                        ; $430F: $10
-    cp c                                          ; $4310: $B9
-    db $10                                        ; $4311: $10
-    pop bc                                        ; $4312: $C1
-    db $10                                        ; $4313: $10
-    ld c, $11                                     ; $4314: $0E $11
-    dec l                                         ; $4316: $2D
-    ld de, $1178                                  ; $4317: $11 $78 $11
-    adc d                                         ; $431A: $8A
-    ld de, $11B7                                  ; $431B: $11 $B7 $11
-    dec h                                         ; $431E: $25
-    inc de                                        ; $431F: $13
-    ld [hl], $13                                  ; $4320: $36 $13
-    sbc $11                                       ; $4322: $DE $11
-    dec sp                                        ; $4324: $3B
-
-jr_001_4325:
-    ld [de], a                                    ; $4325: $12
-    add b                                         ; $4326: $80
-    ld [de], a                                    ; $4327: $12
-    sub c                                         ; $4328: $91
-    ld [de], a                                    ; $4329: $12
-    and d                                         ; $432A: $A2
-    ld [de], a                                    ; $432B: $12
-    rst $10                                       ; $432C: $D7
-
-jr_001_432D:
-    ld [de], a                                    ; $432D: $12
-    add sp, $12                                   ; $432E: $E8 $12
-    ld sp, hl                                     ; $4330: $F9
-    ld [de], a                                    ; $4331: $12
-    call nc, $F414                                ; $4332: $D4 $14 $F4
-
-jr_001_4335:
-    inc d                                         ; $4335: $14
-    ld sp, $4715                                  ; $4336: $31 $15 $47
-    dec d                                         ; $4339: $15
-    add a                                         ; $433A: $87
-    dec d                                         ; $433B: $15
-    sub e                                         ; $433C: $93
-
-jr_001_433D:
-    dec d                                         ; $433D: $15
-    xor c                                         ; $433E: $A9
-    dec d                                         ; $433F: $15
-    or d                                          ; $4340: $B2
-    dec d                                         ; $4341: $15
-    call z, $DB15                                 ; $4342: $CC $15 $DB
-    dec d                                         ; $4345: $15
-    ld sp, $4C16                                  ; $4346: $31 $16 $4C
-    ld d, $8C                                     ; $4349: $16 $8C
-    ld d, $14                                     ; $434B: $16 $14
-    rla                                           ; $434D: $17
-    rst $10                                       ; $434E: $D7
-    ld d, $6F                                     ; $434F: $16 $6F
-    rla                                           ; $4351: $17
-    rst $00                                       ; $4352: $C7
-    rla                                           ; $4353: $17
-    ld [$ED17], a                                 ; $4354: $EA $17 $ED
-    rla                                           ; $4357: $17
-    db $FD                                        ; $4358: $FD
-    rla                                           ; $4359: $17
-    ld a, [bc]                                    ; $435A: $0A
-    jr @+$19                                      ; $435B: $18 $17
-
-    jr @+$26                                      ; $435D: $18 $24
-
-    jr jr_001_4392                                ; $435F: $18 $31
-
-    jr jr_001_43A1                                ; $4361: $18 $3E
-
-    jr @+$4D                                      ; $4363: $18 $4B
-
-    jr jr_001_43B8                                ; $4365: $18 $51
-
-    jr @+$59                                      ; $4367: $18 $57
-
-    jr @+$65                                      ; $4369: $18 $63
-
-    jr @-$56                                      ; $436B: $18 $A8
-
-    jr @-$50                                      ; $436D: $18 $AE
-
-    jr jr_001_4325                                ; $436F: $18 $B4
-
-    jr jr_001_432D                                ; $4371: $18 $BA
-
-    jr jr_001_4335                                ; $4373: $18 $C0
-
-    jr jr_001_433D                                ; $4375: $18 $C6
-
-    jr jr_001_438F                                ; $4377: $18 $16
-
-    add hl, de                                    ; $4379: $19
-    add hl, sp                                    ; $437A: $39
-    add hl, de                                    ; $437B: $19
-    ld e, a                                       ; $437C: $5F
-    add hl, de                                    ; $437D: $19
-    add d                                         ; $437E: $82
-    add hl, de                                    ; $437F: $19
-    and l                                         ; $4380: $A5
-    add hl, de                                    ; $4381: $19
-    add sp, $19                                   ; $4382: $E8 $19
-    dec hl                                        ; $4384: $2B
-    ld a, [de]                                    ; $4385: $1A
-    ld b, d                                       ; $4386: $42
-    ld a, [de]                                    ; $4387: $1A
-    add l                                         ; $4388: $85
-    ld a, [de]                                    ; $4389: $1A
-    sub $1A                                       ; $438A: $D6 $1A
-    add [hl]                                      ; $438C: $86
-    dec de                                        ; $438D: $1B
-    or h                                          ; $438E: $B4
-
-jr_001_438F:
-    dec de                                        ; $438F: $1B
-    rst $18                                       ; $4390: $DF
-    dec de                                        ; $4391: $1B
-
-jr_001_4392:
-    ld hl, sp+$1B                                 ; $4392: $F8 $1B
-    jr nz, @+$1E                                  ; $4394: $20 $1C
-
-    ld c, e                                       ; $4396: $4B
-    inc e                                         ; $4397: $1C
-    ld a, [hl]                                    ; $4398: $7E
-    inc e                                         ; $4399: $1C
-    xor [hl]                                      ; $439A: $AE
-    inc e                                         ; $439B: $1C
-    ldh [rNR32], a                                ; $439C: $E0 $1C
-    db $10                                        ; $439E: $10
-    dec e                                         ; $439F: $1D
-    ld a, e                                       ; $43A0: $7B
-
-jr_001_43A1:
-    dec e                                         ; $43A1: $1D
-    or h                                          ; $43A2: $B4
-
-jr_001_43A3:
-    dec e                                         ; $43A3: $1D
-    ldh a, [rNR33]                                ; $43A4: $F0 $1D
-    ld c, h                                       ; $43A6: $4C
-    ld e, $42                                     ; $43A7: $1E $42
-    dec e                                         ; $43A9: $1D
-    ld a, h                                       ; $43AA: $7C
-    ld e, $CE                                     ; $43AB: $1E $CE
-    ld e, $ED                                     ; $43AD: $1E $ED
-    ld e, $31                                     ; $43AF: $1E $31
-    jr nz, @+$6E                                  ; $43B1: $20 $6C
-
-    jr nz, @+$28                                  ; $43B3: $20 $26
-
-    rra                                           ; $43B5: $1F
-    ld [hl], e                                    ; $43B6: $73
-    rra                                           ; $43B7: $1F
-
-jr_001_43B8:
-    jp nz, $D71F                                  ; $43B8: $C2 $1F $D7
-
-    rra                                           ; $43BB: $1F
-    jr nz, jr_001_43DE                            ; $43BC: $20 $20
-
-    ld a, c                                       ; $43BE: $79
-    jr nz, jr_001_43A3                            ; $43BF: $20 $E2
-
-    jr nz, @+$43                                  ; $43C1: $20 $41
-
-    ld hl, $2166                                  ; $43C3: $21 $66 $21
-    adc e                                         ; $43C6: $8B
-    ld hl, $21C6                                  ; $43C7: $21 $C6 $21
-    sub $21                                       ; $43CA: $D6 $21
-    rst $28                                       ; $43CC: $EF
-    ld hl, $2201                                  ; $43CD: $21 $01 $22
-    ld a, [de]                                    ; $43D0: $1A
-    ld [hl+], a                                   ; $43D1: $22
-    ld e, c                                       ; $43D2: $59
-    ld [hl+], a                                   ; $43D3: $22
-    ld l, e                                       ; $43D4: $6B
-    ld [hl+], a                                   ; $43D5: $22
-    ld a, d                                       ; $43D6: $7A
-    ld [hl+], a                                   ; $43D7: $22
-    sbc c                                         ; $43D8: $99
-    ld [hl+], a                                   ; $43D9: $22
-    sub $22                                       ; $43DA: $D6 $22
-    jr nc, jr_001_4401                            ; $43DC: $30 $23
-
-jr_001_43DE:
-    ld b, b                                       ; $43DE: $40
-    inc hl                                        ; $43DF: $23
-    ld c, a                                       ; $43E0: $4F
-    inc hl                                        ; $43E1: $23
-    ld a, d                                       ; $43E2: $7A
-    inc hl                                        ; $43E3: $23
-    db $F4                                        ; $43E4: $F4
-    inc hl                                        ; $43E5: $23
-    adc c                                         ; $43E6: $89
-    inc hl                                        ; $43E7: $23
-    inc [hl]                                      ; $43E8: $34
-    inc h                                         ; $43E9: $24
-    and b                                         ; $43EA: $A0
-    inc h                                         ; $43EB: $24
-    cp [hl]                                       ; $43EC: $BE
-    inc h                                         ; $43ED: $24
-    ldh [rNR50], a                                ; $43EE: $E0 $24
-    rst $30                                       ; $43F0: $F7
-    inc h                                         ; $43F1: $24
-    adc b                                         ; $43F2: $88
-    dec h                                         ; $43F3: $25
-    add hl, hl                                    ; $43F4: $29
-    ld h, $39                                     ; $43F5: $26 $39
-    ld h, $57                                     ; $43F7: $26 $57
-    ld h, $A5                                     ; $43F9: $26 $A5
-    daa                                           ; $43FB: $27
-    pop bc                                        ; $43FC: $C1
-    daa                                           ; $43FD: $27
-    db $EC                                        ; $43FE: $EC
-    daa                                           ; $43FF: $27
-    ld a, [bc]                                    ; $4400: $0A
-
-jr_001_4401:
-    jr z, jr_001_4433                             ; $4401: $28 $30
-
-    jr z, jr_001_43A1                             ; $4403: $28 $9C
-
-    add hl, hl                                    ; $4405: $29
-    jp nc, $F129                                  ; $4406: $D2 $29 $F1
-
-    add hl, hl                                    ; $4409: $29
-    ld [de], a                                    ; $440A: $12
-    ld a, [hl+]                                   ; $440B: $2A
-    jr @+$2C                                      ; $440C: $18 $2A
-
-    ld d, d                                       ; $440E: $52
-    ld a, [hl+]                                   ; $440F: $2A
-    ld h, [hl]                                    ; $4410: $66
-    ld a, [hl+]                                   ; $4411: $2A
-    ld a, l                                       ; $4412: $7D
-    ld a, [hl+]                                   ; $4413: $2A
-    sbc c                                         ; $4414: $99
-    ld a, [hl+]                                   ; $4415: $2A
-    cp b                                          ; $4416: $B8
-    ld a, [hl+]                                   ; $4417: $2A
-    rst $10                                       ; $4418: $D7
-    ld a, [hl+]                                   ; $4419: $2A
     ld a, [$C9C4]                                 ; $441A: $FA $C4 $C9
     ld [$C18E], a                                 ; $441D: $EA $8E $C1
     ld a, [$C9C5]                                 ; $4420: $FA $C5 $C9
@@ -900,9 +750,9 @@ jr_001_4433:
     ld a, $FF                                     ; $443D: $3E $FF
     ld [$C6DE], a                                 ; $443F: $EA $DE $C6
     ld a, $D3                                     ; $4442: $3E $D3
-    ld [$FFAB], a                                 ; $4444: $EA $AB $FF
+    ld [hScript.State], a                                 ; $4444: $EA $AB $FF
     ld a, $0A                                     ; $4447: $3E $0A
-    ld [$FFAC], a                                 ; $4449: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4449: $EA $AC $FF
     ret                                           ; $444C: $C9
 
 
@@ -950,9 +800,9 @@ jr_001_4433:
     ld a, l                                       ; $4490: $7D
     ld [$FF93], a                                 ; $4491: $EA $93 $FF
     ld a, $19                                     ; $4494: $3E $19
-    ldh [$FFAB], a                                  ; $4496: $E0 $AB
+    ldh [hScript.State], a                                  ; $4496: $E0 $AB
     ld a, $0D                                     ; $4498: $3E $0D
-    ldh [$FFAC], a                                  ; $449A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $449A: $E0 $AC
     ret                                           ; $449C: $C9
 
 
@@ -1025,9 +875,9 @@ jr_001_44E3:
     and a                                         ; $4509: $A7
     ret nz                                        ; $450A: $C0
 
-    ldh a, [$FFAC]                                  ; $450B: $F0 $AC
+    ldh a, [hScript.State + 1]                                  ; $450B: $F0 $AC
     ld h, a                                       ; $450D: $67
-    ldh a, [$FFAB]                                  ; $450E: $F0 $AB
+    ldh a, [hScript.State]                                  ; $450E: $F0 $AB
     ld l, a                                       ; $4510: $6F
     jp hl                                         ; $4511: $E9
 
@@ -1067,12 +917,12 @@ jr_001_4512:
 
 
 jr_001_4548:
-    ld hl, $FFA8                                  ; $4548: $21 $A8 $FF
+    ld hl, hScript.Bank                                  ; $4548: $21 $A8 $FF
     res 7, [hl]                                   ; $454B: $CB $BE
     ld a, $D3                                     ; $454D: $3E $D3
-    ld [$FFAB], a                                 ; $454F: $EA $AB $FF
+    ld [hScript.State], a                                 ; $454F: $EA $AB $FF
     ld a, $0A                                     ; $4552: $3E $0A
-    ld [$FFAC], a                                 ; $4554: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4554: $EA $AC $FF
     xor a                                         ; $4557: $AF
     ld [$C732], a                                 ; $4558: $EA $32 $C7
     ret                                           ; $455B: $C9
@@ -1185,11 +1035,11 @@ jr_001_45DE:
     ld a, b                                       ; $45E2: $78
     ld [$FFAA], a                                 ; $45E3: $EA $AA $FF
     ld a, c                                       ; $45E6: $79
-    ld [$FFA9], a                                 ; $45E7: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $45E7: $EA $A9 $FF
     ld a, $D3                                     ; $45EA: $3E $D3
-    ld [$FFAB], a                                 ; $45EC: $EA $AB $FF
+    ld [hScript.State], a                                 ; $45EC: $EA $AB $FF
     ld a, $0A                                     ; $45EF: $3E $0A
-    ld [$FFAC], a                                 ; $45F1: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $45F1: $EA $AC $FF
     ret                                           ; $45F4: $C9
 
 
@@ -1230,11 +1080,11 @@ jr_001_4615:
     ld a, b                                       ; $4615: $78
     ld [$FFAA], a                                 ; $4616: $EA $AA $FF
     ld a, c                                       ; $4619: $79
-    ld [$FFA9], a                                 ; $461A: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $461A: $EA $A9 $FF
     ld a, $D3                                     ; $461D: $3E $D3
-    ldh [$FFAB], a                                  ; $461F: $E0 $AB
+    ldh [hScript.State], a                                  ; $461F: $E0 $AB
     ld a, $0A                                     ; $4621: $3E $0A
-    ldh [$FFAC], a                                  ; $4623: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $4623: $E0 $AC
     ret                                           ; $4625: $C9
 
 
@@ -1732,9 +1582,9 @@ jr_001_47E6:
     ld a, $47                                     ; $48F4: $3E $47
     ld [wVBlank_Func + 1], a                                 ; $48F6: $EA $E9 $C6
     ld a, $04                                     ; $48F9: $3E $04
-    ld [$FFAB], a                                 ; $48FB: $EA $AB $FF
+    ld [hScript.State], a                                 ; $48FB: $EA $AB $FF
     ld a, $49                                     ; $48FE: $3E $49
-    ld [$FFAC], a                                 ; $4900: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4900: $EA $AC $FF
     ret                                           ; $4903: $C9
 
 
@@ -1773,9 +1623,9 @@ Jump_001_492A:
     ld a, $2D                                     ; $4943: $3E $2D
     ld [$FFA1], a                                 ; $4945: $EA $A1 $FF
     ld a, $53                                     ; $4948: $3E $53
-    ld [$FFAB], a                                 ; $494A: $EA $AB $FF
+    ld [hScript.State], a                                 ; $494A: $EA $AB $FF
     ld a, $49                                     ; $494D: $3E $49
-    ld [$FFAC], a                                 ; $494F: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $494F: $EA $AC $FF
     ret                                           ; $4952: $C9
 
 
@@ -1783,12 +1633,12 @@ Jump_001_492A:
     ld [$C6F2], a                                 ; $4955: $EA $F2 $C6
 
 Jump_001_4958:
-    ld hl, $FFA8                                  ; $4958: $21 $A8 $FF
+    ld hl, hScript.Bank                                  ; $4958: $21 $A8 $FF
     res 7, [hl]                                   ; $495B: $CB $BE
     ld a, $D3                                     ; $495D: $3E $D3
-    ld [$FFAB], a                                 ; $495F: $EA $AB $FF
+    ld [hScript.State], a                                 ; $495F: $EA $AB $FF
     ld a, $0A                                     ; $4962: $3E $0A
-    ld [$FFAC], a                                 ; $4964: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4964: $EA $AC $FF
     ret                                           ; $4967: $C9
 
 
@@ -1814,9 +1664,9 @@ Jump_001_4958:
     ld a, $47                                     ; $498F: $3E $47
     ld [wVBlank_Func + 1], a                                 ; $4991: $EA $E9 $C6
     ld a, $A9                                     ; $4994: $3E $A9
-    ld [$FFAB], a                                 ; $4996: $EA $AB $FF
+    ld [hScript.State], a                                 ; $4996: $EA $AB $FF
     ld a, $49                                     ; $4999: $3E $49
-    ld [$FFAC], a                                 ; $499B: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $499B: $EA $AC $FF
     ld a, $28                                     ; $499E: $3E $28
     ld [$FFA0], a                                 ; $49A0: $EA $A0 $FF
     ld a, $2D                                     ; $49A3: $3E $2D
@@ -1831,9 +1681,9 @@ Jump_001_4958:
     ld a, $47                                     ; $49B3: $3E $47
     ld [wVBlank_Func + 1], a                                 ; $49B5: $EA $E9 $C6
     ld a, $C3                                     ; $49B8: $3E $C3
-    ld [$FFAB], a                                 ; $49BA: $EA $AB $FF
+    ld [hScript.State], a                                 ; $49BA: $EA $AB $FF
     ld a, $49                                     ; $49BD: $3E $49
-    ld [$FFAC], a                                 ; $49BF: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $49BF: $EA $AC $FF
     ret                                           ; $49C2: $C9
 
 
@@ -1842,9 +1692,9 @@ Jump_001_4958:
     ld a, $47                                     ; $49C8: $3E $47
     ld [wVBlank_Func + 1], a                                 ; $49CA: $EA $E9 $C6
     ld a, $D8                                     ; $49CD: $3E $D8
-    ld [$FFAB], a                                 ; $49CF: $EA $AB $FF
+    ld [hScript.State], a                                 ; $49CF: $EA $AB $FF
     ld a, $49                                     ; $49D2: $3E $49
-    ld [$FFAC], a                                 ; $49D4: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $49D4: $EA $AC $FF
     ret                                           ; $49D7: $C9
 
 
@@ -1853,9 +1703,9 @@ Jump_001_4958:
     ld a, $47                                     ; $49DD: $3E $47
     ld [wVBlank_Func + 1], a                                 ; $49DF: $EA $E9 $C6
     ld a, $ED                                     ; $49E2: $3E $ED
-    ld [$FFAB], a                                 ; $49E4: $EA $AB $FF
+    ld [hScript.State], a                                 ; $49E4: $EA $AB $FF
     ld a, $49                                     ; $49E7: $3E $49
-    ld [$FFAC], a                                 ; $49E9: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $49E9: $EA $AC $FF
     ret                                           ; $49EC: $C9
 
 
@@ -1881,22 +1731,22 @@ Jump_001_4958:
 
 
 Jump_001_4A14:
-    ld hl, $FFA8                                  ; $4A14: $21 $A8 $FF
+    ld hl, hScript.Bank                                  ; $4A14: $21 $A8 $FF
     res 7, [hl]                                   ; $4A17: $CB $BE
     ld a, $5D                                     ; $4A19: $3E $5D
-    ld [$FFAB], a                                 ; $4A1B: $EA $AB $FF
+    ld [hScript.State], a                                 ; $4A1B: $EA $AB $FF
     ld a, $27                                     ; $4A1E: $3E $27
-    ld [$FFAC], a                                 ; $4A20: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4A20: $EA $AC $FF
     ret                                           ; $4A23: $C9
 
 
 Jump_001_4A24:
-    ld hl, $FFA8                                  ; $4A24: $21 $A8 $FF
+    ld hl, hScript.Bank                                  ; $4A24: $21 $A8 $FF
     res 7, [hl]                                   ; $4A27: $CB $BE
     ld a, $D3                                     ; $4A29: $3E $D3
-    ld [$FFAB], a                                 ; $4A2B: $EA $AB $FF
+    ld [hScript.State], a                                 ; $4A2B: $EA $AB $FF
     ld a, $0A                                     ; $4A2E: $3E $0A
-    ld [$FFAC], a                                 ; $4A30: $EA $AC $FF
+    ld [hScript.State + 1], a                                 ; $4A30: $EA $AC $FF
     ret                                           ; $4A33: $C9
 
 
@@ -1905,7 +1755,7 @@ Call_001_4A34:
     cp $00                                        ; $4A37: $FE $00
     ret nz                                        ; $4A39: $C0
 
-    ld a, [$C71A]                                 ; $4A3A: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $4A3A: $FA $1A $C7
     and a                                         ; $4A3D: $A7
     ret nz                                        ; $4A3E: $C0
 
@@ -1955,7 +1805,7 @@ Call_001_4A34:
     ld a, $00                                     ; $4A7E: $3E $00
     adc h                                         ; $4A80: $8C
     ld h, a                                       ; $4A81: $67
-    call Call_000_0A45                            ; $4A82: $CD $45 $0A
+    call Hotspot00_GetType                            ; $4A82: $CD $45 $0A
     cp $01                                        ; $4A85: $FE $01
     jr z, jr_001_4A97                             ; $4A87: $28 $0E
 
@@ -2026,7 +1876,7 @@ Call_001_4AC0:
 
     ld a, $01                                     ; $4AC6: $3E $01
     ld [$C735], a                                 ; $4AC8: $EA $35 $C7
-    ld a, [$C71A]                                 ; $4ACB: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $4ACB: $FA $1A $C7
     and a                                         ; $4ACE: $A7
     ret nz                                        ; $4ACF: $C0
 
@@ -2050,7 +1900,7 @@ Call_001_4AC0:
     ld l, a                                       ; $4AE7: $6F
     add hl, de                                    ; $4AE8: $19
     inc hl                                        ; $4AE9: $23
-    call Call_000_0A59                            ; $4AEA: $CD $59 $0A
+    call Hotspot00_SetScript                            ; $4AEA: $CD $59 $0A
     ld a, $D3                                     ; $4AED: $3E $D3
     ld [$C71B], a                                 ; $4AEF: $EA $1B $C7
     ld a, $0A                                     ; $4AF2: $3E $0A
@@ -2247,7 +2097,7 @@ Jump_001_4C08:
     jp c, Jump_001_634D                           ; $4C23: $DA $4D $63
 
     ld a, $B3                                     ; $4C26: $3E $B3
-    ld [$FFA9], a                                 ; $4C28: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4C28: $EA $A9 $FF
     ld a, $61                                     ; $4C2B: $3E $61
     ld [$FFAA], a                                 ; $4C2D: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4C30: $C3 $BA $4B
@@ -2262,7 +2112,7 @@ jr_001_4C33:
     jp c, Jump_001_634D                           ; $4C3C: $DA $4D $63
 
     ld a, $67                                     ; $4C3F: $3E $67
-    ld [$FFA9], a                                 ; $4C41: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4C41: $EA $A9 $FF
     ld a, $61                                     ; $4C44: $3E $61
     ld [$FFAA], a                                 ; $4C46: $EA $AA $FF
     jp Jump_001_6354                              ; $4C49: $C3 $54 $63
@@ -2299,7 +2149,7 @@ Jump_001_4C59:
     jp c, Jump_001_634D                           ; $4C74: $DA $4D $63
 
     ld a, $D9                                     ; $4C77: $3E $D9
-    ld [$FFA9], a                                 ; $4C79: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4C79: $EA $A9 $FF
     ld a, $61                                     ; $4C7C: $3E $61
     ld [$FFAA], a                                 ; $4C7E: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4C81: $C3 $BA $4B
@@ -2314,7 +2164,7 @@ jr_001_4C84:
     jp c, Jump_001_634D                           ; $4C8D: $DA $4D $63
 
     ld a, $F5                                     ; $4C90: $3E $F5
-    ld [$FFA9], a                                 ; $4C92: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4C92: $EA $A9 $FF
     ld a, $60                                     ; $4C95: $3E $60
     ld [$FFAA], a                                 ; $4C97: $EA $AA $FF
     jp Jump_001_6354                              ; $4C9A: $C3 $54 $63
@@ -2351,7 +2201,7 @@ Jump_001_4CAA:
     jp c, Jump_001_634D                           ; $4CC5: $DA $4D $63
 
     ld a, $FF                                     ; $4CC8: $3E $FF
-    ld [$FFA9], a                                 ; $4CCA: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4CCA: $EA $A9 $FF
     ld a, $61                                     ; $4CCD: $3E $61
     ld [$FFAA], a                                 ; $4CCF: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4CD2: $C3 $BA $4B
@@ -2366,7 +2216,7 @@ jr_001_4CD5:
     jp c, Jump_001_634D                           ; $4CDE: $DA $4D $63
 
     ld a, $1B                                     ; $4CE1: $3E $1B
-    ld [$FFA9], a                                 ; $4CE3: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4CE3: $EA $A9 $FF
     ld a, $61                                     ; $4CE6: $3E $61
     ld [$FFAA], a                                 ; $4CE8: $EA $AA $FF
     jp Jump_001_6354                              ; $4CEB: $C3 $54 $63
@@ -2403,7 +2253,7 @@ Jump_001_4CFB:
     jp c, Jump_001_634D                           ; $4D16: $DA $4D $63
 
     ld a, $8D                                     ; $4D19: $3E $8D
-    ld [$FFA9], a                                 ; $4D1B: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4D1B: $EA $A9 $FF
     ld a, $61                                     ; $4D1E: $3E $61
     ld [$FFAA], a                                 ; $4D20: $EA $AA $FF
     jp Jump_001_4BBA                              ; $4D23: $C3 $BA $4B
@@ -2418,7 +2268,7 @@ jr_001_4D26:
     jp c, Jump_001_634D                           ; $4D2F: $DA $4D $63
 
     ld a, $41                                     ; $4D32: $3E $41
-    ld [$FFA9], a                                 ; $4D34: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $4D34: $EA $A9 $FF
     ld a, $61                                     ; $4D37: $3E $61
     ld [$FFAA], a                                 ; $4D39: $EA $AA $FF
     jp Jump_001_6354                              ; $4D3C: $C3 $54 $63
@@ -2845,9 +2695,9 @@ Call_001_4FE6:
 
 Jump_001_4FEF:
     ld a, $D3                                     ; $4FEF: $3E $D3
-    ldh [$FFAB], a                                  ; $4FF1: $E0 $AB
+    ldh [hScript.State], a                                  ; $4FF1: $E0 $AB
     ld a, $0A                                     ; $4FF3: $3E $0A
-    ldh [$FFAC], a                                  ; $4FF5: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $4FF5: $E0 $AC
     ld a, $02                                     ; $4FF7: $3E $02
     ldh [$FF8D], a                                  ; $4FF9: $E0 $8D
     ld a, $50                                     ; $4FFB: $3E $50
@@ -2882,11 +2732,11 @@ Jump_001_5030:
     ld a, $03                                     ; $5030: $3E $03
     ldh [$FF8C], a                                  ; $5032: $E0 $8C
     ld a, $D3                                     ; $5034: $3E $D3
-    ldh [$FFAB], a                                  ; $5036: $E0 $AB
+    ldh [hScript.State], a                                  ; $5036: $E0 $AB
     ld a, $0A                                     ; $5038: $3E $0A
-    ldh [$FFAC], a                                  ; $503A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $503A: $E0 $AC
     ld a, $C9                                     ; $503C: $3E $C9
-    ldh [$FFA9], a                                  ; $503E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $503E: $E0 $A9
     ld a, $68                                     ; $5040: $3E $68
     ldh [$FFAA], a                                  ; $5042: $E0 $AA
     ld a, $71                                     ; $5044: $3E $71
@@ -2902,11 +2752,11 @@ Jump_001_5052:
     ld a, $03                                     ; $5052: $3E $03
     ldh [$FF8C], a                                  ; $5054: $E0 $8C
     ld a, $D3                                     ; $5056: $3E $D3
-    ldh [$FFAB], a                                  ; $5058: $E0 $AB
+    ldh [hScript.State], a                                  ; $5058: $E0 $AB
     ld a, $0A                                     ; $505A: $3E $0A
-    ldh [$FFAC], a                                  ; $505C: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $505C: $E0 $AC
     ld a, $DA                                     ; $505E: $3E $DA
-    ldh [$FFA9], a                                  ; $5060: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5060: $E0 $A9
     ld a, $68                                     ; $5062: $3E $68
     ldh [$FFAA], a                                  ; $5064: $E0 $AA
     ld a, $71                                     ; $5066: $3E $71
@@ -2957,7 +2807,7 @@ Jump_001_5052:
 
     call Call_001_4FDD                            ; $50BF: $CD $DD $4F
     ld a, $AF                                     ; $50C2: $3E $AF
-    ldh [$FFA9], a                                  ; $50C4: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $50C4: $E0 $A9
     ld a, $66                                     ; $50C6: $3E $66
     ldh [$FFAA], a                                  ; $50C8: $E0 $AA
     jp Jump_001_6354                              ; $50CA: $C3 $54 $63
@@ -2965,7 +2815,7 @@ Jump_001_5052:
 
 Jump_001_50CD:
     ld a, $08                                     ; $50CD: $3E $08
-    ld [$FFA9], a                                 ; $50CF: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $50CF: $EA $A9 $FF
     ld a, $6A                                     ; $50D2: $3E $6A
     ld [$FFAA], a                                 ; $50D4: $EA $AA $FF
     jp Jump_001_4FEF                              ; $50D7: $C3 $EF $4F
@@ -2975,11 +2825,11 @@ Jump_001_50DA:
     ld a, $01                                     ; $50DA: $3E $01
     ldh [$FF8C], a                                  ; $50DC: $E0 $8C
     ld a, $D3                                     ; $50DE: $3E $D3
-    ldh [$FFAB], a                                  ; $50E0: $E0 $AB
+    ldh [hScript.State], a                                  ; $50E0: $E0 $AB
     ld a, $0A                                     ; $50E2: $3E $0A
-    ldh [$FFAC], a                                  ; $50E4: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $50E4: $E0 $AC
     ld a, $E7                                     ; $50E6: $3E $E7
-    ldh [$FFA9], a                                  ; $50E8: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $50E8: $E0 $A9
     ld a, $67                                     ; $50EA: $3E $67
     ldh [$FFAA], a                                  ; $50EC: $E0 $AA
     ld a, $1B                                     ; $50EE: $3E $1B
@@ -2995,11 +2845,11 @@ Jump_001_50FC:
     ld a, $01                                     ; $50FC: $3E $01
     ldh [$FF8C], a                                  ; $50FE: $E0 $8C
     ld a, $D3                                     ; $5100: $3E $D3
-    ldh [$FFAB], a                                  ; $5102: $E0 $AB
+    ldh [hScript.State], a                                  ; $5102: $E0 $AB
     ld a, $0A                                     ; $5104: $3E $0A
-    ldh [$FFAC], a                                  ; $5106: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5106: $E0 $AC
     ld a, $F8                                     ; $5108: $3E $F8
-    ldh [$FFA9], a                                  ; $510A: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $510A: $E0 $A9
     ld a, $67                                     ; $510C: $3E $67
     ldh [$FFAA], a                                  ; $510E: $E0 $AA
     ld a, $1B                                     ; $5110: $3E $1B
@@ -3050,7 +2900,7 @@ Jump_001_50FC:
 
     call Call_001_4FDD                            ; $5169: $CD $DD $4F
     ld a, $79                                     ; $516C: $3E $79
-    ldh [$FFA9], a                                  ; $516E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $516E: $E0 $A9
     ld a, $66                                     ; $5170: $3E $66
     ldh [$FFAA], a                                  ; $5172: $E0 $AA
     jp Jump_001_6354                              ; $5174: $C3 $54 $63
@@ -3058,7 +2908,7 @@ Jump_001_50FC:
 
 Jump_001_5177:
     ld a, $27                                     ; $5177: $3E $27
-    ld [$FFA9], a                                 ; $5179: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5179: $EA $A9 $FF
     ld a, $69                                     ; $517C: $3E $69
     ld [$FFAA], a                                 ; $517E: $EA $AA $FF
     jp Jump_001_4FEF                              ; $5181: $C3 $EF $4F
@@ -3068,11 +2918,11 @@ Jump_001_5184:
     ld a, $02                                     ; $5184: $3E $02
     ldh [$FF8C], a                                  ; $5186: $E0 $8C
     ld a, $D3                                     ; $5188: $3E $D3
-    ldh [$FFAB], a                                  ; $518A: $E0 $AB
+    ldh [hScript.State], a                                  ; $518A: $E0 $AB
     ld a, $0A                                     ; $518C: $3E $0A
-    ldh [$FFAC], a                                  ; $518E: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $518E: $E0 $AC
     ld a, $43                                     ; $5190: $3E $43
-    ldh [$FFA9], a                                  ; $5192: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5192: $E0 $A9
     ld a, $68                                     ; $5194: $3E $68
     ldh [$FFAA], a                                  ; $5196: $E0 $AA
     ld a, $C5                                     ; $5198: $3E $C5
@@ -3088,11 +2938,11 @@ Jump_001_51A6:
     ld a, $02                                     ; $51A6: $3E $02
     ldh [$FF8C], a                                  ; $51A8: $E0 $8C
     ld a, $D3                                     ; $51AA: $3E $D3
-    ldh [$FFAB], a                                  ; $51AC: $E0 $AB
+    ldh [hScript.State], a                                  ; $51AC: $E0 $AB
     ld a, $0A                                     ; $51AE: $3E $0A
-    ldh [$FFAC], a                                  ; $51B0: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $51B0: $E0 $AC
     ld a, $54                                     ; $51B2: $3E $54
-    ldh [$FFA9], a                                  ; $51B4: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $51B4: $E0 $A9
     ld a, $68                                     ; $51B6: $3E $68
     ldh [$FFAA], a                                  ; $51B8: $E0 $AA
     ld a, $C5                                     ; $51BA: $3E $C5
@@ -3143,7 +2993,7 @@ Jump_001_51A6:
 
     call Call_001_4FDD                            ; $5213: $CD $DD $4F
     ld a, $8B                                     ; $5216: $3E $8B
-    ldh [$FFA9], a                                  ; $5218: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5218: $E0 $A9
     ld a, $66                                     ; $521A: $3E $66
     ldh [$FFAA], a                                  ; $521C: $E0 $AA
     jp Jump_001_6354                              ; $521E: $C3 $54 $63
@@ -3151,7 +3001,7 @@ Jump_001_51A6:
 
 Jump_001_5221:
     ld a, $72                                     ; $5221: $3E $72
-    ld [$FFA9], a                                 ; $5223: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5223: $EA $A9 $FF
     ld a, $69                                     ; $5226: $3E $69
     ld [$FFAA], a                                 ; $5228: $EA $AA $FF
     jp Jump_001_4FEF                              ; $522B: $C3 $EF $4F
@@ -3161,11 +3011,11 @@ Jump_001_522E:
     ld a, $00                                     ; $522E: $3E $00
     ldh [$FF8C], a                                  ; $5230: $E0 $8C
     ld a, $D3                                     ; $5232: $3E $D3
-    ldh [$FFAB], a                                  ; $5234: $E0 $AB
+    ldh [hScript.State], a                                  ; $5234: $E0 $AB
     ld a, $0A                                     ; $5236: $3E $0A
-    ldh [$FFAC], a                                  ; $5238: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5238: $E0 $AC
     ld a, $6D                                     ; $523A: $3E $6D
-    ldh [$FFA9], a                                  ; $523C: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $523C: $E0 $A9
     ld a, $68                                     ; $523E: $3E $68
     ldh [$FFAA], a                                  ; $5240: $E0 $AA
     ld a, $6F                                     ; $5242: $3E $6F
@@ -3181,11 +3031,11 @@ Jump_001_5250:
     ld a, $00                                     ; $5250: $3E $00
     ldh [$FF8C], a                                  ; $5252: $E0 $8C
     ld a, $D3                                     ; $5254: $3E $D3
-    ldh [$FFAB], a                                  ; $5256: $E0 $AB
+    ldh [hScript.State], a                                  ; $5256: $E0 $AB
     ld a, $0A                                     ; $5258: $3E $0A
-    ldh [$FFAC], a                                  ; $525A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $525A: $E0 $AC
     ld a, $7E                                     ; $525C: $3E $7E
-    ldh [$FFA9], a                                  ; $525E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $525E: $E0 $A9
     ld a, $68                                     ; $5260: $3E $68
     ldh [$FFAA], a                                  ; $5262: $E0 $AA
     ld a, $6F                                     ; $5264: $3E $6F
@@ -3236,7 +3086,7 @@ Jump_001_5250:
 
     call Call_001_4FDD                            ; $52BD: $CD $DD $4F
     ld a, $9D                                     ; $52C0: $3E $9D
-    ldh [$FFA9], a                                  ; $52C2: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $52C2: $E0 $A9
     ld a, $66                                     ; $52C4: $3E $66
     ldh [$FFAA], a                                  ; $52C6: $E0 $AA
     jp Jump_001_6354                              ; $52C8: $C3 $54 $63
@@ -3244,7 +3094,7 @@ Jump_001_5250:
 
 Jump_001_52CB:
     ld a, $BD                                     ; $52CB: $3E $BD
-    ld [$FFA9], a                                 ; $52CD: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $52CD: $EA $A9 $FF
     ld a, $69                                     ; $52D0: $3E $69
     ld [$FFAA], a                                 ; $52D2: $EA $AA $FF
     jp Jump_001_4FEF                              ; $52D5: $C3 $EF $4F
@@ -3325,14 +3175,14 @@ Call_001_5312:
 
 Jump_001_5326:
     ld a, $E2                                     ; $5326: $3E $E2
-    ld [$FFA9], a                                 ; $5328: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5328: $EA $A9 $FF
     ld a, $62                                     ; $532B: $3E $62
     ld [$FFAA], a                                 ; $532D: $EA $AA $FF
     jp Jump_001_6354                              ; $5330: $C3 $54 $63
 
 
     ld a, $06                                     ; $5333: $3E $06
-    ld [$FFA9], a                                 ; $5335: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5335: $EA $A9 $FF
     ld a, $64                                     ; $5338: $3E $64
     ld [$FFAA], a                                 ; $533A: $EA $AA $FF
     jp Jump_001_6354                              ; $533D: $C3 $54 $63
@@ -3357,14 +3207,14 @@ Call_001_5340:
 
 Jump_001_5354:
     ld a, $25                                     ; $5354: $3E $25
-    ld [$FFA9], a                                 ; $5356: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5356: $EA $A9 $FF
     ld a, $62                                     ; $5359: $3E $62
     ld [$FFAA], a                                 ; $535B: $EA $AA $FF
     jp Jump_001_6354                              ; $535E: $C3 $54 $63
 
 
     ld a, $21                                     ; $5361: $3E $21
-    ld [$FFA9], a                                 ; $5363: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5363: $EA $A9 $FF
     ld a, $63                                     ; $5366: $3E $63
     ld [$FFAA], a                                 ; $5368: $EA $AA $FF
     jp Jump_001_6354                              ; $536B: $C3 $54 $63
@@ -3389,14 +3239,14 @@ Call_001_536E:
 
 Jump_001_5382:
     ld a, $64                                     ; $5382: $3E $64
-    ld [$FFA9], a                                 ; $5384: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5384: $EA $A9 $FF
     ld a, $62                                     ; $5387: $3E $62
     ld [$FFAA], a                                 ; $5389: $EA $AA $FF
     jp Jump_001_6354                              ; $538C: $C3 $54 $63
 
 
     ld a, $6F                                     ; $538F: $3E $6F
-    ld [$FFA9], a                                 ; $5391: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5391: $EA $A9 $FF
     ld a, $63                                     ; $5394: $3E $63
     ld [$FFAA], a                                 ; $5396: $EA $AA $FF
     jp Jump_001_6354                              ; $5399: $C3 $54 $63
@@ -3421,14 +3271,14 @@ Call_001_539C:
 
 Jump_001_53B0:
     ld a, $A3                                     ; $53B0: $3E $A3
-    ld [$FFA9], a                                 ; $53B2: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $53B2: $EA $A9 $FF
     ld a, $62                                     ; $53B5: $3E $62
     ld [$FFAA], a                                 ; $53B7: $EA $AA $FF
     jp Jump_001_6354                              ; $53BA: $C3 $54 $63
 
 
     ld a, $BD                                     ; $53BD: $3E $BD
-    ld [$FFA9], a                                 ; $53BF: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $53BF: $EA $A9 $FF
     ld a, $63                                     ; $53C2: $3E $63
     ld [$FFAA], a                                 ; $53C4: $EA $AA $FF
     jp Jump_001_6354                              ; $53C7: $C3 $54 $63
@@ -3438,11 +3288,11 @@ Jump_001_53CA:
     ld a, $03                                     ; $53CA: $3E $03
     ldh [$FF8C], a                                  ; $53CC: $E0 $8C
     ld a, $D3                                     ; $53CE: $3E $D3
-    ldh [$FFAB], a                                  ; $53D0: $E0 $AB
+    ldh [hScript.State], a                                  ; $53D0: $E0 $AB
     ld a, $0A                                     ; $53D2: $3E $0A
-    ldh [$FFAC], a                                  ; $53D4: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $53D4: $E0 $AC
     ld a, $4D                                     ; $53D6: $3E $4D
-    ldh [$FFA9], a                                  ; $53D8: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $53D8: $E0 $A9
     ld a, $5C                                     ; $53DA: $3E $5C
     ldh [$FFAA], a                                  ; $53DC: $E0 $AA
     ld a, $E9                                     ; $53DE: $3E $E9
@@ -3458,7 +3308,7 @@ Jump_001_53CA:
     jp nz, Jump_001_5401                          ; $53F1: $C2 $01 $54
 
     ld a, $A1                                     ; $53F4: $3E $A1
-    ld [$FFA9], a                                 ; $53F6: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $53F6: $EA $A9 $FF
     ld a, $5D                                     ; $53F9: $3E $5D
     ld [$FFAA], a                                 ; $53FB: $EA $AA $FF
     jp Jump_001_640D                              ; $53FE: $C3 $0D $64
@@ -3533,11 +3383,11 @@ Jump_001_5468:
     ld a, $01                                     ; $5468: $3E $01
     ldh [$FF8C], a                                  ; $546A: $E0 $8C
     ld a, $D3                                     ; $546C: $3E $D3
-    ldh [$FFAB], a                                  ; $546E: $E0 $AB
+    ldh [hScript.State], a                                  ; $546E: $E0 $AB
     ld a, $0A                                     ; $5470: $3E $0A
-    ldh [$FFAC], a                                  ; $5472: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5472: $E0 $AC
     ld a, $6D                                     ; $5474: $3E $6D
-    ldh [$FFA9], a                                  ; $5476: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5476: $E0 $A9
     ld a, $5C                                     ; $5478: $3E $5C
     ldh [$FFAA], a                                  ; $547A: $E0 $AA
     ld a, $87                                     ; $547C: $3E $87
@@ -3553,7 +3403,7 @@ Jump_001_5468:
     jr nz, jr_001_549E                            ; $548F: $20 $0D
 
     ld a, $57                                     ; $5491: $3E $57
-    ld [$FFA9], a                                 ; $5493: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5493: $EA $A9 $FF
     ld a, $5E                                     ; $5496: $3E $5E
     ld [$FFAA], a                                 ; $5498: $EA $AA $FF
     jp Jump_001_640D                              ; $549B: $C3 $0D $64
@@ -3653,11 +3503,11 @@ Jump_001_552E:
     ld a, $02                                     ; $552E: $3E $02
     ldh [$FF8C], a                                  ; $5530: $E0 $8C
     ld a, $D3                                     ; $5532: $3E $D3
-    ldh [$FFAB], a                                  ; $5534: $E0 $AB
+    ldh [hScript.State], a                                  ; $5534: $E0 $AB
     ld a, $0A                                     ; $5536: $3E $0A
-    ldh [$FFAC], a                                  ; $5538: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5538: $E0 $AC
     ld a, $8D                                     ; $553A: $3E $8D
-    ldh [$FFA9], a                                  ; $553C: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $553C: $E0 $A9
     ld a, $5C                                     ; $553E: $3E $5C
     ldh [$FFAA], a                                  ; $5540: $E0 $AA
     ld a, $4D                                     ; $5542: $3E $4D
@@ -3673,7 +3523,7 @@ Jump_001_552E:
     jr nz, jr_001_5564                            ; $5555: $20 $0D
 
     ld a, $74                                     ; $5557: $3E $74
-    ld [$FFA9], a                                 ; $5559: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5559: $EA $A9 $FF
     ld a, $5E                                     ; $555C: $3E $5E
     ld [$FFAA], a                                 ; $555E: $EA $AA $FF
     jp Jump_001_640D                              ; $5561: $C3 $0D $64
@@ -3773,11 +3623,11 @@ Jump_001_55F4:
     ld a, $00                                     ; $55F4: $3E $00
     ldh [$FF8C], a                                  ; $55F6: $E0 $8C
     ld a, $D3                                     ; $55F8: $3E $D3
-    ldh [$FFAB], a                                  ; $55FA: $E0 $AB
+    ldh [hScript.State], a                                  ; $55FA: $E0 $AB
     ld a, $0A                                     ; $55FC: $3E $0A
-    ldh [$FFAC], a                                  ; $55FE: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $55FE: $E0 $AC
     ld a, $23                                     ; $5600: $3E $23
-    ldh [$FFA9], a                                  ; $5602: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5602: $E0 $A9
     ld a, $5C                                     ; $5604: $3E $5C
     ldh [$FFAA], a                                  ; $5606: $E0 $AA
     ld a, $13                                     ; $5608: $3E $13
@@ -3793,7 +3643,7 @@ Jump_001_55F4:
     jr nz, jr_001_562A                            ; $561B: $20 $0D
 
     ld a, $97                                     ; $561D: $3E $97
-    ld [$FFA9], a                                 ; $561F: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $561F: $EA $A9 $FF
     ld a, $5D                                     ; $5622: $3E $5D
     ld [$FFAA], a                                 ; $5624: $EA $AA $FF
     jp Jump_001_640D                              ; $5627: $C3 $0D $64
@@ -3868,11 +3718,11 @@ Jump_001_5691:
     ld a, $03                                     ; $5691: $3E $03
     ldh [$FF8C], a                                  ; $5693: $E0 $8C
     ld a, $D3                                     ; $5695: $3E $D3
-    ldh [$FFAB], a                                  ; $5697: $E0 $AB
+    ldh [hScript.State], a                                  ; $5697: $E0 $AB
     ld a, $0A                                     ; $5699: $3E $0A
-    ldh [$FFAC], a                                  ; $569B: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $569B: $E0 $AC
     ld a, $0D                                     ; $569D: $3E $0D
-    ldh [$FFA9], a                                  ; $569F: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $569F: $E0 $A9
     ld a, $5D                                     ; $56A1: $3E $5D
     ldh [$FFAA], a                                  ; $56A3: $E0 $AA
     ld a, $B0                                     ; $56A5: $3E $B0
@@ -3888,7 +3738,7 @@ Jump_001_5691:
     jr nz, jr_001_56C7                            ; $56B8: $20 $0D
 
     ld a, $A1                                     ; $56BA: $3E $A1
-    ld [$FFA9], a                                 ; $56BC: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $56BC: $EA $A9 $FF
     ld a, $5D                                     ; $56BF: $3E $5D
     ld [$FFAA], a                                 ; $56C1: $EA $AA $FF
     jp Jump_001_640D                              ; $56C4: $C3 $0D $64
@@ -3950,11 +3800,11 @@ Jump_001_5724:
     ld a, $01                                     ; $5724: $3E $01
     ldh [$FF8C], a                                  ; $5726: $E0 $8C
     ld a, $D3                                     ; $5728: $3E $D3
-    ldh [$FFAB], a                                  ; $572A: $E0 $AB
+    ldh [hScript.State], a                                  ; $572A: $E0 $AB
     ld a, $0A                                     ; $572C: $3E $0A
-    ldh [$FFAC], a                                  ; $572E: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $572E: $E0 $AC
     ld a, $27                                     ; $5730: $3E $27
-    ldh [$FFA9], a                                  ; $5732: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5732: $E0 $A9
     ld a, $5D                                     ; $5734: $3E $5D
     ldh [$FFAA], a                                  ; $5736: $E0 $AA
     ld a, $43                                     ; $5738: $3E $43
@@ -3970,7 +3820,7 @@ Jump_001_5724:
     jr nz, jr_001_575A                            ; $574B: $20 $0D
 
     ld a, $57                                     ; $574D: $3E $57
-    ld [$FFA9], a                                 ; $574F: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $574F: $EA $A9 $FF
     ld a, $5E                                     ; $5752: $3E $5E
     ld [$FFAA], a                                 ; $5754: $EA $AA $FF
     jp Jump_001_640D                              ; $5757: $C3 $0D $64
@@ -4061,11 +3911,11 @@ Jump_001_57DC:
     ld a, $02                                     ; $57DC: $3E $02
     ldh [$FF8C], a                                  ; $57DE: $E0 $8C
     ld a, $D3                                     ; $57E0: $3E $D3
-    ldh [$FFAB], a                                  ; $57E2: $E0 $AB
+    ldh [hScript.State], a                                  ; $57E2: $E0 $AB
     ld a, $0A                                     ; $57E4: $3E $0A
-    ldh [$FFAC], a                                  ; $57E6: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $57E6: $E0 $AC
     ld a, $41                                     ; $57E8: $3E $41
-    ldh [$FFA9], a                                  ; $57EA: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $57EA: $E0 $A9
     ld a, $5D                                     ; $57EC: $3E $5D
     ldh [$FFAA], a                                  ; $57EE: $E0 $AA
     ld a, $FB                                     ; $57F0: $3E $FB
@@ -4081,7 +3931,7 @@ Jump_001_57DC:
     jr nz, jr_001_5812                            ; $5803: $20 $0D
 
     ld a, $74                                     ; $5805: $3E $74
-    ld [$FFA9], a                                 ; $5807: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5807: $EA $A9 $FF
     ld a, $5E                                     ; $580A: $3E $5E
     ld [$FFAA], a                                 ; $580C: $EA $AA $FF
     jp Jump_001_640D                              ; $580F: $C3 $0D $64
@@ -4172,11 +4022,11 @@ Jump_001_5894:
     ld a, $00                                     ; $5894: $3E $00
     ldh [$FF8C], a                                  ; $5896: $E0 $8C
     ld a, $D3                                     ; $5898: $3E $D3
-    ldh [$FFAB], a                                  ; $589A: $E0 $AB
+    ldh [hScript.State], a                                  ; $589A: $E0 $AB
     ld a, $0A                                     ; $589C: $3E $0A
-    ldh [$FFAC], a                                  ; $589E: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $589E: $E0 $AC
     ld a, $FD                                     ; $58A0: $3E $FD
-    ldh [$FFA9], a                                  ; $58A2: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $58A2: $E0 $A9
     ld a, $5C                                     ; $58A4: $3E $5C
     ldh [$FFAA], a                                  ; $58A6: $E0 $AA
     ld a, $B3                                     ; $58A8: $3E $B3
@@ -4192,7 +4042,7 @@ Jump_001_5894:
     jr nz, jr_001_58CA                            ; $58BB: $20 $0D
 
     ld a, $97                                     ; $58BD: $3E $97
-    ld [$FFA9], a                                 ; $58BF: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $58BF: $EA $A9 $FF
     ld a, $5D                                     ; $58C2: $3E $5D
     ld [$FFAA], a                                 ; $58C4: $EA $AA $FF
     jp Jump_001_640D                              ; $58C7: $C3 $0D $64
@@ -4263,7 +4113,7 @@ jr_001_591C:
     xor a                                         ; $593F: $AF
     ld [$0000], a                                 ; $5940: $EA $00 $00
     ld a, $23                                     ; $5943: $3E $23
-    ld [$FFA9], a                                 ; $5945: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5945: $EA $A9 $FF
     ld a, $5E                                     ; $5948: $3E $5E
     ld [$FFAA], a                                 ; $594A: $EA $AA $FF
     jp Jump_001_6354                              ; $594D: $C3 $54 $63
@@ -4282,7 +4132,7 @@ jr_001_591C:
     xor a                                         ; $5968: $AF
     ld [$0000], a                                 ; $5969: $EA $00 $00
     ld a, $30                                     ; $596C: $3E $30
-    ld [$FFA9], a                                 ; $596E: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $596E: $EA $A9 $FF
     ld a, $5E                                     ; $5971: $3E $5E
     ld [$FFAA], a                                 ; $5973: $EA $AA $FF
     jp Jump_001_6354                              ; $5976: $C3 $54 $63
@@ -4301,7 +4151,7 @@ jr_001_591C:
     xor a                                         ; $5991: $AF
     ld [$0000], a                                 ; $5992: $EA $00 $00
     ld a, $3D                                     ; $5995: $3E $3D
-    ld [$FFA9], a                                 ; $5997: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5997: $EA $A9 $FF
     ld a, $5E                                     ; $599A: $3E $5E
     ld [$FFAA], a                                 ; $599C: $EA $AA $FF
     jp Jump_001_6354                              ; $599F: $C3 $54 $63
@@ -4320,7 +4170,7 @@ jr_001_591C:
     xor a                                         ; $59BA: $AF
     ld [$0000], a                                 ; $59BB: $EA $00 $00
     ld a, $4A                                     ; $59BE: $3E $4A
-    ld [$FFA9], a                                 ; $59C0: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $59C0: $EA $A9 $FF
     ld a, $5E                                     ; $59C3: $3E $5E
     ld [$FFAA], a                                 ; $59C5: $EA $AA $FF
     jp Jump_001_6354                              ; $59C8: $C3 $54 $63
@@ -4340,7 +4190,7 @@ Jump_001_59CB:
     xor a                                         ; $59E3: $AF
     ld [$0000], a                                 ; $59E4: $EA $00 $00
     ld a, $1A                                     ; $59E7: $3E $1A
-    ld [$FFA9], a                                 ; $59E9: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $59E9: $EA $A9 $FF
     ld a, $69                                     ; $59EC: $3E $69
     ld [$FFAA], a                                 ; $59EE: $EA $AA $FF
     jp Jump_001_6354                              ; $59F1: $C3 $54 $63
@@ -4360,7 +4210,7 @@ Jump_001_59F4:
     xor a                                         ; $5A0C: $AF
     ld [$0000], a                                 ; $5A0D: $EA $00 $00
     ld a, $0D                                     ; $5A10: $3E $0D
-    ld [$FFA9], a                                 ; $5A12: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5A12: $EA $A9 $FF
     ld a, $69                                     ; $5A15: $3E $69
     ld [$FFAA], a                                 ; $5A17: $EA $AA $FF
     jp Jump_001_6354                              ; $5A1A: $C3 $54 $63
@@ -4380,7 +4230,7 @@ Jump_001_5A1D:
     xor a                                         ; $5A35: $AF
     ld [$0000], a                                 ; $5A36: $EA $00 $00
     ld a, $F3                                     ; $5A39: $3E $F3
-    ld [$FFA9], a                                 ; $5A3B: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5A3B: $EA $A9 $FF
     ld a, $68                                     ; $5A3E: $3E $68
     ld [$FFAA], a                                 ; $5A40: $EA $AA $FF
     jp Jump_001_6354                              ; $5A43: $C3 $54 $63
@@ -4400,7 +4250,7 @@ Jump_001_5A46:
     xor a                                         ; $5A5E: $AF
     ld [$0000], a                                 ; $5A5F: $EA $00 $00
     ld a, $00                                     ; $5A62: $3E $00
-    ld [$FFA9], a                                 ; $5A64: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5A64: $EA $A9 $FF
     ld a, $69                                     ; $5A67: $3E $69
     ld [$FFAA], a                                 ; $5A69: $EA $AA $FF
     jp Jump_001_6354                              ; $5A6C: $C3 $54 $63
@@ -4446,7 +4296,7 @@ jr_001_5AA2:
     xor a                                         ; $5AB3: $AF
     ld [$0000], a                                 ; $5AB4: $EA $00 $00
     ld a, $35                                     ; $5AB7: $3E $35
-    ld [$FFA9], a                                 ; $5AB9: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5AB9: $EA $A9 $FF
     ld a, $5F                                     ; $5ABC: $3E $5F
     ld [$FFAA], a                                 ; $5ABE: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5AC1: $C3 $AD $5B
@@ -4463,11 +4313,11 @@ jr_001_5AC4:
     ld a, $03                                     ; $5ACF: $3E $03
     ldh [$FF8C], a                                  ; $5AD1: $E0 $8C
     ld a, $D3                                     ; $5AD3: $3E $D3
-    ldh [$FFAB], a                                  ; $5AD5: $E0 $AB
+    ldh [hScript.State], a                                  ; $5AD5: $E0 $AB
     ld a, $0A                                     ; $5AD7: $3E $0A
-    ldh [$FFAC], a                                  ; $5AD9: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5AD9: $E0 $AC
     ld a, $DE                                     ; $5ADB: $3E $DE
-    ldh [$FFA9], a                                  ; $5ADD: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5ADD: $E0 $A9
     ld a, $5F                                     ; $5ADF: $3E $5F
     ldh [$FFAA], a                                  ; $5AE1: $E0 $AA
     ld a, $7F                                     ; $5AE3: $3E $7F
@@ -4485,7 +4335,7 @@ jr_001_5AEE:
     jr z, jr_001_5B06                             ; $5AF7: $28 $0D
 
     ld a, $05                                     ; $5AF9: $3E $05
-    ld [$FFA9], a                                 ; $5AFB: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5AFB: $EA $A9 $FF
     ld a, $5F                                     ; $5AFE: $3E $5F
     ld [$FFAA], a                                 ; $5B00: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B03: $C3 $AD $5B
@@ -4493,7 +4343,7 @@ jr_001_5AEE:
 
 jr_001_5B06:
     ld a, $35                                     ; $5B06: $3E $35
-    ld [$FFA9], a                                 ; $5B08: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5B08: $EA $A9 $FF
     ld a, $5F                                     ; $5B0B: $3E $5F
     ld [$FFAA], a                                 ; $5B0D: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B10: $C3 $AD $5B
@@ -4501,7 +4351,7 @@ jr_001_5B06:
 
 Jump_001_5B13:
     ld a, $9C                                     ; $5B13: $3E $9C
-    ld [$FFA9], a                                 ; $5B15: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5B15: $EA $A9 $FF
     ld a, $5B                                     ; $5B18: $3E $5B
     ld [$FFAA], a                                 ; $5B1A: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5B1D: $C3 $AD $5B
@@ -4520,7 +4370,7 @@ Jump_001_5B13:
     xor a                                         ; $5B38: $AF
     ld [$0000], a                                 ; $5B39: $EA $00 $00
     ld a, $0D                                     ; $5B3C: $3E $0D
-    ld [$FFA9], a                                 ; $5B3E: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5B3E: $EA $A9 $FF
     ld a, $69                                     ; $5B41: $3E $69
     ld [$FFAA], a                                 ; $5B43: $EA $AA $FF
     jp Jump_001_6354                              ; $5B46: $C3 $54 $63
@@ -4539,7 +4389,7 @@ Jump_001_5B13:
     xor a                                         ; $5B61: $AF
     ld [$0000], a                                 ; $5B62: $EA $00 $00
     ld a, $F3                                     ; $5B65: $3E $F3
-    ld [$FFA9], a                                 ; $5B67: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5B67: $EA $A9 $FF
     ld a, $68                                     ; $5B6A: $3E $68
     ld [$FFAA], a                                 ; $5B6C: $EA $AA $FF
     jp Jump_001_6354                              ; $5B6F: $C3 $54 $63
@@ -4558,7 +4408,7 @@ Jump_001_5B13:
     xor a                                         ; $5B8A: $AF
     ld [$0000], a                                 ; $5B8B: $EA $00 $00
     ld a, $00                                     ; $5B8E: $3E $00
-    ld [$FFA9], a                                 ; $5B90: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5B90: $EA $A9 $FF
     ld a, $69                                     ; $5B93: $3E $69
     ld [$FFAA], a                                 ; $5B95: $EA $AA $FF
     jp Jump_001_6354                              ; $5B98: $C3 $54 $63
@@ -4582,9 +4432,9 @@ Call_001_5BA4:
 
 Jump_001_5BAD:
     ld a, $D3                                     ; $5BAD: $3E $D3
-    ldh [$FFAB], a                                  ; $5BAF: $E0 $AB
+    ldh [hScript.State], a                                  ; $5BAF: $E0 $AB
     ld a, $0A                                     ; $5BB1: $3E $0A
-    ldh [$FFAC], a                                  ; $5BB3: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5BB3: $E0 $AC
     ld a, $C0                                     ; $5BB5: $3E $C0
     ldh [$FF8D], a                                  ; $5BB7: $E0 $8D
     ld a, $5B                                     ; $5BB9: $3E $5B
@@ -4629,7 +4479,7 @@ Call_001_5BF4:
     call Call_001_5BA4                            ; $5BFE: $CD $A4 $5B
     pop af                                        ; $5C01: $F1
     ld a, $52                                     ; $5C02: $3E $52
-    ld [$FFA9], a                                 ; $5C04: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5C04: $EA $A9 $FF
     ld a, $65                                     ; $5C07: $3E $65
     ld [$FFAA], a                                 ; $5C09: $EA $AA $FF
     jp Jump_001_6354                              ; $5C0C: $C3 $54 $63
@@ -4647,7 +4497,7 @@ Call_001_5C0F:
     call Call_001_5BA4                            ; $5C19: $CD $A4 $5B
     pop af                                        ; $5C1C: $F1
     ld a, $9F                                     ; $5C1D: $3E $9F
-    ld [$FFA9], a                                 ; $5C1F: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5C1F: $EA $A9 $FF
     ld a, $64                                     ; $5C22: $3E $64
     ld [$FFAA], a                                 ; $5C24: $EA $AA $FF
     jp Jump_001_6354                              ; $5C27: $C3 $54 $63
@@ -4665,7 +4515,7 @@ Call_001_5C2A:
     call Call_001_5BA4                            ; $5C34: $CD $A4 $5B
     pop af                                        ; $5C37: $F1
     ld a, $D9                                     ; $5C38: $3E $D9
-    ld [$FFA9], a                                 ; $5C3A: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5C3A: $EA $A9 $FF
     ld a, $64                                     ; $5C3D: $3E $64
     ld [$FFAA], a                                 ; $5C3F: $EA $AA $FF
     jp Jump_001_6354                              ; $5C42: $C3 $54 $63
@@ -4683,7 +4533,7 @@ Call_001_5C45:
     call Call_001_5BA4                            ; $5C4F: $CD $A4 $5B
     pop af                                        ; $5C52: $F1
     ld a, $13                                     ; $5C53: $3E $13
-    ld [$FFA9], a                                 ; $5C55: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5C55: $EA $A9 $FF
     ld a, $65                                     ; $5C58: $3E $65
     ld [$FFAA], a                                 ; $5C5A: $EA $AA $FF
     jp Jump_001_6354                              ; $5C5D: $C3 $54 $63
@@ -4693,11 +4543,11 @@ Jump_001_5C60:
     ld a, $03                                     ; $5C60: $3E $03
     ldh [$FF8C], a                                  ; $5C62: $E0 $8C
     ld a, $D3                                     ; $5C64: $3E $D3
-    ldh [$FFAB], a                                  ; $5C66: $E0 $AB
+    ldh [hScript.State], a                                  ; $5C66: $E0 $AB
     ld a, $0A                                     ; $5C68: $3E $0A
-    ldh [$FFAC], a                                  ; $5C6A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5C6A: $E0 $AC
     ld a, $8C                                     ; $5C6C: $3E $8C
-    ldh [$FFA9], a                                  ; $5C6E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5C6E: $E0 $A9
     ld a, $5F                                     ; $5C70: $3E $5F
     ldh [$FFAA], a                                  ; $5C72: $E0 $AA
     ld a, $7F                                     ; $5C74: $3E $7F
@@ -4714,7 +4564,7 @@ Jump_001_5C60:
     jp nz, Jump_001_5C9A                          ; $5C8A: $C2 $9A $5C
 
     ld a, $35                                     ; $5C8D: $3E $35
-    ld [$FFA9], a                                 ; $5C8F: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5C8F: $EA $A9 $FF
     ld a, $5F                                     ; $5C92: $3E $5F
     ld [$FFAA], a                                 ; $5C94: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5C97: $C3 $AD $5B
@@ -4760,7 +4610,7 @@ jr_001_5CC9:
 
     call Call_001_5B9B                            ; $5CD6: $CD $9B $5B
     ld a, $3A                                     ; $5CD9: $3E $3A
-    ld [$FFA9], a                                 ; $5CDB: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5CDB: $EA $A9 $FF
     ld a, $66                                     ; $5CDE: $3E $66
     ld [$FFAA], a                                 ; $5CE0: $EA $AA $FF
     jp Jump_001_6354                              ; $5CE3: $C3 $54 $63
@@ -4770,11 +4620,11 @@ Jump_001_5CE6:
     ld a, $01                                     ; $5CE6: $3E $01
     ldh [$FF8C], a                                  ; $5CE8: $E0 $8C
     ld a, $D3                                     ; $5CEA: $3E $D3
-    ldh [$FFAB], a                                  ; $5CEC: $E0 $AB
+    ldh [hScript.State], a                                  ; $5CEC: $E0 $AB
     ld a, $0A                                     ; $5CEE: $3E $0A
-    ldh [$FFAC], a                                  ; $5CF0: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5CF0: $E0 $AC
     ld a, $A1                                     ; $5CF2: $3E $A1
-    ldh [$FFA9], a                                  ; $5CF4: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5CF4: $E0 $A9
     ld a, $5F                                     ; $5CF6: $3E $5F
     ldh [$FFAA], a                                  ; $5CF8: $E0 $AA
     ld a, $05                                     ; $5CFA: $3E $05
@@ -4791,7 +4641,7 @@ Jump_001_5CE6:
     jr nz, jr_001_5D1F                            ; $5D10: $20 $0D
 
     ld a, $11                                     ; $5D12: $3E $11
-    ld [$FFA9], a                                 ; $5D14: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5D14: $EA $A9 $FF
     ld a, $5F                                     ; $5D17: $3E $5F
     ld [$FFAA], a                                 ; $5D19: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5D1C: $C3 $AD $5B
@@ -4844,7 +4694,7 @@ jr_001_5D5E:
 
     call Call_001_5B9B                            ; $5D6B: $CD $9B $5B
     ld a, $91                                     ; $5D6E: $3E $91
-    ld [$FFA9], a                                 ; $5D70: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5D70: $EA $A9 $FF
     ld a, $65                                     ; $5D73: $3E $65
     ld [$FFAA], a                                 ; $5D75: $EA $AA $FF
     jp Jump_001_6354                              ; $5D78: $C3 $54 $63
@@ -4854,11 +4704,11 @@ Jump_001_5D7B:
     ld a, $02                                     ; $5D7B: $3E $02
     ldh [$FF8C], a                                  ; $5D7D: $E0 $8C
     ld a, $D3                                     ; $5D7F: $3E $D3
-    ldh [$FFAB], a                                  ; $5D81: $E0 $AB
+    ldh [hScript.State], a                                  ; $5D81: $E0 $AB
     ld a, $0A                                     ; $5D83: $3E $0A
-    ldh [$FFAC], a                                  ; $5D85: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5D85: $E0 $AC
     ld a, $B5                                     ; $5D87: $3E $B5
-    ldh [$FFA9], a                                  ; $5D89: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5D89: $E0 $A9
     ld a, $5F                                     ; $5D8B: $3E $5F
     ldh [$FFAA], a                                  ; $5D8D: $E0 $AA
     ld a, $9A                                     ; $5D8F: $3E $9A
@@ -4875,7 +4725,7 @@ Jump_001_5D7B:
     jr nz, jr_001_5DB4                            ; $5DA5: $20 $0D
 
     ld a, $1D                                     ; $5DA7: $3E $1D
-    ld [$FFA9], a                                 ; $5DA9: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5DA9: $EA $A9 $FF
     ld a, $5F                                     ; $5DAC: $3E $5F
     ld [$FFAA], a                                 ; $5DAE: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5DB1: $C3 $AD $5B
@@ -4928,7 +4778,7 @@ jr_001_5DF3:
 
     call Call_001_5B9B                            ; $5E00: $CD $9B $5B
     ld a, $C6                                     ; $5E03: $3E $C6
-    ld [$FFA9], a                                 ; $5E05: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5E05: $EA $A9 $FF
     ld a, $65                                     ; $5E08: $3E $65
     ld [$FFAA], a                                 ; $5E0A: $EA $AA $FF
     jp Jump_001_6354                              ; $5E0D: $C3 $54 $63
@@ -4938,11 +4788,11 @@ Jump_001_5E10:
     ld a, $00                                     ; $5E10: $3E $00
     ldh [$FF8C], a                                  ; $5E12: $E0 $8C
     ld a, $D3                                     ; $5E14: $3E $D3
-    ldh [$FFAB], a                                  ; $5E16: $E0 $AB
+    ldh [hScript.State], a                                  ; $5E16: $E0 $AB
     ld a, $0A                                     ; $5E18: $3E $0A
-    ldh [$FFAC], a                                  ; $5E1A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5E1A: $E0 $AC
     ld a, $77                                     ; $5E1C: $3E $77
-    ldh [$FFA9], a                                  ; $5E1E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5E1E: $E0 $A9
     ld a, $5F                                     ; $5E20: $3E $5F
     ldh [$FFAA], a                                  ; $5E22: $E0 $AA
     ld a, $2F                                     ; $5E24: $3E $2F
@@ -4959,7 +4809,7 @@ Jump_001_5E10:
     jr nz, jr_001_5E49                            ; $5E3A: $20 $0D
 
     ld a, $29                                     ; $5E3C: $3E $29
-    ld [$FFA9], a                                 ; $5E3E: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5E3E: $EA $A9 $FF
     ld a, $5F                                     ; $5E41: $3E $5F
     ld [$FFAA], a                                 ; $5E43: $EA $AA $FF
     jp Jump_001_5BAD                              ; $5E46: $C3 $AD $5B
@@ -5005,7 +4855,7 @@ jr_001_5E78:
 
     call Call_001_5B9B                            ; $5E85: $CD $9B $5B
     ld a, $FB                                     ; $5E88: $3E $FB
-    ld [$FFA9], a                                 ; $5E8A: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $5E8A: $EA $A9 $FF
     ld a, $65                                     ; $5E8D: $3E $65
     ld [$FFAA], a                                 ; $5E8F: $EA $AA $FF
     jp Jump_001_6354                              ; $5E92: $C3 $54 $63
@@ -5153,11 +5003,11 @@ Jump_001_5F65:
     ld a, $03                                     ; $5F65: $3E $03
     ldh [$FF8C], a                                  ; $5F67: $E0 $8C
     ld a, $D3                                     ; $5F69: $3E $D3
-    ldh [$FFAB], a                                  ; $5F6B: $E0 $AB
+    ldh [hScript.State], a                                  ; $5F6B: $E0 $AB
     ld a, $0A                                     ; $5F6D: $3E $0A
-    ldh [$FFAC], a                                  ; $5F6F: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5F6F: $E0 $AC
     ld a, $5C                                     ; $5F71: $3E $5C
-    ldh [$FFA9], a                                  ; $5F73: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5F73: $E0 $A9
     ld a, $5B                                     ; $5F75: $3E $5B
     ldh [$FFAA], a                                  ; $5F77: $E0 $AA
     ld a, $84                                     ; $5F79: $3E $84
@@ -5211,11 +5061,11 @@ Jump_001_5FBF:
     ld a, $01                                     ; $5FBF: $3E $01
     ldh [$FF8C], a                                  ; $5FC1: $E0 $8C
     ld a, $D3                                     ; $5FC3: $3E $D3
-    ldh [$FFAB], a                                  ; $5FC5: $E0 $AB
+    ldh [hScript.State], a                                  ; $5FC5: $E0 $AB
     ld a, $0A                                     ; $5FC7: $3E $0A
-    ldh [$FFAC], a                                  ; $5FC9: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $5FC9: $E0 $AC
     ld a, $6C                                     ; $5FCB: $3E $6C
-    ldh [$FFA9], a                                  ; $5FCD: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $5FCD: $E0 $A9
     ld a, $5B                                     ; $5FCF: $3E $5B
     ldh [$FFAA], a                                  ; $5FD1: $E0 $AA
     ld a, $DE                                     ; $5FD3: $3E $DE
@@ -5271,11 +5121,11 @@ Jump_001_601E:
     ld a, $02                                     ; $601E: $3E $02
     ldh [$FF8C], a                                  ; $6020: $E0 $8C
     ld a, $D3                                     ; $6022: $3E $D3
-    ldh [$FFAB], a                                  ; $6024: $E0 $AB
+    ldh [hScript.State], a                                  ; $6024: $E0 $AB
     ld a, $0A                                     ; $6026: $3E $0A
-    ldh [$FFAC], a                                  ; $6028: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6028: $E0 $AC
     ld a, $8C                                     ; $602A: $3E $8C
-    ldh [$FFA9], a                                  ; $602C: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $602C: $E0 $A9
     ld a, $5B                                     ; $602E: $3E $5B
     ldh [$FFAA], a                                  ; $6030: $E0 $AA
     ld a, $3D                                     ; $6032: $3E $3D
@@ -5331,11 +5181,11 @@ Jump_001_607D:
     ld a, $00                                     ; $607D: $3E $00
     ldh [$FF8C], a                                  ; $607F: $E0 $8C
     ld a, $D3                                     ; $6081: $3E $D3
-    ldh [$FFAB], a                                  ; $6083: $E0 $AB
+    ldh [hScript.State], a                                  ; $6083: $E0 $AB
     ld a, $0A                                     ; $6085: $3E $0A
-    ldh [$FFAC], a                                  ; $6087: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6087: $E0 $AC
     ld a, $4C                                     ; $6089: $3E $4C
-    ldh [$FFA9], a                                  ; $608B: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $608B: $E0 $A9
     ld a, $5B                                     ; $608D: $3E $5B
     ldh [$FFAA], a                                  ; $608F: $E0 $AA
     ld a, $9C                                     ; $6091: $3E $9C
@@ -5426,9 +5276,9 @@ Jump_001_60D6:
 
 Jump_001_611D:
     ld a, $D3                                     ; $611D: $3E $D3
-    ldh [$FFAB], a                                  ; $611F: $E0 $AB
+    ldh [hScript.State], a                                  ; $611F: $E0 $AB
     ld a, $0A                                     ; $6121: $3E $0A
-    ldh [$FFAC], a                                  ; $6123: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6123: $E0 $AC
     ld a, $30                                     ; $6125: $3E $30
     ldh [$FF8D], a                                  ; $6127: $E0 $8D
     ld a, $61                                     ; $6129: $3E $61
@@ -5501,13 +5351,13 @@ Jump_001_6187:
     ld a, $03                                     ; $6187: $3E $03
     ldh [$FF8C], a                                  ; $6189: $E0 $8C
     ld a, $D3                                     ; $618B: $3E $D3
-    ldh [$FFAB], a                                  ; $618D: $E0 $AB
+    ldh [hScript.State], a                                  ; $618D: $E0 $AB
     ld a, $0A                                     ; $618F: $3E $0A
-    ldh [$FFAC], a                                  ; $6191: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6191: $E0 $AC
     ld a, $14                                     ; $6193: $3E $14
-    ldh [$FFA8], a                                  ; $6195: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6195: $E0 $A8
     ld a, $34                                     ; $6197: $3E $34
-    ldh [$FFA9], a                                  ; $6199: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6199: $E0 $A9
     ld a, $67                                     ; $619B: $3E $67
     ldh [$FFAA], a                                  ; $619D: $E0 $AA
     ld a, $AA                                     ; $619F: $3E $AA
@@ -5523,7 +5373,7 @@ Jump_001_6187:
     jp nz, Jump_001_61C2                          ; $61B2: $C2 $C2 $61
 
     ld a, $B7                                     ; $61B5: $3E $B7
-    ld [$FFA9], a                                 ; $61B7: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $61B7: $EA $A9 $FF
     ld a, $67                                     ; $61BA: $3E $67
     ld [$FFAA], a                                 ; $61BC: $EA $AA $FF
     jp Jump_001_611D                              ; $61BF: $C3 $1D $61
@@ -5560,13 +5410,13 @@ Jump_001_61EB:
     ld a, $01                                     ; $61EB: $3E $01
     ldh [$FF8C], a                                  ; $61ED: $E0 $8C
     ld a, $D3                                     ; $61EF: $3E $D3
-    ldh [$FFAB], a                                  ; $61F1: $E0 $AB
+    ldh [hScript.State], a                                  ; $61F1: $E0 $AB
     ld a, $0A                                     ; $61F3: $3E $0A
-    ldh [$FFAC], a                                  ; $61F5: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $61F5: $E0 $AC
     ld a, $14                                     ; $61F7: $3E $14
-    ldh [$FFA8], a                                  ; $61F9: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $61F9: $E0 $A8
     ld a, $57                                     ; $61FB: $3E $57
-    ldh [$FFA9], a                                  ; $61FD: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $61FD: $E0 $A9
     ld a, $67                                     ; $61FF: $3E $67
     ldh [$FFAA], a                                  ; $6201: $E0 $AA
     ld a, $0E                                     ; $6203: $3E $0E
@@ -5582,7 +5432,7 @@ Jump_001_61EB:
     jr nz, jr_001_6225                            ; $6216: $20 $0D
 
     ld a, $C7                                     ; $6218: $3E $C7
-    ld [$FFA9], a                                 ; $621A: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $621A: $EA $A9 $FF
     ld a, $67                                     ; $621D: $3E $67
     ld [$FFAA], a                                 ; $621F: $EA $AA $FF
     jp Jump_001_611D                              ; $6222: $C3 $1D $61
@@ -5626,13 +5476,13 @@ Jump_001_625E:
     ld a, $02                                     ; $625E: $3E $02
     ldh [$FF8C], a                                  ; $6260: $E0 $8C
     ld a, $D3                                     ; $6262: $3E $D3
-    ldh [$FFAB], a                                  ; $6264: $E0 $AB
+    ldh [hScript.State], a                                  ; $6264: $E0 $AB
     ld a, $0A                                     ; $6266: $3E $0A
-    ldh [$FFAC], a                                  ; $6268: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6268: $E0 $AC
     ld a, $14                                     ; $626A: $3E $14
-    ldh [$FFA8], a                                  ; $626C: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $626C: $E0 $A8
     ld a, $84                                     ; $626E: $3E $84
-    ldh [$FFA9], a                                  ; $6270: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6270: $E0 $A9
     ld a, $67                                     ; $6272: $3E $67
     ldh [$FFAA], a                                  ; $6274: $E0 $AA
     ld a, $81                                     ; $6276: $3E $81
@@ -5648,7 +5498,7 @@ Jump_001_625E:
     jr nz, jr_001_6298                            ; $6289: $20 $0D
 
     ld a, $D7                                     ; $628B: $3E $D7
-    ld [$FFA9], a                                 ; $628D: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $628D: $EA $A9 $FF
     ld a, $67                                     ; $6290: $3E $67
     ld [$FFAA], a                                 ; $6292: $EA $AA $FF
     jp Jump_001_611D                              ; $6295: $C3 $1D $61
@@ -5692,13 +5542,13 @@ Jump_001_62D1:
     ld a, $00                                     ; $62D1: $3E $00
     ldh [$FF8C], a                                  ; $62D3: $E0 $8C
     ld a, $D3                                     ; $62D5: $3E $D3
-    ldh [$FFAB], a                                  ; $62D7: $E0 $AB
+    ldh [hScript.State], a                                  ; $62D7: $E0 $AB
     ld a, $0A                                     ; $62D9: $3E $0A
-    ldh [$FFAC], a                                  ; $62DB: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $62DB: $E0 $AC
     ld a, $14                                     ; $62DD: $3E $14
-    ldh [$FFA8], a                                  ; $62DF: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $62DF: $E0 $A8
     ld a, $11                                     ; $62E1: $3E $11
-    ldh [$FFA9], a                                  ; $62E3: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $62E3: $E0 $A9
     ld a, $67                                     ; $62E5: $3E $67
     ldh [$FFAA], a                                  ; $62E7: $E0 $AA
     ld a, $F4                                     ; $62E9: $3E $F4
@@ -5714,7 +5564,7 @@ Jump_001_62D1:
     jr nz, jr_001_630B                            ; $62FC: $20 $0D
 
     ld a, $A7                                     ; $62FE: $3E $A7
-    ld [$FFA9], a                                 ; $6300: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $6300: $EA $A9 $FF
     ld a, $67                                     ; $6303: $3E $67
     ld [$FFAA], a                                 ; $6305: $EA $AA $FF
     jp Jump_001_611D                              ; $6308: $C3 $1D $61
@@ -5767,9 +5617,9 @@ Jump_001_634D:
 
 Jump_001_6354:
     ld a, $D3                                     ; $6354: $3E $D3
-    ldh [$FFAB], a                                  ; $6356: $E0 $AB
+    ldh [hScript.State], a                                  ; $6356: $E0 $AB
     ld a, $0A                                     ; $6358: $3E $0A
-    ldh [$FFAC], a                                  ; $635A: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $635A: $E0 $AC
     ld a, $67                                     ; $635C: $3E $67
     ldh [$FF8D], a                                  ; $635E: $E0 $8D
     ld a, $63                                     ; $6360: $3E $63
@@ -5863,9 +5713,9 @@ jr_001_63DD:
 
 Jump_001_640D:
     ld a, $D3                                     ; $640D: $3E $D3
-    ldh [$FFAB], a                                  ; $640F: $E0 $AB
+    ldh [hScript.State], a                                  ; $640F: $E0 $AB
     ld a, $0A                                     ; $6411: $3E $0A
-    ldh [$FFAC], a                                  ; $6413: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6413: $E0 $AC
     ld a, $20                                     ; $6415: $3E $20
     ldh [$FF8D], a                                  ; $6417: $E0 $8D
     ld a, $64                                     ; $6419: $3E $64
@@ -6931,15 +6781,15 @@ jr_001_6945:
     ld de, $000E                                  ; $6956: $11 $0E $00
     add hl, de                                    ; $6959: $19
     ld a, [hl+]                                   ; $695A: $2A
-    ldh [$FFA8], a                                  ; $695B: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $695B: $E0 $A8
     ld a, [hl+]                                   ; $695D: $2A
-    ldh [$FFA9], a                                  ; $695E: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $695E: $E0 $A9
     ld a, [hl+]                                   ; $6960: $2A
     ldh [$FFAA], a                                  ; $6961: $E0 $AA
     ld a, $D3                                     ; $6963: $3E $D3
-    ldh [$FFAB], a                                  ; $6965: $E0 $AB
+    ldh [hScript.State], a                                  ; $6965: $E0 $AB
     ld a, $0A                                     ; $6967: $3E $0A
-    ldh [$FFAC], a                                  ; $6969: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6969: $E0 $AC
     call Script_Play                            ; $696B: $CD $A7 $0A
     call Script_Close                            ; $696E: $CD $78 $2B
     call Script_Open                            ; $6971: $CD $96 $2B
@@ -6997,13 +6847,13 @@ Call_001_69B2:
     ld [hl], c                                    ; $69D2: $71
     pop hl                                        ; $69D3: $E1
     ld a, $19                                     ; $69D4: $3E $19
-    ldh [$FFA8], a                                  ; $69D6: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $69D6: $E0 $A8
     ld a, $D3                                     ; $69D8: $3E $D3
-    ldh [$FFAB], a                                  ; $69DA: $E0 $AB
+    ldh [hScript.State], a                                  ; $69DA: $E0 $AB
     ld a, $0A                                     ; $69DC: $3E $0A
-    ldh [$FFAC], a                                  ; $69DE: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $69DE: $E0 $AC
     ld a, $EF                                     ; $69E0: $3E $EF
-    ldh [$FFA9], a                                  ; $69E2: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $69E2: $E0 $A9
     ld a, $46                                     ; $69E4: $3E $46
     ldh [$FFAA], a                                  ; $69E6: $E0 $AA
     ld a, $B2                                     ; $69E8: $3E $B2
@@ -7017,11 +6867,11 @@ Jump_001_69F3:
     ld a, $03                                     ; $69F3: $3E $03
     ldh [$FF8C], a                                  ; $69F5: $E0 $8C
     ld a, $D3                                     ; $69F7: $3E $D3
-    ldh [$FFAB], a                                  ; $69F9: $E0 $AB
+    ldh [hScript.State], a                                  ; $69F9: $E0 $AB
     ld a, $0A                                     ; $69FB: $3E $0A
-    ldh [$FFAC], a                                  ; $69FD: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $69FD: $E0 $AC
     ld a, $69                                     ; $69FF: $3E $69
-    ldh [$FFA9], a                                  ; $6A01: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6A01: $E0 $A9
     ld a, $73                                     ; $6A03: $3E $73
     ldh [$FFAA], a                                  ; $6A05: $E0 $AA
     ld a, $12                                     ; $6A07: $3E $12
@@ -7075,11 +6925,11 @@ Jump_001_6A51:
     ld a, $01                                     ; $6A51: $3E $01
     ldh [$FF8C], a                                  ; $6A53: $E0 $8C
     ld a, $D3                                     ; $6A55: $3E $D3
-    ldh [$FFAB], a                                  ; $6A57: $E0 $AB
+    ldh [hScript.State], a                                  ; $6A57: $E0 $AB
     ld a, $0A                                     ; $6A59: $3E $0A
-    ldh [$FFAC], a                                  ; $6A5B: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6A5B: $E0 $AC
     ld a, $75                                     ; $6A5D: $3E $75
-    ldh [$FFA9], a                                  ; $6A5F: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6A5F: $E0 $A9
     ld a, $73                                     ; $6A61: $3E $73
     ldh [$FFAA], a                                  ; $6A63: $E0 $AA
     ld a, $70                                     ; $6A65: $3E $70
@@ -7135,11 +6985,11 @@ Jump_001_6AB4:
     ld a, $02                                     ; $6AB4: $3E $02
     ldh [$FF8C], a                                  ; $6AB6: $E0 $8C
     ld a, $D3                                     ; $6AB8: $3E $D3
-    ldh [$FFAB], a                                  ; $6ABA: $E0 $AB
+    ldh [hScript.State], a                                  ; $6ABA: $E0 $AB
     ld a, $0A                                     ; $6ABC: $3E $0A
-    ldh [$FFAC], a                                  ; $6ABE: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6ABE: $E0 $AC
     ld a, $81                                     ; $6AC0: $3E $81
-    ldh [$FFA9], a                                  ; $6AC2: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6AC2: $E0 $A9
     ld a, $73                                     ; $6AC4: $3E $73
     ldh [$FFAA], a                                  ; $6AC6: $E0 $AA
     ld a, $D3                                     ; $6AC8: $3E $D3
@@ -7195,11 +7045,11 @@ Jump_001_6B17:
     ld a, $00                                     ; $6B17: $3E $00
     ldh [$FF8C], a                                  ; $6B19: $E0 $8C
     ld a, $D3                                     ; $6B1B: $3E $D3
-    ldh [$FFAB], a                                  ; $6B1D: $E0 $AB
+    ldh [hScript.State], a                                  ; $6B1D: $E0 $AB
     ld a, $0A                                     ; $6B1F: $3E $0A
-    ldh [$FFAC], a                                  ; $6B21: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6B21: $E0 $AC
     ld a, $5D                                     ; $6B23: $3E $5D
-    ldh [$FFA9], a                                  ; $6B25: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6B25: $E0 $A9
     ld a, $73                                     ; $6B27: $3E $73
     ldh [$FFAA], a                                  ; $6B29: $E0 $AA
     ld a, $36                                     ; $6B2B: $3E $36
@@ -7323,9 +7173,9 @@ jr_001_6BC4:
 
 Jump_001_6BE0:
     ld a, $D3                                     ; $6BE0: $3E $D3
-    ldh [$FFAB], a                                  ; $6BE2: $E0 $AB
+    ldh [hScript.State], a                                  ; $6BE2: $E0 $AB
     ld a, $0A                                     ; $6BE4: $3E $0A
-    ldh [$FFAC], a                                  ; $6BE6: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6BE6: $E0 $AC
     ld a, $F3                                     ; $6BE8: $3E $F3
     ldh [$FF8D], a                                  ; $6BEA: $E0 $8D
     ld a, $6B                                     ; $6BEC: $3E $6B
@@ -7397,13 +7247,13 @@ Jump_001_6C47:
     ld a, $03                                     ; $6C47: $3E $03
     ldh [$FF8C], a                                  ; $6C49: $E0 $8C
     ld a, $D3                                     ; $6C4B: $3E $D3
-    ldh [$FFAB], a                                  ; $6C4D: $E0 $AB
+    ldh [hScript.State], a                                  ; $6C4D: $E0 $AB
     ld a, $0A                                     ; $6C4F: $3E $0A
-    ldh [$FFAC], a                                  ; $6C51: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6C51: $E0 $AC
     ld a, $11                                     ; $6C53: $3E $11
-    ldh [$FFA8], a                                  ; $6C55: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6C55: $E0 $A8
     ld a, $E0                                     ; $6C57: $3E $E0
-    ldh [$FFA9], a                                  ; $6C59: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6C59: $E0 $A9
     ld a, $73                                     ; $6C5B: $3E $73
     ldh [$FFAA], a                                  ; $6C5D: $E0 $AA
     ld a, $6A                                     ; $6C5F: $3E $6A
@@ -7419,7 +7269,7 @@ Jump_001_6C47:
     jp nz, Jump_001_6C82                          ; $6C72: $C2 $82 $6C
 
     ld a, $99                                     ; $6C75: $3E $99
-    ld [$FFA9], a                                 ; $6C77: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $6C77: $EA $A9 $FF
     ld a, $73                                     ; $6C7A: $3E $73
     ld [$FFAA], a                                 ; $6C7C: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6C7F: $C3 $E0 $6B
@@ -7455,13 +7305,13 @@ Jump_001_6CA8:
     ld a, $01                                     ; $6CA8: $3E $01
     ldh [$FF8C], a                                  ; $6CAA: $E0 $8C
     ld a, $D3                                     ; $6CAC: $3E $D3
-    ldh [$FFAB], a                                  ; $6CAE: $E0 $AB
+    ldh [hScript.State], a                                  ; $6CAE: $E0 $AB
     ld a, $0A                                     ; $6CB0: $3E $0A
-    ldh [$FFAC], a                                  ; $6CB2: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6CB2: $E0 $AC
     ld a, $11                                     ; $6CB4: $3E $11
-    ldh [$FFA8], a                                  ; $6CB6: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6CB6: $E0 $A8
     ld a, $03                                     ; $6CB8: $3E $03
-    ldh [$FFA9], a                                  ; $6CBA: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6CBA: $E0 $A9
     ld a, $74                                     ; $6CBC: $3E $74
     ldh [$FFAA], a                                  ; $6CBE: $E0 $AA
     ld a, $CB                                     ; $6CC0: $3E $CB
@@ -7477,7 +7327,7 @@ Jump_001_6CA8:
     jr nz, jr_001_6CE2                            ; $6CD3: $20 $0D
 
     ld a, $A5                                     ; $6CD5: $3E $A5
-    ld [$FFA9], a                                 ; $6CD7: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $6CD7: $EA $A9 $FF
     ld a, $73                                     ; $6CDA: $3E $73
     ld [$FFAA], a                                 ; $6CDC: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6CDF: $C3 $E0 $6B
@@ -7520,13 +7370,13 @@ Jump_001_6D18:
     ld a, $02                                     ; $6D18: $3E $02
     ldh [$FF8C], a                                  ; $6D1A: $E0 $8C
     ld a, $D3                                     ; $6D1C: $3E $D3
-    ldh [$FFAB], a                                  ; $6D1E: $E0 $AB
+    ldh [hScript.State], a                                  ; $6D1E: $E0 $AB
     ld a, $0A                                     ; $6D20: $3E $0A
-    ldh [$FFAC], a                                  ; $6D22: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6D22: $E0 $AC
     ld a, $11                                     ; $6D24: $3E $11
-    ldh [$FFA8], a                                  ; $6D26: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6D26: $E0 $A8
     ld a, $26                                     ; $6D28: $3E $26
-    ldh [$FFA9], a                                  ; $6D2A: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6D2A: $E0 $A9
     ld a, $74                                     ; $6D2C: $3E $74
     ldh [$FFAA], a                                  ; $6D2E: $E0 $AA
     ld a, $3B                                     ; $6D30: $3E $3B
@@ -7542,7 +7392,7 @@ Jump_001_6D18:
     jr nz, jr_001_6D52                            ; $6D43: $20 $0D
 
     ld a, $B1                                     ; $6D45: $3E $B1
-    ld [$FFA9], a                                 ; $6D47: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $6D47: $EA $A9 $FF
     ld a, $73                                     ; $6D4A: $3E $73
     ld [$FFAA], a                                 ; $6D4C: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6D4F: $C3 $E0 $6B
@@ -7585,13 +7435,13 @@ Jump_001_6D88:
     ld a, $00                                     ; $6D88: $3E $00
     ldh [$FF8C], a                                  ; $6D8A: $E0 $8C
     ld a, $D3                                     ; $6D8C: $3E $D3
-    ldh [$FFAB], a                                  ; $6D8E: $E0 $AB
+    ldh [hScript.State], a                                  ; $6D8E: $E0 $AB
     ld a, $0A                                     ; $6D90: $3E $0A
-    ldh [$FFAC], a                                  ; $6D92: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6D92: $E0 $AC
     ld a, $11                                     ; $6D94: $3E $11
-    ldh [$FFA8], a                                  ; $6D96: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6D96: $E0 $A8
     ld a, $BD                                     ; $6D98: $3E $BD
-    ldh [$FFA9], a                                  ; $6D9A: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6D9A: $E0 $A9
     ld a, $73                                     ; $6D9C: $3E $73
     ldh [$FFAA], a                                  ; $6D9E: $E0 $AA
     ld a, $AB                                     ; $6DA0: $3E $AB
@@ -7607,7 +7457,7 @@ Jump_001_6D88:
     jr nz, jr_001_6DC2                            ; $6DB3: $20 $0D
 
     ld a, $8D                                     ; $6DB5: $3E $8D
-    ld [$FFA9], a                                 ; $6DB7: $EA $A9 $FF
+    ld [hScript.Frame], a                                 ; $6DB7: $EA $A9 $FF
     ld a, $73                                     ; $6DBA: $3E $73
     ld [$FFAA], a                                 ; $6DBC: $EA $AA $FF
     jp Jump_001_6BE0                              ; $6DBF: $C3 $E0 $6B
@@ -7814,7 +7664,7 @@ Call_001_6ECF:
     cp $00                                        ; $6EE1: $FE $00
     jp nz, Jump_001_6F81                          ; $6EE3: $C2 $81 $6F
 
-    ld a, [$C71A]                                 ; $6EE6: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $6EE6: $FA $1A $C7
     and a                                         ; $6EE9: $A7
     jp nz, Jump_001_6F81                          ; $6EEA: $C2 $81 $6F
 
@@ -7958,15 +7808,15 @@ jr_001_6F81:
     ld de, $000E                                  ; $6F8E: $11 $0E $00
     add hl, de                                    ; $6F91: $19
     ld a, [hl+]                                   ; $6F92: $2A
-    ldh [$FFA8], a                                  ; $6F93: $E0 $A8
+    ldh [hScript.Bank], a                                  ; $6F93: $E0 $A8
     ld a, [hl+]                                   ; $6F95: $2A
-    ldh [$FFA9], a                                  ; $6F96: $E0 $A9
+    ldh [hScript.Frame], a                                  ; $6F96: $E0 $A9
     ld a, [hl+]                                   ; $6F98: $2A
     ldh [$FFAA], a                                  ; $6F99: $E0 $AA
     ld a, $D3                                     ; $6F9B: $3E $D3
-    ldh [$FFAB], a                                  ; $6F9D: $E0 $AB
+    ldh [hScript.State], a                                  ; $6F9D: $E0 $AB
     ld a, $0A                                     ; $6F9F: $3E $0A
-    ldh [$FFAC], a                                  ; $6FA1: $E0 $AC
+    ldh [hScript.State + 1], a                                  ; $6FA1: $E0 $AC
     call Script_Play                            ; $6FA3: $CD $A7 $0A
     call Script_Close                            ; $6FA6: $CD $78 $2B
     call Script_Open                            ; $6FA9: $CD $96 $2B
@@ -8061,7 +7911,7 @@ Call_001_7038:
     cp $00                                        ; $704A: $FE $00
     jp nz, Jump_001_70C1                          ; $704C: $C2 $C1 $70
 
-    ld a, [$C71A]                                 ; $704F: $FA $1A $C7
+    ld a, [wScript_System.Frame + 1]                                 ; $704F: $FA $1A $C7
     and a                                         ; $7052: $A7
     jp nz, Jump_001_70C1                          ; $7053: $C2 $C1 $70
 
