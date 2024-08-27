@@ -78,10 +78,20 @@ wScript_Text::
     ds 1
     ;ds $C726 - @
     
+    ds $C954 - @
+wCnt1::
+    ds 1
+    ;ds $C955 - @
+wCntDown::
+    ds 1
+    ;ds $C956 - @
+wCntUp::
+    ds 1
 
     ds $C959 - @
 wScreenVisible::
     ds 1
+
 
     ds $C95A - @
 wRAMBank::

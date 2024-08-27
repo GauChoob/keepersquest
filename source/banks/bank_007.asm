@@ -4590,7 +4590,7 @@ jr_007_59B5:
     ret                                           ; $59BF: $C9
 
 
-    ld a, [$C955]                                 ; $59C0: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $59C0: $FA $55 $C9
     bit 0, a                                      ; $59C3: $CB $47
     jp z, Jump_007_59F3                           ; $59C5: $CA $F3 $59
 
@@ -4625,7 +4625,7 @@ jr_007_59E8:
 
 
 Jump_007_59F3:
-    ld a, [$C955]                                 ; $59F3: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $59F3: $FA $55 $C9
     bit 3, a                                      ; $59F6: $CB $5F
     jp z, Jump_007_5A01                           ; $59F8: $CA $01 $5A
 
@@ -4635,7 +4635,7 @@ Jump_007_59F3:
 
 
 Jump_007_5A01:
-    ld a, [$C955]                                 ; $5A01: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $5A01: $FA $55 $C9
     bit 2, a                                      ; $5A04: $CB $57
     jp z, Jump_007_5A0F                           ; $5A06: $CA $0F $5A
 
@@ -4645,7 +4645,7 @@ Jump_007_5A01:
 
 
 Jump_007_5A0F:
-    ld a, [$C955]                                 ; $5A0F: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $5A0F: $FA $55 $C9
     bit 1, a                                      ; $5A12: $CB $4F
     ret z                                         ; $5A14: $C8
 
@@ -4663,129 +4663,7 @@ jr_007_5A24:
     ret                                           ; $5A27: $C9
 
 
-    ld a, [$C954]                                 ; $5A28: $FA $54 $C9
-    ld d, a                                       ; $5A2B: $57
-    ld a, $20                                     ; $5A2C: $3E $20
-    ld [$FF00], a                                 ; $5A2E: $EA $00 $FF
-    ld a, [$FF00]                                 ; $5A31: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A34: $FA $00 $FF
-    cpl                                           ; $5A37: $2F
-    and $0F                                       ; $5A38: $E6 $0F
-    swap a                                        ; $5A3A: $CB $37
-    ld b, a                                       ; $5A3C: $47
-    ld a, $10                                     ; $5A3D: $3E $10
-    ld [$FF00], a                                 ; $5A3F: $EA $00 $FF
-    ld a, [$FF00]                                 ; $5A42: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A45: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A48: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A4B: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A4E: $FA $00 $FF
-    ld a, [$FF00]                                 ; $5A51: $FA $00 $FF
-    cpl                                           ; $5A54: $2F
-    and $0F                                       ; $5A55: $E6 $0F
-    or b                                          ; $5A57: $B0
-    ld [$C954], a                                 ; $5A58: $EA $54 $C9
-    ld c, a                                       ; $5A5B: $4F
-    and $0F                                       ; $5A5C: $E6 $0F
-    cp $0F                                        ; $5A5E: $FE $0F
-    jr nz, jr_007_5A65                            ; $5A60: $20 $03
-
-    jp Boot_SoftReset                              ; $5A62: $C3 $5B $01
-
-
-jr_007_5A65:
-    ld a, c                                       ; $5A65: $79
-    xor d                                         ; $5A66: $AA
-    ld e, a                                       ; $5A67: $5F
-    and c                                         ; $5A68: $A1
-    ld [$C955], a                                 ; $5A69: $EA $55 $C9
-    ld a, c                                       ; $5A6C: $79
-    cpl                                           ; $5A6D: $2F
-    and e                                         ; $5A6E: $A3
-    ld [$C956], a                                 ; $5A6F: $EA $56 $C9
-    ld a, $30                                     ; $5A72: $3E $30
-    ld [$FF00], a                                 ; $5A74: $EA $00 $FF
-    ret                                           ; $5A77: $C9
-
-
-    ld a, [$FF4D]                                 ; $5A78: $FA $4D $FF
-    bit 7, a                                      ; $5A7B: $CB $7F
-    ret nz                                        ; $5A7D: $C0
-
-    ld a, $01                                     ; $5A7E: $3E $01
-    ld [$FF4D], a                                 ; $5A80: $EA $4D $FF
-    ld a, [rIE]                                 ; $5A83: $FA $FF $FF
-    push af                                       ; $5A86: $F5
-    xor a                                         ; $5A87: $AF
-    ld [rIE], a                                 ; $5A88: $EA $FF $FF
-    ld a, $30                                     ; $5A8B: $3E $30
-    ld [$FF00], a                                 ; $5A8D: $EA $00 $FF
-    stop                                          ; $5A90: $10 $00
-
-jr_007_5A92:
-    ld a, [$FF4D]                                 ; $5A92: $FA $4D $FF
-    bit 7, a                                      ; $5A95: $CB $7F
-    jr z, jr_007_5A92                             ; $5A97: $28 $F9
-
-    xor a                                         ; $5A99: $AF
-    ld [$FF00], a                                 ; $5A9A: $EA $00 $FF
-    ld [rIF], a                                 ; $5A9D: $EA $0F $FF
-    pop af                                        ; $5AA0: $F1
-    ld [rIE], a                                 ; $5AA1: $EA $FF $FF
-    ret                                           ; $5AA4: $C9
-
-
-    ld a, [$FF4D]                                 ; $5AA5: $FA $4D $FF
-    bit 7, a                                      ; $5AA8: $CB $7F
-    ret z                                         ; $5AAA: $C8
-
-    ld a, $01                                     ; $5AAB: $3E $01
-    ld [$FF4D], a                                 ; $5AAD: $EA $4D $FF
-    ld a, [rIE]                                 ; $5AB0: $FA $FF $FF
-    push af                                       ; $5AB3: $F5
-    xor a                                         ; $5AB4: $AF
-    ld [rIE], a                                 ; $5AB5: $EA $FF $FF
-    ld a, $30                                     ; $5AB8: $3E $30
-    ld [$FF00], a                                 ; $5ABA: $EA $00 $FF
-    stop                                          ; $5ABD: $10 $00
-
-jr_007_5ABF:
-    ld a, [$FF4D]                                 ; $5ABF: $FA $4D $FF
-    bit 7, a                                      ; $5AC2: $CB $7F
-    jr nz, jr_007_5ABF                            ; $5AC4: $20 $F9
-
-    xor a                                         ; $5AC6: $AF
-    ld [$FF00], a                                 ; $5AC7: $EA $00 $FF
-    ld [rIF], a                                 ; $5ACA: $EA $0F $FF
-    pop af                                        ; $5ACD: $F1
-    ld [rIE], a                                 ; $5ACE: $EA $FF $FF
-    ret                                           ; $5AD1: $C9
-
-
-    ld c, $80                                     ; $5AD2: $0E $80
-    ld b, $0A                                     ; $5AD4: $06 $0A
-    ld hl, $5AE0                                  ; $5AD6: $21 $E0 $5A
-
-jr_007_5AD9:
-    ld a, [hl+]                                   ; $5AD9: $2A
-    ld [c], a                                     ; $5ADA: $E2
-    inc c                                         ; $5ADB: $0C
-    dec b                                         ; $5ADC: $05
-    jr nz, jr_007_5AD9                            ; $5ADD: $20 $FA
-
-    ret                                           ; $5ADF: $C9
-
-
-    ld a, $C0                                     ; $5AE0: $3E $C0
-    ldh [rDMA], a                                 ; $5AE2: $E0 $46
-    ld a, $28                                     ; $5AE4: $3E $28
-
-jr_007_5AE6:
-    dec a                                         ; $5AE6: $3D
-    jr nz, jr_007_5AE6                            ; $5AE7: $20 $FD
-
-    ret                                           ; $5AE9: $C9
-
+INCLUDE "source/engine/system/system_xx.asm"
 
     ret                                           ; $5AEA: $C9
 

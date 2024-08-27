@@ -373,11 +373,11 @@ Jump_000_02F7:
     ldh a, [$FFAF]                                  ; $02F7: $F0 $AF
     inc a                                         ; $02F9: $3C
     ldh [$FFAF], a                                  ; $02FA: $E0 $AF
-    ld a, [$C955]                                 ; $02FC: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $02FC: $FA $55 $C9
     bit 3, a                                      ; $02FF: $CB $5F
     jr z, jr_000_0333                             ; $0301: $28 $30
 
-    ld a, [$C955]                                 ; $0303: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $0303: $FA $55 $C9
     bit 0, a                                      ; $0306: $CB $47
     jr nz, jr_000_0333                            ; $0308: $20 $29
 
@@ -5386,7 +5386,7 @@ jr_000_2390:
     jr jr_000_2390                                ; $2396: $18 $F8
 
 jr_000_2398:
-    ld a, [$C955]                                 ; $2398: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $2398: $FA $55 $C9
     ld d, $00                                     ; $239B: $16 $00
     bit 6, a                                      ; $239D: $CB $77
     jr nz, jr_000_23C4                            ; $239F: $20 $23
@@ -5855,7 +5855,7 @@ jr_000_26B7:
     ld [$FFAB], a                                 ; $26B9: $EA $AB $FF
     ld a, $26                                     ; $26BC: $3E $26
     ld [$FFAC], a                                 ; $26BE: $EA $AC $FF
-    ld a, [$C954]                                 ; $26C1: $FA $54 $C9
+    ld a, [wCnt1]                                 ; $26C1: $FA $54 $C9
     and $01                                       ; $26C4: $E6 $01
     jr nz, jr_000_26C9                            ; $26C6: $20 $01
 

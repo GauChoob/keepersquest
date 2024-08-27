@@ -295,7 +295,7 @@ jr_003_41A7:
 
 
 Call_003_41B1:
-    ld a, [$C955]                                 ; $41B1: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $41B1: $FA $55 $C9
     ld b, a                                       ; $41B4: $47
     ld a, [$CCC6]                                 ; $41B5: $FA $C6 $CC
     and b                                         ; $41B8: $A0

@@ -181,9 +181,9 @@ System_Init::
     SwitchROMBank $01
     call $40D3                                    ; $08B6: $CD $D3 $40
     xor a                                         ; $08B9: $AF
-    ld [$C954], a                                 ; $08BA: $EA $54 $C9
-    ld [$C955], a                                 ; $08BD: $EA $55 $C9
-    ld [$C956], a                                 ; $08C0: $EA $56 $C9
+    ld [wCnt1], a                                 ; $08BA: $EA $54 $C9
+    ld [wCntDown], a                                 ; $08BD: $EA $55 $C9
+    ld [wCntUp], a                                 ; $08C0: $EA $56 $C9
     ld a, $00                                     ; $08C3: $3E $00
     ld [$C9EB], a                                 ; $08C5: $EA $EB $C9
     ld a, $00                                     ; $08C8: $3E $00
@@ -249,11 +249,11 @@ System_UpdateGame:
 
 jr_000_0956:
     ld hl, $C9CC                                  ; $0956: $21 $CC $C9
-    ld a, [$C954]                                 ; $0959: $FA $54 $C9
+    ld a, [wCnt1]                                 ; $0959: $FA $54 $C9
     ld [hl+], a                                   ; $095C: $22
-    ld a, [$C955]                                 ; $095D: $FA $55 $C9
+    ld a, [wCntDown]                                 ; $095D: $FA $55 $C9
     ld [hl+], a                                   ; $0960: $22
-    ld a, [$C956]                                 ; $0961: $FA $56 $C9
+    ld a, [wCntUp]                                 ; $0961: $FA $56 $C9
     ld [hl+], a                                   ; $0964: $22
 
 jr_000_0965:

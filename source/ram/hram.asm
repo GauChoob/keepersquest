@@ -1,4 +1,4 @@
-SECTION "HRAM3", HRAM[$FF80]
+SECTION "HRAM2", HRAM[$FF8A]
 
     ds $FFA5 - @
 hInterrupt_VBlank_Control::
