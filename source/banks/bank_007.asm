@@ -192,6 +192,7 @@ Battery_NextGameCount:
     jp Battery_SetGameCount                              ; $410B: $C3 $23 $41
 
 
+Battery_SaveGame:
     Battery_On
     xor a                                         ; $4113: $AF
     ld [rRAMB], a                                 ; $4114: $EA $00 $40
@@ -256,11 +257,11 @@ jr_007_414E:
 
 Call_007_4178:
     ld a, $19                                     ; $4178: $3E $19
-    ld [$A012], a                                 ; $417A: $EA $12 $A0
+    ld [xLoad_ScriptBank], a                                 ; $417A: $EA $12 $A0
     ld a, $12                                     ; $417D: $3E $12
-    ld [$A013], a                                 ; $417F: $EA $13 $A0
+    ld [xLoad_ScriptFrame], a                                 ; $417F: $EA $13 $A0
     ld a, $47                                     ; $4182: $3E $47
-    ld [$A014], a                                 ; $4184: $EA $14 $A0
+    ld [xLoad_ScriptFrame + 1], a                                 ; $4184: $EA $14 $A0
     ld d, $10                                     ; $4187: $16 $10
     ld bc, $A002                                  ; $4189: $01 $02 $A0
     ld hl, $4000                                  ; $418C: $21 $00 $40
@@ -1897,7 +1898,7 @@ jr_007_4A72:
     ld [$C886], a                                 ; $4A88: $EA $86 $C8
     ret                                           ; $4A8B: $C9
 
-
+Tilemap_Position:
     call Call_007_4956                            ; $4A8C: $CD $56 $49
     ld a, [$C885]                                 ; $4A8F: $FA $85 $C8
     ld h, a                                       ; $4A92: $67
@@ -4349,7 +4350,7 @@ Call_007_5707:
     call Call_007_56F8                            ; $5867: $CD $F8 $56
     call Call_007_56E9                            ; $586A: $CD $E9 $56
     call Call_007_56E9                            ; $586D: $CD $E9 $56
-    jp Jump_000_22D6                              ; $5870: $C3 $D6 $22
+    jp Cmd_System_SceneNew                              ; $5870: $C3 $D6 $22
 
 
     call System_DoVFunc                            ; $5873: $CD $40 $08

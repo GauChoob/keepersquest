@@ -129,7 +129,7 @@ Jump_000_0195:
     ld [hScript.Frame], a                                 ; $01CC: $EA $A9 $FF
     ld a, $47                                     ; $01CF: $3E $47
     ld [hScript.Frame + 1], a                                 ; $01D1: $EA $AA $FF
-    jp Jump_000_22D6                              ; $01D4: $C3 $D6 $22
+    jp Cmd_System_SceneNew                              ; $01D4: $C3 $D6 $22
 
 
     jr nz, jr_000_0226                            ; $01D7: $20 $4D
@@ -369,10 +369,10 @@ jr_000_02F1:
     ret                                           ; $02F6: $C9
 
 
-Jump_000_02F7:
-    ldh a, [$FFAF]                                  ; $02F7: $F0 $AF
+Game_Loop:
+    ldh a, [hTicker]                                  ; $02F7: $F0 $AF
     inc a                                         ; $02F9: $3C
-    ldh [$FFAF], a                                  ; $02FA: $E0 $AF
+    ldh [hTicker], a                                  ; $02FA: $E0 $AF
     ld a, [wCntDown]                                 ; $02FC: $FA $55 $C9
     bit 3, a                                      ; $02FF: $CB $5F
     jr z, jr_000_0333                             ; $0301: $28 $30
@@ -403,7 +403,7 @@ Jump_000_02F7:
 
 jr_000_0333:
     call System_UpdateGame                            ; $0333: $CD $F7 $08
-    jp Jump_000_02F7                              ; $0336: $C3 $F7 $02
+    jp Game_Loop                              ; $0336: $C3 $F7 $02
 
 
     adc c                                         ; $0339: $89
@@ -669,7 +669,7 @@ jr_000_044D:
     ret                                           ; $044F: $C9
 
 
-Call_000_0450:
+Math_ConvertNumberToDigits:
     xor a                                         ; $0450: $AF
 
 Call_000_0451:
@@ -2312,9 +2312,9 @@ jr_000_101A:
     ld a, $10                                     ; $1046: $3E $10
     ldh [hScript.State + 1], a                                  ; $1048: $E0 $AC
     ld a, $18                                     ; $104A: $3E $18
-    ldh [$FFA6], a                                  ; $104C: $E0 $A6
+    ldh [hScript_CurrentAddress], a                                  ; $104C: $E0 $A6
     ld a, $C7                                     ; $104E: $3E $C7
-    ldh [$FFA7], a                                  ; $1050: $E0 $A7
+    ldh [hScript_CurrentAddress + 1], a                                  ; $1050: $E0 $A7
     call Script_Close                            ; $1052: $CD $78 $2B
     SwitchROMBank $04
     jp $415D                                      ; $105D: $C3 $5D $41
@@ -2564,9 +2564,9 @@ Cmd_11DE:
     ld a, c                                       ; $11F6: $79
     ld [hScript.Frame], a                                 ; $11F7: $EA $A9 $FF
     ld a, $0A                                     ; $11FA: $3E $0A
-    ld [$FFA6], a                                 ; $11FC: $EA $A6 $FF
+    ld [hScript_CurrentAddress], a                                 ; $11FC: $EA $A6 $FF
     ld a, $C7                                     ; $11FF: $3E $C7
-    ld [$FFA7], a                                 ; $1201: $EA $A7 $FF
+    ld [hScript_CurrentAddress + 1], a                                 ; $1201: $EA $A7 $FF
     ld a, $D3                                     ; $1204: $3E $D3
     ld [hScript.State], a                                 ; $1206: $EA $AB $FF
     ld a, $0A                                     ; $1209: $3E $0A
@@ -2574,10 +2574,10 @@ Cmd_11DE:
     call Script_Close                            ; $120E: $CD $78 $2B
     call ScreenHide                            ; $1211: $CD $F9 $07
     call Interrupt_Timer_Start                            ; $1214: $CD $61 $2C
-    call Call_000_2B17                            ; $1217: $CD $17 $2B
+    call Interpreter_ReInit                            ; $1217: $CD $17 $2B
     SwitchROMBank $04
     call $4190                                    ; $1222: $CD $90 $41
-    call Call_000_20AC                            ; $1225: $CD $AC $20
+    call System_Script_SceneInit                            ; $1225: $CD $AC $20
     call ScreenShow                            ; $1228: $CD $20 $08
 
 jr_000_122B:
@@ -2788,7 +2788,7 @@ Cmd_14F4:
     ld [hScript.State], a                                 ; $1518: $EA $AB $FF
     ld a, $15                                     ; $151B: $3E $15
     ld [hScript.State + 1], a                                 ; $151D: $EA $AC $FF
-    ldh a, [$FFAF]                                  ; $1520: $F0 $AF
+    ldh a, [hTicker]                                  ; $1520: $F0 $AF
     and $03                                       ; $1522: $E6 $03
     cp $03                                        ; $1524: $FE $03
     ret nz                                        ; $1526: $C0
@@ -4529,7 +4529,7 @@ Cmd_2079:
     jp $45F5                                      ; $2084: $C3 $F5 $45
 
 
-Call_000_2087:
+System_CopyScriptDataToBuffer:
     ld l, c                                       ; $2087: $69
     ld h, b                                       ; $2088: $60
     inc hl                                        ; $2089: $23
@@ -4553,7 +4553,7 @@ Call_000_2087:
     ret                                           ; $20AB: $C9
 
 
-Call_000_20AC:
+System_Script_SceneInit:
     PushROMBank
     xor a                                         ; $20B0: $AF
     ld [$C709], a                                 ; $20B1: $EA $09 $C7
@@ -4576,20 +4576,20 @@ jr_000_20B4:
     PopROMBank
     ret                                           ; $20E1: $C9
 
-Cmd_20E2:
+Cmd_System_BackgroundSceneNew:
     call ScreenHide                            ; $20E2: $CD $F9 $07
     call Interrupt_Timer_Start                            ; $20E5: $CD $61 $2C
     ld a, $0A                                     ; $20E8: $3E $0A
-    ld [$FFA6], a                                 ; $20EA: $EA $A6 $FF
+    ld [hScript_CurrentAddress], a                                 ; $20EA: $EA $A6 $FF
     ld a, $C7                                     ; $20ED: $3E $C7
-    ld [$FFA7], a                                 ; $20EF: $EA $A7 $FF
+    ld [hScript_CurrentAddress + 1], a                                 ; $20EF: $EA $A7 $FF
     ld a, $D3                                     ; $20F2: $3E $D3
     ld [hScript.State], a                                 ; $20F4: $EA $AB $FF
     ld a, $0A                                     ; $20F7: $3E $0A
     ld [hScript.State + 1], a                                 ; $20F9: $EA $AC $FF
     call Script_Close                            ; $20FC: $CD $78 $2B
     call System_Init                            ; $20FF: $CD $63 $08
-    call Call_000_2B17                            ; $2102: $CD $17 $2B
+    call Interpreter_ReInit                            ; $2102: $CD $17 $2B
     ld a, $00                                     ; $2105: $3E $00
     ld [wScript_System.Frame], a                                 ; $2107: $EA $19 $C7
     ld a, $00                                     ; $210A: $3E $00
@@ -4599,7 +4599,7 @@ Cmd_20E2:
     ld a, $15                                     ; $2114: $3E $15
     ld [$C71C], a                                 ; $2116: $EA $1C $C7
     ld sp, wStackTop                                  ; $2119: $31 $F5 $CE
-    call Call_000_20AC                            ; $211C: $CD $AC $20
+    call System_Script_SceneInit                            ; $211C: $CD $AC $20
     ld a, $20                                     ; $211F: $3E $20
     ld [$C86A], a                                 ; $2121: $EA $6A $C8
     ld [$C86B], a                                 ; $2124: $EA $6B $C8
@@ -4609,9 +4609,9 @@ Cmd_20E2:
     call $4956                                    ; $2135: $CD $56 $49
     ld sp, wStackTop                                  ; $2138: $31 $F5 $CE
     call ScreenShow                            ; $213B: $CD $20 $08
-    jp Jump_000_02F7                              ; $213E: $C3 $F7 $02
+    jp Game_Loop                              ; $213E: $C3 $F7 $02
 
-Cmd_2141:
+Cmd_System_InventoryGive:
     ld hl, $CA19                                  ; $2141: $21 $19 $CA
     ld a, [bc]                                    ; $2144: $0A
     ld [hl+], a                                   ; $2145: $22
@@ -4629,7 +4629,7 @@ Cmd_2141:
     pop bc                                        ; $2162: $C1
     jp Script_Start                              ; $2163: $C3 $D3 $0A
 
-Cmd_2166:
+Cmd_System_InventoryTake:
     ld hl, $CA19                                  ; $2166: $21 $19 $CA
     ld a, [bc]                                    ; $2169: $0A
     ld [hl+], a                                   ; $216A: $22
@@ -4647,19 +4647,18 @@ Cmd_2166:
     pop bc                                        ; $2187: $C1
     jp Script_Start                              ; $2188: $C3 $D3 $0A
 
-Cmd_218B:
-Jump_000_218B:
+Cmd_System_LoadGame:
     Battery_SetBank $00
     Battery_On
-    ld a, [$A015]                                 ; $2197: $FA $15 $A0
+    ld a, [xLoad_HeroXTile]                                 ; $2197: $FA $15 $A0
     ld [$C9C4], a                                 ; $219A: $EA $C4 $C9
-    ld a, [$A016]                                 ; $219D: $FA $16 $A0
+    ld a, [xLoad_HeroYTile]                                 ; $219D: $FA $16 $A0
     ld [$C9C5], a                                 ; $21A0: $EA $C5 $C9
-    ld a, [$A012]                                 ; $21A3: $FA $12 $A0
+    ld a, [xLoad_ScriptBank]                                 ; $21A3: $FA $12 $A0
     ld e, a                                       ; $21A6: $5F
-    ld a, [$A013]                                 ; $21A7: $FA $13 $A0
+    ld a, [xLoad_ScriptFrame]                                 ; $21A7: $FA $13 $A0
     ld l, a                                       ; $21AA: $6F
-    ld a, [$A014]                                 ; $21AB: $FA $14 $A0
+    ld a, [xLoad_ScriptFrame + 1]                                 ; $21AB: $FA $14 $A0
     ld h, a                                       ; $21AE: $67
     Battery_Off
     ld a, h                                       ; $21B3: $7C
@@ -4675,14 +4674,14 @@ Jump_000_218B:
 jr_000_21C3:
     jp Script_Start                              ; $21C3: $C3 $D3 $0A
 
-Cmd_21C6:
+Cmd_System_CopyLoadGame:
     push bc                                       ; $21C6: $C5
     SwitchROMBank $07
     call $40B8                                    ; $21CF: $CD $B8 $40
     pop bc                                        ; $21D2: $C1
-    jp Jump_000_218B                              ; $21D3: $C3 $8B $21
+    jp Cmd_System_LoadGame                              ; $21D3: $C3 $8B $21
 
-Cmd_21D6:
+Cmd_System_MenuHistorian:
     push bc                                       ; $21D6: $C5
     SwitchROMBank $03
     call $43D1                                    ; $21DF: $CD $D1 $43
@@ -4690,16 +4689,16 @@ Cmd_21D6:
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $21EC: $C3 $D3 $0A
 
-Cmd_21EF:
+Cmd_System_MenuMusic:
     dec bc                                        ; $21EF: $0B
     dec bc                                        ; $21F0: $0B
     dec bc                                        ; $21F1: $0B
-    call Call_000_2087                            ; $21F2: $CD $87 $20
+    call System_CopyScriptDataToBuffer                            ; $21F2: $CD $87 $20
     SwitchROMBank $03
     call $43D2                                    ; $21FD: $CD $D2 $43
     ret                                           ; $2200: $C9
 
-Cmd_2201:
+Cmd_System_MenuRingBank:
     push bc                                       ; $2201: $C5
     SwitchROMBank $03
     call $43D7                                    ; $220A: $CD $D7 $43
@@ -4707,7 +4706,7 @@ Cmd_2201:
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $2217: $C3 $D3 $0A
 
-Cmd_221A:
+Cmd_System_MenuRingSmith:
     SwitchROMBank $04
     call $415B                                    ; $2222: $CD $5B $41
     SwitchROMBank [hScript.Bank]
@@ -4719,7 +4718,7 @@ Cmd_221A:
     inc bc                                        ; $2236: $03
     inc bc                                        ; $2237: $03
     push bc                                       ; $2238: $C5
-    call Call_000_2087                            ; $2239: $CD $87 $20
+    call System_CopyScriptDataToBuffer                            ; $2239: $CD $87 $20
     SwitchROMBank $04
     call $415B                                    ; $2244: $CD $5B $41
     pop bc                                        ; $2247: $C1
@@ -4730,22 +4729,29 @@ Cmd_221A:
     SwitchROMBank [hScript.Bank]
     jp Jump_000_1593                              ; $2256: $C3 $93 $15
 
-Cmd_2259:
+Cmd_System_MenuRingUpgrade:
     dec bc                                        ; $2259: $0B
     dec bc                                        ; $225A: $0B
     dec bc                                        ; $225B: $0B
-    call Call_000_2087                            ; $225C: $CD $87 $20
+    call System_CopyScriptDataToBuffer                            ; $225C: $CD $87 $20
     SwitchROMBank $03
     call $43D9                                    ; $2267: $CD $D9 $43
     ret                                           ; $226A: $C9
 
-Cmd_226B:
-    call Call_000_2087                            ; $226B: $CD $87 $20
+Cmd_System_MenuShop:
+    call System_CopyScriptDataToBuffer                            ; $226B: $CD $87 $20
     SwitchROMBank $03
     call $43D8                                    ; $2276: $CD $D8 $43
     ret                                           ; $2279: $C9
 
-Cmd_227A:
+Cmd_System_NewGame:
+    ; Modifies the memory to setup a new game
+    ; Tony's default stats will be set and the inventory will be wiped
+    ; In New Game Plus, Tony's stats, creatures and relics will be saved
+    ;
+    ; Arguments:
+    ;   db    0 = New Game
+    ;         1 = New Game Plus (technically, any non-zero value will do)
     ld a, $D3                                     ; $227A: $3E $D3
     ldh [hScript.State], a                                  ; $227C: $E0 $AB
     ld a, $0A                                     ; $227E: $3E $0A
@@ -4758,39 +4764,45 @@ Cmd_227A:
     ld a, c                                       ; $2288: $79
     ldh [hScript.Frame], a                                  ; $2289: $E0 $A9
     SwitchROMBank $01
-    jp z, $4681                                   ; $2293: $CA $81 $46
+    jp z, SystemXX_NewGameInit                                   ; $2293: $CA $81 $46
 
-    jp $46A9                                      ; $2296: $C3 $A9 $46
+    jp SystemXX_NewGamePlusInit                                      ; $2296: $C3 $A9 $46
 
-Cmd_2299:
+Cmd_System_SaveGame:
+    ; Saves the game
+    ; Sets xGameSaved to 1, which opens the Continue door and provides a warning when creating a new game
+    ; Arguments:
+    ;   db  If non-zero (1 is used), Tony will be healed right before saving
     Battery_On
     Battery_SetBank $00
     ld a, [$C18E]                                 ; $22A5: $FA $8E $C1
-    ld [$A015], a                                 ; $22A8: $EA $15 $A0
+    ld [xLoad_HeroXTile], a                                 ; $22A8: $EA $15 $A0
     ld a, [$C18F]                                 ; $22AB: $FA $8F $C1
-    ld [$A016], a                                 ; $22AE: $EA $16 $A0
+    ld [xLoad_HeroYTile], a                                 ; $22AE: $EA $16 $A0
     Battery_SetBank $01
     ld a, [bc]                                    ; $22B8: $0A
     inc bc                                        ; $22B9: $03
     and a                                         ; $22BA: $A7
-    jr z, jr_000_22BD                             ; $22BB: $28 $00
-
-jr_000_22BD:
+    jr z, .SkipHeal                             ; $22BB: $28 $00
+        ; Code commented out here
+    .SkipHeal:
     push bc                                       ; $22BD: $C5
     SwitchROMBank $07
-    call $410E                                    ; $22C6: $CD $0E $41
+    call Battery_SaveGame                                    ; $22C6: $CD $0E $41
     SwitchROMBank [hScript.Bank]
     pop bc                                        ; $22D2: $C1
     jp Script_Start                              ; $22D3: $C3 $D3 $0A
 
-Cmd_22D6:
-Jump_000_22D6:
+Cmd_System_SceneNew:
+    ; Re-initializes many aspects of the game
+    ; Arguments:
+    ;   None
     call ScreenHide                            ; $22D6: $CD $F9 $07
     call Interrupt_Timer_Start                            ; $22D9: $CD $61 $2C
-    ld a, $0A                                     ; $22DC: $3E $0A
-    ld [$FFA6], a                                 ; $22DE: $EA $A6 $FF
-    ld a, $C7                                     ; $22E1: $3E $C7
-    ld [$FFA7], a                                 ; $22E3: $EA $A7 $FF
+    ld a, LOW(wScript_Master)                                     ; $22DC: $3E $0A
+    ld [hScript_CurrentAddress], a                                 ; $22DE: $EA $A6 $FF
+    ld a, HIGH(wScript_Master)                                     ; $22E1: $3E $C7
+    ld [hScript_CurrentAddress + 1], a                                 ; $22E3: $EA $A7 $FF
     ld a, $D3                                     ; $22E6: $3E $D3
     ld [hScript.State], a                                 ; $22E8: $EA $AB $FF
     ld a, $0A                                     ; $22EB: $3E $0A
@@ -4799,7 +4811,7 @@ Jump_000_22D6:
     xor a                                         ; $22F3: $AF
     ld [$CCC2], a                                 ; $22F4: $EA $C2 $CC
     call System_Init                            ; $22F7: $CD $63 $08
-    call Call_000_2B17                            ; $22FA: $CD $17 $2B
+    call Interpreter_ReInit                            ; $22FA: $CD $17 $2B
     ld a, $00                                     ; $22FD: $3E $00
     ld [wScript_System.Frame], a                                 ; $22FF: $EA $19 $C7
     ld a, $00                                     ; $2302: $3E $00
@@ -4809,16 +4821,17 @@ Jump_000_22D6:
     ld a, $15                                     ; $230C: $3E $15
     ld [$C71C], a                                 ; $230E: $EA $1C $C7
     ld sp, wStackTop                                  ; $2311: $31 $F5 $CE
-    call Call_000_20AC                            ; $2314: $CD $AC $20
+    call System_Script_SceneInit                            ; $2314: $CD $AC $20
     SwitchROMBank $07
-    call $4A8C                                    ; $231F: $CD $8C $4A
+    call Tilemap_Position                                    ; $231F: $CD $8C $4A
     ld sp, wStackTop                                  ; $2322: $31 $F5 $CE
     ld a, $01                                     ; $2325: $3E $01
     ld [$C6F7], a                                 ; $2327: $EA $F7 $C6
     call ScreenShow                            ; $232A: $CD $20 $08
-    jp Jump_000_02F7                              ; $232D: $C3 $F7 $02
+    jp Game_Loop                              ; $232D: $C3 $F7 $02
 
-Cmd_2330:
+Cmd_System_SceneReady:
+    ; Sets [wScript_SceneReady], quitting the single script loop and turning on the LCD
     ld a, $01                                     ; $2330: $3E $01
     ld [$C709], a                                 ; $2332: $EA $09 $C7
     ld a, $D3                                     ; $2335: $3E $D3
@@ -4827,7 +4840,11 @@ Cmd_2330:
     ld [hScript.State + 1], a                                 ; $233C: $EA $AC $FF
     ret                                           ; $233F: $C9
 
-Cmd_2340:
+Cmd_System_SetItemSpellMapError:
+    ; Sets the script that will run when the user tries to use an item or spell outside of a battle
+    ; By default, when the game is turned on, the script is set to Script_System_ItemSpellMapError ("I can't use my X here")
+    ; Arguments:
+    ;   BankAddress - script
     ld hl, $CA1C                                  ; $2340: $21 $1C $CA
     ld a, [bc]                                    ; $2343: $0A
     ld [hl+], a                                   ; $2344: $22
@@ -4840,23 +4857,26 @@ Cmd_2340:
     inc bc                                        ; $234B: $03
     jp Script_Start                              ; $234C: $C3 $D3 $0A
 
-Cmd_234F:
+Cmd_System_SaveLocation:
+    ; Save the hero's position and determines from where the script should start upon loading the game
+    ; Arguments:
+    ;   BankAddress - xLoad_ScriptBank + xLoad_ScriptFrame
     xor a                                         ; $234F: $AF
     ld [rRAMB], a                                 ; $2350: $EA $00 $40
     Battery_On
     ld a, [$C18E]                                 ; $2358: $FA $8E $C1
-    ld [$A015], a                                 ; $235B: $EA $15 $A0
+    ld [xLoad_HeroXTile], a                                 ; $235B: $EA $15 $A0
     ld a, [$C18F]                                 ; $235E: $FA $8F $C1
-    ld [$A016], a                                 ; $2361: $EA $16 $A0
+    ld [xLoad_HeroYTile], a                                 ; $2361: $EA $16 $A0
     ld a, [bc]                                    ; $2364: $0A
     inc bc                                        ; $2365: $03
-    ld [$A012], a                                 ; $2366: $EA $12 $A0
+    ld [xLoad_ScriptBank], a                                 ; $2366: $EA $12 $A0
     ld a, [bc]                                    ; $2369: $0A
     inc bc                                        ; $236A: $03
-    ld [$A013], a                                 ; $236B: $EA $13 $A0
+    ld [xLoad_ScriptFrame], a                                 ; $236B: $EA $13 $A0
     ld a, [bc]                                    ; $236E: $0A
     inc bc                                        ; $236F: $03
-    ld [$A014], a                                 ; $2370: $EA $14 $A0
+    ld [xLoad_ScriptFrame + 1], a                                 ; $2370: $EA $14 $A0
     Battery_Off
     jp Script_Start                              ; $2377: $C3 $D3 $0A
 
@@ -5012,6 +5032,7 @@ Cmd_2434:
     jp Script_Start                              ; $244A: $C3 $D3 $0A
 
 
+TextboxXX_Init::
     xor a                                         ; $244D: $AF
     ld [$C6F0], a                                 ; $244E: $EA $F0 $C6
     ld [$C6F2], a                                 ; $2451: $EA $F2 $C6
@@ -5051,7 +5072,7 @@ Cmd_2434:
 
     adc e                                         ; $249F: $8B
 
-Cmd_24A0:
+Cmd_Textbox_FormatChar:
     Battery_SetBank $00
     Battery_On
     ld a, [bc]                                    ; $24AC: $0A
@@ -5061,12 +5082,12 @@ Cmd_24A0:
     ld h, a                                       ; $24B0: $67
     inc bc                                        ; $24B1: $03
     push bc                                       ; $24B2: $C5
-    call Call_000_2EA1                            ; $24B3: $CD $A1 $2E
+    call Text_FormatChar                            ; $24B3: $CD $A1 $2E
     pop bc                                        ; $24B6: $C1
     Battery_Off
     jp Script_Start                              ; $24BB: $C3 $D3 $0A
 
-Cmd_24BE:
+Cmd_Textbox_Clear:
     ld a, [$C6F2]                                 ; $24BE: $FA $F2 $C6
     cp $02                                        ; $24C1: $FE $02
     jp nz, Script_Start                          ; $24C3: $C2 $D3 $0A
@@ -5083,7 +5104,7 @@ Cmd_24BE:
     ld [hScript.State + 1], a                                 ; $24DC: $EA $AC $FF
     ret                                           ; $24DF: $C9
 
-Cmd_24E0:
+Cmd_Textbox_Close:
     xor a                                         ; $24E0: $AF
     ld [$C734], a                                 ; $24E1: $EA $34 $C7
     ld [$C735], a                                 ; $24E4: $EA $35 $C7
@@ -5095,8 +5116,8 @@ Cmd_24E0:
     ld [hScript.State + 1], a                                 ; $24F3: $EA $AC $FF
     ret                                           ; $24F6: $C9
 
-Cmd_24F7:
-    call Call_000_2742                            ; $24F7: $CD $42 $27
+Cmd_Textbox_Icon:
+    call Textbox_VerifyOpen                            ; $24F7: $CD $42 $27
     ld a, $01                                     ; $24FA: $3E $01
     ld [wVBlank_Bank], a                                 ; $24FC: $EA $EA $C6
     ld a, $05                                     ; $24FF: $3E $05
@@ -5175,8 +5196,8 @@ jr_000_256E:
     ld [hScript.State + 1], a                                 ; $2584: $EA $AC $FF
     ret                                           ; $2587: $C9
 
-Cmd_2588:
-    call Call_000_2742                            ; $2588: $CD $42 $27
+Cmd_Textbox_Menu:
+    call Textbox_VerifyOpen                            ; $2588: $CD $42 $27
     ld a, [bc]                                    ; $258B: $0A
     ld e, a                                       ; $258C: $5F
     inc bc                                        ; $258D: $03
@@ -5268,7 +5289,7 @@ jr_000_25A3:
     ld [hScript.State + 1], a                                 ; $2625: $EA $AC $FF
     ret                                           ; $2628: $C9
 
-Cmd_2629:
+Cmd_Textbox_Open:
     ld hl, hScript.Bank                                  ; $2629: $21 $A8 $FF
     set 7, [hl]                                   ; $262C: $CB $FE
     ld a, $68                                     ; $262E: $3E $68
@@ -5277,7 +5298,7 @@ Cmd_2629:
     ld [hScript.State + 1], a                                 ; $2635: $EA $AC $FF
     ret                                           ; $2638: $C9
 
-Cmd_2639:
+Cmd_Textbox_FormatWord:
     Battery_SetBank $00
     Battery_On
     ld a, [bc]                                    ; $2645: $0A
@@ -5287,13 +5308,13 @@ Cmd_2639:
     ld h, a                                       ; $2649: $67
     inc bc                                        ; $264A: $03
     push bc                                       ; $264B: $C5
-    call Call_000_2EC5                            ; $264C: $CD $C5 $2E
+    call Text_FormatWord                            ; $264C: $CD $C5 $2E
     pop bc                                        ; $264F: $C1
     Battery_Off
     jp Script_Start                              ; $2654: $C3 $D3 $0A
 
-Cmd_2657:
-    call Call_000_2742                            ; $2657: $CD $42 $27
+Cmd_Textbox_Write:
+    call Textbox_VerifyOpen                            ; $2657: $CD $42 $27
     ld a, b                                       ; $265A: $78
     ld [$C95F], a                                 ; $265B: $EA $5F $C9
     ld a, c                                       ; $265E: $79
@@ -5308,7 +5329,7 @@ Cmd_2657:
     ld [hScript.State + 1], a                                 ; $2673: $EA $AC $FF
     ret                                           ; $2676: $C9
 
-
+Textbox_Update:
     ld hl, $C95C                                  ; $2677: $21 $5C $C9
     ld a, [hl+]                                   ; $267A: $2A
     ld h, [hl]                                    ; $267B: $66
@@ -5427,7 +5448,7 @@ jr_000_26DE:
     ret                                           ; $2741: $C9
 
 
-Call_000_2742:
+Textbox_VerifyOpen:
     ld a, [$C6F2]                                 ; $2742: $FA $F2 $C6
     cp $02                                        ; $2745: $FE $02
     jr z, jr_000_275C                             ; $2747: $28 $13
@@ -5448,9 +5469,10 @@ Call_000_2742:
 jr_000_275C:
     ret                                           ; $275C: $C9
 
-
+Textbox_OpenTextInit:
     ld a, $02                                     ; $275D: $3E $02
     ld [$C6F2], a                                 ; $275F: $EA $F2 $C6
+Textbox_TextInit:
     ld a, $01                                     ; $2762: $3E $01
     ld [$C6F1], a                                 ; $2764: $EA $F1 $C6
     ld a, $6C                                     ; $2767: $3E $6C
@@ -5478,30 +5500,30 @@ jr_000_275C:
     ld [$C96A], a                                 ; $279F: $EA $6A $C9
     jp Script_Start                              ; $27A2: $C3 $D3 $0A
 
-Cmd_27A5:
+Cmd_Trigger_ToggleAlways:
     ld hl, $0009                                  ; $27A5: $21 $09 $00
-    call Call_000_296E                            ; $27A8: $CD $6E $29
+    call Trigger_Ready                            ; $27A8: $CD $6E $29
     ld a, [wScreenVisible]                                 ; $27AB: $FA $59 $C9
     and a                                         ; $27AE: $A7
     jr nz, jr_000_27B9                            ; $27AF: $20 $08
 
     ld a, b                                       ; $27B1: $78
     and c                                         ; $27B2: $A1
-    jp z, Jump_000_290D                           ; $27B3: $CA $0D $29
+    jp z, Trigger_ToggleResetUpdateTilemap                           ; $27B3: $CA $0D $29
 
-    jp Jump_000_28EB                              ; $27B6: $C3 $EB $28
+    jp Trigger_ToggleSetUpdateTilemapAndJump                              ; $27B6: $C3 $EB $28
 
 
 jr_000_27B9:
     ld a, b                                       ; $27B9: $78
     and c                                         ; $27BA: $A1
-    jp z, Jump_000_28DF                           ; $27BB: $CA $DF $28
+    jp z, Trigger_ToggleSetVarbit_UpdateTilemapAndJump                           ; $27BB: $CA $DF $28
 
-    jp Jump_000_2901                              ; $27BE: $C3 $01 $29
+    jp Trigger_ToggleResetVarbit_UpdateTilemap                              ; $27BE: $C3 $01 $29
 
-Cmd_27C1:
+Cmd_Trigger_ToggleOnce:
     ld hl, $0009                                  ; $27C1: $21 $09 $00
-    call Call_000_296E                            ; $27C4: $CD $6E $29
+    call Trigger_Ready                            ; $27C4: $CD $6E $29
     ld a, [wScreenVisible]                                 ; $27C7: $FA $59 $C9
     and a                                         ; $27CA: $A7
     jr nz, jr_000_27E4                            ; $27CB: $20 $17
@@ -5512,26 +5534,26 @@ Cmd_27C1:
     ldh [hScript.State], a                                  ; $27D1: $E0 $AB
     ld a, $15                                     ; $27D3: $3E $15
     ldh [hScript.State + 1], a                                  ; $27D5: $E0 $AC
-    jp z, Jump_000_290D                           ; $27D7: $CA $0D $29
+    jp z, Trigger_ToggleResetUpdateTilemap                           ; $27D7: $CA $0D $29
 
     ld de, $0003                                  ; $27DA: $11 $03 $00
     add hl, de                                    ; $27DD: $19
     ld a, [hl+]                                   ; $27DE: $2A
     ld e, a                                       ; $27DF: $5F
     inc hl                                        ; $27E0: $23
-    jp Jump_000_2922                              ; $27E1: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $27E1: $C3 $22 $29
 
 
 jr_000_27E4:
     ld a, b                                       ; $27E4: $78
     and c                                         ; $27E5: $A1
-    jp z, Jump_000_28DF                           ; $27E6: $CA $DF $28
+    jp z, Trigger_ToggleSetVarbit_UpdateTilemapAndJump                           ; $27E6: $CA $DF $28
 
-    jp Jump_000_2901                              ; $27E9: $C3 $01 $29
+    jp Trigger_ToggleResetVarbit_UpdateTilemap                              ; $27E9: $C3 $01 $29
 
-Cmd_27EC:
+Cmd_Trigger_TriggerAlways:
     ld hl, $0009                                  ; $27EC: $21 $09 $00
-    call Call_000_296E                            ; $27EF: $CD $6E $29
+    call Trigger_Ready                            ; $27EF: $CD $6E $29
     ld a, [wScreenVisible]                                 ; $27F2: $FA $59 $C9
     and a                                         ; $27F5: $A7
     jr nz, jr_000_2800                            ; $27F6: $20 $08
@@ -5540,21 +5562,21 @@ Cmd_27EC:
     and c                                         ; $27F9: $A1
     jp z, Jump_000_1531                           ; $27FA: $CA $31 $15
 
-    jp Jump_000_28D6                              ; $27FD: $C3 $D6 $28
+    jp Trigger_TriggerSetUpdateTilemap                              ; $27FD: $C3 $D6 $28
 
 
 jr_000_2800:
     ld a, b                                       ; $2800: $78
     and c                                         ; $2801: $A1
-    jp z, Jump_000_28CA                           ; $2802: $CA $CA $28
+    jp z, Trigger_TriggerSetVarbit_UpdateTilemap                           ; $2802: $CA $CA $28
 
     ld b, h                                       ; $2805: $44
     ld c, l                                       ; $2806: $4D
     jp Jump_000_1593                              ; $2807: $C3 $93 $15
 
-Cmd_280A:
+Cmd_Trigger_TriggerOnce:
     ld hl, $0009                                  ; $280A: $21 $09 $00
-    call Call_000_296E                            ; $280D: $CD $6E $29
+    call Trigger_Ready                            ; $280D: $CD $6E $29
     ld a, [wScreenVisible]                                 ; $2810: $FA $59 $C9
     and a                                         ; $2813: $A7
     jr nz, jr_000_2826                            ; $2814: $20 $10
@@ -5567,21 +5589,21 @@ Cmd_280A:
     ldh [hScript.State], a                                  ; $281D: $E0 $AB
     ld a, $15                                     ; $281F: $3E $15
     ldh [hScript.State + 1], a                                  ; $2821: $E0 $AC
-    jp Jump_000_28D6                              ; $2823: $C3 $D6 $28
+    jp Trigger_TriggerSetUpdateTilemap                              ; $2823: $C3 $D6 $28
 
 
 jr_000_2826:
     ld a, b                                       ; $2826: $78
     and c                                         ; $2827: $A1
-    jp z, Jump_000_28CA                           ; $2828: $CA $CA $28
+    jp z, Trigger_TriggerSetVarbit_UpdateTilemap                           ; $2828: $CA $CA $28
 
     ld b, h                                       ; $282B: $44
     ld c, l                                       ; $282C: $4D
     jp Jump_000_1593                              ; $282D: $C3 $93 $15
 
-Cmd_2830:
+Cmd_Trigger_Treasure:
     ld hl, $0007                                  ; $2830: $21 $07 $00
-    call Call_000_296E                            ; $2833: $CD $6E $29
+    call Trigger_Ready                            ; $2833: $CD $6E $29
     ld a, [wScreenVisible]                                 ; $2836: $FA $59 $C9
     and a                                         ; $2839: $A7
     jr nz, jr_000_2850                            ; $283A: $20 $14
@@ -5597,7 +5619,7 @@ Cmd_2830:
     ld a, $15                                     ; $2847: $3E $15
     ldh [hScript.State + 1], a                                  ; $2849: $E0 $AC
     ld e, $FF                                     ; $284B: $1E $FF
-    jp Jump_000_2922                              ; $284D: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $284D: $C3 $22 $29
 
 
 jr_000_2850:
@@ -5642,7 +5664,7 @@ jr_000_2850:
     ld [de], a                                    ; $28A4: $12
     Battery_Off
     ld e, $FF                                     ; $28A9: $1E $FF
-    jp Jump_000_2922                              ; $28AB: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $28AB: $C3 $22 $29
 
 
 Jump_000_28AE:
@@ -5667,29 +5689,86 @@ jr_000_28BB:
     ret                                           ; $28C9: $C9
 
 
-Jump_000_28CA:
+Trigger_TriggerSetVarbit_UpdateTilemap:
+    ; For Cmd_Trigger_TriggerOnce and Cmd_Trigger_TriggerAlways
+    ;
+    ; Turns a varbit on, and then runs Trigger_UpdateTilemap
+    ;
+    ; Inputs:
+    ;   de = address of XRAM varbit
+    ;   c = value of XRAM varbit
+    ;   b = mask of XRAM varbit
+    ;   hl =
+    ;       BankAddress - AlreadyOn script (unused)
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           dw tilemap address
+    ;
     Battery_On
     ld a, b                                       ; $28CF: $78
     or c                                          ; $28D0: $B1
     ld [de], a                                    ; $28D1: $12
     Battery_Off
+    ;jp Trigger_TriggerSetUpdateTilemap
 
-Jump_000_28D6:
+Trigger_TriggerSetUpdateTilemap:
+    ; For Cmd_Trigger_TriggerOnce and Cmd_Trigger_TriggerAlways
+    ;
+    ; Runs Trigger_UpdateTilemap
+    ;
+    ; Inputs:
+    ;   hl =
+    ;       BankAddress - AlreadyOn script (unused)
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           dw tilemap address
+    ;
     ld de, $0003                                  ; $28D6: $11 $03 $00
     add hl, de                                    ; $28D9: $19
     ld a, [hl+]                                   ; $28DA: $2A
     ld e, a                                       ; $28DB: $5F
-    jp Jump_000_2922                              ; $28DC: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $28DC: $C3 $22 $29
 
 
-Jump_000_28DF:
+Trigger_ToggleSetVarbit_UpdateTilemapAndJump:
+    ; For Cmd_Trigger_ToggleOnce and Cmd_Trigger_ToggleAlways, On position
+    ;
+    ; Turns a varbit on
+    ; Updates the frame to continue reading from the TurnOn script
+    ; Runs Trigger_UpdateTilemap with On state
+    ;
+    ; Inputs:
+    ;   de = address of XRAM varbit
+    ;   c = value of XRAM varbit
+    ;   b = mask of XRAM varbit
+    ;   hl =
+    ;       BankAddress - TurnOn script
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           db e = pattern id Off state
+    ;           dw tilemap address
+    ;
     Battery_On
     ld a, b                                       ; $28E4: $78
     or c                                          ; $28E5: $B1
     ld [de], a                                    ; $28E6: $12
     Battery_Off
+    ;jp Trigger_ToggleSetUpdateTilemapAndJump
 
-Jump_000_28EB:
+Trigger_ToggleSetUpdateTilemapAndJump:
+    ; For Cmd_Trigger_ToggleOnce and Cmd_Trigger_ToggleAlways, On position
+    ;
+    ; Updates the frame to continue reading from the TurnOn script
+    ; Runs Trigger_UpdateTilemap with On state
+    ;
+    ; Inputs:
+    ;   hl =
+    ;       BankAddress - TurnOn script
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           db e = pattern id Off state
+    ;           dw tilemap address
+    ;
     ld a, [hl+]                                   ; $28EB: $2A
     ld [hScript.Bank], a                                 ; $28EC: $EA $A8 $FF
     ld a, [hl+]                                   ; $28EF: $2A
@@ -5703,17 +5782,45 @@ Jump_000_28EB:
     ld a, [hl+]                                   ; $28FB: $2A
     ld e, a                                       ; $28FC: $5F
     inc hl                                        ; $28FD: $23
-    jp Jump_000_2922                              ; $28FE: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $28FE: $C3 $22 $29
 
 
-Jump_000_2901:
+Trigger_ToggleResetVarbit_UpdateTilemap:
+    ; For Cmd_Trigger_ToggleOnce and Cmd_Trigger_ToggleAlways, Off position
+    ;
+    ; Turns a varbit off, and then runs Trigger_UpdateTilemap
+    ;
+    ; Inputs:
+    ;   de = address of XRAM varbit
+    ;   c = value of XRAM varbit
+    ;   b = mask of XRAM varbit
+    ;   hl =
+    ;       BankAddress - TurnOn script
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           db e = pattern id Off state
+    ;           dw tilemap address
+    ;
     Battery_On
     ld a, b                                       ; $2906: $78
     xor c                                         ; $2907: $A9
     ld [de], a                                    ; $2908: $12
     Battery_Off
+    ; jp Trigger_ToggleResetUpdateTilemap
 
-Jump_000_290D:
+Trigger_ToggleResetUpdateTilemap:
+    ; For Cmd_Trigger_ToggleOnce and Cmd_Trigger_ToggleAlways, Off position
+    ;
+    ; Runs Trigger_UpdateTilemap with Off state
+    ;
+    ; Inputs:
+    ;   hl =
+    ;       BankAddress - TurnOn script
+    ;       Trigger_UpdateTilemap
+    ;           db e = pattern id On state
+    ;           db e = pattern id Off state
+    ;           dw tilemap address
+    ;
     ld de, $0004                                  ; $290D: $11 $04 $00
     add hl, de                                    ; $2910: $19
     ld a, [hl+]                                   ; $2911: $2A
@@ -5726,10 +5833,15 @@ Jump_000_290D:
     ld [hScript.Frame], a                                 ; $291A: $EA $A9 $FF
     dec hl                                        ; $291D: $2B
     dec hl                                        ; $291E: $2B
-    jp Jump_000_2922                              ; $291F: $C3 $22 $29
+    jp Trigger_UpdateTilemap                              ; $291F: $C3 $22 $29
 
 
-Jump_000_2922:
+Trigger_UpdateTilemap:
+    ; Updates the trigger tile to a new tile id in wMetatilemap
+    ; If the screen is on, also updates the tilemap to display the new tile id
+    ; Inputs:
+    ;   e - new tile id
+    ;   [hl] - tilemap address
     SwitchRAMBank $03
     ld a, [hl+]                                   ; $2929: $2A
     ld h, [hl]                                    ; $292A: $66
@@ -5767,7 +5879,20 @@ Jump_000_2922:
     ret                                           ; $296D: $C9
 
 
-Call_000_296E:
+Trigger_Ready:
+    ; For triggers, fetches the corresponding XRAM var to be interpreted
+    ; Moves the frame past the trigger command
+    ;
+    ; Inputs:
+    ;   bc = frame
+    ;       dw - address of XRAM varbit
+    ;       db - mask of XRAM varbit
+    ;   hl = number of parameter bytes in the command that called this function
+    ; Outputs:
+    ;   de = address of XRAM varbit
+    ;   c = value of XRAM varbit
+    ;   b = mask of XRAM varbit
+    ;   hl = original frame + 3
     add hl, bc                                    ; $296E: $09
     ld a, h                                       ; $296F: $7C
     ld [hScript.Frame + 1], a                                 ; $2970: $EA $AA $FF
@@ -5792,7 +5917,14 @@ Call_000_296E:
     Battery_Off
     ret                                           ; $299B: $C9
 
-Cmd_299C:
+Cmd_Ram_VarBitExpr:
+    ; Gets a result from Expr_GetValue
+    ; If nonzero, sets varbit to %1, else sets varbit to %0
+    ;
+    ; Arguments:
+    ;   dw      VarBit address
+    ;   db      VarBit mask
+    ;   Expr
     ld a, [bc]                                    ; $299C: $0A
     ld l, a                                       ; $299D: $6F
     inc bc                                        ; $299E: $03
@@ -5829,7 +5961,14 @@ jr_000_29C6:
     Battery_Off
     jp Script_Start                              ; $29CF: $C3 $D3 $0A
 
-Cmd_29D2:
+Cmd_Ram_VarByteExpr:
+    ; Sets a VarByte to the value from Expr_GetValue
+    ; Since Expr_GetValue returns a 16-bit value
+    ; The top 8 bits are ignored
+    ;
+    ; Arguments:
+    ;   dw      VarByte address
+    ;   Expr
     ld a, [bc]                                    ; $29D2: $0A
     ld l, a                                       ; $29D3: $6F
     inc bc                                        ; $29D4: $03
@@ -5845,7 +5984,12 @@ Cmd_29D2:
     Battery_Off
     jp Script_Start                              ; $29EE: $C3 $D3 $0A
 
-Cmd_29F1:
+Cmd_Ram_VarWordExpr:
+    ; Sets a VarWord to the value from Expr_GetValue
+    ;
+    ; Arguments:
+    ;   dw      VarByte address
+    ;   Expr
     ld a, [bc]                                    ; $29F1: $0A
     ld l, a                                       ; $29F2: $6F
     inc bc                                        ; $29F3: $03
@@ -6055,7 +6199,7 @@ Cmd_Ram_OrXramByte:
     jp Script_Start                              ; $2B14: $C3 $D3 $0A
 
 
-Call_000_2B17:
+Interpreter_ReInit:
     ld a, $00                                     ; $2B17: $3E $00
     ld [$C712], a                                 ; $2B19: $EA $12 $C7
     ld a, $00                                     ; $2B1C: $3E $00
@@ -6117,9 +6261,9 @@ jr_000_2B62:
 
 
 Script_Close:
-    ld a, [$FFA7]                                 ; $2B78: $FA $A7 $FF
+    ld a, [hScript_CurrentAddress + 1]                                 ; $2B78: $FA $A7 $FF
     ld h, a                                       ; $2B7B: $67
-    ld a, [$FFA6]                                 ; $2B7C: $FA $A6 $FF
+    ld a, [hScript_CurrentAddress]                                 ; $2B7C: $FA $A6 $FF
     ld l, a                                       ; $2B7F: $6F
     ldh a, [hScript.Bank]                                  ; $2B80: $F0 $A8
     ld [hl+], a                                   ; $2B82: $22
@@ -6140,9 +6284,9 @@ Script_Close:
 
 Script_Open:
     ld a, h                                       ; $2B96: $7C
-    ld [$FFA7], a                                 ; $2B97: $EA $A7 $FF
+    ld [hScript_CurrentAddress + 1], a                                 ; $2B97: $EA $A7 $FF
     ld a, l                                       ; $2B9A: $7D
-    ld [$FFA6], a                                 ; $2B9B: $EA $A6 $FF
+    ld [hScript_CurrentAddress], a                                 ; $2B9B: $EA $A6 $FF
     ld a, [hl+]                                   ; $2B9E: $2A
     ldh [hScript.Bank], a                                  ; $2B9F: $E0 $A8
     ld a, [hl+]                                   ; $2BA1: $2A
@@ -6622,10 +6766,10 @@ jr_000_2E8D:
     jp Jump_000_2E52                              ; $2E9E: $C3 $52 $2E
 
 
-Call_000_2EA1:
+Text_FormatChar:
     ld e, [hl]                                    ; $2EA1: $5E
     ld d, $00                                     ; $2EA2: $16 $00
-    call Call_000_0450                            ; $2EA4: $CD $50 $04
+    call Math_ConvertNumberToDigits                            ; $2EA4: $CD $50 $04
     ld hl, $C952                                  ; $2EA7: $21 $52 $C9
     ld bc, $C96C                                  ; $2EAA: $01 $6C $C9
     ld d, $03                                     ; $2EAD: $16 $03
@@ -6647,11 +6791,11 @@ jr_000_2EAF:
     ret                                           ; $2EC4: $C9
 
 
-Call_000_2EC5:
+Text_FormatWord:
     ld e, [hl]                                    ; $2EC5: $5E
     inc hl                                        ; $2EC6: $23
     ld d, [hl]                                    ; $2EC7: $56
-    call Call_000_0450                            ; $2EC8: $CD $50 $04
+    call Math_ConvertNumberToDigits                            ; $2EC8: $CD $50 $04
     ld hl, $C952                                  ; $2ECB: $21 $52 $C9
     ld bc, $C96C                                  ; $2ECE: $01 $6C $C9
     ld d, $03                                     ; $2ED1: $16 $03

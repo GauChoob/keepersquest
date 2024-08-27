@@ -416,7 +416,7 @@ jr_001_41FE:
     and a                                         ; $4215: $A7
     ret z                                         ; $4216: $C8
 
-    ldh a, [$FFAF]                                  ; $4217: $F0 $AF
+    ldh a, [hTicker]                                  ; $4217: $F0 $AF
     and $03                                       ; $4219: $E6 $03
     cp $03                                        ; $421B: $FE $03
     ret nz                                        ; $421D: $C0
@@ -428,7 +428,7 @@ jr_001_41FE:
     and a                                         ; $4224: $A7
     ret z                                         ; $4225: $C8
 
-    ldh a, [$FFAF]                                  ; $4226: $F0 $AF
+    ldh a, [hTicker]                                  ; $4226: $F0 $AF
     and $01                                       ; $4228: $E6 $01
     ret nz                                        ; $422A: $C0
 
@@ -678,43 +678,43 @@ Script_Table::
     dw Cmd_1FD7
     dw Cmd_2020
     dw Cmd_2079
-    dw Cmd_20E2
-    dw Cmd_2141
-    dw Cmd_2166
-    dw Cmd_218B
-    dw Cmd_21C6
-    dw Cmd_21D6
-    dw Cmd_21EF
-    dw Cmd_2201
-    dw Cmd_221A
-    dw Cmd_2259
-    dw Cmd_226B
-    dw Cmd_227A
-    dw Cmd_2299
-    dw Cmd_22D6
-    dw Cmd_2330
-    dw Cmd_2340
-    dw Cmd_234F
+    dw Cmd_System_BackgroundSceneNew
+    dw Cmd_System_InventoryGive
+    dw Cmd_System_InventoryTake
+    dw Cmd_System_LoadGame
+    dw Cmd_System_CopyLoadGame
+    dw Cmd_System_MenuHistorian
+    dw Cmd_System_MenuMusic
+    dw Cmd_System_MenuRingBank
+    dw Cmd_System_MenuRingSmith
+    dw Cmd_System_MenuRingUpgrade
+    dw Cmd_System_MenuShop
+    dw Cmd_System_NewGame
+    dw Cmd_System_SaveGame
+    dw Cmd_System_SceneNew
+    dw Cmd_System_SceneReady
+    dw Cmd_System_SetItemSpellMapError
+    dw Cmd_System_SaveLocation
     dw Cmd_237A
     dw Cmd_23F4
     dw Cmd_2389
     dw Cmd_2434
-    dw Cmd_24A0
-    dw Cmd_24BE
-    dw Cmd_24E0
-    dw Cmd_24F7
-    dw Cmd_2588
-    dw Cmd_2629
-    dw Cmd_2639
-    dw Cmd_2657
-    dw Cmd_27A5
-    dw Cmd_27C1
-    dw Cmd_27EC
-    dw Cmd_280A
-    dw Cmd_2830
-    dw Cmd_299C
-    dw Cmd_29D2
-    dw Cmd_29F1
+    dw Cmd_Textbox_FormatChar
+    dw Cmd_Textbox_Clear
+    dw Cmd_Textbox_Close
+    dw Cmd_Textbox_Icon
+    dw Cmd_Textbox_Menu
+    dw Cmd_Textbox_Open
+    dw Cmd_Textbox_FormatWord
+    dw Cmd_Textbox_Write
+    dw Cmd_Trigger_ToggleAlways
+    dw Cmd_Trigger_ToggleOnce
+    dw Cmd_Trigger_TriggerAlways
+    dw Cmd_Trigger_TriggerOnce
+    dw Cmd_Trigger_Treasure
+    dw Cmd_Ram_VarBitExpr
+    dw Cmd_Ram_VarByteExpr
+    dw Cmd_Ram_VarWordExpr
     dw Cmd_Ram_NextGameCount
     dw Cmd_Ram_SetGameCount
     dw Cmd_Ram_SetWramByte
@@ -1140,14 +1140,14 @@ jr_001_467E:
 jr_001_4680:
     ret                                           ; $4680: $C9
 
-
+SystemXX_NewGameInit:
     Battery_SetBank $00
     Battery_On
-    ld hl, $A018                                  ; $468D: $21 $18 $A0
-    ld bc, $0313                                  ; $4690: $01 $13 $03
+    ld hl, xGamestate_RAM_NEW_GAME_START                                  ; $468D: $21 $18 $A0
+    ld bc, xGamestate_RAM_NEW_GAME_END - xGamestate_RAM_NEW_GAME_START                                  ; $4690: $01 $13 $03
     ld e, $00                                     ; $4693: $1E $00
     call MemSet                            ; $4695: $CD $E8 $07
-    ld hl, $A01B                                  ; $4698: $21 $1B $A0
+    ld hl, xInventory_Rings                                  ; $4698: $21 $1B $A0
     ld bc, $000A                                  ; $469B: $01 $0A $00
     ld a, $FF                                     ; $469E: $3E $FF
     ld e, a                                       ; $46A0: $5F
@@ -1159,7 +1159,7 @@ SystemXX_NewGamePlusInit::
     Battery_SetBank $00
     Battery_On
     ld hl, xGamestate_RAM_NEW_GAME_PLUS_START                                  ; $46B5: $21 $26 $A0
-    ld bc, $0305                                  ; $46B8: $01 $05 $03
+    ld bc, xGamestate_RAM_NEW_GAME_END - xGamestate_RAM_NEW_GAME_PLUS_START                                  ; $46B8: $01 $05 $03
     ld e, $00                                     ; $46BB: $1E $00
     call MemSet                            ; $46BD: $CD $E8 $07
     Battery_Off
@@ -3340,7 +3340,7 @@ Jump_001_5468:
 
 
 jr_001_549E:
-    ldh a, [$FFAF]                                  ; $549E: $F0 $AF
+    ldh a, [hTicker]                                  ; $549E: $F0 $AF
     and $01                                       ; $54A0: $E6 $01
     jp z, Jump_001_54C4                           ; $54A2: $CA $C4 $54
 
@@ -3460,7 +3460,7 @@ Jump_001_552E:
 
 
 jr_001_5564:
-    ldh a, [$FFAF]                                  ; $5564: $F0 $AF
+    ldh a, [hTicker]                                  ; $5564: $F0 $AF
     and $01                                       ; $5566: $E6 $01
     jp z, Jump_001_558A                           ; $5568: $CA $8A $55
 
@@ -4529,7 +4529,7 @@ Jump_001_5CE6:
 
 
 jr_001_5D1F:
-    ldh a, [$FFAF]                                  ; $5D1F: $F0 $AF
+    ldh a, [hTicker]                                  ; $5D1F: $F0 $AF
     and $01                                       ; $5D21: $E6 $01
     jp z, Jump_001_5D3D                           ; $5D23: $CA $3D $5D
 
@@ -4613,7 +4613,7 @@ Jump_001_5D7B:
 
 
 jr_001_5DB4:
-    ldh a, [$FFAF]                                  ; $5DB4: $F0 $AF
+    ldh a, [hTicker]                                  ; $5DB4: $F0 $AF
     and $01                                       ; $5DB6: $E6 $01
     jp z, Jump_001_5DD2                           ; $5DB8: $CA $D2 $5D
 
@@ -4899,7 +4899,7 @@ Jump_001_5F65:
 
 
     call Call_001_6393                            ; $5F84: $CD $93 $63
-    ldh a, [$FFAF]                                  ; $5F87: $F0 $AF
+    ldh a, [hTicker]                                  ; $5F87: $F0 $AF
     and $01                                       ; $5F89: $E6 $01
     jr z, jr_001_5FAB                             ; $5F8B: $28 $1E
 
@@ -4957,7 +4957,7 @@ Jump_001_5FBF:
 
 
     call Call_001_6393                            ; $5FDE: $CD $93 $63
-    ldh a, [$FFAF]                                  ; $5FE1: $F0 $AF
+    ldh a, [hTicker]                                  ; $5FE1: $F0 $AF
     and $01                                       ; $5FE3: $E6 $01
     jr z, jr_001_600A                             ; $5FE5: $28 $23
 
@@ -5017,7 +5017,7 @@ Jump_001_601E:
 
 
     call Call_001_6393                            ; $603D: $CD $93 $63
-    ldh a, [$FFAF]                                  ; $6040: $F0 $AF
+    ldh a, [hTicker]                                  ; $6040: $F0 $AF
     and $01                                       ; $6042: $E6 $01
     jr z, jr_001_6069                             ; $6044: $28 $23
 
@@ -5077,7 +5077,7 @@ Jump_001_607D:
 
 
     call Call_001_6393                            ; $609C: $CD $93 $63
-    ldh a, [$FFAF]                                  ; $609F: $F0 $AF
+    ldh a, [hTicker]                                  ; $609F: $F0 $AF
     and $01                                       ; $60A1: $E6 $01
     jr z, jr_001_60C2                             ; $60A3: $28 $1D
 
@@ -5316,7 +5316,7 @@ Jump_001_61EB:
 
 
 jr_001_6225:
-    ldh a, [$FFAF]                                  ; $6225: $F0 $AF
+    ldh a, [hTicker]                                  ; $6225: $F0 $AF
     and $01                                       ; $6227: $E6 $01
     jp z, Jump_001_6243                           ; $6229: $CA $43 $62
 
@@ -5382,7 +5382,7 @@ Jump_001_625E:
 
 
 jr_001_6298:
-    ldh a, [$FFAF]                                  ; $6298: $F0 $AF
+    ldh a, [hTicker]                                  ; $6298: $F0 $AF
     and $01                                       ; $629A: $E6 $01
     jp z, Jump_001_62B6                           ; $629C: $CA $B6 $62
 
@@ -6636,9 +6636,9 @@ jr_001_6945:
 
     call Call_001_412F                            ; $694B: $CD $2F $41
     ld a, h                                       ; $694E: $7C
-    ld [$FFA7], a                                 ; $694F: $EA $A7 $FF
+    ld [hScript_CurrentAddress + 1], a                                 ; $694F: $EA $A7 $FF
     ld a, l                                       ; $6952: $7D
-    ld [$FFA6], a                                 ; $6953: $EA $A6 $FF
+    ld [hScript_CurrentAddress], a                                 ; $6953: $EA $A6 $FF
     ld de, $000E                                  ; $6956: $11 $0E $00
     add hl, de                                    ; $6959: $19
     ld a, [hl+]                                   ; $695A: $2A
@@ -7191,7 +7191,7 @@ Jump_001_6CA8:
 
 
 jr_001_6CE2:
-    ldh a, [$FFAF]                                  ; $6CE2: $F0 $AF
+    ldh a, [hTicker]                                  ; $6CE2: $F0 $AF
     and $01                                       ; $6CE4: $E6 $01
     jp z, Jump_001_6D00                           ; $6CE6: $CA $00 $6D
 
@@ -7256,7 +7256,7 @@ Jump_001_6D18:
 
 
 jr_001_6D52:
-    ldh a, [$FFAF]                                  ; $6D52: $F0 $AF
+    ldh a, [hTicker]                                  ; $6D52: $F0 $AF
     and $01                                       ; $6D54: $E6 $01
     jp z, Jump_001_6D70                           ; $6D56: $CA $70 $6D
 
@@ -7659,9 +7659,9 @@ jr_001_6F81:
 
     call Call_001_412F                            ; $6F83: $CD $2F $41
     ld a, h                                       ; $6F86: $7C
-    ld [$FFA7], a                                 ; $6F87: $EA $A7 $FF
+    ld [hScript_CurrentAddress + 1], a                                 ; $6F87: $EA $A7 $FF
     ld a, l                                       ; $6F8A: $7D
-    ld [$FFA6], a                                 ; $6F8B: $EA $A6 $FF
+    ld [hScript_CurrentAddress], a                                 ; $6F8B: $EA $A6 $FF
     ld de, $000E                                  ; $6F8E: $11 $0E $00
     add hl, de                                    ; $6F91: $19
     ld a, [hl+]                                   ; $6F92: $2A

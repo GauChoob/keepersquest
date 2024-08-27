@@ -4,7 +4,11 @@ SECTION "HRAM2", HRAM[$FF8A]
 hInterrupt_VBlank_Control::
     ds 1
 
-    ds $FFA8 - @
+    ds $FFA6 - @
+hScript_CurrentAddress:
+    ; Address of the current script
+    ds 2
+    ;ds $FFA8 - @
 hScript::
     .Bank:
     ds 1
@@ -19,6 +23,11 @@ hScript::
     ds 1
     ;ds $FFAE - @
     .BigCounter:
+    ds 1
+
+    ;ds $FFAF - @
+hTicker::
+    ; Increments by 1 every GameLoop (60 Hz)
     ds 1
 
     ds $FFFE - @
