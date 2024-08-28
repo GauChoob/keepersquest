@@ -14,7 +14,14 @@ xLoad_HeroXTile::
 xLoad_HeroYTile::
     ds 1
 
-    ds $A018 - @
+    ds $A017 - @
+xNumberOfSaves:
+    ; 0 = 0 saves
+    ; 2 = 1 save (Slot 1)
+    ; 3 = 2 saves (Slot 1 and 2)
+    ds 1
+
+    ;ds $A018 - @
 xGamestate_RAM_NEW_GAME_START::
 
     ds $A01B - @
@@ -29,6 +36,10 @@ xGameCount::
     ; This is the variable that tracks overall quest progression
     ; This is used for choosing the start screen background
     ds 2
+
+    ds $A132 - @
+xNumberOfAttempts:
+    ds 1
 
     ds $A32B - @
 xGamestate_RAM_NEW_GAME_END::

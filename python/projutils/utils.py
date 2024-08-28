@@ -322,6 +322,9 @@ class SymFile:
             self.symbols[i] = {}
         if file is None:
             return
+        self.addFile(file)
+
+    def addFile(self, file):
         with open(file, "r") as f:
             for line in f.readlines():
                 if line[0] == ";":
@@ -330,6 +333,7 @@ class SymFile:
                 address = int(line[3:7], 16)
                 label = line[8:-1]
                 self.addSymbol(bank, address, label)
+
 
     def hasSymbol(self, bank: int, address: int) -> bool:
         return address in self.symbols[bank]
@@ -345,7 +349,8 @@ class SymFile:
     def addSymbol(self, bank: int, address: int, label: str) -> bool:
         """Adds a label to the specified address. Returns True if there is no other label at that address."""
         if address in self.symbols[bank]:
-            self.symbols[bank][address].append(label)
+            if label not in self.symbols[bank][address]:
+                self.symbols[bank][address].append(label)
             return False
         else:
             self.symbols[bank][address] = [label]

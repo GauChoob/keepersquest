@@ -50,6 +50,7 @@ scripts = [
 ]
 
 sym = utils.SymFile('python/vars.sym')
+sym.addFile('game.sym')
 
 PREVIEW_MGI = 'python/out/magireader/'
 os.makedirs(PREVIEW_MGI, exist_ok=True)

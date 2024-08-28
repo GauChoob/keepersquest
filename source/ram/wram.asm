@@ -113,6 +113,17 @@ wScript_StartButtonScript:
     .Frame:
     ds 2
 
+    ds $C731 - @
+wScript_StartButtonEnabled:
+    ; 0 if disable. 1 if enabled
+    ds 1
+
+    ds $C733 - @
+wScript_TransplantTileDisabled:
+    ; 1 if TransplantTile is disabled
+    ; Set to 1 by script in a single instance, or else it is set when pressing the Start button
+    ds 1
+
     ds $C736 - @
 wScript_CheatCode_TotalSteps:
     ; Total number of steps in the sequence
@@ -137,6 +148,12 @@ wScript_CheatCode_Succeeded:
     ; 1 = Sequence successfully finished
     ds 1
 
+    ds $C74A - @
+wScript_CurrentSaveSlot:
+    ; 0 = Slot 1
+    ; 1 = Slot 2
+    ds 1
+
     ds $C954 - @
 wCnt1::
     ds 1
@@ -159,6 +176,11 @@ wRAMBank::
     ;ds $C95B - @
 wROMBank::
     ; Mirror of the current ROM bank
+    ds 1
+
+    ds $C9CB - @
+wSalafyInvincible::
+    ; Set to 1 when cheat code entered on starting screen
     ds 1
 
     ds $CDF5 - @

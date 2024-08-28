@@ -52,7 +52,7 @@ Call_007_4042:
 
 
 jr_007_4052:
-    ld a, [$C74A]                                 ; $4052: $FA $4A $C7
+    ld a, [wScript_CurrentSaveSlot]                                 ; $4052: $FA $4A $C7
     cp $00                                        ; $4055: $FE $00
     jr nz, jr_007_4062                            ; $4057: $20 $09
 
@@ -100,7 +100,7 @@ jr_007_4073:
     cp $00                                        ; $4087: $FE $00
     jr nz, jr_007_409D                            ; $4089: $20 $12
 
-    ld a, [$C74A]                                 ; $408B: $FA $4A $C7
+    ld a, [wScript_CurrentSaveSlot]                                 ; $408B: $FA $4A $C7
     cp $00                                        ; $408E: $FE $00
     jr z, jr_007_409D                             ; $4090: $28 $0B
 
