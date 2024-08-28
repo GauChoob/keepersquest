@@ -68,6 +68,19 @@ _battle_slot = {
     0x09: 'MAGI',
 }
 
+_cheat_code = [
+    "Cheat_Up",
+    "Cheat_Right",
+    "Cheat_Down",
+    "Cheat_Left",
+    "Cheat_A",
+    "Cheat_B",
+    "Cheat_Select",
+    "Cheat_NULL_7",
+    "Cheat_NULL_8",
+    "Cheat_NULL_9",
+]
+
 
 class DepthTracker:
     defaultdepth = 4
@@ -91,7 +104,7 @@ class DepthTracker:
 
 
 # Load the rom
-rom = utils.Rom()
+rom = utils.Rom(utils.Rom.KQ)
 
 # Keep track of the current WRAM bank used in Math
 rambank = 1
@@ -146,149 +159,164 @@ class MagiScriptLine:
         0x18: CommandBuilder("func", "ThisSpriteBase", "$db"),
         0x19: CommandBuilder("func", "ThisDelete"),
         0x1A: CommandBuilder("func", "ThisWaitTile", "$db"),
-        0x1B: CommandBuilder("func", "StartSFX0", "SFXID"),
-        0x1C: CommandBuilder("func", "StartSFX1", "SFXID"),
-        0x1D: CommandBuilder("func", "PauseSongBugged"),
-        0x1E: CommandBuilder("func", "ResumeSong"),
-        0x1F: CommandBuilder("func", "StartSong", "SONGID"),
-        0x20: CommandBuilder("func", "StartJingle", "SONGID"),
-        0x21: CommandBuilder("func", "StopSong"),
-        0x22: CommandBuilder("func", "SetSongVolume", "$db"),
-        0x23: CommandBuilder("func", "SongFadeIn", "SongFadeInterval"),
-        0x24: CommandBuilder("func", "SongFadeOut", "SongFadeInterval"),
-        0x25: CommandBuilder("func", "BattleNew", "Arena", "CreatureID", "db", "BankAddress_CARDSCENESCRIPT"),
-        0x26: CommandBuilder("func", "BattleAttack", "BattleSlot", "BattleCmd_Table", "BattleAI_Target"),
-        0x27: CommandBuilder("func", "BattleAuto"),
-        0x28: CommandBuilder("func", "BattleSpell", "BattleSlot", "ItemSpell_Table", "BattleAI_Target"),
-        0x29: CommandBuilder("func", "BattleEvaluate"),
-        0x2A: CommandBuilder("func", "BattleFocus", "BattleSlot"),
-        0x2B: CommandBuilder("func", "BattleNextTurn"),
-        0x2C: CommandBuilder("func", "ForgeRing", "CreatureID", "db"),
-        0x2D: CommandBuilder("func", "BattleSummonFast", "BattleSlot", "CreatureID", "db", "db"),
-        0x2E: CommandBuilder("func", "BattleSummon", "BattleSlot", "CreatureID", "db", "db", "db"),
-        0x2F: CommandBuilder("func", "BattleItem", "BattleSlot", "ItemSpell_Table", "BattleAI_Target"),
-        0x30: CommandBuilder("func", "BattleScreenWipe", "07Address", "SONGID"),
-        0x31: CommandBuilder("func", "BattleSetReturn", "BankAddress_SCRIPT", "BankAddress_SCRIPT"),
-        0x32: CommandBuilder("func", "BattleSetEncounter", "BankAddress_BATSCRIPT", "RandDelayAddress"),
-        0x33: CommandBuilder("func", "BlowAway"),
-        0x34: CommandBuilder("func", "LoadArena", "Arena"),
-        0x35: CommandBuilder("func", "LoadCreatureLeft", "CreatureID"),
-        0x36: CommandBuilder("func", "DissolveFast"),
-        0x37: CommandBuilder("func", "DissolveSlow"),
-        0x38: CommandBuilder("func", "FightsceneNew", "Arena", "CreatureID", "CreatureID"),
-        0x39: CommandBuilder("func", "PanTable", "CreatureSide", "PanAddress"),  # Technically it is pan left vs pan right, not CreatureSide, but the reference is the same
-        0x3A: CommandBuilder("func", "Recoil"),
-
-        0x3C: CommandBuilder("func", "PanConstant", "CreatureSide", "db", "db"),
-        0x3D: CommandBuilder("func", "Shake"),
-        0x3E: CommandBuilder("func", "Sink"),
-        0x3F: CommandBuilder("func", "Tremble"),
-        0x40: CommandBuilder("func", "Delay", "db"),
-        0x41: CommandBuilder("func", "RandDelay", "RandDelayAddress"),
-        0x42: CommandBuilder("func", "End"),
-        0x43: CommandBuilder("func", "LongJumpIf", "MATH", "BankAddress_SCRIPT"),
-        0x44: CommandBuilder("func", "InitSkip", "LocalAddress"),
-        0x45: CommandBuilder("func", "LongJump", "BankAddress_SCRIPT"),
-        0x46: CommandBuilder("func", "Jump", "LocalAddress"),
-        0x47: CommandBuilder("func", "RandLongJump", "RANDLONGJUMP"),
-        0x48: CommandBuilder("func", "Pass"),
-        0x49: CommandBuilder("block", "SwitchRange", "MATH"),
-        0x4A: CommandBuilder("func", "ResetScript", "BankAddress_SCRIPT"),
-        0x4B: CommandBuilder("block", "Switch", "MATH"),
-        0x4C: CommandBuilder("block", "SpriteDraw"),
-        0x4D: CommandBuilder("block", "SpriteBlock", "silent_byte", "db", "-db", "-db"),
-        0x4E: CommandBuilder("func", "SpriteInvisible", "db", "-db", "-db"),
-        0x4F: CommandBuilder("block", "OverlayDraw"),
-        0x50: CommandBuilder("func", "OverlayInit", "RAMAddress", "$db", "$db", "$db", "BankAddress_SCRIPT_ACTORSCRIPT0"),
-        0x51: CommandBuilder("func", "OverlayInvisible"),
-        0x52: CommandBuilder("func", "ClearSync", "db"),
-        0x53: CommandBuilder("func", "SetAnyEventMaster"),
-        0x54: CommandBuilder("func", "SetAnyEventScroll"),
-        0x55: CommandBuilder("func", "SetAnyEventText"),
-        0x56: CommandBuilder("func", "SetEventMaster", "db"),
-        0x57: CommandBuilder("func", "SetEventScroll", "db"),
-        0x58: CommandBuilder("func", "SetEventText", "db"),
-        0x59: CommandBuilder("func", "SetScriptMaster", "BankAddress_SCRIPT"),
-        0x5A: CommandBuilder("func", "SetScriptScroll", "BankAddress_SCRIPT"),
-        0x5B: CommandBuilder("func", "SetScriptText", "BankAddress_SCRIPT"),
-        0x5C: CommandBuilder("func", "Sync", "db", "db"),
-        0x5D: CommandBuilder("func", "WaitAnyEventMaster"),
-        0x5E: CommandBuilder("func", "WaitAnyEventScroll"),
-        0x5F: CommandBuilder("func", "WaitAnyEventText"),
-        0x60: CommandBuilder("func", "WaitEventMaster", "db"),
-        0x61: CommandBuilder("func", "WaitEventScroll", "db"),
-        0x62: CommandBuilder("func", "WaitEventText", "db"),
-        0x63: CommandBuilder("func", "LoadFullTilemap", "AddressBank_ATTRTILE_RLE"),
-        0x64: CommandBuilder("func", "LoadHotspots", "HotspotTableAddress"),
-        0x65: CommandBuilder("func", "LoadScene", "AddressBank_SCENE"),
-        0x66: CommandBuilder("func", "LoadSpritePalette", "AddressBank_PAL8"),
-        0x67: CommandBuilder("func", "LoadMap", "AddressBank_METAMAP", "AddressBank_COLLMAP"),
-        0x68: CommandBuilder("func", "LoadMapMask", "AddressBank_METAMAP_MASK", "AddressBank_COLLMAP_MASK"),
-        0x69: CommandBuilder("func", "LoadTriggers", "TriggerTableAddress"),
-        0x6A: CommandBuilder("func", "LoadBitmapSet", "AddressBank_BITSET", "AddressBank_PAL"),
-        0x6B: CommandBuilder("func", "LoadSingleBitmap", "$db", "BankAddress_BITMAP", "$dw", "$db"),
-        0x6C: CommandBuilder("func", "PalArenaFadeToColor", "Palette_PackedLoop", "Color"),
-        0x6D: CommandBuilder("func", "PalArenaFadeToBase", "Palette_PackedLoop"),
-        0x6F: CommandBuilder("func", "PalClearAnim", "Palette_PackedInterval", "Color"),
-        0x70: CommandBuilder("func", "PalCreatureCycle", "Palette_PackedLoop", "CreatureSide"),
-        0x71: CommandBuilder("func", "PalCreatureFadeToColor", "Palette_PackedLoop", "Color", "CreatureSide"),
-        0x72: CommandBuilder("func", "PalCreatureFadeToBase", "Palette_PackedLoop", "CreatureSide"),
-        0x73: CommandBuilder("func", "PalCreatureLoad", "AddressBank_PALCREATURE", "CreatureSide"),
-        0x74: CommandBuilder("func", "PalCreatureFlash", "Palette_PackedLoop", "Palette_SwapType", "CreatureSide"),
-        0x75: CommandBuilder("func", "PalCreatureInvert", "CreatureSide"),
-        0x76: CommandBuilder("func", "PalFadeAnimToBase", "Palette_PackedLoop", "Palette_PackedInterval"),
-        0x77: CommandBuilder("func", "PalFadeAnimToColor", "Palette_PackedLoop", "Palette_PackedInterval", "Color"),
-        0x78: CommandBuilder("func", "PalLoad", "AddressBank_PAL", "Palette_PackedInterval"),
-        0x79: CommandBuilder("func", "PalRefresh", "Palette_PackedInterval"),
-        0x7A: CommandBuilder("func", "PalCycle", "Palette_PackedLoop", "Palette_PackedInterval", "Palette_CyclePattern"),
-        0x7B: CommandBuilder("func", "PalInvert", "Palette_PackedInterval"),
-
-        0x7E: CommandBuilder("func", "TransplantMap", "$dw", "$db", "$db", "$dw", "$db", "$db"),
-        0x7F: CommandBuilder("func", "TransplantMapMask", "$dw", "$db", "$db", "$dw", "$db", "$db"),
-        0x80: CommandBuilder("func", "TransplantTile", "$db", "$db", "$dw", "$db", "$db"),
-
-        0x82: CommandBuilder("func", "HeroSetCamera"),
-        0x83: CommandBuilder("block", "ScrollMap"),
-        0x84: CommandBuilder("func", "SetCamera", "$db", "$db"),
-
-        0x86: CommandBuilder("func", "ResetThenSingleThreadMode"),
-
-        0x89: CommandBuilder("func", "LoadGame"),
-        0x8A: CommandBuilder("func", "CopyLoadGame"),
-
-        0x8C: CommandBuilder("func", "MusicMenu", "MusicMenu"),  # TODO finalize
-
-        0x91: CommandBuilder("func", "NewGame", "db"),  # TODO boolean how?
-        0x92: CommandBuilder("func", "SaveGame", "db"),
-        0x93: CommandBuilder("func", "SceneNew"),
-        0x94: CommandBuilder("func", "SceneReady"),
-        0x95: CommandBuilder("func", "SetItemSpellMapError", "BankAddress_SCRIPT_ITEMSPELLMAPERROR"),
-        0x96: CommandBuilder("func", "SaveLocation", "BankAddress_SCRIPT_SCENELOADER"),
-        0x97: CommandBuilder("func", "Reboot"),
-        0x98: CommandBuilder("func", "FormatChar", "Address_VARDB"),
-        0x99: CommandBuilder("func", "Clear"),
-        0x9A: CommandBuilder("func", "Close"),
-        0x9B: CommandBuilder("func", "Icon", "PortraitAddressBank"),
-        0x9C: CommandBuilder("func", "Menu", "TextMenu"),
-        0x9D: CommandBuilder("func", "Open"),
-        0x9E: CommandBuilder("func", "FormatWord", "Address_VARDW"),
-        0x9F: CommandBuilder("func", "Write", "String🛑"),
-        0xA0: CommandBuilder("func", "ToggleAlways", "Varbit", "BankAddress_SCRIPT_TOGGLEON", "$db", "$db", "$dw"),
-        0xA1: CommandBuilder("func", "ToggleOnce", "Varbit", "BankAddress_SCRIPT_TOGGLEON", "$db", "$db", "$dw"),
-        0xA2: CommandBuilder("func", "TriggerAlways", "Varbit", "BankAddress_SCRIPT_TRIGGERALREADYON", "$db", "$dw"),
-        0xA3: CommandBuilder("func", "TriggerOnce", "Varbit", "BankAddress_SCRIPT_TRIGGERALREADYON", "$db", "$dw"),
-        0xA4: CommandBuilder("func", "Treasure", "Varbit", "$db", "$db", "$dw"),
-        0xA5: CommandBuilder("func", "VarBitExpr", "Varbit", "MATH"),
-        0xA6: CommandBuilder("func", "VarByteExpr", "Address_xVARBYTE", "MATH"),
-        0xA7: CommandBuilder("func", "VarWordExpr", "Address_xVARWORD", "MATH"),
-        0xA8: CommandBuilder("func", "NextGameCount"),
-        0xA9: CommandBuilder("func", "SetGameCount", "db"),
-        0xAA: CommandBuilder("func", "SetWramByte", "AddressBank_WRAM", "$db"),
-        0xAB: CommandBuilder("func", "SetWramWord", "AddressBank_WRAM", "$dw"),
-        0xAC: CommandBuilder("func", "SetByte", "RAMAddress", "$db"),
-        0xAD: CommandBuilder("func", "SetWord", "RAMAddress", "$dw"),
-        0xAE: CommandBuilder("func", "AndByte", "RAMAddress", "%db"),
-        0xAF: CommandBuilder("func", "OrByte", "RAMAddress", "%db"),
+        0x1B: CommandBuilder("func", "ThatSetInterrupt", "db", "BankAddress_ACTORINTERRUPT"),
+        0x1C: CommandBuilder("func", "ThisSetInterrupt", "BankAddress_ACTORINTERRUPT"),
+        0x1D: CommandBuilder("func", "ThisSaveScriptBugged", "BankAddress_ACTORSCRIPT0", "$db"),
+        0x1E: CommandBuilder("func", "StartSFX0", "SFXID"),
+        0x1F: CommandBuilder("func", "StartSFX1", "SFXID"),
+        0x20: CommandBuilder("func", "PauseSongBugged"),
+        0x21: CommandBuilder("func", "ResumeSong"),
+        0x22: CommandBuilder("func", "StartSong", "SONGID"),
+        0x23: CommandBuilder("func", "StartJingle", "SONGID"),
+        0x24: CommandBuilder("func", "StopSong"),
+        0x25: CommandBuilder("func", "SetSongVolume", "$db"),
+        0x26: CommandBuilder("func", "SongFadeIn", "SongFadeInterval"),
+        0x27: CommandBuilder("func", "SongFadeOut", "SongFadeInterval"),
+        0x28: CommandBuilder("func", "BattleNew", "Arena", "CreatureID", "db", "BankAddress_CARDSCENESCRIPT"),
+        0x29: CommandBuilder("func", "BattleAttack", "BattleSlot", "BattleCmd_Table", "BattleAI_Target"),
+        0x2A: CommandBuilder("func", "BattleAuto"),
+        0x2B: CommandBuilder("func", "BattleSpell", "BattleSlot", "ItemSpell_Table", "BattleAI_Target"),
+        0x2C: CommandBuilder("func", "BattleEvaluate"),
+        0x2D: CommandBuilder("func", "BattleFocus", "BattleSlot"),
+        0x2E: CommandBuilder("func", "BattleNextTurn"),
+        0x2F: CommandBuilder("func", "ForgeRing", "CreatureID", "db"),
+        0x30: CommandBuilder("func", "BattleSummonFast", "BattleSlot", "CreatureID", "db", "db"),
+        0x31: CommandBuilder("func", "BattleSummon", "BattleSlot", "CreatureID", "db", "db", "db"),
+        0x32: CommandBuilder("func", "BattleItem", "BattleSlot", "ItemSpell_Table", "BattleAI_Target"),
+        0x33: CommandBuilder("func", "BattleScreenWipe", "07Address", "SONGID"),
+        0x34: CommandBuilder("func", "BattleSetReturn", "BankAddress_SCRIPT", "BankAddress_SCRIPT"),
+        0x35: CommandBuilder("func", "BattleSetEncounter", "BankAddress_BATSCRIPT", "RandDelayAddress"),
+        0x36: CommandBuilder("func", "BlowAway"),
+        0x37: CommandBuilder("func", "LoadArena", "Arena"),
+        0x38: CommandBuilder("func", "LoadCreatureLeft", "CreatureID"),
+        0x39: CommandBuilder("func", "DissolveFast"),
+        0x3A: CommandBuilder("func", "DissolveSlow"),
+        0x3B: CommandBuilder("func", "FightsceneNew", "Arena", "CreatureID", "CreatureID"),
+        0x3C: CommandBuilder("func", "PanTable", "CreatureSide", "PanAddress"),  # Technically it is pan left vs pan right, not CreatureSide, but the reference is the same
+        0x3D: CommandBuilder("func", "Recoil"),
+        0x3E: CommandBuilder("func", "RecoilFast"),
+        0x3F: CommandBuilder("func", "PanConstant", "CreatureSide", "db", "db"),
+        0x40: CommandBuilder("func", "Shake"),
+        0x41: CommandBuilder("func", "Sink"),
+        0x42: CommandBuilder("func", "Tremble"),
+        0x43: CommandBuilder("func", "Delay", "db"),
+        0x44: CommandBuilder("func", "RandDelay", "RandDelayAddress"),
+        0x45: CommandBuilder("func", "End"),
+        0x46: CommandBuilder("func", "LongJumpIf", "MATH", "BankAddress_SCRIPT"),
+        0x47: CommandBuilder("func", "InitSkip", "LocalAddress"),
+        0x48: CommandBuilder("func", "LongJump", "BankAddress_SCRIPT"),
+        0x49: CommandBuilder("func", "Jump", "LocalAddress"),
+        0x4A: CommandBuilder("func", "RandLongJump", "RANDLONGJUMP"),
+        0x4B: CommandBuilder("func", "Pass"),
+        0x4C: CommandBuilder("block", "SwitchRange", "MATH"),
+        0x4D: CommandBuilder("func", "ResetScript", "BankAddress_SCRIPT"),
+        0x4E: CommandBuilder("block", "Switch", "MATH"),
+        0x4F: CommandBuilder("block", "SpriteDraw"),
+        0x50: CommandBuilder("block", "SpriteBlock", "silent_byte", "db", "-db", "-db"),
+        0x51: CommandBuilder("func", "SpriteInvisible", "db", "-db", "-db"),
+        0x52: CommandBuilder("block", "OverlayDraw"),
+        0x53: CommandBuilder("func", "OverlayInit", "RAMAddress", "$db", "$db", "$db", "BankAddress_SCRIPT_ACTORSCRIPT0"),
+        0x54: CommandBuilder("func", "OverlayInvisible"),
+        0x55: CommandBuilder("func", "ClearSync", "db"),
+        0x56: CommandBuilder("func", "SetAnyEventMaster"),
+        0x57: CommandBuilder("func", "SetAnyEventScroll"),
+        0x58: CommandBuilder("func", "SetAnyEventText"),
+        0x59: CommandBuilder("func", "SetEventMaster", "db"),
+        0x5A: CommandBuilder("func", "SetEventScroll", "db"),
+        0x5B: CommandBuilder("func", "SetEventText", "db"),
+        0x5C: CommandBuilder("func", "SetScriptMaster", "BankAddress_SCRIPT"),
+        0x5D: CommandBuilder("func", "SetScriptScroll", "BankAddress_SCRIPT"),
+        0x5E: CommandBuilder("func", "SetScriptText", "BankAddress_SCRIPT"),
+        0x5F: CommandBuilder("func", "Sync", "db", "db"),
+        0x60: CommandBuilder("func", "WaitAnyEventMaster"),
+        0x61: CommandBuilder("func", "WaitAnyEventScroll"),
+        0x62: CommandBuilder("func", "WaitAnyEventText"),
+        0x63: CommandBuilder("func", "WaitEventMaster", "db"),
+        0x64: CommandBuilder("func", "WaitEventScroll", "db"),
+        0x65: CommandBuilder("func", "WaitEventText", "db"),
+        0x66: CommandBuilder("func", "LoadFullTilemap", "AddressBank_ATTRTILE_RLE"),
+        0x67: CommandBuilder("func", "LoadHotspots", "HotspotTableAddress"),
+        0x68: CommandBuilder("func", "LoadScene", "AddressBank_SCENE"),
+        0x69: CommandBuilder("func", "LoadSpritePalette", "AddressBank_PAL8"),
+        0x6A: CommandBuilder("func", "LoadMap", "AddressBank_METAMAP", "AddressBank_COLLMAP"),
+        0x6B: CommandBuilder("func", "LoadMapMask", "AddressBank_METAMAP_MASK", "AddressBank_COLLMAP_MASK"),
+        0x6C: CommandBuilder("func", "LoadTriggers", "TriggerTableAddress"),
+        0x6D: CommandBuilder("func", "LoadBitmapSet", "AddressBank_BITSET", "AddressBank_PAL"),
+        0x6E: CommandBuilder("func", "LoadSingleBitmap", "$db", "BankAddress_BITMAP", "$dw", "$db"),
+        0x6F: CommandBuilder("func", "LoadUnkspot", "HotspotTableAddress"),
+        0x70: CommandBuilder("func", "PalArenaFadeToColor", "Palette_PackedLoop", "Color"),
+        0x71: CommandBuilder("func", "PalArenaFadeToBase", "Palette_PackedLoop"),
+        0x72: CommandBuilder("func", "PalClearBase", "Palette_PackedInterval", "Color"),
+        0x73: CommandBuilder("func", "PalClearAnim", "Palette_PackedInterval", "Color"),
+        0x74: CommandBuilder("func", "PalCreatureCycle", "Palette_PackedLoop", "CreatureSide"),
+        0x75: CommandBuilder("func", "PalCreatureFadeToColor", "Palette_PackedLoop", "Color", "CreatureSide"),
+        0x76: CommandBuilder("func", "PalCreatureFadeToBase", "Palette_PackedLoop", "CreatureSide"),
+        0x77: CommandBuilder("func", "PalCreatureLoad", "AddressBank_PALCREATURE", "CreatureSide"),
+        0x78: CommandBuilder("func", "PalCreatureFlash", "Palette_PackedLoop", "Palette_SwapType", "CreatureSide"),
+        0x79: CommandBuilder("func", "PalCreatureInvert", "CreatureSide"),
+        0x7A: CommandBuilder("func", "PalFadeAnimToBase", "Palette_PackedLoop", "Palette_PackedInterval"),
+        0x7B: CommandBuilder("func", "PalFadeAnimToColor", "Palette_PackedLoop", "Palette_PackedInterval", "Color"),
+        0x7C: CommandBuilder("func", "PalLoad", "AddressBank_PAL", "Palette_PackedInterval"),
+        0x7D: CommandBuilder("func", "PalRefresh", "Palette_PackedInterval"),
+        0x7E: CommandBuilder("func", "PalCycle", "Palette_PackedLoop", "Palette_PackedInterval", "Palette_CyclePattern"),
+        0x7F: CommandBuilder("func", "PalInvert", "Palette_PackedInterval"),
+        0x80: CommandBuilder("func", "CameraSeekPos", "$db", "$db", "db"),
+        0x81: CommandBuilder("func", "CameraSeekActor", "RAMAddress", "db"),
+        0x82: CommandBuilder("func", "TransplantMap", "$dw", "$db", "$db", "$dw", "$db", "$db"),
+        0x83: CommandBuilder("func", "TransplantMapMask", "$dw", "$db", "$db", "$dw", "$db", "$db"),
+        0x84: CommandBuilder("func", "TransplantTile", "$db", "$db", "$dw", "CollID", "$db"),
+        0x85: CommandBuilder("func", "TransplantMaskTile", "$db", "$db", "$dw", "CollID", "$db"),
+        0x86: CommandBuilder("func", "HeroSetCamera"),
+        0x87: CommandBuilder("block", "ScrollMap"),
+        0x88: CommandBuilder("func", "SetCamera", "$db", "$db"),
+        0x89: CommandBuilder("func", "SetCollMask", "%db"),
+        0x8A: CommandBuilder("func", "BackgroundSceneNew"),
+        # InventoryGive
+        # InventoryTake
+        0x8D: CommandBuilder("func", "LoadGame"),
+        0x8E: CommandBuilder("func", "CopyLoadGame"),
+        # MenuHistorian
+        0x90: CommandBuilder("func", "MusicMenu", "MusicMenu"),  # TODO finalize
+        # MenuRingBank
+        # MenuRingSmith
+        # MenuRingUpgrade
+        # MenuShop
+        0x95: CommandBuilder("func", "NewGame", "db"),  # TODO boolean how?
+        0x96: CommandBuilder("func", "SaveGame", "db"),
+        0x97: CommandBuilder("func", "SceneNew"),
+        0x98: CommandBuilder("func", "SceneReady"),
+        0x99: CommandBuilder("func", "SetItemSpellMapError", "BankAddress_SCRIPT_ITEMSPELLMAPERROR"),
+        0x9A: CommandBuilder("func", "SaveLocation", "BankAddress_SCRIPT_SCENELOADER"),
+        0x9B: CommandBuilder("func", "SetStartButtonScript", "BankAddress_SCRIPT_STARTBUTTON"),
+        0x9C: CommandBuilder("func", "SetCheatCode", "db",
+                             "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode", "CheatCode"),
+        0x9D: CommandBuilder("func", "AwaitCheatCode"),
+        0x9E: CommandBuilder("func", "ResetActorList"),
+        # Removed CommandBuilder("func", "Reboot"),
+        0x9F: CommandBuilder("func", "FormatChar", "Address_VARDB"),
+        0xA0: CommandBuilder("func", "Clear"),
+        0xA1: CommandBuilder("func", "Close"),
+        0xA2: CommandBuilder("func", "Icon", "PortraitAddressBank"),
+        0xA3: CommandBuilder("func", "Menu", "TextMenu"),
+        0xA4: CommandBuilder("func", "Open"),
+        0xA5: CommandBuilder("func", "FormatWord", "Address_VARDW"),
+        0xA6: CommandBuilder("func", "Write", "String🛑"),
+        0xA7: CommandBuilder("func", "ToggleAlways", "Varbit", "BankAddress_SCRIPT_TOGGLEON", "$db", "$db", "$dw"),
+        0xA8: CommandBuilder("func", "ToggleOnce", "Varbit", "BankAddress_SCRIPT_TOGGLEON", "$db", "$db", "$dw"),
+        0xA9: CommandBuilder("func", "TriggerAlways", "Varbit", "BankAddress_SCRIPT_TRIGGERALREADYON", "$db", "$dw"),
+        0xAA: CommandBuilder("func", "TriggerOnce", "Varbit", "BankAddress_SCRIPT_TRIGGERALREADYON", "$db", "$dw"),
+        0xAB: CommandBuilder("func", "Treasure", "Varbit", "$db", "$db", "$dw"),
+        0xAC: CommandBuilder("func", "VarBitExpr", "Varbit", "MATH"),
+        0xAD: CommandBuilder("func", "VarByteExpr", "Address_xVARBYTE", "MATH"),
+        0xAE: CommandBuilder("func", "VarWordExpr", "Address_xVARWORD", "MATH"),
+        0xAF: CommandBuilder("func", "NextGameCount"),
+        0xB0: CommandBuilder("func", "SetGameCount", "db"),
+        0xB1: CommandBuilder("func", "SetWramByte", "AddressBank_WRAM", "$db"),
+        0xB2: CommandBuilder("func", "SetWramWord", "AddressBank_WRAM", "$dw"),
+        0xB3: CommandBuilder("func", "SetByte", "RAMAddress", "$db"),
+        0xB4: CommandBuilder("func", "SetWord", "RAMAddress", "$dw"),
+        0xB5: CommandBuilder("func", "AndByte", "RAMAddress", "%db"),
+        0xB6: CommandBuilder("func", "OrByte", "RAMAddress", "%db"),
     }
 
     def isEnd(self):
@@ -491,11 +519,11 @@ class MagiScriptLine:
             elif instruction == "HotspotTableAddress":
                 address = getWord()
                 hotspots.add(address)  # store a copy of all the unique hotspot addresses
-                return [interpretBankAddress(0x21, address, "HOTSPOTX")]  # Hotspots are in 0x21
+                return [interpretBankAddress(0x13, address, "HOTSPOTX")]  # Hotspots are in 0x21
             elif instruction == "TriggerTableAddress":
                 address = getWord()
                 triggers.add(address)  # store a copy of all the unique triggers addresses
-                return [interpretBankAddress(0x21, address, "TRIGGERX")]  # Triggers are in 0x21
+                return [interpretBankAddress(0x13, address, "TRIGGERX")]  # Triggers are in 0x21
             elif instruction == "RandDelayAddress":
                 address = getWord()
                 return [interpretBankAddress(0x01, address, "RANDDELAYTABLE")]  # RandDelay lookup tables are in 0x01
@@ -614,7 +642,9 @@ class MagiScriptLine:
             elif instruction == "CollID":
                 val = getByte()
                 return [collision_ids.ids[val]]
-
+            elif instruction == "CheatCode":
+                val = getByte()
+                return [_cheat_code[val]]
             # Map tileaddresses
             elif instruction == "YXTileaddress":
                 y = getSignedByte()
@@ -626,10 +656,10 @@ class MagiScriptLine:
                 else:
                     width = y_times_width//y
                     assert y_times_width % y == 0
-                return [[x, y, width]]
+                return [f"${x:02X}", f"${y:02X}", f"${width:02X}"]
             elif instruction == "Tileaddress":
                 offset = getSignedWord()
-                return [[offset, 0, 0]]  # TODO - we can't predict width unfortunately with the limited data
+                return [f"${offset:04X}", "0", "0"]  # TODO - we can't predict width unfortunately with the limited data
 
             # Special Objects
             elif instruction == "TextMenu":
@@ -888,7 +918,12 @@ def interpret(startpos: utils.BankAddress, endpos: utils.BankAddress, _sym: util
             if len(lines) == 0 or lines[-1].isEnd():
                 # Add a label to the beginning of sections
                 sym.getSymbol(curpos.getBank(), curpos.getAddress(), "SCRIPT")
-            lines.append(MagiScriptLine())
+            try:
+                lines.append(MagiScriptLine())
+            except KeyError as e:
+                if str(e).endswith('FF\''):
+                    print(e)
+                    break
             # out += " "*defaultdepth + x.command_out + "\n\n"
     except Exception:
         traceback.print_exc()
@@ -1014,7 +1049,7 @@ def buildHotspots() -> None:
     print("\n"*3)
     print("BUILD HOTSPOTS")
     for address in hotspots:
-        label = "_".join(sym.getSymbol(0x21, address, "HOTSPOTX"))
+        label = "_".join(sym.getSymbol(0x13, address, "HOTSPOTX"))
         print(label)
         if label[:8] == "HOTSPOTX":  # Unlabelled hotspot to process
             hotspot.Hotspot.rom_to_file(rom, address, label[9:], sym)
@@ -1027,7 +1062,7 @@ def buildTriggers() -> None:
     print("\n"*3)
     print("BUILD TRIGGERS")
     for address in triggers:
-        label = "_".join(sym.getSymbol(0x21, address, "TRIGGERX"))
+        label = "_".join(sym.getSymbol(0x13, address, "TRIGGERX"))
         print(label)
         if label[:8] == "TRIGGERX":  # Unlabelled trigger to process
             hotspot.Trigger.rom_to_file(rom, address, label[9:], sym)

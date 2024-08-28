@@ -2,7 +2,7 @@
 
 class CollisionIDs:
     """A helper object that gets the Collision IDs"""
-    def __init__(self, file: str = "source/engine/collision/collision_include.asm"):
+    def __init__(self, file: str = "python/collision_ids.asm"):
         self.ids = {}
         with open(file, "r") as f:
             for line in f.readlines():

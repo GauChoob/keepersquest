@@ -7,7 +7,7 @@ import string
 
 # prepare map from bytestring to string
 _encode_table = dict(
-    [(letter, bytes((number,))) for number, letter in enumerate("🡆🡇🧴🪑💍🌟💰📜🥣🍯🍃🌻🌴🍄💎❓Σ◿🔑", 0x0C)] +
+    [(letter, bytes((number,))) for number, letter in enumerate("🡆🡇🧴🪑💍🌟💰📜🥣🍯🍃🌻🌴ⓡ(❓)◿Ⓡ", 0x0C)] +
     [(" ", b' ')] +
     [("!", b'!')] +
     [("'", b'\'')] +

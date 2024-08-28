@@ -58,9 +58,9 @@ class Hotspot:
     def rom_to_file(rom: utils.Rom, address: int, label: str, sym: utils.SymFile) -> int:
         """Given a rom file and its address, and a SymFile, creates a file named "label.hs".
         This function returns the position immediately after the end of the file."""
-        size = rom.getByte(utils.BankAddress(0x21, address))
+        size = rom.getByte(utils.BankAddress(0x13, address))
         os.makedirs(HOTSPOT_FOLDER, exist_ok=True)
-        Hotspot.data_to_file(HOTSPOT_FOLDER+label+".hs", rom.getRawSection(utils.BankAddress(0x21, address), 1+size*4), sym)
+        Hotspot.data_to_file(HOTSPOT_FOLDER+label+".hs", rom.getRawSection(utils.BankAddress(0x13, address), 1+size*4), sym)
         return address + size
 
 
@@ -113,7 +113,7 @@ class Trigger:
     def rom_to_file(rom: utils.Rom, address: int, label: str, sym: utils.SymFile) -> int:
         """Given a rom file and its address, and a SymFile, creates a file named "label.trig".
         This function returns the position immediately after the end of the file."""
-        size = rom.getByte(utils.BankAddress(0x21, address))
+        size = rom.getByte(utils.BankAddress(0x13, address))
         os.makedirs(TRIGGER_FOLDER, exist_ok=True)
-        Trigger.data_to_file(TRIGGER_FOLDER+label+".trig", rom.getRawSection(utils.BankAddress(0x21, address), 1+size*4), sym)
+        Trigger.data_to_file(TRIGGER_FOLDER+label+".trig", rom.getRawSection(utils.BankAddress(0x13, address), 1+size*4), sym)
         return address + size

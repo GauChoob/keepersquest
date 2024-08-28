@@ -103,10 +103,10 @@ Boot_SoftReset:
     call $5A78                                    ; $0184: $CD $78 $5A
     SwitchROMBank $07
     call $5AD2                                    ; $018F: $CD $D2 $5A
-    jp Jump_000_0195                              ; $0192: $C3 $95 $01
+    jp Boot_GameInit                              ; $0192: $C3 $95 $01
 
 
-Jump_000_0195:
+Boot_GameInit:
     ld hl, $C000                                  ; $0195: $21 $00 $C0
     ld bc, $0DF5                                  ; $0198: $01 $F5 $0D
     ld a, $00                                     ; $019B: $3E $00
@@ -119,10 +119,14 @@ Jump_000_0195:
     ld [$C731], a                                 ; $01B0: $EA $31 $C7
     SwitchROMBank $07
     call $40B8                                    ; $01BB: $CD $B8 $40
+    
+    ; Script_Start
     ld a, $D3                                     ; $01BE: $3E $D3
     ldh [hScript.State], a                                  ; $01C0: $E0 $AB
     ld a, $0A                                     ; $01C2: $3E $0A
     ldh [hScript.State + 1], a                                  ; $01C4: $E0 $AC
+    ; Demo entry point seems to be: 1A:573A
+    ; Entry point: 19:4712
     ld a, $19                                     ; $01C6: $3E $19
     ldh [hScript.Bank], a                                  ; $01C8: $E0 $A8
     ld a, $12                                     ; $01CA: $3E $12
