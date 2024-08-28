@@ -6,10 +6,18 @@ scripts = [
     # Huge bitmap before this
     [utils.BankAddress(0x08, 0x6BC0), utils.BankAddress(0x08, 0x7F7E)],
 
-
     # Tony bitmap here
     [utils.BankAddress(0x09, 0x43B0), utils.BankAddress(0x09, 0x7FEC)],
 
+    [utils.BankAddress(0x0A, 0x4000), utils.BankAddress(0x0A, 0x7413)],
+    # Bitmaps at the end
+
+    [utils.BankAddress(0x0B, 0x4000), utils.BankAddress(0x0B, 0x7C76)],
+
+    # Bitmaps at start
+    [utils.BankAddress(0x0C, 0x4AA0), utils.BankAddress(0x0C, 0x7BBC)],
+
+    # D, E, F TODO
 
     [utils.BankAddress(0x10, 0x4000), utils.BankAddress(0x10, 0x7332)],
     # MGI sprite block at the end
