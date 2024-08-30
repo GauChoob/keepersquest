@@ -1635,7 +1635,7 @@ SCRIPT_0F_5CFE::
     LoadHotspots(Hotspot_Orothe_Main)
     LoadMapMask(METAMAP_MASK_2A_4F41, COLLMAP_MASK_2D_59AA)
     LoadTriggers(Trigger_Orothe_Main)
-    LoadUnkspot(Unkspot_Orothe_Main)
+    LoadSolidHotspot(SolidHotspot_Orothe_Main)
     ThatInit(0, Call_001_4AF8, $00, $0C, $D168, $00, ACTORSCRIPT0_0F_5E65, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $01, $0B, $D14B, $00, ACTORSCRIPT0_0F_5D93, ACTORSCRIPT1_0F_63C8)
     ThatInit(3, Call_001_4AF8, $07, $0A, $D133, $30, ACTORSCRIPT0_0F_5EC1, Actor_Null)

@@ -243,7 +243,7 @@ class MagiScriptLine:
         0x6C: CommandBuilder("func", "LoadTriggers", "TriggerTableAddress"),
         0x6D: CommandBuilder("func", "LoadBitmapSet", "AddressBank_BITSET", "AddressBank_PAL"),
         0x6E: CommandBuilder("func", "LoadSingleBitmap", "$db", "BankAddress_BITMAP", "$dw", "$db"),
-        0x6F: CommandBuilder("func", "LoadUnkspot", "UnkspotTableAddress"),
+        0x6F: CommandBuilder("func", "LoadSolidHotspot", "SolidHotspotTableAddress"),
         0x70: CommandBuilder("func", "PalArenaFadeToColor", "Palette_PackedLoop", "Color"),
         0x71: CommandBuilder("func", "PalArenaFadeToBase", "Palette_PackedLoop"),
         0x72: CommandBuilder("func", "PalClearBase", "Palette_PackedInterval", "Color"),
@@ -520,10 +520,10 @@ class MagiScriptLine:
                 address = getWord()
                 hotspots.add(address)  # store a copy of all the unique hotspot addresses
                 return [interpretBankAddress(0x13, address, "HOTSPOTX")]  # Hotspots are in 0x21
-            elif instruction == "UnkspotTableAddress":
+            elif instruction == "SolidHotspotTableAddress":
                 address = getWord()
                 hotspots.add(address)  # store a copy of all the unique hotspot addresses
-                return [interpretBankAddress(0x13, address, "UNKSPOTX")]  # Hotspots are in 0x21
+                return [interpretBankAddress(0x13, address, "SOLIDHOTSPOTX")]  # Hotspots are in 0x21
             elif instruction == "TriggerTableAddress":
                 address = getWord()
                 triggers.add(address)  # store a copy of all the unique triggers addresses

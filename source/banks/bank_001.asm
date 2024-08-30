@@ -660,7 +660,7 @@ Script_Table::
     dw Cmd_Load_BitmapSet
     dw Cmd_Load_Bitmap
 
-        dw Cmd_Load_KQ_UnkSpot
+        dw Cmd_Load_KQ_SolidHotspots
 
     dw Cmd_Palette_ArenaFadeToColor
     dw Cmd_Palette_ArenaFadeToBase
@@ -1766,7 +1766,7 @@ Call_001_4A34:
     or c                                          ; $4A58: $B1
     ret z                                         ; $4A59: $C8
 
-    ld a, [wUnkspot_TableSize]                                 ; $4A5A: $FA $E5 $C6
+    ld a, [wSolidHotspot_TableSize]                                 ; $4A5A: $FA $E5 $C6
     ld e, a                                       ; $4A5D: $5F
     ld d, [hl]                                    ; $4A5E: $56
     ld a, d                                       ; $4A5F: $7A
@@ -1784,9 +1784,9 @@ Call_001_4A34:
     cp e                                          ; $4A6F: $BB
     ret nc                                        ; $4A70: $D0
 
-    ld a, [wUnkspot_Table + 1]                                 ; $4A71: $FA $E4 $C6
+    ld a, [wSolidHotspot_Table + 1]                                 ; $4A71: $FA $E4 $C6
     ld h, a                                       ; $4A74: $67
-    ld a, [wUnkspot_Table]                                 ; $4A75: $FA $E3 $C6
+    ld a, [wSolidHotspot_Table]                                 ; $4A75: $FA $E3 $C6
     ld l, a                                       ; $4A78: $6F
     ld a, d                                       ; $4A79: $7A
     add a                                         ; $4A7A: $87
@@ -1848,7 +1848,7 @@ jr_001_4AAA:
 
 
 jr_001_4AB1:
-    call Call_000_0A8A                            ; $4AB1: $CD $8A $0A
+    call SolidHotspot00_SetScript                            ; $4AB1: $CD $8A $0A
     ld a, $D3                                     ; $4AB4: $3E $D3
     ld [$C71B], a                                 ; $4AB6: $EA $1B $C7
     ld a, $0A                                     ; $4AB9: $3E $0A

@@ -1324,7 +1324,7 @@ Hotspot00_SetScript:
     SwitchROMBank $01
     ret                                           ; $0A75: $C9
 
-; Presumably a second type of hotspot system? KQ exclusive
+SolidHotspot00_GetType:
     SwitchROMBank $13
     ld a, [hl+]                                   ; $0A7E: $2A
     ld e, a                                       ; $0A7F: $5F
@@ -1333,7 +1333,7 @@ Hotspot00_SetScript:
     ret                                           ; $0A89: $C9
 
 
-Call_000_0A8A:
+SolidHotspot00_SetScript:
     SwitchROMBank $13
     ld a, [hl+]                                   ; $0A92: $2A
     ld [wScript_System], a                                 ; $0A93: $EA $18 $C7
@@ -4331,7 +4331,7 @@ jr_000_1ACB:
     ld [hScript.State + 1], a                                 ; $1AD2: $EA $AC $FF
     ret                                           ; $1AD5: $C9
 
-Cmd_Load_KQ_UnkSpot:
+Cmd_Load_KQ_SolidHotspots:
     ; Hotspot-like data
     ld a, [bc]                                    ; $1AD6: $0A
     ld l, a                                       ; $1AD7: $6F
@@ -4341,11 +4341,11 @@ Cmd_Load_KQ_UnkSpot:
     inc bc                                        ; $1ADB: $03
     SwitchROMBank $13
     ld a, [hl+]                                   ; $1AE4: $2A
-    ld [wUnkspot_TableSize], a                                 ; $1AE5: $EA $E5 $C6
+    ld [wSolidHotspot_TableSize], a                                 ; $1AE5: $EA $E5 $C6
     ld a, h                                       ; $1AE8: $7C
-    ld [wUnkspot_Table + 1], a                                 ; $1AE9: $EA $E4 $C6
+    ld [wSolidHotspot_Table + 1], a                                 ; $1AE9: $EA $E4 $C6
     ld a, l                                       ; $1AEC: $7D
-    ld [wUnkspot_Table], a                                 ; $1AED: $EA $E3 $C6
+    ld [wSolidHotspot_Table], a                                 ; $1AED: $EA $E3 $C6
     SwitchROMBank [hScript.Bank]
     jp Script_Start                              ; $1AF9: $C3 $D3 $0A
 

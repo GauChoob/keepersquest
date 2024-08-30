@@ -16,15 +16,15 @@ wHotspot_TableSize:
     ; The number of elements in the hotspot table
     ds 1
     ;ds $C6E2 - @
-wUnkspot_Current:
+wSolidHotspot_Current:
     ; Possibly unused?
     ds 1
     ;ds $C6E3 - @
-wUnkspot_Table:
+wSolidHotspot_Table:
     ; Points to the address of the unkspot table
     ds 2
     ;ds $C6E5 - @
-wUnkspot_TableSize:
+wSolidHotspot_TableSize:
     ; The number of elements in the unkspot table
     ds 1
 

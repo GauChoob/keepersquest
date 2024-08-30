@@ -155,7 +155,7 @@ System_Init::
     ld a, $FF                                     ; $086E: $3E $FF
     ld [wHotspotCurrent], a                                 ; $0870: $EA $DE $C6
     ld a, $FF                                     ; $0873: $3E $FF
-    ld [wUnkspot_Current], a                                 ; $0875: $EA $E2 $C6
+    ld [wSolidHotspot_Current], a                                 ; $0875: $EA $E2 $C6
     xor a                                         ; $0878: $AF
     xor a                                         ; $0879: $AF
     ld [wVBlank_Bank], a                                 ; $087A: $EA $EA $C6
