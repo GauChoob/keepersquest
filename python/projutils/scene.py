@@ -67,7 +67,7 @@ class Scene(filecontents.FileContentsSerializer):
         self.palette.load_contents_from_rom(8*4)
         self.bitset.load_contents_from_rom()
         self.bitset.contents.load_references_from_rom()
-        self.pattern.load_contents_from_rom()
+        self.pattern.load_contents_from_rom(True)
         self.metamap.load_contents_from_rom()
         self.collmap.load_contents_from_rom()
 

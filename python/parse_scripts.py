@@ -17,7 +17,12 @@ scripts = [
     # Bitmaps at start
     [utils.BankAddress(0x0C, 0x4AA0), utils.BankAddress(0x0C, 0x7BBC)],
 
-    # D, E, F TODO
+    # D = character sprites
+
+    # Bitmap at start
+    [utils.BankAddress(0x0E, 0x4710), utils.BankAddress(0x0E, 0x7ECE)],
+
+    [utils.BankAddress(0x0F, 0x4000), utils.BankAddress(0x0F, 0x7EAD)],
 
     [utils.BankAddress(0x10, 0x4000), utils.BankAddress(0x10, 0x7332)],
     # MGI sprite block at the end
@@ -28,9 +33,8 @@ scripts = [
     # Bitmaps after
 
     # 13
-    # 0x4000+ suspected to be Hotspots/Triggers
-    # 0x426B-0x4DB8 or more = Hotspots/Triggers
-    # 0x4EAA or 0x4EAB is the starting point? to 0x53F2 = scenes
+    # 0x4000-0x4DB8 or more = Hotspots/Triggers
+    # 0x4EAC is the starting point? to 0x53F2 = scenes
     # 0x5497+ = sprite anims
 
     # MGI sprite block from 0x4000

@@ -76,9 +76,9 @@ _cheat_code = [
     "Cheat_A",
     "Cheat_B",
     "Cheat_Select",
-    "Cheat_NULL_7",
-    "Cheat_NULL_8",
-    "Cheat_NULL_9",
+    "Cheat_7",
+    "Cheat_8",
+    "Cheat_Null",
 ]
 
 
@@ -1055,9 +1055,9 @@ def buildHotspots() -> None:
     for address in hotspots:
         label = "_".join(sym.getSymbol(0x13, address, "HOTSPOTX"))
         print(label)
-        if label[:8] == "HOTSPOTX":  # Unlabelled hotspot to process
-            hotspot.Hotspot.rom_to_file(rom, address, label[9:], sym)
-            # TODO: rom_replace the hotspot files
+        #if label[:8] == "HOTSPOTX":  # Unlabelled hotspot to process
+        hotspot.Hotspot.rom_to_file(rom, address, label, sym)
+        # TODO: rom_replace the hotspot files
 
 
 def buildTriggers() -> None:
@@ -1068,6 +1068,6 @@ def buildTriggers() -> None:
     for address in triggers:
         label = "_".join(sym.getSymbol(0x13, address, "TRIGGERX"))
         print(label)
-        if label[:8] == "TRIGGERX":  # Unlabelled trigger to process
-            hotspot.Trigger.rom_to_file(rom, address, label[9:], sym)
-            # TODO: rom_replace the trigger files?
+        #if label[:8] == "TRIGGERX":  # Unlabelled trigger to process
+        hotspot.Trigger.rom_to_file(rom, address, label, sym)
+        # TODO: rom_replace the trigger files?

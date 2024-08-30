@@ -1,0 +1,212 @@
+; Progression:
+; Underneath
+; Cald
+; Naroom
+; Orothe
+; Arderial
+; Weave
+; d'Resh
+; Bograth
+; Paradwyn
+; Core - No secret?
+; Names of enemies:
+; Parmalag
+; Wand first: Staff of Hyren to ward off
+; Crystal first: Shield of Hyren
+13:4EAC Scene_Arderial_Puzzle1
+13:4EBB Scene_Arderial_Puzzle2
+; Order intentionally inverted
+13:4ECA Scene_Arderial_Puzzle4
+; East normal, West Secret
+13:4ED9 Scene_Arderial_Puzzle3
+13:4EE8 Scene_Arderial_PuzzleSecret
+13:4EF7 Scene_DeveloperRoom
+13:4F06 Scene_StartRoom
+13:4F15 Scene_UNK1
+13:4F24 Scene_Naroom_UNK1
+13:4F33 Scene_Arderial_Main
+13:4F42 Scene_Arderial_Cutscene
+13:4F51 Scene_Credits
+13:4F60 Scene_Bograth_Puzzle1
+; Puzzle2: If you hit the 4 switches, the end is secret, or else normal
+13:4F6F Scene_Bograth_Puzzle2
+13:4F7E Scene_Bograth_Puzzle3
+13:4F8D Scene_Bograth_Puzzle4
+13:4F9C Scene_Bograth_PuzzleSecret
+13:4FAB Scene_Bograth_Main
+13:4FBA Scene_Bograth_Cutscene
+13:4FC9 Scene_Cald_Puzzle1
+; Puzzle2: North Secret, East normal.
+13:4FD8 Scene_Cald_Puzzle2
+13:4FE7 Scene_Cald_Puzzle3
+13:4FF6 Scene_Cald_Puzzle4
+13:5005 Scene_Cald_PuzzleSecret
+13:5014 Scene_Cald_Main
+13:5023 Scene_Cald_Cutscene
+13:5032 Scene_Underneath_Puzzle1_DUPLICATE1_UNK
+; Puzzle2:
+; Do bottomleft first
+; Do bottomright switch: middle/bottom in any order
+; Hit topright switch then do topleft
+13:5041 Scene_Core_Puzzle2
+; Puzzle3:
+; Right, then Bottom, then only one, Right, Bottom
+13:5050 Scene_Core_Puzzle3
+; Puzzle1:
+; Right then Left
+; Right, then hit button to the east
+13:505F Scene_Core_Puzzle1
+; Triggers 7, 4, then
+; Top moon to go right
+; Hit all 3 switches (middle one collapses so go north quickly)
+; Light up all 3 lights at the top:
+; Right: Left Middle Right
+; Middle: ? ? ?
+; Left: Left Right Middle
+; Head west
+; Hit west switch
+13:506E Scene_Core_Puzzle4
+13:507D Scene_Core_Main
+13:508C Scene_Core_Cutscene
+13:509B Scene_dResh_Puzzle1
+13:50AA Scene_dResh_Puzzle3
+13:50B9 Scene_dResh_Puzzle4
+13:50C8 Scene_dResh_Main
+13:50D7 Scene_dResh_Cutscene
+; Puzzle2:
+; Secret if you hit 4 switches before reaching exit, or else no secret
+; You can hit NW SW SE switches
+; Then hit middle east orange moon
+; Then hit northeast green moon
+; Then hit NE switch
+; Then head to exit
+13:50E6 Scene_dResh_Puzzle2
+; Secret: Head to southeast corner, then northeast corner, then to exit in the north
+13:50F5 Scene_dResh_PuzzleSecret
+13:5104 Scene_Tavel_EntranceUNK
+13:5113 Scene_Tavel_CaveUNK
+13:5122 Scene_Underneath_Puzzle1_DUPLICATE2
+13:5131 Scene_Cald_Puzzle4_DUPLICATE
+13:5140 Scene_Paradwyn_Main_DUPLICATE
+13:514F Scene_Bograth_Puzzle3_DUPLICATE
+13:515E Scene_KybarsTeeth_Puzzle1
+13:516D Scene_KybarsTeeth_Puzzle3
+; Puzzle2:
+; End junction: Right/Top normal
+; West: SECRET - have to run through the top tile of the left path to avoid the hole
+13:517C Scene_KybarsTeeth_Puzzle2
+13:518B Scene_KybarsTeeth_Puzzle4
+13:519A Scene_KybarsTeeth_PuzzleSecret
+13:51A9 Scene_KybarsTeeth_Main
+13:51B8 Scene_KybarsTeeth_Cutscene
+13:51C7 Scene_Naroom_Puzzle1
+13:51D6 Scene_Naroom_Puzzle2
+; Puzzle3: South and west portal both lead to same end?
+13:51E5 Scene_Naroom_Puzzle3
+; Puzzle4: North normal, South secret
+13:51F4 Scene_Naroom_Puzzle4
+13:5203 Scene_Naroom_PuzzleSecret
+13:5212 Scene_Naroom_TrainingRoom_Cutscene
+13:5221 Scene_Naroom_Main
+13:5230 Scene_Naroom_Cutscene
+13:523F Scene_Naroom_Vash
+13:524E Scene_Paradwyn_MainOpen_WIP
+13:525D Scene_Naroom_Glade_UNK
+13:526C Scene_Cald_MainOpen_UNK
+13:527B Scene_Naroom_Puzzle25_End
+; Use teleport in south
+; Switch in bottomleft then topleft = Normal
+; Switch in bottomleft then middle = Secret
+; Staff + consume 1 Bubble = 1 shield from wall
+13:528A Scene_Orothe_Puzzle1
+; Swim to northwest
+; Swim all the way east before teleporting
+13:5299 Scene_Orothe_Puzzle2
+; Puzzle3:
+; Press in this order: 0, 1, 2, 3 (maybe order doesn't matter, dunno)
+; Don't press buttons 4, 5
+13:52A8 Scene_Orothe_Puzzle3
+; Puzzle4:
+; Press in this order: 0->4. Don't press 5/6
+13:52B7 Scene_Orothe_Puzzle4
+13:52C6 Scene_Orothe_PuzzleSecret
+13:52D5 Scene_Orothe_Main
+13:52E4 Scene_Orothe_Cutscene
+13:52F3 Scene_Overworld_1
+13:5302 Scene_Overworld_2
+13:5311 Scene_Naroom_UNK2
+; Reused multiple times:
+; Cald -> Valkan: Gives canister
+; Orothe -> Blu: Gives fungus
+; Weave -> Bo'Ahsa: nothing?
+13:5320 Scene_HouseNoStool
+; Bogroth -> Obgren: Talks about stool
+13:532F Scene_HouseStool
+13:533E Scene_Naroom_TrainingRoom_Normal
+13:534D Scene_Paradwyn_Puzzle1
+13:535C Scene_Paradwyn_Puzzle2
+13:536B Scene_Paradwyn_Puzzle4
+; Puzzle3: Hit 4 switches before end to get secret or else normal
+; Trigger1 teleports back to home, Trigger0 is end
+13:537A Scene_Paradwyn_Puzzle3
+; Switch Order: 2, 4, 3, 1, 0, 5
+13:5389 Scene_Paradwyn_PuzzleSecret
+13:5398 Scene_Paradwyn_Main
+13:53A7 Scene_Paradwyn_Cutscene
+13:53B6 Scene_Underneath_Puzzle1
+13:53C5 Scene_Underneath_Puzzle2
+13:53D4 Scene_Underneath_Puzzle3
+; Top of Puzzle4: Topleft Puzzle2, Topmiddle Puzzle4, Topright Puzzle3
+; Top teleport is normal end, bottom is SECRET
+13:53E3 Scene_Underneath_Puzzle4
+13:53F2 Scene_Underneath_PuzzleSecret
+13:5401 Scene_Underneath_Main
+13:5410 Scene_Underneath_Cutscene
+13:541F Scene_Weave_Puzzle1
+; Puzzle2: North normal, South secret
+13:542E Scene_Weave_Puzzle2
+13:543D Scene_Weave_Puzzle3
+13:544C Scene_Weave_Puzzle3_DUPLICATE
+13:545B Scene_Weave_Puzzle4
+13:546A Scene_Weave_PuzzleSecret
+13:5479 Scene_Weave_Main
+13:5488 Scene_Weave_Cutscene
+;
+;
+08:4000 Icon_Tony
+08:4190 Icon_Salafy
+08:4320 Icon_Yaki
+08:44B0 Icon_Underneath_Strag
+08:4640 Icon_Cald_Grega
+08:47D0 Icon_Cald_Valkan
+08:4AF0 Icon_Arderial_Kalius
+08:4C80 Icon_Weave_Ahdar
+08:4E10 Icon_Weave_BoAhsa
+08:4FA0 Icon_Core_Zet
+08:4960 Icon_Arderial_Delia
+08:5130 Icon_dResh_NaHara
+08:52C0 Icon_dResh_Ydra
+08:5450 Icon_Bograth_Chubble
+08:55E0 Icon_Bograth_Goltha
+08:5770 Icon_Paradwyn_Bazha
+08:5900 Icon_Paradwyn_Squick
+08:5A90 Icon_KybarsTeeth_Targn
+08:5C20 Icon_Underneath_Fossik
+08:5DB0 Icon_Eidon
+08:5F40 Icon_Core_Korg
+08:60D0 Icon_Orothe_Blu
+08:6260 Icon_Orothe_Arosa
+08:63F0 Icon_KybarsTeeth_Jagt
+08:6580 Icon_Tavel_1
+08:6710 Icon_Tavel_2
+08:68A0 Icon_Tavel_3
+08:6A30 Icon_Bograth_Obgren
+;
+;
+00:A178 xDResh_Puzzle1_Score
+0A:40A1 Script_dResh_Puzzle1
+0A:40A5 Script_dResh_Puzzle1_Again
+13:4640 Hotspot_dResh_Puzzle1
+0A:4297 Script_Hotspot_dResh_Puzzle1_0
+;
+;
