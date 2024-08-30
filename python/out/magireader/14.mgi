@@ -1,0 +1,1715 @@
+
+SCRIPT_14_5C23::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_409F)
+        Draw(OAMX_14_40B4)
+        Draw(OAMX_14_40CD)
+        Draw(OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_5C23)
+
+SCRIPT_14_5C33::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_409F)
+        Draw(OAMX_14_40B4)
+        Draw(OAMX_14_40CD)
+        Draw(OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_5C33)
+
+SCRIPT_14_5C43::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_409F)
+    }
+    Jump(SCRIPT_14_5C43)
+
+SCRIPT_14_5C4D::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_4071)
+        Draw(OAMX_14_408A)
+        Draw(OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5C4D)
+
+SCRIPT_14_5C5D::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_4071)
+        Draw(OAMX_14_408A)
+        Draw(OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5C5D)
+
+SCRIPT_14_5C6D::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_14_4125)
+        Draw(OAMX_14_413E)
+        Draw(OAMX_14_414F)
+        Draw(OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_5C6D)
+
+SCRIPT_14_5C7D::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_14_4125)
+        Draw(OAMX_14_413E)
+        Draw(OAMX_14_414F)
+        Draw(OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_5C7D)
+
+SCRIPT_14_5C8D::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_410C)
+        Draw(OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_5C8D)
+
+SCRIPT_14_5C9D::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_410C)
+        Draw(OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_5C9D)
+
+SCRIPT_14_5CAD::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_4071)
+        Draw(OAMX_14_408A)
+        Draw(OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5CAD)
+
+SCRIPT_14_5CBD::
+    SpriteBlock(4, 0, -2) {
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_4071)
+        Draw(OAMX_14_408A)
+        Draw(OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5CBD)
+
+SCRIPT_14_5CCD::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_14_409F)
+        Draw(OAMX_14_40B4)
+        Draw(OAMX_14_40CD)
+        Draw(OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_5CCD)
+
+SCRIPT_14_5CDD::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_410C)
+        Draw(OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_5CDD)
+
+SCRIPT_14_5CED::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_14_4125)
+        Draw(OAMX_14_413E)
+        Draw(OAMX_14_414F)
+        Draw(OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_5CED)
+
+SCRIPT_14_5CFD::
+    SpriteBlock(8, 0, -2) {
+        Draw(OAMX_14_44D2)
+        Draw(OAMX_14_44B9)
+        Draw(OAMX_14_44D2)
+        Draw(OAMX_14_44F3)
+    }
+    Jump(SCRIPT_14_5CFD)
+
+SCRIPT_14_5D0D::
+    SpriteBlock(8, 0, 2) {
+        Draw(OAMX_14_4483)
+        Draw(OAMX_14_446E)
+        Draw(OAMX_14_4483)
+        Draw(OAMX_14_44A4)
+    }
+    Jump(SCRIPT_14_5D0D)
+
+SCRIPT_14_5D1D::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_408A)
+    }
+    Jump(SCRIPT_14_5D1D)
+
+SCRIPT_14_5D27::
+    SpriteBlock(8, -2, 0) {
+        Draw(OAMX_14_4578)
+        Draw(OAMX_14_455B)
+        Draw(OAMX_14_4578)
+        Draw(OAMX_14_458D)
+    }
+    Jump(SCRIPT_14_5D27)
+
+SCRIPT_14_5D37::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4125)
+    }
+    Jump(SCRIPT_14_5D37)
+
+SCRIPT_14_5D41::
+    SpriteBlock(8, 2, 0) {
+        Draw(OAMX_14_4529)
+        Draw(OAMX_14_450C)
+        Draw(OAMX_14_4529)
+        Draw(OAMX_14_453E)
+    }
+    Jump(SCRIPT_14_5D41)
+
+SCRIPT_14_5D51::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_410C)
+    }
+    Jump(SCRIPT_14_5D51)
+
+SCRIPT_14_5D5B::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_5458)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5D5B)
+
+SCRIPT_14_5D6A::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_5415)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5D6A)
+
+SCRIPT_14_5D79::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_54EA)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5D79)
+
+SCRIPT_14_5D88::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_549F)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5D88)
+
+SCRIPT_14_5D97::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_5DA1::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_5DAB::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_5DB5::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_5DB5)
+
+ACTORSCRIPT0_14_5DBF::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4019)
+    }
+    Jump(ACTORSCRIPT0_14_5DBF)
+
+SCRIPT_14_5DC9::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4000)
+    }
+    Jump(SCRIPT_14_5DC9)
+
+SCRIPT_14_5DD3::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4047)
+    }
+    Jump(SCRIPT_14_5DD3)
+
+ACTORSCRIPT1_14_5DDD::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4032)
+    }
+    Jump(ACTORSCRIPT1_14_5DDD)
+
+SCRIPT_14_5DE7::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_52ED)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5DE7)
+
+SCRIPT_14_5DF6::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_52D4)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5DF6)
+
+SCRIPT_14_5E05::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_531F)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5E05)
+
+SCRIPT_14_5E14::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_5306)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5E14)
+
+SCRIPT_14_5E23::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_Hero_Start)
+    Jump(ACTORSCRIPT0_14_5E57)
+
+SCRIPT_14_5E30::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_Hero_Start)
+    Jump(ACTORSCRIPT0_14_5E74)
+
+SCRIPT_14_5E3D::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_Hero_Start)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_5E4A::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_Hero_Start)
+    Jump(SCRIPT_14_5DA1)
+
+ACTORSCRIPT0_14_5E57::
+    SpriteDraw() {
+        MoveDraw(128, 0, 0, OAMX_14_413E)
+        MoveDraw(255, 0, 0, OAMX_14_4019)
+        MoveDraw(255, 0, 0, OAMX_14_441B)
+    }
+
+SCRIPT_14_5E68::
+    SpriteBlock(16, 0, 0) {
+        Draw(OAMX_14_4434)
+        Draw(OAMX_14_4451)
+    }
+    Jump(SCRIPT_14_5E68)
+
+ACTORSCRIPT0_14_5E74::
+    SpriteDraw() {
+        MoveDraw(128, 0, 0, OAMX_14_40FB)
+        MoveDraw(255, 0, 0, OAMX_14_4000)
+        MoveDraw(255, 0, 0, OAMX_14_441B)
+    }
+
+SCRIPT_14_5E85::
+    SpriteBlock(16, 0, 0) {
+        Draw(OAMX_14_4434)
+        Draw(OAMX_14_4451)
+    }
+    Jump(SCRIPT_14_5E85)
+
+SCRIPT_14_5E91::
+    SpriteDraw() {
+        MoveDraw(255, 0, -1, OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_5E91)
+
+SCRIPT_14_5E9B::
+    SpriteDraw() {
+        MoveDraw(255, 0, 1, OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_5E9B)
+
+SCRIPT_14_5EA5::
+    SpriteDraw() {
+        MoveDraw(8, 0, -1, OAMX_14_5458)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5EA5)
+
+SCRIPT_14_5EB4::
+    SpriteDraw() {
+        MoveDraw(8, 0, 1, OAMX_14_5415)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5EB4)
+
+SCRIPT_14_5EC3::
+    SpriteDraw() {
+        MoveDraw(8, -1, 0, OAMX_14_54EA)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5EC3)
+
+SCRIPT_14_5ED2::
+    SpriteDraw() {
+        MoveDraw(8, 1, 0, OAMX_14_549F)
+        MoveDraw(8, 0, 0, OAMX_14_45AA)
+    }
+    Jump(SCRIPT_14_5ED2)
+
+SCRIPT_14_5EE1::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_431C)
+        Draw(OAMX_14_432D)
+    }
+    Jump(SCRIPT_14_5EE1)
+
+SCRIPT_14_5EED::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_42FA)
+        Draw(OAMX_14_430B)
+    }
+    Jump(SCRIPT_14_5EED)
+
+SCRIPT_14_5EF9::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_42D8)
+        Draw(OAMX_14_42E9)
+    }
+    Jump(SCRIPT_14_5EF9)
+
+SCRIPT_14_5F05::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_42B6)
+        Draw(OAMX_14_42C7)
+    }
+    Jump(SCRIPT_14_5F05)
+
+SCRIPT_14_5F11::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_41CE)
+        Draw(OAMX_14_41DF)
+    }
+    Jump(SCRIPT_14_5F11)
+
+SCRIPT_14_5F1D::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_41AC)
+        Draw(OAMX_14_41BD)
+    }
+    Jump(SCRIPT_14_5F1D)
+
+SCRIPT_14_5F29::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_418A)
+        Draw(OAMX_14_419B)
+    }
+    Jump(SCRIPT_14_5F29)
+
+SCRIPT_14_5F35::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_4168)
+        Draw(OAMX_14_4179)
+    }
+    Jump(SCRIPT_14_5F35)
+
+SCRIPT_14_5F41::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_41CE)
+        Draw(OAMX_14_4179)
+        Draw(OAMX_14_41AC)
+        Draw(OAMX_14_419B)
+    }
+    Jump(SCRIPT_14_5F41)
+
+SCRIPT_14_5F51::
+    SpriteBlock(12, 0, 0) {
+        Draw(OAMX_14_41F0)
+        Draw(OAMX_14_4201)
+        Draw(OAMX_14_4212)
+        Draw(OAMX_14_4223)
+    }
+
+SCRIPT_14_5F5E::
+    SpriteDraw() {
+        MoveDraw(12, 0, 0, OAMX_14_4290)
+    }
+    Jump(SCRIPT_14_5F5E)
+
+SCRIPT_14_5F68::
+    ThisNewState(AI_01_5BC0)
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_4168)
+        Draw(OAMX_14_4179)
+    }
+    Jump(SCRIPT_14_5F35)
+
+SCRIPT_14_5F77::
+    SpriteDraw() {
+        MoveDraw(3, 0, -1, OAMX_14_419B)
+        MoveDraw(3, 0, -1, OAMX_14_419B)
+        MoveDraw(3, 0, -1, OAMX_14_418A)
+    }
+    LongJump(SCRIPT_14_5F77)
+
+SCRIPT_14_5F8C::
+    SpriteDraw() {
+        MoveDraw(3, 0, 1, OAMX_14_4179)
+        MoveDraw(3, 0, 1, OAMX_14_4179)
+        MoveDraw(3, 0, 1, OAMX_14_4168)
+    }
+    LongJump(SCRIPT_14_5F8C)
+
+SCRIPT_14_5FA1::
+    SpriteDraw() {
+        MoveDraw(3, -1, 0, OAMX_14_41DF)
+        MoveDraw(3, -1, 0, OAMX_14_41DF)
+        MoveDraw(3, -1, 0, OAMX_14_41CE)
+    }
+    Jump(SCRIPT_14_5FA1)
+
+SCRIPT_14_5FB5::
+    SpriteDraw() {
+        MoveDraw(3, 1, 0, OAMX_14_41BD)
+        MoveDraw(3, 1, 0, OAMX_14_41BD)
+        MoveDraw(3, 1, 0, OAMX_14_41AC)
+    }
+    Jump(SCRIPT_14_5FB5)
+
+SCRIPT_14_5FC9::
+    SpriteDraw() {
+        MoveDraw(3, 0, -1, OAMX_14_42E9)
+        MoveDraw(3, 0, -1, OAMX_14_42E9)
+        MoveDraw(3, 0, -1, OAMX_14_42D8)
+    }
+    LongJump(SCRIPT_14_5FC9)
+
+SCRIPT_14_5FDE::
+    SpriteDraw() {
+        MoveDraw(3, 0, 1, OAMX_14_42C7)
+        MoveDraw(3, 0, 1, OAMX_14_42C7)
+        MoveDraw(3, 0, 1, OAMX_14_42B6)
+    }
+    LongJump(SCRIPT_14_5FDE)
+
+SCRIPT_14_5FF3::
+    SpriteDraw() {
+        MoveDraw(3, -1, 0, OAMX_14_432D)
+        MoveDraw(3, -1, 0, OAMX_14_432D)
+        MoveDraw(3, -1, 0, OAMX_14_431C)
+    }
+    Jump(SCRIPT_14_5FF3)
+
+SCRIPT_14_6007::
+    SpriteDraw() {
+        MoveDraw(3, 1, 0, OAMX_14_430B)
+        MoveDraw(3, 1, 0, OAMX_14_430B)
+        MoveDraw(3, 1, 0, OAMX_14_42FA)
+    }
+    Jump(SCRIPT_14_6007)
+
+SCRIPT_14_601B::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_418A)
+    }
+    Jump(SCRIPT_14_601B)
+
+SCRIPT_14_6025::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_42D8)
+    }
+    Jump(SCRIPT_14_6025)
+
+SCRIPT_14_602F::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5891)
+    }
+    Jump(SCRIPT_14_602F)
+
+SCRIPT_14_6039::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_586C)
+    }
+    Jump(SCRIPT_14_6039)
+
+SCRIPT_14_6043::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_583A)
+        MoveDraw(3, 0, -3, OAMX_14_5853)
+        MoveDraw(2, 0, -2, OAMX_14_5853)
+        MoveDraw(1, 0, -1, OAMX_14_5853)
+        MoveDraw(1, 0, 0, OAMX_14_5853)
+        MoveDraw(1, 0, 1, OAMX_14_5853)
+        MoveDraw(2, 0, 2, OAMX_14_5853)
+        MoveDraw(3, 0, 3, OAMX_14_5853)
+    }
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_6070::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_5808)
+        MoveDraw(3, 0, -3, OAMX_14_5821)
+        MoveDraw(2, 0, -2, OAMX_14_5821)
+        MoveDraw(1, 0, -1, OAMX_14_5821)
+        MoveDraw(1, 0, 0, OAMX_14_5821)
+        MoveDraw(1, 0, 1, OAMX_14_5821)
+        MoveDraw(2, 0, 2, OAMX_14_5821)
+        MoveDraw(3, 0, 3, OAMX_14_5821)
+    }
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_609D::
+    SpriteBlock(1, 0, 1) {
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_4000)
+        Draw(OAMX_14_4071)
+        Draw(OAMX_14_4019)
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_4032)
+        Draw(OAMX_14_40B4)
+        Draw(OAMX_14_4047)
+    }
+    Jump(SCRIPT_14_609D)
+
+SCRIPT_14_60B5::
+    SpriteBlock(1, 0, 2) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_409F)
+    }
+    Jump(SCRIPT_14_60B5)
+
+SCRIPT_14_60C5::
+    SpriteBlock(1, 0, 3) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_409F)
+    }
+    Jump(SCRIPT_14_60C5)
+
+SCRIPT_14_60D5::
+    SpriteBlock(1, 0, 4) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_405C)
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_409F)
+    }
+    Jump(SCRIPT_14_60D5)
+
+SCRIPT_14_60E5::
+    SpriteBlock(4, 0, 0) {
+        Draw(OAMX_14_40E2)
+        Draw(OAMX_14_40FB)
+        Draw(OAMX_14_410C)
+        Draw(OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_60E5)
+
+SCRIPT_14_60F5::
+    SpriteDraw() {
+        MoveDraw(12, 0, 0, OAMX_14_43D0)
+        MoveDraw(1, 0, 0, OAMX_14_43E9)
+        MoveDraw(2, 0, 0, OAMX_14_43E9)
+        MoveDraw(2, 0, 0, OAMX_14_43E9)
+        MoveDraw(2, 0, 0, OAMX_14_43E9)
+        MoveDraw(1, 0, 0, OAMX_14_43E9)
+    }
+    ThisNewState(AI_01_4EFD)
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_611B::
+    SpriteDraw() {
+        MoveDraw(12, 0, 0, OAMX_14_439E)
+        MoveDraw(1, 0, 0, OAMX_14_43B7)
+        MoveDraw(2, 0, 0, OAMX_14_43B7)
+        MoveDraw(2, 0, 0, OAMX_14_43B7)
+        MoveDraw(2, 0, 0, OAMX_14_43B7)
+        MoveDraw(1, 0, 0, OAMX_14_43B7)
+    }
+    ThisNewState(AI_01_4F45)
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_6141::
+    SpriteDraw() {
+        MoveDraw(12, 0, 0, OAMX_14_436C)
+        MoveDraw(1, 0, -2, OAMX_14_4381)
+        MoveDraw(2, 0, -1, OAMX_14_4381)
+        MoveDraw(2, 0, 0, OAMX_14_4381)
+        MoveDraw(2, 0, 1, OAMX_14_4381)
+        MoveDraw(1, 0, 2, OAMX_14_4381)
+    }
+    ThisNewState(AI_01_4F8D)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_6167::
+    SpriteDraw() {
+        MoveDraw(12, 0, 0, OAMX_14_433E)
+        MoveDraw(1, 0, -2, OAMX_14_4357)
+        MoveDraw(2, 0, -1, OAMX_14_4357)
+        MoveDraw(2, 0, 0, OAMX_14_4357)
+        MoveDraw(2, 0, 1, OAMX_14_4357)
+        MoveDraw(1, 0, 2, OAMX_14_4357)
+    }
+    ThisNewState(AI_01_4EB5)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_618D::
+    SpriteDraw() {
+        MoveDraw(4, 0, 0, OAMX_14_5735)
+        MoveDraw(1, 0, -2, OAMX_14_56A3)
+        MoveDraw(2, 0, -1, OAMX_14_56A3)
+        MoveDraw(2, 0, 0, OAMX_14_56A3)
+        MoveDraw(2, 0, 1, OAMX_14_56A3)
+        MoveDraw(1, 0, 2, OAMX_14_56A3)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_61B3::
+    SpriteDraw() {
+        MoveDraw(4, 0, 0, OAMX_14_571C)
+        MoveDraw(1, 0, -2, OAMX_14_5671)
+        MoveDraw(2, 0, -1, OAMX_14_5671)
+        MoveDraw(2, 0, 0, OAMX_14_5671)
+        MoveDraw(2, 0, 1, OAMX_14_5671)
+        MoveDraw(1, 0, 2, OAMX_14_5671)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_61D9::
+    SpriteDraw() {
+        MoveDraw(4, 0, 0, OAMX_14_5767)
+        MoveDraw(1, 0, -2, OAMX_14_583A)
+        MoveDraw(2, 0, -1, OAMX_14_583A)
+        MoveDraw(2, 0, 0, OAMX_14_5853)
+        MoveDraw(2, 0, 1, OAMX_14_5853)
+        MoveDraw(1, 0, 2, OAMX_14_5853)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_61FF::
+    SpriteDraw() {
+        MoveDraw(4, 0, 0, OAMX_14_574E)
+        MoveDraw(1, 0, -2, OAMX_14_5808)
+        MoveDraw(2, 0, -1, OAMX_14_5808)
+        MoveDraw(2, 0, 0, OAMX_14_5821)
+        MoveDraw(2, 0, 1, OAMX_14_5821)
+        MoveDraw(1, 0, 2, OAMX_14_5821)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_6225::
+    SpriteDraw() {
+        MoveDraw(2, -1, -3, OAMX_14_4125)
+        MoveDraw(2, -1, -2, OAMX_14_4125)
+        MoveDraw(2, -1, -1, OAMX_14_4125)
+        MoveDraw(2, -2, -1, OAMX_14_4125)
+        MoveDraw(2, -3, -1, OAMX_14_4125)
+        MoveDraw(2, -3, 1, OAMX_14_4125)
+        MoveDraw(2, -2, 1, OAMX_14_4125)
+        MoveDraw(2, -1, 1, OAMX_14_4125)
+        MoveDraw(2, -1, 2, OAMX_14_4125)
+        MoveDraw(2, -1, 3, OAMX_14_4125)
+        MoveDraw(3, -1, 0, OAMX_14_413E)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_6264::
+    SpriteDraw() {
+        MoveDraw(2, 1, -3, OAMX_14_40E2)
+        MoveDraw(2, 1, -2, OAMX_14_40E2)
+        MoveDraw(2, 1, -1, OAMX_14_40E2)
+        MoveDraw(2, 2, -1, OAMX_14_40E2)
+        MoveDraw(2, 3, -1, OAMX_14_40E2)
+        MoveDraw(2, 3, 1, OAMX_14_40E2)
+        MoveDraw(2, 2, 1, OAMX_14_40E2)
+        MoveDraw(2, 1, 1, OAMX_14_40E2)
+        MoveDraw(2, 1, 2, OAMX_14_40E2)
+        MoveDraw(2, 1, 3, OAMX_14_40E2)
+        MoveDraw(3, 1, 0, OAMX_14_40FB)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_62A3::
+    SpriteDraw() {
+        MoveDraw(2, 0, -4, OAMX_14_409F)
+        MoveDraw(2, 0, -3, OAMX_14_409F)
+        MoveDraw(2, 0, -3, OAMX_14_409F)
+        MoveDraw(2, 0, -2, OAMX_14_409F)
+        MoveDraw(2, 0, -2, OAMX_14_409F)
+        MoveDraw(2, 0, -2, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 1, OAMX_14_409F)
+        MoveDraw(2, 0, 2, OAMX_14_409F)
+        MoveDraw(3, 0, -1, OAMX_14_40B4)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_62E2::
+    SpriteDraw() {
+        MoveDraw(2, 0, -2, OAMX_14_405C)
+        MoveDraw(2, 0, -1, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(2, 0, 2, OAMX_14_405C)
+        MoveDraw(2, 0, 2, OAMX_14_405C)
+        MoveDraw(2, 0, 2, OAMX_14_405C)
+        MoveDraw(2, 0, 3, OAMX_14_405C)
+        MoveDraw(2, 0, 3, OAMX_14_405C)
+        MoveDraw(2, 0, 4, OAMX_14_405C)
+        MoveDraw(3, 0, 1, OAMX_14_4071)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_6321::
+    SpriteDraw() {
+        MoveDraw(2, -1, -3, OAMX_14_4125)
+        MoveDraw(2, -2, -2, OAMX_14_4125)
+        MoveDraw(2, -2, -1, OAMX_14_4125)
+        MoveDraw(2, -3, -1, OAMX_14_4125)
+        MoveDraw(1, -3, -1, OAMX_14_4125)
+        MoveDraw(1, -3, 0, OAMX_14_4125)
+        MoveDraw(1, -3, 1, OAMX_14_4125)
+        MoveDraw(2, -3, 1, OAMX_14_4125)
+        MoveDraw(2, -2, 1, OAMX_14_4125)
+        MoveDraw(2, -2, 2, OAMX_14_4125)
+        MoveDraw(2, -2, 3, OAMX_14_4125)
+        MoveDraw(1, -2, -1, OAMX_14_413E)
+        MoveDraw(1, -1, 0, OAMX_14_413E)
+        MoveDraw(1, -1, 1, OAMX_14_413E)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_636F::
+    SpriteDraw() {
+        MoveDraw(2, 1, -3, OAMX_14_40E2)
+        MoveDraw(2, 2, -2, OAMX_14_40E2)
+        MoveDraw(2, 2, -1, OAMX_14_40E2)
+        MoveDraw(2, 3, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, 0, OAMX_14_40E2)
+        MoveDraw(1, 3, 1, OAMX_14_40E2)
+        MoveDraw(2, 3, 1, OAMX_14_40E2)
+        MoveDraw(2, 2, 1, OAMX_14_40E2)
+        MoveDraw(2, 2, 2, OAMX_14_40E2)
+        MoveDraw(2, 2, 3, OAMX_14_40E2)
+        MoveDraw(1, 2, -1, OAMX_14_40FB)
+        MoveDraw(1, 1, 0, OAMX_14_40FB)
+        MoveDraw(1, 1, 1, OAMX_14_40FB)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_63BD::
+    SpriteDraw() {
+        MoveDraw(4, 0, -5, OAMX_14_409F)
+        MoveDraw(2, 0, -4, OAMX_14_409F)
+        MoveDraw(2, 0, -3, OAMX_14_409F)
+        MoveDraw(2, 0, -3, OAMX_14_409F)
+        MoveDraw(2, 0, -2, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 0, OAMX_14_409F)
+        MoveDraw(2, 0, 1, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_40B4)
+        MoveDraw(1, 0, -2, OAMX_14_40B4)
+        MoveDraw(1, 0, 0, OAMX_14_40B4)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_6406::
+    SpriteDraw() {
+        MoveDraw(2, 0, -1, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(2, 0, 0, OAMX_14_405C)
+        MoveDraw(1, 0, 1, OAMX_14_4071)
+        MoveDraw(2, 0, 2, OAMX_14_405C)
+        MoveDraw(2, 0, 2, OAMX_14_405C)
+        MoveDraw(2, 0, 3, OAMX_14_405C)
+        MoveDraw(2, 0, 4, OAMX_14_405C)
+        MoveDraw(4, 0, 5, OAMX_14_405C)
+        MoveDraw(1, 0, 1, OAMX_14_4071)
+        MoveDraw(1, 0, 2, OAMX_14_4071)
+        MoveDraw(1, 0, 3, OAMX_14_4071)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_6454::
+    SpriteDraw() {
+        MoveDraw(2, -2, -3, OAMX_14_4125)
+        MoveDraw(2, -2, -2, OAMX_14_4125)
+        MoveDraw(2, -2, -1, OAMX_14_4125)
+        MoveDraw(2, -4, -1, OAMX_14_4125)
+        MoveDraw(1, -6, -1, OAMX_14_4125)
+        MoveDraw(1, -6, 0, OAMX_14_4125)
+        MoveDraw(1, -6, 1, OAMX_14_4125)
+        MoveDraw(2, -4, 1, OAMX_14_4125)
+        MoveDraw(2, -2, 1, OAMX_14_4125)
+        MoveDraw(2, -2, 2, OAMX_14_4125)
+        MoveDraw(2, -2, 3, OAMX_14_4125)
+        MoveDraw(1, -2, -1, OAMX_14_413E)
+        MoveDraw(1, -2, 0, OAMX_14_413E)
+        MoveDraw(1, -2, 1, OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_649F::
+    SpriteDraw() {
+        MoveDraw(1, -1, -3, OAMX_14_4125)
+        MoveDraw(1, -1, -2, OAMX_14_4125)
+        MoveDraw(1, -1, -1, OAMX_14_4125)
+        MoveDraw(1, -2, -1, OAMX_14_4125)
+        MoveDraw(1, -3, -1, OAMX_14_4125)
+        MoveDraw(1, -3, 1, OAMX_14_4125)
+        MoveDraw(1, -2, 1, OAMX_14_4125)
+        MoveDraw(1, -1, 1, OAMX_14_4125)
+        MoveDraw(1, -1, 2, OAMX_14_4125)
+        MoveDraw(1, -1, 3, OAMX_14_4125)
+    }
+    ThisNewState(AI_01_5BC0)
+    Jump(SCRIPT_14_5F11)
+
+SCRIPT_14_64D9::
+    SpriteDraw() {
+        MoveDraw(1, 1, -3, OAMX_14_40E2)
+        MoveDraw(1, 1, -2, OAMX_14_40E2)
+        MoveDraw(1, 1, -1, OAMX_14_40E2)
+        MoveDraw(1, 2, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, 1, OAMX_14_40E2)
+        MoveDraw(1, 2, 1, OAMX_14_40E2)
+        MoveDraw(1, 1, 1, OAMX_14_40E2)
+        MoveDraw(1, 1, 2, OAMX_14_40E2)
+        MoveDraw(1, 1, 3, OAMX_14_40E2)
+    }
+    ThisNewState(AI_01_5BC0)
+    Jump(SCRIPT_14_5F1D)
+
+SCRIPT_14_6513::
+    SpriteDraw() {
+        MoveDraw(1, 0, -4, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, 0, OAMX_14_409F)
+        MoveDraw(1, 0, 0, OAMX_14_409F)
+        MoveDraw(1, 0, 1, OAMX_14_409F)
+        MoveDraw(1, 0, 2, OAMX_14_409F)
+    }
+    ThisNewState(AI_01_5BC0)
+    Jump(SCRIPT_14_5F29)
+
+SCRIPT_14_6552::
+    SpriteDraw() {
+        MoveDraw(1, 0, -2, OAMX_14_405C)
+        MoveDraw(1, 0, -1, OAMX_14_405C)
+        MoveDraw(1, 0, 0, OAMX_14_405C)
+        MoveDraw(1, 0, 0, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 4, OAMX_14_405C)
+    }
+    ThisNewState(AI_01_5BC0)
+    Jump(SCRIPT_14_5F35)
+
+SCRIPT_14_6591::
+    SpriteDraw() {
+        MoveDraw(1, -1, -2, OAMX_14_4125)
+        MoveDraw(1, -1, -1, OAMX_14_4125)
+        MoveDraw(1, -2, -1, OAMX_14_4125)
+        MoveDraw(1, -3, -1, OAMX_14_4125)
+        MoveDraw(1, -3, 1, OAMX_14_4125)
+        MoveDraw(1, -2, 2, OAMX_14_4125)
+        MoveDraw(1, -1, 2, OAMX_14_4125)
+        MoveDraw(1, -1, 2, OAMX_14_4125)
+        MoveDraw(1, -1, 3, OAMX_14_4125)
+    }
+    ThisNewState(AI_Hero)
+    Jump(ACTORSCRIPT0_14_5E57)
+
+SCRIPT_14_65C6::
+    SpriteDraw() {
+        MoveDraw(1, 1, -2, OAMX_14_40E2)
+        MoveDraw(1, 1, -1, OAMX_14_40E2)
+        MoveDraw(1, 2, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, -1, OAMX_14_40E2)
+        MoveDraw(1, 3, 1, OAMX_14_40E2)
+        MoveDraw(1, 2, 2, OAMX_14_40E2)
+        MoveDraw(1, 1, 2, OAMX_14_40E2)
+        MoveDraw(1, 1, 2, OAMX_14_40E2)
+        MoveDraw(1, 1, 3, OAMX_14_40E2)
+    }
+    ThisNewState(AI_Hero)
+    Jump(ACTORSCRIPT0_14_5E74)
+
+SCRIPT_14_65FB::
+    SpriteDraw() {
+        MoveDraw(1, 0, -4, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -3, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, -2, OAMX_14_409F)
+        MoveDraw(1, 0, 0, OAMX_14_409F)
+        MoveDraw(1, 0, 0, OAMX_14_409F)
+        MoveDraw(1, 0, 1, OAMX_14_409F)
+        MoveDraw(1, 0, 2, OAMX_14_409F)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_663A::
+    SpriteDraw() {
+        MoveDraw(1, 0, -2, OAMX_14_405C)
+        MoveDraw(1, 0, -1, OAMX_14_405C)
+        MoveDraw(1, 0, 0, OAMX_14_405C)
+        MoveDraw(1, 0, 0, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 2, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 3, OAMX_14_405C)
+        MoveDraw(1, 0, 4, OAMX_14_405C)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_6679::
+    SpriteDraw() {
+        MoveDraw(4, -2, 0, OAMX_14_4578)
+        MoveDraw(4, -2, 0, OAMX_14_455B)
+    }
+    ThisNewState(AI_Hero)
+    Jump(ACTORSCRIPT0_14_5E57)
+
+SCRIPT_14_668B::
+    SpriteDraw() {
+        MoveDraw(4, 2, 0, OAMX_14_4529)
+        MoveDraw(4, 2, 0, OAMX_14_450C)
+    }
+    ThisNewState(AI_Hero)
+    Jump(ACTORSCRIPT0_14_5E74)
+
+SCRIPT_14_669D::
+    SpriteDraw() {
+        MoveDraw(4, 0, -2, OAMX_14_44D2)
+        MoveDraw(4, 0, -2, OAMX_14_44B9)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5D97)
+
+SCRIPT_14_66AF::
+    SpriteDraw() {
+        MoveDraw(4, 0, 2, OAMX_14_4483)
+        MoveDraw(4, 0, 2, OAMX_14_446E)
+    }
+    ThisNewState(AI_Hero)
+    Jump(SCRIPT_14_5DA1)
+
+SCRIPT_14_66C1::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5A97)
+    }
+    Jump(SCRIPT_14_66C1)
+
+SCRIPT_14_66CB::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5AA0)
+    }
+    Jump(SCRIPT_14_66CB)
+
+SCRIPT_14_66D5::
+    SpriteDraw() {
+        MoveDraw(1, 2, -8, OAMX_14_55B2)
+        MoveDraw(1, 2, 1, OAMX_14_55B2)
+        MoveDraw(2, 1, 1, OAMX_14_55B2)
+        MoveDraw(2, 1, 2, OAMX_14_55B2)
+        MoveDraw(8, 1, 0, OAMX_14_55CF)
+    }
+    Jump(SCRIPT_14_5DB5)
+
+SCRIPT_14_66F3::
+    SpriteDraw() {
+        MoveDraw(1, -2, -8, OAMX_14_5605)
+        MoveDraw(1, -2, 1, OAMX_14_5605)
+        MoveDraw(2, -1, 1, OAMX_14_5605)
+        MoveDraw(2, -1, 2, OAMX_14_5605)
+        MoveDraw(8, -1, 0, OAMX_14_5622)
+    }
+    Jump(SCRIPT_14_5DAB)
+
+SCRIPT_14_6711::
+    SpriteDraw() {
+        MoveDraw(4, 0, -1, OAMX_14_5046)
+        MoveDraw(4, 0, -2, OAMX_14_5046)
+        MoveDraw(16, 0, -2, OAMX_14_505F)
+        MoveDraw(32, 0, -1, OAMX_14_505F)
+        MoveDraw(16, 0, -1, OAMX_14_5046)
+        MoveDraw(24, 0, -1, OAMX_14_502D)
+    }
+    Jump(SCRIPT_14_6711)
+
+SCRIPT_14_6734::
+    SpriteDraw() {
+        MoveDraw(4, 0, 1, OAMX_14_4FFB)
+        MoveDraw(4, 0, 2, OAMX_14_4FFB)
+        MoveDraw(16, 0, 2, OAMX_14_5014)
+        MoveDraw(32, 0, 1, OAMX_14_5014)
+        MoveDraw(16, 0, 1, OAMX_14_4FFB)
+        MoveDraw(24, 0, 1, OAMX_14_4FE2)
+    }
+    Jump(SCRIPT_14_6734)
+
+SCRIPT_14_6757::
+    SpriteDraw() {
+        MoveDraw(4, -1, 0, OAMX_14_4FA0)
+        MoveDraw(4, -2, 0, OAMX_14_4FA0)
+        MoveDraw(16, -2, 0, OAMX_14_4FC1)
+        MoveDraw(32, -1, 0, OAMX_14_4FC1)
+        MoveDraw(16, -1, 0, OAMX_14_4FA0)
+        MoveDraw(24, -1, 0, OAMX_14_4F7F)
+    }
+    Jump(SCRIPT_14_6757)
+
+SCRIPT_14_677A::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4FC1)
+    }
+    Jump(SCRIPT_14_677A)
+
+SCRIPT_14_6784::
+    SpriteDraw() {
+        MoveDraw(4, 1, 0, OAMX_14_4F3D)
+        MoveDraw(4, 2, 0, OAMX_14_4F3D)
+        MoveDraw(16, 2, 0, OAMX_14_4F5E)
+        MoveDraw(32, 1, 0, OAMX_14_4F5E)
+        MoveDraw(16, 1, 0, OAMX_14_4F3D)
+        MoveDraw(24, 1, 0, OAMX_14_4F1C)
+    }
+    Jump(SCRIPT_14_6784)
+
+SCRIPT_14_67A7::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_5159)
+        Draw(OAMX_14_5172)
+        Draw(OAMX_14_518B)
+        Draw(OAMX_14_5172)
+    }
+    Jump(SCRIPT_14_67A7)
+
+SCRIPT_14_67B7::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_510E)
+        Draw(OAMX_14_5127)
+        Draw(OAMX_14_5140)
+        Draw(OAMX_14_5127)
+    }
+    Jump(SCRIPT_14_67B7)
+
+SCRIPT_14_67C7::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_50C3)
+        Draw(OAMX_14_50DC)
+        Draw(OAMX_14_50F5)
+        Draw(OAMX_14_50DC)
+    }
+    Jump(SCRIPT_14_67C7)
+
+SCRIPT_14_67D7::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_5078)
+        Draw(OAMX_14_5091)
+        Draw(OAMX_14_50AA)
+        Draw(OAMX_14_5091)
+    }
+    Jump(SCRIPT_14_67D7)
+
+SCRIPT_14_67E7::
+    SpriteDraw() {
+        MoveDraw(4, -2, 0, OAMX_14_4920)
+        MoveDraw(4, -2, 0, OAMX_14_4935)
+        MoveDraw(4, -2, 0, OAMX_14_494A)
+    }
+
+SCRIPT_14_67F8::
+    SpriteDraw() {
+        MoveDraw(10, -2, 0, OAMX_14_466F)
+        MoveDraw(4, -2, 0, OAMX_14_463E)
+        MoveDraw(8, -2, 0, OAMX_14_46A0)
+        MoveDraw(8, -2, 0, OAMX_14_463E)
+    }
+    Jump(SCRIPT_14_67F8)
+
+SCRIPT_14_6811::
+    SpriteDraw() {
+        MoveDraw(1, 4, 0, OAMX_14_413E)
+        MoveDraw(2, 3, 0, OAMX_14_413E)
+        MoveDraw(2, 2, 0, OAMX_14_413E)
+        MoveDraw(3, 1, 0, OAMX_14_4125)
+        MoveDraw(4, 0, 0, OAMX_14_4125)
+        MoveDraw(3, -1, 0, OAMX_14_4125)
+        MoveDraw(2, -2, 0, OAMX_14_413E)
+        MoveDraw(2, -3, 0, OAMX_14_413E)
+        MoveDraw(1, -4, 0, OAMX_14_413E)
+    }
+    Jump(SCRIPT_14_67F8)
+
+SCRIPT_14_6843::
+    SpriteDraw() {
+        MoveDraw(4, 2, 0, OAMX_14_48D5)
+        MoveDraw(4, 2, 0, OAMX_14_48EA)
+        MoveDraw(4, 2, 0, OAMX_14_48FF)
+    }
+
+SCRIPT_14_6854::
+    SpriteDraw() {
+        MoveDraw(10, 2, 0, OAMX_14_45DC)
+        MoveDraw(4, 2, 0, OAMX_14_45AB)
+        MoveDraw(8, 2, 0, OAMX_14_460D)
+        MoveDraw(8, 2, 0, OAMX_14_45AB)
+    }
+    Jump(SCRIPT_14_6854)
+
+SCRIPT_14_686D::
+    SpriteDraw() {
+        MoveDraw(4, 0, -2, OAMX_14_47DF)
+        MoveDraw(4, 0, -2, OAMX_14_4800)
+        MoveDraw(4, 0, -2, OAMX_14_4829)
+    }
+
+SCRIPT_14_687E::
+    SpriteDraw() {
+        MoveDraw(10, 0, -2, OAMX_14_4758)
+        MoveDraw(4, 0, -2, OAMX_14_4785)
+        MoveDraw(8, 0, -2, OAMX_14_47B2)
+        MoveDraw(8, 0, -2, OAMX_14_4785)
+    }
+    Jump(SCRIPT_14_687E)
+
+SCRIPT_14_6897::
+    SpriteDraw() {
+        MoveDraw(1, 0, 4, OAMX_14_40B4)
+        MoveDraw(2, 0, 3, OAMX_14_40B4)
+        MoveDraw(2, 0, 2, OAMX_14_40B4)
+        MoveDraw(3, 0, 1, OAMX_14_409F)
+        MoveDraw(4, 0, 0, OAMX_14_409F)
+        MoveDraw(3, 0, -1, OAMX_14_409F)
+        MoveDraw(2, 0, -2, OAMX_14_40B4)
+        MoveDraw(2, 0, -3, OAMX_14_40B4)
+        MoveDraw(1, 0, -4, OAMX_14_40B4)
+    }
+    Jump(SCRIPT_14_687E)
+
+SCRIPT_14_68C9::
+    SpriteDraw() {
+        MoveDraw(4, 0, 2, OAMX_14_485A)
+        MoveDraw(4, 0, 2, OAMX_14_487B)
+        MoveDraw(4, 0, 2, OAMX_14_48A4)
+    }
+
+SCRIPT_14_68DA::
+    SpriteDraw() {
+        MoveDraw(10, 0, 2, OAMX_14_46D1)
+        MoveDraw(4, 0, 2, OAMX_14_46FE)
+        MoveDraw(8, 0, 2, OAMX_14_472B)
+        MoveDraw(8, 0, 2, OAMX_14_46FE)
+    }
+    Jump(SCRIPT_14_68DA)
+
+SCRIPT_14_68F3::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_01_5002)
+    Jump(SCRIPT_14_6927)
+
+SCRIPT_14_6900::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_01_5002)
+    Jump(SCRIPT_14_6972)
+
+SCRIPT_14_690D::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_01_5002)
+    Jump(SCRIPT_14_69BD)
+
+SCRIPT_14_691A::
+    SpriteDraw() {
+        MoveDraw(50, 0, 0, OAMX_14_418A)
+    }
+    ThisNewState(AI_01_5002)
+    Jump(SCRIPT_14_6A08)
+
+SCRIPT_14_6927::
+    SpriteDraw() {
+        MoveDraw(1, 0, -1, OAMX_14_466F)
+        MoveDraw(1, 0, 0, OAMX_14_466F)
+        MoveDraw(1, 0, -1, OAMX_14_466F)
+        MoveDraw(1, 0, 0, OAMX_14_466F)
+        MoveDraw(1, 0, -1, OAMX_14_466F)
+        MoveDraw(7, 0, 0, OAMX_14_466F)
+        MoveDraw(4, 0, 0, OAMX_14_463E)
+        MoveDraw(1, 0, 1, OAMX_14_46A0)
+        MoveDraw(1, 0, 0, OAMX_14_46A0)
+        MoveDraw(1, 0, 1, OAMX_14_46A0)
+        MoveDraw(1, 0, 0, OAMX_14_46A0)
+        MoveDraw(1, 0, 1, OAMX_14_46A0)
+        MoveDraw(5, 0, 0, OAMX_14_46A0)
+        MoveDraw(8, 0, 0, OAMX_14_463E)
+    }
+    Jump(SCRIPT_14_6927)
+
+SCRIPT_14_6972::
+    SpriteDraw() {
+        MoveDraw(1, 0, -1, OAMX_14_45DC)
+        MoveDraw(1, 0, 0, OAMX_14_45DC)
+        MoveDraw(1, 0, -1, OAMX_14_45DC)
+        MoveDraw(1, 0, 0, OAMX_14_45DC)
+        MoveDraw(1, 0, -1, OAMX_14_45DC)
+        MoveDraw(7, 0, 0, OAMX_14_45DC)
+        MoveDraw(4, 0, 0, OAMX_14_45AB)
+        MoveDraw(1, 0, 1, OAMX_14_460D)
+        MoveDraw(1, 0, 0, OAMX_14_460D)
+        MoveDraw(1, 0, 1, OAMX_14_460D)
+        MoveDraw(1, 0, 0, OAMX_14_460D)
+        MoveDraw(1, 0, 1, OAMX_14_460D)
+        MoveDraw(5, 0, 0, OAMX_14_460D)
+        MoveDraw(8, 0, 0, OAMX_14_45AB)
+    }
+    Jump(SCRIPT_14_6972)
+
+SCRIPT_14_69BD::
+    SpriteDraw() {
+        MoveDraw(1, 0, 1, OAMX_14_4758)
+        MoveDraw(1, 0, 0, OAMX_14_4758)
+        MoveDraw(1, 0, 1, OAMX_14_4758)
+        MoveDraw(1, 0, 0, OAMX_14_4758)
+        MoveDraw(1, 0, 1, OAMX_14_4758)
+        MoveDraw(7, 0, 0, OAMX_14_4758)
+        MoveDraw(4, 0, 0, OAMX_14_4785)
+        MoveDraw(1, 0, -1, OAMX_14_47B2)
+        MoveDraw(1, 0, 0, OAMX_14_47B2)
+        MoveDraw(1, 0, -1, OAMX_14_47B2)
+        MoveDraw(1, 0, 0, OAMX_14_47B2)
+        MoveDraw(1, 0, -1, OAMX_14_47B2)
+        MoveDraw(5, 0, 0, OAMX_14_47B2)
+        MoveDraw(8, 0, 0, OAMX_14_4785)
+    }
+    Jump(SCRIPT_14_69BD)
+
+SCRIPT_14_6A08::
+    SpriteDraw() {
+        MoveDraw(1, 0, 1, OAMX_14_46D1)
+        MoveDraw(1, 0, 0, OAMX_14_46D1)
+        MoveDraw(1, 0, 1, OAMX_14_46D1)
+        MoveDraw(1, 0, 0, OAMX_14_46D1)
+        MoveDraw(1, 0, 1, OAMX_14_46D1)
+        MoveDraw(7, 0, 0, OAMX_14_46D1)
+        MoveDraw(4, 0, 0, OAMX_14_46FE)
+        MoveDraw(1, 0, -1, OAMX_14_472B)
+        MoveDraw(1, 0, 0, OAMX_14_472B)
+        MoveDraw(1, 0, -1, OAMX_14_472B)
+        MoveDraw(1, 0, 0, OAMX_14_472B)
+        MoveDraw(1, 0, -1, OAMX_14_472B)
+        MoveDraw(5, 0, 0, OAMX_14_472B)
+        MoveDraw(8, 0, 0, OAMX_14_46FE)
+    }
+    Jump(SCRIPT_14_6A08)
+
+SCRIPT_14_6A53::
+    SpriteDraw() {
+        MoveDraw(1, 0, -4, OAMX_14_4071)
+        MoveDraw(2, 0, -3, OAMX_14_4071)
+        MoveDraw(2, 0, -2, OAMX_14_4071)
+        MoveDraw(3, 0, -1, OAMX_14_405C)
+        MoveDraw(4, 0, 0, OAMX_14_405C)
+        MoveDraw(3, 0, 1, OAMX_14_405C)
+        MoveDraw(2, 0, 2, OAMX_14_4071)
+        MoveDraw(2, 0, 3, OAMX_14_4071)
+        MoveDraw(1, 0, 4, OAMX_14_4071)
+    }
+    Jump(SCRIPT_14_68DA)
+
+SCRIPT_14_6A85::
+    SpriteDraw() {
+        MoveDraw(1, -4, 0, OAMX_14_40FB)
+        MoveDraw(2, -3, 0, OAMX_14_40FB)
+        MoveDraw(2, -2, 0, OAMX_14_40FB)
+        MoveDraw(3, -1, 0, OAMX_14_40E2)
+        MoveDraw(4, 0, 0, OAMX_14_40E2)
+        MoveDraw(3, 1, 0, OAMX_14_40E2)
+        MoveDraw(2, 2, 0, OAMX_14_40FB)
+        MoveDraw(2, 3, 0, OAMX_14_40FB)
+        MoveDraw(1, 4, 0, OAMX_14_40FB)
+    }
+    Jump(SCRIPT_14_6854)
+
+SCRIPT_14_6AB7::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4EB6)
+    }
+    Jump(SCRIPT_14_6AB7)
+
+SCRIPT_14_6AC1::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_4EB6)
+        Draw(OAMX_14_4EC7)
+        Draw(OAMX_14_4ED8)
+        Draw(OAMX_14_4EC7)
+    }
+    Jump(SCRIPT_14_6AC1)
+
+SCRIPT_14_6AD1::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_4EB6)
+        Draw(OAMX_14_4EC7)
+        Draw(OAMX_14_4ED8)
+        Draw(OAMX_14_4EC7)
+    }
+    Jump(SCRIPT_14_6AD1)
+
+SCRIPT_14_6AE1::
+    SpriteDraw() {
+        MoveDraw(8, 0, 0, OAMX_14_4E94)
+        MoveDraw(8, 0, 0, OAMX_14_4E7B)
+        MoveDraw(4, 0, 0, OAMX_14_4DB3)
+    }
+    Jump(SCRIPT_14_6AB7)
+
+SCRIPT_14_6AF5::
+    SpriteDraw() {
+        MoveDraw(16, 0, 0, OAMX_14_4DB3)
+        MoveDraw(8, 0, 0, OAMX_14_4D9A)
+        MoveDraw(4, 0, 0, OAMX_14_4DB3)
+        MoveDraw(16, 0, 0, OAMX_14_4DCC)
+        MoveDraw(4, 0, 0, OAMX_14_4DB3)
+        MoveDraw(4, 0, 0, OAMX_14_4DCC)
+        MoveDraw(4, 0, 0, OAMX_14_4DB3)
+        MoveDraw(4, 0, 0, OAMX_14_4D9A)
+        MoveDraw(4, 0, 0, OAMX_14_4DB3)
+        MoveDraw(4, 0, 0, OAMX_14_4E7B)
+        MoveDraw(4, 0, 0, OAMX_14_4E94)
+    }
+
+SCRIPT_14_6B2E::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4EAD)
+    }
+    Jump(SCRIPT_14_6B2E)
+
+SCRIPT_14_6B38::
+    SpriteDraw() {
+        MoveDraw(2, -4, 0, OAMX_14_4EAD)
+        MoveDraw(1, -3, 0, OAMX_14_4EAD)
+        MoveDraw(1, -2, 1, OAMX_14_4EAD)
+        MoveDraw(1, -1, 1, OAMX_14_4EAD)
+        MoveDraw(1, -1, 2, OAMX_14_4EAD)
+        MoveDraw(1, -1, 3, OAMX_14_4EAD)
+        MoveDraw(2, 0, 3, OAMX_14_4EAD)
+        MoveDraw(5, 0, 4, OAMX_14_4EAD)
+    }
+    Jump(SCRIPT_14_6B2E)
+
+SCRIPT_14_6B65::
+    SpriteBlock(2, 4, 0) {
+        Draw(OAMX_14_52ED)
+        Draw(OAMX_14_531F)
+        Draw(OAMX_14_5306)
+        Draw(OAMX_14_52D4)
+    }
+    Jump(SCRIPT_14_6B65)
+
+SCRIPT_14_6B75::
+    SpriteBlock(2, 0, -3) {
+        Draw(OAMX_14_52ED)
+        Draw(OAMX_14_531F)
+        Draw(OAMX_14_5306)
+        Draw(OAMX_14_52D4)
+    }
+    Jump(SCRIPT_14_6B75)
+
+SCRIPT_14_6B85::
+    SpriteBlock(4, 0, -1) {
+        Draw(OAMX_14_52ED)
+        Draw(OAMX_14_531F)
+        Draw(OAMX_14_5306)
+        Draw(OAMX_14_52D4)
+    }
+    Jump(SCRIPT_14_6B85)
+
+SCRIPT_14_6B95::
+    SpriteDraw() {
+        MoveDraw(16, 0, 0, OAMX_14_5292)
+    }
+
+SCRIPT_14_6B9C::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_52B3)
+    }
+    Jump(SCRIPT_14_6B9C)
+
+SCRIPT_14_6BA6::
+    SpriteDraw() {
+        MoveDraw(16, 0, 0, OAMX_14_5250)
+    }
+
+SCRIPT_14_6BAD::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5271)
+    }
+    Jump(SCRIPT_14_6BAD)
+
+SCRIPT_14_6BB7::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4B8D)
+    }
+    Jump(SCRIPT_14_6BB7)
+
+SCRIPT_14_6BC1::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4B5B)
+        MoveDraw(255, 0, 0, OAMX_14_4B5B)
+    }
+
+SCRIPT_14_6BCD::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_4C71)
+        Draw(OAMX_14_4C8A)
+    }
+    Jump(SCRIPT_14_6BCD)
+
+SCRIPT_14_6BD9::
+    SpriteDraw() {
+        MoveDraw(32, 0, 0, OAMX_14_4BA6)
+    }
+    SpriteBlock(4, 0, 0) {
+        Draw(OAMX_14_4BBF)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BF5)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BBF)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BF5)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BBF)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BF5)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BBF)
+        Draw(OAMX_14_4BD8)
+        Draw(OAMX_14_4BF5)
+        Draw(OAMX_14_4BD8)
+    }
+    SpriteDraw() {
+        MoveDraw(32, 0, 0, OAMX_14_4BBF)
+        MoveDraw(32, 0, 0, OAMX_14_4BA6)
+    }
+    Jump(SCRIPT_14_6BB7)
+
+SCRIPT_14_6C14::
+    SpriteBlock(8, 0, 0) {
+        Draw(OAMX_14_4CA3)
+        Draw(OAMX_14_4CBC)
+        Draw(OAMX_14_4CE1)
+        Draw(OAMX_14_4D06)
+        Draw(OAMX_14_4D2B)
+        Draw(OAMX_14_4D50)
+        Draw(OAMX_14_4D75)
+    }
+
+SCRIPT_14_6C27::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4CA3)
+    }
+    Jump(SCRIPT_14_6C27)
+
+SCRIPT_14_6C31::
+    SpriteBlock(16, 0, 0) {
+        Draw(OAMX_14_4C50)
+        Draw(OAMX_14_4B8D)
+    }
+    Jump(SCRIPT_14_6C31)
+
+SCRIPT_14_6C3D::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4B74)
+    }
+    Jump(SCRIPT_14_6C3D)
+
+SCRIPT_14_6C47::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_4C12)
+    }
+    Jump(SCRIPT_14_6C47)
+
+SCRIPT_14_6C51::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_14_54D1)
+        Draw(OAMX_14_54EA)
+        Draw(OAMX_14_5503)
+        Draw(OAMX_14_54EA)
+    }
+    LongJump(SCRIPT_14_6C51)
+
+SCRIPT_14_6C62::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_14_5486)
+        Draw(OAMX_14_549F)
+        Draw(OAMX_14_54B8)
+        Draw(OAMX_14_549F)
+    }
+    LongJump(SCRIPT_14_6C62)
+
+SCRIPT_14_6C73::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_14_5400)
+        Draw(OAMX_14_5415)
+        Draw(OAMX_14_542E)
+        Draw(OAMX_14_5415)
+    }
+    LongJump(SCRIPT_14_6C73)
+
+SCRIPT_14_6C84::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_5443)
+        Draw(OAMX_14_5458)
+        Draw(OAMX_14_5471)
+        Draw(OAMX_14_5458)
+    }
+    LongJump(SCRIPT_14_6C84)
+
+SCRIPT_14_6C95::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_14_5605)
+        Draw(OAMX_14_5622)
+        Draw(OAMX_14_563B)
+        Draw(OAMX_14_5622)
+    }
+    LongJump(SCRIPT_14_6C95)
+
+SCRIPT_14_6CA6::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_14_55B2)
+        Draw(OAMX_14_55CF)
+        Draw(OAMX_14_55E8)
+        Draw(OAMX_14_55CF)
+    }
+    LongJump(SCRIPT_14_6CA6)
+
+SCRIPT_14_6CB7::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_14_551C)
+        Draw(OAMX_14_5535)
+        Draw(OAMX_14_554E)
+        Draw(OAMX_14_5535)
+    }
+    LongJump(SCRIPT_14_6CB7)
+
+SCRIPT_14_6CC8::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_14_5567)
+        Draw(OAMX_14_5580)
+        Draw(OAMX_14_5599)
+        Draw(OAMX_14_5580)
+    }
+    LongJump(SCRIPT_14_6CC8)
+
+SCRIPT_14_6CD9::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_52ED)
+    }
+    LongJump(SCRIPT_14_6CD9)
+
+SCRIPT_14_6CE4::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_52D4)
+    }
+    LongJump(SCRIPT_14_6CE4)
+
+SCRIPT_14_6CEF::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5580)
+    }
+    LongJump(SCRIPT_14_6CEF)
+
+SCRIPT_14_6CFA::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_14_5535)
+    }
+    LongJump(SCRIPT_14_6CFA)
+
+SCRIPT_14_6D05::
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_14_6D1C)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_14_6D23)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_14_6D31)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_14_6D2A)
+    }
+
+SCRIPT_14_6D1C::
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_14_6D23::
+    ThisSetAnimSingle(SCRIPT_14_5D97)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_14_6D2A::
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_14_6D31::
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    WaitEventText(1)
+    RestoreActorState()

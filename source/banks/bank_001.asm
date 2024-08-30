@@ -2077,7 +2077,7 @@ Jump_001_4C08:
     cp $0B                                        ; $4C1A: $FE $0B
     jr nz, jr_001_4C33                            ; $4C1C: $20 $15
 
-    ld a, [$C9CF]                                 ; $4C1E: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4C1E: $FA $CF $C9
     sub $02                                       ; $4C21: $D6 $02
     jp c, Jump_001_634D                           ; $4C23: $DA $4D $63
 
@@ -2092,7 +2092,7 @@ jr_001_4C33:
     cp $09                                        ; $4C33: $FE $09
     jr nz, jr_001_4C4C                            ; $4C35: $20 $15
 
-    ld a, [$C9CF]                                 ; $4C37: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4C37: $FA $CF $C9
     sub $01                                       ; $4C3A: $D6 $01
     jp c, Jump_001_634D                           ; $4C3C: $DA $4D $63
 
@@ -2129,7 +2129,7 @@ Jump_001_4C59:
     cp $0B                                        ; $4C6B: $FE $0B
     jr nz, jr_001_4C84                            ; $4C6D: $20 $15
 
-    ld a, [$C9CF]                                 ; $4C6F: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4C6F: $FA $CF $C9
     sub $02                                       ; $4C72: $D6 $02
     jp c, Jump_001_634D                           ; $4C74: $DA $4D $63
 
@@ -2144,7 +2144,7 @@ jr_001_4C84:
     cp $09                                        ; $4C84: $FE $09
     jr nz, jr_001_4C9D                            ; $4C86: $20 $15
 
-    ld a, [$C9CF]                                 ; $4C88: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4C88: $FA $CF $C9
     sub $01                                       ; $4C8B: $D6 $01
     jp c, Jump_001_634D                           ; $4C8D: $DA $4D $63
 
@@ -2181,7 +2181,7 @@ Jump_001_4CAA:
     cp $0B                                        ; $4CBC: $FE $0B
     jr nz, jr_001_4CD5                            ; $4CBE: $20 $15
 
-    ld a, [$C9CF]                                 ; $4CC0: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4CC0: $FA $CF $C9
     sub $02                                       ; $4CC3: $D6 $02
     jp c, Jump_001_634D                           ; $4CC5: $DA $4D $63
 
@@ -2196,7 +2196,7 @@ jr_001_4CD5:
     cp $09                                        ; $4CD5: $FE $09
     jr nz, jr_001_4CEE                            ; $4CD7: $20 $15
 
-    ld a, [$C9CF]                                 ; $4CD9: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4CD9: $FA $CF $C9
     sub $01                                       ; $4CDC: $D6 $01
     jp c, Jump_001_634D                           ; $4CDE: $DA $4D $63
 
@@ -2233,7 +2233,7 @@ Jump_001_4CFB:
     cp $0B                                        ; $4D0D: $FE $0B
     jr nz, jr_001_4D26                            ; $4D0F: $20 $15
 
-    ld a, [$C9CF]                                 ; $4D11: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4D11: $FA $CF $C9
     sub $02                                       ; $4D14: $D6 $02
     jp c, Jump_001_634D                           ; $4D16: $DA $4D $63
 
@@ -2248,7 +2248,7 @@ jr_001_4D26:
     cp $09                                        ; $4D26: $FE $09
     jr nz, jr_001_4D3F                            ; $4D28: $20 $15
 
-    ld a, [$C9CF]                                 ; $4D2A: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $4D2A: $FA $CF $C9
     sub $01                                       ; $4D2D: $D6 $01
     jp c, Jump_001_634D                           ; $4D2F: $DA $4D $63
 
@@ -3048,7 +3048,7 @@ Jump_001_52CB:
 
 
 Call_001_52D8:
-    ld a, [$C9CF]                                 ; $52D8: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $52D8: $FA $CF $C9
     sub $04                                       ; $52DB: $D6 $04
     jp c, Jump_001_52FA                           ; $52DD: $DA $FA $52
 
@@ -3104,7 +3104,7 @@ jr_001_5310:
     jr jr_001_52EE                                ; $5310: $18 $DC
 
 Call_001_5312:
-    ld a, [$C9CF]                                 ; $5312: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5312: $FA $CF $C9
     sub $05                                       ; $5315: $D6 $05
     ret c                                         ; $5317: $D8
 
@@ -3136,7 +3136,7 @@ Jump_001_5326:
 
 
 Call_001_5340:
-    ld a, [$C9CF]                                 ; $5340: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5340: $FA $CF $C9
     sub $05                                       ; $5343: $D6 $05
     ret c                                         ; $5345: $D8
 
@@ -3168,7 +3168,7 @@ Jump_001_5354:
 
 
 Call_001_536E:
-    ld a, [$C9CF]                                 ; $536E: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $536E: $FA $CF $C9
     sub $05                                       ; $5371: $D6 $05
     ret c                                         ; $5373: $D8
 
@@ -3200,7 +3200,7 @@ Jump_001_5382:
 
 
 Call_001_539C:
-    ld a, [$C9CF]                                 ; $539C: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $539C: $FA $CF $C9
     sub $05                                       ; $539F: $D6 $05
     ret c                                         ; $53A1: $D8
 
@@ -4370,7 +4370,7 @@ Call_001_5BF4:
     cp $01                                        ; $5BF5: $FE $01
     ret nz                                        ; $5BF7: $C0
 
-    ld a, [$C9CF]                                 ; $5BF8: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5BF8: $FA $CF $C9
     sub $04                                       ; $5BFB: $D6 $04
     ret c                                         ; $5BFD: $D8
 
@@ -4388,7 +4388,7 @@ Call_001_5C0F:
     cp $01                                        ; $5C10: $FE $01
     ret nz                                        ; $5C12: $C0
 
-    ld a, [$C9CF]                                 ; $5C13: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5C13: $FA $CF $C9
     sub $04                                       ; $5C16: $D6 $04
     ret c                                         ; $5C18: $D8
 
@@ -4406,7 +4406,7 @@ Call_001_5C2A:
     cp $01                                        ; $5C2B: $FE $01
     ret nz                                        ; $5C2D: $C0
 
-    ld a, [$C9CF]                                 ; $5C2E: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5C2E: $FA $CF $C9
     sub $04                                       ; $5C31: $D6 $04
     ret c                                         ; $5C33: $D8
 
@@ -4424,7 +4424,7 @@ Call_001_5C45:
     cp $01                                        ; $5C46: $FE $01
     ret nz                                        ; $5C48: $C0
 
-    ld a, [$C9CF]                                 ; $5C49: $FA $CF $C9
+    ld a, [wHeroAbilities]                                 ; $5C49: $FA $CF $C9
     sub $04                                       ; $5C4C: $D6 $04
     ret c                                         ; $5C4E: $D8
 
@@ -5162,8 +5162,8 @@ Jump_001_60D6:
 
     Battery_SetBank $00
     Battery_On
-    ld a, [$A227]                                 ; $6110: $FA $27 $A2
-    ld [$C9CF], a                                 ; $6113: $EA $CF $C9
+    ld a, [xHeroAbilities]                                 ; $6110: $FA $27 $A2
+    ld [wHeroAbilities], a                                 ; $6113: $EA $CF $C9
     Battery_Off
     jp Jump_001_6130                              ; $611A: $C3 $30 $61
 
@@ -5490,13 +5490,13 @@ jr_001_6319:
     call z, Call_001_4CFB                         ; $632E: $CC $FB $4C
     jp Jump_001_634D                              ; $6331: $C3 $4D $63
 
-
+AI_Hero:
     Battery_SetBank $00
     Battery_On
-    ld a, [$A227]                                 ; $6340: $FA $27 $A2
-    ld [$C9CF], a                                 ; $6343: $EA $CF $C9
+    ld a, [xHeroAbilities]                                 ; $6340: $FA $27 $A2
+    ld [wHeroAbilities], a                                 ; $6343: $EA $CF $C9
     Battery_Off
-    jp Jump_001_6420                              ; $634A: $C3 $20 $64
+    jp AI_Hero_Start                              ; $634A: $C3 $20 $64
 
 
 Jump_001_634D:
@@ -5611,7 +5611,7 @@ Jump_001_640D:
     jp Jump_001_634D                              ; $641D: $C3 $4D $63
 
 
-Jump_001_6420:
+AI_Hero_Start:
     call Call_001_6393                            ; $6420: $CD $93 $63
     ld a, [$C9CC]                                 ; $6423: $FA $CC $C9
     bit 4, a                                      ; $6426: $CB $67
@@ -6261,6 +6261,7 @@ AI_CheckCheatCodeInput:
         ret                                           ; $6786: $C9
 
 
+AI_InvisibleLaser:
     call Call_001_4B1C                            ; $6787: $CD $1C $4B
     call Call_001_67B9                            ; $678A: $CD $B9 $67
     xor a                                         ; $678D: $AF
@@ -7040,8 +7041,8 @@ jr_001_6BC4:
 
     Battery_SetBank $00
     Battery_On
-    ld a, [$A227]                                 ; $6BD3: $FA $27 $A2
-    ld [$C9CF], a                                 ; $6BD6: $EA $CF $C9
+    ld a, [xHeroAbilities]                                 ; $6BD3: $FA $27 $A2
+    ld [wHeroAbilities], a                                 ; $6BD6: $EA $CF $C9
     Battery_Off
     jp Jump_001_6BF3                              ; $6BDD: $C3 $F3 $6B
 
@@ -7506,7 +7507,7 @@ jr_001_6E2C:
     ld [hl+], a                                   ; $6EB0: $22
     ret                                           ; $6EB1: $C9
 
-
+AI_Chicken::
     call Call_001_4B1C                            ; $6EB2: $CD $1C $4B
     call Call_001_7038                            ; $6EB5: $CD $38 $70
     and a                                         ; $6EB8: $A7

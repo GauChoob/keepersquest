@@ -37,8 +37,25 @@ xGameCount::
     ; This is used for choosing the start screen background
     ds 2
 
+    ds $A038 - @
+xBits_dResh::
+    ; 0
+    ; 1
+    ; 2 = Completed dResh_Puzzle1
+    ds 1
+
     ds $A132 - @
 xNumberOfAttempts:
+    ds 1
+
+    ds $A227 - @
+xHeroAbilities::
+    ; 0 = Nothing
+    ; 1 = Energy Band
+    ; 2 = Crystal Gloves
+    ; 3 = Boots of Agadon
+    ; 4 = Orothean Belt
+    ; 5 = Eye of the Storm
     ds 1
 
     ds $A32B - @

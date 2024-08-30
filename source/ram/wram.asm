@@ -114,8 +114,8 @@ wScript_StartButtonScript:
     ds 2
 
     ds $C731 - @
-wScript_StartButtonEnabled:
-    ; 0 if disable. 1 if enabled
+wScript_StartButtonDisabled:
+    ; 1 if disable. 0 if enabled
     ds 1
 
     ds $C733 - @
@@ -181,6 +181,10 @@ wROMBank::
     ds $C9CB - @
 wSalafyInvincible::
     ; Set to 1 when cheat code entered on starting screen
+    ds 1
+
+    ds $C9CF - @
+wHeroAbilities::
     ds 1
 
     ds $CDF5 - @

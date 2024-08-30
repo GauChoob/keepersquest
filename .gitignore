@@ -15,7 +15,8 @@
 # Python
 __pycache__/
 .venv/
-python/out/
+python/out/*
+!python/out/magireader
 
 # VS code
 *.code-workspace

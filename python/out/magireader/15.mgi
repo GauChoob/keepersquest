@@ -1,0 +1,3409 @@
+
+SCRIPT_15_4000::
+    StartSong(SONGID_Bogrom)
+    LongJump(SCRIPT_15_409F)
+
+SCRIPT_15_4006::
+    StartSong(SONGID_Bogrom)
+    LongJump(SCRIPT_15_44FF)
+
+SCRIPT_15_400C::
+    StartSong(SONGID_Bogrom)
+    LongJump(SCRIPT_15_4A11)
+
+SCRIPT_15_4012::
+    StartSong(SONGID_Bogrom)
+    LongJump(SCRIPT_15_4EA7)
+
+SCRIPT_15_4018::
+    StartSong(SONGID_Bogrom)
+    LongJump(SCRIPT_15_56BB)
+
+SCRIPT_15_401E::
+    OrByte(MATHADDRESS_00_A035, %00000001)
+
+SCRIPT_15_4022::
+    HeroToDoor($08, $20)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_4029::
+    OrByte(MATHADDRESS_00_A035, %00000010)
+
+SCRIPT_15_402D::
+    HeroToDoor($04, $13)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_4034::
+    OrByte(MATHADDRESS_00_A035, %00000100)
+
+SCRIPT_15_4038::
+    HeroToDoor($15, $14)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_403F::
+    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_15_4054)
+    LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000010) == c0)#, SCRIPT_09_45D3)
+
+SCRIPT_15_4054::
+    OrByte(MATHADDRESS_00_A035, %00100000)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) == c0)#, SCRIPT_15_406E)
+    OrByte(MATHADDRESS_00_A035, %00001000)
+    HeroToDoor($12, $09)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_406E::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A035], c%00001000)#, SCRIPT_15_4081)
+    OrByte(MATHADDRESS_00_A035, %00001000)
+    HeroToDoor($1F, $13)
+    LongJump(SCRIPT_09_4A10)
+
+SCRIPT_15_4081::
+    HeroToDoor($12, $09)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_4088::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A035], c%00010000)#, SCRIPT_15_4098)
+    OrByte(MATHADDRESS_00_A035, %00010000)
+    LongJump(SCRIPT_09_48E7)
+
+SCRIPT_15_4098::
+    HeroToDoor($04, $03)
+    LongJump(SCRIPT_09_4561)
+
+SCRIPT_15_409F::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_40A3::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle1)
+    LoadHotspots(HOTSPOTX_13_4C84)
+    ThatInit(0, AI_Hero, $09, $11, $D0D5, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, AI_01_70E1, $06, $11, $D0D2, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatInit(4, AI_01_70E1, $01, $0F, $D0B5, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatInit(5, AI_01_70E1, $06, $0B, $D08A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatInit(6, AI_01_70E1, $08, $0C, $D098, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatInit(7, AI_01_70E1, $09, $05, $D045, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatInit(8, AI_01_70E1, $03, $06, $D04B, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_41A7)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_4159)
+    End()
+
+SCRIPT_STARTBUTTON_15_4159::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_417E, SCRIPT_15_4022)
+    End()
+
+SCRIPT_15_417E::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_4195)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_4195::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_40A3)
+
+ACTORSCRIPT1_15_41A7::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatScript(0, SCRIPT_15_417E)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    End()
+
+SCRIPT_15_41B6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_41CD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_41E4::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_41FB::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_4212::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_4229::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_4240::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_4257::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_426E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_4285::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_429C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_42AD)
+    ThatScript(3, SCRIPT_15_41CD)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_42AD::
+    End()
+
+SCRIPT_15_42AE::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_42BF)
+    ThatScript(4, SCRIPT_15_41E4)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_42BF::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_42D0)
+    ThatScript(3, SCRIPT_15_41CD)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_42D0::
+    End()
+
+SCRIPT_15_42D1::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_42E2)
+    ThatScript(4, SCRIPT_15_41E4)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_42E2::
+    End()
+
+SCRIPT_15_42E3::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_42F4)
+    ThatScript(3, SCRIPT_15_41B6)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_42F4::
+    End()
+
+SCRIPT_15_42F5::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4306)
+    ThatScript(5, SCRIPT_15_41FB)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4306::
+    End()
+
+SCRIPT_15_4307::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4318)
+    ThatScript(5, SCRIPT_15_4212)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4318::
+    End()
+
+SCRIPT_15_4319::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_432A)
+    ThatScript(6, SCRIPT_15_4229)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_432A::
+    End()
+
+SCRIPT_15_432B::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_433C)
+    ThatScript(7, SCRIPT_15_4257)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_433C::
+    End()
+
+SCRIPT_15_433D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_434E)
+    ThatScript(7, SCRIPT_15_4240)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_434E::
+    End()
+
+SCRIPT_15_434F::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4360)
+    ThatScript(8, SCRIPT_15_426E)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4360::
+    End()
+
+SCRIPT_15_4361::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_43BC)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000001) != c0)#, SCRIPT_15_43F8)
+    Close()
+    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_401E)
+
+SCRIPT_15_43BC::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000001) != c0)#, SCRIPT_15_43F8)
+    Close()
+    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_401E)
+
+SCRIPT_15_43F8::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15E])#, SCRIPT_15_4477)
+    FormatChar(xVARBYTE_00_A15E)
+    LongJumpIf(#(c[xVARBYTE_00_A15E] == c1)#, SCRIPT_15_443D)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_401E)
+
+SCRIPT_15_443D::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_401E)
+
+SCRIPT_15_4477::
+    FormatChar(xVARBYTE_00_A15E)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_401E)
+
+SCRIPT_15_44DB::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_44EC)
+    ThatScript(8, SCRIPT_15_4285)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_44EC::
+    End()
+
+SCRIPT_15_44ED::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_44FE)
+    ThatScript(7, SCRIPT_15_4240)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_44FE::
+    End()
+
+SCRIPT_15_44FF::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_4503::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle2)
+    LoadHotspots(HOTSPOTX_13_4CB9)
+    ThatInit(0, AI_Hero, $01, $08, $D059, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_70E1, $02, $01, $D00D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_45CD)
+    ThatInit(3, AI_01_70E1, $04, $04, $D030, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_45CD)
+    ThatInit(4, AI_01_70E1, $03, $05, $D03A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_45CD)
+    ThatInit(5, AI_01_70E1, $03, $06, $D045, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_45CD)
+    ThatInit(6, AI_01_70E1, $03, $07, $D050, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_45CD)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    SetByte(RAM_00_A129, $00)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_45A8)
+    End()
+
+SCRIPT_STARTBUTTON_15_45A8::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_45DC, SCRIPT_15_402D)
+    End()
+
+ACTORSCRIPT1_15_45CD::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    LongJump(SCRIPT_15_45DC)
+
+SCRIPT_15_45DC::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_45EF)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_45EF::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_4503)
+
+SCRIPT_15_4601::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4612)
+    ThatScript(2, ACTORSCRIPT0_15_4914)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4612::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_4623)
+    ThatScript(6, ACTORSCRIPT0_15_49B5)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_4623::
+    End()
+
+SCRIPT_15_4624::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4635)
+    ThatScript(2, ACTORSCRIPT0_15_4914)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4635::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4646)
+    ThatScript(5, ACTORSCRIPT0_15_4970)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4646::
+    End()
+
+SCRIPT_15_4647::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4658)
+    ThatScript(2, ACTORSCRIPT0_15_4914)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4658::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_4669)
+    ThatScript(4, ACTORSCRIPT0_15_4942)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_4669::
+    End()
+
+SCRIPT_15_466A::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_467B)
+    ThatScript(2, ACTORSCRIPT0_15_4914)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_467B::
+    End()
+
+SCRIPT_15_467C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_468D)
+    ThatScript(6, ACTORSCRIPT0_15_49B5)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_468D::
+    End()
+
+SCRIPT_15_468E::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_469F)
+    ThatScript(5, ACTORSCRIPT0_15_4970)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_469F::
+    End()
+
+SCRIPT_15_46A0::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_46B1)
+    ThatScript(4, ACTORSCRIPT0_15_4942)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_46B1::
+    End()
+
+SCRIPT_15_46B2::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_46C3)
+    ThatScript(2, ACTORSCRIPT0_15_492B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_46C3::
+    End()
+
+SCRIPT_15_46C4::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_46D5)
+    ThatScript(3, ACTORSCRIPT0_15_49FA)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_46D5::
+    End()
+
+SCRIPT_15_46D6::
+    StartSFX0(SFXID_EnemyDie)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle4)
+    LoadHotspots(HOTSPOTX_13_4D43)
+    ThatInit(0, AI_Hero, $0C, $07, $D16A, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatStart(0)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_45A8)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    TransplantTile($06, $0A, $D136, COLLID_HS1C, $24)
+    End()
+
+SCRIPT_15_4712::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_4723)
+    ThatScript(4, ACTORSCRIPT0_15_4959)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_4723::
+    End()
+
+SCRIPT_15_4724::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4735)
+    ThatScript(5, ACTORSCRIPT0_15_4987)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4735::
+    End()
+
+SCRIPT_15_4736::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_4747)
+    ThatScript(6, ACTORSCRIPT0_15_499E)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_4747::
+    End()
+
+SCRIPT_15_4748::
+    End()
+
+SCRIPT_15_4749::
+    End()
+
+SCRIPT_15_474A::
+    End()
+
+SCRIPT_15_474B::
+    End()
+
+SCRIPT_15_474C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_475D)
+    ThatScript(2, ACTORSCRIPT0_15_48FD)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_475D::
+    End()
+
+SCRIPT_15_475E::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_47B9)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000010) != c0)#, SCRIPT_15_47F5)
+    Close()
+    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4029)
+
+SCRIPT_15_47B9::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000010) != c0)#, SCRIPT_15_47F5)
+    Close()
+    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4029)
+
+SCRIPT_15_47F5::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15F])#, SCRIPT_15_4874)
+    FormatChar(xVARBYTE_00_A15F)
+    LongJumpIf(#(c[xVARBYTE_00_A15F] == c1)#, SCRIPT_15_483A)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_4029)
+
+SCRIPT_15_483A::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_4029)
+
+SCRIPT_15_4874::
+    FormatChar(xVARBYTE_00_A15F)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4029)
+
+SCRIPT_15_48D8::
+    End()
+
+SCRIPT_15_48D9::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_48EA)
+    ThatScript(6, ACTORSCRIPT0_15_49CC)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_48EA::
+    End()
+
+SCRIPT_15_48EB::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_48FC)
+    ThatScript(6, ACTORSCRIPT0_15_49E3)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_48FC::
+    End()
+
+ACTORSCRIPT0_15_48FD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+ACTORSCRIPT0_15_4914::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 56)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 56)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+ACTORSCRIPT0_15_492B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+ACTORSCRIPT0_15_4942::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+ACTORSCRIPT0_15_4959::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+ACTORSCRIPT0_15_4970::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+ACTORSCRIPT0_15_4987::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+ACTORSCRIPT0_15_499E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+ACTORSCRIPT0_15_49B5::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+ACTORSCRIPT0_15_49CC::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+ACTORSCRIPT0_15_49E3::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+ACTORSCRIPT0_15_49FA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_4A11::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_4A15::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle3)
+    LoadHotspots(HOTSPOTX_13_4D0E)
+    ThatInit(0, AI_Hero, $04, $07, $D06D, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, AI_01_70E1, $08, $06, $D062, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatInit(4, AI_01_70E1, $01, $05, $D04C, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatInit(5, AI_01_70E1, $09, $0C, $D0BD, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatInit(6, AI_01_70E1, $0A, $0C, $D0BE, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatInit(7, AI_01_70E1, $0B, $02, $D029, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatInit(8, AI_01_70E1, $05, $08, $D07D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4B15)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_4ACB)
+    End()
+
+SCRIPT_STARTBUTTON_15_4ACB::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_4AF0, SCRIPT_15_4038)
+    End()
+
+SCRIPT_15_4AF0::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_4B03)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_4B03::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_4A15)
+
+ACTORSCRIPT1_15_4B15::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    LongJump(SCRIPT_15_4AF0)
+
+SCRIPT_15_4B24::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_4B3B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_4B52::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 64)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 64)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_4B69::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_4B80::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_4B97::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 80)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 80)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_4BAE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 64)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 64)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_4BC5::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_4BDC::
+    StartSFX0(SFXID_EnemyDie)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle4)
+    LoadHotspots(HOTSPOTX_13_4D43)
+    ThatInit(0, AI_Hero, $2D, $05, $D127, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatStart(0)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_4ACB)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+SCRIPT_15_4C11::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_4C6C)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000100) != c0)#, SCRIPT_15_4CA8)
+    Close()
+    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4034)
+
+SCRIPT_15_4C6C::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000100) != c0)#, SCRIPT_15_4CA8)
+    Close()
+    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4034)
+
+SCRIPT_15_4CA8::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A160])#, SCRIPT_15_4D27)
+    FormatChar(xVARBYTE_00_A160)
+    LongJumpIf(#(c[xVARBYTE_00_A160] == c1)#, SCRIPT_15_4CED)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_4034)
+
+SCRIPT_15_4CED::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_4034)
+
+SCRIPT_15_4D27::
+    FormatChar(xVARBYTE_00_A160)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4034)
+
+SCRIPT_15_4D8B::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4D9C)
+    ThatScript(3, SCRIPT_15_4B24)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4D9C::
+    End()
+
+SCRIPT_15_4D9D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_4DAE)
+    ThatScript(4, SCRIPT_15_4B52)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_4DAE::
+    End()
+
+SCRIPT_15_4DAF::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4DC0)
+    ThatScript(3, SCRIPT_15_4B3B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4DC0::
+    End()
+
+SCRIPT_15_4DC1::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4DD2)
+    ThatScript(5, SCRIPT_15_4B69)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4DD2::
+    End()
+
+SCRIPT_15_4DD3::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_4DE4)
+    ThatScript(6, SCRIPT_15_4B80)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_4DE4::
+    End()
+
+SCRIPT_15_4DE5::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_4DF6)
+    ThatScript(7, SCRIPT_15_4B97)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_4DF6::
+    End()
+
+SCRIPT_15_4DF7::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4E08)
+    ThatScript(8, SCRIPT_15_4BAE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4E08::
+    End()
+
+SCRIPT_15_4E09::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_4E1A)
+    ThatScript(3, SCRIPT_15_4B3B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_4E1A::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4E2B)
+    ThatScript(8, SCRIPT_15_4BAE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4E2B::
+    End()
+
+SCRIPT_15_4E2C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_4E3D)
+    ThatScript(5, SCRIPT_15_4B69)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_4E3D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4E4E)
+    ThatScript(8, SCRIPT_15_4BAE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4E4E::
+    End()
+
+SCRIPT_15_4E4F::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_4E60)
+    ThatScript(6, SCRIPT_15_4B80)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_4E60::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4E71)
+    ThatScript(8, SCRIPT_15_4BAE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4E71::
+    End()
+
+SCRIPT_15_4E72::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_4E83)
+    ThatScript(7, SCRIPT_15_4B97)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_4E83::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4E94)
+    ThatScript(8, SCRIPT_15_4BAE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4E94::
+    End()
+
+SCRIPT_15_4E95::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_4EA6)
+    ThatScript(8, SCRIPT_15_4BC5)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_4EA6::
+    End()
+
+SCRIPT_15_4EA7::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_4EAB::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle4)
+    LoadHotspots(HOTSPOTX_13_4D43)
+    ThatInit(0, AI_Hero, $0D, $15, $D427, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, AI_01_70E1, $0C, $12, $D390, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(4, AI_01_70E1, $0E, $11, $D360, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(5, AI_01_70E1, $13, $10, $D333, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(6, AI_01_70E1, $13, $14, $D3FB, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(7, AI_01_70E1, $15, $0F, $D303, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(8, AI_01_70E1, $1B, $11, $D36D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(9, AI_01_70E1, $19, $16, $D465, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(10, AI_01_70E1, $19, $17, $D497, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatInit(11, AI_01_70E1, $18, $19, $D4FA, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_4FF2)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    ThatStart(11)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
+    AndByte(RAM_00_A029, %11111110)
+    SetByte(RAM_00_A129, $00)
+    SetByte(RAM_00_A12A, $00)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_4FA8)
+    End()
+
+SCRIPT_STARTBUTTON_15_4FA8::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_4FCD, SCRIPT_15_4081)
+    End()
+
+SCRIPT_15_4FCD::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_4FE0)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_4FE0::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_4EAB)
+
+ACTORSCRIPT1_15_4FF2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    LongJump(SCRIPT_15_4FCD)
+
+SCRIPT_15_5001::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 72)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 72)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_5018::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 56)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 56)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_502F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_5046::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_505D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_5074::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_508B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_50A2::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_50B9::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_50D0::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_50E7::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_50FE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    End()
+
+SCRIPT_15_5115::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
+    End()
+
+SCRIPT_15_512C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111110)
+    End()
+
+SCRIPT_15_5143::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_519E)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) != c0)#, SCRIPT_15_51DA)
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_406E)
+
+SCRIPT_15_519E::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) != c0)#, SCRIPT_15_51DA)
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_406E)
+
+SCRIPT_15_51DA::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A161])#, SCRIPT_15_5259)
+    FormatChar(xVARBYTE_00_A161)
+    LongJumpIf(#(c[xVARBYTE_00_A161] == c1)#, SCRIPT_15_521F)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_406E)
+
+SCRIPT_15_521F::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_406E)
+
+SCRIPT_15_5259::
+    FormatChar(xVARBYTE_00_A161)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_406E)
+
+SCRIPT_15_52BD::
+    LongJump(SCRIPT_15_4C11)
+
+SCRIPT_15_52C1::
+    LongJump(SCRIPT_15_475E)
+
+SCRIPT_15_52C5::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_52D6)
+    ThatScript(4, SCRIPT_15_5018)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_52D6::
+    End()
+
+SCRIPT_15_52D7::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_52E8)
+    ThatScript(4, SCRIPT_15_5018)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_52E8::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_52F9)
+    ThatScript(6, SCRIPT_15_5074)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_52F9::
+    End()
+
+SCRIPT_15_52FA::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_530B)
+    ThatScript(3, SCRIPT_15_5001)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_530B::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_531C)
+    ThatScript(4, SCRIPT_15_5018)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_531C::
+    End()
+
+SCRIPT_15_531D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_532E)
+    ThatScript(6, SCRIPT_15_5074)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_532E::
+    End()
+
+SCRIPT_15_532F::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_5340)
+    ThatScript(3, SCRIPT_15_5001)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_5340::
+    End()
+
+SCRIPT_15_5341::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_5352)
+    ThatScript(3, SCRIPT_15_5001)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_5352::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_5363)
+    ThatScript(5, SCRIPT_15_505D)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_5363::
+    End()
+
+SCRIPT_15_5364::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_5375)
+    ThatScript(4, SCRIPT_15_502F)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_5375::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_5386)
+    ThatScript(5, SCRIPT_15_505D)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_5386::
+    End()
+
+SCRIPT_15_5387::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5398)
+    ThatScript(7, SCRIPT_15_50B9)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5398::
+    End()
+
+SCRIPT_15_5399::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_53AA)
+    ThatScript(7, SCRIPT_15_50B9)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_53AA::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_53BB)
+    ThatScript(8, SCRIPT_15_50D0)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_53BB::
+    End()
+
+SCRIPT_15_53BC::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_53CD)
+    ThatScript(4, SCRIPT_15_502F)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_53CD::
+    End()
+
+SCRIPT_15_53CE::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_53DF)
+    ThatScript(5, SCRIPT_15_5046)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_53DF::
+    End()
+
+SCRIPT_15_53E0::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_53F1)
+    ThatScript(7, SCRIPT_15_50A2)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_53F1::
+    End()
+
+SCRIPT_15_53F2::
+    StartSFX0(SFXID_EnemyDie)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatInit(0, Call_001_4AF8, $17, $05, $D111, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    PalClearAnim(0, 16, WHITE_A)
+    CameraSeekActor(RAM_00_C189, 4)
+    PalRefresh(0, 16)
+    ThatAI(0, AI_Hero)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_15_541A::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_542B)
+    ThatScript(8, SCRIPT_15_50E7)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_542B::
+    End()
+
+SCRIPT_15_542C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_543D)
+    ThatScript(8, SCRIPT_15_50D0)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_543D::
+    End()
+
+SCRIPT_15_543E::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_544F)
+    ThatScript(6, SCRIPT_15_508B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_544F::
+    End()
+
+SCRIPT_15_5450::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5461)
+    ThatScript(6, SCRIPT_15_508B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5461::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5472)
+    ThatScript(9, SCRIPT_15_50FE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5472::
+    End()
+
+SCRIPT_15_5473::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5484)
+    ThatScript(6, SCRIPT_15_508B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5484::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_15_5495)
+    ThatScript(10, SCRIPT_15_5115)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+
+SCRIPT_15_5495::
+    End()
+
+SCRIPT_15_5496::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_54A7)
+    ThatScript(9, SCRIPT_15_50FE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_54A7::
+    End()
+
+SCRIPT_15_54A8::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_15_54B9)
+    ThatScript(10, SCRIPT_15_5115)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+
+SCRIPT_15_54B9::
+    End()
+
+SCRIPT_15_54BA::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_54CB)
+    ThatScript(11, SCRIPT_15_512C)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_54CB::
+    End()
+
+SCRIPT_15_54CC::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_15_54DD)
+    ThatScript(10, SCRIPT_15_5115)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+
+SCRIPT_15_54DD::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_54EE)
+    ThatScript(11, SCRIPT_15_512C)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_54EE::
+    End()
+
+SCRIPT_15_54EF::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5500)
+    ThatScript(9, SCRIPT_15_50FE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5500::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_5511)
+    ThatScript(11, SCRIPT_15_512C)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_5511::
+    End()
+
+SCRIPT_15_5512::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_5523)
+    ThatScript(11, SCRIPT_15_512C)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_5523::
+    End()
+
+SCRIPT_15_5524::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000010) == c0)#, SCRIPT_15_5537)
+    ThatDelete(0)
+
+SCRIPT_15_5537::
+    Write("You found⭍a SECRET!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_558A)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) != c0)#, SCRIPT_15_55C6)
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_403F)
+
+SCRIPT_15_558A::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) != c0)#, SCRIPT_15_55C6)
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_403F)
+
+SCRIPT_15_55C6::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A161])#, SCRIPT_15_5645)
+    FormatChar(xVARBYTE_00_A161)
+    LongJumpIf(#(c[xVARBYTE_00_A161] == c1)#, SCRIPT_15_560B)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_403F)
+
+SCRIPT_15_560B::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_403F)
+
+SCRIPT_15_5645::
+    FormatChar(xVARBYTE_00_A161)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_403F)
+
+SCRIPT_15_56A9::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_56BA)
+    ThatScript(7, SCRIPT_15_50B9)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_56BA::
+    End()
+
+SCRIPT_15_56BB::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_56BF::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Underneath_Puzzle5)
+    LoadHotspots(HOTSPOTX_13_4DB8)
+    ThatInit(0, AI_Hero, $01, $12, $D1C3, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, AI_01_70E1, $05, $11, $D1AE, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(4, AI_01_70E1, $0E, $16, $D234, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(5, AI_01_70E1, $0F, $15, $D21C, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(6, AI_01_70E1, $13, $0B, $D126, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(7, AI_01_70E1, $14, $0C, $D140, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(8, AI_01_70E1, $15, $0D, $D15A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(9, AI_01_70E1, $16, $0E, $D174, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(10, AI_01_70E1, $14, $05, $D091, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(11, AI_01_70E1, $10, $06, $D0A6, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(18, AI_01_70E1, $10, $04, $D074, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatInit(19, AI_01_70E1, $0C, $05, $D089, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_15_5828)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    ThatStart(11)
+    ThatStart(18)
+    ThatStart(19)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
+    AndByte(RAM_00_A029, %11111110)
+    AndByte(RAM_00_A029, %11111101)
+    AndByte(RAM_00_A029, %11111011)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_57DE)
+    End()
+
+SCRIPT_STARTBUTTON_15_57DE::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_5803, SCRIPT_15_4098)
+    End()
+
+SCRIPT_15_5803::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_5816)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_5816::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_56BF)
+
+ACTORSCRIPT1_15_5828::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    LongJump(SCRIPT_15_5803)
+
+SCRIPT_15_5837::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_584E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_5865::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    End()
+
+SCRIPT_15_587C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 32)
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_5893::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    End()
+
+SCRIPT_15_58AA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_58C1::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    End()
+
+SCRIPT_15_58D8::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_58EF::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    End()
+
+SCRIPT_15_5906::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_591D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    End()
+
+SCRIPT_15_5934::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_594B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_5962::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    End()
+
+SCRIPT_15_5979::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    End()
+
+SCRIPT_15_5990::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    End()
+
+SCRIPT_15_59A7::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    End()
+
+SCRIPT_15_59BE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
+    End()
+
+SCRIPT_15_59D5::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111110)
+    End()
+
+SCRIPT_15_59EC::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111110)
+    End()
+
+SCRIPT_15_5A03::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111101)
+    End()
+
+SCRIPT_15_5A1A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111101)
+    End()
+
+SCRIPT_15_5A31::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(RAM_00_A029, %11111011)
+    End()
+
+SCRIPT_15_5A48::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_5AA3)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00010000) != c0)#, SCRIPT_15_5ADF)
+    Close()
+    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4088)
+
+SCRIPT_15_5AA3::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00010000) != c0)#, SCRIPT_15_5ADF)
+    Close()
+    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4088)
+
+SCRIPT_15_5ADF::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A162])#, SCRIPT_15_5B5E)
+    FormatChar(xVARBYTE_00_A162)
+    LongJumpIf(#(c[xVARBYTE_00_A162] == c1)#, SCRIPT_15_5B24)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_4088)
+
+SCRIPT_15_5B24::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_4088)
+
+SCRIPT_15_5B5E::
+    FormatChar(xVARBYTE_00_A162)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_4088)
+
+SCRIPT_15_5BC2::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_5BD3)
+    ThatScript(3, SCRIPT_15_5837)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_5BD3::
+    End()
+
+SCRIPT_15_5BD4::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_5BE5)
+    ThatScript(3, SCRIPT_15_5865)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_5BE5::
+    End()
+
+SCRIPT_15_5BE6::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_15_5BF7)
+    ThatScript(3, SCRIPT_15_584E)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+
+SCRIPT_15_5BF7::
+    End()
+
+SCRIPT_15_5BF8::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_5C09)
+    ThatScript(5, SCRIPT_15_58C1)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_5C09::
+    End()
+
+SCRIPT_15_5C0A::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_5C1B)
+    ThatScript(4, SCRIPT_15_587C)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_5C1B::
+    End()
+
+SCRIPT_15_5C1C::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_15_5C2D)
+    ThatScript(4, SCRIPT_15_5893)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+
+SCRIPT_15_5C2D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_5C3E)
+    ThatScript(5, SCRIPT_15_58C1)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_5C3E::
+    End()
+
+SCRIPT_15_5C3F::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_15_5C50)
+    ThatScript(5, SCRIPT_15_58AA)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+
+SCRIPT_15_5C50::
+    End()
+
+SCRIPT_15_5C51::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5C62)
+    ThatScript(6, SCRIPT_15_58D8)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5C62::
+    End()
+
+SCRIPT_15_5C63::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5C74)
+    ThatScript(6, SCRIPT_15_58EF)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5C74::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5C85)
+    ThatScript(7, SCRIPT_15_591D)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5C85::
+    End()
+
+SCRIPT_15_5C86::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5C97)
+    ThatScript(7, SCRIPT_15_591D)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5C97::
+    End()
+
+SCRIPT_15_5C98::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5CA9)
+    ThatScript(7, SCRIPT_15_5906)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5CA9::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5CBA)
+    ThatScript(8, SCRIPT_15_594B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5CBA::
+    End()
+
+SCRIPT_15_5CBB::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5CCC)
+    ThatScript(6, SCRIPT_15_58EF)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5CCC::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5CDD)
+    ThatScript(8, SCRIPT_15_594B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5CDD::
+    End()
+
+SCRIPT_15_5CDE::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5CEF)
+    ThatScript(8, SCRIPT_15_5934)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5CEF::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5D00)
+    ThatScript(9, SCRIPT_15_5979)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5D00::
+    End()
+
+SCRIPT_15_5D01::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5D12)
+    ThatScript(9, SCRIPT_15_5979)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5D12::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5D23)
+    ThatScript(7, SCRIPT_15_5906)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5D23::
+    End()
+
+SCRIPT_15_5D24::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5D35)
+    ThatScript(9, SCRIPT_15_5979)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5D35::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5D46)
+    ThatScript(6, SCRIPT_15_58EF)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5D46::
+    End()
+
+SCRIPT_15_5D47::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5D58)
+    ThatScript(9, SCRIPT_15_5990)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5D58::
+    End()
+
+SCRIPT_15_5D59::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5D6A)
+    ThatScript(8, SCRIPT_15_5934)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5D6A::
+    End()
+
+SCRIPT_15_5D6B::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_15_5D7C)
+    ThatScript(7, SCRIPT_15_5906)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+
+SCRIPT_15_5D7C::
+    End()
+
+SCRIPT_15_5D7D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_15_5D8E)
+    ThatScript(6, SCRIPT_15_58EF)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+
+SCRIPT_15_5D8E::
+    End()
+
+SCRIPT_15_5D8F::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5DA0)
+    ThatScript(9, SCRIPT_15_59A7)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5DA0::
+    End()
+
+SCRIPT_15_5DA1::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_15_5DB2)
+    ThatScript(10, SCRIPT_15_59BE)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+
+SCRIPT_15_5DB2::
+    End()
+
+SCRIPT_15_5DB3::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000010)#, SCRIPT_15_5DC4)
+    ThatScript(18, SCRIPT_15_5A03)
+    OrByte(RAM_00_A029, %00000010)
+
+SCRIPT_15_5DC4::
+    End()
+
+SCRIPT_15_5DC5::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_5DD6)
+    ThatScript(11, SCRIPT_15_59EC)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_5DD6::
+    End()
+
+SCRIPT_15_5DD7::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000010)#, SCRIPT_15_5DE8)
+    ThatScript(18, SCRIPT_15_5A1A)
+    OrByte(RAM_00_A029, %00000010)
+
+SCRIPT_15_5DE8::
+    End()
+
+SCRIPT_15_5DE9::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_15_5DFA)
+    ThatScript(19, SCRIPT_15_5A31)
+    OrByte(RAM_00_A029, %00000100)
+
+SCRIPT_15_5DFA::
+    End()
+
+SCRIPT_15_5DFB::
+    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_15_5E0C)
+    ThatScript(11, SCRIPT_15_59D5)
+    OrByte(RAM_00_A029, %00000001)
+
+SCRIPT_15_5E0C::
+    End()
+
+SCRIPT_15_5E0D::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5E1E)
+    ThatScript(8, SCRIPT_15_5962)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5E1E::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_15_5E2F)
+    ThatScript(9, SCRIPT_15_59A7)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+
+SCRIPT_15_5E2F::
+    End()
+
+SCRIPT_15_5E30::
+    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_15_5E41)
+    ThatScript(8, SCRIPT_15_594B)
+    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+
+SCRIPT_15_5E41::
+    End()
+
+SCRIPT_15_5E42::
+    StartSong(SONGID_Forest)
+    LongJump(SCRIPT_15_5EEE)
+
+SCRIPT_15_5E48::
+    StartSong(SONGID_Forest)
+    LongJump(SCRIPT_15_623E)
+
+SCRIPT_15_5E4E::
+    StartSong(SONGID_Forest)
+    LongJump(SCRIPT_15_690F)
+
+SCRIPT_15_5E54::
+    StartSong(SONGID_Forest)
+    LongJump(SCRIPT_15_6576)
+
+SCRIPT_15_5E5A::
+    StartSong(SONGID_Forest)
+    LongJump(SCRIPT_15_6D97)
+
+SCRIPT_15_5E60::
+    OrByte(MATHADDRESS_00_A03B, %00000001)
+
+SCRIPT_15_5E64::
+    HeroToDoor($0B, $03)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5E6B::
+    OrByte(MATHADDRESS_00_A03B, %00000010)
+
+SCRIPT_15_5E6F::
+    HeroToDoor($18, $06)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5E76::
+    OrByte(MATHADDRESS_00_A03B, %00000100)
+
+SCRIPT_15_5E7A::
+    HeroToDoor($11, $0C)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5E81::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A04B], c%00000010)#, SCRIPT_15_5EA3)
+    OrByte(MATHADDRESS_00_A03B, %00000100)
+    OrByte(MATHADDRESS_00_A03B, %00100000)
+    OrByte(MATHADDRESS_00_A04B, %00000010)
+    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_15_5E81)
+    LongJump(SCRIPT_0E_6C73)
+
+SCRIPT_15_5EA3::
+    OrByte(MATHADDRESS_00_A03B, %00100000)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) == c0)#, SCRIPT_15_5EBD)
+    OrByte(MATHADDRESS_00_A03B, %00000100)
+    HeroToDoor($11, $0C)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5EBD::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A03B], c%00001000)#, SCRIPT_15_5ED0)
+    OrByte(MATHADDRESS_00_A03B, %00001000)
+    HeroToDoor($09, $14)
+    LongJump(SCRIPT_0E_6D51)
+
+SCRIPT_15_5ED0::
+    HeroToDoor($09, $14)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5ED7::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A03B], c%00010000)#, SCRIPT_15_5EE7)
+    OrByte(MATHADDRESS_00_A03B, %00010000)
+    LongJump(SCRIPT_0E_6B48)
+
+SCRIPT_15_5EE7::
+    HeroToDoor($03, $09)
+    LongJump(SCRIPT_0E_6A67)
+
+SCRIPT_15_5EEE::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_5EF2::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Paradwyn_Puzzle1)
+    LoadHotspots(HOTSPOTX_13_4BB1)
+    ThatInit(0, AI_Hero, $05, $0D, $D116, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_InvisibleLaser, $09, $10, $D159, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_5FB0)
+    ThatInit(3, AI_InvisibleLaser, $10, $0C, $D10C, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_5FB0)
+    ThatInit(4, AI_InvisibleLaser, $09, $07, $D09C, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_5FB0)
+    ThatInit(5, AI_01_70E1, $09, $0B, $D0F0, $00, ACTORSCRIPT0_15_6020, ACTORSCRIPT1_15_6032)
+    ThatInit(6, AI_01_70E1, $0D, $0D, $D11E, $00, ACTORSCRIPT0_15_6020, ACTORSCRIPT1_15_6032)
+    AndByte(RAM_00_A02B, %11111011)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A02A, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_5F87)
+    End()
+
+SCRIPT_STARTBUTTON_15_5F87::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    OrByte(RAM_00_A02B, %00000100)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_6047, SCRIPT_15_5E64)
+    End()
+
+ACTORSCRIPT1_15_5FB0::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_5FE0)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_15_5FF0)
+        Case(1, SCRIPT_15_5FFC)
+        Case(2, SCRIPT_15_6008)
+        Case(3, SCRIPT_15_6014)
+    }
+    End()
+
+ACTORSCRIPT0_15_5FE0::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_15_6047)
+
+SCRIPT_15_5FEA::
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6047)
+
+SCRIPT_15_5FF0::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6047)
+
+SCRIPT_15_5FFC::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6047)
+
+SCRIPT_15_6008::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6047)
+
+SCRIPT_15_6014::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6047)
+
+ACTORSCRIPT0_15_6020::
+    ThisWaitTile($FE)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
+    ThisDelete()
+
+ACTORSCRIPT1_15_6032::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_6041)
+    End()
+
+ACTORSCRIPT0_15_6041::
+    ThisSetAnimSingle(SCRIPT_14_60E5)
+    Delay(16)
+
+SCRIPT_15_6047::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_606C)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_606C::
+    LongJump(SCRIPT_15_5EF2)
+
+SCRIPT_15_6070::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_60CB)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000001) != c0)#, SCRIPT_15_6107)
+    Close()
+    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E60)
+
+SCRIPT_15_60CB::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000001) != c0)#, SCRIPT_15_6107)
+    Close()
+    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E60)
+
+SCRIPT_15_6107::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A187])#, SCRIPT_15_6186)
+    FormatChar(xVARBYTE_00_A187)
+    LongJumpIf(#(c[xVARBYTE_00_A187] == c1)#, SCRIPT_15_614C)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5E60)
+
+SCRIPT_15_614C::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5E60)
+
+SCRIPT_15_6186::
+    FormatChar(xVARBYTE_00_A187)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E60)
+
+SCRIPT_15_61EA::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0B, $0B, $D0F2, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_61FF::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0B, $12, $D185, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_6214::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0C, $0D, $D11D, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_6229::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0D, $04, $D061, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_623E::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_6242::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Paradwyn_Puzzle2)
+    LoadHotspots(HOTSPOTX_13_4BC6)
+    ThatInit(0, AI_Hero, $03, $02, $D01F, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_InvisibleLaser, $09, $07, $D06B, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_62EF)
+    ThatInit(3, AI_InvisibleLaser, $09, $0A, $D095, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_62EF)
+    ThatInit(4, AI_InvisibleLaser, $0C, $0C, $D0B4, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_62EF)
+    ThatInit(5, AI_01_70E1, $01, $02, $D01D, $00, ACTORSCRIPT0_15_635F, ACTORSCRIPT1_15_6371)
+    AndByte(RAM_00_A02B, %11111011)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A02A, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_62C6)
+    End()
+
+SCRIPT_STARTBUTTON_15_62C6::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    OrByte(RAM_00_A02B, %00000100)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_6386, SCRIPT_15_5E6F)
+    End()
+
+ACTORSCRIPT1_15_62EF::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_631F)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_15_632F)
+        Case(1, SCRIPT_15_633B)
+        Case(2, SCRIPT_15_6347)
+        Case(3, SCRIPT_15_6353)
+    }
+    End()
+
+ACTORSCRIPT0_15_631F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_15_6386)
+
+SCRIPT_15_6329::
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6386)
+
+SCRIPT_15_632F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6386)
+
+SCRIPT_15_633B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6386)
+
+SCRIPT_15_6347::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6386)
+
+SCRIPT_15_6353::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_6386)
+
+ACTORSCRIPT0_15_635F::
+    ThisWaitTile($FE)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
+    ThisDelete()
+
+ACTORSCRIPT1_15_6371::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_6380)
+    End()
+
+ACTORSCRIPT0_15_6380::
+    ThisSetAnimSingle(SCRIPT_14_60E5)
+    Delay(16)
+
+SCRIPT_15_6386::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_63AB)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_63AB::
+    LongJump(SCRIPT_15_6242)
+
+SCRIPT_15_63AF::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_640A)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000010) != c0)#, SCRIPT_15_6446)
+    Close()
+    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E6B)
+
+SCRIPT_15_640A::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000010) != c0)#, SCRIPT_15_6446)
+    Close()
+    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E6B)
+
+SCRIPT_15_6446::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A188])#, SCRIPT_15_64C5)
+    FormatChar(xVARBYTE_00_A188)
+    LongJumpIf(#(c[xVARBYTE_00_A188] == c1)#, SCRIPT_15_648B)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5E6B)
+
+SCRIPT_15_648B::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5E6B)
+
+SCRIPT_15_64C5::
+    FormatChar(xVARBYTE_00_A188)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E6B)
+
+SCRIPT_15_6529::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $08, $02, $D024, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_653E::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0A, $03, $D034, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_6553::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $07, $09, $D085, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6568)
+
+SCRIPT_15_6568::
+    CameraSeekActor(RAM_00_C189, 4)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, ACTORSCRIPT0_14_5E57)
+    End()
+
+SCRIPT_15_6576::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_657A::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Paradwyn_Puzzle4)
+    LoadHotspots(HOTSPOTX_13_4BD7)
+    ThatInit(0, AI_Hero, $07, $02, $D029, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_InvisibleLaser, $05, $08, $D08D, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_6649)
+    ThatInit(3, AI_InvisibleLaser, $08, $05, $D05D, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_6649)
+    ThatInit(4, AI_InvisibleLaser, $0B, $08, $D093, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_6649)
+    ThatInit(5, AI_InvisibleLaser, $0A, $0C, $D0D6, $00, SCRIPT_19_46E7, ACTORSCRIPT1_15_6649)
+    ThatInit(6, AI_01_70E1, $07, $05, $D05C, $00, ACTORSCRIPT0_15_66B9, ACTORSCRIPT1_15_66CB)
+    ThatInit(7, AI_01_70E1, $05, $09, $D09E, $00, ACTORSCRIPT0_15_66B9, ACTORSCRIPT1_15_66CB)
+    AndByte(RAM_00_A02B, %11111011)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(RAM_00_A02A, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_6620)
+    End()
+
+SCRIPT_STARTBUTTON_15_6620::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    OrByte(RAM_00_A02B, %00000100)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_66E0, SCRIPT_15_5ED0)
+    End()
+
+ACTORSCRIPT1_15_6649::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_6679)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_15_6689)
+        Case(1, SCRIPT_15_6695)
+        Case(2, SCRIPT_15_66A1)
+        Case(3, SCRIPT_15_66AD)
+    }
+    End()
+
+ACTORSCRIPT0_15_6679::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_15_66E0)
+
+SCRIPT_15_6683::
+    ThatDelete(0)
+    LongJump(SCRIPT_15_66E0)
+
+SCRIPT_15_6689::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_66E0)
+
+SCRIPT_15_6695::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_66E0)
+
+SCRIPT_15_66A1::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_66E0)
+
+SCRIPT_15_66AD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_15_66E0)
+
+ACTORSCRIPT0_15_66B9::
+    ThisWaitTile($FE)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
+    ThisDelete()
+
+ACTORSCRIPT1_15_66CB::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_15_66DA)
+    End()
+
+ACTORSCRIPT0_15_66DA::
+    ThisSetAnimSingle(SCRIPT_14_60E5)
+    Delay(16)
+
+SCRIPT_15_66E0::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_6705)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_6705::
+    LongJump(SCRIPT_15_657A)
+
+SCRIPT_15_6709::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_6764)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00001000) != c0)#, SCRIPT_15_67A0)
+    Close()
+    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5EBD)
+
+SCRIPT_15_6764::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00001000) != c0)#, SCRIPT_15_67A0)
+    Close()
+    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5EBD)
+
+SCRIPT_15_67A0::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A189])#, SCRIPT_15_681F)
+    FormatChar(xVARBYTE_00_A189)
+    LongJumpIf(#(c[xVARBYTE_00_A189] == c1)#, SCRIPT_15_67E5)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5EBD)
+
+SCRIPT_15_67E5::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5EBD)
+
+SCRIPT_15_681F::
+    FormatChar(xVARBYTE_00_A189)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5EBD)
+
+SCRIPT_15_6883::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $06, $02, $D028, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_6898::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $02, $08, $D08A, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_68AD::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $03, $05, $D058, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_68C2::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0A, $02, $D02C, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_68D7::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0F, $09, $D0A8, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_68EC::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $08, $0B, $D0C3, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    LongJump(SCRIPT_15_6901)
+
+SCRIPT_15_6901::
+    CameraSeekActor(RAM_00_C189, 4)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, ACTORSCRIPT0_14_5E57)
+    End()
+
+SCRIPT_15_690F::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_6913::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Paradwyn_Puzzle3)
+    LoadHotspots(HOTSPOTX_13_4BF4)
+    LoadTriggers(TRIGGERX_13_4C01)
+    LoadUnkspot(UNKSPOTX_13_4C12)
+    ThatInit(0, AI_Hero, $06, $07, $D164, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, Call_001_4AF8, $16, $2E, $D912, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, Call_001_4AF8, $1B, $0E, $D2D7, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(4, Call_001_4AF8, $16, $1B, $D55C, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(5, Call_001_4AF8, $2B, $1F, $D639, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    LoadSingleBitmap($40, BITMAP_0A_7413, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    SetByte(RAM_00_A128, $00)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_69A9)
+    End()
+
+SCRIPT_STARTBUTTON_15_69A9::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_69CE, SCRIPT_15_5E7A)
+    End()
+
+SCRIPT_15_69CE::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_69E5)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_69E5::
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_6913)
+
+SCRIPT_15_69F3::
+    ThatDelete(0)
+    LongJumpIf(#(c[RAM_00_A128] == c4)#, SCRIPT_15_6B77)
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_6A58)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) != c0)#, SCRIPT_15_6A94)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E76)
+
+SCRIPT_15_6A58::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) != c0)#, SCRIPT_15_6A94)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E76)
+
+SCRIPT_15_6A94::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18A])#, SCRIPT_15_6B13)
+    FormatChar(xVARBYTE_00_A18A)
+    LongJumpIf(#(c[xVARBYTE_00_A18A] == c1)#, SCRIPT_15_6AD9)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5E76)
+
+SCRIPT_15_6AD9::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5E76)
+
+SCRIPT_15_6B13::
+    FormatChar(xVARBYTE_00_A18A)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E76)
+
+SCRIPT_15_6B77::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍a SECRET!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_6BD2)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) != c0)#, SCRIPT_15_6C0E)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E81)
+
+SCRIPT_15_6BD2::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) != c0)#, SCRIPT_15_6C0E)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E81)
+
+SCRIPT_15_6C0E::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18A])#, SCRIPT_15_6C8D)
+    FormatChar(xVARBYTE_00_A18A)
+    LongJumpIf(#(c[xVARBYTE_00_A18A] == c1)#, SCRIPT_15_6C53)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5E81)
+
+SCRIPT_15_6C53::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5E81)
+
+SCRIPT_15_6C8D::
+    FormatChar(xVARBYTE_00_A18A)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5E81)
+
+SCRIPT_15_6CF1::
+    StartSFX0(SFXID_EnemyDie)
+    ThatDelete(0)
+    ThatInit(0, AI_Hero, $06, $06, $D132, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    CameraSeekActor(RAM_00_C189, 8)
+    ThatStart(0)
+    End()
+
+SCRIPT_15_6D0B::
+    VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
+    SetScriptScroll(SCRIPT_19_4690)
+    WaitEventText(2)
+    LongJumpIf(#(c[RAM_00_A128] != c4)#, SCRIPT_15_6D2A)
+    SetScriptScroll(SCRIPT_19_46A7)
+    WaitEventText(2)
+
+SCRIPT_15_6D2A::
+    End()
+
+SCRIPT_15_6D2B::
+    TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D1B8)
+    StartSFX0(SFXID_PhysicalAttack)
+    LongJump(SCRIPT_15_6D0B)
+
+SCRIPT_15_6D3B::
+    TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D5EB)
+    StartSFX0(SFXID_PhysicalAttack)
+    LongJump(SCRIPT_15_6D0B)
+
+SCRIPT_15_6D4B::
+    TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D8D4)
+    StartSFX0(SFXID_PhysicalAttack)
+    LongJump(SCRIPT_15_6D0B)
+
+SCRIPT_15_6D5B::
+    TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D924)
+    StartSFX0(SFXID_PhysicalAttack)
+    LongJump(SCRIPT_15_6D0B)
+
+SCRIPT_15_6D6B::
+    StartSFX0(SFXID_Vortex)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_5F41)
+    Delay(32)
+    ThatScript(0, SCRIPT_14_5F51)
+    Delay(64)
+    LongJump(SCRIPT_15_69CE)
+
+SCRIPT_15_6D87::
+    StartSFX0(SFXID_Earthquake)
+
+SCRIPT_15_6D89::
+    ScrollMap() {
+        Move(2, 2, 2)
+    }
+    ScrollMap() {
+        Move(2, -2, -2)
+    }
+    LongJump(SCRIPT_15_6D89)
+
+SCRIPT_15_6D97::
+    SetByte(xNumberOfAttempts, $01)
+
+SCRIPT_15_6D9B::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Paradwyn_Puzzle5)
+    LoadHotspots(HOTSPOTX_13_4C17)
+    LoadTriggers(TRIGGERX_13_4C25)
+    LoadUnkspot(UNKSPOTX_13_4C20)
+    LoadMapMask(METAMAP_MASK_2F_628A, COLLMAP_MASK_2A_7FE4)
+    ThatInit(0, AI_Hero, $02, $07, $D1C2, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, Call_001_4AF8, $03, $10, $D403, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, Call_001_4AF8, $08, $05, $D148, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(4, Call_001_4AF8, $0F, $03, $D0CF, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(5, Call_001_4AF8, $18, $0F, $D3D8, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(6, Call_001_4AF8, $23, $03, $D0E3, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(7, Call_001_4AF8, $22, $10, $D422, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    ThatInit(9, Call_001_4AF8, $31, $0F, $D3F1, $00, ACTORSCRIPT0_11_7476, ACTORSCRIPT1_19_46E8)
+    LoadSingleBitmap($40, BITMAP_0A_7413, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(9)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    SetByte(RAM_00_A128, $03)
+    SetByte(RAM_00_A133, $00)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    AndByte(RAM_00_A02A, %11111110)
+    AndByte(RAM_00_A02A, %11111101)
+    OrByte(RAM_00_A02A, %00000100)
+    OrByte(RAM_00_A02A, %00010000)
+    OrByte(RAM_00_A02A, %00100000)
+    OrByte(RAM_00_A02A, %01000000)
+    AndByte(RAM_00_A02A, %01111111)
+    OrByte(RAM_00_A02B, %00000001)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_15_6E97)
+    End()
+
+SCRIPT_STARTBUTTON_15_6E97::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_15_6EBC, SCRIPT_15_5EE7)
+    End()
+
+SCRIPT_15_6EBC::
+    ThisSetAnimSingle(SCRIPT_19_46E7)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_15_6ED3)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+SCRIPT_15_6ED3::
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(SCRIPT_15_6D9B)
+
+SCRIPT_15_6EE1::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_15_6F3C)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00010000) != c0)#, SCRIPT_15_6F78)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5ED7)
+
+SCRIPT_15_6F3C::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00010000) != c0)#, SCRIPT_15_6F78)
+    Close()
+    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5ED7)
+
+SCRIPT_15_6F78::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18B])#, SCRIPT_15_6FF7)
+    FormatChar(xVARBYTE_00_A18B)
+    LongJumpIf(#(c[xVARBYTE_00_A18B] == c1)#, SCRIPT_15_6FBD)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(SCRIPT_15_5ED7)
+
+SCRIPT_15_6FBD::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(SCRIPT_15_5ED7)
+
+SCRIPT_15_6FF7::
+    FormatChar(xVARBYTE_00_A18B)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    LongJump(SCRIPT_15_5ED7)
+
+SCRIPT_15_705B::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00000001)#, SCRIPT_15_7074)
+    OrByte(RAM_00_A02A, %00000001)
+    TransplantMapMask($D041, $01, $03, $D04C, $01, $0C)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7074::
+    AndByte(RAM_00_A02A, %11111110)
+    TransplantMapMask($D042, $01, $03, $D04C, $01, $0C)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7085::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00000010)#, SCRIPT_15_709E)
+    OrByte(RAM_00_A02A, %00000010)
+    TransplantMapMask($D041, $01, $03, $D3C6, $0F, $06)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_709E::
+    AndByte(RAM_00_A02A, %11111101)
+    TransplantMapMask($D042, $01, $03, $D3C6, $0F, $06)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_70AF::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00000100)#, SCRIPT_15_70C8)
+    OrByte(RAM_00_A02A, %00000100)
+    TransplantMapMask($D041, $01, $03, $D352, $0D, $12)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_70C8::
+    AndByte(RAM_00_A02A, %11111011)
+    TransplantMapMask($D042, $01, $03, $D352, $0D, $12)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_70D9::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00010000)#, SCRIPT_15_70F2)
+    OrByte(RAM_00_A02A, %00010000)
+    TransplantMapMask($D041, $01, $03, $D31F, $0C, $1F)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_70F2::
+    AndByte(RAM_00_A02A, %11101111)
+    TransplantMapMask($D042, $01, $03, $D31F, $0C, $1F)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7103::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00100000)#, SCRIPT_15_711C)
+    OrByte(RAM_00_A02A, %00100000)
+    TransplantMapMask($D041, $01, $03, $D21F, $08, $1F)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_711C::
+    AndByte(RAM_00_A02A, %11011111)
+    TransplantMapMask($D042, $01, $03, $D21F, $08, $1F)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_712D::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%01000000)#, SCRIPT_15_7146)
+    OrByte(RAM_00_A02A, %01000000)
+    TransplantMapMask($D043, $03, $01, $D1E7, $07, $27)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7146::
+    AndByte(RAM_00_A02A, %10111111)
+    TransplantMapMask($D083, $03, $01, $D1E7, $07, $27)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7157::
+    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%10000000)#, SCRIPT_15_7170)
+    OrByte(RAM_00_A02A, %10000000)
+    TransplantMapMask($D043, $03, $01, $D12B, $04, $2B)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7170::
+    AndByte(RAM_00_A02A, %01111111)
+    TransplantMapMask($D083, $03, $01, $D12B, $04, $2B)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_7181::
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000001)#, SCRIPT_15_719A)
+    OrByte(RAM_00_A02B, %00000001)
+    TransplantMapMask($D041, $01, $03, $D36E, $0D, $2E)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_719A::
+    AndByte(RAM_00_A02B, %11111110)
+    TransplantMapMask($D042, $01, $03, $D36E, $0D, $2E)
+    LongJump(SCRIPT_15_71AB)
+
+SCRIPT_15_71AB::
+    SetEventText(1)
+    End()
+
+SCRIPT_15_71AE::
+    TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D242)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $01)
+    SetScriptScroll(SCRIPT_15_72C9)
+    WaitEventText(2)
+    SetScriptScroll(SCRIPT_15_70AF)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_712D)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7181)
+    SetByte(RAM_00_A128, $06)
+    LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
+
+SCRIPT_15_71DC::
+    TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D40E)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $02)
+    SetScriptScroll(SCRIPT_15_72C9)
+    WaitEventText(2)
+    SetScriptScroll(SCRIPT_15_7085)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7103)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7157)
+    SetByte(RAM_00_A128, $01)
+    LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
+
+SCRIPT_15_720A::
+    TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D1D8)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $03)
+    SetScriptScroll(SCRIPT_15_72C9)
+    WaitEventText(2)
+    SetScriptScroll(SCRIPT_15_705B)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7085)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_712D)
+    SetByte(RAM_00_A128, $05)
+    LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
+
+SCRIPT_15_7238::
+    TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D2E7)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $04)
+    SetScriptScroll(SCRIPT_15_72C9)
+    WaitEventText(2)
+    SetScriptScroll(SCRIPT_15_705B)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7085)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_7157)
+    SetByte(RAM_00_A128, $02)
+    LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
+
+SCRIPT_15_7266::
+    TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D137)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $05)
+    SetScriptScroll(SCRIPT_15_72C9)
+    WaitEventText(2)
+    SetScriptScroll(SCRIPT_15_70AF)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_70D9)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_15_712D)
+    SetByte(RAM_00_A128, $04)
+    LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
+
+SCRIPT_15_7294::
+    TriggerOnce(xBIT_00_A028_5, SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D3B6)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(RAM_00_A133, $06)
+    SetScriptScroll(SCRIPT_15_7181)
+    WaitEventText(1)
+    LongJumpIf(#(c[RAM_00_A128] == not c[RAM_00_A133])#, SCRIPT_19_46C0)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    TransplantTile($10, $38, $D438, COLLID_HS00, $DA)
+    LongJump(SCRIPT_19_46A7)
+
+SCRIPT_15_72C9::
+    LongJumpIf(#(c[RAM_00_A128] == c[RAM_00_A133])#, SCRIPT_15_72D8)
+    LongJump(SCRIPT_19_46C0)
+
+SCRIPT_15_72D8::
+    LongJump(SCRIPT_19_46A7)
+
+SCRIPT_15_72DC::
+    StartSFX0(SFXID_Vortex)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_5F41)
+    Delay(32)
+    ThatScript(0, SCRIPT_14_5F51)
+    Delay(64)
+    LongJump(SCRIPT_15_6EBC)

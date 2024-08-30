@@ -1,0 +1,238 @@
+
+SCRIPT_14_7918::
+    SongFadeOut(1)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(PAL8_14_78D8)
+    LoadScene(Scene_Tavel_EntranceUNK)
+    LoadHotspots(HOTSPOTX_13_46CE)
+    ThatInit(0, Call_001_4AF8, $06, $03, $D02A, $00, ACTORSCRIPT0_14_79AB, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, Call_001_4AF8, $06, $07, $D05A, $00, ACTORSCRIPT0_14_79FA, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, Call_001_4AF8, $05, $06, $D04D, $30, ACTORSCRIPT0_14_7B06, ACTORSCRIPT1_19_46E8)
+    ThatInit(4, Call_001_4AF8, $07, $06, $D04F, $60, ACTORSCRIPT0_14_7B2E, ACTORSCRIPT1_19_46E8)
+    LoadSingleBitmap($30, BITMAP_0A_7B03, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0A_7D83, $8300, $00)
+    LoadSingleBitmap($30, BITMAP_09_40B0, $8600, $00)
+    AndByte(RAM_00_A02B, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    HeroSetCamera()
+    SetByte(xHeroAbilities, $05)
+    AndByte(RAM_00_A02A, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_14_79A6)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(3, $20, 0, 16)
+    SetEventText(1)
+    End()
+
+SCRIPT_STARTBUTTON_14_79A6::
+    End()
+
+SCRIPT_14_79A7::
+    LongJump(SCRIPT_14_7B55)
+
+ACTORSCRIPT0_14_79AB::
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 32)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(SCRIPT_14_5C4D, 8)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 2)
+    Sync(2, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(3, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DC9, 4)
+        ScriptDelay(SCRIPT_14_5DAB, 4)
+        ScriptDelay(SCRIPT_14_5DA1, 4)
+        ScriptDelay(SCRIPT_14_5DAB, 0)
+    }
+    Sync(4, 5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5CFD, 16)
+    }
+    ThisDelete()
+
+ACTORSCRIPT0_14_79FA::
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_420A)
+    Sync(0, 2)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4200)
+    SetScriptText(SCRIPT_14_7A2C)
+    Sync(1, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_41C0, 14)
+        ScriptDelay(ACTORSCRIPT1_1A_4200, 0)
+    }
+    Sync(4, 5)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4214)
+    Sync(5, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4228)
+    Sync(6, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4200)
+    End()
+
+SCRIPT_14_7A2C::
+    Icon(Icon_Tavel_1)
+    Write("HEY!!🅐")
+    Sync(1, 4)
+    Write("Who are YOU?!🅐")
+    Icon(Icon_Tavel_2)
+    Write("Yeah! You⭍aren't FONEY🅐BONEY!!🅐")
+    Icon(Icon_Tavel_3)
+    Write("Did that fink⭍send you out🅐with our⭍Crystal?🅐")
+    Close()
+    Sync(2, 2)
+    Icon(Icon_Salafy)
+    Write("Uh...🅐")
+    Icon(Icon_Tavel_1)
+    Write("WELL?!🅐")
+    Sync(3, 2)
+    Delay(16)
+    Icon(Icon_Salafy)
+    Write("LOOK! A⭍TIMBER HYREN!!🅐")
+    Sync(4, 5)
+    Close()
+    Write("WHERE!🅐")
+    Sync(5, 4)
+    Write("A what?🅐")
+    Sync(6, 4)
+    Write("HEY!!🅐")
+    Close()
+    LongJump(SCRIPT_14_7B55)
+
+ACTORSCRIPT0_14_7B06::
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_44D8)
+    Sync(1, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_4452, 14)
+        ScriptDelay(SCRIPT_1A_44C4, 0)
+    }
+    Sync(4, 5)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_44A6)
+    Sync(5, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_44D8)
+    Sync(6, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4492)
+    End()
+
+SCRIPT_14_7B2D::
+    End()
+
+ACTORSCRIPT0_14_7B2E::
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4770)
+    Sync(1, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_46F4, 14)
+        ScriptDelay(SCRIPT_1A_475C, 0)
+    }
+    Sync(4, 5)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4748)
+    Sync(5, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4770)
+    Sync(6, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4734)
+    End()
+
+SCRIPT_14_7B55::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(PAL8_14_78D8)
+    LoadScene(Scene_Tavel_CaveUNK)
+    LoadHotspots(HOTSPOTX_13_46D3)
+    ThatInit(0, Call_001_4AF8, $0D, $19, $D201, $00, ACTORSCRIPT0_14_7BAD, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, Call_001_4AF8, $0D, $16, $D1C5, $00, ACTORSCRIPT0_14_7D1E, ACTORSCRIPT1_19_46E8)
+    AndByte(RAM_00_A02B, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    LoadSingleBitmap($80, BITMAP_21_5000, $8000, $00)
+    SetCamera($0F, $1D)
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(RAM_00_A02A, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_14_7BA8)
+    End()
+
+SCRIPT_STARTBUTTON_14_7BA8::
+    End()
+
+SCRIPT_14_7BA9::
+    LongJump(SCRIPT_14_7918)
+
+ACTORSCRIPT0_14_7BAD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5CFD, 16)
+        ScriptDelay(SCRIPT_14_5DAB, 4)
+        ScriptDelay(SCRIPT_14_5D0D, 8)
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    SetScriptText(SCRIPT_14_7BEF)
+    Sync(0, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D41, 8)
+        ScriptDelay(SCRIPT_14_5D97, 16)
+        ScriptDelay(SCRIPT_14_5D27, 8)
+        ScriptDelay(SCRIPT_14_5D97, 16)
+        ScriptDelay(SCRIPT_14_5D41, 8)
+        ScriptDelay(SCRIPT_14_5D27, 8)
+        ScriptDelay(SCRIPT_14_5CFD, 48)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(3, $20, 0, 16)
+    LongJump(SCRIPT_18_5DA8)
+
+SCRIPT_14_7BEF::
+    Write("OUCH!🅐")
+    Icon(Icon_Salafy)
+    Write("Tony?!🅐")
+    Icon(Icon_Tony)
+    Write("Salafy!🅐")
+    Close()
+    ScrollMap() {
+        Move(32, 0, -1)
+    }
+    Icon(Icon_Tony)
+    Write("Wha... How?🅐")
+    Icon(Icon_Salafy)
+    Write("Where are we?🅐")
+    Icon(Icon_Tony)
+    Write("This is the⭍cave where I🅐fell into the⭍Naroom River...🅐But how did⭍you get here?🅐")
+    Icon(Icon_Salafy)
+    Write("I don't know!⭍I was playing🅐a game and⭍got warped here🅐when I⭍collected🅐255 energy.🅐")
+    Icon(Icon_Tony)
+    Write("Weird...🅐Well, see⭍you around.🅐")
+    Icon(Icon_Salafy)
+    Write("Later!🅐")
+    Close()
+    Sync(0, 3)
+    End()
+
+ACTORSCRIPT0_14_7D1E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_6CB7, 16)
+        ScriptDelay(SCRIPT_14_6CE4, 4)
+        ScriptDelay(SCRIPT_14_6CC8, 8)
+        ScriptDelay(SCRIPT_14_6CFA, 0)
+    }
+    Sync(0, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_6CA6, 8)
+        ScriptDelay(SCRIPT_14_6CFA, 16)
+        ScriptDelay(SCRIPT_14_6C95, 8)
+        ScriptDelay(SCRIPT_14_6CFA, 16)
+        ScriptDelay(SCRIPT_14_6CA6, 16)
+        ScriptDelay(SCRIPT_14_6CB7, 96)
+    }
+    ThisDelete()

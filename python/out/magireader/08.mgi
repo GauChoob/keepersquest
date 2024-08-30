@@ -1,0 +1,1082 @@
+
+SCRIPT_08_6BC0::
+    StartSFX0(SFXID_Jump)
+    SetScriptMaster(SCRIPT_08_6BC7)
+    End()
+
+SCRIPT_08_6BC7::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    Icon(Icon_Salafy)
+    Write("Save Game?🅐")
+    Clear()
+    Write(" No.⭍ Yes.")
+    Menu(SCRIPT_08_6C2A, SCRIPT_08_6BF1)
+
+SCRIPT_08_6BF1::
+    SaveLocation(SCRIPT_SCENELOADER_08_6D13)
+    SaveGame(1)
+    Clear()
+    Write("Game Saved to⭍")
+    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_08_6C20)
+    Write("Slot 2.🅐")
+    LongJump(SCRIPT_08_6C2A)
+
+SCRIPT_08_6C20::
+    Write("Slot 1.🅐")
+
+SCRIPT_08_6C2A::
+    Close()
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_6C34::
+    StartSong(SONGID_Mushroom_Farm)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, AI_Hero, $05, $17, $D2B7, $00, ACTORSCRIPT0_14_5DBF, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $06, $19, $D2F4, $00, ACTORSCRIPT0_08_6C94, ACTORSCRIPT1_08_763B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_08_6C94::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A047], c%00000001)#, SCRIPT_19_4710)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D48)
+    End()
+
+SCRIPT_08_6CA1::
+    StartSong(SONGID_Mushroom_Farm)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $03, $16, $D297, $00, ACTORSCRIPT0_08_6D02, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $06, $19, $D2F4, $00, ACTORSCRIPT0_08_6C94, ACTORSCRIPT1_08_763B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroFromDoor()
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_08_6D02::
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C5D, 32, 0, 1)
+    }
+    ThisSetAnimSingle(ACTORSCRIPT0_14_5DBF)
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_SCENELOADER_08_6D13::
+    StartSong(SONGID_Mushroom_Farm)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $00, $1B, $D32A, $00, ACTORSCRIPT0_08_6D73, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $06, $19, $D2F4, $00, ACTORSCRIPT0_08_6C94, ACTORSCRIPT1_08_763B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_08_6D73::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 48)
+        ScriptDelay(SCRIPT_14_5DAB, 0)
+    }
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_08_6D82::
+    StartSong(SONGID_Mischief)
+    VarByteExpr(xVARBYTE_00_A139, #(c[xVARBYTE_00_A139] + c1)#)
+    SetByte(RAM_00_A135, $09)
+    Switch(#c[MATHADDRESS_00_A136]#) {
+        Case(0, SCRIPT_08_6DB8)
+        Case(1, SCRIPT_08_6DC0)
+        Case(2, SCRIPT_08_6DD5)
+        Case(3, SCRIPT_08_6DEA)
+        Case(4, SCRIPT_08_6DFF)
+        Case(5, SCRIPT_08_6DFF)
+    }
+    LongJump(SCRIPT_08_6DFF)
+
+SCRIPT_08_6DB8::
+    SetByte(MATHADDRESS_00_A136, $03)
+    LongJump(SCRIPT_08_6DEA)
+
+SCRIPT_08_6DC0::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_Bograth_Cutscene)
+    LongJump(SCRIPT_0B_6C8B)
+
+SCRIPT_08_6DD5::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_Bograth_Cutscene)
+    LongJump(SCRIPT_0B_6D11)
+
+SCRIPT_08_6DEA::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_Bograth_Cutscene)
+    LongJump(SCRIPT_0B_6D4A)
+
+SCRIPT_08_6DFF::
+    HeroToDoor($04, $06)
+    LongJump(SCRIPT_08_6CA1)
+
+SCRIPT_08_6E06::
+    StartSong(SONGID_Mushroom_Farm)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $04, $06, $D0B8, $00, ACTORSCRIPT0_08_6E60, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $06, $09, $D114, $00, ACTORSCRIPT0_08_6E71, ACTORSCRIPT1_08_6E76)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($05, $08)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_08_6E60::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 48)
+        ScriptDelay(SCRIPT_14_5DB5, 32)
+    }
+    SetScriptText(SCRIPT_0B_6CAA)
+    End()
+
+ACTORSCRIPT0_08_6E71::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    End()
+
+ACTORSCRIPT1_08_6E76::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_08_6E82)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_08_6E82::
+    Icon(Icon_Eidon)
+    Write("Get going, we⭍don't have all🅐day!🅐")
+    Close()
+    SetEventText(1)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_6EB5::
+    StartSong(SONGID_Mushroom_Farm)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $0F, $14, $D267, $00, ACTORSCRIPT0_08_6F0F, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $11, $16, $D2A5, $00, ACTORSCRIPT0_08_6F43, ACTORSCRIPT1_08_6F54)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($10, $16)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_08_6F0F::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5DB5, 32)
+    }
+    SetByte(RAM_00_A135, $09)
+    SetScriptText(SCRIPT_0B_6D88)
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
+    CameraSeekPos($18, $0A, 1)
+    Delay(32)
+    CameraSeekPos($05, $07, 1)
+    Delay(32)
+    CameraSeekActor(RAM_00_C189, 4)
+    Sync(0, 2)
+    SetEventMaster(2)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    End()
+
+ACTORSCRIPT0_08_6F43::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D52)
+    WaitEventMaster(2)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    End()
+
+ACTORSCRIPT1_08_6F54::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_08_6F60)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_08_6F60::
+    Icon(Icon_Eidon)
+    Write("Get going, we⭍don't have all🅐day!🅐")
+    Close()
+    SetEventText(1)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_6F93::
+    StartSong(SONGID_Mushroom_Farm)
+    OrByte(MATHADDRESS_00_A047, %00000001)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $0C, $01, $D02A, $00, ACTORSCRIPT0_08_700A, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, Call_001_4AF8, $16, $05, $D0AC, $00, ACTORSCRIPT0_08_7047, ACTORSCRIPT1_19_46E8)
+    ThatInit(3, AI_01_6E8F, $11, $04, $D089, $30, ACTORSCRIPT0_08_706F, ACTORSCRIPT1_08_72D5)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    LoadSingleBitmap($2D, BITMAP_0A_7813, $8300, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    SetCamera($0D, $03)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_08_700A::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C4D, 48)
+        ScriptDelay(SCRIPT_14_5C8D, 8)
+        ScriptDelay(SCRIPT_14_5DB5, 64)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(SCRIPT_14_5DB5, 48)
+    }
+    SetScriptText(SCRIPT_08_7098)
+    WaitEventMaster(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C4D, 16)
+        ScriptDelay(SCRIPT_14_5C8D, 88)
+        ScriptDelay(SCRIPT_14_5DD3, 32)
+    }
+    SetEventMaster(5)
+    WaitEventText(1)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_08_7047::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CC0, 64)
+        ScriptDelay(ACTORSCRIPT1_13_6D34, 0)
+    }
+    SetEventMaster(2)
+    WaitEventMaster(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CC0, 16)
+        ScriptDelay(ACTORSCRIPT1_13_6D34, 0)
+    }
+    WaitEventMaster(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 80)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_08_706F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_48FB, 32)
+        ScriptDelay(SCRIPT_1A_4907, 32)
+        ScriptDelay(SCRIPT_1A_48FB, 32)
+        ScriptDelay(SCRIPT_1A_4907, 32)
+        ScriptDelay(SCRIPT_1A_48FB, 32)
+        ScriptDelay(SCRIPT_1A_4957, 32)
+    }
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_1A_4989)
+    End()
+
+SCRIPT_08_7090::
+    Delay(32)
+    ScrollMap() {
+        Move(48, 1, 0)
+    }
+    End()
+
+SCRIPT_08_7098::
+    Icon(Icon_Bograth_Obgren)
+    Write("I'm late! I'm⭍late! Did I🅐miss anything?🅐")
+    Icon(Icon_Salafy)
+    Write("I don't know.⭍What are you🅐late for?🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("I need to make⭍sure Salafy🅐finds the⭍Bograth mazes.🅐")
+    Icon(Icon_Salafy)
+    Write("I'm Salafy, and⭍I am already🅐done. Who are⭍you?🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("I am Obgren,⭍Keeper of🅐Bograth!🅐")
+    Icon(Icon_Eidon)
+    Write("Also known as⭍the 'late'🅐Keeper of⭍Bograth.🅐")
+    Close()
+    SetEventMaster(1)
+    SetScriptScroll(SCRIPT_08_7090)
+    WaitEventMaster(2)
+    Icon(Icon_Bograth_Obgren)
+    Write("Eidon! Sorry⭍I'm late. I🅐was... umm...⭍my pet...🅐umm... my foot⭍got stuck on🅐a... uh... I⭍had some🅐Keeper's stuff⭍to attend to.🅐Yeah. It was⭍very important.🅐")
+    Icon(Icon_Eidon)
+    SetEventMaster(3)
+    Write("Of course. Come⭍Salafy, it's🅐time to go to⭍the sunny🅐tropics of⭍Paradwyn!🅐")
+    Close()
+    SetEventMaster(4)
+    WaitEventMaster(5)
+    Icon(Icon_Salafy)
+    Write("Nice meeting⭍you. Bye.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+ACTORSCRIPT1_08_72D5::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_08_72E1)
+    LongJump(SCRIPT_1A_4993)
+
+SCRIPT_08_72E1::
+    Icon(Icon_Bograth_Obgren)
+    Write("Hi!🅐")
+    Icon(Icon_Salafy)
+    Write("Hi.🅐")
+    Close()
+    SetEventText(1)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_72FF::
+    StartSong(SONGID_Mushroom_Farm)
+    SetByte(RAM_00_A134, $09)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Bograth_Main)
+    LoadHotspots(HOTSPOTX_13_415F)
+    LoadMapMask(METAMAP_MASK_2A_47B1, COLLMAP_MASK_2C_701E)
+    LoadTriggers(TRIGGERX_13_417C)
+    ThatInit(0, Call_001_4AF8, $00, $1B, $D32A, $00, ACTORSCRIPT0_08_738F, ACTORSCRIPT1_19_46E8)
+    ThatInit(2, AI_01_6E8F, $00, $1C, $D348, $00, ACTORSCRIPT0_08_745A, ACTORSCRIPT1_08_763B)
+    ThatInit(3, Call_001_4AF8, $04, $15, $D27A, $30, ACTORSCRIPT0_08_74B9, ACTORSCRIPT1_19_46E8)
+    ThatInit(4, Call_001_4AF8, $06, $15, $D27C, $58, ACTORSCRIPT0_08_756F, ACTORSCRIPT1_19_46E8)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    LoadSingleBitmap($28, BITMAP_0D_70C0, $8300, $00)
+    LoadSingleBitmap($24, BITMAP_0D_5B20, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($02, $1B)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_08_738F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 48)
+        ScriptDelay(SCRIPT_14_5D97, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 8)
+    }
+    SetScriptText(SCRIPT_08_7787)
+    WaitEventText(1)
+    SetScriptText(SCRIPT_08_77BA)
+    WaitEventText(2)
+    SetScriptText(SCRIPT_08_77E0)
+    WaitEventText(3)
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 16)
+    }
+    SetEventMaster(1)
+    ScrollMap() {
+        Move(28, 0, -1)
+    }
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C23, 16, 0, -1)
+    }
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+        ScriptDelay(SCRIPT_14_5C23, 16)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 0)
+    }
+    WaitEventText(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D97, 32)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 32)
+        ScriptDelay(SCRIPT_14_5D97, 32)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 48)
+    }
+    SetScriptText(SCRIPT_08_78F1)
+    WaitEventText(11)
+    SetScriptText(SCRIPT_08_790F)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    WaitEventText(12)
+    SetScriptText(SCRIPT_08_7929)
+    WaitEventText(13)
+    Delay(48)
+    SetScriptText(SCRIPT_08_7948)
+    WaitEventText(14)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 48)
+    }
+    SetScriptText(SCRIPT_08_795A)
+    WaitEventText(15)
+    Delay(24)
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    WaitEventText(17)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 16)
+        ScriptDelay(SCRIPT_14_5C6D, 16)
+        ScriptDelay(SCRIPT_14_5DB5, 64)
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+        ScriptDelay(SCRIPT_14_5C23, 48)
+        ScriptDelay(SCRIPT_14_5C6D, 16)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    WaitEventText(25)
+    ScrollMap() {
+        Move(64, 0, -1)
+    }
+    Delay(32)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_08_6BC0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_08_745A::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6D3E, 16)
+        ScriptDelay(SCRIPT_13_6CD0, 16)
+        ScriptDelay(ACTORSCRIPT1_13_6D52, 0)
+    }
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 48)
+        ScriptDelay(SCRIPT_13_6CA0, 16)
+        ScriptDelay(SCRIPT_13_6CD0, 16)
+        ScriptDelay(SCRIPT_13_6CA0, 32)
+        ScriptDelay(SCRIPT_13_6CD0, 16)
+        ScriptDelay(SCRIPT_13_6D20, 0)
+    }
+    WaitEventText(5)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D48)
+    Delay(12)
+    SetScriptText(SCRIPT_08_786F)
+    WaitEventText(15)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    SetScriptText(SCRIPT_08_7982)
+    WaitEventText(16)
+    SetScriptText(SCRIPT_08_79B6)
+    WaitEventText(17)
+    Delay(128)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CC0, 16)
+        ScriptDelay(SCRIPT_13_6CA0, 64)
+        ScriptDelay(SCRIPT_13_6CD0, 16)
+        ScriptDelay(ACTORSCRIPT1_13_6D5C, 0)
+    }
+    End()
+
+ACTORSCRIPT0_08_74B9::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_44DF)
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4453, 6)
+        ScriptDelay(SCRIPT_11_4433, 16)
+        ScriptDelay(SCRIPT_11_44AD, 0)
+    }
+    SetScriptText(SCRIPT_08_783F)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4433, 8)
+        ScriptDelay(SCRIPT_11_44AD, 0)
+    }
+    WaitEventText(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4423, 8)
+        ScriptDelay(SCRIPT_11_44AD, 0)
+    }
+    WaitEventText(6)
+    SetScriptText(SCRIPT_08_7893)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4433, 8)
+        ScriptDelay(SCRIPT_11_44AD, 0)
+    }
+    WaitEventText(7)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4423, 8)
+        ScriptDelay(SCRIPT_11_44AD, 0)
+    }
+    WaitEventText(13)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_44C1, 48)
+        ScriptDelay(SCRIPT_11_44AD, 16)
+    }
+    WaitEventText(17)
+    Delay(24)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4433, 64)
+        ScriptDelay(SCRIPT_11_4443, 16)
+        ScriptDelay(SCRIPT_11_44C1, 0)
+    }
+    WaitEventText(20)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_44E9, 32)
+        ScriptDelay(ACTORSCRIPT1_11_44DF, 32)
+        ScriptDelay(SCRIPT_11_44C1, 48)
+    }
+    SetScriptText(SCRIPT_08_7A3B)
+    WaitEventText(21)
+    Delay(16)
+    SetScriptText(SCRIPT_08_7A54)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_44AD, 8)
+        ScriptDelay(ACTORSCRIPT1_11_44DF, 0)
+    }
+    WaitEventText(22)
+    SetScriptText(SCRIPT_08_7A8A)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_44CB, 32)
+        ScriptDelay(SCRIPT_11_44C1, 32)
+        ScriptDelay(ACTORSCRIPT1_11_44DF, 32)
+    }
+    WaitEventText(24)
+    Delay(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_4433, 16)
+        ScriptDelay(SCRIPT_11_4443, 100)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_08_756F::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6AC9)
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A1D, 16)
+        ScriptDelay(SCRIPT_13_6A97, 0)
+    }
+    WaitEventText(4)
+    SetScriptText(SCRIPT_08_7857)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A1D, 8)
+        ScriptDelay(SCRIPT_13_6A97, 0)
+    }
+    WaitEventText(5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A0D, 8)
+        ScriptDelay(SCRIPT_13_6A97, 0)
+    }
+    WaitEventText(7)
+    Delay(16)
+    SetScriptText(SCRIPT_08_78A6)
+    WaitEventText(8)
+    SetScriptText(SCRIPT_08_78C6)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A1D, 8)
+        ScriptDelay(SCRIPT_13_6A97, 0)
+    }
+    WaitEventText(9)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A0D, 8)
+        ScriptDelay(SCRIPT_13_6A97, 0)
+    }
+    Delay(16)
+    SetScriptText(SCRIPT_08_78D9)
+    WaitEventText(13)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6AA1, 48)
+        ScriptDelay(SCRIPT_13_6A97, 16)
+    }
+    WaitEventText(17)
+    Delay(40)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A2D, 16)
+    }
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_13_6A1D, 32, 0, 1)
+    }
+    ScrollMap() {
+        Move(8, 0, 1)
+    }
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A1D, 24)
+        ScriptDelay(SCRIPT_13_6AA1, 0)
+    }
+    Delay(32)
+    SetScriptText(SCRIPT_08_79CE)
+    WaitEventText(18)
+    SetScriptText(SCRIPT_08_79EE)
+    WaitEventText(19)
+    SetScriptText(SCRIPT_08_7A1F)
+    WaitEventText(21)
+    SetScriptText(SCRIPT_08_7A54)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A2D, 16)
+        ScriptDelay(SCRIPT_13_6A1D, 16)
+        ScriptDelay(SCRIPT_13_6A2D, 48)
+        ScriptDelay(SCRIPT_13_6ABF, 0)
+    }
+    Sync(0, 2)
+    SetScriptText(SCRIPT_08_7ABB)
+    Delay(6)
+    ThisSetAnimSingle(SCRIPT_13_6AA1)
+    WaitEventText(24)
+    SetScriptText(SCRIPT_08_7AE0)
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6A2D, 100)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT1_08_763B::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_08_7647)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_08_7647::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000100) == w65535)#, SCRIPT_08_76AD)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000010) == w65535)#, SCRIPT_08_76F3)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000001) == w65535)#, SCRIPT_08_7748)
+    Icon(Icon_Eidon)
+    Write("Parmalags don't⭍get stuck in🅐the mud. Follow⭍their lead.🅐")
+    LongJump(SCRIPT_08_7783)
+
+SCRIPT_08_76AD::
+    Icon(Icon_Eidon)
+    Write("Take it one⭍step at a🅐time... any⭍more, and you🅐may fall in!🅐")
+    LongJump(SCRIPT_08_7783)
+
+SCRIPT_08_76F3::
+    Icon(Icon_Eidon)
+    Write("There may be⭍more parmalags🅐than Salafys,⭍but you🅐outnumber them⭍in smarts.🅐")
+    LongJump(SCRIPT_08_7783)
+
+SCRIPT_08_7748::
+    Icon(Icon_Eidon)
+    Write("The ground⭍isn't steady🅐here, so watch⭍your step!🅐")
+    LongJump(SCRIPT_08_7783)
+
+SCRIPT_08_7783::
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_08_7787::
+    Icon(Icon_Salafy)
+    Write("I knew it! An⭍entire region🅐made of muck.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_08_77BA::
+    Icon(Icon_Eidon)
+    Write("Don't worry,⭍you'll survive.🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_08_77E0::
+    Icon(Icon_Salafy)
+    Write("I don't know...⭍dizzying cliffs🅐are one thing,⭍miles of mud🅐are completely⭍different.🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_08_783F::
+    Icon(Icon_Bograth_Chubble)
+    Write("Hellooo Eidon!🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_08_7857::
+    Icon(Icon_Bograth_Goltha)
+    Write("Hellooo Eidon!🅐")
+    Close()
+    SetEventText(5)
+    End()
+
+SCRIPT_08_786F::
+    Icon(Icon_Eidon)
+    Write("Salafy, this is⭍Chubble...🅐")
+    Close()
+    SetEventText(6)
+    End()
+
+SCRIPT_08_7893::
+    Icon(Icon_Bograth_Chubble)
+    Write("Hi, lady!🅐")
+    Close()
+    SetEventText(7)
+    End()
+
+SCRIPT_08_78A6::
+    Icon(Icon_Eidon)
+    Write("...and this is⭍Goltha.🅐")
+    Close()
+    SetEventText(8)
+    End()
+
+SCRIPT_08_78C6::
+    Icon(Icon_Bograth_Goltha)
+    Write("Hi, lady!🅐")
+    Close()
+    SetEventText(9)
+    End()
+
+SCRIPT_08_78D9::
+    Icon(Icon_Eidon)
+    Write("They're twins.🅐")
+    Close()
+    SetEventText(10)
+    End()
+
+SCRIPT_08_78F1::
+    Icon(Icon_Salafy)
+    Write("Covered in mud,⭍too.🅐")
+    Close()
+    SetEventText(11)
+    End()
+
+SCRIPT_08_790F::
+    Icon(Icon_Bograth_Chubble)
+    Write("We like the⭍mud.🅐")
+    Close()
+    SetEventText(12)
+    End()
+
+SCRIPT_08_7929::
+    Icon(Icon_Salafy)
+    Write("Do you like⭍pie, too?🅐")
+    Close()
+    SetEventText(13)
+    End()
+
+SCRIPT_08_7948::
+    Icon(Icon_Bograth_Goltha)
+    Write("Oh, yes!🅐")
+    Close()
+    SetEventText(14)
+    End()
+
+SCRIPT_08_795A::
+    Icon(Icon_Salafy)
+    Write(".........🅐")
+    Icon(Icon_Salafy)
+    Write("Naah, too easy.🅐")
+    Close()
+    SetEventText(15)
+    End()
+
+SCRIPT_08_7982::
+    Icon(Icon_Eidon)
+    Write("So Salafy, are⭍you ready for🅐another maze?🅐")
+    Close()
+    SetEventText(16)
+    End()
+
+SCRIPT_08_79B6::
+    Icon(Icon_Salafy)
+    Write("Yup, let's go!🅐")
+    Close()
+    SetEventText(17)
+    End()
+
+SCRIPT_08_79CE::
+    Icon(Icon_Bograth_Goltha)
+    Write("Where were they⭍going?🅐")
+    Close()
+    SetEventText(18)
+    End()
+
+SCRIPT_08_79EE::
+    Icon(Icon_Bograth_Chubble)
+    Write("I think he said⭍something about🅐a maze.🅐")
+    Close()
+    SetEventText(19)
+    End()
+
+SCRIPT_08_7A1F::
+    Icon(Icon_Bograth_Goltha)
+    Write("Really? What⭍maze?🅐")
+    Close()
+    SetEventText(20)
+    End()
+
+SCRIPT_08_7A3B::
+    Icon(Icon_Bograth_Chubble)
+    Write("I don't know...🅐")
+    Close()
+    SetEventText(21)
+    End()
+
+SCRIPT_08_7A54::
+    Icon(Icon_Bograth_Goltha)
+    Write("Let's follow⭍them! Maybe🅐we'll see the⭍maze.🅐")
+    Close()
+    SetEventText(22)
+    End()
+
+SCRIPT_08_7A8A::
+    Icon(Icon_Bograth_Chubble)
+    Write("Good idea!🅐")
+    Icon(Icon_Bograth_Chubble)
+    Write("Which way did⭍they go?🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_08_7ABB::
+    Icon(Icon_Bograth_Goltha)
+    Write("I think they🅐went this way.🅐")
+    Close()
+    SetEventText(24)
+    End()
+
+SCRIPT_08_7AE0::
+    Icon(Icon_Bograth_Chubble)
+    Write("Yay, let's go!🅐")
+    Close()
+    SetEventText(25)
+    End()
+
+SCRIPT_08_7AF8::
+    LongJump(SCRIPT_17_5C50)
+
+SCRIPT_08_7AFC::
+    LongJump(SCRIPT_17_5C56)
+
+SCRIPT_08_7B00::
+    LongJump(SCRIPT_17_5C5C)
+
+SCRIPT_08_7B04::
+    LongJump(SCRIPT_17_5C62)
+
+SCRIPT_08_7B08::
+    LongJump(SCRIPT_17_5C68)
+
+SCRIPT_08_7B0C::
+    HeroToDoor($13, $06)
+    LongJump(SCRIPT_1A_512C)
+
+SCRIPT_08_7B13::
+    HeroToDoor($13, $06)
+    LongJump(SCRIPT_1A_512C)
+
+SCRIPT_08_7B1A::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_08_7B2F, SCRIPT_08_7B71, SCRIPT_08_7BAA, SCRIPT_08_7BEC)
+
+SCRIPT_08_7B2F::
+    Write("Ooooh, the ⭍temptation to🅐step on a tree⭍and bury it in🅐mud!🅐")
+    Jump(SCRIPT_08_7C19)
+
+SCRIPT_08_7B71::
+    Write("A whole forest⭍of buried trees🅐right below my⭍feet!🅐")
+    Jump(SCRIPT_08_7C19)
+
+SCRIPT_08_7BAA::
+    Write("I bet this tree⭍was really tall🅐before it sank⭍into the mud.🅐")
+    Jump(SCRIPT_08_7C19)
+
+SCRIPT_08_7BEC::
+    Write("No sunken ⭍treasure, just🅐sunken trees.🅐")
+    Jump(SCRIPT_08_7C19)
+
+SCRIPT_08_7C19::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_7C1F::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_08_7C2E, SCRIPT_08_7C83)
+
+SCRIPT_08_7C2E::
+    Write("When living off⭍of mud, what 🅐more can you ⭍expect than a 🅐gray, lifeless⭍tree?🅐")
+    Jump(SCRIPT_08_7CE4)
+
+SCRIPT_08_7C83::
+    Write("Falling out of⭍trees with no🅐consequences! I⭍am starting to 🅐see the⭍brighter side 🅐of mud!🅐")
+    Jump(SCRIPT_08_7CE4)
+
+SCRIPT_08_7CE4::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_7CEA::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_08_7CFF, SCRIPT_08_7D4D, SCRIPT_08_7D5E, SCRIPT_08_7D99)
+
+SCRIPT_08_7CFF::
+    Write("I could make ⭍millions in 🅐animite selling⭍these mushrooms🅐as potpourri!🅐")
+    Jump(SCRIPT_08_7DDC)
+
+SCRIPT_08_7D4D::
+    Write("Mudshrooms?🅐")
+    Jump(SCRIPT_08_7DDC)
+
+SCRIPT_08_7D5E::
+    Write("Be mud⭍friendly, grow🅐a bright, green⭍mushroom today!🅐")
+    Jump(SCRIPT_08_7DDC)
+
+SCRIPT_08_7D99::
+    Write("Good smelling ⭍mushrooms?🅐What's next? ⭍Nasty smelling🅐roses?🅐")
+    Jump(SCRIPT_08_7DDC)
+
+SCRIPT_08_7DDC::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_7DE2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_08_7DF4, SCRIPT_08_7E1B, SCRIPT_08_7E64)
+
+SCRIPT_08_7DF4::
+    Write("This wall looks⭍like molded🅐muck!🅐")
+    Jump(SCRIPT_08_7EB6)
+
+SCRIPT_08_7E1B::
+    Write("Full-size mud⭍walls.....🅐Why does that⭍not make me 🅐feel very safe?🅐")
+    Jump(SCRIPT_08_7EB6)
+
+SCRIPT_08_7E64::
+    Write("There are⭍shirts and🅐shoes stuck to⭍that wall! No🅐shirt, no⭍shoes, no🅐mazes?🅐")
+    Jump(SCRIPT_08_7EB6)
+
+SCRIPT_08_7EB6::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_08_7EBC::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000001) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D241, $08, $07, $D241, $13, $07)
+    TransplantMap($D08B, $04, $08, $D1CD, $0F, $0B)
+    End()
+
+SCRIPT_08_7EDA::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000010) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D1B7, $04, $0D, $D1B7, $0E, $13)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00100000) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D115, $04, $05, $D115, $09, $07)
+    TransplantMapMask($D155, $05, $05, $D155, $0B, $0B)
+    TransplantMapMask($D1EB, $04, $07, $D1EB, $10, $0B)
+    End()
+
+SCRIPT_08_7F15::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000100) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D0E0, $05, $05, $D0E0, $07, $0E)
+    TransplantMapMask($D100, $05, $06, $D100, $08, $10)
+    TransplantMap($D089, $02, $03, $D0A7, $05, $11)
+    TransplantTile($0E, $12, $D1B6, COLLID_WALL, $0E)
+    TransplantTile($07, $12, $D0E4, COLLID_WALL, $2D)
+    End()
+
+SCRIPT_08_7F4A::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00001000) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D04D, $0C, $06, $D04D, $02, $11)
+    End()
+
+SCRIPT_08_7F5F::
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00100000) == c0)#, SCRIPT_19_46E7)
+    TransplantMapMask($D150, $09, $05, $D150, $0B, $06)
+    TransplantMapMask($D116, $02, $02, $D116, $09, $08)
+    End()
+
+SCRIPT_08_7F7D::
+    End()

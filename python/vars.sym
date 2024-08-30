@@ -6,6 +6,7 @@
 ; Arderial
 ; Weave
 ; d'Resh
+; Kybar's Teeth
 ; Bograth
 ; Paradwyn
 ; Core - No secret?
@@ -19,7 +20,7 @@
 13:4ECA Scene_Arderial_Puzzle4
 ; East normal, West Secret
 13:4ED9 Scene_Arderial_Puzzle3
-13:4EE8 Scene_Arderial_PuzzleSecret
+13:4EE8 Scene_Arderial_Puzzle5
 13:4EF7 Scene_DeveloperRoom
 13:4F06 Scene_StartRoom
 13:4F15 Scene_UNK1
@@ -32,7 +33,7 @@
 13:4F6F Scene_Bograth_Puzzle2
 13:4F7E Scene_Bograth_Puzzle3
 13:4F8D Scene_Bograth_Puzzle4
-13:4F9C Scene_Bograth_PuzzleSecret
+13:4F9C Scene_Bograth_Puzzle5
 13:4FAB Scene_Bograth_Main
 13:4FBA Scene_Bograth_Cutscene
 13:4FC9 Scene_Cald_Puzzle1
@@ -40,10 +41,10 @@
 13:4FD8 Scene_Cald_Puzzle2
 13:4FE7 Scene_Cald_Puzzle3
 13:4FF6 Scene_Cald_Puzzle4
-13:5005 Scene_Cald_PuzzleSecret
+13:5005 Scene_Cald_Puzzle5
 13:5014 Scene_Cald_Main
 13:5023 Scene_Cald_Cutscene
-13:5032 Scene_Underneath_Puzzle1_DUPLICATE1_UNK
+13:5032 Scene_Core_Puzzle5
 ; Puzzle2:
 ; Do bottomleft first
 ; Do bottomright switch: middle/bottom in any order
@@ -82,10 +83,10 @@
 ; Then head to exit
 13:50E6 Scene_dResh_Puzzle2
 ; Secret: Head to southeast corner, then northeast corner, then to exit in the north
-13:50F5 Scene_dResh_PuzzleSecret
+13:50F5 Scene_dResh_Puzzle5
 13:5104 Scene_Tavel_EntranceUNK
 13:5113 Scene_Tavel_CaveUNK
-13:5122 Scene_Underneath_Puzzle1_DUPLICATE2
+13:5122 Scene_Underneath_Puzzle1_DUPLICATE
 13:5131 Scene_Cald_Puzzle4_DUPLICATE
 13:5140 Scene_Paradwyn_Main_DUPLICATE
 13:514F Scene_Bograth_Puzzle3_DUPLICATE
@@ -96,7 +97,7 @@
 ; West: SECRET - have to run through the top tile of the left path to avoid the hole
 13:517C Scene_KybarsTeeth_Puzzle2
 13:518B Scene_KybarsTeeth_Puzzle4
-13:519A Scene_KybarsTeeth_PuzzleSecret
+13:519A Scene_KybarsTeeth_Puzzle5
 13:51A9 Scene_KybarsTeeth_Main
 13:51B8 Scene_KybarsTeeth_Cutscene
 13:51C7 Scene_Naroom_Puzzle1
@@ -105,7 +106,7 @@
 13:51E5 Scene_Naroom_Puzzle3
 ; Puzzle4: North normal, South secret
 13:51F4 Scene_Naroom_Puzzle4
-13:5203 Scene_Naroom_PuzzleSecret
+13:5203 Scene_Naroom_Puzzle5
 13:5212 Scene_Naroom_TrainingRoom_Cutscene
 13:5221 Scene_Naroom_Main
 13:5230 Scene_Naroom_Cutscene
@@ -129,12 +130,12 @@
 ; Puzzle4:
 ; Press in this order: 0->4. Don't press 5/6
 13:52B7 Scene_Orothe_Puzzle4
-13:52C6 Scene_Orothe_PuzzleSecret
+13:52C6 Scene_Orothe_Puzzle5
 13:52D5 Scene_Orothe_Main
 13:52E4 Scene_Orothe_Cutscene
 13:52F3 Scene_Overworld_1
 13:5302 Scene_Overworld_2
-13:5311 Scene_Naroom_UNK2
+13:5311 Scene_Naroom_Demo
 ; Reused multiple times:
 ; Cald -> Valkan: Gives canister
 ; Orothe -> Blu: Gives fungus
@@ -150,7 +151,7 @@
 ; Trigger1 teleports back to home, Trigger0 is end
 13:537A Scene_Paradwyn_Puzzle3
 ; Switch Order: 2, 4, 3, 1, 0, 5
-13:5389 Scene_Paradwyn_PuzzleSecret
+13:5389 Scene_Paradwyn_Puzzle5
 13:5398 Scene_Paradwyn_Main
 13:53A7 Scene_Paradwyn_Cutscene
 13:53B6 Scene_Underneath_Puzzle1
@@ -159,7 +160,7 @@
 ; Top of Puzzle4: Topleft Puzzle2, Topmiddle Puzzle4, Topright Puzzle3
 ; Top teleport is normal end, bottom is SECRET
 13:53E3 Scene_Underneath_Puzzle4
-13:53F2 Scene_Underneath_PuzzleSecret
+13:53F2 Scene_Underneath_Puzzle5
 13:5401 Scene_Underneath_Main
 13:5410 Scene_Underneath_Cutscene
 13:541F Scene_Weave_Puzzle1
@@ -168,7 +169,7 @@
 13:543D Scene_Weave_Puzzle3
 13:544C Scene_Weave_Puzzle3_DUPLICATE
 13:545B Scene_Weave_Puzzle4
-13:546A Scene_Weave_PuzzleSecret
+13:546A Scene_Weave_Puzzle5
 13:5479 Scene_Weave_Main
 13:5488 Scene_Weave_Cutscene
 ;
@@ -203,10 +204,111 @@
 08:6A30 Icon_Bograth_Obgren
 ;
 ;
+14:7858 Pal_AllSprites
+;
+;
+0E:4B7A Script_DeveloperRoom
+13:405B Hotspot_DeveloperRoom
+0E:4BBC Hotspot_DeveloperRoom_Underneath_Puzzle1
+0E:4BC0 Hotspot_DeveloperRoom_Underneath_Puzzle2
+0E:4BC4 Hotspot_DeveloperRoom_Underneath_Puzzle3
+0E:4BC8 Hotspot_DeveloperRoom_Underneath_Puzzle4
+0E:4BCC Hotspot_DeveloperRoom_Underneath_Puzzle5
+0E:4BD0 Hotspot_DeveloperRoom_Cald_Puzzle1
+0E:4BD4 Hotspot_DeveloperRoom_Cald_Puzzle2
+0E:4BD8 Hotspot_DeveloperRoom_Cald_Puzzle3
+0E:4BDC Hotspot_DeveloperRoom_Cald_Puzzle4
+0E:4BE0 Hotspot_DeveloperRoom_Cald_Puzzle5
+0E:4BA8 Hotspot_DeveloperRoom_Naroom_Puzzle1
+0E:4BAC Hotspot_DeveloperRoom_Naroom_Puzzle2
+0E:4BB0 Hotspot_DeveloperRoom_Naroom_Puzzle3
+0E:4BB4 Hotspot_DeveloperRoom_Naroom_Puzzle4
+0E:4BB8 Hotspot_DeveloperRoom_Naroom_Puzzle5
+0E:4BE4 Hotspot_DeveloperRoom_Orothe_Puzzle1
+0E:4BE8 Hotspot_DeveloperRoom_Orothe_Puzzle2
+0E:4BEC Hotspot_DeveloperRoom_Orothe_Puzzle3
+0E:4BF0 Hotspot_DeveloperRoom_Orothe_Puzzle4
+0E:4BF4 Hotspot_DeveloperRoom_Orothe_Puzzle5
+0E:4BF8 Hotspot_DeveloperRoom_Arderial_Puzzle1
+0E:4BFC Hotspot_DeveloperRoom_Arderial_Puzzle2
+0E:4C00 Hotspot_DeveloperRoom_Arderial_Puzzle3
+0E:4C04 Hotspot_DeveloperRoom_Arderial_Puzzle4
+0E:4C08 Hotspot_DeveloperRoom_Arderial_Puzzle5
+0E:4C0C Hotspot_DeveloperRoom_Weave_Puzzle1
+0E:4C10 Hotspot_DeveloperRoom_Weave_Puzzle2
+0E:4C14 Hotspot_DeveloperRoom_Weave_Puzzle3
+0E:4C18 Hotspot_DeveloperRoom_Weave_Puzzle4
+0E:4C1C Hotspot_DeveloperRoom_Weave_Puzzle5
+0E:4C20 Hotspot_DeveloperRoom_dResh_Puzzle1
+0E:4C24 Hotspot_DeveloperRoom_dResh_Puzzle2
+0E:4C28 Hotspot_DeveloperRoom_dResh_Puzzle3
+0E:4C2C Hotspot_DeveloperRoom_dResh_Puzzle4
+0E:4C30 Hotspot_DeveloperRoom_dResh_Puzzle5
+0E:4C34 Hotspot_DeveloperRoom_KybarsTeeth_Puzzle1
+0E:4C38 Hotspot_DeveloperRoom_KybarsTeeth_Puzzle2
+0E:4C3C Hotspot_DeveloperRoom_KybarsTeeth_Puzzle3
+0E:4C40 Hotspot_DeveloperRoom_KybarsTeeth_Puzzle4
+0E:4C44 Hotspot_DeveloperRoom_KybarsTeeth_Puzzle5
+0E:4C48 Hotspot_DeveloperRoom_Bograth_Puzzle1
+0E:4C4C Hotspot_DeveloperRoom_Bograth_Puzzle2
+0E:4C50 Hotspot_DeveloperRoom_Bograth_Puzzle3
+0E:4C54 Hotspot_DeveloperRoom_Bograth_Puzzle4
+0E:4C58 Hotspot_DeveloperRoom_Bograth_Puzzle5
+0E:4C5C Hotspot_DeveloperRoom_Paradwyn_Puzzle1
+0E:4C60 Hotspot_DeveloperRoom_Paradwyn_Puzzle2
+0E:4C64 Hotspot_DeveloperRoom_Paradwyn_Puzzle3
+0E:4C68 Hotspot_DeveloperRoom_Paradwyn_Puzzle4
+0E:4C6C Hotspot_DeveloperRoom_Paradwyn_Puzzle5
+0E:4C70 Hotspot_DeveloperRoom_Core_Puzzle5
+0E:4C74 Hotspot_DeveloperRoom_Core_Puzzle2
+0E:4C78 Hotspot_DeveloperRoom_Core_Puzzle3
+0E:4C7C Hotspot_DeveloperRoom_Core_Puzzle1
+0E:4C80 Hotspot_DeveloperRoom_Core_Puzzle4
+0E:4C84 Hotspot_DeveloperRoom_StartRoom
+;
 00:A178 xDResh_Puzzle1_Score
-0A:40A1 Script_dResh_Puzzle1
+0A:4000 Script_dResh_Puzzle1
+0A:4006 Script_dResh_Puzzle2
+0A:400C Script_dResh_Puzzle3
+0A:4012 Script_dResh_Puzzle4
+0A:4018 Script_dResh_Puzzle5
+0A:401E Script_dResh_Puzzle1_Complete
+0A:4022 Script_dResh_Puzzle1_Exit
+0A:40A1 Script_dResh_Puzzle1_First
 0A:40A5 Script_dResh_Puzzle1_Again
+0A:417C Start_dResh_Puzzle1
+0A:4193 .Chicken1Skip
+0A:41A3 .Chicken2Skip
+0A:41B3 .Chicken3Skip
+0A:41C3 .Chicken4Skip
+0A:41FE Interrupt_InvisibleLaser_dResh_Puzzle1
+0A:422E .SalafyFade
+0A:423E .Direction1
+0A:424A .Direction2
+0A:4256 .Direction3
+0A:4262 .Direction4
 13:4640 Hotspot_dResh_Puzzle1
-0A:4297 Script_Hotspot_dResh_Puzzle1_0
+0A:426E Script_dResh_Puzzle1_Dead
+0A:4293 .MaxAttempts
+0A:4297 Hotspot_dResh_Puzzle1_Finish
+0A:42AF .Chicken1Skip
+0A:42BF .Chicken2Skip
+0A:42CF .Chicken3Skip
+0A:42DF .Chicken4Skip
+0A:4347 .MaxAttempts
+0A:4383 .HighScore
+0A:43C8 .HighScore1
+0A:4402 .HighScoreNew
+0A:4B8C Script_dResh_Puzzle2_First
+0A:4467 Script_dResh_Puzzle3_First
+0A:4825 Script_dResh_Puzzle4_First
+0A:51B2 Script_dResh_Puzzle5_First
+0C:6A5A Start_dResh_Main
+0C:6A61 Start_dResh_Main.Prompt
+0C:6A8B Start_dResh_Main.Yes
+0C:6ABA Start_dResh_Main.Slot1
+0C:6AC4 Start_dResh_Main.No
+0C:6B3B Script_dResh_Main
+0C:6BAD Script_dResh_LoadGame
 ;
 ;

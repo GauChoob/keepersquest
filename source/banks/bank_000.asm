@@ -116,7 +116,7 @@ Boot_GameInit:
     call $587D                                    ; $01A9: $CD $7D $58
     call System_Init                            ; $01AC: $CD $63 $08
     xor a                                         ; $01AF: $AF
-    ld [wScript_StartButtonEnabled], a                                 ; $01B0: $EA $31 $C7
+    ld [wScript_StartButtonDisabled], a                                 ; $01B0: $EA $31 $C7
     SwitchROMBank $07
     call $40B8                                    ; $01BB: $CD $B8 $40
     
@@ -126,6 +126,7 @@ Boot_GameInit:
     ld a, $0A                                     ; $01C2: $3E $0A
     ldh [hScript.State + 1], a                                  ; $01C4: $E0 $AC
     ; Demo entry point seems to be: 1A:573A
+    ; Dev entry point seems to be: 0E:4B7A
     ; Entry point: 19:4712
     ld a, $19                                     ; $01C6: $3E $19
     ldh [hScript.Bank], a                                  ; $01C8: $E0 $A8
@@ -389,7 +390,7 @@ Game_Loop:
     cp $01                                        ; $030D: $FE $01
     jr z, jr_000_0333                             ; $030F: $28 $22
 
-    ld a, [wScript_StartButtonEnabled]                                 ; $0311: $FA $31 $C7
+    ld a, [wScript_StartButtonDisabled]                                 ; $0311: $FA $31 $C7
     cp $01                                        ; $0314: $FE $01
     jr z, jr_000_0333                             ; $0316: $28 $1B
 
@@ -400,7 +401,7 @@ Game_Loop:
     ld a, $01                                     ; $031F: $3E $01
     ld [wScript_TransplantTileDisabled], a                                 ; $0321: $EA $33 $C7
     ld [$C734], a                                 ; $0324: $EA $34 $C7
-    ld [wScript_StartButtonEnabled], a                                 ; $0327: $EA $31 $C7
+    ld [wScript_StartButtonDisabled], a                                 ; $0327: $EA $31 $C7
     ld bc, wScript_StartButtonScript                                  ; $032A: $01 $2B $C7
     ld hl, wScript_Text                                  ; $032D: $21 $1F $C7
     call Global_KQ_SetScript                            ; $0330: $CD $03 $19
