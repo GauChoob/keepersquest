@@ -39,9 +39,9 @@ SCRIPT_10_4074::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, AI_Hero, $0C, $06, $D0C0, $00, ACTORSCRIPT0_14_5DBF, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $19, $D2FD, $00, ACTORSCRIPT0_10_40ED, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1B, $D337, $5C, ACTORSCRIPT0_10_40FC, ACTORSCRIPT1_10_4258)
@@ -150,9 +150,9 @@ SCRIPT_10_441F::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $0E, $1D, $D374, $00, ACTORSCRIPT0_10_4499, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $19, $D2FD, $00, ACTORSCRIPT0_10_40ED, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1B, $D337, $5C, ACTORSCRIPT0_10_40FC, ACTORSCRIPT1_10_4258)
@@ -187,9 +187,9 @@ SCRIPT_10_44AA::
     SetByte(RAM_00_A135, $0B)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $18, $0F, $D1DA, $00, ACTORSCRIPT0_10_4521, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $15, $11, $D213, $00, ACTORSCRIPT0_10_4555, ACTORSCRIPT1_10_4566)
     ThatInit(3, AI_01_6E8F, $0D, $1B, $D337, $5C, SCRIPT_15_7878, ACTORSCRIPT1_10_4258)
@@ -254,9 +254,9 @@ SCRIPT_SCENELOADER_10_45A5::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $0E, $1D, $D374, $00, ACTORSCRIPT0_10_461E, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $19, $D2FD, $00, ACTORSCRIPT0_10_40ED, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1B, $D337, $5C, ACTORSCRIPT0_10_40FC, ACTORSCRIPT1_10_4258)
@@ -824,9 +824,9 @@ SCRIPT_10_4F63::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $07, $06, $D0BB, $00, ACTORSCRIPT0_10_5006, ACTORSCRIPT1_19_46E8)
     ThatInit(2, Call_001_4AF8, $0B, $09, $D119, $00, ACTORSCRIPT0_10_5030, ACTORSCRIPT1_19_46E8)
     ThatInit(3, Call_001_4AF8, $0A, $0A, $D136, $30, ACTORSCRIPT0_10_503B, ACTORSCRIPT1_19_46E8)
@@ -939,9 +939,9 @@ SCRIPT_10_518D::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $07, $06, $D0BB, $00, ACTORSCRIPT0_10_5273, ACTORSCRIPT1_19_46E8)
     ThatInit(2, Call_001_4AF8, $0B, $09, $D119, $00, ACTORSCRIPT0_10_5301, ACTORSCRIPT1_19_46E8)
     ThatInit(3, Call_001_4AF8, $0A, $0A, $D136, $30, ACTORSCRIPT0_10_530C, ACTORSCRIPT1_19_46E8)
@@ -1149,9 +1149,9 @@ SCRIPT_10_5464::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $07, $06, $D0BB, $00, ACTORSCRIPT0_10_54D7, ACTORSCRIPT1_19_46E8)
     ThatInit(2, Call_001_4AF8, $09, $08, $D0F9, $00, ACTORSCRIPT0_10_550B, ACTORSCRIPT1_19_46E8)
     ThatInit(3, Call_001_4AF8, $08, $0A, $D134, $5C, ACTORSCRIPT0_10_5524, ACTORSCRIPT1_19_46E8)
@@ -1246,9 +1246,9 @@ SCRIPT_10_5676::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $0E, $1E, $D392, $00, ACTORSCRIPT0_10_56ED, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $1E, $D393, $00, ACTORSCRIPT0_10_5708, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1E, $D391, $5C, ACTORSCRIPT0_10_571D, ACTORSCRIPT1_10_4258)
@@ -1318,9 +1318,9 @@ SCRIPT_10_5803::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $06, $11, $D204, $00, ACTORSCRIPT0_10_5880, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $09, $0C, $D171, $00, ACTORSCRIPT0_10_5998, ACTORSCRIPT1_19_46E8)
     ThatInit(3, AI_01_6E8F, $09, $0A, $D135, $5C, ACTORSCRIPT0_10_5C4E, ACTORSCRIPT1_19_46E8)
@@ -1425,7 +1425,7 @@ ACTORSCRIPT0_10_5998::
         ScriptDelay(SCRIPT_15_7488, 8)
     }
     Sync(1, 2)
-    ThisSetAnimSingle(SCRIPT_19_46E7)
+    ThisSetAnimSingle(Actor_Null)
     End()
 
 ACTORSCRIPT0_10_5C4E::
@@ -1605,9 +1605,9 @@ SCRIPT_10_609A::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $0E, $1E, $D392, $00, ACTORSCRIPT0_10_6111, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $1E, $D393, $00, ACTORSCRIPT0_10_6136, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1E, $D391, $5C, ACTORSCRIPT0_10_6147, ACTORSCRIPT1_10_4258)
@@ -1695,9 +1695,9 @@ SCRIPT_10_62EE::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
-    LoadHotspots(HOTSPOTX_13_44AA)
+    LoadHotspots(Hotspot_Core_Main)
     LoadMapMask(METAMAP_MASK_2C_4976, COLLMAP_MASK_2D_4F9D)
-    LoadTriggers(TRIGGERX_13_44C7)
+    LoadTriggers(Trigger_Core_Main)
     ThatInit(0, Call_001_4AF8, $0E, $1E, $D392, $00, ACTORSCRIPT0_10_6365, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $0F, $1E, $D393, $00, ACTORSCRIPT0_10_63A2, ACTORSCRIPT1_10_410B)
     ThatInit(3, AI_01_6E8F, $0D, $1E, $D391, $5C, ACTORSCRIPT0_10_63C1, ACTORSCRIPT1_10_4258)
@@ -1904,45 +1904,45 @@ SCRIPT_10_6AB7::
     End()
 
 SCRIPT_10_6ABD::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D22B, $09, $0B, $D22B, $12, $0F)
     End()
 
 SCRIPT_10_6AD2::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D15C, $05, $07, $D15C, $0B, $12)
     End()
 
 SCRIPT_10_6AE7::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D0DC, $0A, $05, $D0DC, $07, $0A)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) == w65535)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) == w65535)#, Actor_Null)
     TransplantMapMask($D2B2, $0C, $06, $D09B, $05, $05)
     End()
 
 SCRIPT_10_6B11::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D044, $09, $07, $D044, $02, $08)
     End()
 
 SCRIPT_10_6B26::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00100000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D14F, $08, $0A, $D14F, $0B, $05)
     End()
 
 SCRIPT_10_6B3B::
     End()
 
-SCRIPT_10_6B3C::
+Script_Bograth_Puzzle5_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_10_6B40::
+Script_Bograth_Puzzle5_Again::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Bograth_Puzzle5)
-    LoadHotspots(HOTSPOTX_13_431A)
+    LoadHotspots(Hotspot_Bograth_Puzzle5)
     ThatInit(0, AI_Hero, $01, $12, $D169, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
     ThatInit(3, AI_01_70E1, $05, $11, $D159, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
     ThatInit(4, AI_01_70E1, $0A, $10, $D14A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
@@ -2004,17 +2004,17 @@ SCRIPT_STARTBUTTON_10_6C9C::
     End()
 
 SCRIPT_10_6CC1::
-    ThisSetAnimSingle(SCRIPT_19_46E7)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_10_6CD8)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
 
-SCRIPT_10_6CD8::
+.MaxFailedAttempts::
     StartSFX0(SFXID_DarkAttack)
     Delay(16)
     PalClearBase(0, 16, $00, $00, $00, 255)
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
-    LongJump(SCRIPT_10_6B40)
+    LongJump(Script_Bograth_Puzzle5_Again)
 
 ACTORSCRIPT1_10_6CEA::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -2482,35 +2482,35 @@ SCRIPT_10_714F::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_10_71AA)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, SCRIPT_10_71E6)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_17_5CDA)
 
-SCRIPT_10_71AA::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, SCRIPT_10_71E6)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_17_5CDA)
 
-SCRIPT_10_71E6::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A186])#, SCRIPT_10_7265)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A186])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A186)
-    LongJumpIf(#(c[xVARBYTE_00_A186] == c1)#, SCRIPT_10_722B)
+    LongJumpIf(#(c[xVARBYTE_00_A186] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_17_5CDA)
 
-SCRIPT_10_722B::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_17_5CDA)
 
-SCRIPT_10_7265::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A186)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()

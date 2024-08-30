@@ -90,6 +90,10 @@ def _preview(scene_label: str, scene_address: utils.BankAddress, sym: utils.SymF
 
     # Read Scene file
     scenery = scene.Scene.init_from_rom(sym, rom, scene_address)
+    if scene_label == 'Scene_dResh_Puzzle5_Mask':
+        # Since this one map is hidden, render the mask maps instead (hardcoded)
+        scenery.metamap.bankaddress = utils.BankAddress(0x27, 0x5760)
+        scenery.collmap.bankaddress = utils.BankAddress(0x29, 0x48EB)
     scenery.load_references_from_rom()
 
     pal = scenery.palette.contents

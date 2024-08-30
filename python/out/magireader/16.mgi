@@ -1,23 +1,23 @@
 
 SCRIPT_16_4000::
     StartSong(SONGID_Descent)
-    LongJump(SCRIPT_16_5728)
+    LongJump(Script_Core_Puzzle1_First)
 
 SCRIPT_16_4006::
     StartSong(SONGID_Descent)
-    LongJump(SCRIPT_16_4759)
+    LongJump(Script_Core_Puzzle2_First)
 
 SCRIPT_16_400C::
     StartSong(SONGID_Descent)
-    LongJump(SCRIPT_16_50F1)
+    LongJump(Script_Core_Puzzle3_First)
 
 SCRIPT_16_4012::
     StartSong(SONGID_Descent)
-    LongJump(SCRIPT_16_609D)
+    LongJump(Script_Core_Puzzle4_First)
 
 SCRIPT_16_4018::
     StartSong(SONGID_Descent)
-    LongJump(SCRIPT_16_409D)
+    LongJump(Script_Core_Puzzle5_First)
 
 SCRIPT_16_401E::
     OrByte(MATHADDRESS_00_A03C, %00000001)
@@ -72,19 +72,19 @@ SCRIPT_16_4096::
     HeroToDoor($06, $10)
     LongJump(SCRIPT_10_441F)
 
-SCRIPT_16_409D::
+Script_Core_Puzzle5_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_16_40A1::
-    SetByte(RAM_00_A133, $00)
+Script_Core_Puzzle5_Again::
+    SetByte(xPuzzleCounter, $00)
     AndByte(RAM_00_A02A, %11110111)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Puzzle5)
-    LoadHotspots(HOTSPOTX_13_44E8)
-    LoadTriggers(TRIGGERX_13_44ED)
+    LoadHotspots(Hotspot_Core_Puzzle5)
+    LoadTriggers(Trigger_Core_Puzzle5)
     ThatInit(0, AI_Hero, $04, $11, $D158, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_InvisibleLaser, $07, $04, $D057, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     ThatInit(3, AI_InvisibleLaser, $05, $05, $D069, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
@@ -168,17 +168,17 @@ SCRIPT_16_41E5::
     End()
 
 SCRIPT_16_41EA::
-    ThisSetAnimSingle(SCRIPT_19_46E7)
+    ThisSetAnimSingle(Actor_Null)
     StartSFX0(SFXID_DarkAttack)
     Delay(16)
     PalClearBase(0, 16, $00, $00, $00, 255)
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_16_420F)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
 
-SCRIPT_16_420F::
-    LongJump(SCRIPT_16_40A1)
+.MaxFailedAttempts::
+    LongJump(Script_Core_Puzzle5_Again)
 
 SCRIPT_16_4213::
     StartSong(SONGID_GetItem)
@@ -186,35 +186,35 @@ SCRIPT_16_4213::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_426F)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00010000) != c0)#, SCRIPT_16_42AB)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18C, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4086)
 
-SCRIPT_16_426F::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00010000) != c0)#, SCRIPT_16_42AB)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18C, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4086)
 
-SCRIPT_16_42AB::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18C])#, SCRIPT_16_432A)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18C])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A18C)
-    LongJumpIf(#(c[xVARBYTE_00_A18C] == c1)#, SCRIPT_16_42F0)
+    LongJumpIf(#(c[xVARBYTE_00_A18C] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_4086)
 
-SCRIPT_16_42F0::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_4086)
 
-SCRIPT_16_432A::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A18C)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -225,7 +225,7 @@ SCRIPT_16_432A::
 SCRIPT_16_438F::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_43A8, $FE, $D016)
     StartSFX0(SFXID_PhysicalAttack)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
     SetScriptScroll(SCRIPT_16_440C)
 
 SCRIPT_TRIGGERALREADYON_16_43A8::
@@ -235,7 +235,7 @@ SCRIPT_16_43AC::
     InitSkip(SCRIPT_16_43C8)
     TriggerOnce(xBIT_00_A028_1, SCRIPT_16_43C8, $FE, $D026)
     StartSFX0(SFXID_PhysicalAttack)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
     SetScriptScroll(SCRIPT_16_440C)
 
 SCRIPT_16_43C8::
@@ -245,7 +245,7 @@ SCRIPT_16_43CC::
     InitSkip(SCRIPT_16_43E8)
     TriggerOnce(xBIT_00_A028_2, SCRIPT_16_43E8, $FE, $D0DE)
     StartSFX0(SFXID_PhysicalAttack)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
     SetScriptScroll(SCRIPT_16_440C)
 
 SCRIPT_16_43E8::
@@ -255,7 +255,7 @@ SCRIPT_16_43EC::
     InitSkip(SCRIPT_16_4408)
     TriggerOnce(xBIT_00_A028_3, SCRIPT_16_4408, $FE, $D116)
     StartSFX0(SFXID_PhysicalAttack)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
     SetScriptScroll(SCRIPT_16_440C)
 
 SCRIPT_16_4408::
@@ -264,7 +264,7 @@ SCRIPT_16_4408::
 SCRIPT_16_440C::
     SetScriptText(SCRIPT_16_442C)
     WaitEventText(1)
-    Switch(#c[RAM_00_A133]#) {
+    Switch(#c[xPuzzleCounter]#) {
         Case(1, SCRIPT_16_4441)
         Case(2, SCRIPT_16_4508)
         Case(3, SCRIPT_16_45AE)
@@ -281,17 +281,17 @@ SCRIPT_16_442C::
     End()
 
 SCRIPT_16_4441::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(2, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(3, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(4, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(5, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(6, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(7, $00, $00, $00, COLLID_WALL, $FB)
     ThatInit(2, AI_InvisibleLaser, $0B, $02, $D033, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     Delay(1)
@@ -308,15 +308,15 @@ SCRIPT_16_4441::
     End()
 
 SCRIPT_16_4508::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(3, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(4, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(5, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(6, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(7, $00, $00, $00, COLLID_WALL, $FB)
     ThatInit(3, AI_InvisibleLaser, $0C, $06, $D084, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     Delay(1)
@@ -331,15 +331,15 @@ SCRIPT_16_4508::
     End()
 
 SCRIPT_16_45AE::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(3, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(4, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(5, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(6, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(7, $00, $00, $00, COLLID_WALL, $FB)
     ThatInit(2, AI_InvisibleLaser, $01, $05, $D065, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     Delay(1)
@@ -356,15 +356,15 @@ SCRIPT_16_45AE::
     End()
 
 SCRIPT_16_4665::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(3, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(4, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(5, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(6, $00, $00, $00, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThatDrawTile(7, $00, $00, $00, COLLID_WALL, $FB)
     ThatInit(2, AI_InvisibleLaser, $0B, $02, $D033, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     Delay(1)
@@ -378,23 +378,23 @@ SCRIPT_16_4665::
     Delay(1)
     ThatInit(7, AI_InvisibleLaser, $0E, $0F, $D13A, $00, ACTORSCRIPT0_16_4749, ACTORSCRIPT1_16_4187)
     Delay(1)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($06, $11, $D089, COLLID_SPACE, $16)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($07, $11, $D09D, COLLID_SPACE, $16)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($08, $11, $D0B1, COLLID_SPACE, $16)
     End()
 
 ACTORSCRIPT0_16_4749::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     End()
 
-SCRIPT_16_4759::
+Script_Core_Puzzle2_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_16_475D::
+Script_Core_Puzzle2_Again::
     AndByte(RAM_00_A02A, %11110111)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -402,8 +402,8 @@ SCRIPT_16_475D::
     AndByte(RAM_00_A02B, %11111011)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Puzzle2)
-    LoadHotspots(HOTSPOTX_13_44FE)
-    LoadTriggers(TRIGGERX_13_450B)
+    LoadHotspots(Hotspot_Core_Puzzle2)
+    LoadTriggers(Trigger_Core_Puzzle2)
     ThatInit(0, AI_Hero, $02, $03, $D03E, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6DE8, $07, $07, $D093, $00, ACTORSCRIPT0_16_4FB3, ACTORSCRIPT1_19_46E8)
     ThatInit(3, AI_01_6DE8, $0D, $04, $D05D, $00, ACTORSCRIPT0_16_4FFB, ACTORSCRIPT1_19_46E8)
@@ -457,7 +457,7 @@ SCRIPT_16_4849::
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJump(SCRIPT_16_475D)
+    LongJump(Script_Core_Puzzle2_Again)
 
 SCRIPT_16_4871::
     StartSong(SONGID_GetItem)
@@ -465,35 +465,35 @@ SCRIPT_16_4871::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_48CD)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, SCRIPT_16_4909)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4029)
 
-SCRIPT_16_48CD::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, SCRIPT_16_4909)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4029)
 
-SCRIPT_16_4909::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, SCRIPT_16_4988)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A18D)
-    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, SCRIPT_16_494E)
+    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_4029)
 
-SCRIPT_16_494E::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_4029)
 
-SCRIPT_16_4988::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A18D)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -507,35 +507,35 @@ SCRIPT_16_49ED::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍a SECRET!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_4A49)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, SCRIPT_16_4A85)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4034)
 
-SCRIPT_16_4A49::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, SCRIPT_16_4A85)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4034)
 
-SCRIPT_16_4A85::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, SCRIPT_16_4B04)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A18D)
-    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, SCRIPT_16_4ACA)
+    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_4034)
 
-SCRIPT_16_4ACA::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_4034)
 
-SCRIPT_16_4B04::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A18D)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -546,12 +546,12 @@ SCRIPT_16_4B04::
 SCRIPT_16_4B69::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_4BAB, $FE, $D02C)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($03, $04, $D040, COLLID_TR01, $FF)
     VarByteExpr(RAM_00_A127, #(c[RAM_00_A127] - c1)#)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11111101)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0A, $00, $D0C8, COLLID_WALL, $6E)
 
 SCRIPT_TRIGGERALREADYON_16_4BAB::
@@ -560,11 +560,11 @@ SCRIPT_TRIGGERALREADYON_16_4BAB::
 SCRIPT_16_4BAF::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_16_4BEC, $FE, $D040)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($02, $04, $D02C, COLLID_TR00, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11111110)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0A, $00, $D0C8, COLLID_WALL, $6F)
     LongJump(SCRIPT_16_4F29)
 
@@ -574,11 +574,11 @@ SCRIPT_TRIGGERALREADYON_16_4BEC::
 SCRIPT_16_4BF0::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_16_4C2D, $FE, $D039)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($03, $11, $D04D, COLLID_TR03, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11110111)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0B, $00, $D0DC, COLLID_WALL, $6F)
     LongJump(SCRIPT_16_4F29)
 
@@ -588,11 +588,11 @@ SCRIPT_TRIGGERALREADYON_16_4C2D::
 SCRIPT_16_4C31::
     TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_16_4C6A, $FE, $D04D)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($02, $11, $D039, COLLID_TR02, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11111011)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0B, $00, $D0DC, COLLID_WALL, $6E)
 
 SCRIPT_TRIGGERALREADYON_16_4C6A::
@@ -601,11 +601,11 @@ SCRIPT_TRIGGERALREADYON_16_4C6A::
 SCRIPT_16_4C6E::
     TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_16_4CAB, $FE, $D142)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($11, $02, $D156, COLLID_TR05, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11011111)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0C, $00, $D0F0, COLLID_WALL, $6F)
     LongJump(SCRIPT_16_4F29)
 
@@ -615,11 +615,11 @@ SCRIPT_TRIGGERALREADYON_16_4CAB::
 SCRIPT_16_4CAF::
     TriggerOnce(xBIT_00_A028_5, SCRIPT_TRIGGERALREADYON_16_4CE8, $FE, $D156)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($10, $02, $D142, COLLID_TR04, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5, %11101111)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0C, $00, $D0F0, COLLID_WALL, $6E)
 
 SCRIPT_TRIGGERALREADYON_16_4CE8::
@@ -628,14 +628,14 @@ SCRIPT_TRIGGERALREADYON_16_4CE8::
 SCRIPT_16_4CEC::
     TriggerOnce(xBIT_00_A028_6, SCRIPT_TRIGGERALREADYON_16_4D38, $FE, $D13C)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($10, $10, $D150, COLLID_TR07, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($11, $10, $D164, COLLID_TR08, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6, %01111111)
     AndByte(RAM_00_A029, %11111110)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0D, $00, $D104, COLLID_WALL, $6E)
 
 SCRIPT_TRIGGERALREADYON_16_4D38::
@@ -644,14 +644,14 @@ SCRIPT_TRIGGERALREADYON_16_4D38::
 SCRIPT_16_4D3C::
     TriggerOnce(xBIT_00_A028_7, SCRIPT_TRIGGERALREADYON_16_4D8C, $FE, $D150)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0F, $10, $D13C, COLLID_TR06, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($11, $10, $D164, COLLID_TR08, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %10111111)
     AndByte(RAM_00_A029, %11111110)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0D, $00, $D104, COLLID_WALL, $6F)
     LongJump(SCRIPT_16_4F29)
 
@@ -661,14 +661,14 @@ SCRIPT_TRIGGERALREADYON_16_4D8C::
 SCRIPT_16_4D90::
     TriggerOnce(xBIT_00_A029_0, SCRIPT_TRIGGERALREADYON_16_4DDC, $FE, $D164)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0F, $10, $D13C, COLLID_TR06, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($10, $10, $D150, COLLID_TR07, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %10111111)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %01111111)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_19_46DC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
     TransplantTile($0D, $00, $D104, COLLID_WALL, $6E)
 
 SCRIPT_TRIGGERALREADYON_16_4DDC::
@@ -731,43 +731,43 @@ SCRIPT_16_4EB0::
     TransplantMap($D147, $03, $01, $D15B, $11, $07)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010) == c0)#, SCRIPT_16_4ED7)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0A, $00, $D0C8, COLLID_WALL, $6F)
 
 SCRIPT_16_4ED7::
     LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100) == c0)#, SCRIPT_16_4EF1)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $00, $D0DC, COLLID_WALL, $6F)
 
 SCRIPT_16_4EF1::
     LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000) == c0)#, SCRIPT_16_4F0B)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0C, $00, $D0F0, COLLID_WALL, $6F)
 
 SCRIPT_16_4F0B::
     LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000) == c0)#, SCRIPT_16_4F25)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0D, $00, $D104, COLLID_WALL, $6F)
 
 SCRIPT_16_4F25::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_4F29::
-    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010) == c0)#, SCRIPT_19_46E7)
-    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100) == c0)#, SCRIPT_19_46E7)
-    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000) == c0)#, SCRIPT_19_46E7)
-    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000) == c0)#, SCRIPT_19_46E7)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010) == c0)#, Actor_Null)
+    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100) == c0)#, Actor_Null)
+    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000) == c0)#, Actor_Null)
+    LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000) == c0)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($09, $01, $D0B5, COLLID_SPACE, $45)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($09, $02, $D0B6, COLLID_SPACE, $22)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0A, $01, $D0C9, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $01, $D0DD, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0C, $01, $D0F1, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0D, $01, $D105, COLLID_HS01, $F9)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
@@ -877,10 +877,10 @@ SCRIPT_16_50D3::
     }
     LongJump(ACTORSCRIPT0_16_508B)
 
-SCRIPT_16_50F1::
+Script_Core_Puzzle3_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_16_50F5::
+Script_Core_Puzzle3_Again::
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11110111)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
     AndByte(RAM_00_A02B/xBIT_00_A02B_0, %11111011)
@@ -889,11 +889,11 @@ SCRIPT_16_50F5::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Puzzle3)
-    LoadHotspots(HOTSPOTX_13_4544)
-    LoadTriggers(TRIGGERX_13_4551)
+    LoadHotspots(Hotspot_Core_Puzzle3)
+    LoadTriggers(Trigger_Core_Puzzle3)
     ThatInit(0, AI_Hero, $02, $03, $D03E, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, AI_InvisibleLaser, $02, $08, $D0A2, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_5219)
-    ThatInit(3, AI_InvisibleLaser, $0A, $09, $D0BE, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_5219)
+    ThatInit(2, AI_InvisibleLaser, $02, $08, $D0A2, $00, Actor_Null, ACTORSCRIPT1_16_5219)
+    ThatInit(3, AI_InvisibleLaser, $0A, $09, $D0BE, $00, Actor_Null, ACTORSCRIPT1_16_5219)
     ThatInit(4, AI_01_6DE8, $01, $0D, $D105, $04, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
     ThatInit(5, AI_01_6DE8, $0E, $04, $D05E, $04, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
     ThatInit(6, AI_01_6DE8, $11, $0B, $D0ED, $04, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
@@ -983,17 +983,17 @@ SCRIPT_16_5277::
     End()
 
 SCRIPT_16_527C::
-    ThisSetAnimSingle(SCRIPT_19_46E7)
+    ThisSetAnimSingle(Actor_Null)
     StartSFX0(SFXID_DarkAttack)
     Delay(16)
     PalClearBase(0, 16, $00, $00, $00, 255)
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_16_52A1)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
 
-SCRIPT_16_52A1::
-    LongJump(SCRIPT_16_50F5)
+.MaxFailedAttempts::
+    LongJump(Script_Core_Puzzle3_Again)
 
 SCRIPT_16_52A5::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1005,7 +1005,7 @@ SCRIPT_16_52A5::
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJump(SCRIPT_16_50F5)
+    LongJump(Script_Core_Puzzle3_Again)
 
 SCRIPT_16_52CD::
     StartSong(SONGID_GetItem)
@@ -1013,35 +1013,35 @@ SCRIPT_16_52CD::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_5329)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) != c0)#, SCRIPT_16_5365)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18E, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4061)
 
-SCRIPT_16_5329::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) != c0)#, SCRIPT_16_5365)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18E, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_4061)
 
-SCRIPT_16_5365::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18E])#, SCRIPT_16_53E4)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18E])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A18E)
-    LongJumpIf(#(c[xVARBYTE_00_A18E] == c1)#, SCRIPT_16_53AA)
+    LongJumpIf(#(c[xVARBYTE_00_A18E] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_4061)
 
-SCRIPT_16_53AA::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_4061)
 
-SCRIPT_16_53E4::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A18E)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -1128,7 +1128,7 @@ ACTORSCRIPT0_16_5572::
         ScriptDelay(SCRIPT_11_5766, 72)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $01, $D03D, COLLID_TR00, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1141,7 +1141,7 @@ ACTORSCRIPT0_16_559C::
         ScriptDelay(SCRIPT_11_545A, 72)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $04, $D02C, COLLID_TR01, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1156,7 +1156,7 @@ ACTORSCRIPT0_16_55C6::
         ScriptDelay(SCRIPT_11_542D, 144)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_TR02, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1202,7 +1202,7 @@ ACTORSCRIPT0_16_5658::
         ScriptDelay(SCRIPT_11_555E, 56)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $10, $D128, COLLID_TR05, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11011111)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1219,7 +1219,7 @@ ACTORSCRIPT0_16_5682::
         ScriptDelay(SCRIPT_11_5766, 96)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($11, $0D, $D161, COLLID_TR06, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %10111111)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1236,7 +1236,7 @@ ACTORSCRIPT0_16_56BC::
         ScriptDelay(SCRIPT_11_5766, 64)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $06, $D11E, COLLID_TR07, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %01111111)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
@@ -1251,19 +1251,19 @@ ACTORSCRIPT0_16_56F6::
         ScriptDelay(SCRIPT_11_5739, 16)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($11, $04, $D158, COLLID_TR08, $FF)
     AndByte(RAM_00_A029/xBIT_00_A029_0, %11111110)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
     End()
 
-SCRIPT_16_5728::
+Script_Core_Puzzle1_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_16_572C::
+Script_Core_Puzzle1_Again::
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11110111)
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11111110)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     SetByte(RAM_00_A128, $00)
     AndByte(RAM_00_A02B/xBIT_00_A02B_0, %11111011)
     SceneNew()
@@ -1271,14 +1271,14 @@ SCRIPT_16_572C::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Puzzle1)
-    LoadHotspots(HOTSPOTX_13_4576)
-    LoadTriggers(TRIGGERX_13_4583)
+    LoadHotspots(Hotspot_Core_Puzzle1)
+    LoadTriggers(Trigger_Core_Puzzle1)
     ThatInit(0, AI_Hero, $03, $04, $D053, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, AI_InvisibleLaser, $02, $0A, $D0CA, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_59B4)
-    ThatInit(3, AI_InvisibleLaser, $02, $0C, $D0F2, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_59B4)
-    ThatInit(4, AI_InvisibleLaser, $02, $0F, $D12E, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_59B4)
-    ThatInit(8, AI_InvisibleLaser, $0E, $09, $D0C2, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_59B4)
-    ThatInit(9, AI_InvisibleLaser, $12, $09, $D0C6, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_59B4)
+    ThatInit(2, AI_InvisibleLaser, $02, $0A, $D0CA, $00, Actor_Null, ACTORSCRIPT1_16_59B4)
+    ThatInit(3, AI_InvisibleLaser, $02, $0C, $D0F2, $00, Actor_Null, ACTORSCRIPT1_16_59B4)
+    ThatInit(4, AI_InvisibleLaser, $02, $0F, $D12E, $00, Actor_Null, ACTORSCRIPT1_16_59B4)
+    ThatInit(8, AI_InvisibleLaser, $0E, $09, $D0C2, $00, Actor_Null, ACTORSCRIPT1_16_59B4)
+    ThatInit(9, AI_InvisibleLaser, $12, $09, $D0C6, $00, Actor_Null, ACTORSCRIPT1_16_59B4)
     ThatInit(10, AI_01_6DE8, $0F, $04, $D05F, $0C, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
     ThatInit(11, AI_01_6DE8, $0F, $0D, $D113, $0C, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
@@ -1300,58 +1300,58 @@ SCRIPT_16_572C::
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11110111)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11101111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_16_598B)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0A, $02, $D0CA, COLLID_WALL, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0C, $02, $D0F2, COLLID_WALL, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $02, $D11A, COLLID_WALL, $FC)
 
 SCRIPT_16_583A::
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0D, $02, $D106, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0C, $02, $D0F2, COLLID_WALL, $FC)
     ThatLoc(3, $00, $00, $02, $0C, $D0F2)
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0C, $02, $D0F2, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $02, $D11A, COLLID_WALL, $FC)
     ThatLoc(3, $00, $00, $02, $0E, $D11A)
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0F, $02, $D12E, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $02, $D0DE, COLLID_WALL, $FC)
     ThatLoc(4, $00, $00, $02, $0B, $D0DE)
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0A, $02, $D0CA, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $02, $D0DE, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0D, $02, $D106, COLLID_WALL, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0F, $02, $D12E, COLLID_WALL, $FC)
     ThatLoc(2, $00, $00, $02, $0D, $D106)
     ThatLoc(4, $00, $00, $02, $0F, $D12E)
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $02, $D11A, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0F, $02, $D12E, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0A, $02, $D0CA, COLLID_WALL, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $02, $D0DE, COLLID_WALL, $FC)
     ThatLoc(3, $00, $00, $02, $0A, $D0CA)
     ThatLoc(4, $00, $00, $02, $0B, $D0DE)
     Delay(64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0B, $02, $D0DE, COLLID_WALL, $FB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0F, $02, $D12E, COLLID_WALL, $FC)
     ThatLoc(2, $00, $00, $02, $0A, $D0CA)
     ThatLoc(3, $00, $00, $02, $0D, $D106)
@@ -1418,17 +1418,17 @@ SCRIPT_16_5A12::
     End()
 
 SCRIPT_16_5A17::
-    ThisSetAnimSingle(SCRIPT_19_46E7)
+    ThisSetAnimSingle(Actor_Null)
     StartSFX0(SFXID_DarkAttack)
     Delay(16)
     PalClearBase(0, 16, $00, $00, $00, 255)
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_16_5A3C)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
 
-SCRIPT_16_5A3C::
-    LongJump(SCRIPT_16_572C)
+.MaxFailedAttempts::
+    LongJump(Script_Core_Puzzle1_Again)
 
 SCRIPT_16_5A40::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1440,44 +1440,44 @@ SCRIPT_16_5A40::
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJump(SCRIPT_16_572C)
+    LongJump(Script_Core_Puzzle1_Again)
 
 SCRIPT_16_5A68::
     StartSong(SONGID_GetItem)
-    SetScriptMaster(SCRIPT_19_46E7)
+    SetScriptMaster(Actor_Null)
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_5AC8)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) != c0)#, SCRIPT_16_5B04)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_401E)
 
-SCRIPT_16_5AC8::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) != c0)#, SCRIPT_16_5B04)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_401E)
 
-SCRIPT_16_5B04::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18F])#, SCRIPT_16_5B83)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18F])#, .HighscoreNew)
     FormatChar(xVARBYTE_00_A18F)
-    LongJumpIf(#(c[xVARBYTE_00_A18F] == c1)#, SCRIPT_16_5B49)
+    LongJumpIf(#(c[xVARBYTE_00_A18F] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_401E)
 
-SCRIPT_16_5B49::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_401E)
 
-SCRIPT_16_5B83::
+.HighscoreNew::
     FormatChar(xVARBYTE_00_A18F)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -1486,136 +1486,136 @@ SCRIPT_16_5B83::
     LongJump(SCRIPT_16_401E)
 
 SCRIPT_16_5BE8::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $03, $D02B, COLLID_TR00, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $04, $D02C, COLLID_TR01, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $05, $D02D, COLLID_TR02, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $03, $D017, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $04, $D018, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $05, $D019, COLLID_WALL, $6E)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     SetByte(RAM_00_A128, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5C5A::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_5CAD, $FE, $D02B)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $03, $D017, COLLID_WALL, $6F)
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_16_5CB1)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c[RAM_00_A128])#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c[RAM_00_A128])#)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
     LongJumpIf(#(c[RAM_00_A128] == c3)#, SCRIPT_16_5BE8)
-    LongJumpIf(#(c[RAM_00_A133] == c7)#, SCRIPT_16_5F03)
+    LongJumpIf(#(c[xPuzzleCounter] == c7)#, SCRIPT_16_5F03)
 
 SCRIPT_TRIGGERALREADYON_16_5CAD::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5CB1::
-    SetByte(RAM_00_A133, $01)
+    SetByte(xPuzzleCounter, $01)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000001)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $04, $D02C, COLLID_TR01, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $05, $D02D, COLLID_TR02, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D023, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $04, $D018, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $05, $D019, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0E, $D022, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $03, $D017, COLLID_WALL, $6F)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5D3D::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_16_5D90, $FE, $D02C)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $04, $D018, COLLID_WALL, $6F)
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_16_5D94)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c3)#)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c[RAM_00_A128])#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c3)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c[RAM_00_A128])#)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
     LongJumpIf(#(c[RAM_00_A128] == c3)#, SCRIPT_16_5BE8)
-    LongJumpIf(#(c[RAM_00_A133] == c7)#, SCRIPT_16_5F03)
+    LongJumpIf(#(c[xPuzzleCounter] == c7)#, SCRIPT_16_5F03)
 
 SCRIPT_TRIGGERALREADYON_16_5D90::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5D94::
-    SetByte(RAM_00_A133, $02)
+    SetByte(xPuzzleCounter, $02)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000010)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $03, $D02B, COLLID_TR00, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $05, $D02D, COLLID_TR02, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0E, $D022, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $03, $D017, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $05, $D019, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D023, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $04, $D018, COLLID_WALL, $6F)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5E20::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_16_5E73, $FE, $D02D)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $05, $D019, COLLID_WALL, $6F)
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_16_5E77)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c5)#)
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c[RAM_00_A128])#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c5)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c[RAM_00_A128])#)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
     LongJumpIf(#(c[RAM_00_A128] == c3)#, SCRIPT_16_5BE8)
-    LongJumpIf(#(c[RAM_00_A133] == c7)#, SCRIPT_16_5F03)
+    LongJumpIf(#(c[xPuzzleCounter] == c7)#, SCRIPT_16_5F03)
 
 SCRIPT_TRIGGERALREADYON_16_5E73::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_5E77::
-    SetByte(RAM_00_A133, $03)
+    SetByte(xPuzzleCounter, $03)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000100)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $03, $D02B, COLLID_TR00, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $04, $D02C, COLLID_TR01, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0E, $D022, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D023, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $03, $D017, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $04, $D018, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $05, $D019, COLLID_WALL, $6F)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
@@ -1627,9 +1627,9 @@ SCRIPT_16_5F03::
 
 SCRIPT_16_5F1B::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00001000)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FE)
-    Switch(#c[RAM_00_A133]#) {
+    Switch(#c[xPuzzleCounter]#) {
         Case(0, SCRIPT_16_5F47)
         Case(1, SCRIPT_16_5FBA)
         Case(2, SCRIPT_16_5FC3)
@@ -1637,21 +1637,21 @@ SCRIPT_16_5F1B::
     }
 
 SCRIPT_16_5F47::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0E, $D022, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D023, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_WALL, $6F)
     Delay(8)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0E, $D022, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D023, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $10, $D024, COLLID_WALL, $6E)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11110111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FF)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
@@ -1676,7 +1676,7 @@ ACTORSCRIPT0_16_5FD5::
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11110111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FF)
     End()
 
@@ -1689,7 +1689,7 @@ ACTORSCRIPT0_16_5FFF::
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11110111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FF)
     End()
 
@@ -1703,13 +1703,13 @@ ACTORSCRIPT0_16_6029::
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11110111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FF)
     End()
 
 SCRIPT_16_6057::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00010000)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $11, $D129, COLLID_TR03, $FE)
     ThatScript(11, ACTORSCRIPT0_16_6073)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
@@ -1723,33 +1723,33 @@ ACTORSCRIPT0_16_6073::
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11101111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $11, $D129, COLLID_TR04, $FF)
     End()
 
-SCRIPT_16_609D::
+Script_Core_Puzzle4_First::
     SetByte(xNumberOfAttempts, $01)
 
-SCRIPT_16_60A1::
+Script_Core_Puzzle4_Again::
     AndByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %11110111)
     SetByte(RAM_00_A128, $00)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     AndByte(RAM_00_A02B/xBIT_00_A02B_0, %11111011)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Puzzle4)
-    LoadHotspots(HOTSPOTX_13_4598)
-    LoadTriggers(TRIGGERX_13_45C9)
+    LoadHotspots(Hotspot_Core_Puzzle4)
+    LoadTriggers(Trigger_Core_Puzzle4)
     ThatInit(0, AI_Hero, $0E, $0D, $D194, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, AI_InvisibleLaser, $06, $18, $D2D6, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(3, AI_InvisibleLaser, $0B, $18, $D2DB, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(4, AI_InvisibleLaser, $09, $19, $D2F7, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(5, AI_InvisibleLaser, $0E, $19, $D2FC, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(6, AI_InvisibleLaser, $04, $1A, $D310, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(7, AI_InvisibleLaser, $0C, $1B, $D336, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(8, AI_InvisibleLaser, $08, $1C, $D350, $08, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
+    ThatInit(2, AI_InvisibleLaser, $06, $18, $D2D6, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(3, AI_InvisibleLaser, $0B, $18, $D2DB, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(4, AI_InvisibleLaser, $09, $19, $D2F7, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(5, AI_InvisibleLaser, $0E, $19, $D2FC, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(6, AI_InvisibleLaser, $04, $1A, $D310, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(7, AI_InvisibleLaser, $0C, $1B, $D336, $08, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(8, AI_InvisibleLaser, $08, $1C, $D350, $08, Actor_Null, ACTORSCRIPT1_16_634A)
     ThatInit(10, AI_01_6DE8, $07, $04, $D07F, $04, ACTORSCRIPT0_16_6D43, ACTORSCRIPT1_19_46E8)
     ThatInit(11, AI_01_6DE8, $16, $0D, $D19C, $04, SCRIPT_11_5400, ACTORSCRIPT1_19_46E8)
     ThatInit(18, AI_01_6DE8, $02, $11, $D200, $04, ACTORSCRIPT0_16_6D77, ACTORSCRIPT1_19_46E8)
@@ -1808,49 +1808,49 @@ SCRIPT_STARTBUTTON_16_620E::
 SCRIPT_16_6237::
     LongJumpIf(#(c[RAM_00_A13C] == c1)#, SCRIPT_16_633B)
     ThatDelete(3)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $0B, $D2DB, COLLID_WALL, $FB)
     ThatDelete(5)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $0E, $D2FC, COLLID_WALL, $FB)
     ThatDelete(6)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1A, $04, $D310, COLLID_WALL, $FB)
     ThatDelete(8)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1C, $08, $D350, COLLID_WALL, $FB)
     Delay(15)
     ThatStart(2)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $06, $D2D6, COLLID_WALL, $FC)
     ThatStart(4)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $09, $D2F7, COLLID_WALL, $FC)
     ThatStart(7)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1B, $0C, $D336, COLLID_WALL, $FC)
     Delay(50)
     ThatDelete(2)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $06, $D2D6, COLLID_WALL, $FB)
     ThatDelete(4)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $09, $D2F7, COLLID_WALL, $FB)
     ThatDelete(7)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1B, $0C, $D336, COLLID_WALL, $FB)
     Delay(15)
     ThatStart(3)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $0B, $D2DB, COLLID_WALL, $FC)
     ThatStart(5)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $0E, $D2FC, COLLID_WALL, $FC)
     ThatStart(6)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1A, $04, $D310, COLLID_WALL, $FC)
     ThatStart(8)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1C, $08, $D350, COLLID_WALL, $FC)
     Delay(50)
     LongJump(SCRIPT_16_6237)
@@ -1911,17 +1911,17 @@ SCRIPT_16_63A8::
     End()
 
 SCRIPT_16_63AD::
-    ThisSetAnimSingle(SCRIPT_19_46E7)
+    ThisSetAnimSingle(Actor_Null)
     StartSFX0(SFXID_DarkAttack)
     Delay(16)
     PalClearBase(0, 16, $00, $00, $00, 255)
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_16_63D2)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
 
-SCRIPT_16_63D2::
-    LongJump(SCRIPT_16_60A1)
+.MaxFailedAttempts::
+    LongJump(Script_Core_Puzzle4_Again)
 
 SCRIPT_16_63D6::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1933,7 +1933,7 @@ SCRIPT_16_63D6::
     PalFadeAnimToBase(1, $20, 0, 7)
     PalFadeAnimToBase(1, $20, 7, 9)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJump(SCRIPT_16_60A1)
+    LongJump(Script_Core_Puzzle4_Again)
 
 SCRIPT_16_63FE::
     ResetActorList()
@@ -1941,35 +1941,35 @@ SCRIPT_16_63FE::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
-    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, SCRIPT_16_645A)
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) != c0)#, SCRIPT_16_6496)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_406C)
 
-SCRIPT_16_645A::
+.MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) != c0)#, SCRIPT_16_6496)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03C], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_16_406C)
 
-SCRIPT_16_6496::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[MATHADDRESS_00_A190])#, SCRIPT_16_6515)
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[MATHADDRESS_00_A190])#, .HighscoreNew)
     FormatChar(MATHADDRESS_00_A190)
-    LongJumpIf(#(c[MATHADDRESS_00_A190] == c1)#, SCRIPT_16_64DB)
+    LongJumpIf(#(c[MATHADDRESS_00_A190] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(SCRIPT_16_406C)
 
-SCRIPT_16_64DB::
+.Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
     LongJump(SCRIPT_16_406C)
 
-SCRIPT_16_6515::
+.HighscoreNew::
     FormatChar(MATHADDRESS_00_A190)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
@@ -1978,57 +1978,57 @@ SCRIPT_16_6515::
     LongJump(SCRIPT_16_406C)
 
 SCRIPT_16_657A::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $19, $D091, COLLID_TR00, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $1A, $D092, COLLID_TR01, $FF)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $1B, $D093, COLLID_TR02, $FF)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
     SetByte(RAM_00_A128, $00)
-    Switch(#c[RAM_00_A133]#) {
+    Switch(#c[xPuzzleCounter]#) {
         Case(21, SCRIPT_16_662D)
         Case(31, SCRIPT_16_6671)
         Case(12, SCRIPT_16_668C)
     }
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $19, $D055, COLLID_TR00, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $1A, $D056, COLLID_TR01, $FC)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $1B, $D057, COLLID_TR02, $FC)
-    ThatInit(10, AI_InvisibleLaser, $19, $02, $D055, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(11, AI_InvisibleLaser, $1A, $02, $D056, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    ThatInit(18, AI_InvisibleLaser, $1B, $02, $D057, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
-    SetByte(RAM_00_A133, $00)
+    ThatInit(10, AI_InvisibleLaser, $19, $02, $D055, $00, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(11, AI_InvisibleLaser, $1A, $02, $D056, $00, Actor_Null, ACTORSCRIPT1_16_634A)
+    ThatInit(18, AI_InvisibleLaser, $1B, $02, $D057, $00, Actor_Null, ACTORSCRIPT1_16_634A)
+    SetByte(xPuzzleCounter, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_662D::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $1C, $D0B2, COLLID_SPACE, $64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($06, $1C, $D0D0, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($07, $1C, $D0EE, COLLID_SPACE, $17)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $1B, $D057, COLLID_WALL, $6F)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_6671::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $19, $D055, COLLID_WALL, $6F)
     OrByte(RAM_00_A029/xBIT_00_A029_0, %01000000)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_668C::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $1A, $D056, COLLID_WALL, $6F)
     OrByte(RAM_00_A029/xBIT_00_A029_0, %10000000)
-    SetByte(RAM_00_A133, $00)
+    SetByte(xPuzzleCounter, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_66A7::
@@ -2045,11 +2045,11 @@ SCRIPT_TRIGGERALREADYON_16_66CF::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_66D3::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c1)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_66E0::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c10)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c10)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_66ED::
@@ -2066,11 +2066,11 @@ SCRIPT_TRIGGERALREADYON_16_6715::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_6719::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c2)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c2)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_6726::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c20)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c20)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_6733::
@@ -2087,11 +2087,11 @@ SCRIPT_TRIGGERALREADYON_16_675B::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_675F::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c3)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c3)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_676C::
-    VarByteExpr(RAM_00_A133, #(c[RAM_00_A133] + c30)#)
+    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c30)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_6779::
@@ -2104,11 +2104,11 @@ SCRIPT_TRIGGERALREADYON_16_6785::
 SCRIPT_16_6789::
     TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_16_67C2, $FE, $D199)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($14, $14, $D26C, COLLID_SPACE, $8A)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($15, $14, $D28A, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($16, $14, $D2A8, COLLID_SPACE, $A5)
 
 SCRIPT_TRIGGERALREADYON_16_67C2::
@@ -2124,9 +2124,9 @@ SCRIPT_TRIGGERALREADYON_16_67D2::
 SCRIPT_16_67D6::
     TriggerOnce(xBIT_00_A028_6, SCRIPT_TRIGGERALREADYON_16_6802, $FE, $D1E9)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($10, $05, $D1E5, COLLID_WALL, $FB)
-    ThatInit(2, AI_InvisibleLaser, $05, $10, $D1E5, $00, SCRIPT_19_46E7, ACTORSCRIPT1_16_634A)
+    ThatInit(2, AI_InvisibleLaser, $05, $10, $D1E5, $00, Actor_Null, ACTORSCRIPT1_16_634A)
     ThatStart(2)
 
 SCRIPT_TRIGGERALREADYON_16_6802::
@@ -2135,11 +2135,11 @@ SCRIPT_TRIGGERALREADYON_16_6802::
 SCRIPT_16_6806::
     TriggerOnce(xBIT_00_A028_7, SCRIPT_TRIGGERALREADYON_16_683F, $FE, $D1EC)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $14, $D1B8, COLLID_SPACE, $64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0F, $14, $D1D6, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($10, $14, $D1F4, COLLID_SPACE, $A5)
 
 SCRIPT_TRIGGERALREADYON_16_683F::
@@ -2148,11 +2148,11 @@ SCRIPT_TRIGGERALREADYON_16_683F::
 SCRIPT_16_6843::
     TriggerOnce(xBIT_00_A029_0, SCRIPT_TRIGGERALREADYON_16_687C, $FE, $D1FB)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $1C, $D0B2, COLLID_HS01, $64)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($06, $1C, $D0D0, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($07, $1C, $D0EE, COLLID_SPACE, $54)
 
 SCRIPT_TRIGGERALREADYON_16_687C::
@@ -2162,13 +2162,13 @@ SCRIPT_16_6880::
     TriggerOnce(xBIT_00_A02A_0, SCRIPT_TRIGGERALREADYON_16_68CF, $FE, $D2AF)
     StartSFX0(SFXID_PhysicalAttack)
     LoadMapMask(METAMAP_MASK_2E_6DD7, COLLMAP_MASK_2F_69D8)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($12, $1B, $D237, COLLID_SPACE, $34)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($13, $1B, $D255, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($14, $1B, $D273, COLLID_SPACE, $84)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($15, $1B, $D291, COLLID_SPACE, $A5)
 
 SCRIPT_TRIGGERALREADYON_16_68CF::
@@ -2177,35 +2177,35 @@ SCRIPT_TRIGGERALREADYON_16_68CF::
 SCRIPT_16_68D3::
     TriggerOnce(xBIT_00_A02A_1, SCRIPT_TRIGGERALREADYON_16_69B5, $FE, $D2EB)
     StartSFX0(SFXID_PhysicalAttack)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $19, $D2E9, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $1D, $D2ED, COLLID_WALL, $6F)
     Delay(5)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $19, $D2E9, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $1D, $D2ED, COLLID_WALL, $6E)
     Delay(5)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $19, $D2E9, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $1D, $D2ED, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($17, $1A, $D2CC, COLLID_HS02, $39)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($17, $1B, $D2CD, COLLID_HS02, $3A)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($17, $1C, $D2CE, COLLID_HS02, $3B)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $1A, $D2EA, COLLID_HS02, $49)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($18, $1C, $D2EC, COLLID_HS02, $4B)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $1A, $D308, COLLID_HS02, $59)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $1B, $D309, COLLID_HS02, $5A)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $1C, $D30A, COLLID_HS02, $5B)
 
 SCRIPT_TRIGGERALREADYON_16_69B5::
@@ -2220,22 +2220,22 @@ SCRIPT_TRIGGERALREADYON_16_69D4::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_16_69D8::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $1C, $D0B2, COLLID_SPACE, $27)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($06, $1C, $D0D0, COLLID_HS02, $37)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($07, $1C, $D0EE, COLLID_SPACE, $07)
     End()
 
 SCRIPT_16_6A06::
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2, %00010000)
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6A42)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0B, $D029, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D02D, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $12, $D030, COLLID_WALL, $6F)
 
 SCRIPT_16_6A42::
@@ -2243,11 +2243,11 @@ SCRIPT_16_6A42::
         ScriptDelay(SCRIPT_11_748E, 56)
     }
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6A80)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0B, $D029, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $0F, $D02D, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($01, $12, $D030, COLLID_WALL, $6E)
 
 SCRIPT_16_6A80::
@@ -2258,11 +2258,11 @@ SCRIPT_16_6A80::
 SCRIPT_16_6A86::
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2, %00100000)
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%01000000) == c0)#, SCRIPT_16_6AC2)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $09, $D045, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $0D, $D049, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $11, $D04D, COLLID_WALL, $6F)
 
 SCRIPT_16_6AC2::
@@ -2270,11 +2270,11 @@ SCRIPT_16_6AC2::
         ScriptDelay(SCRIPT_11_748E, 56)
     }
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%01000000) == c0)#, SCRIPT_16_6B00)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $09, $D045, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $0D, $D049, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($02, $11, $D04D, COLLID_WALL, $6E)
 
 SCRIPT_16_6B00::
@@ -2285,11 +2285,11 @@ SCRIPT_16_6B00::
 SCRIPT_16_6B06::
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2, %01000000)
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6B42)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0B, $D065, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D069, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $13, $D06D, COLLID_WALL, $6F)
 
 SCRIPT_16_6B42::
@@ -2297,11 +2297,11 @@ SCRIPT_16_6B42::
         ScriptDelay(SCRIPT_11_748E, 56)
     }
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6B80)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0B, $D065, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D069, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $13, $D06D, COLLID_WALL, $6E)
 
 SCRIPT_16_6B80::
@@ -2312,11 +2312,11 @@ SCRIPT_16_6B80::
 SCRIPT_16_6B86::
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2, %10000000)
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%01000000) == c0)#, SCRIPT_16_6BC2)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $09, $D081, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $0D, $D085, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $11, $D089, COLLID_WALL, $6F)
 
 SCRIPT_16_6BC2::
@@ -2324,11 +2324,11 @@ SCRIPT_16_6BC2::
         ScriptDelay(SCRIPT_11_748E, 56)
     }
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%01000000) == c0)#, SCRIPT_16_6C00)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $09, $D081, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $0D, $D085, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($04, $11, $D089, COLLID_WALL, $6E)
 
 SCRIPT_16_6C00::
@@ -2339,11 +2339,11 @@ SCRIPT_16_6C00::
 SCRIPT_16_6C06::
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000001)
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6C42)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $0B, $D0A1, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $0F, $D0A5, COLLID_WALL, $6F)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $12, $D0A8, COLLID_WALL, $6F)
 
 SCRIPT_16_6C42::
@@ -2351,11 +2351,11 @@ SCRIPT_16_6C42::
         ScriptDelay(SCRIPT_11_748E, 56)
     }
     LongJumpIf(#(bitmatch(c[RAM_00_A029/xBIT_00_A029_0], c%10000000) == c0)#, SCRIPT_16_6C80)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $0B, $D0A1, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $0F, $D0A5, COLLID_WALL, $6E)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $12, $D0A8, COLLID_WALL, $6E)
 
 SCRIPT_16_6C80::
@@ -2406,17 +2406,17 @@ SCRIPT_16_6D07::
 ACTORSCRIPT1_16_6D08::
     SetByte(wScript_StartButtonDisabled, $01)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJump(SCRIPT_16_60A1)
+    LongJump(Script_Core_Puzzle4_Again)
 
 SCRIPT_16_6D19::
     ThatScript(19, ACTORSCRIPT0_16_6DDB)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $13, $D301, COLLID_SPACE, $F8)
     End()
 
 SCRIPT_16_6D2E::
     ThatScript(20, ACTORSCRIPT0_16_6E01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1B, $13, $D33D, COLLID_SPACE, $F8)
     End()
 
@@ -2485,7 +2485,7 @@ ACTORSCRIPT0_16_6DDB::
         ScriptDelay(SCRIPT_11_5531, 96)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $13, $D301, COLLID_HS08, $F8)
     End()
 
@@ -2497,12 +2497,12 @@ ACTORSCRIPT0_16_6E01::
         ScriptDelay(SCRIPT_11_542D, 64)
     }
     ThisSetAnimSingle(SCRIPT_11_5400)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, SCRIPT_19_46E7)
+    LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1B, $13, $D33D, COLLID_HS09, $F8)
     End()
 
 SCRIPT_16_6E27::
-    LongJumpIf(#(c[RAM_00_A13D] == c1)#, SCRIPT_19_46E7)
+    LongJumpIf(#(c[RAM_00_A13D] == c1)#, Actor_Null)
     SetByte(RAM_00_A13D, $01)
     SetScriptMaster(SCRIPT_16_6237)
     End()
@@ -2551,9 +2551,9 @@ SCRIPT_16_6EB3::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, AI_Hero, $14, $07, $D0E6, $00, ACTORSCRIPT0_14_5DBF, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $14, $08, $D104, $00, ACTORSCRIPT0_16_6F13, ACTORSCRIPT1_16_7610)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2580,9 +2580,9 @@ SCRIPT_16_6F20::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $03, $16, $D297, $00, ACTORSCRIPT0_16_6F81, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $14, $08, $D104, $00, ACTORSCRIPT0_16_6F13, ACTORSCRIPT1_16_7610)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2613,9 +2613,9 @@ SCRIPT_SCENELOADER_16_6F92::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $1D, $05, $D0B3, $00, ACTORSCRIPT0_16_6FF2, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $14, $08, $D104, $00, ACTORSCRIPT0_16_6F13, ACTORSCRIPT1_16_7610)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2688,9 +2688,9 @@ SCRIPT_16_7079::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $18, $0E, $D1BC, $00, ACTORSCRIPT0_16_70D3, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $16, $10, $D1F6, $00, ACTORSCRIPT0_16_70E4, ACTORSCRIPT1_16_70E9)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2737,9 +2737,9 @@ SCRIPT_16_7128::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $05, $03, $D05F, $00, ACTORSCRIPT0_16_7182, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $07, $05, $D09D, $00, ACTORSCRIPT0_16_71B6, ACTORSCRIPT1_16_71C7)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2802,9 +2802,9 @@ SCRIPT_16_7206::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $0C, $16, $D2A0, $00, ACTORSCRIPT0_16_7264, ACTORSCRIPT1_19_46E8)
     ThatInit(2, Call_001_4AF8, $0F, $19, $D2FD, $00, ACTORSCRIPT0_16_7293, ACTORSCRIPT1_19_46E8)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
@@ -2882,9 +2882,9 @@ SCRIPT_16_737D::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_KybarsTeeth_Main)
-    LoadHotspots(HOTSPOTX_13_46D8)
+    LoadHotspots(Hotspot_KybarsTeeth_Main)
     LoadMapMask(METAMAP_MASK_2B_701E, COLLMAP_MASK_2D_68CE)
-    LoadTriggers(TRIGGERX_13_46F5)
+    LoadTriggers(Trigger_KybarsTeeth_Main)
     ThatInit(0, Call_001_4AF8, $1D, $05, $D0B3, $00, ACTORSCRIPT0_16_740B, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $1D, $05, $D0B3, $00, ACTORSCRIPT0_16_74A6, ACTORSCRIPT1_16_7610)
     ThatInit(3, Call_001_4AF8, $13, $06, $D0C7, $30, ACTORSCRIPT0_16_7512, ACTORSCRIPT1_19_46E8)
@@ -3344,28 +3344,28 @@ SCRIPT_16_7DA0::
     End()
 
 SCRIPT_16_7DA6::
-    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000001) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D009, $04, $09, $D009, $00, $09)
     TransplantMapMask($D02B, $05, $0A, $D02B, $01, $0D)
     End()
 
 SCRIPT_16_7DC4::
-    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000010) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D0D8, $04, $0A, $D0D8, $07, $06)
     End()
 
 SCRIPT_16_7DD9::
-    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000100) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D23B, $09, $09, $D23B, $13, $01)
     End()
 
 SCRIPT_16_7DEE::
-    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00001000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D284, $08, $07, $D284, $15, $0E)
     End()
 
 SCRIPT_16_7E03::
-    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00100000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D170, $0D, $07, $D170, $0C, $08)
     End()
 

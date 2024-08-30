@@ -47,6 +47,10 @@ xBits_dResh::
     ds $A132 - @
 xNumberOfAttempts:
     ds 1
+    ;ds $A133 - @
+xPuzzleCounter:
+    ; dResh_Puzzle2 = Thirst = 1-14
+    ds 1
 
     ds $A227 - @
 xHeroAbilities::

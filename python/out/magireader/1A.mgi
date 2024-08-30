@@ -169,9 +169,9 @@ SCRIPT_1A_4A3A::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_1)
-    LoadHotspots(HOTSPOTX_13_4A20)
+    LoadHotspots(Hotspot_Overworld_1)
     LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
-    LoadTriggers(TRIGGERX_13_4A41)
+    LoadTriggers(Trigger_Overworld_1)
     ThatInit(0, Call_001_4AF8, $08, $08, $D0F8, $00, ACTORSCRIPT0_1A_4A6C, ACTORSCRIPT1_19_46E8)
     ThatStart(0)
     HeroFromDoor()
@@ -196,9 +196,9 @@ SCRIPT_1A_4A85::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_1)
-    LoadHotspots(HOTSPOTX_13_4A20)
+    LoadHotspots(Hotspot_Overworld_1)
     LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
-    LoadTriggers(TRIGGERX_13_4A41)
+    LoadTriggers(Trigger_Overworld_1)
     ThatInit(0, Call_001_4AF8, $03, $12, $D21F, $00, ACTORSCRIPT0_1A_4AD8, ACTORSCRIPT1_19_46E8)
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_1A_4AD1)
     ThatInit(0, Call_001_4AF8, $04, $05, $D09A, $00, ACTORSCRIPT0_1A_4AD8, ACTORSCRIPT1_19_46E8)
@@ -272,9 +272,9 @@ SCRIPT_1A_4B99::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_1)
-    LoadHotspots(HOTSPOTX_13_4A20)
+    LoadHotspots(Hotspot_Overworld_1)
     LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
-    LoadTriggers(TRIGGERX_13_4A41)
+    LoadTriggers(Trigger_Overworld_1)
     ThatInit(0, AI_Hero, $04, $16, $D298, $00, SCRIPT_14_5DB5, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $04, $1D, $D36A, $00, ACTORSCRIPT0_1A_4BF5, ACTORSCRIPT1_1A_4B3D)
     LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
@@ -426,22 +426,22 @@ SCRIPT_1A_500A::
     End()
 
 SCRIPT_1A_5063::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D009, $09, $09, $D009, $00, $09)
     End()
 
 SCRIPT_1A_5078::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000100) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D140, $08, $09, $D140, $0A, $14)
     End()
 
 SCRIPT_1A_508D::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000001) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D285, $0C, $0A, $D285, $15, $0F)
     End()
 
 SCRIPT_1A_50A2::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00001000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D221, $08, $07, $D221, $12, $05)
     End()
 
@@ -488,9 +488,9 @@ SCRIPT_1A_512C::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_2)
-    LoadHotspots(HOTSPOTX_13_4A8A)
+    LoadHotspots(Hotspot_Overworld_2)
     LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
-    LoadTriggers(TRIGGERX_13_4AAB)
+    LoadTriggers(Trigger_Overworld_2)
     ThatInit(0, Call_001_4AF8, $08, $08, $D0F8, $00, ACTORSCRIPT0_1A_5166, ACTORSCRIPT1_19_46E8)
     ThatStart(0)
     HeroFromDoor()
@@ -515,9 +515,9 @@ SCRIPT_1A_517F::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_2)
-    LoadHotspots(HOTSPOTX_13_4A8A)
+    LoadHotspots(Hotspot_Overworld_2)
     LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
-    LoadTriggers(TRIGGERX_13_4AAB)
+    LoadTriggers(Trigger_Overworld_2)
     ThatInit(0, Call_001_4AF8, $07, $07, $D0D9, $00, ACTORSCRIPT0_1A_51D2, ACTORSCRIPT1_19_46E8)
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_1A_51CB)
     ThatInit(0, Call_001_4AF8, $08, $14, $D260, $00, ACTORSCRIPT0_1A_51D2, ACTORSCRIPT1_19_46E8)
@@ -547,9 +547,9 @@ SCRIPT_1A_51E7::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Overworld_2)
-    LoadHotspots(HOTSPOTX_13_4A8A)
+    LoadHotspots(Hotspot_Overworld_2)
     LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
-    LoadTriggers(TRIGGERX_13_4AAB)
+    LoadTriggers(Trigger_Overworld_2)
     ThatInit(0, AI_Hero, $03, $07, $D0D5, $00, SCRIPT_14_5DB5, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $02, $00, $D002, $00, ACTORSCRIPT0_1A_5243, ACTORSCRIPT1_1A_52A8)
     LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
@@ -721,27 +721,27 @@ SCRIPT_1A_560E::
     End()
 
 SCRIPT_1A_56A5::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00100000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D206, $09, $0B, $D206, $11, $08)
     End()
 
 SCRIPT_1A_56BA::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00001000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D1F0, $06, $06, $D1F0, $10, $10)
     End()
 
 SCRIPT_1A_56CF::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%10000000) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%10000000) == c0)#, Actor_Null)
     TransplantMapMask($D04F, $0A, $0B, $D04F, $02, $13)
     End()
 
 SCRIPT_1A_56E4::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00000001) == c0)#, SCRIPT_19_46E7)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D044, $06, $06, $D044, $02, $08)
     End()
 
 SCRIPT_1A_56F9::
-    LongJumpIf(#((c[xVARBYTE_00_A138] != c5) or (c[xVARBYTE_00_A139] != c5))#, SCRIPT_19_46E7)
+    LongJumpIf(#((c[xVARBYTE_00_A138] != c5) or (c[xVARBYTE_00_A139] != c5))#, Actor_Null)
     TransplantMapMask($D11A, $07, $07, $D11A, $09, $0C)
     End()
 
@@ -761,7 +761,7 @@ SCRIPT_1A_573A::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Demo)
-    LoadHotspots(HOTSPOTX_13_4AEC)
+    LoadHotspots(Hotspot_Naroom_Demo)
     ThatInit(0, AI_Hero, $0A, $0E, $D2C6, $00, ACTORSCRIPT0_1A_5779, ACTORSCRIPT1_19_46E8)
     ThatStart(0)
     HeroSetCamera()
@@ -837,8 +837,8 @@ SCRIPT_1A_584E::
     LoadScene(Scene_HouseStool)
 
 SCRIPT_1A_5868::
-    LoadHotspots(HOTSPOTX_13_4B2D)
-    LoadTriggers(TRIGGERX_13_4B48)
+    LoadHotspots(Hotspot_House_Orothe)
+    LoadTriggers(Trigger_House_Orothe)
     ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_13_6039, ACTORSCRIPT1_1A_58AB)
     LoadSingleBitmap($30, BITMAP_0D_47E0, $8000, $00)
@@ -950,8 +950,8 @@ SCRIPT_1A_5DD5::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_TrainingRoom_Normal)
-    LoadHotspots(HOTSPOTX_13_4B59)
-    LoadTriggers(TRIGGERX_13_4B6E)
+    LoadHotspots(Hotspot_Naroom_TrainingRoom_Normal)
+    LoadTriggers(Trigger_Naroom_TrainingRoom_Normal)
     ThatInit(0, Call_001_4AF8, $00, $12, $D2D0, $00, ACTORSCRIPT0_1A_698B, ACTORSCRIPT1_19_46E8)
     ThatStart(0)
     HeroSetCamera()
@@ -1033,8 +1033,8 @@ SCRIPT_1A_5EFE::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_HouseNoStool)
-    LoadHotspots(HOTSPOTX_13_4B17)
-    LoadTriggers(TRIGGERX_13_4B1C)
+    LoadHotspots(Hotspot_House_Weave)
+    LoadTriggers(Trigger_House_Weave)
     ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_13_62AC, ACTORSCRIPT1_1A_5F56)
     LoadSingleBitmap($29, BITMAP_0D_5340, $8000, $00)
@@ -1121,8 +1121,8 @@ SCRIPT_1A_63B3::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_HouseNoStool)
-    LoadHotspots(HOTSPOTX_13_4B01)
-    LoadTriggers(TRIGGERX_13_4B06)
+    LoadHotspots(Hotspot_House_Cald)
+    LoadTriggers(Trigger_House_Cald)
     ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, SCRIPT_11_5356, ACTORSCRIPT1_1A_6403)
     LoadSingleBitmap($2A, BITMAP_0D_7B20, $8000, $00)
@@ -1308,7 +1308,7 @@ SCRIPT_1A_69A6::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Demo)
-    LoadHotspots(HOTSPOTX_13_4AEC)
+    LoadHotspots(Hotspot_Naroom_Demo)
     ThatInit(0, Call_001_4AF8, $08, $08, $D198, $00, ACTORSCRIPT0_1A_69E6, ACTORSCRIPT1_19_46E8)
     ThatStart(0)
     HeroFromDoor()
@@ -1333,19 +1333,19 @@ ACTORSCRIPT0_1A_69E6::
     End()
 
 SCRIPT_1A_69F3::
-    LongJump(SCRIPT_0F_6D67)
+    LongJump(Script_Naroom_Puzzle2_First)
 
 SCRIPT_1A_69F7::
-    LongJump(SCRIPT_15_409F)
+    LongJump(Script_Underneath_Puzzle1_First)
 
 SCRIPT_1A_69FB::
-    LongJump(SCRIPT_18_6DC9)
+    LongJump(Script_Cald_Puzzle2_First)
 
 SCRIPT_1A_69FF::
-    LongJump(SCRIPT_17_4D66)
+    LongJump(Script_Orothe_Puzzle3_First)
 
 SCRIPT_1A_6A03::
-    LongJump(SCRIPT_12_40BB)
+    LongJump(Script_Arderial_Puzzle1_First)
 
 SCRIPT_1A_6A07::
     OrByte(MATHADDRESS_00_A034, %00000010)
@@ -1812,8 +1812,8 @@ SCRIPT_1A_7489::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_HouseStool)
-    LoadHotspots(HOTSPOTX_13_4B43)
-    LoadTriggers(TRIGGERX_13_4B32)
+    LoadHotspots(Hotspot_House_Bograth)
+    LoadTriggers(Trigger_House_Bograth)
     ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_74D9, ACTORSCRIPT1_19_46E8)
     ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_1A_7594, ACTORSCRIPT1_1A_7607)
     LoadSingleBitmap($2D, BITMAP_0A_7813, $8000, $00)
