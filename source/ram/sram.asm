@@ -1,7 +1,17 @@
 SECTION "XRAM Gamestate", SRAM[$A000], BANK[$00]
-
-
-    ds $A012 - @
+    ds $A000 - @
+xBattery_SavedSavefileBaseBank::
+    ds 1
+    ;ds $A001 - @
+xBattery_Unused::
+    ; This is supposed to be the upper byte of xBattery_SavefileBaseBank, but in practice xBattery_SavefileBaseBank is always treated as an 8-bit value,
+    ; so this variable is unused
+    ds 1
+    ;ds $A002 - @
+xBattery_Verify0::
+    ; Verification string
+    ds $10
+    ;ds $A012 - @
 xLoad_ScriptBank::
     ds 1
     ;ds $A013 - @
@@ -36,6 +46,8 @@ xGameCount::
     ; This is the variable that tracks overall quest progression
     ; This is used for choosing the start screen background
     ds 2
+    ;ds $A028 - @
+xScript_SaveBits::
 
     ds $A038 - @
 xBits_dResh::
@@ -43,6 +55,9 @@ xBits_dResh::
     ; 1
     ; 2 = Completed dResh_Puzzle1
     ds 1
+
+    ds $A127 - @
+xScript_SaveVars:
 
     ds $A132 - @
 xNumberOfAttempts:
@@ -64,3 +79,8 @@ xHeroAbilities::
 
     ds $A32B - @
 xGamestate_RAM_NEW_GAME_END::
+
+    ds $A7F0 - @
+xBattery_Verify1::
+    ; Reverse verification string
+    ds $10
