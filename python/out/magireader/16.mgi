@@ -191,20 +191,20 @@ Hotspot_Core_Puzzle5_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18C, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18C, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle5_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18C])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A18C)
-    LongJumpIf(#(c[xVARBYTE_00_A18C] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle5_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle5_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle5_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle5_Complete)
@@ -215,10 +215,10 @@ Hotspot_Core_Puzzle5_0::
     LongJump(Script_Core_Puzzle5_Complete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A18C)
+    FormatChar(xCore_Puzzle5_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18C, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle5_Complete)
 
@@ -470,20 +470,20 @@ Hotspot_Core_Puzzle2_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle2_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A18D)
-    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle2_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle2_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle2_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle2_Complete)
@@ -494,10 +494,10 @@ Hotspot_Core_Puzzle2_0::
     LongJump(Script_Core_Puzzle2_Complete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A18D)
+    FormatChar(xCore_Puzzle2_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle2_Complete)
 
@@ -512,20 +512,20 @@ Hotspot_Core_Puzzle2_1::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle2_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle2_SecretComplete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18D])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A18D)
-    LongJumpIf(#(c[xVARBYTE_00_A18D] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle2_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle2_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle2_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle2_SecretComplete)
@@ -536,10 +536,10 @@ Hotspot_Core_Puzzle2_1::
     LongJump(Script_Core_Puzzle2_SecretComplete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A18D)
+    FormatChar(xCore_Puzzle2_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18D, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle2_SecretComplete)
 
@@ -1019,20 +1019,20 @@ Hotspot_Core_Puzzle3_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle3_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18E])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A18E)
-    LongJumpIf(#(c[xVARBYTE_00_A18E] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle3_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle3_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle3_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle3_Complete)
@@ -1043,10 +1043,10 @@ Hotspot_Core_Puzzle3_0::
     LongJump(Script_Core_Puzzle3_Complete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A18E)
+    FormatChar(xCore_Puzzle3_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle3_Complete)
 
@@ -1456,20 +1456,20 @@ Hotspot_Core_Puzzle1_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle1_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A18F])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A18F)
-    LongJumpIf(#(c[xVARBYTE_00_A18F] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle1_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle1_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle1_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle1_Complete)
@@ -1480,10 +1480,10 @@ Hotspot_Core_Puzzle1_0::
     LongJump(Script_Core_Puzzle1_Complete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A18F)
+    FormatChar(xCore_Puzzle1_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle1_Complete)
 
@@ -1948,20 +1948,20 @@ Hotspot_Core_Puzzle4_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Core], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Core_Puzzle4_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[MATHADDRESS_00_A190])#, .HighscoreNew)
-    FormatChar(MATHADDRESS_00_A190)
-    LongJumpIf(#(c[MATHADDRESS_00_A190] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xCore_Puzzle4_HighScore])#, .HighscoreNew)
+    FormatChar(xCore_Puzzle4_HighScore)
+    LongJumpIf(#(c[xCore_Puzzle4_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Core_Puzzle4_Complete)
@@ -1972,10 +1972,10 @@ Hotspot_Core_Puzzle4_0::
     LongJump(Script_Core_Puzzle4_Complete)
 
 .HighscoreNew::
-    FormatChar(MATHADDRESS_00_A190)
+    FormatChar(xCore_Puzzle4_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(MATHADDRESS_00_A190, #c[xNumberOfAttempts]#)
+    VarByteExpr(xCore_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Core_Puzzle4_Complete)
 

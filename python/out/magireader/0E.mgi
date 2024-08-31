@@ -181,20 +181,20 @@ SCRIPT_0E_498E::
     ThatDelete(12)
     FormatChar(xNumberOfAttempts)
     Write("Time's UP!!🅐You collected⭍🔊 Energy.🅐")
-    LongJumpIf(#(c[MATHADDRESS_00_A191] == c0)#, SCRIPT_0E_4A62)
-    LongJumpIf(#(c[xNumberOfAttempts] > c[MATHADDRESS_00_A191])#, .HighscoreNew)
-    FormatChar(MATHADDRESS_00_A191)
+    LongJumpIf(#(c[xLaser_HighScore] == c0)#, SCRIPT_0E_4A62)
+    LongJumpIf(#(c[xNumberOfAttempts] > c[xLaser_HighScore])#, .HighscoreNew)
+    FormatChar(xLaser_HighScore)
     Write("The current⭍High Score is🅐🔊 Energy.🅐")
     Close()
     LongJump(SCRIPT_18_5DA8)
 
 .HighscoreNew::
-    FormatChar(MATHADDRESS_00_A191)
+    FormatChar(xLaser_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 Energy.🅐")
     Close()
 
 SCRIPT_0E_4A62::
-    VarByteExpr(MATHADDRESS_00_A191, #c[xNumberOfAttempts]#)
+    VarByteExpr(xLaser_HighScore, #c[xNumberOfAttempts]#)
     Close()
     SaveGame(1)
     LongJump(SCRIPT_18_5DA8)

@@ -184,181 +184,181 @@ xPuzzleCounter:
     ds 1
 
     ds $A159 - @
-xNaroom_Puzzle1_Score:
+xNaroom_Puzzle1_HighScore:
     ds 1
     ;ds $A15A - @
-xNaroom_Puzzle2_Score:
+xNaroom_Puzzle2_HighScore:
     ds 1
     ;ds $A15B - @
-xNaroom_Puzzle3_Score:
+xNaroom_Puzzle3_HighScore:
     ds 1
     ;ds $A15C - @
-xNaroom_Puzzle4_Score:
+xNaroom_Puzzle4_HighScore:
     ds 1
     ;ds $A15D - @
-xNaroom_Puzzle5_Score:
+xNaroom_Puzzle5_HighScore:
     ds 1
     ;ds $A15E - @
-xUnderneath_Puzzle1_Score:
+xUnderneath_Puzzle1_HighScore:
     ds 1
     ;ds $A15F - @
-xUnderneath_Puzzle2_Score:
+xUnderneath_Puzzle2_HighScore:
     ds 1
     ;ds $A160 - @
-xUnderneath_Puzzle3_Score:
+xUnderneath_Puzzle3_HighScore:
     ds 1
     ;ds $A161 - @
-xUnderneath_Puzzle4_Score:
+xUnderneath_Puzzle4_HighScore:
     ds 1
     ;ds $A162 - @
-xUnderneath_Puzzle5_Score:
+xUnderneath_Puzzle5_HighScore:
     ds 1
     ;ds $A163 - @
-xCald_Puzzle1_Score:
+xCald_Puzzle1_HighScore:
     ds 1
     ;ds $A164 - @
-xCald_Puzzle2_Score:
+xCald_Puzzle2_HighScore:
     ds 1
     ;ds $A165 - @
-xCald_Puzzle3_Score:
+xCald_Puzzle3_HighScore:
     ds 1
     ;ds $A166 - @
-xCald_Puzzle4_Score:
+xCald_Puzzle4_HighScore:
     ds 1
     ;ds $A167 - @
-xCald_Puzzle5_Score:
+xCald_Puzzle5_HighScore:
     ds 1
 
     ; Unused
     ds 1
 
     ;ds $A169 - @
-xOrothe_Puzzle1_Score:
+xOrothe_Puzzle1_HighScore:
     ds 1
     ;ds $A16A - @
-xOrothe_Puzzle2_Score:
+xOrothe_Puzzle2_HighScore:
     ds 1
     ;ds $A16B - @
-xOrothe_Puzzle3_Score:
+xOrothe_Puzzle3_HighScore:
     ds 1
     ;ds $A16C - @
-xOrothe_Puzzle4_Score:
+xOrothe_Puzzle4_HighScore:
     ds 1
     ;ds $A16D - @
-xOrothe_Puzzle5_Score:
+xOrothe_Puzzle5_HighScore:
     ds 1
     ;ds $A16E - @
-xArderial_Puzzle1_Score:
+xArderial_Puzzle1_HighScore:
     ds 1
     ;ds $A16F - @
-xArderial_Puzzle2_Score:
+xArderial_Puzzle2_HighScore:
     ds 1
     ;ds $A170 - @
-xArderial_Puzzle4_Score:
+xArderial_Puzzle4_HighScore:
     ; Order inversed
     ds 1
     ;ds $A171 - @
-xArderial_Puzzle3_Score:
+xArderial_Puzzle3_HighScore:
     ; Order inversed
     ds 1
     ;ds $A172 - @
-xArderial_Puzzle5_Score:
+xArderial_Puzzle5_HighScore:
     ds 1
     ;ds $A173 - @
-xWeave_Puzzle1_Score:
+xWeave_Puzzle1_HighScore:
     ds 1
     ;ds $A174 - @
-xWeave_Puzzle2_Score:
+xWeave_Puzzle2_HighScore:
     ds 1
     ;ds $A175 - @
-xWeave_Puzzle3_Score:
+xWeave_Puzzle3_HighScore:
     ds 1
     ;ds $A176 - @
-xWeave_Puzzle4_Score:
+xWeave_Puzzle4_HighScore:
     ds 1
     ;ds $A177 - @
-xWeave_Puzzle5_Score:
+xWeave_Puzzle5_HighScore:
     ds 1
     ;ds $A178 - @
-xdResh_Puzzle1_Score:
+xdResh_Puzzle1_HighScore:
     ds 1
     ;ds $A179 - @
-xdResh_Puzzle2_Score:
+xdResh_Puzzle2_HighScore:
     ds 1
     ;ds $A17A - @
-xdResh_Puzzle3_Score:
+xdResh_Puzzle3_HighScore:
     ds 1
     ;ds $A17B - @
-xdResh_Puzzle4_Score:
+xdResh_Puzzle4_HighScore:
     ds 1
     ;ds $A17C - @
-xdResh_Puzzle5_Score:
+xdResh_Puzzle5_HighScore:
     ds 1
     ;ds $A17D - @
-xKybarsTeeth_Puzzle1_Score:
+xKybarsTeeth_Puzzle1_HighScore:
     ds 1
     ;ds $A17E - @
-xKybarsTeeth_Puzzle2_Score:
+xKybarsTeeth_Puzzle2_HighScore:
     ds 1
     ;ds $A17F - @
-xKybarsTeeth_Puzzle3_Score:
+xKybarsTeeth_Puzzle3_HighScore:
     ds 1
     ;ds $A180 - @
-xKybarsTeeth_Puzzle4_Score:
+xKybarsTeeth_Puzzle4_HighScore:
     ds 1
     ;ds $A181 - @
-xKybarsTeeth_Puzzle5_Score:
+xKybarsTeeth_Puzzle5_HighScore:
     ds 1
     ;ds $A182 - @
-xBograth_Puzzle1_Score:
+xBograth_Puzzle1_HighScore:
     ds 1
     ;ds $A183 - @
-xBograth_Puzzle2_Score:
+xBograth_Puzzle2_HighScore:
     ds 1
     ;ds $A184 - @
-xBograth_Puzzle3_Score:
+xBograth_Puzzle3_HighScore:
     ds 1
     ;ds $A185 - @
-xBograth_Puzzle4_Score:
+xBograth_Puzzle4_HighScore:
     ds 1
     ;ds $A186 - @
-xBograth_Puzzle5_Score:
+xBograth_Puzzle5_HighScore:
     ds 1
     ;ds $A187 - @
-xParadwyn_Puzzle1_Score:
+xParadwyn_Puzzle1_HighScore:
     ds 1
     ;ds $A188 - @
-xParadwyn_Puzzle2_Score:
+xParadwyn_Puzzle2_HighScore:
     ds 1
     ;ds $A189 - @
-xParadwyn_Puzzle4_Score:
+xParadwyn_Puzzle4_HighScore:
     ; Order inversed
     ds 1
     ;ds $A18A - @
-xParadwyn_Puzzle3_Score:
+xParadwyn_Puzzle3_HighScore:
     ; Order inversed
     ds 1
     ;ds $A18B - @
-xParadwyn_Puzzle5_Score:
+xParadwyn_Puzzle5_HighScore:
     ds 1
     ;ds $A18C - @
-xCore_Puzzle5_Score:
+xCore_Puzzle5_HighScore:
     ds 1
     ;ds $A18D - @
-xCore_Puzzle2_Score:
+xCore_Puzzle2_HighScore:
     ds 1
     ;ds $A18E - @
-xCore_Puzzle3_Score:
+xCore_Puzzle3_HighScore:
     ds 1
     ;ds $A18F - @
-xCore_Puzzle1_Score:
+xCore_Puzzle1_HighScore:
     ds 1
     ;ds $A190 - @
-xCore_Puzzle5_Score:
+xCore_Puzzle4_HighScore:
     ds 1
 
     ;ds $A191 - @
-xLaser_Score:
+xLaser_HighScore:
     ds 1
 
     ds $A227 - @

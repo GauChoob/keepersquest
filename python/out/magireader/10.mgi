@@ -2487,20 +2487,20 @@ Hotspot_Bograth_Puzzle5_28::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Bograth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
+    VarByteExpr(xBograth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Bograth_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Bograth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
+    VarByteExpr(xBograth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Bograth_Puzzle5_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A186])#, .HighscoreNew)
-    FormatChar(xVARBYTE_00_A186)
-    LongJumpIf(#(c[xVARBYTE_00_A186] == c1)#, .Highscore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xBograth_Puzzle5_HighScore])#, .HighscoreNew)
+    FormatChar(xBograth_Puzzle5_HighScore)
+    LongJumpIf(#(c[xBograth_Puzzle5_HighScore] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_Bograth_Puzzle5_Complete)
@@ -2511,10 +2511,10 @@ Hotspot_Bograth_Puzzle5_28::
     LongJump(Script_Bograth_Puzzle5_Complete)
 
 .HighscoreNew::
-    FormatChar(xVARBYTE_00_A186)
+    FormatChar(xBograth_Puzzle5_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
+    VarByteExpr(xBograth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_Bograth_Puzzle5_Complete)
 
