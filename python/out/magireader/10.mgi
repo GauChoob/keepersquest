@@ -284,11 +284,11 @@ ACTORSCRIPT0_10_461E::
 SCRIPT_10_462D::
     OrByte(MATHADDRESS_00_A047, %00000100)
     Switch(#c[MATHADDRESS_00_A136]#) {
-        Case(0, SCRIPT_16_406C)
+        Case(0, Script_Core_Puzzle4_Complete)
         Case(1, SCRIPT_10_4650)
         Case(2, SCRIPT_10_4747)
         Case(3, SCRIPT_10_4A97)
-        Case(4, SCRIPT_16_406C)
+        Case(4, Script_Core_Puzzle4_Complete)
     }
     End()
 
@@ -2488,14 +2488,14 @@ Hotspot_Bograth_Puzzle5_28::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_17_5CDA)
+    LongJump(Script_Bograth_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_17_5CDA)
+    LongJump(Script_Bograth_Puzzle5_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A186])#, .HighscoreNew)
@@ -2503,12 +2503,12 @@ Hotspot_Bograth_Puzzle5_28::
     LongJumpIf(#(c[xVARBYTE_00_A186] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_17_5CDA)
+    LongJump(Script_Bograth_Puzzle5_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_17_5CDA)
+    LongJump(Script_Bograth_Puzzle5_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A186)
@@ -2516,7 +2516,7 @@ Hotspot_Bograth_Puzzle5_28::
     Close()
     VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_17_5CDA)
+    LongJump(Script_Bograth_Puzzle5_Complete)
 
 Hotspot_Bograth_Puzzle5_29::
     LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_72DB)

@@ -49,6 +49,7 @@
 ; Do bottomleft first
 ; Do bottomright switch: middle/bottom in any order
 ; Hit topright switch then do topleft
+; TODO Secret???
 13:5041 Scene_Core_Puzzle2
 ; Puzzle3:
 ; Right, then Bottom, then only one, Right, Bottom
@@ -214,7 +215,6 @@
 0A:400C Script_dResh_Puzzle3
 0A:4012 Script_dResh_Puzzle4
 0A:4018 Script_dResh_Puzzle5
-0A:401E Script_dResh_Puzzle1_Complete
 0A:4022 Script_dResh_Puzzle1_Exit
 0A:417C Start_dResh_Puzzle1
 0A:4193 .Chicken1Skip
@@ -1847,3 +1847,69 @@
 ;
 ;
 ;
+0A:401E Script_dResh_Puzzle1_Complete
+0A:4065 Script_dResh_Puzzle3_Complete
+0A:4070 Script_dResh_Puzzle4_Complete
+0A:4029 Script_dResh_Puzzle2_Complete
+0A:4034 Script_dResh_Puzzle2_SecretComplete
+0A:408A Script_dResh_Puzzle5_Complete
+0A:5AE4 Script_Weave_Puzzle1_Complete
+0A:5AEF Script_Weave_Puzzle2_Complete
+0A:5AFA Script_Weave_Puzzle2_SecretComplete
+0A:5B2B Script_Weave_Puzzle3_Complete
+0A:5B36 Script_Weave_Puzzle4_Complete
+0A:5B50 Script_Weave_Puzzle5_Complete
+0C:4ABE Script_KybarsTeeth_Puzzle1_Complete
+0C:4AC9 Script_KybarsTeeth_Puzzle2_Complete
+0C:4AD4 Script_KybarsTeeth_Puzzle2_SecretComplete
+0C:4AFB Script_KybarsTeeth_Puzzle3_Complete
+0C:4B06 Script_KybarsTeeth_Puzzle4_Complete
+0C:4B20 Script_KybarsTeeth_Puzzle5_Complete
+0F:6945 Script_Naroom_Puzzle1_Complete
+0F:6950 Script_Naroom_Puzzle2_Complete
+0F:695B Script_Naroom_Puzzle3_Complete
+0F:6979 Script_Naroom_Puzzle4_SecretComplete
+0F:6966 Script_Naroom_Puzzle4_Complete
+0F:69BA Script_Naroom_Puzzle5_Complete
+17:5CDA Script_Bograth_Puzzle5_Complete
+12:401E Script_Arderial_Puzzle1_Complete
+12:4029 Script_Arderial_Puzzle2_Complete
+12:4034 Script_Arderial_Puzzle4_Complete
+12:4055 Script_Arderial_Puzzle3_Complete
+12:406F Script_Arderial_Puzzle3_SecretComplete
+12:40A4 Script_Arderial_Puzzle5_Complete
+15:401E Script_Underneath_Puzzle1_Complete
+15:4029 Script_Underneath_Puzzle2_Complete
+15:4034 Script_Underneath_Puzzle3_Complete
+15:406E Script_Underneath_Puzzle4_Complete
+15:403F Script_Underneath_Puzzle4_SecretComplete
+15:4088 Script_Underneath_Puzzle5_Complete
+15:5E60 Script_Paradwyn_Puzzle1_Complete
+15:5E6B Script_Paradwyn_Puzzle2_Complete
+15:5EBD Script_Paradwyn_Puzzle4_Complete
+15:5E76 Script_Paradwyn_Puzzle3_Complete
+15:5E81 Script_Paradwyn_Puzzle3_SecretComplete
+15:5ED7 Script_Paradwyn_Puzzle5_Complete
+16:4086 Script_Core_Puzzle5_Complete
+16:4029 Script_Core_Puzzle2_Complete
+16:4034 Script_Core_Puzzle2_SecretComplete
+16:4061 Script_Core_Puzzle3_Complete
+16:401E Script_Core_Puzzle1_Complete
+16:406C Script_Core_Puzzle4_Complete
+17:40BE Script_Orothe_Puzzle1_Complete
+17:40C9 Script_Orothe_Puzzle1_SecretComplete
+17:40FA Script_Orothe_Puzzle2_Complete
+17:4105 Script_Orothe_Puzzle3_Complete
+17:4110 Script_Orothe_Puzzle4_Complete
+17:412A Script_Orothe_Puzzle5_Complete
+17:5C6E Script_Bograth_Puzzle1_Complete
+17:5C79 Script_Bograth_Puzzle2_Complete
+17:5C84 Script_Bograth_Puzzle2_SecretComplete
+17:5CB5 Script_Bograth_Puzzle3_Complete
+17:5CC0 Script_Bograth_Puzzle4_Complete
+18:68F7 Script_Cald_Puzzle5_Complete
+18:688B Script_Cald_Puzzle1_Complete
+18:6896 Script_Cald_Puzzle2_Complete
+18:68A1 Script_Cald_Puzzle2_SecretComplete
+18:68D2 Script_Cald_Puzzle3_Complete
+18:68DD Script_Cald_Puzzle4_Complete

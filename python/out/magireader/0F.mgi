@@ -386,7 +386,7 @@ ACTORSCRIPT0_0F_4548::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 SCRIPT_0F_4589::
     End()
@@ -2180,34 +2180,34 @@ SCRIPT_0F_693F::
     StartSong(SONGID_Sanctuary)
     LongJump(Script_Naroom_Puzzle5_First)
 
-SCRIPT_0F_6945::
+Script_Naroom_Puzzle1_Complete::
     OrByte(MATHADDRESS_00_A034, %00000001)
 
 SCRIPT_0F_6949::
     HeroToDoor($0B, $0C)
     LongJump(SCRIPT_0F_419C)
 
-SCRIPT_0F_6950::
+Script_Naroom_Puzzle2_Complete::
     OrByte(MATHADDRESS_00_A034, %00000010)
 
 SCRIPT_0F_6954::
     HeroToDoor($14, $03)
     LongJump(SCRIPT_0F_419C)
 
-SCRIPT_0F_695B::
+Script_Naroom_Puzzle3_Complete::
     OrByte(MATHADDRESS_00_A034, %00000100)
 
 SCRIPT_0F_695F::
     HeroToDoor($17, $0B)
     LongJump(SCRIPT_0F_419C)
 
-SCRIPT_0F_6966::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A034], c%00001000)#, SCRIPT_0F_6979)
+Script_Naroom_Puzzle4_Complete::
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A034], c%00001000)#, Script_Naroom_Puzzle4_SecretComplete)
     OrByte(MATHADDRESS_00_A034, %00001000)
     HeroToDoor($1F, $13)
     LongJump(SCRIPT_0F_4309)
 
-SCRIPT_0F_6979::
+Script_Naroom_Puzzle4_SecretComplete::
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_0F_698E)
     LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000001) == c0)#, SCRIPT_0F_451F)
 
@@ -2227,7 +2227,7 @@ SCRIPT_0F_69B3::
     HeroToDoor($1F, $13)
     LongJump(SCRIPT_0F_419C)
 
-SCRIPT_0F_69BA::
+Script_Naroom_Puzzle5_Complete::
     LongJumpIf(#bitmatch(c[MATHADDRESS_00_A034], c%00010000)#, SCRIPT_0F_69CA)
     OrByte(MATHADDRESS_00_A034, %00010000)
     LongJump(SCRIPT_0F_44C4)
@@ -2391,14 +2391,14 @@ Hotspot_Naroom_Puzzle1_0::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A159, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6945)
+    LongJump(Script_Naroom_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A159, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6945)
+    LongJump(Script_Naroom_Puzzle1_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A159])#, .HighscoreNew)
@@ -2406,12 +2406,12 @@ Hotspot_Naroom_Puzzle1_0::
     LongJumpIf(#(c[xVARBYTE_00_A159] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_6945)
+    LongJump(Script_Naroom_Puzzle1_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_6945)
+    LongJump(Script_Naroom_Puzzle1_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A159)
@@ -2419,7 +2419,7 @@ Hotspot_Naroom_Puzzle1_0::
     Close()
     VarByteExpr(xVARBYTE_00_A159, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0F_6945)
+    LongJump(Script_Naroom_Puzzle1_Complete)
 
 Script_Naroom_Puzzle2_First::
     SetByte(xNumberOfAttempts, $01)
@@ -2588,14 +2588,14 @@ SCRIPT_0F_6F90::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15A, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6950)
+    LongJump(Script_Naroom_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15A, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6950)
+    LongJump(Script_Naroom_Puzzle2_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15A])#, .HighscoreNew)
@@ -2603,19 +2603,19 @@ SCRIPT_0F_6F90::
     LongJumpIf(#(c[xVARBYTE_00_A15A] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_6950)
+    LongJump(Script_Naroom_Puzzle2_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_6950)
+    LongJump(Script_Naroom_Puzzle2_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A15A)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
     VarByteExpr(xVARBYTE_00_A15A, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6950)
+    LongJump(Script_Naroom_Puzzle2_Complete)
 
 Script_Naroom_Puzzle3_First::
     SetByte(xNumberOfAttempts, $01)
@@ -2793,14 +2793,14 @@ Hotspot_Naroom_Puzzle3_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15B, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_695B)
+    LongJump(Script_Naroom_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15B, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_695B)
+    LongJump(Script_Naroom_Puzzle3_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15B])#, .HighscoreNew)
@@ -2808,19 +2808,19 @@ Hotspot_Naroom_Puzzle3_4::
     LongJumpIf(#(c[xVARBYTE_00_A15B] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_695B)
+    LongJump(Script_Naroom_Puzzle3_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_695B)
+    LongJump(Script_Naroom_Puzzle3_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A15B)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
     VarByteExpr(xVARBYTE_00_A15B, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_695B)
+    LongJump(Script_Naroom_Puzzle3_Complete)
 
 Script_Naroom_Puzzle4_First::
     SetByte(xNumberOfAttempts, $01)
@@ -3020,14 +3020,14 @@ SCRIPT_0F_776C::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15C])#, .HighscoreNew)
@@ -3035,19 +3035,19 @@ SCRIPT_0F_776C::
     LongJumpIf(#(c[xVARBYTE_00_A15C] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A15C)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6979)
+    LongJump(Script_Naroom_Puzzle4_SecretComplete)
 
 Hotspot_Naroom_Puzzle4_1::
     StartSong(SONGID_GetItem)
@@ -3060,14 +3060,14 @@ Hotspot_Naroom_Puzzle4_1::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6966)
+    LongJump(Script_Naroom_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6966)
+    LongJump(Script_Naroom_Puzzle4_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15C])#, .HighscoreNew)
@@ -3075,19 +3075,19 @@ Hotspot_Naroom_Puzzle4_1::
     LongJumpIf(#(c[xVARBYTE_00_A15C] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_6966)
+    LongJump(Script_Naroom_Puzzle4_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_6966)
+    LongJump(Script_Naroom_Puzzle4_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A15C)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_6966)
+    LongJump(Script_Naroom_Puzzle4_Complete)
 
 Script_Naroom_Puzzle5_First::
     SetByte(xNumberOfAttempts, $01)
@@ -3319,14 +3319,14 @@ SCRIPT_0F_7D2B::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15D, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_69BA)
+    LongJump(Script_Naroom_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A15D, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_69BA)
+    LongJump(Script_Naroom_Puzzle5_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A15D])#, .HighscoreNew)
@@ -3334,19 +3334,19 @@ SCRIPT_0F_7D2B::
     LongJumpIf(#(c[xVARBYTE_00_A15D] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0F_69BA)
+    LongJump(Script_Naroom_Puzzle5_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0F_69BA)
+    LongJump(Script_Naroom_Puzzle5_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A15D)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
     VarByteExpr(xVARBYTE_00_A15D, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0F_69BA)
+    LongJump(Script_Naroom_Puzzle5_Complete)
 
 Hotspot_Naroom_Puzzle25_End_0::
     LongJump(SCRIPT_0F_7D2B)

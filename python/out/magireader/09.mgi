@@ -177,7 +177,7 @@ ACTORSCRIPT0_09_4600::
     WaitEventText(99)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    LongJump(SCRIPT_15_403F)
+    LongJump(Script_Underneath_Puzzle4_SecretComplete)
 
 SCRIPT_09_4632::
     End()
