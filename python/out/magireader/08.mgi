@@ -928,30 +928,30 @@ SCRIPT_08_7AE0::
     SetEventText(25)
     End()
 
-SCRIPT_08_7AF8::
+Hotspot_Bograth_Main_0::
     LongJump(SCRIPT_17_5C50)
 
-SCRIPT_08_7AFC::
+Hotspot_Bograth_Main_1::
     LongJump(SCRIPT_17_5C56)
 
-SCRIPT_08_7B00::
+Hotspot_Bograth_Main_2::
     LongJump(SCRIPT_17_5C5C)
 
-SCRIPT_08_7B04::
+Hotspot_Bograth_Main_3::
     LongJump(SCRIPT_17_5C62)
 
-SCRIPT_08_7B08::
+Hotspot_Bograth_Main_4::
     LongJump(SCRIPT_17_5C68)
 
-SCRIPT_08_7B0C::
+Hotspot_Bograth_Main_5::
     HeroToDoor($13, $06)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_08_7B13::
+Hotspot_Bograth_Main_6::
     HeroToDoor($13, $06)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_08_7B1A::
+Trigger_Bograth_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_08_7B2F, SCRIPT_08_7B71, SCRIPT_08_7BAA, SCRIPT_08_7BEC)
@@ -977,7 +977,7 @@ SCRIPT_08_7C19::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_7C1F::
+Trigger_Bograth_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_08_7C2E, SCRIPT_08_7C83)
@@ -995,7 +995,7 @@ SCRIPT_08_7CE4::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_7CEA::
+Trigger_Bograth_Main_3::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_08_7CFF, SCRIPT_08_7D4D, SCRIPT_08_7D5E, SCRIPT_08_7D99)
@@ -1021,7 +1021,7 @@ SCRIPT_08_7DDC::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_7DE2::
+Trigger_Bograth_Main_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_08_7DF4, SCRIPT_08_7E1B, SCRIPT_08_7E64)
@@ -1043,13 +1043,13 @@ SCRIPT_08_7EB6::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_7EBC::
+Trigger_Bograth_Main_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D241, $08, $07, $D241, $13, $07)
     TransplantMap($D08B, $04, $08, $D1CD, $0F, $0B)
     End()
 
-SCRIPT_08_7EDA::
+Trigger_Bograth_Main_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D1B7, $04, $0D, $D1B7, $0E, $13)
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00100000) == c0)#, Actor_Null)
@@ -1058,7 +1058,7 @@ SCRIPT_08_7EDA::
     TransplantMapMask($D1EB, $04, $07, $D1EB, $10, $0B)
     End()
 
-SCRIPT_08_7F15::
+Trigger_Bograth_Main_6::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D0E0, $05, $05, $D0E0, $07, $0E)
     TransplantMapMask($D100, $05, $06, $D100, $08, $10)
@@ -1067,16 +1067,16 @@ SCRIPT_08_7F15::
     TransplantTile($07, $12, $D0E4, COLLID_WALL, $2D)
     End()
 
-SCRIPT_08_7F4A::
+Trigger_Bograth_Main_7::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D04D, $0C, $06, $D04D, $02, $11)
     End()
 
-SCRIPT_08_7F5F::
+Trigger_Bograth_Main_8::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03A], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D150, $09, $05, $D150, $0B, $06)
     TransplantMapMask($D116, $02, $02, $D116, $09, $08)
     End()
 
-SCRIPT_08_7F7D::
+Trigger_Bograth_Main_9::
     End()

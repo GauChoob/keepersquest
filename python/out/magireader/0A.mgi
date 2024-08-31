@@ -214,7 +214,7 @@ Script_dResh_Puzzle1_Dead::
 .MaxFailedAttempts::
     LongJump(Script_dResh_Puzzle1_Again)
 
-Hotspot_dResh_Puzzle1_Finish::
+Hotspot_dResh_Puzzle1_0_Finish::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -417,7 +417,7 @@ SCRIPT_0A_462C::
 .MaxFailedAttempts::
     LongJump(Script_dResh_Puzzle3_Again)
 
-SCRIPT_0A_4655::
+Hotspot_dResh_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -609,7 +609,7 @@ SCRIPT_0A_49A5::
 .MaxFailedAttempts::
     LongJump(Script_dResh_Puzzle4_Again)
 
-SCRIPT_0A_49CE::
+Hotspot_dResh_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -724,22 +724,22 @@ SCRIPT_0A_4C2C::
     PalFadeAnimToBase(1, $20, 7, 9)
     LongJump(Script_dResh_Puzzle2_Again)
 
-SCRIPT_0A_4C51::
+Trigger_dResh_Puzzle2_0::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_19_46DC, $9F, $D196)
     StartSFX0(SFXID_PhysicalAttack)
     LongJump(SCRIPT_0A_4C8D)
 
-SCRIPT_0A_4C61::
+Trigger_dResh_Puzzle2_1::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_19_46DC, $9F, $D0E7)
     StartSFX0(SFXID_PhysicalAttack)
     LongJump(SCRIPT_0A_4C8D)
 
-SCRIPT_0A_4C71::
+Trigger_dResh_Puzzle2_2::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_19_46DC, $9F, $D2F9)
     StartSFX0(SFXID_PhysicalAttack)
     LongJump(SCRIPT_0A_4C8D)
 
-SCRIPT_0A_4C81::
+Trigger_dResh_Puzzle2_3::
     TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_19_46DC, $9F, $D56A)
     StartSFX0(SFXID_PhysicalAttack)
 
@@ -932,12 +932,12 @@ Actor_ThirstOverlay_Decreasing::
 SCRIPT_0A_4E2E::
     End()
 
-SCRIPT_0A_4E2F::
+Hotspot_dResh_Puzzle2_3::
     SetByte(xPuzzleCounter, $0E)
     ThatScript(2, Actor_ThirstOverlay_Decreasing)
     End()
 
-SCRIPT_0A_4E39::
+Hotspot_dResh_Puzzle2_0::
     ThatScript(2, Actor_ThirstOverlay_Frozen)
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1019,7 +1019,7 @@ SCRIPT_0A_4FC3::
     Close()
     LongJump(SCRIPT_0A_4034)
 
-SCRIPT_0A_5138::
+Hotspot_dResh_Puzzle2_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_0A_5174)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_14_5E74)
@@ -1037,7 +1037,7 @@ SCRIPT_0A_5138::
 SCRIPT_0A_5174::
     End()
 
-SCRIPT_0A_5175::
+Hotspot_dResh_Puzzle2_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_0A_51B1)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_14_5E74)
@@ -1104,7 +1104,7 @@ SCRIPT_0A_5239::
     PalFadeAnimToBase(1, $20, 7, 9)
     LongJump(Script_dResh_Puzzle5_Again)
 
-SCRIPT_0A_525E::
+Hotspot_dResh_Puzzle5_20::
     StartSong(SONGID_GetItem)
     ThatScript(2, ACTORSCRIPT0_0A_53DE)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1322,132 +1322,132 @@ SCRIPT_0A_551F::
 SCRIPT_0A_5555::
     End()
 
-SCRIPT_0A_5556::
+Hotspot_dResh_Puzzle5_22::
     SetByte(RAM_00_A128, $0E)
     ThatScript(2, SCRIPT_ACTORSCRIPT0_0A_5465)
     End()
 
-SCRIPT_0A_5560::
+Hotspot_dResh_Puzzle5_0::
     LongJumpIf(#(c[xPuzzleCounter] == c1)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $01)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_557B::
+Hotspot_dResh_Puzzle5_1::
     LongJumpIf(#(c[xPuzzleCounter] == c2)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $02)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5596::
+Hotspot_dResh_Puzzle5_2::
     LongJumpIf(#(c[xPuzzleCounter] == c3)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $03)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_55B1::
+Hotspot_dResh_Puzzle5_3::
     LongJumpIf(#(c[xPuzzleCounter] == c4)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $04)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_55CC::
+Hotspot_dResh_Puzzle5_4::
     LongJumpIf(#(c[xPuzzleCounter] == c5)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $05)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_55E7::
+Hotspot_dResh_Puzzle5_5::
     LongJumpIf(#(c[xPuzzleCounter] == c6)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $06)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5602::
+Hotspot_dResh_Puzzle5_6::
     LongJumpIf(#(c[xPuzzleCounter] == c7)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $07)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_561D::
+Hotspot_dResh_Puzzle5_7::
     LongJumpIf(#(c[xPuzzleCounter] == c8)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $08)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5638::
+Hotspot_dResh_Puzzle5_8::
     LongJumpIf(#(c[xPuzzleCounter] == c9)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $09)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5653::
+Hotspot_dResh_Puzzle5_9::
     LongJumpIf(#(c[xPuzzleCounter] == c10)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0A)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_566E::
+Hotspot_dResh_Puzzle5_10::
     LongJumpIf(#(c[xPuzzleCounter] == c11)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0B)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5689::
+Hotspot_dResh_Puzzle5_11::
     LongJumpIf(#(c[xPuzzleCounter] == c12)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0C)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_56A4::
+Hotspot_dResh_Puzzle5_12::
     LongJumpIf(#(c[xPuzzleCounter] == c13)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0D)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_56BF::
+Hotspot_dResh_Puzzle5_13::
     LongJumpIf(#(c[xPuzzleCounter] == c14)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0E)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_56DA::
+Hotspot_dResh_Puzzle5_14::
     LongJumpIf(#(c[xPuzzleCounter] == c15)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0F)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_56F5::
+Hotspot_dResh_Puzzle5_15::
     LongJumpIf(#(c[xPuzzleCounter] == c16)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $10)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5710::
+Hotspot_dResh_Puzzle5_16::
     LongJumpIf(#(c[xPuzzleCounter] == c17)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $11)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_572B::
+Hotspot_dResh_Puzzle5_17::
     LongJumpIf(#(c[xPuzzleCounter] == c18)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $12)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5746::
+Hotspot_dResh_Puzzle5_18::
     LongJumpIf(#(c[xPuzzleCounter] == c19)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $13)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_5761::
+Hotspot_dResh_Puzzle5_19::
     LongJumpIf(#(c[xPuzzleCounter] == c20)#, Actor_Null)
     VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $14)
     LongJump(SCRIPT_0A_57B0)
 
-SCRIPT_0A_577C::
+Hotspot_dResh_Puzzle5_21::
     SetByte(RAM_00_A127, $00)
     SetByte(xPuzzleCounter, $11)
     ThatAI(0, Call_001_4AF8)
@@ -1883,7 +1883,7 @@ SCRIPT_0A_5D10::
 .MaxFailedAttempts::
     LongJump(Script_Weave_Puzzle1_Again)
 
-SCRIPT_0A_5D39::
+Hotspot_Weave_Puzzle1_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2106,7 +2106,7 @@ ACTORSCRIPT1_0A_6110::
     ThatScript(0, ACTORSCRIPT0_0A_6095)
     End()
 
-SCRIPT_0A_611F::
+Hotspot_Weave_Puzzle2_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2147,7 +2147,7 @@ SCRIPT_0A_611F::
     Close()
     LongJump(SCRIPT_0A_5AEF)
 
-SCRIPT_0A_629A::
+Hotspot_Weave_Puzzle2_1::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2321,7 +2321,7 @@ SCRIPT_0A_65A7::
 .MaxFailedAttempts::
     LongJump(Script_Weave_Puzzle3_Again)
 
-SCRIPT_0A_65D0::
+Hotspot_Weave_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2518,7 +2518,7 @@ SCRIPT_0A_6932::
 .MaxFailedAttempts::
     LongJump(Script_Weave_Puzzle4_Again)
 
-SCRIPT_0A_695B::
+Hotspot_Weave_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2795,7 +2795,7 @@ SCRIPT_0A_6D68::
 .MaxFailedAttempts::
     LongJump(Script_Weave_Puzzle5_Again)
 
-SCRIPT_0A_6D91::
+Hotspot_Weave_Puzzle5_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)

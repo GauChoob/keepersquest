@@ -944,7 +944,7 @@ SCRIPT_09_54A0::
     SetEventText(1)
     End()
 
-SCRIPT_09_54A4::
+Trigger_Underneath_Main_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("Orange, fluffy⭍mushrooms......🅐Mmmmmm...🅐")
@@ -952,7 +952,7 @@ SCRIPT_09_54A4::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_54DC::
+Trigger_Underneath_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_54F1, SCRIPT_09_5510, SCRIPT_09_5545, SCRIPT_09_557F)
@@ -977,7 +977,7 @@ SCRIPT_09_5599::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_559F::
+Trigger_Underneath_Main_3::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_55B1, SCRIPT_09_55EA, SCRIPT_09_5624)
@@ -998,7 +998,7 @@ SCRIPT_09_5645::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_564B::
+Trigger_Underneath_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_565D, SCRIPT_09_56BB, SCRIPT_09_56D9)
@@ -1019,55 +1019,55 @@ SCRIPT_09_5704::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_570A::
+Hotspot_Underneath_Main_0::
     LongJump(SCRIPT_15_4000)
 
-SCRIPT_09_570E::
+Hotspot_Underneath_Main_1::
     LongJump(SCRIPT_15_4006)
 
-SCRIPT_09_5712::
+Hotspot_Underneath_Main_2::
     LongJump(SCRIPT_15_400C)
 
-SCRIPT_09_5716::
+Hotspot_Underneath_Main_3::
     LongJump(SCRIPT_15_4012)
 
-SCRIPT_09_571A::
+Hotspot_Underneath_Main_4::
     LongJump(SCRIPT_15_4018)
 
-SCRIPT_09_571E::
+Hotspot_Underneath_Main_5::
     HeroToDoor($07, $05)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_09_5725::
+Hotspot_Underneath_Main_6::
     HeroToDoor($07, $05)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_09_572C::
+Trigger_Underneath_Main_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D2F5, $07, $09, $D2F5, $19, $07)
     End()
 
-SCRIPT_09_5741::
+Trigger_Underneath_Main_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D226, $06, $07, $D226, $12, $0A)
     End()
 
-SCRIPT_09_5756::
+Trigger_Underneath_Main_6::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D196, $05, $09, $D196, $0D, $10)
     End()
 
-SCRIPT_09_576B::
+Trigger_Underneath_Main_7::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D033, $04, $08, $D033, $01, $15)
     End()
 
-SCRIPT_09_5780::
+Trigger_Underneath_Main_8::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D0FB, $06, $06, $D0FB, $08, $0B)
     End()
 
-SCRIPT_09_5795::
+Trigger_Underneath_Main_9::
     End()
 
 SCRIPT_09_5796::
@@ -1991,30 +1991,30 @@ SCRIPT_09_66E1::
     SetEventText(1)
     End()
 
-SCRIPT_09_66E5::
+Hotspot_Cald_Main_0::
     LongJump(SCRIPT_18_686D)
 
-SCRIPT_09_66E9::
+Hotspot_Cald_Main_1::
     LongJump(SCRIPT_18_6873)
 
-SCRIPT_09_66ED::
+Hotspot_Cald_Main_2::
     LongJump(SCRIPT_18_6879)
 
-SCRIPT_09_66F1::
+Hotspot_Cald_Main_3::
     LongJump(SCRIPT_18_687F)
 
-SCRIPT_09_66F5::
+Hotspot_Cald_Main_4::
     LongJump(SCRIPT_18_6885)
 
-SCRIPT_09_66F9::
+Hotspot_Cald_Main_5::
     HeroToDoor($13, $06)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_09_6700::
+Hotspot_Cald_Main_6::
     HeroToDoor($13, $06)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_09_6707::
+Trigger_Cald_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_671F, SCRIPT_09_6756, SCRIPT_09_6793, SCRIPT_09_67AE, SCRIPT_09_67CB)
@@ -2043,7 +2043,7 @@ SCRIPT_09_6844::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_684A::
+Trigger_Cald_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_6862, SCRIPT_09_68AC, SCRIPT_09_68F5, SCRIPT_09_690D, SCRIPT_09_6950)
@@ -2072,35 +2072,35 @@ SCRIPT_09_6985::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_698B::
+Trigger_Cald_Main_2::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A036], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D2A3, $06, $05, $D2A3, $16, $0F)
     End()
 
-SCRIPT_09_69A0::
+Trigger_Cald_Main_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A036], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D1BB, $05, $07, $D1BB, $0E, $17)
     End()
 
-SCRIPT_09_69B5::
+Trigger_Cald_Main_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A036], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D0FF, $08, $06, $D0FF, $08, $0F)
     TransplantTile($07, $11, $D0E3, COLLID_SPACE, $1E)
     TransplantTile($07, $12, $D0E4, COLLID_WALL, $1D)
     End()
 
-SCRIPT_09_69D8::
+Trigger_Cald_Main_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A036], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D011, $09, $08, $D011, $00, $11)
     End()
 
-SCRIPT_09_69ED::
+Trigger_Cald_Main_6::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A036], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D0F7, $08, $0A, $D0F7, $08, $07)
     TransplantMapMask($D195, $07, $08, $D195, $0D, $0F)
     End()
 
-SCRIPT_09_6A0B::
+Trigger_Cald_Main_7::
     End()
 
 SCRIPT_09_6A0C::
@@ -2966,30 +2966,30 @@ ACTORSCRIPT0_09_7AA9::
     SetEventText(1)
     End()
 
-SCRIPT_09_7AC5::
+Hotspot_Weave_Main_0::
     LongJump(SCRIPT_0A_5AC6)
 
-SCRIPT_09_7AC9::
+Hotspot_Weave_Main_1::
     LongJump(SCRIPT_0A_5ACC)
 
-SCRIPT_09_7ACD::
+Hotspot_Weave_Main_2::
     LongJump(SCRIPT_0A_5AD2)
 
-SCRIPT_09_7AD1::
+Hotspot_Weave_Main_3::
     LongJump(SCRIPT_0A_5AD8)
 
-SCRIPT_09_7AD5::
+Hotspot_Weave_Main_4::
     LongJump(SCRIPT_0A_5ADE)
 
-SCRIPT_09_7AD9::
+Hotspot_Weave_Main_5::
     HeroToDoor($07, $11)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_09_7AE0::
+Hotspot_Weave_Main_6::
     HeroToDoor($07, $11)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_09_7AE7::
+Trigger_Weave_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("These statues⭍are creepy! I'm🅐not even sure⭍what they are! 🅐")
@@ -2997,7 +2997,7 @@ SCRIPT_09_7AE7::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7B32::
+Trigger_Weave_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This statue ⭍says on it that🅐it is here to⭍promote plant🅐growth and⭍bring bad times🅐upon all weeds.🅐")
@@ -3005,7 +3005,7 @@ SCRIPT_09_7B32::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7BA5::
+Trigger_Weave_Main_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("There seems to⭍be grass🅐growing out of⭍the cracks on 🅐this statue.🅐")
@@ -3013,7 +3013,7 @@ SCRIPT_09_7BA5::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7BF7::
+Trigger_Weave_Main_3::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("Yaki has been⭍to this statue.🅐It has 'Yaki is⭍da man' carved🅐on it.🅐")
@@ -3021,7 +3021,7 @@ SCRIPT_09_7BF7::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7C4A::
+Trigger_Weave_Main_4::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("The birds ⭍really seem to🅐like this⭍statue!🅐")
@@ -3029,7 +3029,7 @@ SCRIPT_09_7C4A::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7C85::
+Trigger_Weave_Main_5::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("'The Statue of⭍Good Riddance'?🅐")
@@ -3037,7 +3037,7 @@ SCRIPT_09_7C85::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7CB3::
+Trigger_Weave_Main_6::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This statue⭍must be really🅐old, because it⭍is starting to🅐crumble away.🅐")
@@ -3045,7 +3045,7 @@ SCRIPT_09_7CB3::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7D0A::
+Trigger_Weave_Main_7::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("They have this⭍statue chained🅐down! It must⭍have been bored🅐and tried to ⭍run away!🅐")
@@ -3053,7 +3053,7 @@ SCRIPT_09_7D0A::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7D6D::
+Trigger_Weave_Main_8::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This statue ⭍says, 'Run 🅐around the head⭍five times.'🅐What is that ⭍supposed to 🅐mean?🅐")
@@ -3061,7 +3061,7 @@ SCRIPT_09_7D6D::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7DD3::
+Trigger_Weave_Main_9::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This one says,⭍'Then poke the🅐eye.'⭍........🅐I am getting⭍really confused🅐with these ⭍statues!🅐")
@@ -3069,7 +3069,7 @@ SCRIPT_09_7DD3::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7E41::
+Trigger_Weave_Main_10::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_7E59, SCRIPT_09_7E8C, SCRIPT_09_7ED2, SCRIPT_09_7F04, SCRIPT_09_7F41)
@@ -3098,31 +3098,31 @@ SCRIPT_09_7F73::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_7F79::
+Trigger_Weave_Main_11::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D0A1, $07, $05, $D0A1, $05, $0B)
     End()
 
-SCRIPT_09_7F8E::
+Trigger_Weave_Main_12::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D0D9, $04, $08, $D0D9, $07, $07)
     TransplantMapMask($D1AD, $01, $02, $D1AD, $0E, $09)
     End()
 
-SCRIPT_09_7FAC::
+Trigger_Weave_Main_13::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D1EA, $04, $09, $D1EA, $10, $0A)
     End()
 
-SCRIPT_09_7FC1::
+Trigger_Weave_Main_14::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D187, $07, $0E, $D187, $0D, $01)
     End()
 
-SCRIPT_09_7FD6::
+Trigger_Weave_Main_15::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D175, $08, $0C, $D175, $0C, $0D)
     End()
 
-SCRIPT_09_7FEB::
+Trigger_Weave_Main_16::
     End()

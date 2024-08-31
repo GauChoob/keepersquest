@@ -180,7 +180,7 @@ SCRIPT_16_41EA::
 .MaxFailedAttempts::
     LongJump(Script_Core_Puzzle5_Again)
 
-SCRIPT_16_4213::
+Hotspot_Core_Puzzle5_0::
     StartSong(SONGID_GetItem)
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
@@ -222,7 +222,7 @@ SCRIPT_16_4213::
     Close()
     LongJump(SCRIPT_16_4086)
 
-SCRIPT_16_438F::
+Trigger_Core_Puzzle5_0::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_43A8, $FE, $D016)
     StartSFX0(SFXID_PhysicalAttack)
     VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
@@ -231,7 +231,7 @@ SCRIPT_16_438F::
 SCRIPT_TRIGGERALREADYON_16_43A8::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_43AC::
+Trigger_Core_Puzzle5_1::
     InitSkip(SCRIPT_16_43C8)
     TriggerOnce(xBIT_00_A028_1, SCRIPT_16_43C8, $FE, $D026)
     StartSFX0(SFXID_PhysicalAttack)
@@ -241,7 +241,7 @@ SCRIPT_16_43AC::
 SCRIPT_16_43C8::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_43CC::
+Trigger_Core_Puzzle5_2::
     InitSkip(SCRIPT_16_43E8)
     TriggerOnce(xBIT_00_A028_2, SCRIPT_16_43E8, $FE, $D0DE)
     StartSFX0(SFXID_PhysicalAttack)
@@ -251,7 +251,7 @@ SCRIPT_16_43CC::
 SCRIPT_16_43E8::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_43EC::
+Trigger_Core_Puzzle5_3::
     InitSkip(SCRIPT_16_4408)
     TriggerOnce(xBIT_00_A028_3, SCRIPT_16_4408, $FE, $D116)
     StartSFX0(SFXID_PhysicalAttack)
@@ -444,10 +444,10 @@ SCRIPT_STARTBUTTON_16_4820::
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
-    Menu(SCRIPT_16_4849, SCRIPT_16_402D)
+    Menu(Hotspot_Core_Puzzle2_2, SCRIPT_16_402D)
     End()
 
-SCRIPT_16_4849::
+Hotspot_Core_Puzzle2_2::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, SCRIPT_14_60E5)
@@ -459,7 +459,7 @@ SCRIPT_16_4849::
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
     LongJump(Script_Core_Puzzle2_Again)
 
-SCRIPT_16_4871::
+Hotspot_Core_Puzzle2_0::
     StartSong(SONGID_GetItem)
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
@@ -501,7 +501,7 @@ SCRIPT_16_4871::
     Close()
     LongJump(SCRIPT_16_4029)
 
-SCRIPT_16_49ED::
+Hotspot_Core_Puzzle2_1::
     StartSong(SONGID_GetItem)
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
@@ -543,7 +543,7 @@ SCRIPT_16_49ED::
     Close()
     LongJump(SCRIPT_16_4034)
 
-SCRIPT_16_4B69::
+Trigger_Core_Puzzle2_0::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_4BAB, $FE, $D02C)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -557,7 +557,7 @@ SCRIPT_16_4B69::
 SCRIPT_TRIGGERALREADYON_16_4BAB::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4BAF::
+Trigger_Core_Puzzle2_1::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_16_4BEC, $FE, $D040)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -571,7 +571,7 @@ SCRIPT_16_4BAF::
 SCRIPT_TRIGGERALREADYON_16_4BEC::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4BF0::
+Trigger_Core_Puzzle2_2::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_16_4C2D, $FE, $D039)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -585,7 +585,7 @@ SCRIPT_16_4BF0::
 SCRIPT_TRIGGERALREADYON_16_4C2D::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4C31::
+Trigger_Core_Puzzle2_3::
     TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_16_4C6A, $FE, $D04D)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -598,7 +598,7 @@ SCRIPT_16_4C31::
 SCRIPT_TRIGGERALREADYON_16_4C6A::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4C6E::
+Trigger_Core_Puzzle2_4::
     TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_16_4CAB, $FE, $D142)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -612,7 +612,7 @@ SCRIPT_16_4C6E::
 SCRIPT_TRIGGERALREADYON_16_4CAB::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4CAF::
+Trigger_Core_Puzzle2_5::
     TriggerOnce(xBIT_00_A028_5, SCRIPT_TRIGGERALREADYON_16_4CE8, $FE, $D156)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -625,7 +625,7 @@ SCRIPT_16_4CAF::
 SCRIPT_TRIGGERALREADYON_16_4CE8::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4CEC::
+Trigger_Core_Puzzle2_6::
     TriggerOnce(xBIT_00_A028_6, SCRIPT_TRIGGERALREADYON_16_4D38, $FE, $D13C)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -641,7 +641,7 @@ SCRIPT_16_4CEC::
 SCRIPT_TRIGGERALREADYON_16_4D38::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4D3C::
+Trigger_Core_Puzzle2_7::
     TriggerOnce(xBIT_00_A028_7, SCRIPT_TRIGGERALREADYON_16_4D8C, $FE, $D150)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -658,7 +658,7 @@ SCRIPT_16_4D3C::
 SCRIPT_TRIGGERALREADYON_16_4D8C::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4D90::
+Trigger_Core_Puzzle2_8::
     TriggerOnce(xBIT_00_A029_0, SCRIPT_TRIGGERALREADYON_16_4DDC, $FE, $D164)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
@@ -674,7 +674,7 @@ SCRIPT_16_4D90::
 SCRIPT_TRIGGERALREADYON_16_4DDC::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4DE0::
+Trigger_Core_Puzzle2_9::
     TriggerOnce(xBIT_00_A02A_4, SCRIPT_TRIGGERALREADYON_16_4E06, $FE, $D0BD)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4], c%00100000) == c0)#, SCRIPT_TRIGGERALREADYON_16_4E06)
@@ -684,7 +684,7 @@ SCRIPT_16_4DE0::
 SCRIPT_TRIGGERALREADYON_16_4E06::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4E0A::
+Trigger_Core_Puzzle2_10::
     TriggerOnce(xBIT_00_A02A_5, SCRIPT_TRIGGERALREADYON_16_4E30, $FE, $D0D1)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5], c%00010000) == c0)#, SCRIPT_TRIGGERALREADYON_16_4E30)
@@ -694,7 +694,7 @@ SCRIPT_16_4E0A::
 SCRIPT_TRIGGERALREADYON_16_4E30::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4E34::
+Trigger_Core_Puzzle2_11::
     TriggerOnce(xBIT_00_A02A_6, SCRIPT_TRIGGERALREADYON_16_4E5A, $FE, $D0D2)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6], c%00010000) == c0)#, SCRIPT_TRIGGERALREADYON_16_4E5A)
@@ -704,7 +704,7 @@ SCRIPT_16_4E34::
 SCRIPT_TRIGGERALREADYON_16_4E5A::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4E5E::
+Trigger_Core_Puzzle2_12::
     TriggerOnce(xBIT_00_A02A_7, SCRIPT_TRIGGERALREADYON_16_4E79, $FE, $D0D6)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#(bitmatch(c[RAM_00_A02B], c%00000001) == c0)#, SCRIPT_TRIGGERALREADYON_16_4E79)
@@ -713,7 +713,7 @@ SCRIPT_16_4E5E::
 SCRIPT_TRIGGERALREADYON_16_4E79::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_4E7D::
+Trigger_Core_Puzzle2_13::
     TriggerOnce(xBIT_00_A02B_0, SCRIPT_TRIGGERALREADYON_16_4E98, $FE, $D10F)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#(bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%10000000) == c0)#, SCRIPT_TRIGGERALREADYON_16_4E98)
@@ -934,7 +934,7 @@ SCRIPT_STARTBUTTON_16_51F0::
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
-    Menu(SCRIPT_16_52A5, SCRIPT_16_4065)
+    Menu(Hotspot_Core_Puzzle3_1/Hotspot_Core_Puzzle3_2, SCRIPT_16_4065)
     End()
 
 ACTORSCRIPT1_16_5219::
@@ -995,7 +995,8 @@ SCRIPT_16_527C::
 .MaxFailedAttempts::
     LongJump(Script_Core_Puzzle3_Again)
 
-SCRIPT_16_52A5::
+Hotspot_Core_Puzzle3_1::
+Hotspot_Core_Puzzle3_2::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, SCRIPT_14_60E5)
@@ -1007,7 +1008,7 @@ SCRIPT_16_52A5::
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
     LongJump(Script_Core_Puzzle3_Again)
 
-SCRIPT_16_52CD::
+Hotspot_Core_Puzzle3_0::
     StartSong(SONGID_GetItem)
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1049,7 +1050,7 @@ SCRIPT_16_52CD::
     Close()
     LongJump(SCRIPT_16_4061)
 
-SCRIPT_16_5449::
+Trigger_Core_Puzzle3_0::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D03D)
@@ -1057,7 +1058,7 @@ SCRIPT_16_5449::
     ThatScript(4, ACTORSCRIPT0_16_5572)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_546A::
+Trigger_Core_Puzzle3_1::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D02C)
@@ -1065,7 +1066,7 @@ SCRIPT_16_546A::
     ThatScript(5, ACTORSCRIPT0_16_559C)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_548B::
+Trigger_Core_Puzzle3_2::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D024)
@@ -1073,7 +1074,7 @@ SCRIPT_16_548B::
     ThatScript(5, ACTORSCRIPT0_16_55C6)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_54AC::
+Trigger_Core_Puzzle3_3::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D04C)
@@ -1081,7 +1082,7 @@ SCRIPT_16_54AC::
     ThatScript(6, ACTORSCRIPT0_16_55F8)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_54CD::
+Trigger_Core_Puzzle3_4::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D150)
@@ -1089,7 +1090,7 @@ SCRIPT_16_54CD::
     ThatScript(9, ACTORSCRIPT0_16_561A)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_54EE::
+Trigger_Core_Puzzle3_5::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_5, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D128)
@@ -1097,7 +1098,7 @@ SCRIPT_16_54EE::
     ThatScript(7, ACTORSCRIPT0_16_5658)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_550F::
+Trigger_Core_Puzzle3_6::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_6, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D161)
@@ -1105,7 +1106,7 @@ SCRIPT_16_550F::
     ThatScript(8, ACTORSCRIPT0_16_5682)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_5530::
+Trigger_Core_Puzzle3_7::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A028_7, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D11E)
@@ -1113,7 +1114,7 @@ SCRIPT_16_5530::
     ThatScript(4, ACTORSCRIPT0_16_56BC)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_5551::
+Trigger_Core_Puzzle3_8::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7], c%00000001)#, SCRIPT_TRIGGERALREADYON_19_46DC)
     OrByte(RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7, %00000001)
     TriggerOnce(xBIT_00_A029_0, SCRIPT_TRIGGERALREADYON_19_46DC, $FE, $D158)
@@ -1369,7 +1370,7 @@ SCRIPT_STARTBUTTON_16_598B::
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
-    Menu(SCRIPT_16_5A40, SCRIPT_16_4022)
+    Menu(Hotspot_Core_Puzzle1_1/Hotspot_Core_Puzzle1_2, SCRIPT_16_4022)
     End()
 
 ACTORSCRIPT1_16_59B4::
@@ -1430,7 +1431,8 @@ SCRIPT_16_5A17::
 .MaxFailedAttempts::
     LongJump(Script_Core_Puzzle1_Again)
 
-SCRIPT_16_5A40::
+Hotspot_Core_Puzzle1_1::
+Hotspot_Core_Puzzle1_2::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, SCRIPT_14_60E5)
@@ -1442,7 +1444,7 @@ SCRIPT_16_5A40::
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
     LongJump(Script_Core_Puzzle1_Again)
 
-SCRIPT_16_5A68::
+Hotspot_Core_Puzzle1_0::
     StartSong(SONGID_GetItem)
     SetScriptMaster(Actor_Null)
     ResetActorList()
@@ -1505,7 +1507,7 @@ SCRIPT_16_5BE8::
     SetByte(RAM_00_A128, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_5C5A::
+Trigger_Core_Puzzle1_0::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_5CAD, $FE, $D02B)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -1543,7 +1545,7 @@ SCRIPT_16_5CB1::
     TransplantTile($01, $03, $D017, COLLID_WALL, $6F)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_5D3D::
+Trigger_Core_Puzzle1_1::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_16_5D90, $FE, $D02C)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -1581,7 +1583,7 @@ SCRIPT_16_5D94::
     TransplantTile($01, $04, $D018, COLLID_WALL, $6F)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_5E20::
+Trigger_Core_Puzzle1_2::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_16_5E73, $FE, $D02D)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -1625,7 +1627,7 @@ SCRIPT_16_5F03::
     TransplantMapMask($D042, $08, $05, $D042, $03, $06)
     LongJump(SCRIPT_16_5BE8)
 
-SCRIPT_16_5F1B::
+Trigger_Core_Puzzle1_3::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00001000)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FE)
@@ -1707,7 +1709,7 @@ ACTORSCRIPT0_16_6029::
     TransplantTile($03, $0F, $D04B, COLLID_TR03, $FF)
     End()
 
-SCRIPT_16_6057::
+Trigger_Core_Puzzle1_4::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00010000)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($0E, $11, $D129, COLLID_TR03, $FE)
@@ -1802,7 +1804,7 @@ SCRIPT_STARTBUTTON_16_620E::
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
-    Menu(SCRIPT_16_63D6, SCRIPT_16_407F)
+    Menu(Hotspot_Core_Puzzle4_2, SCRIPT_16_407F)
     End()
 
 SCRIPT_16_6237::
@@ -1923,7 +1925,7 @@ SCRIPT_16_63AD::
 .MaxFailedAttempts::
     LongJump(Script_Core_Puzzle4_Again)
 
-SCRIPT_16_63D6::
+Hotspot_Core_Puzzle4_2::
     SetByte(wScript_StartButtonDisabled, $01)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, SCRIPT_14_60E5)
@@ -1935,7 +1937,7 @@ SCRIPT_16_63D6::
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
     LongJump(Script_Core_Puzzle4_Again)
 
-SCRIPT_16_63FE::
+Hotspot_Core_Puzzle4_0::
     ResetActorList()
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -2031,7 +2033,7 @@ SCRIPT_16_668C::
     SetByte(xPuzzleCounter, $00)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_66A7::
+Trigger_Core_Puzzle4_0::
     TriggerOnce(xBIT_00_A028_0, SCRIPT_TRIGGERALREADYON_16_66CF, $FE, $D091)
     StartSFX0(SFXID_PhysicalAttack)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
@@ -2052,7 +2054,7 @@ SCRIPT_16_66E0::
     VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c10)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_66ED::
+Trigger_Core_Puzzle4_1::
     TriggerOnce(xBIT_00_A028_1, SCRIPT_TRIGGERALREADYON_16_6715, $FE, $D092)
     StartSFX0(SFXID_PhysicalAttack)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
@@ -2073,7 +2075,7 @@ SCRIPT_16_6726::
     VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c20)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6733::
+Trigger_Core_Puzzle4_2::
     TriggerOnce(xBIT_00_A028_2, SCRIPT_TRIGGERALREADYON_16_675B, $FE, $D093)
     StartSFX0(SFXID_PhysicalAttack)
     VarByteExpr(RAM_00_A128, #(c[RAM_00_A128] + c1)#)
@@ -2094,14 +2096,14 @@ SCRIPT_16_676C::
     VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c30)#)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6779::
+Trigger_Core_Puzzle4_3::
     TriggerOnce(xBIT_00_A028_3, SCRIPT_TRIGGERALREADYON_16_6785, $FE, $D18B)
     StartSFX0(SFXID_PhysicalAttack)
 
 SCRIPT_TRIGGERALREADYON_16_6785::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6789::
+Trigger_Core_Puzzle4_4::
     TriggerOnce(xBIT_00_A028_4, SCRIPT_TRIGGERALREADYON_16_67C2, $FE, $D199)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2114,14 +2116,14 @@ SCRIPT_16_6789::
 SCRIPT_TRIGGERALREADYON_16_67C2::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_67C6::
+Trigger_Core_Puzzle4_5::
     TriggerOnce(xBIT_00_A028_5, SCRIPT_TRIGGERALREADYON_16_67D2, $FE, $D1E1)
     StartSFX0(SFXID_PhysicalAttack)
 
 SCRIPT_TRIGGERALREADYON_16_67D2::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_67D6::
+Trigger_Core_Puzzle4_6::
     TriggerOnce(xBIT_00_A028_6, SCRIPT_TRIGGERALREADYON_16_6802, $FE, $D1E9)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2132,7 +2134,7 @@ SCRIPT_16_67D6::
 SCRIPT_TRIGGERALREADYON_16_6802::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6806::
+Trigger_Core_Puzzle4_7::
     TriggerOnce(xBIT_00_A028_7, SCRIPT_TRIGGERALREADYON_16_683F, $FE, $D1EC)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2145,7 +2147,7 @@ SCRIPT_16_6806::
 SCRIPT_TRIGGERALREADYON_16_683F::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6843::
+Trigger_Core_Puzzle4_8::
     TriggerOnce(xBIT_00_A029_0, SCRIPT_TRIGGERALREADYON_16_687C, $FE, $D1FB)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2158,7 +2160,7 @@ SCRIPT_16_6843::
 SCRIPT_TRIGGERALREADYON_16_687C::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_6880::
+Trigger_Core_Puzzle4_9::
     TriggerOnce(xBIT_00_A02A_0, SCRIPT_TRIGGERALREADYON_16_68CF, $FE, $D2AF)
     StartSFX0(SFXID_PhysicalAttack)
     LoadMapMask(METAMAP_MASK_2E_6DD7, COLLMAP_MASK_2F_69D8)
@@ -2174,7 +2176,7 @@ SCRIPT_16_6880::
 SCRIPT_TRIGGERALREADYON_16_68CF::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_68D3::
+Trigger_Core_Puzzle4_10::
     TriggerOnce(xBIT_00_A02A_1, SCRIPT_TRIGGERALREADYON_16_69B5, $FE, $D2EB)
     StartSFX0(SFXID_PhysicalAttack)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2211,7 +2213,7 @@ SCRIPT_16_68D3::
 SCRIPT_TRIGGERALREADYON_16_69B5::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_69B9::
+Trigger_Core_Puzzle4_11::
     TriggerOnce(xBIT_00_A02A_2, SCRIPT_TRIGGERALREADYON_16_69D4, $FE, $D327)
     StartSFX0(SFXID_PhysicalAttack)
     ThatInit(11, AI_01_6DE8, $16, $0D, $D19C, $04, ACTORSCRIPT0_16_6D55, ACTORSCRIPT1_19_46E8)
@@ -2219,7 +2221,7 @@ SCRIPT_16_69B9::
 SCRIPT_TRIGGERALREADYON_16_69D4::
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
-SCRIPT_16_69D8::
+Hotspot_Core_Puzzle4_1::
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($05, $1C, $D0B2, COLLID_SPACE, $27)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
@@ -2363,7 +2365,7 @@ SCRIPT_16_6C80::
     ThisDelete()
     End()
 
-SCRIPT_16_6C86::
+Hotspot_Core_Puzzle4_3::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2], c%00010000)#, SCRIPT_16_6C9F)
     ThatInit(2, AI_01_70E1, $15, $01, $D033, $00, SCRIPT_16_6A06, ACTORSCRIPT1_16_6D08)
     ThatStart(2)
@@ -2371,7 +2373,7 @@ SCRIPT_16_6C86::
 SCRIPT_16_6C9F::
     End()
 
-SCRIPT_16_6CA0::
+Hotspot_Core_Puzzle4_4::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2], c%00100000)#, SCRIPT_16_6CB9)
     ThatInit(3, AI_01_70E1, $15, $02, $D051, $00, SCRIPT_16_6A86, ACTORSCRIPT1_16_6D08)
     ThatStart(3)
@@ -2379,7 +2381,7 @@ SCRIPT_16_6CA0::
 SCRIPT_16_6CB9::
     End()
 
-SCRIPT_16_6CBA::
+Hotspot_Core_Puzzle4_5::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2], c%01000000)#, SCRIPT_16_6CD3)
     ThatInit(4, AI_01_70E1, $15, $03, $D06F, $00, SCRIPT_16_6B06, ACTORSCRIPT1_16_6D08)
     ThatStart(4)
@@ -2387,7 +2389,7 @@ SCRIPT_16_6CBA::
 SCRIPT_16_6CD3::
     End()
 
-SCRIPT_16_6CD4::
+Hotspot_Core_Puzzle4_6::
     LongJumpIf(#bitmatch(c[RAM_00_A02A/xBIT_00_A02A_4/xBIT_00_A02A_5/xBIT_00_A02A_6/xBIT_00_A02A_7/xBIT_00_A02A_0/xBIT_00_A02A_1/xBIT_00_A02A_2], c%10000000)#, SCRIPT_16_6CED)
     ThatInit(5, AI_01_70E1, $15, $04, $D08D, $00, SCRIPT_16_6B86, ACTORSCRIPT1_16_6D08)
     ThatStart(5)
@@ -2395,7 +2397,7 @@ SCRIPT_16_6CD4::
 SCRIPT_16_6CED::
     End()
 
-SCRIPT_16_6CEE::
+Hotspot_Core_Puzzle4_7::
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000001)#, SCRIPT_16_6D07)
     ThatInit(6, AI_01_70E1, $15, $05, $D0AB, $00, SCRIPT_16_6C06, ACTORSCRIPT1_16_6D08)
     ThatStart(6)
@@ -2408,13 +2410,13 @@ ACTORSCRIPT1_16_6D08::
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
     LongJump(Script_Core_Puzzle4_Again)
 
-SCRIPT_16_6D19::
+Hotspot_Core_Puzzle4_8::
     ThatScript(19, ACTORSCRIPT0_16_6DDB)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($19, $13, $D301, COLLID_SPACE, $F8)
     End()
 
-SCRIPT_16_6D2E::
+Hotspot_Core_Puzzle4_9::
     ThatScript(20, ACTORSCRIPT0_16_6E01)
     LongJumpIf(#bitmatch(c[RAM_00_A02B/xBIT_00_A02B_0], c%00000100)#, Actor_Null)
     TransplantTile($1B, $13, $D33D, COLLID_SPACE, $F8)
@@ -2501,13 +2503,13 @@ ACTORSCRIPT0_16_6E01::
     TransplantTile($1B, $13, $D33D, COLLID_HS09, $F8)
     End()
 
-SCRIPT_16_6E27::
+Hotspot_Core_Puzzle4_10::
     LongJumpIf(#(c[RAM_00_A13D] == c1)#, Actor_Null)
     SetByte(RAM_00_A13D, $01)
     SetScriptMaster(SCRIPT_16_6237)
     End()
 
-SCRIPT_16_6E3A::
+Hotspot_Core_Puzzle4_11::
     SetByte(RAM_00_A13C, $01)
     End()
 
@@ -3299,30 +3301,30 @@ SCRIPT_16_7CB7::
     SetEventText(24)
     End()
 
-SCRIPT_16_7CD9::
+Hotspot_KybarsTeeth_Main_0::
     LongJump(SCRIPT_0C_4AA0)
 
-SCRIPT_16_7CDD::
+Hotspot_KybarsTeeth_Main_1::
     LongJump(SCRIPT_0C_4AA6)
 
-SCRIPT_16_7CE1::
+Hotspot_KybarsTeeth_Main_2::
     LongJump(SCRIPT_0C_4AAC)
 
-SCRIPT_16_7CE5::
+Hotspot_KybarsTeeth_Main_3::
     LongJump(SCRIPT_0C_4AB2)
 
-SCRIPT_16_7CE9::
+Hotspot_KybarsTeeth_Main_4::
     LongJump(SCRIPT_0C_4AB8)
 
-SCRIPT_16_7CED::
+Hotspot_KybarsTeeth_Main_5::
     HeroToDoor($17, $0F)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_16_7CF4::
+Hotspot_KybarsTeeth_Main_6::
     HeroToDoor($17, $0F)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_16_7CFB::
+Trigger_KybarsTeeth_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_16_7D0D, SCRIPT_16_7D50, SCRIPT_16_7D7C)
@@ -3343,31 +3345,31 @@ SCRIPT_16_7DA0::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_16_7DA6::
+Trigger_KybarsTeeth_Main_1::
     LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D009, $04, $09, $D009, $00, $09)
     TransplantMapMask($D02B, $05, $0A, $D02B, $01, $0D)
     End()
 
-SCRIPT_16_7DC4::
+Trigger_KybarsTeeth_Main_2::
     LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D0D8, $04, $0A, $D0D8, $07, $06)
     End()
 
-SCRIPT_16_7DD9::
+Trigger_KybarsTeeth_Main_3::
     LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D23B, $09, $09, $D23B, $13, $01)
     End()
 
-SCRIPT_16_7DEE::
+Trigger_KybarsTeeth_Main_4::
     LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D284, $08, $07, $D284, $15, $0E)
     End()
 
-SCRIPT_16_7E03::
+Trigger_KybarsTeeth_Main_5::
     LongJumpIf(#(bitmatch(c[RAM_00_A039], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D170, $0D, $07, $D170, $0C, $08)
     End()
 
-SCRIPT_16_7E18::
+Trigger_KybarsTeeth_Main_6::
     End()

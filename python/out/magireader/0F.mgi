@@ -722,30 +722,30 @@ SCRIPT_0F_4DE0::
     SetEventText(1)
     End()
 
-SCRIPT_0F_4DE4::
+Hotspot_Naroom_TrainingRoom_Cutscene_0::
     LongJump(SCRIPT_0F_6927)
 
-SCRIPT_0F_4DE8::
+Hotspot_Naroom_TrainingRoom_Cutscene_1::
     LongJump(SCRIPT_0F_692D)
 
-SCRIPT_0F_4DEC::
+Hotspot_Naroom_TrainingRoom_Cutscene_2::
     LongJump(SCRIPT_0F_6933)
 
-SCRIPT_0F_4DF0::
+Hotspot_Naroom_TrainingRoom_Cutscene_3::
     LongJump(SCRIPT_0F_6939)
 
-SCRIPT_0F_4DF4::
+Hotspot_Naroom_TrainingRoom_Cutscene_4::
     LongJump(SCRIPT_0F_693F)
 
-SCRIPT_0F_4DF8::
+Hotspot_Naroom_TrainingRoom_Cutscene_5::
     HeroToDoor($16, $0F)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0F_4DFF::
+Hotspot_Naroom_TrainingRoom_Cutscene_6::
     HeroToDoor($16, $0F)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0F_4E06::
+Trigger_Naroom_TrainingRoom_Cutscene_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4E1B, SCRIPT_0F_4E60, SCRIPT_0F_4EBC, SCRIPT_0F_4F03)
@@ -770,7 +770,7 @@ SCRIPT_0F_4F3C::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_4F42::
+Trigger_Naroom_TrainingRoom_Cutscene_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4F54, SCRIPT_0F_4F66, SCRIPT_0F_4F8F)
@@ -791,7 +791,7 @@ SCRIPT_0F_4FC9::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_4FCF::
+Trigger_Naroom_TrainingRoom_Cutscene_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4FE4, SCRIPT_0F_5017, SCRIPT_0F_504D, SCRIPT_0F_508A)
@@ -816,32 +816,32 @@ SCRIPT_0F_50C4::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_50CA::
+Trigger_Naroom_TrainingRoom_Cutscene_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D14E, $04, $08, $D14E, $08, $0E)
     End()
 
-SCRIPT_0F_50DF::
+Trigger_Naroom_TrainingRoom_Cutscene_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D17B, $03, $07, $D17B, $09, $13)
     End()
 
-SCRIPT_0F_50F4::
+Trigger_Naroom_TrainingRoom_Cutscene_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D0B9, $07, $0B, $D0B9, $04, $19)
     End()
 
-SCRIPT_0F_5109::
+Trigger_Naroom_TrainingRoom_Cutscene_6::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D2C0, $05, $07, $D2C0, $11, $18)
     End()
 
-SCRIPT_0F_511E::
+Trigger_Naroom_TrainingRoom_Cutscene_7::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A034], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D2A2, $04, $07, $D2A2, $10, $22)
     End()
 
-SCRIPT_0F_5133::
+Trigger_Naroom_TrainingRoom_Cutscene_8::
     End()
 
 SCRIPT_0F_5134::
@@ -2023,30 +2023,30 @@ SCRIPT_0F_6515::
     SetEventText(1)
     End()
 
-SCRIPT_0F_6519::
+Hotspot_Orothe_Main_0::
     LongJump(SCRIPT_17_40A0)
 
-SCRIPT_0F_651D::
+Hotspot_Orothe_Main_1::
     LongJump(SCRIPT_17_40A6)
 
-SCRIPT_0F_6521::
+Hotspot_Orothe_Main_2::
     LongJump(SCRIPT_17_40AC)
 
-SCRIPT_0F_6525::
+Hotspot_Orothe_Main_3::
     LongJump(SCRIPT_17_40B2)
 
-SCRIPT_0F_6529::
+Hotspot_Orothe_Main_4::
     LongJump(SCRIPT_17_40B8)
 
-SCRIPT_0F_652D::
+Hotspot_Orothe_Main_5::
     HeroToDoor($11, $19)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0F_6534::
+Hotspot_Orothe_Main_6::
     HeroToDoor($11, $19)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0F_653B::
+Trigger_Orothe_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This tree looks⭍pretty bare🅐with hardly any🅐leaves to cover⭍its trunk.🅐")
@@ -2054,7 +2054,7 @@ SCRIPT_0F_653B::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_6591::
+Trigger_Orothe_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("This tree must⭍be the granddad🅐of all of the ⭍Orothe trees!🅐")
@@ -2062,7 +2062,7 @@ SCRIPT_0F_6591::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_65DC::
+Trigger_Orothe_Main_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("It looks like⭍something huge🅐stomped this ⭍tree into the 🅐ground!🅐")
@@ -2070,7 +2070,7 @@ SCRIPT_0F_65DC::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_662D::
+Trigger_Orothe_Main_3::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("Hello, tree.🅐")
@@ -2078,7 +2078,7 @@ SCRIPT_0F_662D::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_6649::
+Trigger_Orothe_Main_4::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_665B, SCRIPT_0F_66A5, SCRIPT_0F_66EF)
@@ -2099,7 +2099,7 @@ SCRIPT_0F_6740::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_6746::
+Trigger_Orothe_Main_5::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_675B, SCRIPT_0F_678A, SCRIPT_0F_67F0, SCRIPT_0F_681B)
@@ -2124,7 +2124,7 @@ SCRIPT_0F_6872::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_6878::
+Trigger_Orothe_Main_6::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     Write("Keep me away⭍from that 🅐sharp, nasty,⭍hurting coral!!🅐")
@@ -2132,32 +2132,32 @@ SCRIPT_0F_6878::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0F_68BD::
+Trigger_Orothe_Main_7::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A032], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D139, $06, $03, $D139, $0A, $0D)
     End()
 
-SCRIPT_0F_68D2::
+Trigger_Orothe_Main_8::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A032], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D1B8, $03, $06, $D1B8, $0E, $14)
     End()
 
-SCRIPT_0F_68E7::
+Trigger_Orothe_Main_9::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A032], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D283, $07, $06, $D283, $15, $0D)
     End()
 
-SCRIPT_0F_68FC::
+Trigger_Orothe_Main_10::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A032], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D2B5, $06, $04, $D2B5, $17, $03)
     End()
 
-SCRIPT_0F_6911::
+Trigger_Orothe_Main_11::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A032], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D08D, $03, $08, $D08D, $04, $15)
     End()
 
-SCRIPT_0F_6926::
+Trigger_Orothe_Main_12::
     End()
 
 SCRIPT_0F_6927::
@@ -2380,7 +2380,7 @@ SCRIPT_0F_6BC3::
 .MaxFailedAttempts::
     LongJump(Script_Naroom_Puzzle1_Again)
 
-SCRIPT_0F_6BEC::
+Hotspot_Naroom_Puzzle1_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2564,7 +2564,7 @@ SCRIPT_0F_6F3B::
 .MaxFailedAttempts::
     LongJump(Script_Naroom_Puzzle2_Again)
 
-SCRIPT_0F_6F64::
+Hotspot_Naroom_Puzzle2_0::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2740,7 +2740,7 @@ SCRIPT_0F_7296::
     ThatScript(0, SCRIPT_14_5DA1)
     End()
 
-SCRIPT_0F_72B5::
+Hotspot_Naroom_Puzzle3_0::
     StartSFX0(SFXID_EnemyDie)
     ThatInit(0, Call_001_4AF8, $18, $16, $D254, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
     CameraSeekActor(RAM_00_C189, 4)
@@ -2748,7 +2748,7 @@ SCRIPT_0F_72B5::
     ThatScript(0, SCRIPT_14_5DA1)
     End()
 
-SCRIPT_0F_72D4::
+Hotspot_Naroom_Puzzle3_1::
     StartSFX0(SFXID_EnemyDie)
     ThatInit(0, Call_001_4AF8, $01, $01, $D01B, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
     CameraSeekActor(RAM_00_C189, 4)
@@ -2756,7 +2756,7 @@ SCRIPT_0F_72D4::
     ThatScript(0, SCRIPT_14_5DA1)
     End()
 
-SCRIPT_0F_72F3::
+Hotspot_Naroom_Puzzle3_2::
     StartSFX0(SFXID_EnemyDie)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_0F_731E)
@@ -2769,7 +2769,7 @@ SCRIPT_0F_72F3::
 SCRIPT_0F_731E::
     LongJump(SCRIPT_0F_7296)
 
-SCRIPT_0F_7322::
+Hotspot_Naroom_Puzzle3_3::
     StartSFX0(SFXID_EnemyDie)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_0F_734D)
@@ -2782,7 +2782,7 @@ SCRIPT_0F_7322::
 SCRIPT_0F_734D::
     LongJump(SCRIPT_0F_7296)
 
-SCRIPT_0F_7351::
+Hotspot_Naroom_Puzzle3_4::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -3006,7 +3006,7 @@ SCRIPT_0F_7730::
 .MaxFailedAttempts::
     LongJump(Script_Naroom_Puzzle4_Again)
 
-SCRIPT_0F_7759::
+Hotspot_Naroom_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000001) == c0)#, SCRIPT_0F_776C)
@@ -3049,7 +3049,7 @@ SCRIPT_0F_776C::
     VarByteExpr(xVARBYTE_00_A15C, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_0F_6979)
 
-SCRIPT_0F_78DE::
+Hotspot_Naroom_Puzzle4_1::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -3294,7 +3294,7 @@ SCRIPT_0F_7CD6::
 .MaxFailedAttempts::
     LongJump(Script_Naroom_Puzzle5_Again)
 
-SCRIPT_0F_7CFF::
+Hotspot_Naroom_Puzzle5_0::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -3348,8 +3348,8 @@ SCRIPT_0F_7D2B::
     VarByteExpr(xVARBYTE_00_A15D, #c[xNumberOfAttempts]#)
     LongJump(SCRIPT_0F_69BA)
 
-SCRIPT_0F_7EA5::
+Hotspot_Naroom_Puzzle25_End_0::
     LongJump(SCRIPT_0F_7D2B)
 
-SCRIPT_0F_7EA9::
+Hotspot_Naroom_Puzzle25_End_1::
     LongJump(SCRIPT_0F_6F90)

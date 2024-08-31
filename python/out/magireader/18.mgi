@@ -1312,7 +1312,7 @@ SCRIPT_18_5F67::
     }
     LongJump(SCRIPT_18_5F67)
 
-SCRIPT_18_5F75::
+Hotspot_StartRoom_2::
     LongJump(SCRIPT_0E_47AC)
 
 SCRIPT_18_5F79::
@@ -1331,7 +1331,7 @@ SCRIPT_18_5F8B::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     End()
 
-SCRIPT_18_5F9D::
+Hotspot_StartRoom_0::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000001)#, SCRIPT_18_5FAE)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000001)
     ThatScript(4, SCRIPT_18_5F8B)
@@ -1339,7 +1339,7 @@ SCRIPT_18_5F9D::
 SCRIPT_18_5FAE::
     End()
 
-SCRIPT_18_5FAF::
+Hotspot_StartRoom_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000001)#, SCRIPT_18_5FC0)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000001)
     ThatScript(4, SCRIPT_18_5F79)
@@ -1347,7 +1347,7 @@ SCRIPT_18_5FAF::
 SCRIPT_18_5FC0::
     End()
 
-SCRIPT_18_5FC1::
+Trigger_StartRoom_0::
     TriggerOnce(xBIT_00_A028_1, Actor_Null, $FA, $D092)
     StartSFX0(SFXID_PhysicalAttack)
     SetScriptText(SCRIPT_18_5FD2)
@@ -1437,7 +1437,7 @@ SCRIPT_18_61A9::
     Clear()
     LongJump(SCRIPT_0F_5134)
 
-SCRIPT_18_61AE::
+Trigger_StartRoom_1::
     TriggerOnce(xBIT_00_A028_2, Actor_Null, $FA, $D0BA)
     StartSFX0(SFXID_PhysicalAttack)
     SetScriptText(SCRIPT_18_61BF)
@@ -1490,7 +1490,7 @@ SCRIPT_18_626A::
     Close()
     End()
 
-SCRIPT_18_6271::
+Trigger_StartRoom_2::
     TriggerOnce(xBIT_00_A028_3, Actor_Null, $FA, $D0E2)
     StartSFX0(SFXID_PhysicalAttack)
     Write("Would you like⭍to view the🅐Credits?🅐")
@@ -1769,7 +1769,7 @@ ACTORSCRIPT1_18_6618::
     ThatDelete(0)
     LongJump(SCRIPT_18_65F3)
 
-SCRIPT_18_6626::
+Hotspot_Cald_Puzzle5_0::
     StartSong(SONGID_GetItem)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1811,7 +1811,7 @@ SCRIPT_18_6626::
     Close()
     LongJump(SCRIPT_18_68F7)
 
-SCRIPT_18_67A5::
+Hotspot_Cald_Puzzle5_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_18_67BD)
     TransplantTile($17, $01, $D143, COLLID_HS01, $FB)
     ThatScript(4, SCRIPT_18_6501)
@@ -1820,7 +1820,7 @@ SCRIPT_18_67A5::
 SCRIPT_18_67BD::
     End()
 
-SCRIPT_18_67BE::
+Hotspot_Cald_Puzzle5_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100)#, SCRIPT_18_67D6)
     TransplantTile($12, $03, $D0FF, COLLID_HS02, $FB)
     ThatScript(5, SCRIPT_18_6519)
@@ -1829,7 +1829,7 @@ SCRIPT_18_67BE::
 SCRIPT_18_67D6::
     End()
 
-SCRIPT_18_67D7::
+Hotspot_Cald_Puzzle5_3::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00001000)#, SCRIPT_18_67EF)
     TransplantTile($0E, $06, $D0CA, COLLID_HS03, $FB)
     ThatScript(6, SCRIPT_18_653F)
@@ -1838,7 +1838,7 @@ SCRIPT_18_67D7::
 SCRIPT_18_67EF::
     End()
 
-SCRIPT_18_67F0::
+Hotspot_Cald_Puzzle5_4::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000)#, SCRIPT_18_6808)
     TransplantTile($0B, $05, $D09F, COLLID_HS04, $FB)
     ThatScript(7, SCRIPT_18_6557)
@@ -1847,7 +1847,7 @@ SCRIPT_18_67F0::
 SCRIPT_18_6808::
     End()
 
-SCRIPT_18_6809::
+Hotspot_Cald_Puzzle5_5::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00100000)#, SCRIPT_18_6821)
     TransplantTile($0D, $01, $D0B7, COLLID_HS05, $FB)
     ThatScript(8, SCRIPT_18_656F)
@@ -1856,7 +1856,7 @@ SCRIPT_18_6809::
 SCRIPT_18_6821::
     End()
 
-SCRIPT_18_6822::
+Hotspot_Cald_Puzzle5_6::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%01000000)#, SCRIPT_18_683A)
     TransplantTile($07, $08, $D06A, COLLID_HS06, $FB)
     ThatScript(9, SCRIPT_18_6595)
@@ -1865,7 +1865,7 @@ SCRIPT_18_6822::
 SCRIPT_18_683A::
     End()
 
-SCRIPT_18_683B::
+Hotspot_Cald_Puzzle5_7::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000)#, SCRIPT_18_6853)
     TransplantTile($07, $0C, $D06E, COLLID_HS07, $FB)
     ThatScript(10, SCRIPT_18_65AD)
@@ -1874,7 +1874,7 @@ SCRIPT_18_683B::
 SCRIPT_18_6853::
     End()
 
-SCRIPT_18_6854::
+Hotspot_Cald_Puzzle5_8::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000001)#, SCRIPT_18_686C)
     TransplantTile($04, $09, $D041, COLLID_HS08, $FB)
     ThatScript(11, SCRIPT_18_65D3)
@@ -2126,7 +2126,7 @@ ACTORSCRIPT1_18_6B74::
     ThatDelete(0)
     LongJump(SCRIPT_18_6B4F)
 
-SCRIPT_18_6B82::
+Hotspot_Cald_Puzzle1_0::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000001)#, SCRIPT_18_6B9A)
     TransplantTile($18, $01, $D2D1, COLLID_HS00, $FB)
     ThatScript(3, SCRIPT_18_6A1B)
@@ -2135,7 +2135,7 @@ SCRIPT_18_6B82::
 SCRIPT_18_6B9A::
     End()
 
-SCRIPT_18_6B9B::
+Hotspot_Cald_Puzzle1_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000)#, SCRIPT_18_6BB3)
     TransplantTile($17, $05, $D2B7, COLLID_HS01, $FB)
     ThatScript(4, SCRIPT_18_6B25)
@@ -2144,7 +2144,7 @@ SCRIPT_18_6B9B::
 SCRIPT_18_6BB3::
     End()
 
-SCRIPT_18_6BB4::
+Hotspot_Cald_Puzzle1_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_18_6BCC)
     TransplantTile($0F, $07, $D1C9, COLLID_HS02, $FB)
     ThatScript(5, SCRIPT_18_6A41)
@@ -2153,7 +2153,7 @@ SCRIPT_18_6BB4::
 SCRIPT_18_6BCC::
     End()
 
-SCRIPT_18_6BCD::
+Hotspot_Cald_Puzzle1_3::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100)#, SCRIPT_18_6BE5)
     TransplantTile($0D, $07, $D18D, COLLID_HS03, $FB)
     ThatScript(6, SCRIPT_18_6A67)
@@ -2162,7 +2162,7 @@ SCRIPT_18_6BCD::
 SCRIPT_18_6BE5::
     End()
 
-SCRIPT_18_6BE6::
+Hotspot_Cald_Puzzle1_4::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00001000)#, SCRIPT_18_6BFE)
     TransplantTile($0B, $07, $D151, COLLID_HS04, $FB)
     ThatScript(7, SCRIPT_18_6A8D)
@@ -2171,7 +2171,7 @@ SCRIPT_18_6BE6::
 SCRIPT_18_6BFE::
     End()
 
-SCRIPT_18_6BFF::
+Hotspot_Cald_Puzzle1_5::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000)#, SCRIPT_18_6C17)
     TransplantTile($08, $03, $D0F3, COLLID_HS05, $FB)
     ThatScript(8, SCRIPT_18_6AB3)
@@ -2180,7 +2180,7 @@ SCRIPT_18_6BFF::
 SCRIPT_18_6C17::
     End()
 
-SCRIPT_18_6C18::
+Hotspot_Cald_Puzzle1_6::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00100000)#, SCRIPT_18_6C30)
     TransplantTile($06, $05, $D0B9, COLLID_HS06, $FB)
     ThatScript(9, SCRIPT_18_6AD9)
@@ -2189,7 +2189,7 @@ SCRIPT_18_6C18::
 SCRIPT_18_6C30::
     End()
 
-SCRIPT_18_6C31::
+Hotspot_Cald_Puzzle1_7::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%01000000)#, SCRIPT_18_6C49)
     TransplantTile($06, $02, $D0B6, COLLID_HS07, $FB)
     ThatScript(10, SCRIPT_18_6AFF)
@@ -2198,7 +2198,7 @@ SCRIPT_18_6C31::
 SCRIPT_18_6C49::
     End()
 
-SCRIPT_18_6C4A::
+Hotspot_Cald_Puzzle1_8::
     StartSong(SONGID_GetItem)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -2429,7 +2429,7 @@ SCRIPT_18_7076::
     ThatDelete(0)
     LongJump(SCRIPT_18_7049)
 
-SCRIPT_18_707C::
+Hotspot_Cald_Puzzle2_0::
     StartSong(SONGID_GetItem)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -2471,7 +2471,7 @@ SCRIPT_18_707C::
     Close()
     LongJump(SCRIPT_18_6896)
 
-SCRIPT_18_71FB::
+Hotspot_Cald_Puzzle2_1::
     StartSong(SONGID_GetItem)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -2512,7 +2512,7 @@ SCRIPT_18_71FB::
     Close()
     LongJump(SCRIPT_18_68A1)
 
-SCRIPT_18_7378::
+Hotspot_Cald_Puzzle2_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100)#, SCRIPT_18_7390)
     TransplantTile($10, $02, $D142, COLLID_HS02, $FB)
     ThatScript(5, SCRIPT_18_6EEF)
@@ -2521,7 +2521,7 @@ SCRIPT_18_7378::
 SCRIPT_18_7390::
     End()
 
-SCRIPT_18_7391::
+Hotspot_Cald_Puzzle2_3::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00001000)#, SCRIPT_18_73A9)
     TransplantTile($11, $03, $D157, COLLID_HS03, $FB)
     ThatScript(6, SCRIPT_18_6F15)
@@ -2530,7 +2530,7 @@ SCRIPT_18_7391::
 SCRIPT_18_73A9::
     End()
 
-SCRIPT_18_73AA::
+Hotspot_Cald_Puzzle2_4::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000)#, SCRIPT_18_73C2)
     TransplantTile($10, $0C, $D14C, COLLID_HS04, $FB)
     ThatScript(7, SCRIPT_18_6F3B)
@@ -2539,7 +2539,7 @@ SCRIPT_18_73AA::
 SCRIPT_18_73C2::
     End()
 
-SCRIPT_18_73C3::
+Hotspot_Cald_Puzzle2_5::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00100000)#, SCRIPT_18_73DB)
     TransplantTile($10, $12, $D152, COLLID_HS05, $FB)
     ThatScript(8, SCRIPT_18_6F61)
@@ -2548,7 +2548,7 @@ SCRIPT_18_73C3::
 SCRIPT_18_73DB::
     End()
 
-SCRIPT_18_73DC::
+Hotspot_Cald_Puzzle2_6::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%01000000)#, SCRIPT_18_73F4)
     TransplantTile($0D, $12, $D116, COLLID_HS06, $FB)
     ThatScript(9, SCRIPT_18_6F87)
@@ -2557,7 +2557,7 @@ SCRIPT_18_73DC::
 SCRIPT_18_73F4::
     End()
 
-SCRIPT_18_73F5::
+Hotspot_Cald_Puzzle2_7::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000)#, SCRIPT_18_740D)
     TransplantTile($09, $0E, $D0C2, COLLID_HS07, $FB)
     ThatScript(10, SCRIPT_18_6FAD)
@@ -2566,7 +2566,7 @@ SCRIPT_18_73F5::
 SCRIPT_18_740D::
     End()
 
-SCRIPT_18_740E::
+Hotspot_Cald_Puzzle2_8::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000001)#, SCRIPT_18_7426)
     TransplantTile($09, $05, $D0B9, COLLID_HS08, $FB)
     ThatScript(11, SCRIPT_18_6FD3)
@@ -2575,7 +2575,7 @@ SCRIPT_18_740E::
 SCRIPT_18_7426::
     End()
 
-SCRIPT_18_7427::
+Hotspot_Cald_Puzzle2_9::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000010)#, SCRIPT_18_743F)
     TransplantTile($07, $05, $D091, COLLID_HS09, $FB)
     ThatScript(18, SCRIPT_18_6FF9)
@@ -2584,7 +2584,7 @@ SCRIPT_18_7427::
 SCRIPT_18_743F::
     End()
 
-SCRIPT_18_7440::
+Hotspot_Cald_Puzzle2_10::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000100)#, SCRIPT_18_7458)
     TransplantTile($03, $03, $D03F, COLLID_HS0A, $FB)
     ThatScript(19, SCRIPT_18_701F)
@@ -2794,7 +2794,7 @@ ACTORSCRIPT1_18_7735::
     ThatDelete(0)
     LongJump(SCRIPT_18_7710)
 
-SCRIPT_18_7743::
+Hotspot_Cald_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
@@ -2836,7 +2836,7 @@ SCRIPT_18_7743::
     Close()
     LongJump(SCRIPT_18_68D2)
 
-SCRIPT_18_78C2::
+Hotspot_Cald_Puzzle3_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_18_78DA)
     TransplantTile($13, $02, $D132, COLLID_HS01, $FB)
     ThatScript(4, SCRIPT_18_7590)
@@ -2845,7 +2845,7 @@ SCRIPT_18_78C2::
 SCRIPT_18_78DA::
     End()
 
-SCRIPT_18_78DB::
+Hotspot_Cald_Puzzle3_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100)#, SCRIPT_18_78F3)
     TransplantTile($11, $05, $D115, COLLID_HS02, $FB)
     ThatScript(5, SCRIPT_18_75B6)
@@ -2854,7 +2854,7 @@ SCRIPT_18_78DB::
 SCRIPT_18_78F3::
     End()
 
-SCRIPT_18_78F4::
+Hotspot_Cald_Puzzle3_3::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00001000)#, SCRIPT_18_790C)
     TransplantTile($13, $0C, $D13C, COLLID_HS03, $FB)
     ThatScript(6, SCRIPT_18_75DC)
@@ -2863,7 +2863,7 @@ SCRIPT_18_78F4::
 SCRIPT_18_790C::
     End()
 
-SCRIPT_18_790D::
+Hotspot_Cald_Puzzle3_4::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000)#, SCRIPT_18_7925)
     TransplantTile($11, $0C, $D11C, COLLID_HS04, $FB)
     ThatScript(7, SCRIPT_18_7602)
@@ -2872,7 +2872,7 @@ SCRIPT_18_790D::
 SCRIPT_18_7925::
     End()
 
-SCRIPT_18_7926::
+Hotspot_Cald_Puzzle3_5::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00100000)#, SCRIPT_18_793E)
     TransplantTile($0D, $0A, $D0DA, COLLID_HS05, $FB)
     ThatScript(8, SCRIPT_18_7628)
@@ -2881,7 +2881,7 @@ SCRIPT_18_7926::
 SCRIPT_18_793E::
     End()
 
-SCRIPT_18_793F::
+Hotspot_Cald_Puzzle3_6::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%01000000)#, SCRIPT_18_7957)
     TransplantTile($08, $08, $D088, COLLID_HS06, $FB)
     ThatScript(9, SCRIPT_18_764E)
@@ -2890,7 +2890,7 @@ SCRIPT_18_793F::
 SCRIPT_18_7957::
     End()
 
-SCRIPT_18_7958::
+Hotspot_Cald_Puzzle3_7::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000)#, SCRIPT_18_7970)
     TransplantTile($06, $06, $D066, COLLID_HS07, $FB)
     ThatScript(10, SCRIPT_18_7674)
@@ -2899,7 +2899,7 @@ SCRIPT_18_7958::
 SCRIPT_18_7970::
     End()
 
-SCRIPT_18_7971::
+Hotspot_Cald_Puzzle3_8::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000001)#, SCRIPT_18_7989)
     TransplantTile($09, $05, $D095, COLLID_HS08, $FB)
     ThatScript(11, SCRIPT_18_769A)
@@ -2908,7 +2908,7 @@ SCRIPT_18_7971::
 SCRIPT_18_7989::
     End()
 
-SCRIPT_18_798A::
+Hotspot_Cald_Puzzle3_9::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000010)#, SCRIPT_18_79A2)
     TransplantTile($06, $04, $D064, COLLID_HS09, $FB)
     ThatScript(18, SCRIPT_18_76C0)
@@ -2917,7 +2917,7 @@ SCRIPT_18_798A::
 SCRIPT_18_79A2::
     End()
 
-SCRIPT_18_79A3::
+Hotspot_Cald_Puzzle3_10::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000100)#, SCRIPT_18_79BB)
     TransplantTile($0A, $02, $D0A2, COLLID_HS0A, $FB)
     ThatScript(19, SCRIPT_18_76E6)
@@ -3112,7 +3112,7 @@ ACTORSCRIPT1_18_7C5D::
     ThatDelete(0)
     LongJump(SCRIPT_18_7C38)
 
-SCRIPT_18_7C6B::
+Hotspot_Cald_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     OrByte(RAM_00_A02B/xBIT_00_A02B_0, %00000100)
@@ -3154,7 +3154,7 @@ SCRIPT_18_7C6B::
     Close()
     LongJump(SCRIPT_18_68DD)
 
-SCRIPT_18_7DEA::
+Hotspot_Cald_Puzzle4_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_18_7E02)
     TransplantTile($16, $02, $D228, COLLID_HS01, $FB)
     ThatScript(4, SCRIPT_18_7ADE)
@@ -3163,7 +3163,7 @@ SCRIPT_18_7DEA::
 SCRIPT_18_7E02::
     End()
 
-SCRIPT_18_7E03::
+Hotspot_Cald_Puzzle4_2::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100)#, SCRIPT_18_7E1B)
     TransplantTile($14, $03, $D1F7, COLLID_HS02, $FB)
     ThatScript(5, SCRIPT_18_7B04)
@@ -3172,7 +3172,7 @@ SCRIPT_18_7E03::
 SCRIPT_18_7E1B::
     End()
 
-SCRIPT_18_7E1C::
+Hotspot_Cald_Puzzle4_3::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00001000)#, SCRIPT_18_7E34)
     TransplantTile($17, $09, $D248, COLLID_HS03, $FB)
     ThatScript(6, SCRIPT_18_7B2A)
@@ -3181,7 +3181,7 @@ SCRIPT_18_7E1C::
 SCRIPT_18_7E34::
     End()
 
-SCRIPT_18_7E35::
+Hotspot_Cald_Puzzle4_4::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00010000)#, SCRIPT_18_7E4D)
     TransplantTile($14, $08, $D1FC, COLLID_HS04, $FB)
     ThatScript(7, SCRIPT_18_7B50)
@@ -3190,7 +3190,7 @@ SCRIPT_18_7E35::
 SCRIPT_18_7E4D::
     End()
 
-SCRIPT_18_7E4E::
+Hotspot_Cald_Puzzle4_5::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00100000)#, SCRIPT_18_7E66)
     TransplantTile($0E, $07, $D165, COLLID_HS05, $FB)
     ThatScript(8, SCRIPT_18_7B76)
@@ -3199,7 +3199,7 @@ SCRIPT_18_7E4E::
 SCRIPT_18_7E66::
     End()
 
-SCRIPT_18_7E67::
+Hotspot_Cald_Puzzle4_6::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%01000000)#, SCRIPT_18_7E80)
     ThatScript(9, SCRIPT_18_7B9C)
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %01000000)
@@ -3209,7 +3209,7 @@ SCRIPT_18_7E67::
 SCRIPT_18_7E80::
     End()
 
-SCRIPT_18_7E81::
+Hotspot_Cald_Puzzle4_7::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%10000000)#, SCRIPT_18_7E99)
     TransplantTile($0C, $06, $D132, COLLID_HS07, $FB)
     ThatScript(10, SCRIPT_18_7BC2)
@@ -3218,7 +3218,7 @@ SCRIPT_18_7E81::
 SCRIPT_18_7E99::
     End()
 
-SCRIPT_18_7E9A::
+Hotspot_Cald_Puzzle4_8::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000001)#, SCRIPT_18_7EB2)
     TransplantTile($0A, $08, $D102, COLLID_HS08, $FB)
     ThatScript(11, SCRIPT_18_7BE8)
@@ -3227,7 +3227,7 @@ SCRIPT_18_7E9A::
 SCRIPT_18_7EB2::
     End()
 
-SCRIPT_18_7EB3::
+Hotspot_Cald_Puzzle4_9::
     LongJumpIf(#bitmatch(c[RAM_00_A029/xBIT_00_A029_0/xBIT_00_A029_1], c%00000010)#, SCRIPT_18_7ECB)
     TransplantTile($0B, $05, $D118, COLLID_HS09, $FB)
     ThatScript(18, SCRIPT_18_7C0E)

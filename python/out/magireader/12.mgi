@@ -186,7 +186,7 @@ SCRIPT_12_41CE::
 .MaxFailedAttempts::
     LongJump(Script_Arderial_Puzzle1_Again)
 
-SCRIPT_12_41F7::
+Hotspot_Arderial_Puzzle1_0::
     StartSong(SONGID_GetItem)
     ThatDelete(0)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -364,7 +364,7 @@ SCRIPT_12_4526::
 .MaxFailedAttempts::
     LongJump(Script_Arderial_Puzzle2_Again)
 
-SCRIPT_12_454F::
+Hotspot_Arderial_Puzzle2_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -558,7 +558,7 @@ SCRIPT_12_48B0::
 .MaxFailedAttempts::
     LongJump(Script_Arderial_Puzzle4_Again)
 
-SCRIPT_12_48D9::
+Hotspot_Arderial_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -749,7 +749,7 @@ SCRIPT_12_4C39::
 .MaxFailedAttempts::
     LongJump(Script_Arderial_Puzzle3_Again)
 
-SCRIPT_12_4C62::
+Hotspot_Arderial_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -808,7 +808,7 @@ SCRIPT_12_4C9A::
     Close()
     LongJump(SCRIPT_12_4055)
 
-SCRIPT_12_4E20::
+Hotspot_Arderial_Puzzle3_1::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -1009,7 +1009,7 @@ SCRIPT_12_518B::
 .MaxFailedAttempts::
     LongJump(Script_Arderial_Puzzle5_Again)
 
-SCRIPT_12_51B4::
+Hotspot_Arderial_Puzzle5_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)

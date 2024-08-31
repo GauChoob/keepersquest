@@ -235,7 +235,8 @@ SCRIPT_0E_4AA9::
     SetEventText(1)
     End()
 
-SCRIPT_0E_4AC3::
+Hotspot_Turret_0::
+Hotspot_Turret_1::
     ThatDrawTile(10, $00, $00, $00, COLLID_SPACE, $FD)
     ThatScript(10, SCRIPT_0E_490B)
     End()
@@ -310,172 +311,172 @@ Script_DeveloperRoom::
     SceneReady()
     End()
 
-Hotspot_DeveloperRoom_Naroom_Puzzle1::
+Hotspot_DeveloperRoom_10_Naroom_Puzzle1::
     LongJump(Script_Naroom_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Naroom_Puzzle2::
+Hotspot_DeveloperRoom_11_Naroom_Puzzle2::
     LongJump(Script_Naroom_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Naroom_Puzzle3::
+Hotspot_DeveloperRoom_12_Naroom_Puzzle3::
     LongJump(Script_Naroom_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Naroom_Puzzle4::
+Hotspot_DeveloperRoom_13_Naroom_Puzzle4::
     LongJump(Script_Naroom_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Naroom_Puzzle5::
+Hotspot_DeveloperRoom_14_Naroom_Puzzle5::
     LongJump(Script_Naroom_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Underneath_Puzzle1::
+Hotspot_DeveloperRoom_0_Underneath_Puzzle1::
     LongJump(Script_Underneath_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Underneath_Puzzle2::
+Hotspot_DeveloperRoom_1_Underneath_Puzzle2::
     LongJump(Script_Underneath_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Underneath_Puzzle3::
+Hotspot_DeveloperRoom_2_Underneath_Puzzle3::
     LongJump(Script_Underneath_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Underneath_Puzzle4::
+Hotspot_DeveloperRoom_3_Underneath_Puzzle4::
     LongJump(Script_Underneath_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Underneath_Puzzle5::
+Hotspot_DeveloperRoom_4_Underneath_Puzzle5::
     LongJump(Script_Underneath_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Cald_Puzzle1::
+Hotspot_DeveloperRoom_5_Cald_Puzzle1::
     LongJump(Script_Cald_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Cald_Puzzle2::
+Hotspot_DeveloperRoom_6_Cald_Puzzle2::
     LongJump(Script_Cald_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Cald_Puzzle3::
+Hotspot_DeveloperRoom_7_Cald_Puzzle3::
     LongJump(Script_Cald_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Cald_Puzzle4::
+Hotspot_DeveloperRoom_8_Cald_Puzzle4::
     LongJump(Script_Cald_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Cald_Puzzle5::
+Hotspot_DeveloperRoom_9_Cald_Puzzle5::
     LongJump(Script_Cald_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Orothe_Puzzle1::
+Hotspot_DeveloperRoom_15_Orothe_Puzzle1::
     LongJump(Script_Orothe_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Orothe_Puzzle2::
+Hotspot_DeveloperRoom_16_Orothe_Puzzle2::
     LongJump(Script_Orothe_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Orothe_Puzzle3::
+Hotspot_DeveloperRoom_17_Orothe_Puzzle3::
     LongJump(Script_Orothe_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Orothe_Puzzle4::
+Hotspot_DeveloperRoom_18_Orothe_Puzzle4::
     LongJump(Script_Orothe_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Orothe_Puzzle5::
+Hotspot_DeveloperRoom_19_Orothe_Puzzle5::
     LongJump(Script_Orothe_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Arderial_Puzzle1::
+Hotspot_DeveloperRoom_20_Arderial_Puzzle1::
     LongJump(Script_Arderial_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Arderial_Puzzle2::
+Hotspot_DeveloperRoom_21_Arderial_Puzzle2::
     LongJump(Script_Arderial_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Arderial_Puzzle3::
+Hotspot_DeveloperRoom_22_Arderial_Puzzle3::
     LongJump(Script_Arderial_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Arderial_Puzzle4::
+Hotspot_DeveloperRoom_23_Arderial_Puzzle4::
     LongJump(Script_Arderial_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Arderial_Puzzle5::
+Hotspot_DeveloperRoom_24_Arderial_Puzzle5::
     LongJump(Script_Arderial_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Weave_Puzzle1::
+Hotspot_DeveloperRoom_25_Weave_Puzzle1::
     LongJump(Script_Weave_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Weave_Puzzle2::
+Hotspot_DeveloperRoom_26_Weave_Puzzle2::
     LongJump(Script_Weave_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Weave_Puzzle3::
+Hotspot_DeveloperRoom_27_Weave_Puzzle3::
     LongJump(Script_Weave_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Weave_Puzzle4::
+Hotspot_DeveloperRoom_28_Weave_Puzzle4::
     LongJump(Script_Weave_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Weave_Puzzle5::
+Hotspot_DeveloperRoom_29_Weave_Puzzle5::
     LongJump(Script_Weave_Puzzle5_First)
 
-Hotspot_DeveloperRoom_dResh_Puzzle1::
+Hotspot_DeveloperRoom_30_dResh_Puzzle1::
     LongJump(Script_dResh_Puzzle1_First)
 
-Hotspot_DeveloperRoom_dResh_Puzzle2::
+Hotspot_DeveloperRoom_31_dResh_Puzzle2::
     LongJump(Script_dResh_Puzzle2_First)
 
-Hotspot_DeveloperRoom_dResh_Puzzle3::
+Hotspot_DeveloperRoom_32_dResh_Puzzle3::
     LongJump(Script_dResh_Puzzle3_First)
 
-Hotspot_DeveloperRoom_dResh_Puzzle4::
+Hotspot_DeveloperRoom_33_dResh_Puzzle4::
     LongJump(Script_dResh_Puzzle4_First)
 
-Hotspot_DeveloperRoom_dResh_Puzzle5::
+Hotspot_DeveloperRoom_34_dResh_Puzzle5::
     LongJump(Script_dResh_Puzzle5_First)
 
-Hotspot_DeveloperRoom_KybarsTeeth_Puzzle1::
+Hotspot_DeveloperRoom_35_KybarsTeeth_Puzzle1::
     LongJump(Script_KybarsTeeth_Puzzle1_First)
 
-Hotspot_DeveloperRoom_KybarsTeeth_Puzzle2::
+Hotspot_DeveloperRoom_36_KybarsTeeth_Puzzle2::
     LongJump(Script_KybarsTeeth_Puzzle2_First)
 
-Hotspot_DeveloperRoom_KybarsTeeth_Puzzle3::
+Hotspot_DeveloperRoom_37_KybarsTeeth_Puzzle3::
     LongJump(Script_KybarsTeeth_Puzzle3_First)
 
-Hotspot_DeveloperRoom_KybarsTeeth_Puzzle4::
+Hotspot_DeveloperRoom_38_KybarsTeeth_Puzzle4::
     LongJump(Script_KybarsTeeth_Puzzle4_First)
 
-Hotspot_DeveloperRoom_KybarsTeeth_Puzzle5::
+Hotspot_DeveloperRoom_39_KybarsTeeth_Puzzle5::
     LongJump(Script_KybarsTeeth_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Bograth_Puzzle1::
+Hotspot_DeveloperRoom_40_Bograth_Puzzle1::
     LongJump(Script_Bograth_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Bograth_Puzzle2::
+Hotspot_DeveloperRoom_41_Bograth_Puzzle2::
     LongJump(Script_Bograth_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Bograth_Puzzle3::
+Hotspot_DeveloperRoom_42_Bograth_Puzzle3::
     LongJump(Script_Bograth_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Bograth_Puzzle4::
+Hotspot_DeveloperRoom_43_Bograth_Puzzle4::
     LongJump(Script_Bograth_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Bograth_Puzzle5::
+Hotspot_DeveloperRoom_44_Bograth_Puzzle5::
     LongJump(Script_Bograth_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Paradwyn_Puzzle1::
+Hotspot_DeveloperRoom_45_Paradwyn_Puzzle1::
     LongJump(Script_Paradwyn_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Paradwyn_Puzzle2::
+Hotspot_DeveloperRoom_46_Paradwyn_Puzzle2::
     LongJump(Script_Paradwyn_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Paradwyn_Puzzle3::
+Hotspot_DeveloperRoom_47_Paradwyn_Puzzle3::
     LongJump(Script_Paradwyn_Puzzle4_First)
 
-Hotspot_DeveloperRoom_Paradwyn_Puzzle4::
+Hotspot_DeveloperRoom_48_Paradwyn_Puzzle4::
     LongJump(Script_Paradwyn_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Paradwyn_Puzzle5::
+Hotspot_DeveloperRoom_49_Paradwyn_Puzzle5::
     LongJump(Script_Paradwyn_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Core_Puzzle5::
+Hotspot_DeveloperRoom_50_Core_Puzzle5::
     LongJump(Script_Core_Puzzle5_First)
 
-Hotspot_DeveloperRoom_Core_Puzzle2::
+Hotspot_DeveloperRoom_51_Core_Puzzle2::
     LongJump(Script_Core_Puzzle2_First)
 
-Hotspot_DeveloperRoom_Core_Puzzle3::
+Hotspot_DeveloperRoom_52_Core_Puzzle3::
     LongJump(Script_Core_Puzzle3_First)
 
-Hotspot_DeveloperRoom_Core_Puzzle1::
+Hotspot_DeveloperRoom_53_Core_Puzzle1::
     LongJump(Script_Core_Puzzle1_First)
 
-Hotspot_DeveloperRoom_Core_Puzzle4::
+Hotspot_DeveloperRoom_54_Core_Puzzle4::
     LongJump(Script_Core_Puzzle4_First)
 
-Hotspot_DeveloperRoom_StartRoom::
+Hotspot_DeveloperRoom_55_StartRoom::
     LongJump(SCRIPT_18_5DA8)
 
 SCRIPT_0E_4C88::
@@ -1735,30 +1736,30 @@ SCRIPT_0E_6433::
     SetEventText(5)
     End()
 
-SCRIPT_0E_65D3::
+Hotspot_Arderial_Main_0::
     LongJump(SCRIPT_12_4000)
 
-SCRIPT_0E_65D7::
+Hotspot_Arderial_Main_1::
     LongJump(SCRIPT_12_4006)
 
-SCRIPT_0E_65DB::
+Hotspot_Arderial_Main_2::
     LongJump(SCRIPT_12_400C)
 
-SCRIPT_0E_65DF::
+Hotspot_Arderial_Main_3::
     LongJump(SCRIPT_12_4012)
 
-SCRIPT_0E_65E3::
+Hotspot_Arderial_Main_4::
     LongJump(SCRIPT_12_4018)
 
-SCRIPT_0E_65E7::
+Hotspot_Arderial_Main_5::
     HeroToDoor($05, $11)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0E_65EE::
+Hotspot_Arderial_Main_6::
     HeroToDoor($05, $11)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_0E_65F5::
+Trigger_Arderial_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0E_6616, SCRIPT_0E_6641, SCRIPT_0E_6675, SCRIPT_0E_669C, SCRIPT_0E_6743, SCRIPT_0E_6772, SCRIPT_0E_67B2, SCRIPT_0E_67FB)
@@ -1800,7 +1801,7 @@ SCRIPT_0E_6870::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0E_6876::
+Trigger_Arderial_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0E_688B, SCRIPT_0E_68C6, SCRIPT_0E_6918, SCRIPT_0E_693C)
@@ -1826,32 +1827,32 @@ SCRIPT_0E_6976::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0E_697C::
+Trigger_Arderial_Main_2::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D16F, $05, $08, $D16F, $0C, $07)
     End()
 
-SCRIPT_0E_6991::
+Trigger_Arderial_Main_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D243, $08, $0C, $D243, $13, $09)
     End()
 
-SCRIPT_0E_69A6::
+Trigger_Arderial_Main_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D141, $08, $06, $D141, $0A, $15)
     End()
 
-SCRIPT_0E_69BB::
+Trigger_Arderial_Main_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D1D5, $06, $0B, $D1D5, $0F, $13)
     End()
 
-SCRIPT_0E_69D0::
+Trigger_Arderial_Main_6::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D046, $0D, $07, $D046, $02, $0A)
     End()
 
-SCRIPT_0E_69E5::
+Trigger_Arderial_Main_7::
     End()
 
 SCRIPT_STARTBUTTON_0E_69E6::
@@ -2930,30 +2931,30 @@ SCRIPT_0E_7CAA::
     SetEventText(23)
     End()
 
-SCRIPT_0E_7CCD::
+Hotspot_Paradwyn_Main_0::
     LongJump(SCRIPT_15_5E42)
 
-SCRIPT_0E_7CD1::
+Hotspot_Paradwyn_Main_1::
     LongJump(SCRIPT_15_5E48)
 
-SCRIPT_0E_7CD5::
+Hotspot_Paradwyn_Main_2::
     LongJump(SCRIPT_15_5E4E)
 
-SCRIPT_0E_7CD9::
+Hotspot_Paradwyn_Main_3::
     LongJump(SCRIPT_15_5E54)
 
-SCRIPT_0E_7CDD::
+Hotspot_Paradwyn_Main_4::
     LongJump(SCRIPT_15_5E5A)
 
-SCRIPT_0E_7CE1::
+Hotspot_Paradwyn_Main_5::
     HeroToDoor($06, $09)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_0E_7CE8::
+Hotspot_Paradwyn_Main_6::
     HeroToDoor($06, $09)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_0E_7CEF::
+Trigger_Paradwyn_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0E_7D07, SCRIPT_0E_7D3C, SCRIPT_0E_7D8B, SCRIPT_0E_7DC3, SCRIPT_0E_7DFC)
@@ -2982,31 +2983,31 @@ SCRIPT_0E_7E55::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0E_7E5B::
+Trigger_Paradwyn_Main_1::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D04B, $07, $06, $D04B, $02, $0F)
     End()
 
-SCRIPT_0E_7E70::
+Trigger_Paradwyn_Main_2::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D15C, $08, $08, $D15C, $0B, $12)
     End()
 
-SCRIPT_0E_7E85::
+Trigger_Paradwyn_Main_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D247, $05, $07, $D247, $13, $0D)
     End()
 
-SCRIPT_0E_7E9A::
+Trigger_Paradwyn_Main_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D2BB, $0F, $07, $D2BB, $17, $09)
     End()
 
-SCRIPT_0E_7EAF::
+Trigger_Paradwyn_Main_5::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D18A, $0D, $04, $D18A, $0D, $04)
     TransplantMapMask($D20D, $02, $01, $D20D, $11, $0F)
     End()
 
-SCRIPT_0E_7ECD::
+Trigger_Paradwyn_Main_6::
     End()

@@ -296,10 +296,10 @@ ACTORSCRIPT0_1A_4BF5::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_1A_4C0A::
+Hotspot_Overworld_1_0::
     LongJump(SCRIPT_SCENELOADER_09_4878)
 
-SCRIPT_1A_4C0E::
+Hotspot_Overworld_1_1::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000100) == c0)#, SCRIPT_1A_4C1D)
     LongJump(SCRIPT_SCENELOADER_09_59C1)
 
@@ -307,7 +307,7 @@ SCRIPT_1A_4C1D::
     OrByte(MATHADDRESS_00_A048, %00000100)
     LongJump(SCRIPT_09_5EA7)
 
-SCRIPT_1A_4C25::
+Hotspot_Overworld_1_2::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000001) == c0)#, SCRIPT_1A_4C34)
     LongJump(SCRIPT_SCENELOADER_0F_4298)
 
@@ -315,7 +315,7 @@ SCRIPT_1A_4C34::
     OrByte(MATHADDRESS_00_A048, %00000001)
     LongJump(SCRIPT_0F_4843)
 
-SCRIPT_1A_4C3C::
+Hotspot_Overworld_1_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00001000) == c0)#, SCRIPT_1A_4C4B)
     LongJump(SCRIPT_SCENELOADER_0F_590A)
 
@@ -323,7 +323,7 @@ SCRIPT_1A_4C4B::
     OrByte(MATHADDRESS_00_A048, %00001000)
     LongJump(SCRIPT_0F_5CFE)
 
-SCRIPT_1A_4C53::
+Hotspot_Overworld_1_4::
     LongJump(SCRIPT_SCENELOADER_0E_4DE8)
 
 SCRIPT_1A_4C57::
@@ -336,7 +336,7 @@ SCRIPT_1A_4C5F::
 SCRIPT_1A_4C60::
     LongJump(SCRIPT_1A_517F)
 
-SCRIPT_1A_4C64::
+Trigger_Overworld_1_11::
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_1A_4C75, SCRIPT_1A_4CC1, SCRIPT_1A_4CFB, SCRIPT_1A_4D41)
 
@@ -359,93 +359,94 @@ SCRIPT_1A_4D73::
     Close()
     End()
 
-SCRIPT_1A_4D75::
+Trigger_Overworld_1_0::
     Icon(Icon_Salafy)
     Write("That is the ⭍second tallest🅐group of trees⭍I have seen in 🅐the Moonlands!🅐")
     Close()
     End()
 
-SCRIPT_1A_4DC6::
+Trigger_Overworld_1_1::
     Icon(Icon_Salafy)
     Write("Now THOSE are ⭍the tallest 🅐trees I have ⭍ever seen in 🅐the Moonlands!🅐")
     Close()
     End()
 
-SCRIPT_1A_4E14::
+Trigger_Overworld_1_2::
     Icon(Icon_Salafy)
     Write("Hrmm... ⭍This tree seems🅐to be shorter ⭍than me!🅐")
     Close()
     End()
 
-SCRIPT_1A_4E4C::
+Trigger_Overworld_1_3::
     Icon(Icon_Salafy)
     Write("This tree could⭍be a toothpick🅐for an ormagon!🅐")
     Close()
     End()
 
-SCRIPT_1A_4E82::
+Trigger_Overworld_1_4::
     Icon(Icon_Salafy)
     Write("A well watered⭍and well kept🅐household tree.🅐")
     Close()
     End()
 
-SCRIPT_1A_4EB6::
+Trigger_Overworld_1_5::
     Icon(Icon_Salafy)
     Write("A lone tree in⭍the middle of🅐nowhere.....🅐")
     Close()
     End()
 
-SCRIPT_1A_4EE7::
+Trigger_Overworld_1_6::
     Icon(Icon_Salafy)
     Write("The branches⭍are all bent!🅐This tree has⭍had one too 🅐many giant 🅐birds landing⭍on it!🅐")
     Close()
     End()
 
-SCRIPT_1A_4F45::
+Trigger_Overworld_1_7::
     Icon(Icon_Salafy)
     Write("Nothing special⭍about this 🅐tree. Nope, ⭍nothing special🅐at all....🅐")
     Close()
     End()
 
-SCRIPT_1A_4F90::
+Trigger_Overworld_1_8::
     Icon(Icon_Salafy)
     Write("This tree looks⭍to be even 🅐thirstier than ⭍I am!🅐")
     Close()
     End()
 
-SCRIPT_1A_4FC9::
+Trigger_Overworld_1_9::
     Icon(Icon_Salafy)
     Write("For some reason⭍I dare not get 🅐any closer to ⭍this bush.🅐")
     Close()
     End()
 
-SCRIPT_1A_500A::
+Trigger_Overworld_1_10::
     Icon(Icon_Salafy)
     Write("Even from a⭍distance, there🅐is no doubt⭍Vash Naroom is🅐the prettiest⭍city around!🅐")
     Close()
     End()
 
-SCRIPT_1A_5063::
+Trigger_Overworld_1_12::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D009, $09, $09, $D009, $00, $09)
     End()
 
-SCRIPT_1A_5078::
+Trigger_Overworld_1_13::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D140, $08, $09, $D140, $0A, $14)
     End()
 
-SCRIPT_1A_508D::
+Trigger_Overworld_1_14::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D285, $0C, $0A, $D285, $15, $0F)
     End()
 
-SCRIPT_1A_50A2::
+Trigger_Overworld_1_15::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D221, $08, $07, $D221, $12, $05)
     End()
 
-SCRIPT_1A_50B7::
+Trigger_Overworld_1_16::
+Trigger_Overworld_1_17::
     End()
 
 SCRIPT_1A_50B8::
@@ -619,10 +620,10 @@ SCRIPT_1A_52F0::
     PalFadeAnimToBase(1, $20, 0, 16)
     LongJump(SCRIPT_1A_4B99)
 
-SCRIPT_1A_530A::
+Hotspot_Overworld_2_0::
     LongJump(SCRIPT_SCENELOADER_09_6B5F)
 
-SCRIPT_1A_530E::
+Hotspot_Overworld_2_1::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%01000000) == c0)#, SCRIPT_1A_531D)
     LongJump(Script_dResh_LoadGame)
 
@@ -630,7 +631,7 @@ SCRIPT_1A_531D::
     OrByte(MATHADDRESS_00_A048, %01000000)
     LongJump(SCRIPT_0C_6FB1)
 
-SCRIPT_1A_5325::
+Hotspot_Overworld_2_2::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%10000000) == c0)#, SCRIPT_1A_5334)
     LongJump(SCRIPT_SCENELOADER_16_6F92)
 
@@ -638,7 +639,7 @@ SCRIPT_1A_5334::
     OrByte(MATHADDRESS_00_A048, %10000000)
     LongJump(SCRIPT_16_737D)
 
-SCRIPT_1A_533C::
+Hotspot_Overworld_2_3::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A049], c%00000001) == c0)#, SCRIPT_1A_534B)
     LongJump(SCRIPT_SCENELOADER_08_6D13)
 
@@ -646,7 +647,7 @@ SCRIPT_1A_534B::
     OrByte(MATHADDRESS_00_A049, %00000001)
     LongJump(SCRIPT_08_72FF)
 
-SCRIPT_1A_5353::
+Hotspot_Overworld_2_4::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A049], c%00000010) == c0)#, SCRIPT_1A_5362)
     LongJump(SCRIPT_SCENELOADER_0E_6AD9)
 
@@ -654,98 +655,98 @@ SCRIPT_1A_5362::
     OrByte(MATHADDRESS_00_A049, %00000010)
     LongJump(SCRIPT_0E_74F1)
 
-SCRIPT_1A_536A::
+Hotspot_Overworld_2_5::
     LongJump(SCRIPT_SCENELOADER_10_45A5)
 
 SCRIPT_1A_536E::
     End()
 
-SCRIPT_1A_536F::
+Trigger_Overworld_2_0::
     Icon(Icon_Salafy)
     Write("Do I really  ⭍expect this 🅐tree to talk⭍back to me? 🅐")
     Close()
     End()
 
-SCRIPT_1A_53AB::
+Trigger_Overworld_2_1::
     Icon(Icon_Salafy)
     Write("This tree may⭍live in the 🅐desert, but I ⭍am thirstier 🅐than it is!🅐")
     Close()
     End()
 
-SCRIPT_1A_53F6::
+Trigger_Overworld_2_2::
     Icon(Icon_Salafy)
     Write("I have been in ⭍the desert too🅐long! This tree⭍must be just a 🅐mirage!🅐")
     Close()
     End()
 
-SCRIPT_1A_5444::
+Trigger_Overworld_2_3::
     Icon(Icon_Salafy)
     Write("It may look  ⭍like a tree, 🅐but really it's⭍just an  🅐overgrown weed!🅐")
     Close()
     End()
 
-SCRIPT_1A_5491::
+Trigger_Overworld_2_4::
     Icon(Icon_Salafy)
     Write("This sure is a⭍popular type of🅐tree around⭍here.🅐")
     Close()
     End()
 
-SCRIPT_1A_54C9::
+Trigger_Overworld_2_5::
     Icon(Icon_Salafy)
     Write("Is there⭍anything around🅐here that isn't⭍covered in mud?🅐")
     Close()
     End()
 
-SCRIPT_1A_5509::
+Trigger_Overworld_2_6::
     Icon(Icon_Salafy)
     Write("It appears to⭍be a mound of 🅐mud in the ⭍shape of a 🅐stubby tree.🅐")
     Close()
     End()
 
-SCRIPT_1A_5552::
+Trigger_Overworld_2_7::
     Icon(Icon_Salafy)
     Write("If I never see⭍another tree  🅐covered in mud,⭍then I would 🅐never see ⭍another tree🅐covered in mud.🅐")
     Close()
     End()
 
-SCRIPT_1A_55BD::
+Trigger_Overworld_2_8::
     Icon(Icon_Salafy)
     Write("It's so hot⭍here that there🅐is steam rising⭍from the leaves🅐of this tree.🅐")
     Close()
     End()
 
-SCRIPT_1A_560E::
+Trigger_Overworld_2_9::
     Icon(Icon_Salafy)
     Write("There is some⭍writing carved🅐on this tree.⭍It says 'The 🅐incredible,⭍spectacular,🅐amazing, real⭍talking tree!'🅐.......⭍'Out of order.'🅐Figures.🅐")
     Close()
     End()
 
-SCRIPT_1A_56A5::
+Trigger_Overworld_2_10::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D206, $09, $0B, $D206, $11, $08)
     End()
 
-SCRIPT_1A_56BA::
+Trigger_Overworld_2_11::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D1F0, $06, $06, $D1F0, $10, $10)
     End()
 
-SCRIPT_1A_56CF::
+Trigger_Overworld_2_12::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%10000000) == c0)#, Actor_Null)
     TransplantMapMask($D04F, $0A, $0B, $D04F, $02, $13)
     End()
 
-SCRIPT_1A_56E4::
+Trigger_Overworld_2_13::
     LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D044, $06, $06, $D044, $02, $08)
     End()
 
-SCRIPT_1A_56F9::
+Trigger_Overworld_2_14::
     LongJumpIf(#((c[xVARBYTE_00_A138] != c5) or (c[xVARBYTE_00_A139] != c5))#, Actor_Null)
     TransplantMapMask($D11A, $07, $07, $D11A, $09, $0C)
     End()
 
-SCRIPT_1A_5714::
+Trigger_Overworld_2_15::
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_1A_5730)
     LongJumpIf(#((c[xVARBYTE_00_A138] == c5) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_1A_5730)
     End()
@@ -828,7 +829,7 @@ SCRIPT_1A_579B::
 SCRIPT_1A_584D::
     End()
 
-SCRIPT_1A_584E::
+Hotspot_Overworld_1_7::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
@@ -941,7 +942,7 @@ SCRIPT_1A_5BBC::
     OrByte(MATHADDRESS_00_A02C, %00010000)
     End()
 
-SCRIPT_1A_5DD5::
+Hotspot_Overworld_1_6::
     SetByte(RAM_00_A129, $00)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
@@ -960,11 +961,11 @@ SCRIPT_1A_5DD5::
     PalFadeAnimToBase(2, $20, 0, 16)
     End()
 
-SCRIPT_1A_5E13::
+Hotspot_Naroom_TrainingRoom_Normal_0::
     HeroToDoor($1C, $16)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_1A_5E1A::
+Hotspot_Naroom_TrainingRoom_Normal_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_1A_5E44)
     LongJumpIf(#(bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100) == c0)#, SCRIPT_1A_5E44)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
@@ -978,16 +979,17 @@ SCRIPT_1A_5E45::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000001)
     End()
 
-SCRIPT_1A_5E4A::
+Hotspot_Naroom_TrainingRoom_Normal_2::
+Hotspot_Naroom_TrainingRoom_Normal_3::
     SetByte(RAM_00_A129, $00)
     AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
     End()
 
-SCRIPT_1A_5E53::
+Hotspot_Naroom_TrainingRoom_Normal_4::
     OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000100)
     End()
 
-SCRIPT_1A_5E58::
+Trigger_Naroom_TrainingRoom_Normal_1::
     LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000001)#, SCRIPT_1A_5E61)
     End()
 
@@ -1005,7 +1007,7 @@ SCRIPT_1A_5E98::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_1A_5E9D::
+Trigger_Naroom_TrainingRoom_Normal_0::
     TriggerOnce(xBIT_00_A02C_2, SCRIPT_TRIGGERALREADYON_1A_5ED6, $FF, $D090)
     StartSFX0(SFXID_PhysicalAttack)
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1024,11 +1026,11 @@ SCRIPT_TRIGGERALREADYON_1A_5ED6::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_1A_5EF7::
+Hotspot_House_Weave_0::
     HeroToDoor($06, $1A)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_1A_5EFE::
+Hotspot_Overworld_2_6::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
@@ -1116,7 +1118,7 @@ SCRIPT_1A_6160::
     SetEventText(1)
     End()
 
-SCRIPT_1A_63B3::
+Hotspot_Overworld_1_5::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
@@ -1182,97 +1184,97 @@ SCRIPT_1A_64A0::
     OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %00000010)
     End()
 
-SCRIPT_1A_671F::
+Trigger_House_Cald_0::
     Icon(Icon_Salafy)
     Write("It doesn't⭍respond,🅐its just a⭍'cat picture.'🅐")
     Close()
     End()
 
-SCRIPT_1A_6754::
+Trigger_House_Cald_1::
     Icon(Icon_Salafy)
     Write("A view⭍of magma.🅐")
     Close()
     End()
 
-SCRIPT_1A_676C::
+Trigger_House_Cald_2::
     Icon(Icon_Salafy)
     Write("Pumice⭍underwear?🅐")
     Close()
     End()
 
-SCRIPT_1A_6785::
+Trigger_House_Cald_3::
     Icon(Icon_Salafy)
     Write("Bridge-⭍building🅐books.🅐")
     Close()
     End()
 
-SCRIPT_1A_67A4::
+Trigger_House_Weave_0::
     Icon(Icon_Salafy)
     Write("Grass cat⭍pinata🅐picture.🅐")
     Close()
     End()
 
-SCRIPT_1A_67C5::
+Trigger_House_Weave_1::
     Icon(Icon_Salafy)
     Write("Can't see⭍past the🅐huge⭍dandelion.🅐")
     Close()
     End()
 
-SCRIPT_1A_67EF::
+Trigger_House_Weave_2::
     Icon(Icon_Salafy)
     Write("This sewing kit⭍has a hedge🅐trimmer⭍in it.🅐")
     Close()
     End()
 
-SCRIPT_1A_6821::
+Trigger_House_Weave_3::
     Icon(Icon_Salafy)
     Write("Woven grass⭍furniture.🅐")
     Close()
     End()
 
-SCRIPT_1A_683F::
+Trigger_House_Orothe_0::
     Icon(Icon_Salafy)
     Write("Surfer cat.🅐")
     Close()
     End()
 
-SCRIPT_1A_6852::
+Trigger_House_Orothe_1::
     Icon(Icon_Salafy)
     Write("This window is⭍rusted shut.🅐")
     Close()
     End()
 
-SCRIPT_1A_6875::
+Trigger_House_Orothe_2::
     Icon(Icon_Salafy)
     Write("39 black⭍eyepatches🅐and 1 purple⭍one.🅐")
     Close()
     End()
 
-SCRIPT_1A_68A2::
+Trigger_House_Orothe_3::
     Icon(Icon_Salafy)
     Write("Three⭍waterlogged🅐copies of⭍'Pirates of🅐Oscent Mar.'🅐")
     Close()
     End()
 
-SCRIPT_1A_68DE::
+Trigger_House_Bograth_0::
     Icon(Icon_Salafy)
     Write("This cat is⭍staring at me.🅐")
     Close()
     End()
 
-SCRIPT_1A_6900::
+Trigger_House_Bograth_1::
     Icon(Icon_Salafy)
     Write("There is a⭍mud garden🅐out there.🅐")
     Close()
     End()
 
-SCRIPT_1A_6928::
+Trigger_House_Bograth_2::
     Icon(Icon_Salafy)
     Write("Full of dirt.🅐")
     Close()
     End()
 
-SCRIPT_1A_693D::
+Trigger_House_Bograth_3::
     Icon(Icon_Salafy)
     Write("All of the⭍books on this🅐shelf are cheap⭍cardboard🅐props.🅐")
     Close()
@@ -1294,11 +1296,11 @@ ACTORSCRIPT0_1A_698B::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_1A_6998::
+Hotspot_House_Cald_0::
     HeroToDoor($19, $02)
     LongJump(SCRIPT_1A_4A3A)
 
-SCRIPT_1A_699F::
+Hotspot_House_Orothe_0::
     HeroToDoor($0C, $1A)
     LongJump(SCRIPT_1A_4A3A)
 
@@ -1332,19 +1334,19 @@ ACTORSCRIPT0_1A_69E6::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_1A_69F3::
+Hotspot_Naroom_Demo_0::
     LongJump(Script_Naroom_Puzzle2_First)
 
-SCRIPT_1A_69F7::
+Hotspot_Naroom_Demo_1::
     LongJump(Script_Underneath_Puzzle1_First)
 
-SCRIPT_1A_69FB::
+Hotspot_Naroom_Demo_2::
     LongJump(Script_Cald_Puzzle2_First)
 
-SCRIPT_1A_69FF::
+Hotspot_Naroom_Demo_3::
     LongJump(Script_Orothe_Puzzle3_First)
 
-SCRIPT_1A_6A03::
+Hotspot_Naroom_Demo_4::
     LongJump(Script_Arderial_Puzzle1_First)
 
 SCRIPT_1A_6A07::
@@ -1803,11 +1805,11 @@ SCRIPT_1A_742C::
     Sync(1, 2)
     End()
 
-SCRIPT_1A_7482::
+Hotspot_House_Bograth_0::
     HeroToDoor($19, $1B)
     LongJump(SCRIPT_1A_512C)
 
-SCRIPT_1A_7489::
+Hotspot_Overworld_2_7::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
