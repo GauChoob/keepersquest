@@ -20,21 +20,21 @@ SCRIPT_15_4018::
     LongJump(Script_Underneath_Puzzle5_First)
 
 Script_Underneath_Puzzle1_Complete::
-    OrByte(MATHADDRESS_00_A035, %00000001)
+    OrByte(xBits_Underneath, %00000001)
 
 SCRIPT_15_4022::
     HeroToDoor($08, $20)
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle2_Complete::
-    OrByte(MATHADDRESS_00_A035, %00000010)
+    OrByte(xBits_Underneath, %00000010)
 
 SCRIPT_15_402D::
     HeroToDoor($04, $13)
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle3_Complete::
-    OrByte(MATHADDRESS_00_A035, %00000100)
+    OrByte(xBits_Underneath, %00000100)
 
 SCRIPT_15_4038::
     HeroToDoor($15, $14)
@@ -45,15 +45,15 @@ Script_Underneath_Puzzle4_SecretComplete::
     LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000010) == c0)#, SCRIPT_09_45D3)
 
 SCRIPT_15_4054::
-    OrByte(MATHADDRESS_00_A035, %00100000)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A035], c%00001000) == c0)#, Script_Underneath_Puzzle4_Complete)
-    OrByte(MATHADDRESS_00_A035, %00001000)
+    OrByte(xBits_Underneath, %00100000)
+    LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00001000) == c0)#, Script_Underneath_Puzzle4_Complete)
+    OrByte(xBits_Underneath, %00001000)
     HeroToDoor($12, $09)
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle4_Complete::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A035], c%00001000)#, SCRIPT_15_4081)
-    OrByte(MATHADDRESS_00_A035, %00001000)
+    LongJumpIf(#bitmatch(c[xBits_Underneath], c%00001000)#, SCRIPT_15_4081)
+    OrByte(xBits_Underneath, %00001000)
     HeroToDoor($1F, $13)
     LongJump(SCRIPT_09_4A10)
 
@@ -62,8 +62,8 @@ SCRIPT_15_4081::
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle5_Complete::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A035], c%00010000)#, SCRIPT_15_4098)
-    OrByte(MATHADDRESS_00_A035, %00010000)
+    LongJumpIf(#bitmatch(c[xBits_Underneath], c%00010000)#, SCRIPT_15_4098)
+    OrByte(xBits_Underneath, %00010000)
     LongJump(SCRIPT_09_48E7)
 
 SCRIPT_15_4098::
@@ -332,14 +332,14 @@ Hotspot_Underneath_Puzzle1_10::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle1_Complete)
 
 .HighScore::
@@ -359,7 +359,7 @@ Hotspot_Underneath_Puzzle1_10::
     FormatChar(xUnderneath_Puzzle1_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A15E, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle1_Complete)
 
 Hotspot_Underneath_Puzzle1_11::
@@ -601,14 +601,14 @@ Hotspot_Underneath_Puzzle2_18::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle2_Complete)
 
 .HighScore::
@@ -628,7 +628,7 @@ Hotspot_Underneath_Puzzle2_18::
     FormatChar(xUnderneath_Puzzle2_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A15F, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle2_Complete)
 
 Hotspot_Underneath_Puzzle2_19::
@@ -943,14 +943,14 @@ SCRIPT_15_4C11::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle3_Complete)
 
 .HighScore::
@@ -970,7 +970,7 @@ SCRIPT_15_4C11::
     FormatChar(xUnderneath_Puzzle3_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A160, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle3_Complete)
 
 Hotspot_Underneath_Puzzle3_1::
@@ -1316,14 +1316,14 @@ Hotspot_Underneath_Puzzle4_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_Complete)
 
 .HighScore::
@@ -1343,7 +1343,7 @@ Hotspot_Underneath_Puzzle4_0::
     FormatChar(xUnderneath_Puzzle4_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_Complete)
 
 Hotspot_Underneath_Puzzle4_1::
@@ -1605,14 +1605,14 @@ SCRIPT_15_5537::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_SecretComplete)
 
 .HighScore::
@@ -1632,7 +1632,7 @@ SCRIPT_15_5537::
     FormatChar(xUnderneath_Puzzle4_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A161, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle4_SecretComplete)
 
 Hotspot_Underneath_Puzzle4_27::
@@ -1964,14 +1964,14 @@ Hotspot_Underneath_Puzzle5_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Underneath], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle5_Complete)
 
 .HighScore::
@@ -1991,7 +1991,7 @@ Hotspot_Underneath_Puzzle5_0::
     FormatChar(xUnderneath_Puzzle5_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A162, #c[xNumberOfAttempts]#)
+    VarByteExpr(xUnderneath_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Underneath_Puzzle5_Complete)
 
 Hotspot_Underneath_Puzzle5_1::
@@ -2279,21 +2279,21 @@ SCRIPT_15_5E5A::
     LongJump(Script_Paradwyn_Puzzle5_First)
 
 Script_Paradwyn_Puzzle1_Complete::
-    OrByte(MATHADDRESS_00_A03B, %00000001)
+    OrByte(xBits_Paradwyn, %00000001)
 
 SCRIPT_15_5E64::
     HeroToDoor($0B, $03)
     LongJump(SCRIPT_0E_6A67)
 
 Script_Paradwyn_Puzzle2_Complete::
-    OrByte(MATHADDRESS_00_A03B, %00000010)
+    OrByte(xBits_Paradwyn, %00000010)
 
 SCRIPT_15_5E6F::
     HeroToDoor($18, $06)
     LongJump(SCRIPT_0E_6A67)
 
 Script_Paradwyn_Puzzle3_Complete::
-    OrByte(MATHADDRESS_00_A03B, %00000100)
+    OrByte(xBits_Paradwyn, %00000100)
 
 SCRIPT_15_5E7A::
     HeroToDoor($11, $0C)
@@ -2308,15 +2308,15 @@ Script_Paradwyn_Puzzle3_SecretComplete::
     LongJump(SCRIPT_0E_6C73)
 
 SCRIPT_15_5EA3::
-    OrByte(MATHADDRESS_00_A03B, %00100000)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A03B], c%00000100) == c0)#, Script_Paradwyn_Puzzle4_Complete)
-    OrByte(MATHADDRESS_00_A03B, %00000100)
+    OrByte(xBits_Paradwyn, %00100000)
+    LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000100) == c0)#, Script_Paradwyn_Puzzle4_Complete)
+    OrByte(xBits_Paradwyn, %00000100)
     HeroToDoor($11, $0C)
     LongJump(SCRIPT_0E_6A67)
 
 Script_Paradwyn_Puzzle4_Complete::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A03B], c%00001000)#, SCRIPT_15_5ED0)
-    OrByte(MATHADDRESS_00_A03B, %00001000)
+    LongJumpIf(#bitmatch(c[xBits_Paradwyn], c%00001000)#, SCRIPT_15_5ED0)
+    OrByte(xBits_Paradwyn, %00001000)
     HeroToDoor($09, $14)
     LongJump(SCRIPT_0E_6D51)
 
@@ -2325,8 +2325,8 @@ SCRIPT_15_5ED0::
     LongJump(SCRIPT_0E_6A67)
 
 Script_Paradwyn_Puzzle5_Complete::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A03B], c%00010000)#, SCRIPT_15_5EE7)
-    OrByte(MATHADDRESS_00_A03B, %00010000)
+    LongJumpIf(#bitmatch(c[xBits_Paradwyn], c%00010000)#, SCRIPT_15_5EE7)
+    OrByte(xBits_Paradwyn, %00010000)
     LongJump(SCRIPT_0E_6B48)
 
 SCRIPT_15_5EE7::
@@ -2469,14 +2469,14 @@ Hotspot_Paradwyn_Puzzle1_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle1_Complete)
 
 .HighScore::
@@ -2496,7 +2496,7 @@ Hotspot_Paradwyn_Puzzle1_0::
     FormatChar(xParadwyn_Puzzle1_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A187, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle1_Complete)
 
 Hotspot_Paradwyn_Puzzle1_1::
@@ -2653,14 +2653,14 @@ Hotspot_Paradwyn_Puzzle2_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle2_Complete)
 
 .HighScore::
@@ -2680,7 +2680,7 @@ Hotspot_Paradwyn_Puzzle2_0::
     FormatChar(xParadwyn_Puzzle2_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A188, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle2_Complete)
 
 Hotspot_Paradwyn_Puzzle2_1::
@@ -2842,14 +2842,14 @@ Hotspot_Paradwyn_Puzzle4_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle4_Complete)
 
 .HighScore::
@@ -2869,7 +2869,7 @@ Hotspot_Paradwyn_Puzzle4_0::
     FormatChar(xParadwyn_Puzzle4_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A189, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle4_Complete)
 
 Hotspot_Paradwyn_Puzzle4_1::
@@ -2974,14 +2974,14 @@ Hotspot_Paradwyn_Puzzle3_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_Complete)
 
 .HighScore::
@@ -3001,7 +3001,7 @@ Hotspot_Paradwyn_Puzzle3_0::
     FormatChar(xParadwyn_Puzzle3_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_Complete)
 
 SCRIPT_15_6B77::
@@ -3014,14 +3014,14 @@ SCRIPT_15_6B77::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_SecretComplete)
 
 .HighScore::
@@ -3041,7 +3041,7 @@ SCRIPT_15_6B77::
     FormatChar(xParadwyn_Puzzle3_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18A, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle3_SecretComplete)
 
 Hotspot_Paradwyn_Puzzle3_1::
@@ -3188,14 +3188,14 @@ Hotspot_Paradwyn_Puzzle5_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Paradwyn], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle5_Complete)
 
 .HighScore::
@@ -3215,7 +3215,7 @@ Hotspot_Paradwyn_Puzzle5_0::
     FormatChar(xParadwyn_Puzzle5_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xVARBYTE_00_A18B, #c[xNumberOfAttempts]#)
+    VarByteExpr(xParadwyn_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
     LongJump(Script_Paradwyn_Puzzle5_Complete)
 
 SCRIPT_15_705B::
