@@ -2487,14 +2487,14 @@ Hotspot_Bograth_Puzzle5_28::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Bograth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xBograth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
     LongJump(Script_Bograth_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Bograth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xBograth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A186, #c[xNumberOfAttempts]#)
     LongJump(Script_Bograth_Puzzle5_Complete)
 
 .HighScore::

@@ -20,21 +20,21 @@ SCRIPT_12_4018::
     LongJump(Script_Arderial_Puzzle5_First)
 
 Script_Arderial_Puzzle1_Complete::
-    OrByte(xBits_Arderial, %00000001)
+    OrByte(MATHADDRESS_00_A033, %00000001)
 
 SCRIPT_12_4022::
     HeroToDoor($06, $05)
     LongJump(SCRIPT_0E_4D76)
 
 Script_Arderial_Puzzle2_Complete::
-    OrByte(xBits_Arderial, %00000010)
+    OrByte(MATHADDRESS_00_A033, %00000010)
 
 SCRIPT_12_402D::
     HeroToDoor($05, $12)
     LongJump(SCRIPT_0E_4D76)
 
 Script_Arderial_Puzzle4_Complete::
-    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) == c0)#, SCRIPT_12_4046)
+    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A033], c%00000100) == c0)#, SCRIPT_12_4046)
     HeroToDoor($10, $0B)
     LongJump(SCRIPT_0E_4D76)
 
@@ -47,8 +47,8 @@ SCRIPT_12_404E::
     LongJump(SCRIPT_0E_4D76)
 
 Script_Arderial_Puzzle3_Complete::
-    LongJumpIf(#bitmatch(c[xBits_Arderial], c%00001000)#, SCRIPT_12_4068)
-    OrByte(xBits_Arderial, %00001000)
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A033], c%00001000)#, SCRIPT_12_4068)
+    OrByte(MATHADDRESS_00_A033, %00001000)
     HeroToDoor($11, $15)
     LongJump(SCRIPT_0E_4D76)
 
@@ -71,8 +71,8 @@ SCRIPT_12_4095::
     LongJump(SCRIPT_0E_4D76)
 
 Script_Arderial_Puzzle5_Complete::
-    LongJumpIf(#bitmatch(c[xBits_Arderial], c%00010000)#, SCRIPT_12_40B4)
-    OrByte(xBits_Arderial, %00010000)
+    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A033], c%00010000)#, SCRIPT_12_40B4)
+    OrByte(MATHADDRESS_00_A033, %00010000)
     LongJump(SCRIPT_0E_4E57)
 
 SCRIPT_12_40B4::
@@ -196,14 +196,14 @@ Hotspot_Arderial_Puzzle1_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A16E, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A16E, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle1_Complete)
 
 .HighScore::
@@ -397,14 +397,14 @@ SCRIPT_12_4597::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A16F, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A16F, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle2_Complete)
 
 .HighScore::
@@ -586,14 +586,14 @@ SCRIPT_12_4911::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A170, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A170, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle4_Complete)
 
 .HighScore::
@@ -777,14 +777,14 @@ SCRIPT_12_4C9A::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A171, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A171, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle3_Complete)
 
 .HighScore::
@@ -836,14 +836,14 @@ SCRIPT_12_4E58::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A171, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle3_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A171, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle3_SecretComplete)
 
 .HighScore::
@@ -1037,14 +1037,14 @@ SCRIPT_12_51EC::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A172, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xArderial_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A172, #c[xNumberOfAttempts]#)
     LongJump(Script_Arderial_Puzzle5_Complete)
 
 .HighScore::

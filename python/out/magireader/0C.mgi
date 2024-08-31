@@ -20,14 +20,14 @@ SCRIPT_0C_4AB8::
     LongJump(Script_KybarsTeeth_Puzzle5_First)
 
 Script_KybarsTeeth_Puzzle1_Complete::
-    OrByte(xBits_KybarsTeeth, %00000001)
+    OrByte(RAM_00_A039, %00000001)
 
 SCRIPT_0C_4AC2::
     HeroToDoor($11, $04)
     LongJump(SCRIPT_16_6F20)
 
 Script_KybarsTeeth_Puzzle2_Complete::
-    OrByte(xBits_KybarsTeeth, %00000010)
+    OrByte(RAM_00_A039, %00000010)
 
 SCRIPT_0C_4ACD::
     HeroToDoor($05, $03)
@@ -47,15 +47,15 @@ SCRIPT_0C_4AEC::
     LongJump(SCRIPT_16_6F20)
 
 Script_KybarsTeeth_Puzzle3_Complete::
-    OrByte(xBits_KybarsTeeth, %00000100)
+    OrByte(RAM_00_A039, %00000100)
 
 SCRIPT_0C_4AFF::
     HeroToDoor($04, $10)
     LongJump(SCRIPT_16_6F20)
 
 Script_KybarsTeeth_Puzzle4_Complete::
-    LongJumpIf(#bitmatch(c[xBits_KybarsTeeth], c%00001000)#, SCRIPT_0C_4B19)
-    OrByte(xBits_KybarsTeeth, %00001000)
+    LongJumpIf(#bitmatch(c[RAM_00_A039], c%00001000)#, SCRIPT_0C_4B19)
+    OrByte(RAM_00_A039, %00001000)
     HeroToDoor($0C, $16)
     LongJump(SCRIPT_16_7206)
 
@@ -64,8 +64,8 @@ SCRIPT_0C_4B19::
     LongJump(SCRIPT_16_6F20)
 
 Script_KybarsTeeth_Puzzle5_Complete::
-    LongJumpIf(#bitmatch(c[xBits_KybarsTeeth], c%00010000)#, SCRIPT_0C_4B30)
-    OrByte(xBits_KybarsTeeth, %00010000)
+    LongJumpIf(#bitmatch(c[RAM_00_A039], c%00010000)#, SCRIPT_0C_4B30)
+    OrByte(RAM_00_A039, %00010000)
     LongJump(SCRIPT_16_7001)
 
 SCRIPT_0C_4B30::
@@ -462,14 +462,14 @@ Hotspot_KybarsTeeth_Puzzle1_19::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17D, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000001) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17D, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle1_Complete)
 
 .HighScore::
@@ -589,14 +589,14 @@ Hotspot_KybarsTeeth_Puzzle2_1::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17E, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17E, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle2_Complete)
 
 .HighScore::
@@ -976,14 +976,14 @@ Hotspot_KybarsTeeth_Puzzle2_15::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17E, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17E, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
 
 .HighScore::
@@ -1418,14 +1418,14 @@ Hotspot_KybarsTeeth_Puzzle3_9::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17F, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A17F, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle3_Complete)
 
 .HighScore::
@@ -1739,14 +1739,14 @@ Hotspot_KybarsTeeth_Puzzle4_0::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A180, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00001000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A180, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle4_Complete)
 
 .HighScore::
@@ -2105,14 +2105,14 @@ Hotspot_KybarsTeeth_Puzzle5_1::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A181, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00010000) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xKybarsTeeth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xVARBYTE_00_A181, #c[xNumberOfAttempts]#)
     LongJump(Script_KybarsTeeth_Puzzle5_Complete)
 
 .HighScore::
