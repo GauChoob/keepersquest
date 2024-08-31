@@ -37,7 +37,7 @@ SCRIPT_19_46E3::
 Actor_Null::
     End()
 
-ACTORSCRIPT1_19_46E8::
+Actor_RestoreState::
     RestoreActorState()
 
 SCRIPT_19_46E9::
@@ -67,7 +67,7 @@ SCRIPT_19_46F0::
     End()
 
 SCRIPT_19_46FA::
-    ThatInit(0, AI_Hero, $0A, $0E, $D2C6, $00, SCRIPT_14_5DA1, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $0A, $0E, $D2C6, $00, SCRIPT_14_5DA1, Actor_RestoreState)
     ThatStart(0)
     CameraSeekActor(RAM_00_C189, 2)
     End()
@@ -799,10 +799,10 @@ ACTORSCRIPT1_19_5023::
 
 SCRIPT_19_504D::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_50B9, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5105, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5156, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_7180, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_50B9, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5105, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5156, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
@@ -1140,10 +1140,10 @@ SCRIPT_19_59E7::
 
 SCRIPT_19_59E8::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_5A54, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5AA2, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5B15, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0C, $0A, $D0D4, $58, ACTORSCRIPT0_11_7180, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_5A54, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5AA2, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5B15, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0C, $0A, $D0D4, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
@@ -1336,10 +1336,10 @@ SCRIPT_19_5D8F::
 
 SCRIPT_19_5DEB::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0D, $0C, $D0FD, $00, ACTORSCRIPT0_19_5E57, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $0E, $05, $D072, $00, ACTORSCRIPT0_19_5EB3, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0E, $05, $D072, $28, ACTORSCRIPT0_19_5EF5, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $07, $07, $D093, $58, ACTORSCRIPT0_11_7180, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0D, $0C, $D0FD, $00, ACTORSCRIPT0_19_5E57, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0E, $05, $D072, $00, ACTORSCRIPT0_19_5EB3, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0E, $05, $D072, $28, ACTORSCRIPT0_19_5EF5, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $07, $07, $D093, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
@@ -1451,8 +1451,8 @@ SCRIPT_19_5F53::
 
 SCRIPT_19_5F89::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0A, $06, $D082, $00, ACTORSCRIPT0_19_5FC3, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0A, $06, $D082, $00, ACTORSCRIPT0_19_5FC3, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
     ThatStart(0)
     ThatStart(4)
@@ -1572,9 +1572,9 @@ SCRIPT_19_637E::
 
 SCRIPT_19_64CD::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $04, $08, $D0A4, $00, ACTORSCRIPT0_19_6520, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0F, $05, $D073, $28, ACTORSCRIPT0_19_65C0, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $04, $08, $D0A4, $00, ACTORSCRIPT0_19_6520, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0F, $05, $D073, $28, ACTORSCRIPT0_19_65C0, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
     ThatStart(0)
@@ -1706,8 +1706,8 @@ SCRIPT_19_669C::
 
 SCRIPT_19_672B::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $07, $07, $D093, $00, ACTORSCRIPT0_19_6765, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0E, $05, $D072, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $07, $07, $D093, $00, ACTORSCRIPT0_19_6765, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0E, $05, $D072, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
     ThatStart(0)
     ThatStart(4)
@@ -1764,8 +1764,8 @@ SCRIPT_19_67D3::
 
 SCRIPT_19_67FD::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0E, $0F, $D13A, $00, ACTORSCRIPT0_19_6837, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0C, $09, $D0C0, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0E, $0F, $D13A, $00, ACTORSCRIPT0_19_6837, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0C, $09, $D0C0, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
     ThatStart(0)
     ThatStart(4)
@@ -1817,8 +1817,8 @@ SCRIPT_19_6891::
 
 SCRIPT_19_68CD::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0C, $07, $D098, $00, ACTORSCRIPT0_19_6907, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $05, $09, $D0B9, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0C, $07, $D098, $00, ACTORSCRIPT0_19_6907, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $05, $09, $D0B9, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
     ThatStart(0)
     ThatStart(4)
@@ -1873,10 +1873,10 @@ SCRIPT_19_696D::
 
 SCRIPT_19_699E::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0B, $0D, $D10F, $00, ACTORSCRIPT0_19_6A0A, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_6A73, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0E, $06, $D086, $28, ACTORSCRIPT0_19_6A92, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $09, $06, $D081, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0B, $0D, $D10F, $00, ACTORSCRIPT0_19_6A0A, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_6A73, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0E, $06, $D086, $28, ACTORSCRIPT0_19_6A92, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $06, $D081, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
@@ -1973,10 +1973,10 @@ SCRIPT_19_6B4B::
 
 SCRIPT_19_6B8E::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0E, $07, $D09A, $00, ACTORSCRIPT0_19_6BFA, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $05, $08, $D0A5, $00, ACTORSCRIPT0_19_6C48, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $05, $0A, $D0CD, $28, ACTORSCRIPT0_19_6CBE, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0E, $07, $D09A, $00, ACTORSCRIPT0_19_6BFA, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $05, $08, $D0A5, $00, ACTORSCRIPT0_19_6C48, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $05, $0A, $D0CD, $28, ACTORSCRIPT0_19_6CBE, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
@@ -2239,10 +2239,10 @@ SCRIPT_19_7125::
 
 SCRIPT_19_7128::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $07, $09, $D0BB, $00, ACTORSCRIPT0_19_7194, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $0F, $0E, $D127, $00, ACTORSCRIPT0_19_71F6, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0D, $0E, $D125, $28, ACTORSCRIPT0_19_7251, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0D, $0A, $D0D5, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $07, $09, $D0BB, $00, ACTORSCRIPT0_19_7194, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0F, $0E, $D127, $00, ACTORSCRIPT0_19_71F6, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0D, $0E, $D125, $28, ACTORSCRIPT0_19_7251, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0D, $0A, $D0D5, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
@@ -2378,10 +2378,10 @@ SCRIPT_19_7359::
 
 SCRIPT_19_737F::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $0D, $0A, $D0D5, $00, ACTORSCRIPT0_19_73EB, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $08, $07, $D094, $00, ACTORSCRIPT0_19_744A, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0A, $07, $D096, $28, ACTORSCRIPT0_19_7469, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $05, $0A, $D0CD, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0D, $0A, $D0D5, $00, ACTORSCRIPT0_19_73EB, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $08, $07, $D094, $00, ACTORSCRIPT0_19_744A, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0A, $07, $D096, $28, ACTORSCRIPT0_19_7469, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $05, $0A, $D0CD, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
@@ -2475,10 +2475,10 @@ SCRIPT_19_7504::
 
 SCRIPT_19_7540::
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $04, $09, $D0B8, $00, ACTORSCRIPT0_19_75AC, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $0B, $0A, $D0D3, $00, ACTORSCRIPT0_19_7614, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $09, $0A, $D0D1, $28, ACTORSCRIPT0_19_7784, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $0B, $07, $D097, $58, ACTORSCRIPT0_11_728D, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $04, $09, $D0B8, $00, ACTORSCRIPT0_19_75AC, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0B, $0A, $D0D3, $00, ACTORSCRIPT0_19_7614, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $09, $0A, $D0D1, $28, ACTORSCRIPT0_19_7784, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0B, $07, $D097, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
     LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
     LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)

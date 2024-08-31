@@ -49,11 +49,127 @@ xGameCount::
     ;ds $A028 - @
 xScript_SaveBits::
 
-    ds $A038 - @
+
+    ds $A032 - @
+xBits_Orothe::
+    ; 0 = Completed Orothe_Puzzle1
+    ; 1 = Completed Orothe_Puzzle2
+    ; 2 = Completed Orothe_Puzzle3
+    ; 3 = Completed Orothe_Puzzle4
+    ; 4 = Completed Orothe_Puzzle5
+    ; 5 = Unlocked Orothe_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A033 - @
+xBits_Arderial::
+    ; 0 = Completed Arderial_Puzzle1
+    ; 1 = Completed Arderial_Puzzle2
+    ; 2 = Completed Arderial_Puzzle3
+    ; 3 = Completed Arderial_Puzzle4
+    ; 4 = Completed Arderial_Puzzle5
+    ; 5 = Unlocked Arderial_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A034 - @
+xBits_Naroom::
+    ; 0 = Completed Naroom_Puzzle1
+    ; 1 = Completed Naroom_Puzzle2
+    ; 2 = Completed Naroom_Puzzle3
+    ; 3 = Completed Naroom_Puzzle4
+    ; 4 = Completed Naroom_Puzzle5
+    ; 5 = Unlocked Naroom_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A035 - @
+xBits_Underneath::
+    ; 0 = Completed Underneath_Puzzle1
+    ; 1 = Completed Underneath_Puzzle2
+    ; 2 = Completed Underneath_Puzzle3
+    ; 3 = Completed Underneath_Puzzle4
+    ; 4 = Completed Underneath_Puzzle5
+    ; 5 = Unlocked Underneath_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A036 - @
+xBits_Cald::
+    ; 0 = Completed Cald_Puzzle1
+    ; 1 = Completed Cald_Puzzle2
+    ; 2 = Completed Cald_Puzzle3
+    ; 3 = Completed Cald_Puzzle4
+    ; 4 = Completed Cald_Puzzle5
+    ; 5 = Unlocked Cald_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A037 - @
+xBits_Weave::
+    ; 0 = Completed Weave_Puzzle1
+    ; 1 = Completed Weave_Puzzle2
+    ; 2 = Completed Weave_Puzzle3
+    ; 3 = Completed Weave_Puzzle4
+    ; 4 = Completed Weave_Puzzle5
+    ; 5 = Unlocked Weave_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A038 - @
 xBits_dResh::
-    ; 0
-    ; 1
+    ; 0 = Unused
+    ; 1 = Unused
     ; 2 = Completed dResh_Puzzle1
+    ; 3 = Completed dResh_Puzzle2
+    ; 4 = Completed dResh_Puzzle3
+    ; 5 = Completed dResh_Puzzle4
+    ; 6 = Completed dResh_Puzzle5
+    ; 7 = Unlocked dResh_Puzzle5
+    ds 1
+    ;ds $A039 - @
+xBits_KybarsTeeth::
+    ; 0 = Completed KybarsTeeth_Puzzle1
+    ; 1 = Completed KybarsTeeth_Puzzle2
+    ; 2 = Completed KybarsTeeth_Puzzle3
+    ; 3 = Completed KybarsTeeth_Puzzle4
+    ; 4 = Completed KybarsTeeth_Puzzle5
+    ; 5 = Unlocked KybarsTeeth_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A03A - @
+xBits_Bograth::
+    ; 0 = Completed Bograth_Puzzle1
+    ; 1 = Completed Bograth_Puzzle2
+    ; 2 = Completed Bograth_Puzzle3
+    ; 3 = Completed Bograth_Puzzle4
+    ; 4 = Completed Bograth_Puzzle5
+    ; 5 = Unlocked Bograth_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A03B - @
+xBits_Paradwyn::
+    ; 0 = Completed Paradwyn_Puzzle1
+    ; 1 = Completed Paradwyn_Puzzle2
+    ; 2 = Completed Paradwyn_Puzzle3
+    ; 3 = Completed Paradwyn_Puzzle4
+    ; 4 = Completed Paradwyn_Puzzle5
+    ; 5 = Unlocked Paradwyn_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
+    ds 1
+    ;ds $A03C - @
+xBits_Core::
+    ; 0 = Completed Core_Puzzle1
+    ; 1 = Completed Core_Puzzle2
+    ; 2 = Completed Core_Puzzle3
+    ; 3 = Completed Core_Puzzle4
+    ; 4 = Completed Core_Puzzle5
+    ; 5 = Unlocked Core_Puzzle5
+    ; 6 = Unused
+    ; 7 = Unused
     ds 1
 
     ds $A127 - @
@@ -67,8 +183,182 @@ xPuzzleCounter:
     ; dResh_Puzzle2 = Thirst = 1-14
     ds 1
 
-    ds $A178 - @
+    ds $A159 - @
+xNaroom_Puzzle1_Score:
+    ds 1
+    ;ds $A15A - @
+xNaroom_Puzzle2_Score:
+    ds 1
+    ;ds $A15B - @
+xNaroom_Puzzle3_Score:
+    ds 1
+    ;ds $A15C - @
+xNaroom_Puzzle4_Score:
+    ds 1
+    ;ds $A15D - @
+xNaroom_Puzzle5_Score:
+    ds 1
+    ;ds $A15E - @
+xUnderneath_Puzzle1_Score:
+    ds 1
+    ;ds $A15F - @
+xUnderneath_Puzzle2_Score:
+    ds 1
+    ;ds $A160 - @
+xUnderneath_Puzzle3_Score:
+    ds 1
+    ;ds $A161 - @
+xUnderneath_Puzzle4_Score:
+    ds 1
+    ;ds $A162 - @
+xUnderneath_Puzzle5_Score:
+    ds 1
+    ;ds $A163 - @
+xCald_Puzzle1_Score:
+    ds 1
+    ;ds $A164 - @
+xCald_Puzzle2_Score:
+    ds 1
+    ;ds $A165 - @
+xCald_Puzzle3_Score:
+    ds 1
+    ;ds $A166 - @
+xCald_Puzzle4_Score:
+    ds 1
+    ;ds $A167 - @
+xCald_Puzzle5_Score:
+    ds 1
+
+    ; Unused
+    ds 1
+
+    ;ds $A169 - @
+xOrothe_Puzzle1_Score:
+    ds 1
+    ;ds $A16A - @
+xOrothe_Puzzle2_Score:
+    ds 1
+    ;ds $A16B - @
+xOrothe_Puzzle3_Score:
+    ds 1
+    ;ds $A16C - @
+xOrothe_Puzzle4_Score:
+    ds 1
+    ;ds $A16D - @
+xOrothe_Puzzle5_Score:
+    ds 1
+    ;ds $A16E - @
+xArderial_Puzzle1_Score:
+    ds 1
+    ;ds $A16F - @
+xArderial_Puzzle2_Score:
+    ds 1
+    ;ds $A170 - @
+xArderial_Puzzle4_Score:
+    ; Order inversed
+    ds 1
+    ;ds $A171 - @
+xArderial_Puzzle3_Score:
+    ; Order inversed
+    ds 1
+    ;ds $A172 - @
+xArderial_Puzzle5_Score:
+    ds 1
+    ;ds $A173 - @
+xWeave_Puzzle1_Score:
+    ds 1
+    ;ds $A174 - @
+xWeave_Puzzle2_Score:
+    ds 1
+    ;ds $A175 - @
+xWeave_Puzzle3_Score:
+    ds 1
+    ;ds $A176 - @
+xWeave_Puzzle4_Score:
+    ds 1
+    ;ds $A177 - @
+xWeave_Puzzle5_Score:
+    ds 1
+    ;ds $A178 - @
 xdResh_Puzzle1_Score:
+    ds 1
+    ;ds $A179 - @
+xdResh_Puzzle2_Score:
+    ds 1
+    ;ds $A17A - @
+xdResh_Puzzle3_Score:
+    ds 1
+    ;ds $A17B - @
+xdResh_Puzzle4_Score:
+    ds 1
+    ;ds $A17C - @
+xdResh_Puzzle5_Score:
+    ds 1
+    ;ds $A17D - @
+xKybarsTeeth_Puzzle1_Score:
+    ds 1
+    ;ds $A17E - @
+xKybarsTeeth_Puzzle2_Score:
+    ds 1
+    ;ds $A17F - @
+xKybarsTeeth_Puzzle3_Score:
+    ds 1
+    ;ds $A180 - @
+xKybarsTeeth_Puzzle4_Score:
+    ds 1
+    ;ds $A181 - @
+xKybarsTeeth_Puzzle5_Score:
+    ds 1
+    ;ds $A182 - @
+xBograth_Puzzle1_Score:
+    ds 1
+    ;ds $A183 - @
+xBograth_Puzzle2_Score:
+    ds 1
+    ;ds $A184 - @
+xBograth_Puzzle3_Score:
+    ds 1
+    ;ds $A185 - @
+xBograth_Puzzle4_Score:
+    ds 1
+    ;ds $A186 - @
+xBograth_Puzzle5_Score:
+    ds 1
+    ;ds $A187 - @
+xParadwyn_Puzzle1_Score:
+    ds 1
+    ;ds $A188 - @
+xParadwyn_Puzzle2_Score:
+    ds 1
+    ;ds $A189 - @
+xParadwyn_Puzzle4_Score:
+    ; Order inversed
+    ds 1
+    ;ds $A18A - @
+xParadwyn_Puzzle3_Score:
+    ; Order inversed
+    ds 1
+    ;ds $A18B - @
+xParadwyn_Puzzle5_Score:
+    ds 1
+    ;ds $A18C - @
+xCore_Puzzle5_Score:
+    ds 1
+    ;ds $A18D - @
+xCore_Puzzle2_Score:
+    ds 1
+    ;ds $A18E - @
+xCore_Puzzle3_Score:
+    ds 1
+    ;ds $A18F - @
+xCore_Puzzle1_Score:
+    ds 1
+    ;ds $A190 - @
+xCore_Puzzle5_Score:
+    ds 1
+
+    ;ds $A191 - @
+xLaser_Score:
     ds 1
 
     ds $A227 - @

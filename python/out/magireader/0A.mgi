@@ -26,17 +26,17 @@ Script_dResh_Puzzle1_Exit::
     HeroToDoor($09, $12)
     LongJump(Script_dResh_Main)
 
-SCRIPT_0A_4029::
+Script_dResh_Puzzle2_Complete::
     OrByte(xBits_dResh, %00001000)
     HeroToDoor($05, $02)
     LongJump(Script_dResh_Main)
 
-SCRIPT_0A_4034::
+Script_dResh_Puzzle2_SecretComplete::
     LongJumpIf(#bitmatch(c[RAM_00_A04A], c%01000000)#, SCRIPT_0A_4056)
     OrByte(xBits_dResh, %00001000)
     OrByte(xBits_dResh, %10000000)
     OrByte(RAM_00_A04A, %01000000)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_0A_4034)
+    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_dResh_Puzzle2_SecretComplete)
     LongJump(SCRIPT_0C_6D53)
 
 SCRIPT_0A_4056::
@@ -47,14 +47,14 @@ SCRIPT_0A_405E::
     HeroToDoor($05, $02)
     LongJump(Script_dResh_Main)
 
-SCRIPT_0A_4065::
+Script_dResh_Puzzle3_Complete::
     OrByte(xBits_dResh, %00010000)
 
 SCRIPT_0A_4069::
     HeroToDoor($0C, $0A)
     LongJump(Script_dResh_Main)
 
-SCRIPT_0A_4070::
+Script_dResh_Puzzle4_Complete::
     LongJumpIf(#bitmatch(c[xBits_dResh], c%00100000)#, SCRIPT_0A_4083)
     OrByte(xBits_dResh, %00100000)
     HeroToDoor($17, $02)
@@ -64,7 +64,7 @@ SCRIPT_0A_4083::
     HeroToDoor($17, $02)
     LongJump(Script_dResh_Main)
 
-SCRIPT_0A_408A::
+Script_dResh_Puzzle5_Complete::
     LongJumpIf(#bitmatch(c[xBits_dResh], c%01000000)#, SCRIPT_0A_409A)
     OrByte(xBits_dResh, %01000000)
     LongJump(SCRIPT_0C_6C1C)
@@ -84,7 +84,7 @@ Script_dResh_Puzzle1_Again::
     LoadScene(Scene_dResh_Puzzle1)
     LoadBitmapSet(BITSET_2E_700C, PAL_2F_5685)
     LoadHotspots(Hotspot_dResh_Puzzle1)
-    ThatInit(0, AI_Hero, $14, $23, $D58C, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $14, $23, $D58C, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $10, $0B, $D1C8, $50, Actor_Null, Interrupt_InvisibleLaser_dResh_Puzzle1)
     ThatInit(3, AI_InvisibleLaser, $10, $0D, $D218, $50, Actor_Null, Interrupt_InvisibleLaser_dResh_Puzzle1)
     ThatInit(4, AI_InvisibleLaser, $18, $0B, $D1D0, $50, Actor_Null, Interrupt_InvisibleLaser_dResh_Puzzle1)
@@ -289,7 +289,7 @@ Script_dResh_Puzzle3_Again::
     LoadScene(Scene_dResh_Puzzle3)
     LoadBitmapSet(BITSET_2E_700C, PAL_2F_5685)
     LoadHotspots(Hotspot_dResh_Puzzle3)
-    ThatInit(0, AI_Hero, $0C, $02, $D03E, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $0C, $02, $D03E, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $09, $0A, $D103, $50, Actor_Null, ACTORSCRIPT1_0A_45BC)
     ThatInit(3, AI_InvisibleLaser, $10, $0A, $D10A, $50, Actor_Null, ACTORSCRIPT1_0A_45BC)
     ThatInit(4, AI_InvisibleLaser, $10, $10, $D1A0, $50, Actor_Null, ACTORSCRIPT1_0A_45BC)
@@ -451,14 +451,14 @@ SCRIPT_0A_469D::
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17A, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4065)
+    LongJump(Script_dResh_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17A, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4065)
+    LongJump(Script_dResh_Puzzle3_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A17A])#, .HighscoreNew)
@@ -466,12 +466,12 @@ SCRIPT_0A_469D::
     LongJumpIf(#(c[xVARBYTE_00_A17A] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_4065)
+    LongJump(Script_dResh_Puzzle3_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_4065)
+    LongJump(Script_dResh_Puzzle3_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A17A)
@@ -479,7 +479,7 @@ SCRIPT_0A_469D::
     Close()
     VarByteExpr(xVARBYTE_00_A17A, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_4065)
+    LongJump(Script_dResh_Puzzle3_Complete)
 
 Script_dResh_Puzzle4_First::
     SetByte(xNumberOfAttempts, $01)
@@ -492,7 +492,7 @@ Script_dResh_Puzzle4_Again::
     LoadScene(Scene_dResh_Puzzle4)
     LoadBitmapSet(BITSET_2E_700C, PAL_2F_5685)
     LoadHotspots(Hotspot_dResh_Puzzle4)
-    ThatInit(0, AI_Hero, $02, $02, $D034, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $02, $02, $D034, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $05, $14, $D1F9, $50, Actor_Null, ACTORSCRIPT1_0A_4935)
     ThatInit(3, AI_InvisibleLaser, $10, $12, $D1D2, $50, Actor_Null, ACTORSCRIPT1_0A_4935)
     ThatInit(14, AI_Chicken, $03, $03, $D04E, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
@@ -638,14 +638,14 @@ SCRIPT_0A_4A06::
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00100000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17B, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4070)
+    LongJump(Script_dResh_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00100000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17B, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4070)
+    LongJump(Script_dResh_Puzzle4_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A17B])#, .HighscoreNew)
@@ -653,12 +653,12 @@ SCRIPT_0A_4A06::
     LongJumpIf(#(c[xVARBYTE_00_A17B] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_4070)
+    LongJump(Script_dResh_Puzzle4_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_4070)
+    LongJump(Script_dResh_Puzzle4_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A17B)
@@ -666,7 +666,7 @@ SCRIPT_0A_4A06::
     Close()
     VarByteExpr(xVARBYTE_00_A17B, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_4070)
+    LongJump(Script_dResh_Puzzle4_Complete)
 
 Script_dResh_Puzzle2_First::
     SetByte(xNumberOfAttempts, $01)
@@ -681,7 +681,7 @@ Script_dResh_Puzzle2_Again::
     LoadTriggers(Trigger_dResh_Puzzle2)
     LoadMapMask(METAMAP_MASK_2C_7AA0, COLLMAP_MASK_2D_6F25)
     LoadSingleBitmap($06, BITMAP_19_4390, $8000, $00)
-    ThatInit(0, AI_Hero, $13, $25, $D5DB, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $13, $25, $D5DB, $00, ACTORSCRIPT0_14_5E74, Actor_RestoreState)
     OverlayInit(RAM_00_C1BF, $96, $23, $00, Actor_ThirstOverlay_Decreasing)
     AndByte(RAM_00_A02B, %11111011)
     ThatStart(0)
@@ -950,14 +950,14 @@ Hotspot_dResh_Puzzle2_0::
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4029)
+    LongJump(Script_dResh_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4029)
+    LongJump(Script_dResh_Puzzle2_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A179])#, .HighscoreNew)
@@ -965,12 +965,12 @@ Hotspot_dResh_Puzzle2_0::
     LongJumpIf(#(c[xVARBYTE_00_A179] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_4029)
+    LongJump(Script_dResh_Puzzle2_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_4029)
+    LongJump(Script_dResh_Puzzle2_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A179)
@@ -978,7 +978,7 @@ Hotspot_dResh_Puzzle2_0::
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_4029)
+    LongJump(Script_dResh_Puzzle2_Complete)
 
 SCRIPT_0A_4FC3::
     ThatDelete(0)
@@ -989,7 +989,7 @@ SCRIPT_0A_4FC3::
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4034)
+    LongJump(Script_dResh_Puzzle2_SecretComplete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A179])#, .HighscoreNew)
@@ -997,19 +997,19 @@ SCRIPT_0A_4FC3::
     LongJumpIf(#(c[xVARBYTE_00_A179] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_4034)
+    LongJump(Script_dResh_Puzzle2_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_4034)
+    LongJump(Script_dResh_Puzzle2_SecretComplete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_4034)
+    LongJump(Script_dResh_Puzzle2_SecretComplete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A179)
@@ -1017,7 +1017,7 @@ SCRIPT_0A_4FC3::
     Close()
     VarByteExpr(xVARBYTE_00_A179, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_4034)
+    LongJump(Script_dResh_Puzzle2_SecretComplete)
 
 Hotspot_dResh_Puzzle2_1::
     LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_0A_5174)
@@ -1067,7 +1067,7 @@ Script_dResh_Puzzle5_Again::
     LoadHotspots(Hotspot_dResh_Puzzle5)
     LoadMapMask(METAMAP_MASK_27_5760, COLLMAP_MASK_29_48EB)
     LoadSingleBitmap($06, BITMAP_19_4390, $8000, $00)
-    ThatInit(0, AI_Hero, $0D, $23, $D634, $00, ACTORSCRIPT0_14_5E74, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $0D, $23, $D634, $00, ACTORSCRIPT0_14_5E74, Actor_RestoreState)
     OverlayInit(RAM_00_C1BF, $96, $23, $00, SCRIPT_ACTORSCRIPT0_0A_5465)
     ThatStart(0)
     AndByte(RAM_00_A02B, %11111011)
@@ -1116,14 +1116,14 @@ Hotspot_dResh_Puzzle5_20::
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%01000000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_408A)
+    LongJump(Script_dResh_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%01000000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A17C, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_408A)
+    LongJump(Script_dResh_Puzzle5_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A17C])#, .HighscoreNew)
@@ -1131,12 +1131,12 @@ Hotspot_dResh_Puzzle5_20::
     LongJumpIf(#(c[xVARBYTE_00_A17C] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_408A)
+    LongJump(Script_dResh_Puzzle5_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_408A)
+    LongJump(Script_dResh_Puzzle5_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A17C)
@@ -1144,7 +1144,7 @@ Hotspot_dResh_Puzzle5_20::
     Close()
     VarByteExpr(xVARBYTE_00_A17C, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_408A)
+    LongJump(Script_dResh_Puzzle5_Complete)
 
 ACTORSCRIPT0_0A_53DE::
     Switch(#c[RAM_00_A128]#) {
@@ -1706,44 +1706,44 @@ SCRIPT_0A_5ADE::
     StartSong(SONGID_Sanctuary)
     LongJump(Script_Weave_Puzzle5_First)
 
-SCRIPT_0A_5AE4::
-    OrByte(MATHADDRESS_00_A037, %00000001)
+Script_Weave_Puzzle1_Complete::
+    OrByte(xBits_Weave, %00000001)
 
 SCRIPT_0A_5AE8::
     HeroToDoor($13, $02)
     LongJump(SCRIPT_09_6AED)
 
-SCRIPT_0A_5AEF::
-    OrByte(MATHADDRESS_00_A037, %00000010)
+Script_Weave_Puzzle2_Complete::
+    OrByte(xBits_Weave, %00000010)
 
 SCRIPT_0A_5AF3::
     HeroToDoor($06, $02)
     LongJump(SCRIPT_09_6AED)
 
-SCRIPT_0A_5AFA::
+Script_Weave_Puzzle2_SecretComplete::
     LongJumpIf(#bitmatch(c[RAM_00_A04A], c%00100000)#, SCRIPT_0A_5B1C)
-    OrByte(MATHADDRESS_00_A037, %00000010)
-    OrByte(MATHADDRESS_00_A037, %00100000)
+    OrByte(xBits_Weave, %00000010)
+    OrByte(xBits_Weave, %00100000)
     OrByte(RAM_00_A04A, %00100000)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_0A_5AFA)
+    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Weave_Puzzle2_SecretComplete)
     LongJump(SCRIPT_09_6CF9)
 
 SCRIPT_0A_5B1C::
-    OrByte(MATHADDRESS_00_A037, %00000010)
-    OrByte(MATHADDRESS_00_A037, %00100000)
+    OrByte(xBits_Weave, %00000010)
+    OrByte(xBits_Weave, %00100000)
     HeroToDoor($06, $02)
     LongJump(SCRIPT_09_6AED)
 
-SCRIPT_0A_5B2B::
-    OrByte(MATHADDRESS_00_A037, %00000100)
+Script_Weave_Puzzle3_Complete::
+    OrByte(xBits_Weave, %00000100)
 
 SCRIPT_0A_5B2F::
     HeroToDoor($0B, $0A)
     LongJump(SCRIPT_09_6AED)
 
-SCRIPT_0A_5B36::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A037], c%00001000)#, SCRIPT_0A_5B49)
-    OrByte(MATHADDRESS_00_A037, %00001000)
+Script_Weave_Puzzle4_Complete::
+    LongJumpIf(#bitmatch(c[xBits_Weave], c%00001000)#, SCRIPT_0A_5B49)
+    OrByte(xBits_Weave, %00001000)
     HeroToDoor($09, $15)
     LongJump(SCRIPT_09_6DD7)
 
@@ -1751,9 +1751,9 @@ SCRIPT_0A_5B49::
     HeroToDoor($09, $15)
     LongJump(SCRIPT_09_6AED)
 
-SCRIPT_0A_5B50::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A037], c%00010000)#, SCRIPT_0A_5B60)
-    OrByte(MATHADDRESS_00_A037, %00010000)
+Script_Weave_Puzzle5_Complete::
+    LongJumpIf(#bitmatch(c[xBits_Weave], c%00010000)#, SCRIPT_0A_5B60)
+    OrByte(xBits_Weave, %00010000)
     LongJump(SCRIPT_09_6BCE)
 
 SCRIPT_0A_5B60::
@@ -1770,7 +1770,7 @@ Script_Weave_Puzzle1_Again::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Weave_Puzzle1)
     LoadHotspots(Hotspot_Weave_Puzzle1)
-    ThatInit(0, AI_Hero, $0B, $0B, $D0E7, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $0B, $0B, $D0E7, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $09, $05, $D06D, $00, Actor_Null, ACTORSCRIPT1_0A_5CA0)
     ThatInit(3, AI_InvisibleLaser, $09, $09, $D0BD, $00, Actor_Null, ACTORSCRIPT1_0A_5CA0)
     ThatInit(4, AI_InvisibleLaser, $09, $0D, $D10D, $00, Actor_Null, ACTORSCRIPT1_0A_5CA0)
@@ -1891,17 +1891,17 @@ Hotspot_Weave_Puzzle1_0::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000001) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A173, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AE4)
+    LongJump(Script_Weave_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000001) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000001) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A173, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AE4)
+    LongJump(Script_Weave_Puzzle1_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A173])#, .HighscoreNew)
@@ -1909,12 +1909,12 @@ Hotspot_Weave_Puzzle1_0::
     LongJumpIf(#(c[xVARBYTE_00_A173] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5AE4)
+    LongJump(Script_Weave_Puzzle1_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5AE4)
+    LongJump(Script_Weave_Puzzle1_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A173)
@@ -1922,7 +1922,7 @@ Hotspot_Weave_Puzzle1_0::
     Close()
     VarByteExpr(xVARBYTE_00_A173, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5AE4)
+    LongJump(Script_Weave_Puzzle1_Complete)
 
 Script_Weave_Puzzle2_First::
     SetByte(xNumberOfAttempts, $01)
@@ -1934,7 +1934,7 @@ Script_Weave_Puzzle2_Again::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Weave_Puzzle2)
     LoadHotspots(Hotspot_Weave_Puzzle2)
-    ThatInit(0, AI_Hero, $03, $0A, $D0DF, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $03, $0A, $D0DF, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $07, $02, $D033, $50, Actor_Null, ACTORSCRIPT1_0A_6065)
     ThatInit(9, AI_InvisibleLaser, $0F, $09, $D0D5, $50, Actor_Null, ACTORSCRIPT1_0A_6065)
     ThatInit(3, AI_Chicken, $05, $07, $D09F, $56, ACTORSCRIPT0_19_4829, ACTORSCRIPT1_19_5023)
@@ -2114,17 +2114,17 @@ Hotspot_Weave_Puzzle2_0::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000010) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AEF)
+    LongJump(Script_Weave_Puzzle2_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000010) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AEF)
+    LongJump(Script_Weave_Puzzle2_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A174])#, .HighscoreNew)
@@ -2132,12 +2132,12 @@ Hotspot_Weave_Puzzle2_0::
     LongJumpIf(#(c[xVARBYTE_00_A174] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5AEF)
+    LongJump(Script_Weave_Puzzle2_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5AEF)
+    LongJump(Script_Weave_Puzzle2_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A174)
@@ -2145,7 +2145,7 @@ Hotspot_Weave_Puzzle2_0::
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5AEF)
+    LongJump(Script_Weave_Puzzle2_Complete)
 
 Hotspot_Weave_Puzzle2_1::
     StartSong(SONGID_GetItem)
@@ -2155,17 +2155,17 @@ Hotspot_Weave_Puzzle2_1::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000010) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AFA)
+    LongJump(Script_Weave_Puzzle2_SecretComplete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000010) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000010) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5AFA)
+    LongJump(Script_Weave_Puzzle2_SecretComplete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A174])#, .HighscoreNew)
@@ -2173,12 +2173,12 @@ Hotspot_Weave_Puzzle2_1::
     LongJumpIf(#(c[xVARBYTE_00_A174] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5AFA)
+    LongJump(Script_Weave_Puzzle2_SecretComplete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5AFA)
+    LongJump(Script_Weave_Puzzle2_SecretComplete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A174)
@@ -2186,7 +2186,7 @@ Hotspot_Weave_Puzzle2_1::
     Close()
     VarByteExpr(xVARBYTE_00_A174, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5AFA)
+    LongJump(Script_Weave_Puzzle2_SecretComplete)
 
 Script_Weave_Puzzle3_First::
     SetByte(xNumberOfAttempts, $01)
@@ -2199,7 +2199,7 @@ Script_Weave_Puzzle3_Again::
     LoadScene(Scene_Weave_Puzzle3)
     LoadBitmapSet(BITSET_2E_778B, PAL_2F_50C5)
     LoadHotspots(Hotspot_Weave_Puzzle3)
-    ThatInit(0, AI_Hero, $02, $15, $D20F, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $02, $15, $D20F, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $13, $06, $D0A9, $50, Actor_Null, ACTORSCRIPT1_0A_6537)
     ThatInit(14, AI_Chicken, $03, $15, $D210, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
     ThatInit(15, AI_Chicken, $0B, $15, $D218, $54, ACTORSCRIPT0_19_4BE5, ACTORSCRIPT1_19_4BFD)
@@ -2352,17 +2352,17 @@ SCRIPT_0A_6618::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000100) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A175, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B2B)
+    LongJump(Script_Weave_Puzzle3_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00000100) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000100) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A175, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B2B)
+    LongJump(Script_Weave_Puzzle3_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A175])#, .HighscoreNew)
@@ -2370,12 +2370,12 @@ SCRIPT_0A_6618::
     LongJumpIf(#(c[xVARBYTE_00_A175] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5B2B)
+    LongJump(Script_Weave_Puzzle3_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5B2B)
+    LongJump(Script_Weave_Puzzle3_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A175)
@@ -2383,7 +2383,7 @@ SCRIPT_0A_6618::
     Close()
     VarByteExpr(xVARBYTE_00_A175, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5B2B)
+    LongJump(Script_Weave_Puzzle3_Complete)
 
 Script_Weave_Puzzle4_First::
     SetByte(xNumberOfAttempts, $01)
@@ -2396,7 +2396,7 @@ Script_Weave_Puzzle4_Again::
     LoadScene(Scene_Weave_Puzzle4)
     LoadBitmapSet(BITSET_2E_778B, PAL_2F_50C5)
     LoadHotspots(Hotspot_Weave_Puzzle4)
-    ThatInit(0, AI_Hero, $02, $02, $D034, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $02, $02, $D034, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $08, $15, $D215, $50, Actor_Null, ACTORSCRIPT1_0A_68C2)
     ThatInit(14, AI_Chicken, $0F, $15, $D21C, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
     ThatInit(15, AI_Chicken, $10, $0F, $D187, $54, ACTORSCRIPT0_19_4BE5, ACTORSCRIPT1_19_4BFD)
@@ -2549,17 +2549,17 @@ SCRIPT_0A_69A3::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00001000) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A176, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B36)
+    LongJump(Script_Weave_Puzzle4_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00001000) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00001000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A176, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B36)
+    LongJump(Script_Weave_Puzzle4_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A176])#, .HighscoreNew)
@@ -2567,12 +2567,12 @@ SCRIPT_0A_69A3::
     LongJumpIf(#(c[xVARBYTE_00_A176] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5B36)
+    LongJump(Script_Weave_Puzzle4_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5B36)
+    LongJump(Script_Weave_Puzzle4_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A176)
@@ -2580,7 +2580,7 @@ SCRIPT_0A_69A3::
     Close()
     VarByteExpr(xVARBYTE_00_A176, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5B36)
+    LongJump(Script_Weave_Puzzle4_Complete)
 
 Script_Weave_Puzzle5_First::
     SetByte(xNumberOfAttempts, $01)
@@ -2592,7 +2592,7 @@ Script_Weave_Puzzle5_Again::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Weave_Puzzle5)
     LoadHotspots(Hotspot_Weave_Puzzle5)
-    ThatInit(0, AI_Hero, $01, $12, $D0EB, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, AI_Hero, $01, $12, $D0EB, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, AI_InvisibleLaser, $04, $0C, $D0A0, $04, ACTORSCRIPT0_0A_6BDC, ACTORSCRIPT1_0A_6C64)
     ThatInit(3, AI_InvisibleLaser, $09, $09, $D07E, $04, ACTORSCRIPT0_0A_6BF8, ACTORSCRIPT1_0A_6C8A)
     ThatInit(4, AI_InvisibleLaser, $04, $03, $D02B, $04, ACTORSCRIPT0_0A_6C14, ACTORSCRIPT1_0A_6CB0)
@@ -2803,17 +2803,17 @@ Hotspot_Weave_Puzzle5_0::
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
     FormatChar(xNumberOfAttempts)
     Write("It took you⭍🔊 attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00010000) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A177, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B50)
+    LongJump(Script_Weave_Puzzle5_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A037], c%00010000) != c0)#, .HighScore)
+    LongJumpIf(#(bitmatch(c[xBits_Weave], c%00010000) != c0)#, .HighScore)
     Close()
     VarByteExpr(xVARBYTE_00_A177, #c[xNumberOfAttempts]#)
-    LongJump(SCRIPT_0A_5B50)
+    LongJump(Script_Weave_Puzzle5_Complete)
 
 .HighScore::
     LongJumpIf(#(c[xNumberOfAttempts] < c[xVARBYTE_00_A177])#, .HighscoreNew)
@@ -2821,12 +2821,12 @@ Hotspot_Weave_Puzzle5_0::
     LongJumpIf(#(c[xVARBYTE_00_A177] == c1)#, .Highscore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
-    LongJump(SCRIPT_0A_5B50)
+    LongJump(Script_Weave_Puzzle5_Complete)
 
 .Highscore1::
     Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
     Close()
-    LongJump(SCRIPT_0A_5B50)
+    LongJump(Script_Weave_Puzzle5_Complete)
 
 .HighscoreNew::
     FormatChar(xVARBYTE_00_A177)
@@ -2834,7 +2834,7 @@ Hotspot_Weave_Puzzle5_0::
     Close()
     VarByteExpr(xVARBYTE_00_A177, #c[xNumberOfAttempts]#)
     Close()
-    LongJump(SCRIPT_0A_5B50)
+    LongJump(Script_Weave_Puzzle5_Complete)
 
 SCRIPT_0A_6F0C::
     OrByte(RAM_00_A02B, %00001000)
@@ -2844,13 +2844,13 @@ SCRIPT_0A_6F0C::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Underneath_Puzzle1_DUPLICATE)
-    ThatInit(0, Call_001_4AF8, $09, $10, $D0C9, $00, ACTORSCRIPT0_0A_700D, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $06, $11, $D0D2, $00, ACTORSCRIPT0_0A_6FC7, ACTORSCRIPT1_19_46E8)
-    ThatInit(4, Call_001_4AF8, $01, $0F, $D0B5, $00, ACTORSCRIPT0_0A_6FE5, ACTORSCRIPT1_19_46E8)
-    ThatInit(5, Call_001_4AF8, $06, $0B, $D08A, $00, ACTORSCRIPT0_0A_7003, ACTORSCRIPT1_19_46E8)
-    ThatInit(6, Call_001_4AF8, $08, $0C, $D098, $00, ACTORSCRIPT0_0A_7008, ACTORSCRIPT1_19_46E8)
-    ThatInit(7, Call_001_4AF8, $09, $05, $D045, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
-    ThatInit(8, Call_001_4AF8, $03, $06, $D04B, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $09, $10, $D0C9, $00, ACTORSCRIPT0_0A_700D, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $06, $11, $D0D2, $00, ACTORSCRIPT0_0A_6FC7, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $01, $0F, $D0B5, $00, ACTORSCRIPT0_0A_6FE5, Actor_RestoreState)
+    ThatInit(5, Call_001_4AF8, $06, $0B, $D08A, $00, ACTORSCRIPT0_0A_7003, Actor_RestoreState)
+    ThatInit(6, Call_001_4AF8, $08, $0C, $D098, $00, ACTORSCRIPT0_0A_7008, Actor_RestoreState)
+    ThatInit(7, Call_001_4AF8, $09, $05, $D045, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(8, Call_001_4AF8, $03, $06, $D04B, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
     OverlayInit(RAM_00_C2CD, $50, $5C, $20, SCRIPT_ACTORSCRIPT0_0A_73FD)
     ThatStart(0)
     ThatStart(3)
@@ -2935,7 +2935,7 @@ ACTORSCRIPT0_0A_700D::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadScene(Scene_Cald_Puzzle4_DUPLICATE)
     LoadSpritePalette(Pal_AllSprites)
-    ThatInit(0, Call_001_4AF8, $01, $17, $D240, $00, ACTORSCRIPT0_0A_7105, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $01, $17, $D240, $00, ACTORSCRIPT0_0A_7105, Actor_RestoreState)
     ThatInit(4, AI_01_70E1, $04, $17, $D243, $00, ACTORSCRIPT0_0A_715D, ACTORSCRIPT1_18_7C5D)
     ThatInit(5, AI_01_70E1, $05, $17, $D244, $00, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_18_7C5D)
     ThatInit(6, AI_01_70E1, $09, $10, $D199, $00, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_18_7C5D)
@@ -3022,9 +3022,9 @@ SCRIPT_0A_71AB::
     AndByte(RAM_00_A02B, %11101111)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Paradwyn_Main_DUPLICATE)
-    ThatInit(0, Call_001_4AF8, $0E, $04, $D086, $00, ACTORSCRIPT0_0A_7228, ACTORSCRIPT1_19_46E8)
-    ThatInit(2, Call_001_4AF8, $0A, $09, $D118, $00, ACTORSCRIPT0_0A_7271, ACTORSCRIPT1_19_46E8)
-    ThatInit(3, Call_001_4AF8, $0C, $09, $D11A, $30, ACTORSCRIPT0_0A_729C, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $0E, $04, $D086, $00, ACTORSCRIPT0_0A_7228, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0A, $09, $D118, $00, ACTORSCRIPT0_0A_7271, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0C, $09, $D11A, $30, ACTORSCRIPT0_0A_729C, Actor_RestoreState)
     OverlayInit(RAM_00_C2CD, $50, $5C, $60, SCRIPT_ACTORSCRIPT0_0A_73FD)
     LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
     LoadSingleBitmap($30, BITMAP_0D_43D0, $8300, $00)
@@ -3111,12 +3111,12 @@ ACTORSCRIPT0_0A_729C::
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Bograth_Puzzle3_DUPLICATE)
-    ThatInit(0, Call_001_4AF8, $14, $05, $D087, $00, ACTORSCRIPT0_0A_7378, ACTORSCRIPT1_19_46E8)
-    ThatInit(6, Call_001_4AF8, $13, $02, $D041, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
-    ThatInit(7, Call_001_4AF8, $15, $03, $D05A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
-    ThatInit(8, Call_001_4AF8, $10, $05, $D083, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
-    ThatInit(9, Call_001_4AF8, $11, $06, $D09B, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_19_46E8)
-    ThatInit(11, Call_001_4AF8, $06, $0A, $D0EC, $00, ACTORSCRIPT0_0A_73D6, ACTORSCRIPT1_19_46E8)
+    ThatInit(0, Call_001_4AF8, $14, $05, $D087, $00, ACTORSCRIPT0_0A_7378, Actor_RestoreState)
+    ThatInit(6, Call_001_4AF8, $13, $02, $D041, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(7, Call_001_4AF8, $15, $03, $D05A, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(8, Call_001_4AF8, $10, $05, $D083, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(9, Call_001_4AF8, $11, $06, $D09B, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(11, Call_001_4AF8, $06, $0A, $D0EC, $00, ACTORSCRIPT0_0A_73D6, Actor_RestoreState)
     OverlayInit(RAM_00_C2CD, $50, $5C, $60, SCRIPT_ACTORSCRIPT0_0A_73FD)
     ThatStart(0)
     ThatStart(6)
