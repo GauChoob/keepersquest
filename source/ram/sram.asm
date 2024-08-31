@@ -1,11 +1,11 @@
-SECTION "XRAM Gamestate", SRAM[$A000], BANK[$00]
+SECTION "Active", SRAM[$A000], BANK[$00]
     ds $A000 - @
-xBattery_SavedSavefileBaseBank::
+xBattery_CopySource::
+    ; When saving or loading, determines the source bank
+    ; The destination bank is always xor xBattery_CopySource, 2
     ds 1
     ;ds $A001 - @
 xBattery_Unused::
-    ; This is supposed to be the upper byte of xBattery_SavefileBaseBank, but in practice xBattery_SavefileBaseBank is always treated as an 8-bit value,
-    ; so this variable is unused
     ds 1
     ;ds $A002 - @
 xBattery_Verify0::
@@ -67,6 +67,10 @@ xPuzzleCounter:
     ; dResh_Puzzle2 = Thirst = 1-14
     ds 1
 
+    ds $A178 - @
+xdResh_Puzzle1_Score:
+    ds 1
+
     ds $A227 - @
 xHeroAbilities::
     ; 0 = Nothing
@@ -80,7 +84,18 @@ xHeroAbilities::
     ds $A32B - @
 xGamestate_RAM_NEW_GAME_END::
 
+
     ds $A7F0 - @
 xBattery_Verify1::
     ; Reverse verification string
     ds $10
+
+SECTION "Unused SRAM 1", SRAM[$A000], BANK[$01]
+SECTION "Unused SRAM 3", SRAM[$A000], BANK[$03]
+SECTION "Savefiles", SRAM[$A000], BANK[$02]
+    ;ds $A000 - @
+xSave1:
+    ds $800
+    ;ds $A800 - @
+xSave2:
+    ds $800

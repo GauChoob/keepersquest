@@ -18,7 +18,7 @@ SCRIPT_08_6BF1::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_08_6C20)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_08_6C20)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_08_6C2A)
 

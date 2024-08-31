@@ -148,8 +148,13 @@ wScript_CheatCode_Succeeded:
     ; 1 = Sequence successfully finished
     ds 1
 
-    ds $C74A - @
-wScript_CurrentSaveSlot:
+    ds $C749 - @
+wBattery_IsLoading:
+    ; 0 = Saving the game
+    ; 1 = Loading the game
+    ds 1
+    ;ds $C74A - @
+wBattery_CurrentSaveSlot:
     ; 0 = Slot 1
     ; 1 = Slot 2
     ds 1

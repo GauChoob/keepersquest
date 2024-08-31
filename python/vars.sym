@@ -209,7 +209,6 @@
 ;
 0E:4B7A Script_DeveloperRoom
 ;
-00:A178 xDResh_Puzzle1_Score
 0A:4000 Script_dResh_Puzzle1
 0A:4006 Script_dResh_Puzzle2
 0A:400C Script_dResh_Puzzle3
@@ -1845,3 +1844,6 @@
 09:7FC1 Trigger_Weave_Main_14
 09:7FD6 Trigger_Weave_Main_15
 09:7FEB Trigger_Weave_Main_16
+;
+;
+;

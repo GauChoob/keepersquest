@@ -247,20 +247,20 @@ Hotspot_dResh_Puzzle1_0_Finish::
     Write("It took you⭍🔊 attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xDResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
+    VarByteExpr(xdResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
     LongJump(Script_dResh_Puzzle1_Complete)
 
 .MaxAttempts::
     Write("It took you⭍more than 255🅐attempts.🅐")
     LongJumpIf(#(bitmatch(c[xBits_dResh], c%00000100) != c0)#, .HighScore)
     Close()
-    VarByteExpr(xDResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
+    VarByteExpr(xdResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
     LongJump(Script_dResh_Puzzle1_Complete)
 
 .HighScore::
-    LongJumpIf(#(c[xNumberOfAttempts] < c[xDResh_Puzzle1_Score])#, .HighScoreNew)
-    FormatChar(xDResh_Puzzle1_Score)
-    LongJumpIf(#(c[xDResh_Puzzle1_Score] == c1)#, .HighScore1)
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xdResh_Puzzle1_Score])#, .HighScoreNew)
+    FormatChar(xdResh_Puzzle1_Score)
+    LongJumpIf(#(c[xdResh_Puzzle1_Score] == c1)#, .HighScore1)
     Write("The current⭍High Score is🅐🔊 attempts.🅐")
     Close()
     LongJump(Script_dResh_Puzzle1_Complete)
@@ -271,10 +271,10 @@ Hotspot_dResh_Puzzle1_0_Finish::
     LongJump(Script_dResh_Puzzle1_Complete)
 
 .HighScoreNew::
-    FormatChar(xDResh_Puzzle1_Score)
+    FormatChar(xdResh_Puzzle1_Score)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
     Close()
-    VarByteExpr(xDResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
+    VarByteExpr(xdResh_Puzzle1_Score, #c[xNumberOfAttempts]#)
     Close()
     LongJump(Script_dResh_Puzzle1_Complete)
 
@@ -687,17 +687,17 @@ Script_dResh_Puzzle2_Again::
     ThatStart(0)
     ThatStart(2)
     SetByte(xHeroAbilities, $01)
-    OrByte(RAM_00_A028, %00100000)
-    AndByte(RAM_00_A028, %10111111)
+    OrByte(xScript_SaveBits, %00100000)
+    AndByte(xScript_SaveBits, %10111111)
     HeroSetCamera()
     SceneReady()
     SetStartButtonScript(SCRIPT_STARTBUTTON_0A_4C01)
     SetByte(xPuzzleCounter, $0E)
     SetByte(RAM_00_A128, $00)
-    AndByte(RAM_00_A028, %11111110)
-    AndByte(RAM_00_A028, %11111101)
-    AndByte(RAM_00_A028, %11111011)
-    AndByte(RAM_00_A028, %11110111)
+    AndByte(xScript_SaveBits, %11111110)
+    AndByte(xScript_SaveBits, %11111101)
+    AndByte(xScript_SaveBits, %11111011)
+    AndByte(xScript_SaveBits, %11110111)
     End()
 
 SCRIPT_STARTBUTTON_0A_4C01::
@@ -1020,11 +1020,11 @@ SCRIPT_0A_4FC3::
     LongJump(SCRIPT_0A_4034)
 
 Hotspot_dResh_Puzzle2_1::
-    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_0A_5174)
+    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_0A_5174)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_14_5E74)
-    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
     ThatScript(2, Actor_ThirstOverlay_Frozen)
     SetScriptScroll(SCRIPT_17_45CC)
     TransplantMapMask($D2AA, $0E, $0E, $D1ED, $0C, $0D)
@@ -1038,11 +1038,11 @@ SCRIPT_0A_5174::
     End()
 
 Hotspot_dResh_Puzzle2_2::
-    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_0A_51B1)
+    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_0A_51B1)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_14_5E74)
-    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
     ThatScript(2, Actor_ThirstOverlay_Frozen)
     SetScriptScroll(SCRIPT_17_45CC)
     TransplantMapMask($D02A, $0E, $0E, $D1ED, $0C, $0D)
@@ -1072,7 +1072,7 @@ Script_dResh_Puzzle5_Again::
     ThatStart(0)
     AndByte(RAM_00_A02B, %11111011)
     SetByte(xHeroAbilities, $01)
-    SetByte(RAM_00_A127, $00)
+    SetByte(xScript_SaveVars, $00)
     SetByte(xPuzzleCounter, $00)
     SetByte(RAM_00_A128, $00)
     HeroSetCamera()
@@ -1329,126 +1329,126 @@ Hotspot_dResh_Puzzle5_22::
 
 Hotspot_dResh_Puzzle5_0::
     LongJumpIf(#(c[xPuzzleCounter] == c1)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $01)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_1::
     LongJumpIf(#(c[xPuzzleCounter] == c2)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $02)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_2::
     LongJumpIf(#(c[xPuzzleCounter] == c3)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $03)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_3::
     LongJumpIf(#(c[xPuzzleCounter] == c4)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $04)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_4::
     LongJumpIf(#(c[xPuzzleCounter] == c5)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $05)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_5::
     LongJumpIf(#(c[xPuzzleCounter] == c6)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $06)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_6::
     LongJumpIf(#(c[xPuzzleCounter] == c7)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $07)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_7::
     LongJumpIf(#(c[xPuzzleCounter] == c8)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $08)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_8::
     LongJumpIf(#(c[xPuzzleCounter] == c9)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $09)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_9::
     LongJumpIf(#(c[xPuzzleCounter] == c10)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0A)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_10::
     LongJumpIf(#(c[xPuzzleCounter] == c11)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0B)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_11::
     LongJumpIf(#(c[xPuzzleCounter] == c12)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0C)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_12::
     LongJumpIf(#(c[xPuzzleCounter] == c13)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0D)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_13::
     LongJumpIf(#(c[xPuzzleCounter] == c14)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0E)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_14::
     LongJumpIf(#(c[xPuzzleCounter] == c15)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $0F)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_15::
     LongJumpIf(#(c[xPuzzleCounter] == c16)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $10)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_16::
     LongJumpIf(#(c[xPuzzleCounter] == c17)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $11)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_17::
     LongJumpIf(#(c[xPuzzleCounter] == c18)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $12)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_18::
     LongJumpIf(#(c[xPuzzleCounter] == c19)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $13)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_19::
     LongJumpIf(#(c[xPuzzleCounter] == c20)#, Actor_Null)
-    VarByteExpr(RAM_00_A127, #(c[xPuzzleCounter] + c0)#)
+    VarByteExpr(xScript_SaveVars, #(c[xPuzzleCounter] + c0)#)
     SetByte(xPuzzleCounter, $14)
     LongJump(SCRIPT_0A_57B0)
 
 Hotspot_dResh_Puzzle5_21::
-    SetByte(RAM_00_A127, $00)
+    SetByte(xScript_SaveVars, $00)
     SetByte(xPuzzleCounter, $11)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_14_5E74)
@@ -1467,7 +1467,7 @@ SCRIPT_0A_57B0::
     ThatScript(0, ACTORSCRIPT0_14_5E74)
     ThatScript(2, ACTORSCRIPT0_0A_53DE)
     SetScriptScroll(SCRIPT_17_45CC)
-    Switch(#c[RAM_00_A127]#) {
+    Switch(#c[xScript_SaveVars]#) {
         Case(1, SCRIPT_0A_5831)
         Case(2, SCRIPT_0A_583E)
         Case(3, SCRIPT_0A_584B)
@@ -1801,8 +1801,8 @@ Script_Weave_Puzzle1_Again::
     SceneReady()
     SetByte(xHeroAbilities, $01)
     AndByte(RAM_00_A02A, %11110111)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0A_5C7B)
     End()
 

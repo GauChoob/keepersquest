@@ -18,7 +18,7 @@ SCRIPT_0F_4031::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_0F_4060)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_0F_4060)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_0F_406A)
 
@@ -1215,7 +1215,7 @@ SCRIPT_0F_5722::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_0F_5751)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_0F_5751)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_0F_575B)
 
@@ -2650,8 +2650,8 @@ Script_Naroom_Puzzle3_Again::
     SceneReady()
     SetByte(xHeroAbilities, $01)
     AndByte(RAM_00_A02A, %11110111)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_71D8)
     End()
 
@@ -2758,8 +2758,8 @@ Hotspot_Naroom_Puzzle3_1::
 
 Hotspot_Naroom_Puzzle3_2::
     StartSFX0(SFXID_EnemyDie)
-    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
-    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_0F_731E)
+    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_0F_731E)
     ThatInit(0, Call_001_4AF8, $01, $01, $D01B, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
     CameraSeekActor(RAM_00_C189, 4)
     ThatAI(0, AI_Hero)
@@ -2771,8 +2771,8 @@ SCRIPT_0F_731E::
 
 Hotspot_Naroom_Puzzle3_3::
     StartSFX0(SFXID_EnemyDie)
-    OrByte(RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
-    LongJumpIf(#bitmatch(c[RAM_00_A028/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_0F_734D)
+    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_0F_734D)
     ThatInit(0, Call_001_4AF8, $18, $16, $D254, $00, ACTORSCRIPT0_14_5E57, ACTORSCRIPT1_19_46E8)
     CameraSeekActor(RAM_00_C189, 4)
     ThatAI(0, AI_Hero)

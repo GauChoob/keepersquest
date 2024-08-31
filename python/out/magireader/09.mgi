@@ -18,7 +18,7 @@ SCRIPT_09_43E1::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_09_4410)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_09_4410)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_09_441A)
 
@@ -1089,7 +1089,7 @@ SCRIPT_09_57C7::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_09_57F6)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_09_57F6)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_09_5800)
 
@@ -2122,7 +2122,7 @@ SCRIPT_09_6A3D::
     SaveGame(1)
     Clear()
     Write("Game Saved to⭍")
-    LongJumpIf(#(c[wScript_CurrentSaveSlot] == c0)#, SCRIPT_09_6A6C)
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_09_6A6C)
     Write("Slot 2.🅐")
     LongJump(SCRIPT_09_6A76)
 

@@ -28441,7 +28441,7 @@
 01:8e00 vObjectsChars
 01:9000 vObjectsChars.End
 01:9000 vBackgroundCharsC
-00:a000 xBattery_SavedSavefileBaseBank
+00:a000 xBattery_CopySource
 00:a001 xBattery_Unused
 00:a002 xBattery_Verify0
 00:a012 xLoad_ScriptBank

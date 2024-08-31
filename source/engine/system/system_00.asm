@@ -150,8 +150,8 @@ System_DoVFunc::
 
 
 System_Init::
-    SwitchROMBank $05
-    call $47AF                                    ; $086B: $CD $AF $47
+    SwitchROMBank BANK(Collision_Init)
+    call Collision_Init                                    ; $086B: $CD $AF $47
     ld a, $FF                                     ; $086E: $3E $FF
     ld [wHotspotCurrent], a                                 ; $0870: $EA $DE $C6
     ld a, $FF                                     ; $0873: $3E $FF
