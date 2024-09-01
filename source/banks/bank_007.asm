@@ -5158,16 +5158,16 @@ Jump_007_6027:
 
     Battery_SetBank $00
     Battery_On
-    ld a, [$CA1B]                                 ; $6048: $FA $1B $CA
+    ld a, [wInventory_Amount]                                 ; $6048: $FA $1B $CA
     ld e, a                                       ; $604B: $5F
     ld d, $00                                     ; $604C: $16 $00
-    ld hl, $A229                                  ; $604E: $21 $29 $A2
+    ld hl, xMoney                                  ; $604E: $21 $29 $A2
     ld a, [hl+]                                   ; $6051: $2A
     ld h, [hl]                                    ; $6052: $66
     ld l, a                                       ; $6053: $6F
     push hl                                       ; $6054: $E5
     add hl, de                                    ; $6055: $19
-    ld de, $FC19                                  ; $6056: $11 $19 $FC
+    ld de, -999                                  ; $6056: $11 $19 $FC
     push hl                                       ; $6059: $E5
     add hl, de                                    ; $605A: $19
     pop hl                                        ; $605B: $E1
@@ -5177,9 +5177,9 @@ Jump_007_6027:
 
 jr_007_6061:
     ld a, h                                       ; $6061: $7C
-    ld [$A22A], a                                 ; $6062: $EA $2A $A2
+    ld [xMoney + 1], a                                 ; $6062: $EA $2A $A2
     ld a, l                                       ; $6065: $7D
-    ld [$A229], a                                 ; $6066: $EA $29 $A2
+    ld [xMoney], a                                 ; $6066: $EA $29 $A2
     Battery_Off
     pop bc                                        ; $606D: $C1
     ld a, c                                       ; $606E: $79
@@ -5191,7 +5191,7 @@ jr_007_6061:
     inc bc                                        ; $6074: $03
     add hl, bc                                    ; $6075: $09
     ld a, l                                       ; $6076: $7D
-    ld [$CA1B], a                                 ; $6077: $EA $1B $CA
+    ld [wInventory_Amount], a                                 ; $6077: $EA $1B $CA
     ret                                           ; $607A: $C9
 
 
@@ -5201,7 +5201,7 @@ jr_007_6061:
     ret                                           ; $607C: $C9
 
 
-    ld hl, $A22C                                  ; $607D: $21 $2C $A2
+    ld hl, xInventory_Infused                                  ; $607D: $21 $2C $A2
     add hl, de                                    ; $6080: $19
     push hl                                       ; $6081: $E5
     ld a, e                                       ; $6082: $7B
@@ -5225,7 +5225,7 @@ Jump_007_60A0:
     Battery_On
     ld a, [hl]                                    ; $60AC: $7E
     ld c, a                                       ; $60AD: $4F
-    ld a, [$CA1B]                                 ; $60AE: $FA $1B $CA
+    ld a, [wInventory_Amount]                                 ; $60AE: $FA $1B $CA
     add c                                         ; $60B1: $81
     jr nc, jr_007_60BD                            ; $60B2: $30 $09
 
@@ -5249,11 +5249,11 @@ jr_007_60C3:
     jp Jump_007_6027                              ; $60CB: $C3 $27 $60
 
 
-    ld hl, $A22C                                  ; $60CE: $21 $2C $A2
+    ld hl, xInventory_Infused                                  ; $60CE: $21 $2C $A2
     add hl, de                                    ; $60D1: $19
     Battery_SetBank $00
     Battery_On
-    ld a, [$CA1B]                                 ; $60DE: $FA $1B $CA
+    ld a, [wInventory_Amount]                                 ; $60DE: $FA $1B $CA
     ld e, a                                       ; $60E1: $5F
     ld d, $00                                     ; $60E2: $16 $00
     ld a, e                                       ; $60E4: $7B
@@ -5263,7 +5263,7 @@ jr_007_60C3:
     cpl                                           ; $60E8: $2F
     ld d, a                                       ; $60E9: $57
     inc de                                        ; $60EA: $13
-    ld hl, $A229                                  ; $60EB: $21 $29 $A2
+    ld hl, xMoney                                  ; $60EB: $21 $29 $A2
     ld a, [hl+]                                   ; $60EE: $2A
     ld h, [hl]                                    ; $60EF: $66
     ld l, a                                       ; $60F0: $6F
@@ -5274,20 +5274,20 @@ jr_007_60C3:
 
 jr_007_60F7:
     ld a, h                                       ; $60F7: $7C
-    ld [$A22A], a                                 ; $60F8: $EA $2A $A2
+    ld [xMoney + 1], a                                 ; $60F8: $EA $2A $A2
     ld a, l                                       ; $60FB: $7D
-    ld [$A229], a                                 ; $60FC: $EA $29 $A2
+    ld [xMoney], a                                 ; $60FC: $EA $29 $A2
     Battery_Off
     ret                                           ; $6103: $C9
 
 
-    ld hl, $A22C                                  ; $6104: $21 $2C $A2
+    ld hl, xInventory_Infused                                  ; $6104: $21 $2C $A2
     add hl, de                                    ; $6107: $19
 
 Jump_007_6108:
     Battery_SetBank $00
     Battery_On
-    ld a, [$CA1B]                                 ; $6114: $FA $1B $CA
+    ld a, [wInventory_Amount]                                 ; $6114: $FA $1B $CA
     ld c, a                                       ; $6117: $4F
     ld a, [hl]                                    ; $6118: $7E
     sub c                                         ; $6119: $91

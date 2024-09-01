@@ -39,9 +39,9 @@ SCRIPT_0F_4074::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_TrainingRoom_Cutscene)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadHotspots(Hotspot_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
     ThatInit(0, AI_Hero, $0A, $11, $D2B2, $00, SCRIPT_14_5DAB, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, AI_01_6E8F, $0C, $13, $D304, $00, ACTORSCRIPT1_15_7896, ACTORSCRIPT1_0F_49B4)
@@ -64,8 +64,8 @@ SCRIPT_0F_40D4::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
+    LoadHotspots(Hotspot_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $00, $12, $D2D0, $00, ACTORSCRIPT0_0F_412E, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, AI_01_6E8F, $07, $12, $D2D7, $00, ACTORSCRIPT0_0F_414D, ACTORSCRIPT1_0F_4158)
@@ -116,9 +116,9 @@ SCRIPT_0F_419C::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadHotspots(Hotspot_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $05, $12, $D2D5, $00, ACTORSCRIPT0_0F_41FD, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, AI_01_6E8F, $0C, $13, $D304, $00, ACTORSCRIPT0_0F_420E, ACTORSCRIPT1_0F_49B4)
@@ -142,7 +142,7 @@ ACTORSCRIPT0_0F_41FD::
     End()
 
 ACTORSCRIPT0_0F_420E::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00000001)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00000001)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -154,9 +154,9 @@ SCRIPT_0F_421B::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadHotspots(Hotspot_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $05, $12, $D2D5, $00, ACTORSCRIPT0_0F_427C, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, AI_01_6E8F, $0C, $13, $D304, $00, ACTORSCRIPT0_0F_428B, ACTORSCRIPT1_0F_49B4)
@@ -180,7 +180,7 @@ ACTORSCRIPT0_0F_427C::
     End()
 
 ACTORSCRIPT0_0F_428B::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00000001)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00000001)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -193,8 +193,8 @@ SCRIPT_SCENELOADER_0F_4298::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
+    LoadHotspots(Hotspot_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $00, $12, $D2D0, $00, ACTORSCRIPT0_0F_42FA, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, AI_01_6E8F, $0C, $13, $D304, $00, ACTORSCRIPT0_0F_420E, ACTORSCRIPT1_0F_49B4)
@@ -216,9 +216,9 @@ ACTORSCRIPT0_0F_42FA::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_0F_4309::
+Script_Naroom_CompletedFirstTime::
     StartSong(SONGID_Vash_Naroom)
-    OrByte(MATHADDRESS_00_A046, %00000001)
+    OrByte(xBits_ZonesCompleted_1, %00000001)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -226,8 +226,8 @@ SCRIPT_0F_4309::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
+    LoadHotspots(Hotspot_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $24, $13, $D31C, $00, ACTORSCRIPT0_0F_4380, Actor_RestoreState)
     ThatStart(0)
     ThatInit(2, Call_001_4AF8, $26, $0F, $D27E, $00, ACTORSCRIPT0_0F_43AE, Actor_RestoreState)
@@ -353,9 +353,9 @@ SCRIPT_0F_4518::
     HeroToDoor($24, $01)
     LongJump(SCRIPT_0F_421B)
 
-SCRIPT_0F_451F::
+Script_Naroom_SecretCompletedFirstTimeCutscene::
     StartSong(SONGID_Vash_Naroom)
-    OrByte(RAM_00_A04A, %00000001)
+    OrByte(xBits_Secrets_1, %00000001)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_0F_4548)
     ThatInit(2, Call_001_4AF8, $18, $0D, $D220, $78, ACTORSCRIPT0_0F_458A, Actor_Null)
@@ -481,9 +481,9 @@ SCRIPT_0F_478D::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
+    LoadHotspots(Hotspot_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
+    LoadTriggers(Trigger_Naroom_Main)
     ThatInit(0, Call_001_4AF8, $24, $01, $D04C, $00, ACTORSCRIPT0_0F_47DF, Actor_RestoreState)
     ThatInit(2, AI_01_6E8F, $21, $03, $D099, $00, ACTORSCRIPT0_0F_47F0, ACTORSCRIPT1_0F_47F5)
     LoadSingleBitmap($30, BITMAP_0D_43D0, $8000, $00)
@@ -525,8 +525,8 @@ SCRIPT_0F_4843::
     SceneNew()
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Naroom_Main)
-    LoadHotspots(Hotspot_Naroom_TrainingRoom_Cutscene)
-    LoadTriggers(Trigger_Naroom_TrainingRoom_Cutscene)
+    LoadHotspots(Hotspot_Naroom_Main)
+    LoadTriggers(Trigger_Naroom_Main)
     LoadMapMask(METAMAP_MASK_2B_4324, COLLMAP_MASK_2C_68D1)
     ThatInit(0, Call_001_4AF8, $02, $12, $D2D2, $00, ACTORSCRIPT0_0F_48AE, Actor_RestoreState)
     ThatInit(2, AI_01_6E8F, $00, $12, $D2D0, $00, ACTORSCRIPT0_0F_491A, ACTORSCRIPT1_0F_49B4)
@@ -722,30 +722,30 @@ SCRIPT_0F_4DE0::
     SetEventText(1)
     End()
 
-Hotspot_Naroom_TrainingRoom_Cutscene_0::
+Hotspot_Naroom_Main_0::
     LongJump(SCRIPT_0F_6927)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_1::
+Hotspot_Naroom_Main_1::
     LongJump(SCRIPT_0F_692D)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_2::
+Hotspot_Naroom_Main_2::
     LongJump(SCRIPT_0F_6933)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_3::
+Hotspot_Naroom_Main_3::
     LongJump(SCRIPT_0F_6939)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_4::
+Hotspot_Naroom_Main_4::
     LongJump(SCRIPT_0F_693F)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_5::
+Hotspot_Naroom_Main_5::
     HeroToDoor($16, $0F)
     LongJump(SCRIPT_1A_4A3A)
 
-Hotspot_Naroom_TrainingRoom_Cutscene_6::
+Hotspot_Naroom_Main_6::
     HeroToDoor($16, $0F)
     LongJump(SCRIPT_1A_4A3A)
 
-Trigger_Naroom_TrainingRoom_Cutscene_2::
+Trigger_Naroom_Main_2::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4E1B, SCRIPT_0F_4E60, SCRIPT_0F_4EBC, SCRIPT_0F_4F03)
@@ -770,7 +770,7 @@ SCRIPT_0F_4F3C::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_0::
+Trigger_Naroom_Main_0::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4F54, SCRIPT_0F_4F66, SCRIPT_0F_4F8F)
@@ -791,7 +791,7 @@ SCRIPT_0F_4FC9::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_1::
+Trigger_Naroom_Main_1::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_0F_4FE4, SCRIPT_0F_5017, SCRIPT_0F_504D, SCRIPT_0F_508A)
@@ -816,32 +816,32 @@ SCRIPT_0F_50C4::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_3::
+Trigger_Naroom_Main_3::
     LongJumpIf(#(bitmatch(c[xBits_Naroom], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D14E, $04, $08, $D14E, $08, $0E)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_4::
+Trigger_Naroom_Main_4::
     LongJumpIf(#(bitmatch(c[xBits_Naroom], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D17B, $03, $07, $D17B, $09, $13)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_5::
+Trigger_Naroom_Main_5::
     LongJumpIf(#(bitmatch(c[xBits_Naroom], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D0B9, $07, $0B, $D0B9, $04, $19)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_6::
+Trigger_Naroom_Main_6::
     LongJumpIf(#(bitmatch(c[xBits_Naroom], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D2C0, $05, $07, $D2C0, $11, $18)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_7::
+Trigger_Naroom_Main_7::
     LongJumpIf(#(bitmatch(c[xBits_Naroom], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D2A2, $04, $07, $D2A2, $10, $22)
     End()
 
-Trigger_Naroom_TrainingRoom_Cutscene_8::
+Trigger_Naroom_Main_8::
     End()
 
 SCRIPT_0F_5134::
@@ -1253,7 +1253,7 @@ SCRIPT_0F_5765::
     End()
 
 ACTORSCRIPT0_0F_57C5::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00001000)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00001000)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -1459,7 +1459,7 @@ SCRIPT_0F_5A64::
     SetEventText(1)
     End()
 
-SCRIPT_0F_5AA6::
+Script_Orothe_SecretCompletedFirstTime::
     StartSong(SONGID_Shadow_Geyser)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -1525,9 +1525,9 @@ SCRIPT_0F_5B59::
     SetEventText(1)
     End()
 
-SCRIPT_0F_5B89::
+Script_Orothe_CompletedFirstTime::
     StartSong(SONGID_Shadow_Geyser)
-    OrByte(MATHADDRESS_00_A046, %00001000)
+    OrByte(xBits_ZonesCompleted_1, %00001000)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2147,17 +2147,17 @@ Trigger_Orothe_Main_9::
     TransplantMapMask($D283, $07, $06, $D283, $15, $0D)
     End()
 
-Trigger_Orothe_Main_10::
+Trigger_Orothe_Main_A::
     LongJumpIf(#(bitmatch(c[xBits_Orothe], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D2B5, $06, $04, $D2B5, $17, $03)
     End()
 
-Trigger_Orothe_Main_11::
+Trigger_Orothe_Main_B::
     LongJumpIf(#(bitmatch(c[xBits_Orothe], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D08D, $03, $08, $D08D, $04, $15)
     End()
 
-Trigger_Orothe_Main_12::
+Trigger_Orothe_Main_C::
     End()
 
 SCRIPT_0F_6927::
@@ -2205,11 +2205,11 @@ Script_Naroom_Puzzle4_Complete::
     LongJumpIf(#bitmatch(c[xBits_Naroom], c%00001000)#, Script_Naroom_Puzzle4_SecretComplete)
     OrByte(xBits_Naroom, %00001000)
     HeroToDoor($1F, $13)
-    LongJump(SCRIPT_0F_4309)
+    LongJump(Script_Naroom_CompletedFirstTime)
 
 Script_Naroom_Puzzle4_SecretComplete::
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_0F_698E)
-    LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000001) == c0)#, SCRIPT_0F_451F)
+    LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000001) == c0)#, Script_Naroom_SecretCompletedFirstTimeCutscene)
 
 SCRIPT_0F_698E::
     OrByte(xBits_Naroom, %00100000)
@@ -2221,7 +2221,7 @@ SCRIPT_0F_698E::
 SCRIPT_0F_69A8::
     OrByte(xBits_Naroom, %00001000)
     HeroToDoor($1F, $13)
-    LongJump(SCRIPT_0F_4309)
+    LongJump(Script_Naroom_CompletedFirstTime)
 
 SCRIPT_0F_69B3::
     HeroToDoor($1F, $13)
@@ -2262,7 +2262,7 @@ Script_Naroom_Puzzle1_Again::
     ThatInit(20, AI_01_70E1, $15, $05, $D0AB, $00, ACTORSCRIPT0_0F_6B9C, ACTORSCRIPT1_0F_6BAE)
     ThatInit(21, AI_01_70E1, $14, $03, $D06E, $00, ACTORSCRIPT0_0F_6B9C, ACTORSCRIPT1_0F_6BAE)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -2281,14 +2281,14 @@ Script_Naroom_Puzzle1_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_6B03)
     End()
 
 SCRIPT_STARTBUTTON_0F_6B03::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2352,7 +2352,7 @@ SCRIPT_0F_6B90::
 
 ACTORSCRIPT0_0F_6B9C::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2445,7 +2445,7 @@ Script_Naroom_Puzzle2_Again::
     ThatInit(12, AI_01_70E1, $01, $07, $D06A, $00, ACTORSCRIPT0_0F_6EE7, ACTORSCRIPT1_0F_6EF9)
     ThatInit(13, AI_01_70E1, $01, $06, $D05B, $00, ACTORSCRIPT0_0F_6EE7, ACTORSCRIPT1_0F_6EF9)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -2462,7 +2462,7 @@ Script_Naroom_Puzzle2_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_6F12)
     End()
 
@@ -2522,7 +2522,7 @@ SCRIPT_0F_6EDB::
 
 ACTORSCRIPT0_0F_6EE7::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2544,7 +2544,7 @@ SCRIPT_STARTBUTTON_0F_6F12::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
@@ -2649,9 +2649,9 @@ Script_Naroom_Puzzle3_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(RAM_00_A02A, %11110111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_71D8)
     End()
 
@@ -2758,8 +2758,8 @@ Hotspot_Naroom_Puzzle3_1::
 
 Hotspot_Naroom_Puzzle3_2::
     StartSFX0(SFXID_EnemyDie)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_0F_731E)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0F_731E)
     ThatInit(0, Call_001_4AF8, $01, $01, $D01B, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     CameraSeekActor(RAM_00_C189, 4)
     ThatAI(0, AI_Hero)
@@ -2771,8 +2771,8 @@ SCRIPT_0F_731E::
 
 Hotspot_Naroom_Puzzle3_3::
     StartSFX0(SFXID_EnemyDie)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_0F_734D)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0F_734D)
     ThatInit(0, Call_001_4AF8, $18, $16, $D254, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     CameraSeekActor(RAM_00_C189, 4)
     ThatAI(0, AI_Hero)
@@ -2846,7 +2846,7 @@ Script_Naroom_Puzzle4_Again::
     ThatInit(18, AI_01_70E1, $04, $10, $D1E4, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
     ThatInit(19, AI_01_70E1, $04, $12, $D220, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
     ThatInit(20, AI_01_70E1, $10, $08, $D100, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
     LoadSingleBitmap($02, BITMAP_19_4370, $8040, $00)
     ThatStart(0)
@@ -2866,14 +2866,14 @@ Script_Naroom_Puzzle4_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_75F4)
     End()
 
 SCRIPT_STARTBUTTON_0F_75F4::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2883,7 +2883,7 @@ SCRIPT_STARTBUTTON_0F_75F4::
 
 ACTORSCRIPT1_0F_761D::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_769F)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_769F)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $04, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($00)
@@ -2892,7 +2892,7 @@ ACTORSCRIPT1_0F_761D::
 
 ACTORSCRIPT1_0F_7643::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_769F)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_769F)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $04, SCRIPT_11_75EA, Actor_Null)
     ThisSpriteBase($00)
     ThatStart(21)
@@ -2978,7 +2978,7 @@ ACTORSCRIPT0_0F_76EB::
 
 ACTORSCRIPT0_0F_7709::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -3009,7 +3009,7 @@ SCRIPT_0F_7730::
 Hotspot_Naroom_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00000001) == c0)#, SCRIPT_0F_776C)
+    LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000001) == c0)#, SCRIPT_0F_776C)
     ThatDelete(0)
 
 SCRIPT_0F_776C::
@@ -3117,7 +3117,7 @@ Script_Naroom_Puzzle5_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_0F_7CB1)
     End()
 
@@ -3175,7 +3175,7 @@ ACTORSCRIPT0_0F_7B61::
 
 ACTORSCRIPT1_0F_7B87::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_7C7B)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_7C7B)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $54, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($50)
@@ -3184,7 +3184,7 @@ ACTORSCRIPT1_0F_7B87::
 
 ACTORSCRIPT1_0F_7BAD::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_7C7B)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_7C7B)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $54, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($50)
@@ -3193,7 +3193,7 @@ ACTORSCRIPT1_0F_7BAD::
 
 ACTORSCRIPT1_0F_7BD3::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_7C7B)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_7C7B)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $54, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($50)
@@ -3202,7 +3202,7 @@ ACTORSCRIPT1_0F_7BD3::
 
 ACTORSCRIPT1_0F_7BF9::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_7C7B)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_7C7B)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $54, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($50)
@@ -3211,7 +3211,7 @@ ACTORSCRIPT1_0F_7BF9::
 
 ACTORSCRIPT1_0F_7C1F::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[RAM_00_A02A], c%00001000)#, SCRIPT_0F_7C7B)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00001000)#, SCRIPT_0F_7C7B)
     ThatInit(21, Call_001_4AF8, $00, $00, $D000, $54, SCRIPT_11_75EA, Actor_Null)
     ThatStart(21)
     ThisSpriteBase($50)

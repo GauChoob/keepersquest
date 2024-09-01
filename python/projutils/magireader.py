@@ -569,7 +569,8 @@ class MagiScriptLine:
                 mask = getByte()
                 bit = mask.bit_length()-1  # Get a number 0-7
                 assert 2**bit == mask  # Make sure the mask only refers to a single bit
-                return ["/".join(sym.getVarbit(address, bit))]
+                return ["/".join(sym.getSymbol(0, address, 'VARBIT')) + f'[{bit}]']
+                #return ["/".join(sym.getVarbit(address, bit))]
 
             # Packed Objects: Palette, Color, Palette_PackedLoop, SongFadeInterval, PortraitAddressBank
             elif instruction == "Palette_PackedInterval":

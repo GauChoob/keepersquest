@@ -56,7 +56,7 @@ SCRIPT_08_6C34::
     End()
 
 ACTORSCRIPT0_08_6C94::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A047], c%00000001)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_2], c%00000001)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_13_6D48)
     End()
 
@@ -220,7 +220,7 @@ SCRIPT_08_6E82::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_6EB5::
+Script_Bograth_SecretCompletedFirstTime::
     StartSong(SONGID_Mushroom_Farm)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -284,9 +284,9 @@ SCRIPT_08_6F60::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_08_6F93::
+Script_Bograth_CompletedFirstTime::
     StartSong(SONGID_Mushroom_Farm)
-    OrByte(MATHADDRESS_00_A047, %00000001)
+    OrByte(xBits_ZonesCompleted_2, %00000001)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)

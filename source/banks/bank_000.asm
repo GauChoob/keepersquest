@@ -6344,7 +6344,7 @@ jr_000_2850:
     ld a, [hl+]                                   ; $2860: $2A
     ld [$CA1A], a                                 ; $2861: $EA $1A $CA
     ld a, $01                                     ; $2864: $3E $01
-    ld [$CA1B], a                                 ; $2866: $EA $1B $CA
+    ld [wInventory_Amount], a                                 ; $2866: $EA $1B $CA
     push hl                                       ; $2869: $E5
     SwitchROMBank $07
     call $6024                                    ; $2872: $CD $24 $60

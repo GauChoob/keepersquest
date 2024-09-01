@@ -63,6 +63,8 @@ scripts = [
 
 sym = utils.SymFile('python/vars.sym')
 sym.addFile('game.sym')
+sym.replaceSymbol(0, 0xA127, sym.getSymbol(0, 0xA127, '')[1])  # Hide the label xScript_SaveBits
+sym.replaceSymbol(0, 0xA028, sym.getSymbol(0, 0xA028, '')[1])  # Hide the label xScript_SaveBits
 
 PREVIEW_MGI = 'python/out/magireader/'
 os.makedirs(PREVIEW_MGI, exist_ok=True)

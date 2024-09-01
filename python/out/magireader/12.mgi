@@ -40,7 +40,7 @@ Script_Arderial_Puzzle4_Complete::
 
 SCRIPT_12_4046::
     OrByte(xBits_Arderial, %00000100)
-    LongJump(SCRIPT_0E_5177)
+    LongJump(Script_Arderial_CompletedFirstTime)
 
 SCRIPT_12_404E::
     HeroToDoor($10, $0B)
@@ -57,12 +57,12 @@ SCRIPT_12_4068::
     LongJump(SCRIPT_0E_4D76)
 
 Script_Arderial_Puzzle3_SecretComplete::
-    LongJumpIf(#(bitmatch(c[RAM_00_A04A], c%00010000) == w65535)#, SCRIPT_12_4095)
+    LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00010000) == w65535)#, SCRIPT_12_4095)
     OrByte(xBits_Arderial, %00100000)
     OrByte(xBits_Arderial, %00001000)
-    OrByte(RAM_00_A04A, %00010000)
+    OrByte(xBits_Secrets_1, %00010000)
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Arderial_Puzzle3_SecretComplete)
-    LongJump(SCRIPT_0E_4EC2)
+    LongJump(Script_Arderial_SecretCompletedFirstTime)
 
 SCRIPT_12_4095::
     OrByte(xBits_Arderial, %00100000)
@@ -94,17 +94,17 @@ Script_Arderial_Puzzle1_Again::
     ThatInit(3, AI_Chicken, $07, $1B, $D3B8, $54, ACTORSCRIPT0_19_4829, ACTORSCRIPT1_19_483D)
     LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
     LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
     SetStartButtonScript(SCRIPT_STARTBUTTON_12_4135)
     End()
 
@@ -112,7 +112,7 @@ SCRIPT_STARTBUTTON_12_4135::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
@@ -248,7 +248,7 @@ Script_Arderial_Puzzle2_Again::
     ThatInit(17, AI_Chicken, $1A, $08, $D10A, $54, ACTORSCRIPT0_19_4EB9, ACTORSCRIPT1_19_4ED1)
     LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
     LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -260,7 +260,7 @@ Script_Arderial_Puzzle2_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_12_443C)
     End()
 
@@ -268,19 +268,19 @@ SCRIPT_STARTBUTTON_12_443C::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_4453)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_4453)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4453::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4463)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4463)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4463::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4473)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4473)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4473::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02C], c%00000001)#, SCRIPT_12_4483)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000001)#, SCRIPT_12_4483)
     ThatDrawTile(17, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4483::
@@ -288,7 +288,7 @@ SCRIPT_12_4483::
     ThatDelete(15)
     ThatDelete(16)
     ThatDelete(17)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     StartSFX0(SFXID_Jump)
@@ -368,19 +368,19 @@ Hotspot_Arderial_Puzzle2_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_4567)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_4567)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4567::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4577)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4577)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4577::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4587)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4587)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4587::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02C], c%00000001)#, SCRIPT_12_4597)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000001)#, SCRIPT_12_4597)
     ThatDrawTile(17, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4597::
@@ -388,7 +388,7 @@ SCRIPT_12_4597::
     ThatDelete(15)
     ThatDelete(16)
     ThatDelete(17)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     Write("You found⭍the exit!🅐")
@@ -448,7 +448,7 @@ Script_Arderial_Puzzle4_Again::
     ThatInit(16, AI_Chicken, $09, $06, $D09F, $54, ACTORSCRIPT0_19_4D4F, ACTORSCRIPT1_19_4D67)
     LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
     LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -459,7 +459,7 @@ Script_Arderial_Puzzle4_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_12_47D8)
     End()
 
@@ -467,22 +467,22 @@ SCRIPT_STARTBUTTON_12_47D8::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_47EF)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_47EF)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_47EF::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_47FF)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_47FF)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_47FF::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_480F)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_480F)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_480F::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     StartSFX0(SFXID_Jump)
@@ -562,22 +562,22 @@ Hotspot_Arderial_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_48F1)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_48F1)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_48F1::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4901)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4901)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4901::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4911)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4911)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4911::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     Write("You found⭍the exit!🅐")
@@ -638,7 +638,7 @@ Script_Arderial_Puzzle3_Again::
     ThatInit(16, AI_Chicken, $15, $10, $D1F5, $54, ACTORSCRIPT0_19_4D4F, ACTORSCRIPT1_19_4D67)
     LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
     LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -650,7 +650,7 @@ Script_Arderial_Puzzle3_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_12_4B61)
     End()
 
@@ -658,22 +658,22 @@ SCRIPT_STARTBUTTON_12_4B61::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_4B78)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_4B78)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4B78::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4B88)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4B88)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4B88::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4B98)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4B98)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4B98::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     StartSFX0(SFXID_Jump)
@@ -753,22 +753,22 @@ Hotspot_Arderial_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_4C7A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_4C7A)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4C7A::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4C8A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4C8A)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4C8A::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4C9A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4C9A)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4C9A::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     Write("You found⭍the exit!🅐")
@@ -812,22 +812,22 @@ Hotspot_Arderial_Puzzle3_1::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_4E38)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_4E38)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4E38::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_4E48)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_4E48)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4E48::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_4E58)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_4E58)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_4E58::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     Write("You found⭍a SECRET!🅐")
@@ -885,7 +885,7 @@ Script_Arderial_Puzzle5_Again::
     ThatInit(16, AI_Chicken, $0C, $15, $D219, $54, ACTORSCRIPT0_12_5094, ACTORSCRIPT1_19_4D67)
     LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
     LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(14)
@@ -894,23 +894,23 @@ Script_Arderial_Puzzle5_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02A, %11110111)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_12_50B3)
     End()
 
 ACTORSCRIPT0_12_5075::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisSetAnimSingle(Actor_Null)
-    AndByte(RAM_00_A02B, %10111111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %10111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     End()
 
 ACTORSCRIPT0_12_5094::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisSetAnimSingle(Actor_Null)
-    AndByte(RAM_00_A02B, %01111111)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %01111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     End()
 
@@ -918,22 +918,22 @@ SCRIPT_STARTBUTTON_12_50B3::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_50CA)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_50CA)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_50CA::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_50DA)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_50DA)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_50DA::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_50EA)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_50EA)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_50EA::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     StartSFX0(SFXID_Jump)
@@ -1013,22 +1013,22 @@ Hotspot_Arderial_Puzzle5_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00100000)#, SCRIPT_12_51CC)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00100000)#, SCRIPT_12_51CC)
     ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_51CC::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%01000000)#, SCRIPT_12_51DC)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%01000000)#, SCRIPT_12_51DC)
     ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_51DC::
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%10000000)#, SCRIPT_12_51EC)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%10000000)#, SCRIPT_12_51EC)
     ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
 
 SCRIPT_12_51EC::
     ThatDelete(14)
     ThatDelete(15)
     ThatDelete(16)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
     PalRefresh(0, 16)
     Write("You found⭍the exit!🅐")

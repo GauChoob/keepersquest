@@ -82,12 +82,12 @@ SCRIPT_0E_47AC::
     SetCamera($04, $0C)
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(RAM_00_A02B, %11111011)
-    AndByte(RAM_00_A02A, %11110111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
     Write("Guide the⭍Turret to🅐the energy⭍pellets🅐before you⭍run out🅐of energy.🅐READY🅐SET🅐GO!⭍")
     Close()
     ThatStart(0)
@@ -181,20 +181,20 @@ SCRIPT_0E_498E::
     ThatDelete(12)
     FormatChar(xNumberOfAttempts)
     Write("Time's UP!!🅐You collected⭍🔊 Energy.🅐")
-    LongJumpIf(#(c[xLaser_HighScore] == c0)#, SCRIPT_0E_4A62)
-    LongJumpIf(#(c[xNumberOfAttempts] > c[xLaser_HighScore])#, .HighscoreNew)
-    FormatChar(xLaser_HighScore)
+    LongJumpIf(#(c[xTurret_HighScore] == c0)#, SCRIPT_0E_4A62)
+    LongJumpIf(#(c[xNumberOfAttempts] > c[xTurret_HighScore])#, .HighscoreNew)
+    FormatChar(xTurret_HighScore)
     Write("The current⭍High Score is🅐🔊 Energy.🅐")
     Close()
     LongJump(SCRIPT_18_5DA8)
 
 .HighscoreNew::
-    FormatChar(xLaser_HighScore)
+    FormatChar(xTurret_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 Energy.🅐")
     Close()
 
 SCRIPT_0E_4A62::
-    VarByteExpr(xLaser_HighScore, #c[xNumberOfAttempts]#)
+    VarByteExpr(xTurret_HighScore, #c[xNumberOfAttempts]#)
     Close()
     SaveGame(1)
     LongJump(SCRIPT_18_5DA8)
@@ -311,19 +311,19 @@ Script_DeveloperRoom::
     SceneReady()
     End()
 
-Hotspot_DeveloperRoom_10_Naroom_Puzzle1::
+Hotspot_DeveloperRoom_A_Naroom_Puzzle1::
     LongJump(Script_Naroom_Puzzle1_First)
 
-Hotspot_DeveloperRoom_11_Naroom_Puzzle2::
+Hotspot_DeveloperRoom_B_Naroom_Puzzle2::
     LongJump(Script_Naroom_Puzzle2_First)
 
-Hotspot_DeveloperRoom_12_Naroom_Puzzle3::
+Hotspot_DeveloperRoom_C_Naroom_Puzzle3::
     LongJump(Script_Naroom_Puzzle3_First)
 
-Hotspot_DeveloperRoom_13_Naroom_Puzzle4::
+Hotspot_DeveloperRoom_D_Naroom_Puzzle4::
     LongJump(Script_Naroom_Puzzle4_First)
 
-Hotspot_DeveloperRoom_14_Naroom_Puzzle5::
+Hotspot_DeveloperRoom_E_Naroom_Puzzle5::
     LongJump(Script_Naroom_Puzzle5_First)
 
 Hotspot_DeveloperRoom_0_Underneath_Puzzle1::
@@ -356,127 +356,127 @@ Hotspot_DeveloperRoom_8_Cald_Puzzle4::
 Hotspot_DeveloperRoom_9_Cald_Puzzle5::
     LongJump(Script_Cald_Puzzle5_First)
 
-Hotspot_DeveloperRoom_15_Orothe_Puzzle1::
+Hotspot_DeveloperRoom_F_Orothe_Puzzle1::
     LongJump(Script_Orothe_Puzzle1_First)
 
-Hotspot_DeveloperRoom_16_Orothe_Puzzle2::
+Hotspot_DeveloperRoom_10_Orothe_Puzzle2::
     LongJump(Script_Orothe_Puzzle2_First)
 
-Hotspot_DeveloperRoom_17_Orothe_Puzzle3::
+Hotspot_DeveloperRoom_11_Orothe_Puzzle3::
     LongJump(Script_Orothe_Puzzle3_First)
 
-Hotspot_DeveloperRoom_18_Orothe_Puzzle4::
+Hotspot_DeveloperRoom_12_Orothe_Puzzle4::
     LongJump(Script_Orothe_Puzzle4_First)
 
-Hotspot_DeveloperRoom_19_Orothe_Puzzle5::
+Hotspot_DeveloperRoom_13_Orothe_Puzzle5::
     LongJump(Script_Orothe_Puzzle5_First)
 
-Hotspot_DeveloperRoom_20_Arderial_Puzzle1::
+Hotspot_DeveloperRoom_14_Arderial_Puzzle1::
     LongJump(Script_Arderial_Puzzle1_First)
 
-Hotspot_DeveloperRoom_21_Arderial_Puzzle2::
+Hotspot_DeveloperRoom_15_Arderial_Puzzle2::
     LongJump(Script_Arderial_Puzzle2_First)
 
-Hotspot_DeveloperRoom_22_Arderial_Puzzle3::
+Hotspot_DeveloperRoom_16_Arderial_Puzzle3::
     LongJump(Script_Arderial_Puzzle4_First)
 
-Hotspot_DeveloperRoom_23_Arderial_Puzzle4::
+Hotspot_DeveloperRoom_17_Arderial_Puzzle4::
     LongJump(Script_Arderial_Puzzle3_First)
 
-Hotspot_DeveloperRoom_24_Arderial_Puzzle5::
+Hotspot_DeveloperRoom_18_Arderial_Puzzle5::
     LongJump(Script_Arderial_Puzzle5_First)
 
-Hotspot_DeveloperRoom_25_Weave_Puzzle1::
+Hotspot_DeveloperRoom_19_Weave_Puzzle1::
     LongJump(Script_Weave_Puzzle1_First)
 
-Hotspot_DeveloperRoom_26_Weave_Puzzle2::
+Hotspot_DeveloperRoom_1A_Weave_Puzzle2::
     LongJump(Script_Weave_Puzzle2_First)
 
-Hotspot_DeveloperRoom_27_Weave_Puzzle3::
+Hotspot_DeveloperRoom_1B_Weave_Puzzle3::
     LongJump(Script_Weave_Puzzle3_First)
 
-Hotspot_DeveloperRoom_28_Weave_Puzzle4::
+Hotspot_DeveloperRoom_1C_Weave_Puzzle4::
     LongJump(Script_Weave_Puzzle4_First)
 
-Hotspot_DeveloperRoom_29_Weave_Puzzle5::
+Hotspot_DeveloperRoom_1D_Weave_Puzzle5::
     LongJump(Script_Weave_Puzzle5_First)
 
-Hotspot_DeveloperRoom_30_dResh_Puzzle1::
+Hotspot_DeveloperRoom_1E_dResh_Puzzle1::
     LongJump(Script_dResh_Puzzle1_First)
 
-Hotspot_DeveloperRoom_31_dResh_Puzzle2::
+Hotspot_DeveloperRoom_1F_dResh_Puzzle2::
     LongJump(Script_dResh_Puzzle2_First)
 
-Hotspot_DeveloperRoom_32_dResh_Puzzle3::
+Hotspot_DeveloperRoom_20_dResh_Puzzle3::
     LongJump(Script_dResh_Puzzle3_First)
 
-Hotspot_DeveloperRoom_33_dResh_Puzzle4::
+Hotspot_DeveloperRoom_21_dResh_Puzzle4::
     LongJump(Script_dResh_Puzzle4_First)
 
-Hotspot_DeveloperRoom_34_dResh_Puzzle5::
+Hotspot_DeveloperRoom_22_dResh_Puzzle5::
     LongJump(Script_dResh_Puzzle5_First)
 
-Hotspot_DeveloperRoom_35_KybarsTeeth_Puzzle1::
+Hotspot_DeveloperRoom_23_KybarsTeeth_Puzzle1::
     LongJump(Script_KybarsTeeth_Puzzle1_First)
 
-Hotspot_DeveloperRoom_36_KybarsTeeth_Puzzle2::
+Hotspot_DeveloperRoom_24_KybarsTeeth_Puzzle2::
     LongJump(Script_KybarsTeeth_Puzzle2_First)
 
-Hotspot_DeveloperRoom_37_KybarsTeeth_Puzzle3::
+Hotspot_DeveloperRoom_25_KybarsTeeth_Puzzle3::
     LongJump(Script_KybarsTeeth_Puzzle3_First)
 
-Hotspot_DeveloperRoom_38_KybarsTeeth_Puzzle4::
+Hotspot_DeveloperRoom_26_KybarsTeeth_Puzzle4::
     LongJump(Script_KybarsTeeth_Puzzle4_First)
 
-Hotspot_DeveloperRoom_39_KybarsTeeth_Puzzle5::
+Hotspot_DeveloperRoom_27_KybarsTeeth_Puzzle5::
     LongJump(Script_KybarsTeeth_Puzzle5_First)
 
-Hotspot_DeveloperRoom_40_Bograth_Puzzle1::
+Hotspot_DeveloperRoom_28_Bograth_Puzzle1::
     LongJump(Script_Bograth_Puzzle1_First)
 
-Hotspot_DeveloperRoom_41_Bograth_Puzzle2::
+Hotspot_DeveloperRoom_29_Bograth_Puzzle2::
     LongJump(Script_Bograth_Puzzle2_First)
 
-Hotspot_DeveloperRoom_42_Bograth_Puzzle3::
+Hotspot_DeveloperRoom_2A_Bograth_Puzzle3::
     LongJump(Script_Bograth_Puzzle3_First)
 
-Hotspot_DeveloperRoom_43_Bograth_Puzzle4::
+Hotspot_DeveloperRoom_2B_Bograth_Puzzle4::
     LongJump(Script_Bograth_Puzzle4_First)
 
-Hotspot_DeveloperRoom_44_Bograth_Puzzle5::
+Hotspot_DeveloperRoom_2C_Bograth_Puzzle5::
     LongJump(Script_Bograth_Puzzle5_First)
 
-Hotspot_DeveloperRoom_45_Paradwyn_Puzzle1::
+Hotspot_DeveloperRoom_2D_Paradwyn_Puzzle1::
     LongJump(Script_Paradwyn_Puzzle1_First)
 
-Hotspot_DeveloperRoom_46_Paradwyn_Puzzle2::
+Hotspot_DeveloperRoom_2E_Paradwyn_Puzzle2::
     LongJump(Script_Paradwyn_Puzzle2_First)
 
-Hotspot_DeveloperRoom_47_Paradwyn_Puzzle3::
+Hotspot_DeveloperRoom_2F_Paradwyn_Puzzle3::
     LongJump(Script_Paradwyn_Puzzle4_First)
 
-Hotspot_DeveloperRoom_48_Paradwyn_Puzzle4::
+Hotspot_DeveloperRoom_30_Paradwyn_Puzzle4::
     LongJump(Script_Paradwyn_Puzzle3_First)
 
-Hotspot_DeveloperRoom_49_Paradwyn_Puzzle5::
+Hotspot_DeveloperRoom_31_Paradwyn_Puzzle5::
     LongJump(Script_Paradwyn_Puzzle5_First)
 
-Hotspot_DeveloperRoom_50_Core_Puzzle5::
+Hotspot_DeveloperRoom_32_Core_Puzzle5::
     LongJump(Script_Core_Puzzle5_First)
 
-Hotspot_DeveloperRoom_51_Core_Puzzle2::
+Hotspot_DeveloperRoom_33_Core_Puzzle2::
     LongJump(Script_Core_Puzzle2_First)
 
-Hotspot_DeveloperRoom_52_Core_Puzzle3::
+Hotspot_DeveloperRoom_34_Core_Puzzle3::
     LongJump(Script_Core_Puzzle3_First)
 
-Hotspot_DeveloperRoom_53_Core_Puzzle1::
+Hotspot_DeveloperRoom_35_Core_Puzzle1::
     LongJump(Script_Core_Puzzle1_First)
 
-Hotspot_DeveloperRoom_54_Core_Puzzle4::
+Hotspot_DeveloperRoom_36_Core_Puzzle4::
     LongJump(Script_Core_Puzzle4_First)
 
-Hotspot_DeveloperRoom_55_StartRoom::
+Hotspot_DeveloperRoom_37_StartRoom::
     LongJump(SCRIPT_18_5DA8)
 
 SCRIPT_0E_4C88::
@@ -484,7 +484,7 @@ SCRIPT_0E_4C88::
 
 SCRIPT_STARTBUTTON_0E_4C89::
     StartSFX0(SFXID_Jump)
-    OrByte(RAM_00_A02B, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
     SetScriptMaster(SCRIPT_0E_4C94)
     End()
 
@@ -513,7 +513,7 @@ SCRIPT_0E_4CF7::
     Close()
     SetStartButtonScript(SCRIPT_STARTBUTTON_0E_4C89)
     SetByte(wScript_StartButtonDisabled, $00)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     End()
 
 SCRIPT_0E_4D05::
@@ -542,7 +542,7 @@ SCRIPT_0E_4D05::
     End()
 
 ACTORSCRIPT0_0E_4D69::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00010000)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00010000)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -648,7 +648,7 @@ SCRIPT_0E_4EBB::
     HeroToDoor($16, $01)
     LongJump(SCRIPT_0E_4D76)
 
-SCRIPT_0E_4EC2::
+Script_Arderial_SecretCompletedFirstTime::
     StartSong(SONGID_DreamCreature)
     SceneNew()
     SetStartButtonScript(SCRIPT_STARTBUTTON_0E_4C89)
@@ -776,9 +776,9 @@ SCRIPT_0E_5135::
     SetEventText(1)
     End()
 
-SCRIPT_0E_5177::
+Script_Arderial_CompletedFirstTime::
     StartSong(SONGID_DreamCreature)
-    OrByte(MATHADDRESS_00_A046, %00010000)
+    OrByte(xBits_ZonesCompleted_1, %00010000)
     LongJumpIf(#(((c[MATHADDRESS_00_A136] == c2) and (c[xVARBYTE_00_A138] == c5)) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_52DC)
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_5449)
     SceneNew()
@@ -1144,7 +1144,7 @@ SCRIPT_0E_56E8::
     ThatInit(3, Call_001_4AF8, $03, $09, $D111, $30, ACTORSCRIPT0_0E_597A, Actor_RestoreState)
     ThatInit(4, Call_001_4AF8, $0C, $10, $D1EC, $5B, ACTORSCRIPT0_0E_59FD, Actor_RestoreState)
     ThatInit(5, Call_001_4AF8, $09, $07, $D0DB, $A3, ACTORSCRIPT0_0E_5A0B, Actor_RestoreState)
-    AndByte(RAM_00_A02B, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
     LoadSingleBitmap($30, BITMAP_0D_43D0, $8000, $00)
     LoadSingleBitmap($2B, BITMAP_0D_55D0, $8300, $00)
     LoadSingleBitmap($48, BITMAP_0D_62C0, $85B0, $00)
@@ -1321,7 +1321,7 @@ ACTORSCRIPT0_0E_5880::
     SetScriptText(SCRIPT_0E_609F)
     WaitEventText(28)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7864)
-    LongJumpIf(#bitmatch(c[RAM_00_A02B], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $28)
     End()
 
@@ -1888,7 +1888,7 @@ SCRIPT_0E_6A50::
     End()
 
 SCRIPT_0E_6A5A::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A047], c%00000010)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_2], c%00000010)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
     End()
 
@@ -2050,7 +2050,7 @@ SCRIPT_0E_6C48::
     SetEventText(1)
     End()
 
-SCRIPT_0E_6C73::
+Script_Paradwyn_SecretCompletedFirstTime::
     StartSong(SONGID_Parathin)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -2114,9 +2114,9 @@ SCRIPT_0E_6D1E::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_0E_6D51::
+Script_Paradwyn_CompletedFirstTime::
     StartSong(SONGID_Parathin)
-    OrByte(MATHADDRESS_00_A047, %00000010)
+    OrByte(xBits_ZonesCompleted_2, %00000010)
     LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_70FF)
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_7243)
     LongJumpIf(#((c[MATHADDRESS_00_A136] == c3) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_7402)
@@ -2419,11 +2419,11 @@ ACTORSCRIPT0_0E_729D::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00001000) == w65535)#, SCRIPT_0E_7304)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000001) == w65535)#, SCRIPT_0E_730C)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000100) == w65535)#, SCRIPT_0E_7314)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == w65535)#, SCRIPT_0E_731C)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == c0)#, SCRIPT_0E_7324)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00001000) == w65535)#, SCRIPT_0E_7304)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000001) == w65535)#, SCRIPT_0E_730C)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000100) == w65535)#, SCRIPT_0E_7314)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000010) == w65535)#, SCRIPT_0E_731C)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000010) == c0)#, SCRIPT_0E_7324)
     End()
 
 SCRIPT_0E_7304::
@@ -2447,10 +2447,10 @@ SCRIPT_0E_7324::
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_732C::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00010000) == w65535)#, SCRIPT_0E_561A)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00001000) == w65535)#, SCRIPT_0F_57D2)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000001) == w65535)#, SCRIPT_0F_40D4)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000100) == w65535)#, SCRIPT_09_5877)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00010000) == w65535)#, SCRIPT_0E_561A)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00001000) == w65535)#, SCRIPT_0F_57D2)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000001) == w65535)#, SCRIPT_0F_40D4)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000100) == w65535)#, SCRIPT_09_5877)
     LongJump(SCRIPT_09_4491)
 
 SCRIPT_0E_7360::

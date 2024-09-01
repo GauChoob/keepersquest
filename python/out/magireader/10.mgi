@@ -178,7 +178,7 @@ ACTORSCRIPT0_10_4499::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_10_44AA::
+Script_Core_SecretCompletedFirstTime::
     StartSong(SONGID_Agram)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -281,8 +281,8 @@ ACTORSCRIPT0_10_461E::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_10_462D::
-    OrByte(MATHADDRESS_00_A047, %00000100)
+Script_Core_CompletedFirstTime::
+    OrByte(xBits_ZonesCompleted_2, %00000100)
     Switch(#c[MATHADDRESS_00_A136]#) {
         Case(0, Script_Core_Puzzle4_Complete)
         Case(1, SCRIPT_10_4650)
@@ -1976,20 +1976,20 @@ Script_Bograth_Puzzle5_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
-    AndByte(RAM_00_A029, %11111110)
-    AndByte(RAM_00_A029, %11111101)
-    AndByte(RAM_00_A029, %11111011)
-    AndByte(RAM_00_A029, %11110111)
-    AndByte(RAM_00_A029, %11101111)
-    AndByte(RAM_00_A029, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    AndByte(xBits_Puzzle_Bits2, %11111011)
+    AndByte(xBits_Puzzle_Bits2, %11110111)
+    AndByte(xBits_Puzzle_Bits2, %11101111)
+    AndByte(xBits_Puzzle_Bits2, %11011111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_10_6C9C)
     End()
 
@@ -2030,7 +2030,7 @@ SCRIPT_10_6CF9::
         ScriptDelay(SCRIPT_11_764E, 32)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
 
 SCRIPT_10_6D10::
@@ -2040,7 +2040,7 @@ SCRIPT_10_6D10::
         ScriptDelay(SCRIPT_11_769C, 8)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
 
 SCRIPT_10_6D27::
@@ -2050,7 +2050,7 @@ SCRIPT_10_6D27::
         ScriptDelay(SCRIPT_11_764E, 24)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
     End()
 
 SCRIPT_10_6D3E::
@@ -2060,7 +2060,7 @@ SCRIPT_10_6D3E::
         ScriptDelay(SCRIPT_11_764E, 32)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
 
 SCRIPT_10_6D55::
@@ -2070,7 +2070,7 @@ SCRIPT_10_6D55::
         ScriptDelay(SCRIPT_11_769C, 32)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
 
 SCRIPT_10_6D6C::
@@ -2080,7 +2080,7 @@ SCRIPT_10_6D6C::
         ScriptDelay(SCRIPT_11_7675, 16)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
 
 SCRIPT_10_6D83::
@@ -2090,7 +2090,7 @@ SCRIPT_10_6D83::
         ScriptDelay(SCRIPT_11_7675, 24)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
 
 SCRIPT_10_6D9A::
@@ -2100,7 +2100,7 @@ SCRIPT_10_6D9A::
         ScriptDelay(SCRIPT_11_7675, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
 
 SCRIPT_10_6DB1::
@@ -2110,7 +2110,7 @@ SCRIPT_10_6DB1::
         ScriptDelay(SCRIPT_11_769C, 56)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
 
 SCRIPT_10_6DC8::
@@ -2120,7 +2120,7 @@ SCRIPT_10_6DC8::
         ScriptDelay(SCRIPT_11_769C, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
 
 SCRIPT_10_6DDF::
@@ -2130,7 +2130,7 @@ SCRIPT_10_6DDF::
         ScriptDelay(SCRIPT_11_7675, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11111110)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
     End()
 
 SCRIPT_10_6DF6::
@@ -2140,7 +2140,7 @@ SCRIPT_10_6DF6::
         ScriptDelay(SCRIPT_11_7675, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11111101)
+    AndByte(xBits_Puzzle_Bits2, %11111101)
     End()
 
 SCRIPT_10_6E0D::
@@ -2150,7 +2150,7 @@ SCRIPT_10_6E0D::
         ScriptDelay(SCRIPT_11_76C3, 40)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11111011)
+    AndByte(xBits_Puzzle_Bits2, %11111011)
     End()
 
 SCRIPT_10_6E24::
@@ -2160,7 +2160,7 @@ SCRIPT_10_6E24::
         ScriptDelay(SCRIPT_11_769C, 40)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11110111)
+    AndByte(xBits_Puzzle_Bits2, %11110111)
     End()
 
 SCRIPT_10_6E3B::
@@ -2170,7 +2170,7 @@ SCRIPT_10_6E3B::
         ScriptDelay(SCRIPT_11_764E, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11101111)
+    AndByte(xBits_Puzzle_Bits2, %11101111)
     End()
 
 SCRIPT_10_6E52::
@@ -2180,304 +2180,304 @@ SCRIPT_10_6E52::
         ScriptDelay(SCRIPT_11_764E, 48)
         ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
     }
-    AndByte(RAM_00_A029, %11011111)
+    AndByte(xBits_Puzzle_Bits2, %11011111)
     End()
 
 Hotspot_Bograth_Puzzle5_0::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_10_6E7A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_10_6E7A)
     ThatScript(3, SCRIPT_10_6CF9)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
 
 SCRIPT_10_6E7A::
     End()
 
 Hotspot_Bograth_Puzzle5_1::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_10_6E8C)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_10_6E8C)
     ThatScript(5, SCRIPT_10_6D3E)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
 
 SCRIPT_10_6E8C::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_10_6E9D)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_10_6E9D)
     ThatScript(6, SCRIPT_10_6D55)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
 
 SCRIPT_10_6E9D::
     End()
 
 Hotspot_Bograth_Puzzle5_2::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_10_6EAF)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_10_6EAF)
     ThatScript(4, SCRIPT_10_6D27)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
 
 SCRIPT_10_6EAF::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_10_6EC0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_10_6EC0)
     ThatScript(6, SCRIPT_10_6D55)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
 
 SCRIPT_10_6EC0::
     End()
 
 Hotspot_Bograth_Puzzle5_3::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_10_6ED2)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_10_6ED2)
     ThatScript(6, SCRIPT_10_6D55)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
 
 SCRIPT_10_6ED2::
     End()
 
 Hotspot_Bograth_Puzzle5_4::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000010)#, SCRIPT_10_6EE4)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_10_6EE4)
     ThatScript(4, SCRIPT_10_6D27)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000010)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
 
 SCRIPT_10_6EE4::
     End()
 
 Hotspot_Bograth_Puzzle5_5::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000100)#, SCRIPT_10_6EF6)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_10_6EF6)
     ThatScript(5, SCRIPT_10_6D3E)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000100)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
 
 SCRIPT_10_6EF6::
     End()
 
 Hotspot_Bograth_Puzzle5_6::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00001000)#, SCRIPT_10_6F08)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_10_6F08)
     ThatScript(6, SCRIPT_10_6D6C)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00001000)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
 
 SCRIPT_10_6F08::
     End()
 
 Hotspot_Bograth_Puzzle5_7::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_10_6F1A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_10_6F1A)
     ThatScript(7, SCRIPT_10_6D83)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
 
 SCRIPT_10_6F1A::
     End()
 
 Hotspot_Bograth_Puzzle5_8::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_10_6F2C)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_10_6F2C)
     ThatScript(7, SCRIPT_10_6D83)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
 
 SCRIPT_10_6F2C::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_10_6F3D)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_10_6F3D)
     ThatScript(9, SCRIPT_10_6DB1)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
 
 SCRIPT_10_6F3D::
     End()
 
 Hotspot_Bograth_Puzzle5_9::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00010000)#, SCRIPT_10_6F4F)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_10_6F4F)
     ThatScript(7, SCRIPT_10_6D83)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00010000)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
 
 SCRIPT_10_6F4F::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_10_6F60)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_10_6F60)
     ThatScript(10, SCRIPT_10_6DC8)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
 
 SCRIPT_10_6F60::
     End()
 
-Hotspot_Bograth_Puzzle5_10::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_10_6F72)
+Hotspot_Bograth_Puzzle5_A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_10_6F72)
     ThatScript(8, SCRIPT_10_6D9A)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
 
 SCRIPT_10_6F72::
     End()
 
-Hotspot_Bograth_Puzzle5_11::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_10_6F84)
+Hotspot_Bograth_Puzzle5_B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_10_6F84)
     ThatScript(8, SCRIPT_10_6D9A)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
 
 SCRIPT_10_6F84::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_10_6F95)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_10_6F95)
     ThatScript(9, SCRIPT_10_6DB1)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
 
 SCRIPT_10_6F95::
     End()
 
-Hotspot_Bograth_Puzzle5_12::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00100000)#, SCRIPT_10_6FA7)
+Hotspot_Bograth_Puzzle5_C::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_10_6FA7)
     ThatScript(8, SCRIPT_10_6D9A)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00100000)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
 
 SCRIPT_10_6FA7::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_10_6FB8)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_10_6FB8)
     ThatScript(10, SCRIPT_10_6DC8)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
 
 SCRIPT_10_6FB8::
     End()
 
-Hotspot_Bograth_Puzzle5_13::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%01000000)#, SCRIPT_10_6FCA)
+Hotspot_Bograth_Puzzle5_D::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_10_6FCA)
     ThatScript(9, SCRIPT_10_6DB1)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %01000000)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
 
 SCRIPT_10_6FCA::
     End()
 
-Hotspot_Bograth_Puzzle5_14::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%10000000)#, SCRIPT_10_6FDC)
+Hotspot_Bograth_Puzzle5_E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_10_6FDC)
     ThatScript(10, SCRIPT_10_6DC8)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %10000000)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
 
 SCRIPT_10_6FDC::
     End()
 
-Hotspot_Bograth_Puzzle5_15::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00001000)#, SCRIPT_10_6FEE)
+Hotspot_Bograth_Puzzle5_F::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00001000)#, SCRIPT_10_6FEE)
     ThatScript(20, SCRIPT_10_6E24)
-    OrByte(RAM_00_A029, %00001000)
+    OrByte(xBits_Puzzle_Bits2, %00001000)
 
 SCRIPT_10_6FEE::
     End()
 
-Hotspot_Bograth_Puzzle5_16::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_10_7000)
+Hotspot_Bograth_Puzzle5_10::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_10_7000)
     ThatScript(11, SCRIPT_10_6DDF)
-    OrByte(RAM_00_A029, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
 
 SCRIPT_10_7000::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00001000)#, SCRIPT_10_7011)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00001000)#, SCRIPT_10_7011)
     ThatScript(20, SCRIPT_10_6E24)
-    OrByte(RAM_00_A029, %00001000)
+    OrByte(xBits_Puzzle_Bits2, %00001000)
 
 SCRIPT_10_7011::
     End()
 
-Hotspot_Bograth_Puzzle5_17::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00010000)#, SCRIPT_10_7023)
+Hotspot_Bograth_Puzzle5_11::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00010000)#, SCRIPT_10_7023)
     ThatScript(21, SCRIPT_10_6E3B)
-    OrByte(RAM_00_A029, %00010000)
+    OrByte(xBits_Puzzle_Bits2, %00010000)
 
 SCRIPT_10_7023::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00001000)#, SCRIPT_10_7034)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00001000)#, SCRIPT_10_7034)
     ThatScript(20, SCRIPT_10_6E24)
-    OrByte(RAM_00_A029, %00001000)
+    OrByte(xBits_Puzzle_Bits2, %00001000)
 
 SCRIPT_10_7034::
     End()
 
-Hotspot_Bograth_Puzzle5_18::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000010)#, SCRIPT_10_7046)
+Hotspot_Bograth_Puzzle5_12::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_10_7046)
     ThatScript(18, SCRIPT_10_6DF6)
-    OrByte(RAM_00_A029, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
 
 SCRIPT_10_7046::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00001000)#, SCRIPT_10_7057)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00001000)#, SCRIPT_10_7057)
     ThatScript(20, SCRIPT_10_6E24)
-    OrByte(RAM_00_A029, %00001000)
+    OrByte(xBits_Puzzle_Bits2, %00001000)
 
 SCRIPT_10_7057::
     End()
 
-Hotspot_Bograth_Puzzle5_19::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00100000)#, SCRIPT_10_7069)
+Hotspot_Bograth_Puzzle5_13::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00100000)#, SCRIPT_10_7069)
     ThatScript(22, SCRIPT_10_6E52)
-    OrByte(RAM_00_A029, %00100000)
+    OrByte(xBits_Puzzle_Bits2, %00100000)
 
 SCRIPT_10_7069::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00001000)#, SCRIPT_10_707A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00001000)#, SCRIPT_10_707A)
     ThatScript(20, SCRIPT_10_6E24)
-    OrByte(RAM_00_A029, %00001000)
+    OrByte(xBits_Puzzle_Bits2, %00001000)
 
 SCRIPT_10_707A::
     End()
 
-Hotspot_Bograth_Puzzle5_20::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_10_708C)
+Hotspot_Bograth_Puzzle5_14::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_10_708C)
     ThatScript(11, SCRIPT_10_6DDF)
-    OrByte(RAM_00_A029, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
 
 SCRIPT_10_708C::
     End()
 
-Hotspot_Bograth_Puzzle5_21::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000001)#, SCRIPT_10_709E)
+Hotspot_Bograth_Puzzle5_15::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_10_709E)
     ThatScript(11, SCRIPT_10_6DDF)
-    OrByte(RAM_00_A029, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
 
 SCRIPT_10_709E::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_70AF)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_10_70AF)
     ThatScript(19, SCRIPT_10_6E0D)
-    OrByte(RAM_00_A029, %00000100)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
 
 SCRIPT_10_70AF::
     End()
 
-Hotspot_Bograth_Puzzle5_22::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00010000)#, SCRIPT_10_70C1)
+Hotspot_Bograth_Puzzle5_16::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00010000)#, SCRIPT_10_70C1)
     ThatScript(21, SCRIPT_10_6E3B)
-    OrByte(RAM_00_A029, %00010000)
+    OrByte(xBits_Puzzle_Bits2, %00010000)
 
 SCRIPT_10_70C1::
     End()
 
-Hotspot_Bograth_Puzzle5_23::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00010000)#, SCRIPT_10_70D3)
+Hotspot_Bograth_Puzzle5_17::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00010000)#, SCRIPT_10_70D3)
     ThatScript(21, SCRIPT_10_6E3B)
-    OrByte(RAM_00_A029, %00010000)
+    OrByte(xBits_Puzzle_Bits2, %00010000)
 
 SCRIPT_10_70D3::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_70E4)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_10_70E4)
     ThatScript(19, SCRIPT_10_6E0D)
-    OrByte(RAM_00_A029, %00000100)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
 
 SCRIPT_10_70E4::
     End()
 
-Hotspot_Bograth_Puzzle5_24::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000010)#, SCRIPT_10_70F6)
+Hotspot_Bograth_Puzzle5_18::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_10_70F6)
     ThatScript(18, SCRIPT_10_6DF6)
-    OrByte(RAM_00_A029, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
 
 SCRIPT_10_70F6::
     End()
 
-Hotspot_Bograth_Puzzle5_25::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000010)#, SCRIPT_10_7108)
+Hotspot_Bograth_Puzzle5_19::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_10_7108)
     ThatScript(18, SCRIPT_10_6DF6)
-    OrByte(RAM_00_A029, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
 
 SCRIPT_10_7108::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_7119)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_10_7119)
     ThatScript(19, SCRIPT_10_6E0D)
-    OrByte(RAM_00_A029, %00000100)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
 
 SCRIPT_10_7119::
     End()
 
-Hotspot_Bograth_Puzzle5_26::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00100000)#, SCRIPT_10_712B)
+Hotspot_Bograth_Puzzle5_1A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00100000)#, SCRIPT_10_712B)
     ThatScript(22, SCRIPT_10_6E52)
-    OrByte(RAM_00_A029, %00100000)
+    OrByte(xBits_Puzzle_Bits2, %00100000)
 
 SCRIPT_10_712B::
     End()
 
-Hotspot_Bograth_Puzzle5_27::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00100000)#, SCRIPT_10_713D)
+Hotspot_Bograth_Puzzle5_1B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00100000)#, SCRIPT_10_713D)
     ThatScript(22, SCRIPT_10_6E52)
-    OrByte(RAM_00_A029, %00100000)
+    OrByte(xBits_Puzzle_Bits2, %00100000)
 
 SCRIPT_10_713D::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_714E)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_10_714E)
     ThatScript(19, SCRIPT_10_6E0D)
-    OrByte(RAM_00_A029, %00000100)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
 
 SCRIPT_10_714E::
     End()
 
-Hotspot_Bograth_Puzzle5_28::
+Hotspot_Bograth_Puzzle5_1C::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
@@ -2518,23 +2518,23 @@ Hotspot_Bograth_Puzzle5_28::
     Close()
     LongJump(Script_Bograth_Puzzle5_Complete)
 
-Hotspot_Bograth_Puzzle5_29::
-    LongJumpIf(#bitmatch(c[RAM_00_A029], c%00000100)#, SCRIPT_10_72DB)
+Hotspot_Bograth_Puzzle5_1D::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_10_72DB)
     ThatScript(19, SCRIPT_10_6E0D)
-    OrByte(RAM_00_A029, %00000100)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
 
 SCRIPT_10_72DB::
     End()
 
-Hotspot_Bograth_Puzzle5_30::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3], c%00000001)#, SCRIPT_10_72ED)
+Hotspot_Bograth_Puzzle5_1E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_10_72ED)
     ThatScript(3, SCRIPT_10_6D10)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3, %00000001)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
 
 SCRIPT_10_72ED::
     End()
 
-Hotspot_Bograth_Puzzle5_31::
+Hotspot_Bograth_Puzzle5_1F::
     ThatDelete(8)
     ThatStart(22)
     End()
@@ -2556,7 +2556,7 @@ SCRIPT_10_72F3::
     ThatDelete(10)
     End()
 
-Hotspot_Bograth_Puzzle5_32::
+Hotspot_Bograth_Puzzle5_20::
     ThatDelete(22)
     ThatStart(8)
     End()

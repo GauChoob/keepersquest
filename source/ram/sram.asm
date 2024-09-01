@@ -24,7 +24,7 @@ xLoad_HeroXTile::
 xLoad_HeroYTile::
     ds 1
 
-    ds $A017 - @
+    ;ds $A017 - @
 xNumberOfSaves:
     ; 0 = 0 saves
     ; 2 = 1 save (Slot 1)
@@ -48,10 +48,57 @@ xGameCount::
     ds 2
     ;ds $A028 - @
 xScript_SaveBits::
+    ; Generic puzzle bits
+    ; dResh_Puzzle1:
+    ;   4:2
+    ;   3:3
+    ; dResh_Puzzle2:
+    ;   0-3 = switches pressed
+    ;   5-6 = half-moon buttons pressed
+    ; Weave_Puzzle1:
+    ;   0-1 = Reset but unused
+xBits_Puzzle_Bits1::
+    ds 1
+    ;ds $A029 - @
+xBits_Puzzle_Bits2::
+    ds 1
+    ;ds $A02A - @
+xBits_Puzzle_Bits3::
+    ds 1
+    ;ds $A02B - @
+xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret::
+    ; 0 = Multi-use, depends on the puzzle
+    ; 1 = Start Screen secret unlocked
+    ; 2 = Set to disable tile copying (when puzzle is cancelled or finished)
+    ; 3 = Start Screen preview - disable the fade from white to the start screen (set after playing a demo scene when going back to start screen)
+    ; 4 = Start Screen preview - swap between the two demos. Reset = Play Underground/Cald demo. Set = Play Paradwyn/Bograth demo
+    ; 5 = Set if Chicken1 is flying. Reset if chicken is displayed as a tile
+    ; 6 = Set if Chicken2 is flying. Reset if chicken is displayed as a tile
+    ; 7 = Set if Chicken3 is flying. Reset if chicken is displayed as a tile
+    ds 1
+    ;ds $A02C - @
+xBits_Puzzle_Bits5_Chicken_Ormagon::
+    ; 0 = Set if Chicken4 is flying. Reset if chicken is displayed as a tile
+    ; 1 = Got Trophy from Valkan's house
+    ; 2 = Found Specimen Jar at the back of the Training Room
+    ; 3 = Talked to Blu at his house (he has fungus)
+    ; 4 = Got fungus Specimen from Blu's house (requires Specimen Jar & Trophy)
+    ; 5 = Talked to Bo'Ahsa at her house
+    ; 6 = Got Fungicide from Bo'Ahsa
+    ; 7 = Encountered Ormagon at Obgren's house
+    ds 1
+    ;ds $A02D - @
+xBits_Puzzle_Bits6_Ormagon::
+    ; 0 = Talked to Obgren about his deluxe house
+    ; 1 = Talked to Blu at his house and he told you that he upgraded his house and got rid of fungus (requires Fungicide)
+    ; 2-7 = unused
+    ds 1
+; Unused puzzle bits
+    ds 4
 
-
-    ds $A032 - @
+    ;ds $A032 - @
 xBits_Orothe::
+    ; These bits are used to open pathways and tell previous highscores
     ; 0 = Completed Orothe_Puzzle1
     ; 1 = Completed Orothe_Puzzle2
     ; 2 = Completed Orothe_Puzzle3
@@ -172,8 +219,98 @@ xBits_Core::
     ; 7 = Unused
     ds 1
 
+; unused
+    ds 9
+
+    ds $A046 - @
+xBits_ZonesCompleted_1::
+    ; These bits are sort of duplicated from above, but in this case
+    ; are used to determine the cutscenes that play after a zone is completed (puzzle 4)
+    ; 0 = Naroom completed
+    ; 1 = Underneath completed
+    ; 2 = Cald completed
+    ; 3 = Orothe completed
+    ; 4 = Arderial completed
+    ; 5 = Weave completed
+    ; 6 = Unused
+    ; 7 = KybarsTeeth completed
+    ds 1
+    ;ds $A047 - @
+xBits_ZonesCompleted_2::
+    ; 0 = Bograth completed
+    ; 1 = Paradwyn completed
+    ; 2 = Core completed
+    ; 3 = dResh completed
+    ; 4-7 = Unused
+    ds 1
+    ;ds $A048 - @
+xBits_ZonesIntroduced_1::
+    ; Set if the cutscene introducing the zone has been played
+    ; 0 = Naroom introduced
+    ; 1 = introduced
+    ; 2 = Cald introduced
+    ; 3 = Orothe introduced
+    ; 4 = Unused - Arderial introduced
+    ; 5 = Unused - Weave introduced
+    ; 6 = dResh introduced
+    ; 7 = KybarsTeeth introduced
+    ds 1
+    ;ds $A049 - @
+xBits_ZonesIntroduced_2::
+    ; 0 = Bograth introduced
+    ; 1 = Paradwyn introduced
+    ; 2 = Unused ?Core introduced
+    ; 3-7 = Unused
+    ds 1
+    ;ds $A04A - @
+xBits_Secrets_1::
+    ; These bits are sort of duplicated from above, but in this case
+    ; are used to determine the cutscenes that play after secrets
+    ; 0 = Naroom Secret completed
+    ; 1 = Underneath Secret completed
+    ; 2 = Cald Secret completed
+    ; 3 = Orothe Secret completed
+    ; 4 = Arderial Secret completed
+    ; 5 = Weave Secret completed
+    ; 6 = dResh Secret completed
+    ; 7 = KybarsTeeth Secret completed
+    ds 1
+    ;ds $A04B - @
+xBits_Secrets_2::
+    ; 0 = Bograth Secret completed
+    ; 1 = Paradwyn Secret completed
+    ; 2 = Core Secret completed
+    ; 3-7 = Unused
+    ds 1
+
+; Unused space
+    ds (xScript_SaveBits + $FF) - @
+
     ds $A127 - @
-xScript_SaveVars:
+xScript_SaveVars::
+xdResh_Puzzle5_PreviousChunkID::
+    ; dResh_Puzzle5 = The ID of the chunk being erased
+    ; Bograth_Puzzle4 = ?deprecated
+    ; Core_Puzzle2 = ?deprecated
+    ds 1
+    ;ds $A128 - @
+xPuzzle_SwitchCounter_Thirst::
+    ; dResh_Puzzle2 & Paradwyn_Puzzle3 & Bograth_Puzzle2 = Number of switches activated (0-4) for secret
+    ; Core_Puzzle1 & Core_Puzzle4 = Number of switches activated from the sets of 3 (0-3)
+    ; dResh_Puzzle5 = Thirst = 1-14
+    ; Paradwyn_Puzzle5 = The Trigger ID of the next correct switch to trigger (1-6 instead of 0-5)
+    ds 1
+    ;ds $A129 - @
+xTrainingRoom_TimesAround::
+    ; Number of times around the head of the training room (0-5)
+    ; Underneath_Puzzle2 & Underneath_Puzzle4 - deprecated?
+    ds 1
+    ;ds $A12A - @
+xDeprecated::
+    ; Underneath_Puzzle4 - deprecated?
+    ds 1
+
+    ; unused puzzle bytes?
 
     ds $A132 - @
 xNumberOfAttempts:
@@ -181,7 +318,19 @@ xNumberOfAttempts:
     ;ds $A133 - @
 xPuzzleCounter:
     ; dResh_Puzzle2 = Thirst = 1-14
+    ; dResh_Puzzle5 = The ID of the chunk being drawn
     ds 1
+    ;ds $A134 - @
+    ;ds $A135 - @
+    ;ds $A136 - @
+
+    ;ds $A138 - @
+    ;ds $A139 - @
+    ;ds $A13A - @
+    ;ds $A13B - @
+    ;ds $A13C - @
+    ;ds $A13D - @
+
 
     ds $A159 - @
 xNaroom_Puzzle1_HighScore:
@@ -358,10 +507,18 @@ xCore_Puzzle4_HighScore:
     ds 1
 
     ;ds $A191 - @
-xLaser_HighScore:
+xTurret_HighScore:
     ds 1
 
-    ds $A227 - @
+; Unused space
+    ds (xScript_SaveVars + $FF) - @
+
+    ;ds $A226 - @
+xScript_Treasure:
+    ; Unused/Deprecated
+    ds 1
+
+    ;ds $A227 - @
 xHeroAbilities::
     ; 0 = Nothing
     ; 1 = Energy Band
@@ -370,10 +527,29 @@ xHeroAbilities::
     ; 4 = Orothean Belt
     ; 5 = Eye of the Storm
     ds 1
-
-    ds $A32B - @
+    ;ds $A228 - @
+xGlyphState::
+    ; Unused
+    ds 1
+    ;ds $A229 - @
+xMoney::
+    ; Deprecated. Changed from 2 to 1
+    ds 1
+    ;ds $A22A - @
+xHeroSpriteRelatedUNK::
+    ; Seems to be some counter that decreases in some special circumstance
+    ; If zero, switches out one animation with another?
+    ; Seems to be glitched however as the counter is read while the battery is off
+    ds 1
+; Unused
+    ds 1
+    ;ds $A22C - @
+xInventory_Infused:
+    ds $FF
+    ;ds $A32B - @
 xGamestate_RAM_NEW_GAME_END::
 
+; Unused
 
     ds $A7F0 - @
 xBattery_Verify1::

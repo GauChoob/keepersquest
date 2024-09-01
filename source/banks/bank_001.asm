@@ -4051,9 +4051,9 @@ jr_001_591C:
     ld [$C944], a                                 ; $5929: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5938: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5938: $FA $2A $A2
     dec a                                         ; $593B: $3D
-    ld [$A22A], a                                 ; $593C: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $593C: $EA $2A $A2
     Battery_Off
     ld a, $23                                     ; $5943: $3E $23
     ld [hScript.Frame], a                                 ; $5945: $EA $A9 $FF
@@ -4066,9 +4066,9 @@ jr_001_591C:
     ld [$C944], a                                 ; $5952: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5961: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5961: $FA $2A $A2
     dec a                                         ; $5964: $3D
-    ld [$A22A], a                                 ; $5965: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5965: $EA $2A $A2
     Battery_Off
     ld a, $30                                     ; $596C: $3E $30
     ld [hScript.Frame], a                                 ; $596E: $EA $A9 $FF
@@ -4081,9 +4081,9 @@ jr_001_591C:
     ld [$C944], a                                 ; $597B: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $598A: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $598A: $FA $2A $A2
     dec a                                         ; $598D: $3D
-    ld [$A22A], a                                 ; $598E: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $598E: $EA $2A $A2
     Battery_Off
     ld a, $3D                                     ; $5995: $3E $3D
     ld [hScript.Frame], a                                 ; $5997: $EA $A9 $FF
@@ -4096,9 +4096,9 @@ jr_001_591C:
     ld [$C944], a                                 ; $59A4: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $59B3: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $59B3: $FA $2A $A2
     dec a                                         ; $59B6: $3D
-    ld [$A22A], a                                 ; $59B7: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $59B7: $EA $2A $A2
     Battery_Off
     ld a, $4A                                     ; $59BE: $3E $4A
     ld [hScript.Frame], a                                 ; $59C0: $EA $A9 $FF
@@ -4112,9 +4112,9 @@ Jump_001_59CB:
     ld [$C944], a                                 ; $59CD: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $59DC: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $59DC: $FA $2A $A2
     dec a                                         ; $59DF: $3D
-    ld [$A22A], a                                 ; $59E0: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $59E0: $EA $2A $A2
     Battery_Off
     ld a, $1A                                     ; $59E7: $3E $1A
     ld [hScript.Frame], a                                 ; $59E9: $EA $A9 $FF
@@ -4128,9 +4128,9 @@ Jump_001_59F4:
     ld [$C944], a                                 ; $59F6: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5A05: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5A05: $FA $2A $A2
     dec a                                         ; $5A08: $3D
-    ld [$A22A], a                                 ; $5A09: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5A09: $EA $2A $A2
     Battery_Off
     ld a, $0D                                     ; $5A10: $3E $0D
     ld [hScript.Frame], a                                 ; $5A12: $EA $A9 $FF
@@ -4144,9 +4144,9 @@ Jump_001_5A1D:
     ld [$C944], a                                 ; $5A1F: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5A2E: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5A2E: $FA $2A $A2
     dec a                                         ; $5A31: $3D
-    ld [$A22A], a                                 ; $5A32: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5A32: $EA $2A $A2
     Battery_Off
     ld a, $F3                                     ; $5A39: $3E $F3
     ld [hScript.Frame], a                                 ; $5A3B: $EA $A9 $FF
@@ -4160,9 +4160,9 @@ Jump_001_5A46:
     ld [$C944], a                                 ; $5A48: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5A57: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5A57: $FA $2A $A2
     dec a                                         ; $5A5A: $3D
-    ld [$A22A], a                                 ; $5A5B: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5A5B: $EA $2A $A2
     Battery_Off
     ld a, $00                                     ; $5A62: $3E $00
     ld [hScript.Frame], a                                 ; $5A64: $EA $A9 $FF
@@ -4195,7 +4195,7 @@ Jump_001_5A46:
     jr jr_001_5AEE                                ; $5AA0: $18 $4C
 
 jr_001_5AA2:
-    ld a, [$A22A]                                 ; $5AA2: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5AA2: $FA $2A $A2
     cp $00                                        ; $5AA5: $FE $00
     jp z, Jump_001_5B13                           ; $5AA7: $CA $13 $5B
 
@@ -4203,8 +4203,9 @@ jr_001_5AA2:
     cp $00                                        ; $5AAB: $FE $00
     jp z, Jump_001_5B13                           ; $5AAD: $CA $13 $5B
 
-    ld [$A22A], a                                 ; $5AB0: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5AB0: $EA $2A $A2
     Battery_Off
+    ; Swimming animation:
     ld a, $35                                     ; $5AB7: $3E $35
     ld [hScript.Frame], a                                 ; $5AB9: $EA $A9 $FF
     ld a, $5F                                     ; $5ABC: $3E $5F
@@ -4260,6 +4261,7 @@ jr_001_5B06:
 
 
 Jump_001_5B13:
+    ; Glitched animation?
     ld a, $9C                                     ; $5B13: $3E $9C
     ld [hScript.Frame], a                                 ; $5B15: $EA $A9 $FF
     ld a, $5B                                     ; $5B18: $3E $5B
@@ -4271,9 +4273,9 @@ Jump_001_5B13:
     ld [$C944], a                                 ; $5B22: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5B31: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5B31: $FA $2A $A2
     dec a                                         ; $5B34: $3D
-    ld [$A22A], a                                 ; $5B35: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5B35: $EA $2A $A2
     Battery_Off
     ld a, $0D                                     ; $5B3C: $3E $0D
     ld [hScript.Frame], a                                 ; $5B3E: $EA $A9 $FF
@@ -4286,9 +4288,9 @@ Jump_001_5B13:
     ld [$C944], a                                 ; $5B4B: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5B5A: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5B5A: $FA $2A $A2
     dec a                                         ; $5B5D: $3D
-    ld [$A22A], a                                 ; $5B5E: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5B5E: $EA $2A $A2
     Battery_Off
     ld a, $F3                                     ; $5B65: $3E $F3
     ld [hScript.Frame], a                                 ; $5B67: $EA $A9 $FF
@@ -4301,9 +4303,9 @@ Jump_001_5B13:
     ld [$C944], a                                 ; $5B74: $EA $44 $C9
     Battery_SetBank $00
     Battery_On
-    ld a, [$A22A]                                 ; $5B83: $FA $2A $A2
+    ld a, [xHeroSpriteRelatedUNK]                                 ; $5B83: $FA $2A $A2
     dec a                                         ; $5B86: $3D
-    ld [$A22A], a                                 ; $5B87: $EA $2A $A2
+    ld [xHeroSpriteRelatedUNK], a                                 ; $5B87: $EA $2A $A2
     Battery_Off
     ld a, $00                                     ; $5B8E: $3E $00
     ld [hScript.Frame], a                                 ; $5B90: $EA $A9 $FF

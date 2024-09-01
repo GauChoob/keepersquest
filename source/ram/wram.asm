@@ -192,6 +192,10 @@ wSalafyInvincible::
 wHeroAbilities::
     ds 1
 
+    ds $CA1B - @
+wInventory_Amount::
+    ds 1
+
     ds $CDF5 - @
 wStack::
     ds $100

@@ -56,7 +56,7 @@ SCRIPT_09_4424::
     End()
 
 ACTORSCRIPT0_09_4484::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00000010)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00000010)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -149,9 +149,9 @@ ACTORSCRIPT0_09_45C2::
     SetScriptScroll(SCRIPT_19_46F0)
     End()
 
-SCRIPT_09_45D3::
+Script_Underneath_SecretCompletedFirstTimeCutscene::
     StartSong(SONGID_Arderial)
-    OrByte(RAM_00_A04A, %00000010)
+    OrByte(xBits_Secrets_1, %00000010)
     ThatAI(0, Call_001_4AF8)
     ThatScript(0, ACTORSCRIPT0_09_4600)
     ThatInit(2, Call_001_4AF8, $1F, $1C, $D597, $78, ACTORSCRIPT0_09_4633, Actor_Null)
@@ -369,9 +369,9 @@ SCRIPT_09_49CE::
     SetEventText(1)
     End()
 
-SCRIPT_09_4A10::
+Script_Underneath_CompletedFirstTime::
     StartSong(SONGID_Arderial)
-    OrByte(MATHADDRESS_00_A046, %00000010)
+    OrByte(xBits_ZonesCompleted_1, %00000010)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1127,7 +1127,7 @@ SCRIPT_09_580A::
     End()
 
 ACTORSCRIPT0_09_586A::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00000100)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00000100)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7896)
     End()
 
@@ -1342,7 +1342,7 @@ SCRIPT_09_5B1B::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_5B65::
+Script_Cald_SecretCompletedFirstTime::
     StartSong(SONGID_Shop)
     SetByte(RAM_00_A135, $03)
     SceneNew()
@@ -1410,9 +1410,9 @@ SCRIPT_09_5C20::
     SetEventText(1)
     End()
 
-SCRIPT_09_5C50::
+Script_Cald_CompletedFirstTime::
     StartSong(SONGID_Shop)
-    OrByte(MATHADDRESS_00_A046, %00000100)
+    OrByte(xBits_ZonesCompleted_1, %00000100)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2160,7 +2160,7 @@ SCRIPT_09_6A80::
     End()
 
 ACTORSCRIPT0_09_6AE0::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A046], c%00100000)#, SCRIPT_19_4710)
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_1], c%00100000)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
     End()
 
@@ -2322,7 +2322,7 @@ SCRIPT_09_6CCE::
     SetEventText(1)
     End()
 
-SCRIPT_09_6CF9::
+Script_Weave_SecretCompletedFirstTime::
     StartSong(SONGID_Weave)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
@@ -2386,9 +2386,9 @@ SCRIPT_09_6DA4::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-SCRIPT_09_6DD7::
+Script_Weave_CompletedFirstTime::
     StartSong(SONGID_Weave)
-    OrByte(MATHADDRESS_00_A046, %00100000)
+    OrByte(xBits_ZonesCompleted_1, %00100000)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -3069,7 +3069,7 @@ Trigger_Weave_Main_9::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-Trigger_Weave_Main_10::
+Trigger_Weave_Main_A::
     SetByte(wScript_StartButtonDisabled, $01)
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_09_7E59, SCRIPT_09_7E8C, SCRIPT_09_7ED2, SCRIPT_09_7F04, SCRIPT_09_7F41)
@@ -3098,31 +3098,31 @@ SCRIPT_09_7F73::
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
-Trigger_Weave_Main_11::
+Trigger_Weave_Main_B::
     LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D0A1, $07, $05, $D0A1, $05, $0B)
     End()
 
-Trigger_Weave_Main_12::
+Trigger_Weave_Main_C::
     LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D0D9, $04, $08, $D0D9, $07, $07)
     TransplantMapMask($D1AD, $01, $02, $D1AD, $0E, $09)
     End()
 
-Trigger_Weave_Main_13::
+Trigger_Weave_Main_D::
     LongJumpIf(#(bitmatch(c[xBits_Weave], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D1EA, $04, $09, $D1EA, $10, $0A)
     End()
 
-Trigger_Weave_Main_14::
+Trigger_Weave_Main_E::
     LongJumpIf(#(bitmatch(c[xBits_Weave], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D187, $07, $0E, $D187, $0D, $01)
     End()
 
-Trigger_Weave_Main_15::
+Trigger_Weave_Main_F::
     LongJumpIf(#(bitmatch(c[xBits_Weave], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D175, $08, $0C, $D175, $0C, $0D)
     End()
 
-Trigger_Weave_Main_16::
+Trigger_Weave_Main_10::
     End()

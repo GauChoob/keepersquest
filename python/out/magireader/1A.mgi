@@ -300,34 +300,34 @@ Hotspot_Overworld_1_0::
     LongJump(SCRIPT_SCENELOADER_09_4878)
 
 Hotspot_Overworld_1_1::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000100) == c0)#, SCRIPT_1A_4C1D)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000100) == c0)#, SCRIPT_1A_4C1D)
     LongJump(SCRIPT_SCENELOADER_09_59C1)
 
 SCRIPT_1A_4C1D::
-    OrByte(MATHADDRESS_00_A048, %00000100)
+    OrByte(xBits_ZonesIntroduced_1, %00000100)
     LongJump(SCRIPT_09_5EA7)
 
 Hotspot_Overworld_1_2::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00000001) == c0)#, SCRIPT_1A_4C34)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000001) == c0)#, SCRIPT_1A_4C34)
     LongJump(SCRIPT_SCENELOADER_0F_4298)
 
 SCRIPT_1A_4C34::
-    OrByte(MATHADDRESS_00_A048, %00000001)
+    OrByte(xBits_ZonesIntroduced_1, %00000001)
     LongJump(SCRIPT_0F_4843)
 
 Hotspot_Overworld_1_3::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%00001000) == c0)#, SCRIPT_1A_4C4B)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00001000) == c0)#, SCRIPT_1A_4C4B)
     LongJump(SCRIPT_SCENELOADER_0F_590A)
 
 SCRIPT_1A_4C4B::
-    OrByte(MATHADDRESS_00_A048, %00001000)
+    OrByte(xBits_ZonesIntroduced_1, %00001000)
     LongJump(SCRIPT_0F_5CFE)
 
 Hotspot_Overworld_1_4::
     LongJump(SCRIPT_SCENELOADER_0E_4DE8)
 
 SCRIPT_1A_4C57::
-    OrByte(MATHADDRESS_00_A048, %00010000)
+    OrByte(xBits_ZonesIntroduced_1, %00010000)
     LongJump(SCRIPT_0E_56E8)
 
 SCRIPT_1A_4C5F::
@@ -336,7 +336,7 @@ SCRIPT_1A_4C5F::
 SCRIPT_1A_4C60::
     LongJump(SCRIPT_1A_517F)
 
-Trigger_Overworld_1_11::
+Trigger_Overworld_1_B::
     Icon(Icon_Salafy)
     RandLongJump(SCRIPT_1A_4C75, SCRIPT_1A_4CC1, SCRIPT_1A_4CFB, SCRIPT_1A_4D41)
 
@@ -419,34 +419,34 @@ Trigger_Overworld_1_9::
     Close()
     End()
 
-Trigger_Overworld_1_10::
+Trigger_Overworld_1_A::
     Icon(Icon_Salafy)
     Write("Even from a⭍distance, there🅐is no doubt⭍Vash Naroom is🅐the prettiest⭍city around!🅐")
     Close()
     End()
 
-Trigger_Overworld_1_12::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000010) == c0)#, Actor_Null)
+Trigger_Overworld_1_C::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000010) == c0)#, Actor_Null)
     TransplantMapMask($D009, $09, $09, $D009, $00, $09)
     End()
 
-Trigger_Overworld_1_13::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000100) == c0)#, Actor_Null)
+Trigger_Overworld_1_D::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000100) == c0)#, Actor_Null)
     TransplantMapMask($D140, $08, $09, $D140, $0A, $14)
     End()
 
-Trigger_Overworld_1_14::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00000001) == c0)#, Actor_Null)
+Trigger_Overworld_1_E::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D285, $0C, $0A, $D285, $15, $0F)
     End()
 
-Trigger_Overworld_1_15::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00001000) == c0)#, Actor_Null)
+Trigger_Overworld_1_F::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D221, $08, $07, $D221, $12, $05)
     End()
 
-Trigger_Overworld_1_16::
-Trigger_Overworld_1_17::
+Trigger_Overworld_1_10::
+Trigger_Overworld_1_11::
     End()
 
 SCRIPT_1A_50B8::
@@ -624,35 +624,35 @@ Hotspot_Overworld_2_0::
     LongJump(SCRIPT_SCENELOADER_09_6B5F)
 
 Hotspot_Overworld_2_1::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%01000000) == c0)#, SCRIPT_1A_531D)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%01000000) == c0)#, SCRIPT_1A_531D)
     LongJump(Script_dResh_LoadGame)
 
 SCRIPT_1A_531D::
-    OrByte(MATHADDRESS_00_A048, %01000000)
+    OrByte(xBits_ZonesIntroduced_1, %01000000)
     LongJump(SCRIPT_0C_6FB1)
 
 Hotspot_Overworld_2_2::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A048], c%10000000) == c0)#, SCRIPT_1A_5334)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%10000000) == c0)#, SCRIPT_1A_5334)
     LongJump(SCRIPT_SCENELOADER_16_6F92)
 
 SCRIPT_1A_5334::
-    OrByte(MATHADDRESS_00_A048, %10000000)
+    OrByte(xBits_ZonesIntroduced_1, %10000000)
     LongJump(SCRIPT_16_737D)
 
 Hotspot_Overworld_2_3::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A049], c%00000001) == c0)#, SCRIPT_1A_534B)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_2], c%00000001) == c0)#, SCRIPT_1A_534B)
     LongJump(SCRIPT_SCENELOADER_08_6D13)
 
 SCRIPT_1A_534B::
-    OrByte(MATHADDRESS_00_A049, %00000001)
+    OrByte(xBits_ZonesIntroduced_2, %00000001)
     LongJump(SCRIPT_08_72FF)
 
 Hotspot_Overworld_2_4::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A049], c%00000010) == c0)#, SCRIPT_1A_5362)
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_2], c%00000010) == c0)#, SCRIPT_1A_5362)
     LongJump(SCRIPT_SCENELOADER_0E_6AD9)
 
 SCRIPT_1A_5362::
-    OrByte(MATHADDRESS_00_A049, %00000010)
+    OrByte(xBits_ZonesIntroduced_2, %00000010)
     LongJump(SCRIPT_0E_74F1)
 
 Hotspot_Overworld_2_5::
@@ -721,32 +721,32 @@ Trigger_Overworld_2_9::
     Close()
     End()
 
-Trigger_Overworld_2_10::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%00100000) == c0)#, Actor_Null)
+Trigger_Overworld_2_A::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00100000) == c0)#, Actor_Null)
     TransplantMapMask($D206, $09, $0B, $D206, $11, $08)
     End()
 
-Trigger_Overworld_2_11::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00001000) == c0)#, Actor_Null)
+Trigger_Overworld_2_B::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_2], c%00001000) == c0)#, Actor_Null)
     TransplantMapMask($D1F0, $06, $06, $D1F0, $10, $10)
     End()
 
-Trigger_Overworld_2_12::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A046], c%10000000) == c0)#, Actor_Null)
+Trigger_Overworld_2_C::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%10000000) == c0)#, Actor_Null)
     TransplantMapMask($D04F, $0A, $0B, $D04F, $02, $13)
     End()
 
-Trigger_Overworld_2_13::
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A047], c%00000001) == c0)#, Actor_Null)
+Trigger_Overworld_2_D::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_2], c%00000001) == c0)#, Actor_Null)
     TransplantMapMask($D044, $06, $06, $D044, $02, $08)
     End()
 
-Trigger_Overworld_2_14::
+Trigger_Overworld_2_E::
     LongJumpIf(#((c[xVARBYTE_00_A138] != c5) or (c[xVARBYTE_00_A139] != c5))#, Actor_Null)
     TransplantMapMask($D11A, $07, $07, $D11A, $09, $0C)
     End()
 
-Trigger_Overworld_2_15::
+Trigger_Overworld_2_F::
     LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_1A_5730)
     LongJumpIf(#((c[xVARBYTE_00_A138] == c5) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_1A_5730)
     End()
@@ -834,7 +834,7 @@ Hotspot_Overworld_1_7::
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_HouseNoStool)
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A02C], c%01000000)#, SCRIPT_1A_5868)
+    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000)#, SCRIPT_1A_5868)
     LoadScene(Scene_HouseStool)
 
 SCRIPT_1A_5868::
@@ -846,7 +846,7 @@ SCRIPT_1A_5868::
     ThatStart(0)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A046], c%00001000)#, SCRIPT_1A_58A6)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00001000)#, SCRIPT_1A_58A6)
     ThatStart(2)
 
 SCRIPT_1A_58A6::
@@ -856,9 +856,9 @@ SCRIPT_1A_58A6::
 
 ACTORSCRIPT1_1A_58AB::
     ThisSetAnimSingle(ACTORSCRIPT0_13_6039)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A02C], c%01000000) and not bitmatch(c[MATHADDRESS_00_A02D], c%00000010))#, SCRIPT_1A_58DD)
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02D], c%00000010)#, SCRIPT_1A_58D5)
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02C], c%00001000)#, SCRIPT_1A_58E9)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000) and not bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000010))#, SCRIPT_1A_58DD)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000010)#, SCRIPT_1A_58D5)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00001000)#, SCRIPT_1A_58E9)
     SetScriptText(SCRIPT_1A_5A07)
     LongJump(SCRIPT_13_6089)
 
@@ -867,7 +867,7 @@ SCRIPT_1A_58D5::
     LongJump(SCRIPT_13_6089)
 
 SCRIPT_1A_58DD::
-    OrByte(MATHADDRESS_00_A02D, %00000010)
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000010)
     SetScriptText(SCRIPT_1A_5919)
     LongJump(SCRIPT_13_6089)
 
@@ -896,13 +896,13 @@ SCRIPT_1A_5919::
 SCRIPT_1A_59C4::
     Icon(Icon_Orothe_Blu)
     Write("Argh, there⭍be icky🅐fungus⭍everywhere!🅐")
-    LongJumpIf(#((bitmatch(c[MATHADDRESS_00_A02C], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C], c%00000100)) and not bitmatch(c[MATHADDRESS_00_A02C], c%00010000))#, SCRIPT_1A_5BBC)
+    LongJumpIf(#((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000))#, SCRIPT_1A_5BBC)
     Close()
     SetEventText(1)
     End()
 
 SCRIPT_1A_5A07::
-    OrByte(MATHADDRESS_00_A02C, %00001000)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00001000)
     Icon(Icon_Orothe_Blu)
     Write("Arr, Salafy,⭍great to see🅐ye again!⭍Good work on🅐beatin' our⭍mazes.🅐")
     Icon(Icon_Salafy)
@@ -917,7 +917,7 @@ SCRIPT_1A_5A07::
     Write("Ohhhh, this⭍fungus! I did🅐not see it⭍before. It🅐just blends in⭍with the🅐carpet.🅐")
     Icon(Icon_Orothe_Blu)
     Write("Aye, that⭍it does.🅐")
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A02C], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C], c%00000100))#, SCRIPT_1A_5BBC)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100))#, SCRIPT_1A_5BBC)
     Close()
     SetEventText(1)
     End()
@@ -939,14 +939,14 @@ SCRIPT_1A_5BBC::
     Write("Sure thing!🅐")
     Close()
     SetEventText(1)
-    OrByte(MATHADDRESS_00_A02C, %00010000)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00010000)
     End()
 
 Hotspot_Overworld_1_6::
-    SetByte(RAM_00_A129, $00)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111101)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
+    SetByte(xTrainingRoom_TimesAround, $00)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
@@ -966,41 +966,41 @@ Hotspot_Naroom_TrainingRoom_Normal_0::
     LongJump(SCRIPT_1A_4A3A)
 
 Hotspot_Naroom_TrainingRoom_Normal_1::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_1A_5E44)
-    LongJumpIf(#(bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000100) == c0)#, SCRIPT_1A_5E44)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111011)
-    LongJumpIf(#(c[RAM_00_A129] == c5)#, SCRIPT_1A_5E45)
-    VarByteExpr(RAM_00_A129, #(c[RAM_00_A129] + c1)#)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_1A_5E44)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits1], c%00000100) == c0)#, SCRIPT_1A_5E44)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    LongJumpIf(#(c[xTrainingRoom_TimesAround] == c5)#, SCRIPT_1A_5E45)
+    VarByteExpr(xTrainingRoom_TimesAround, #(c[xTrainingRoom_TimesAround] + c1)#)
 
 SCRIPT_1A_5E44::
     End()
 
 SCRIPT_1A_5E45::
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000001)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
     End()
 
 Hotspot_Naroom_TrainingRoom_Normal_2::
 Hotspot_Naroom_TrainingRoom_Normal_3::
-    SetByte(RAM_00_A129, $00)
-    AndByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %11111110)
+    SetByte(xTrainingRoom_TimesAround, $00)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
 
 Hotspot_Naroom_TrainingRoom_Normal_4::
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000100)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
     End()
 
 Trigger_Naroom_TrainingRoom_Normal_1::
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000001)#, SCRIPT_1A_5E61)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_1A_5E61)
     End()
 
 SCRIPT_1A_5E61::
     SetByte(wScript_StartButtonDisabled, $01)
-    LongJumpIf(#bitmatch(c[xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7], c%00000010)#, SCRIPT_1A_5E98)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_1A_5E98)
     Write("'Click!'🅐")
     Close()
     TransplantMap($D434, $02, $03, $D21D, $0D, $15)
-    OrByte(xScript_SaveBits/xBIT_00_A028_0/xBIT_00_A028_1/xBIT_00_A028_2/xBIT_00_A028_3/xBIT_00_A028_4/xBIT_00_A028_5/xBIT_00_A028_6/xBIT_00_A028_7, %00000010)
-    LongJumpIf(#(bitmatch(c[MATHADDRESS_00_A02C], c%00000100) == c0)#, SCRIPT_1A_5E98)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100) == c0)#, SCRIPT_1A_5E98)
     TransplantTile($03, $18, $D090, COLLID_TR00, $FF)
 
 SCRIPT_1A_5E98::
@@ -1008,12 +1008,12 @@ SCRIPT_1A_5E98::
     End()
 
 Trigger_Naroom_TrainingRoom_Normal_0::
-    TriggerOnce(xBIT_00_A02C_2, SCRIPT_TRIGGERALREADYON_1A_5ED6, $FF, $D090)
+    TriggerOnce(xBits_Puzzle_Bits5_Chicken_Ormagon[2], SCRIPT_TRIGGERALREADYON_1A_5ED6, $FF, $D090)
     StartSFX0(SFXID_PhysicalAttack)
     SetByte(wScript_StartButtonDisabled, $01)
     Write("Salafy found a⭍Specimen Jar!🅐")
     Close()
-    OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %00000100)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00000100)
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 
@@ -1043,7 +1043,7 @@ Hotspot_Overworld_2_6::
     ThatStart(0)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A046], c%00100000)#, SCRIPT_1A_5F49)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00100000)#, SCRIPT_1A_5F49)
     ThatStart(2)
 
 SCRIPT_1A_5F49::
@@ -1055,7 +1055,7 @@ SCRIPT_1A_5F49::
 
 ACTORSCRIPT1_1A_5F56::
     ThisSetAnimSingle(ACTORSCRIPT0_13_62AC)
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00100000)#, SCRIPT_1A_5F6A)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00100000)#, SCRIPT_1A_5F6A)
     SetScriptText(SCRIPT_1A_5FDF)
     LongJump(SCRIPT_13_62FC)
 
@@ -1066,13 +1066,13 @@ SCRIPT_1A_5F6A::
 SCRIPT_1A_5F72::
     Icon(Icon_Weave_BoAhsa)
     Write("I would be⭍rich with🅐animite right⭍now if Eidon🅐had just made⭍that bet.....🅐")
-    LongJumpIf(#(((bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000100)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00010000)) and not bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%01000000))#, SCRIPT_1A_6160)
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_6160)
     Close()
     SetEventText(1)
     End()
 
 SCRIPT_1A_5FDF::
-    OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %00100000)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00100000)
     Icon(Icon_Weave_BoAhsa)
     Write("Heya, Salafy.🅐")
     Icon(Icon_Salafy)
@@ -1085,7 +1085,7 @@ SCRIPT_1A_5FDF::
     Write("Hah! If⭍Eidon had made🅐that bet, then⭍the pressure🅐on you would⭍have been too🅐much and you⭍would have🅐failed!🅐")
     Icon(Icon_Salafy)
     Write("........🅐")
-    LongJumpIf(#(((bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000100)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00010000)) and not bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%01000000))#, SCRIPT_1A_6160)
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_6160)
     Close()
     SetEventText(1)
     End()
@@ -1114,7 +1114,7 @@ SCRIPT_1A_6160::
     Icon(Icon_Salafy)
     Write(".......🅐")
     Close()
-    OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %01000000)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %01000000)
     SetEventText(1)
     End()
 
@@ -1131,7 +1131,7 @@ Hotspot_Overworld_1_5::
     ThatStart(0)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A046], c%00000100)#, SCRIPT_1A_63FE)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00000100)#, SCRIPT_1A_63FE)
     ThatStart(2)
 
 SCRIPT_1A_63FE::
@@ -1141,7 +1141,7 @@ SCRIPT_1A_63FE::
 
 ACTORSCRIPT1_1A_6403::
     ThisSetAnimSingle(SCRIPT_11_5374)
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000010)#, SCRIPT_1A_6417)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010)#, SCRIPT_1A_6417)
     SetScriptText(SCRIPT_1A_64A0)
     LongJump(SCRIPT_11_53A6)
 
@@ -1181,7 +1181,7 @@ SCRIPT_1A_64A0::
     Write(".........🅐")
     Close()
     SetEventText(1)
-    OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %00000010)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00000010)
     End()
 
 Trigger_House_Cald_0::
@@ -1442,7 +1442,7 @@ SCRIPT_1A_6C6E::
     Write("What are you⭍doing?🅐")
     Icon(Icon_Salafy)
     Write("I'm sure⭍you did🅐something to⭍this statue to🅐open the door.🅐")
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000100)#, SCRIPT_1A_6D20)
+    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)#, SCRIPT_1A_6D20)
     Write("I opened it⭍earlier, I🅐just can't⭍remember how🅐to do it!🅐So you can⭍tell me.🅐")
 
 SCRIPT_1A_6D20::
@@ -1822,7 +1822,7 @@ Hotspot_Overworld_2_7::
     ThatStart(0)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
-    LongJumpIf(#not bitmatch(c[MATHADDRESS_00_A047], c%00000001)#, SCRIPT_1A_74D4)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_2], c%00000001)#, SCRIPT_1A_74D4)
     ThatStart(2)
 
 SCRIPT_1A_74D4::
@@ -1834,7 +1834,7 @@ ACTORSCRIPT0_1A_74D9::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_14_5C23, 16)
     }
-    LongJumpIf(#(((((bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000100)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00010000)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%01000000)) and not bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%10000000)) and bitmatch(c[MATHADDRESS_00_A047], c%00000001))#, SCRIPT_1A_750C)
+    LongJumpIf(#(((((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%10000000)) and bitmatch(c[xBits_ZonesCompleted_2], c%00000001))#, SCRIPT_1A_750C)
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_14_5D97, 48)
     }
@@ -1931,12 +1931,12 @@ ACTORSCRIPT0_1A_7594::
 
 ACTORSCRIPT1_1A_7607::
     ThisSetAnimSingle(SCRIPT_1A_4943)
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02D], c%00000001)#, SCRIPT_1A_7D0F)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000001)#, SCRIPT_1A_7D0F)
     SetScriptText(SCRIPT_1A_761B)
     LongJump(SCRIPT_1A_4993)
 
 SCRIPT_1A_761B::
-    LongJumpIf(#bitmatch(c[MATHADDRESS_00_A02D], c%00000001)#, SCRIPT_1A_786C)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000001)#, SCRIPT_1A_786C)
     Icon(Icon_Salafy)
     Write("Obgren, this⭍is your house?🅐")
     Icon(Icon_Bograth_Obgren)
@@ -1955,8 +1955,8 @@ SCRIPT_1A_761B::
     Write("I got the⭍deluxe model🅐home!🅐")
     Icon(Icon_Salafy)
     Write("........🅐")
-    OrByte(MATHADDRESS_00_A02D, %00000001)
-    LongJumpIf(#(((bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000010) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00000100)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%00010000)) and bitmatch(c[MATHADDRESS_00_A02C/xBIT_00_A02C_2], c%01000000))#, SCRIPT_1A_7888)
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000001)
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_7888)
     Close()
     SetEventText(1)
     End()
@@ -2024,8 +2024,8 @@ SCRIPT_1A_7C75::
     Icon(Icon_Bograth_Obgren)
     Write("Now that was⭍an interesting🅐coincidence,⭍wasn't it?🅐")
     Close()
-    OrByte(MATHADDRESS_00_A02D, %00000001)
-    OrByte(MATHADDRESS_00_A02C/xBIT_00_A02C_2, %10000000)
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000001)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %10000000)
     ThatAI(0, AI_Hero)
     ThatScript(0, SCRIPT_14_5D97)
     ThatScript(2, SCRIPT_1A_4943)
