@@ -1,0 +1,1069 @@
+
+SCRIPT_12_4000::
+    StartSong(SONGID_Rescue)
+    LongJump(Script_Arderial_Puzzle1_First)
+
+SCRIPT_12_4006::
+    StartSong(SONGID_Rescue)
+    LongJump(Script_Arderial_Puzzle2_First)
+
+SCRIPT_12_400C::
+    StartSong(SONGID_Rescue)
+    LongJump(Script_Arderial_Puzzle3_First)
+
+SCRIPT_12_4012::
+    StartSong(SONGID_Rescue)
+    LongJump(Script_Arderial_Puzzle4_First)
+
+SCRIPT_12_4018::
+    StartSong(SONGID_Rescue)
+    LongJump(Script_Arderial_Puzzle5_First)
+
+Script_Arderial_Puzzle1_Complete::
+    OrByte(xBits_Arderial, %00000001)
+
+SCRIPT_12_4022::
+    HeroToDoor($06, $05)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle2_Complete::
+    OrByte(xBits_Arderial, %00000010)
+
+SCRIPT_12_402D::
+    HeroToDoor($05, $12)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle4_Complete::
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) == c0)#, SCRIPT_12_4046)
+    HeroToDoor($10, $0B)
+    LongJump(SCRIPT_0E_4D76)
+
+SCRIPT_12_4046::
+    OrByte(xBits_Arderial, %00000100)
+    LongJump(Script_Arderial_CompletedFirstTime)
+
+SCRIPT_12_404E::
+    HeroToDoor($10, $0B)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle3_Complete::
+    LongJumpIf(#bitmatch(c[xBits_Arderial], c%00001000)#, SCRIPT_12_4068)
+    OrByte(xBits_Arderial, %00001000)
+    HeroToDoor($11, $15)
+    LongJump(SCRIPT_0E_4D76)
+
+SCRIPT_12_4068::
+    HeroToDoor($11, $15)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle3_SecretComplete::
+    LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00010000) == w65535)#, SCRIPT_12_4095)
+    OrByte(xBits_Arderial, %00100000)
+    OrByte(xBits_Arderial, %00001000)
+    OrByte(xBits_Secrets_1, %00010000)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, Script_Arderial_Puzzle3_SecretComplete)
+    LongJump(Script_Arderial_SecretCompletedFirstTime)
+
+SCRIPT_12_4095::
+    OrByte(xBits_Arderial, %00100000)
+    OrByte(xBits_Arderial, %00001000)
+    HeroToDoor($11, $15)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle5_Complete::
+    LongJumpIf(#bitmatch(c[xBits_Arderial], c%00010000)#, SCRIPT_12_40B4)
+    OrByte(xBits_Arderial, %00010000)
+    LongJump(SCRIPT_0E_4E57)
+
+SCRIPT_12_40B4::
+    HeroToDoor($16, $01)
+    LongJump(SCRIPT_0E_4D76)
+
+Script_Arderial_Puzzle1_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_Arderial_Puzzle1_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Arderial_Puzzle1)
+    LoadHotspots(Hotspot_Arderial_Puzzle1)
+    ThatInit(0, AI_Hero, $06, $1C, $D3DA, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(2, AI_InvisibleLaser, $1A, $07, $D10F, $50, Actor_Null, ACTORSCRIPT1_12_415E)
+    ThatInit(3, AI_Chicken, $07, $1B, $D3B8, $54, ACTORSCRIPT0_19_4829, ACTORSCRIPT1_19_483D)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
+    LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_12_4135)
+    End()
+
+SCRIPT_STARTBUTTON_12_4135::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_12_41CE, SCRIPT_12_4022)
+    End()
+
+ACTORSCRIPT1_12_415E::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_12_418E)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_12_419E)
+        Case(1, SCRIPT_12_41AA)
+        Case(2, SCRIPT_12_41B6)
+        Case(3, SCRIPT_12_41C2)
+    }
+    End()
+
+ACTORSCRIPT0_12_418E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_4198::
+    ThatDelete(0)
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_419E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_41AA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_41B6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_41C2::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_41CE)
+
+SCRIPT_12_41CE::
+    ThisSetAnimSingle(Actor_Null)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    LongJump(Script_Arderial_Puzzle1_Again)
+
+Hotspot_Arderial_Puzzle1_0::
+    StartSong(SONGID_GetItem)
+    ThatDelete(0)
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000001) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle1_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000001) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle1_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle1_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle1_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle1_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle1_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle1_Complete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle1_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle1_Complete)
+
+Script_Arderial_Puzzle2_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_Arderial_Puzzle2_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Arderial_Puzzle2)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_57C5)
+    LoadHotspots(Hotspot_Arderial_Puzzle2)
+    ThatInit(0, AI_Hero, $02, $1B, $D32C, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(2, AI_InvisibleLaser, $0B, $19, $D2F9, $50, Actor_Null, ACTORSCRIPT1_12_44B6)
+    ThatInit(3, AI_InvisibleLaser, $0F, $10, $D1EF, $50, Actor_Null, ACTORSCRIPT1_12_44B6)
+    ThatInit(4, AI_InvisibleLaser, $13, $10, $D1F3, $50, Actor_Null, ACTORSCRIPT1_12_44B6)
+    ThatInit(14, AI_Chicken, $03, $19, $D2F1, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
+    ThatInit(15, AI_Chicken, $03, $04, $D07B, $54, ACTORSCRIPT0_19_4D4F, ACTORSCRIPT1_19_4D67)
+    ThatInit(16, AI_Chicken, $04, $04, $D07C, $54, ACTORSCRIPT0_19_4BE5, ACTORSCRIPT1_19_4BFD)
+    ThatInit(17, AI_Chicken, $1A, $08, $D10A, $54, ACTORSCRIPT0_19_4EB9, ACTORSCRIPT1_19_4ED1)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
+    LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(14)
+    ThatStart(15)
+    ThatStart(16)
+    ThatStart(17)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_12_443C)
+    End()
+
+SCRIPT_STARTBUTTON_12_443C::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_4453)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4453::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4463)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4463::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4473)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4473::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000001)#, SCRIPT_12_4483)
+    ThatDrawTile(17, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4483::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    ThatDelete(17)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_12_4526, SCRIPT_12_402D)
+    End()
+
+ACTORSCRIPT1_12_44B6::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_12_44E6)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_12_44F6)
+        Case(1, SCRIPT_12_4502)
+        Case(2, SCRIPT_12_450E)
+        Case(3, SCRIPT_12_451A)
+    }
+    End()
+
+ACTORSCRIPT0_12_44E6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_44F0::
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_44F6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_4502::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_450E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_451A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4526)
+
+SCRIPT_12_4526::
+    ThisSetAnimSingle(Actor_Null)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    LongJump(Script_Arderial_Puzzle2_Again)
+
+Hotspot_Arderial_Puzzle2_0::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_4567)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4567::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4577)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4577::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4587)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4587::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000001)#, SCRIPT_12_4597)
+    ThatDrawTile(17, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4597::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    ThatDelete(17)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle2_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle2_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle2_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle2_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle2_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle2_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle2_Complete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle2_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle2_Complete)
+
+Script_Arderial_Puzzle4_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_Arderial_Puzzle4_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Arderial_Puzzle4)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_57C5)
+    LoadHotspots(Hotspot_Arderial_Puzzle4)
+    ThatInit(0, AI_Hero, $06, $02, $D038, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(2, AI_InvisibleLaser, $07, $0C, $D133, $50, Actor_Null, ACTORSCRIPT1_12_4840)
+    ThatInit(3, AI_InvisibleLaser, $0B, $11, $D1B4, $50, Actor_Null, ACTORSCRIPT1_12_4840)
+    ThatInit(4, AI_InvisibleLaser, $0F, $0C, $D13B, $50, Actor_Null, ACTORSCRIPT1_12_4840)
+    ThatInit(14, AI_Chicken, $03, $15, $D210, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
+    ThatInit(15, AI_Chicken, $15, $15, $D222, $54, ACTORSCRIPT0_19_4BE5, ACTORSCRIPT1_19_4BFD)
+    ThatInit(16, AI_Chicken, $09, $06, $D09F, $54, ACTORSCRIPT0_19_4D4F, ACTORSCRIPT1_19_4D67)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
+    LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(14)
+    ThatStart(15)
+    ThatStart(16)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_12_47D8)
+    End()
+
+SCRIPT_STARTBUTTON_12_47D8::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_47EF)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_47EF::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_47FF)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_47FF::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_480F)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_480F::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_12_48B0, SCRIPT_12_404E)
+    End()
+
+ACTORSCRIPT1_12_4840::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_12_4870)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_12_4880)
+        Case(1, SCRIPT_12_488C)
+        Case(2, SCRIPT_12_4898)
+        Case(3, SCRIPT_12_48A4)
+    }
+    End()
+
+ACTORSCRIPT0_12_4870::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_487A::
+    ThatDelete(0)
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_4880::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_488C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_4898::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_48A4::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_48B0)
+
+SCRIPT_12_48B0::
+    ThisSetAnimSingle(Actor_Null)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    LongJump(Script_Arderial_Puzzle4_Again)
+
+Hotspot_Arderial_Puzzle4_0::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_48F1)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_48F1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4901)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4901::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4911)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4911::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle4_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00000100) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle4_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle4_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle4_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle4_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle4_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle4_Complete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle4_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle4_Complete)
+
+Script_Arderial_Puzzle3_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_Arderial_Puzzle3_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Arderial_Puzzle3)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_57C5)
+    LoadHotspots(Hotspot_Arderial_Puzzle3)
+    ThatInit(0, AI_Hero, $04, $19, $D2F2, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(2, AI_InvisibleLaser, $04, $04, $D07C, $50, Actor_Null, ACTORSCRIPT1_12_4BC9)
+    ThatInit(3, AI_InvisibleLaser, $11, $08, $D101, $50, Actor_Null, ACTORSCRIPT1_12_4BC9)
+    ThatInit(4, AI_InvisibleLaser, $15, $08, $D105, $50, Actor_Null, ACTORSCRIPT1_12_4BC9)
+    ThatInit(5, AI_InvisibleLaser, $15, $06, $D0C9, $50, Actor_Null, ACTORSCRIPT1_12_4BC9)
+    ThatInit(14, AI_Chicken, $0C, $03, $D066, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
+    ThatInit(15, AI_Chicken, $1A, $03, $D074, $54, ACTORSCRIPT0_19_4BE5, ACTORSCRIPT1_19_4BFD)
+    ThatInit(16, AI_Chicken, $15, $10, $D1F5, $54, ACTORSCRIPT0_19_4D4F, ACTORSCRIPT1_19_4D67)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
+    LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(14)
+    ThatStart(15)
+    ThatStart(16)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_12_4B61)
+    End()
+
+SCRIPT_STARTBUTTON_12_4B61::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_4B78)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4B78::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4B88)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4B88::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4B98)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4B98::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_12_4C39, SCRIPT_12_4068)
+    End()
+
+ACTORSCRIPT1_12_4BC9::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_12_4BF9)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_12_4C09)
+        Case(1, SCRIPT_12_4C15)
+        Case(2, SCRIPT_12_4C21)
+        Case(3, SCRIPT_12_4C2D)
+    }
+    End()
+
+ACTORSCRIPT0_12_4BF9::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 72)
+    }
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C03::
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C09::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 72)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C15::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C21::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C2D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_4C39)
+
+SCRIPT_12_4C39::
+    ThisSetAnimSingle(Actor_Null)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    LongJump(Script_Arderial_Puzzle3_Again)
+
+Hotspot_Arderial_Puzzle3_0::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_4C7A)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4C7A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4C8A)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4C8A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4C9A)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4C9A::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle3_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle3_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle3_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle3_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle3_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle3_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle3_Complete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle3_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle3_Complete)
+
+Hotspot_Arderial_Puzzle3_1::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_4E38)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4E38::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_4E48)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4E48::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_4E58)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_4E58::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    Write("You found⭍a SECRET!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle3_SecretComplete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle3_SecretComplete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle3_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle3_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle3_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle3_SecretComplete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle3_SecretComplete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle3_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle3_SecretComplete)
+
+Script_Arderial_Puzzle5_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_Arderial_Puzzle5_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Arderial_Puzzle5)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_57C5)
+    LoadHotspots(Hotspot_Arderial_Puzzle5)
+    ThatInit(0, AI_Hero, $0C, $03, $D057, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(2, AI_InvisibleLaser, $04, $04, $D068, $50, Actor_Null, ACTORSCRIPT1_12_511B)
+    ThatInit(14, AI_Chicken, $03, $15, $D210, $54, ACTORSCRIPT0_19_4A7B, ACTORSCRIPT1_19_4A93)
+    ThatInit(15, AI_Chicken, $0B, $15, $D218, $54, ACTORSCRIPT0_12_5075, ACTORSCRIPT1_19_4BFD)
+    ThatInit(16, AI_Chicken, $0C, $15, $D219, $54, ACTORSCRIPT0_12_5094, ACTORSCRIPT1_19_4D67)
+    LoadSingleBitmap($04, BITMAP_19_4330, $8500, $00)
+    LoadSingleBitmap($30, BITMAP_19_4030, $8540, $00)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(14)
+    ThatStart(15)
+    ThatStart(16)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $05)
+    AndByte(xBits_Puzzle_Bits3, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_12_50B3)
+    End()
+
+ACTORSCRIPT0_12_5075::
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisSetAnimSingle(Actor_Null)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    End()
+
+ACTORSCRIPT0_12_5094::
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisSetAnimSingle(Actor_Null)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    End()
+
+SCRIPT_STARTBUTTON_12_50B3::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_50CA)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_50CA::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_50DA)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_50DA::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_50EA)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_50EA::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_12_518B, SCRIPT_12_40B4)
+    End()
+
+ACTORSCRIPT1_12_511B::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    StartSFX0(SFXID_PanPop)
+    LoadSpritePalette(PAL8_14_7898)
+    PalRefresh(0, 16)
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, ACTORSCRIPT0_12_514B)
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_12_515B)
+        Case(1, SCRIPT_12_5167)
+        Case(2, SCRIPT_12_5173)
+        Case(3, SCRIPT_12_517F)
+    }
+    End()
+
+ACTORSCRIPT0_12_514B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_60E5, 32)
+    }
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_5155::
+    ThatDelete(0)
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_515B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74CF, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_5167::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7498, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_5173::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74A2, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_517F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_748E, 32)
+    }
+    ThatDelete(0)
+    LongJump(SCRIPT_12_518B)
+
+SCRIPT_12_518B::
+    ThisSetAnimSingle(Actor_Null)
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    LongJump(Script_Arderial_Puzzle5_Again)
+
+Hotspot_Arderial_Puzzle5_0::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00100000)#, SCRIPT_12_51CC)
+    ThatDrawTile(14, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_51CC::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%01000000)#, SCRIPT_12_51DC)
+    ThatDrawTile(15, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_51DC::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%10000000)#, SCRIPT_12_51EC)
+    ThatDrawTile(16, $00, $00, $00, COLLID_SPACE, $FD)
+
+SCRIPT_12_51EC::
+    ThatDelete(14)
+    ThatDelete(15)
+    ThatDelete(16)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
+    LoadBitmapSet(BITSET_2E_7B78, PAL_2F_5905)
+    PalRefresh(0, 16)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00010000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle5_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Arderial], c%00010000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xArderial_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_Arderial_Puzzle5_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xArderial_Puzzle5_HighScore])#, .HighscoreNew)
+    FormatChar(xArderial_Puzzle5_HighScore)
+    LongJumpIf(#(c[xArderial_Puzzle5_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle5_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_Arderial_Puzzle5_Complete)
+
+.HighscoreNew::
+    FormatChar(xArderial_Puzzle5_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xArderial_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_Arderial_Puzzle5_Complete)

@@ -1,0 +1,2828 @@
+
+SCRIPT_19_4690::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("-Click!-🅐")
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetEventText(2)
+    End()
+
+SCRIPT_19_46A7::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("-KaCHINK!-🅐")
+    Close()
+    SetEventText(2)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_19_46C0::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("-RrrrrCLANK!-🅐")
+    Close()
+    SetEventText(2)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_TRIGGERALREADYON_19_46DC::
+    Close()
+    End()
+
+SCRIPT_19_46DE::
+    ThatAI(0, AI_Hero)
+    End()
+
+SCRIPT_19_46E3::
+    ThisSetAnimSingle(Actor_Null)
+
+Actor_Null::
+    End()
+
+Actor_RestoreState::
+    RestoreActorState()
+
+SCRIPT_19_46E9::
+    End()
+
+SCRIPT_19_46EA::
+    End()
+
+SCRIPT_19_46EB::
+    End()
+
+SCRIPT_19_46EC::
+    End()
+
+SCRIPT_19_46ED::
+    End()
+
+SCRIPT_19_46EE::
+    End()
+
+SCRIPT_19_46EF::
+    End()
+
+SCRIPT_19_46F0::
+    ThatAI(0, AI_Hero)
+    ThatScript(0, ACTORSCRIPT0_14_5DBF)
+    End()
+
+SCRIPT_19_46FA::
+    ThatInit(0, AI_Hero, $0A, $0E, $D2C6, $00, SCRIPT_14_5DA1, Actor_RestoreState)
+    ThatStart(0)
+    CameraSeekActor(RAM_00_C189, 2)
+    End()
+
+SCRIPT_19_4710::
+    ThisDelete()
+    End()
+
+SCRIPT_19_4712::
+    SceneNew()
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11110111)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11101111)
+    SetByte(wScript_StartButtonDisabled, $01)
+    BackgroundSceneNew()
+    LoadBitmapSet(BITSET_12_5372, PAL_12_7187)
+    LoadFullTilemap(ATTRTILE_RLE_12_724F)
+    PalClearAnim(0, 8, WHITE_A)
+    SetCamera($00, $00)
+    SceneReady()
+    PalFadeAnimToBase(3, $20, 0, 8)
+    Delay(90)
+    PalClearBase(0, 8, WHITE_A)
+    PalFadeAnimToBase(3, $20, 0, 8)
+    BackgroundSceneNew()
+    LoadBitmapSet(BITSET_12_5372, PAL_12_71C7)
+    LoadFullTilemap(ATTRTILE_RLE_12_774F)
+    PalClearAnim(0, 8, WHITE_A)
+    SetCamera($00, $00)
+    SceneReady()
+    PalFadeAnimToBase(3, $20, 0, 8)
+    Delay(90)
+    PalClearBase(0, 8, WHITE_A)
+    PalFadeAnimToBase(3, $20, 0, 8)
+
+SCRIPT_19_475F::
+    SceneNew()
+    StartSong(SONGID_Cald)
+    SetByte(wScript_StartButtonDisabled, $01)
+    BackgroundSceneNew()
+    LoadBitmapSet(BITSET_12_5390, PAL_12_7207)
+    LoadFullTilemap(ATTRTILE_RLE_12_77D0)
+    LoadSpritePalette(PAL_12_7187)
+    ThatInit(2, Call_001_4AF8, $04, $07, $D04A, $00, ACTORSCRIPT0_19_480C, Actor_Null)
+    ThatInit(3, AI_CheckCheatCodeInput, $05, $05, $D01E, $0C, ACTORSCRIPT0_19_4822, Actor_Null)
+    LoadSingleBitmap($07, BITMAP_0C_40C0, $8000, $00)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00001000)#, SCRIPT_19_47A8)
+    PalClearAnim(0, 8, WHITE_A)
+
+SCRIPT_19_47A8::
+    SetCamera($00, $00)
+    SceneReady()
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00001000)#, SCRIPT_19_47B7)
+    PalFadeAnimToBase(2, $20, 0, 8)
+
+SCRIPT_19_47B7::
+    ThatStart(2)
+    ThatStart(3)
+    SetByte(wSalafyInvincible, $00)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_19_47E7)
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetCheatCode(9, Cheat_B, Cheat_Right, Cheat_Up, Cheat_B, Cheat_Select, Cheat_A, Cheat_Left, Cheat_A, Cheat_Down, Cheat_Null, Cheat_Null, Cheat_Null)
+    Delay(255)
+    Delay(255)
+    Delay(255)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00010000)#, SCRIPT_0A_71AB)
+    LongJump(SCRIPT_0A_6F0C)
+
+SCRIPT_STARTBUTTON_19_47E7::
+    SetByte(RAM_00_C734, $00)
+    LongJumpIf(#c[wScript_CheatCode_Succeeded]#, SCRIPT_19_47F9)
+    HeroToDoor($06, $13)
+    LongJump(Script_StartRoom)
+
+SCRIPT_19_47F9::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetByte(wSalafyInvincible, $01)
+    StartSong(SONGID_GetItem)
+    Delay(96)
+    HeroToDoor($06, $13)
+    LongJump(Script_StartRoom)
+
+ACTORSCRIPT0_19_480C::
+    Delay(32)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_718A)
+
+SCRIPT_19_4812::
+    Delay(32)
+    ThisSetAnimSingle(Actor_Null)
+    Delay(32)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_718A)
+    LongJump(SCRIPT_19_4812)
+
+ACTORSCRIPT0_19_4822::
+    Delay(255)
+    Delay(100)
+    End()
+
+SCRIPT_19_4827::
+    End()
+
+SCRIPT_19_4828::
+    End()
+
+ACTORSCRIPT0_19_4829::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    End()
+
+ACTORSCRIPT1_19_483D::
+    ThisAI(Call_001_4AF8)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_48A1)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4866)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4917)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_48DC)
+    }
+
+SCRIPT_19_4866::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_48A1::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_48DC::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_750C)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4917::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_74D9)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT0_19_4952::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    End()
+
+ACTORSCRIPT1_19_4966::
+    ThisAI(Call_001_4AF8)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_49CA)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_498F)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4A40)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_4A05)
+    }
+
+SCRIPT_19_498F::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_49CA::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4A05::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_750C)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4A40::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_74D9)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT0_19_4A7B::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    End()
+
+ACTORSCRIPT1_19_4A93::
+    ThisAI(Call_001_4AF8)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00100000)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_4B03)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4AB9)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4B97)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_4B4D)
+    }
+
+SCRIPT_19_4AB9::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7542)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4B03::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7578)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4B4D::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_751D)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4B97::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    ThisSetAnimSingle(SCRIPT_11_74EA)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT0_19_4BE5::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    End()
+
+ACTORSCRIPT1_19_4BFD::
+    ThisAI(Call_001_4AF8)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01000000)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_4C6D)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4C23)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4D01)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_4CB7)
+    }
+
+SCRIPT_19_4C23::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7542)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4C6D::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7578)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4CB7::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_751D)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4D01::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    ThisSetAnimSingle(SCRIPT_11_74EA)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT0_19_4D4F::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    End()
+
+ACTORSCRIPT1_19_4D67::
+    ThisAI(Call_001_4AF8)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10000000)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_4DD7)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4D8D)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4E6B)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_4E21)
+    }
+
+SCRIPT_19_4D8D::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7542)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4DD7::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7578)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4E21::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_751D)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4E6B::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    ThisSetAnimSingle(SCRIPT_11_74EA)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT0_19_4EB9::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7564)
+    AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
+    End()
+
+ACTORSCRIPT1_19_4ED1::
+    ThisAI(Call_001_4AF8)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00000001)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_4F41)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4EF7)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4FD5)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_4F8B)
+    }
+
+SCRIPT_19_4EF7::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6141)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7542)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7542, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4F41::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_6167)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_7578)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7578, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4F8B::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_611B)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_11_751D)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_751D, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DB5)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
+    AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+SCRIPT_19_4FD5::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_60F5)
+    Delay(10)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    ThisSetAnimSingle(SCRIPT_11_74EA)
+    ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_74EA, 6)
+    }
+    Delay(5)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DAB)
+    ThisWaitTile($FD)
+    Delay(3)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
+    AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
+    ThisAI(AI_Chicken)
+    SetByte(RAM_00_C188, $00)
+    End()
+
+ACTORSCRIPT1_19_5023::
+    ThisAI(Call_001_4AF8)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
+    ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_19_48A1)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_19_4866)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_19_4917)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_19_48DC)
+    }
+    End()
+
+SCRIPT_19_504D::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_50B9, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5105, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5156, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($09, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_50B9::
+    Delay(80)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 8)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 0)
+    }
+    WaitEventMaster(1)
+    SetScriptText(SCRIPT_19_51F9)
+    WaitEventText(5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 32)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(1, SCRIPT_0F_4518)
+        Case(2, SCRIPT_09_494B)
+        Case(3, SCRIPT_09_5A94)
+        Case(4, SCRIPT_0F_59DD)
+        Case(5, SCRIPT_0E_4EBB)
+    }
+    End()
+
+ACTORSCRIPT0_19_5105::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+    }
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 16)
+        ScriptDelay(SCRIPT_15_754E, 0)
+    }
+    SetScriptText(SCRIPT_19_51BB)
+    WaitEventText(2)
+    SetScriptText(SCRIPT_19_51E8)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 16)
+        ScriptDelay(SCRIPT_15_754E, 0)
+    }
+    Sync(0, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 32)
+        ScriptDelay(SCRIPT_15_7498, 32)
+        ScriptDelay(SCRIPT_15_74B8, 100)
+    }
+    SetEventMaster(1)
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_19_5156::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7AE6, 40)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 40)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 40)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7ABE, 32)
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A30, 24)
+        ScriptDelay(SCRIPT_10_7AAA, 0)
+    }
+    ThatDelete(4)
+    SetScriptText(SCRIPT_19_51A5)
+    WaitEventText(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_10_7AC8)
+    WaitEventText(2)
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 16)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 0)
+    }
+    Sync(0, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 80)
+    }
+    ThisDelete()
+    End()
+
+SCRIPT_19_51A5::
+    Icon(Icon_Core_Zet)
+    Write("Aha! Got it!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_51BB::
+    Icon(Icon_Core_Korg)
+    Write("Give it to me,⭍it's mine!🅐")
+    Icon(Icon_Core_Zet)
+    Write("????🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_51E8::
+    Icon(Icon_Core_Korg)
+    Write("MINE!!🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_51F9::
+    Icon(Icon_Salafy)
+    Write("I've got to be⭍faster, there🅐is only one⭍piece of the🅐wand left!🅐")
+    Close()
+    SetEventText(5)
+    End()
+
+SCRIPT_19_5243::
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
+    Icon(Icon_Yaki)
+    Write("Salafy! Guess⭍what you just🅐did!🅐")
+    Icon(Icon_Salafy)
+    Write("Uh oh. Did I⭍step in🅐something?🅐")
+    Icon(Icon_Yaki)
+    Write("Nope, even⭍better! The🅐exit you just⭍found opened up🅐TWO paths⭍instead of one!🅐")
+    SetEventMaster(1)
+    Write("This one looks⭍normal, the🅐other looks⭍kind of funny,🅐so YOU BE⭍CAREFUL!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_5348::
+    End()
+
+SCRIPT_19_5349::
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
+    Icon(Icon_Yaki)
+    Write("WOOO! You⭍opened up🅐two mazes⭍again!🅐")
+    Icon(Icon_Salafy)
+    Write("Really? I⭍wonder why they🅐")
+    SetEventMaster(1)
+    Write("are so⭍hidden...🅐")
+    Icon(Icon_Yaki)
+    Write("Probably⭍because they🅐are...🅐DANGEROUS!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_53ED::
+    End()
+
+SCRIPT_19_53EE::
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
+    Icon(Icon_Yaki)
+    Write("OOOH YEAA!⭍")
+    SetEventMaster(1)
+    Write("Here come some🅐extra mazes⭍for you again!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_5445::
+    End()
+
+SCRIPT_19_5446::
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
+    Icon(Icon_Salafy)
+    Write("Where is it?🅐")
+    Clear()
+    Write("Where's my⭍extra maze??🅐")
+    Icon(Icon_Yaki)
+    Write("WOO! That's the⭍spirit!🅐")
+    SetEventMaster(1)
+    Write("And you really⭍don't have to🅐look that far.🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_54D9::
+    End()
+
+SCRIPT_19_54DA::
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
+    Icon(Icon_Yaki)
+    Write("All right,⭍sister! Looks🅐like you've⭍opened up all🅐the extra mazes⭍that there are.🅐")
+    Icon(Icon_Salafy)
+    Write("All right! The⭍world is now🅐mine for the⭍taking!🅐")
+    Icon(Icon_Yaki)
+    Write(".........?🅐")
+    SetEventMaster(1)
+    Icon(Icon_Salafy)
+    Write("Well, at least⭍the mazes are.🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_55B6::
+    End()
+
+SCRIPT_19_55B7::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Eidon)
+    Write("I see you have⭍found an extra🅐exit from this⭍maze. This one🅐opened up two⭍mazes instead🅐of one.🅐")
+    SetEventMaster(1)
+    Icon(Icon_Salafy)
+    Write("All right!⭍Maybe I'll find🅐something🅐really cool in⭍that extra one!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_5680::
+    End()
+
+SCRIPT_19_5681::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Salafy)
+    Write("I found another⭍secret!🅐")
+    Icon(Icon_Eidon)
+    Write("Good for you.⭍")
+    SetEventMaster(1)
+    Icon(Icon_Eidon)
+    Write("You know these🅐extra mazes are⭍pretty hard.🅐They aren't too⭍tough for you?🅐")
+    Icon(Icon_Salafy)
+    Write("Naaah, they⭍aren't too bad.🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_573D::
+    End()
+
+SCRIPT_19_573E::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Eidon)
+    Write("Guess what?🅐")
+    Icon(Icon_Salafy)
+    Write("Another new⭍path has🅐opened?🅐")
+    SetEventMaster(1)
+    Icon(Icon_Eidon)
+    Write("It sure has!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_579E::
+    End()
+
+SCRIPT_19_579F::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Eidon)
+    Write("Are those extra⭍exits any🅐harder than the⭍the normal🅐ones?🅐")
+    SetEventMaster(1)
+    Icon(Icon_Salafy)
+    Write("Yes, but I like⭍the challenge!🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_581E::
+    End()
+
+SCRIPT_19_581F::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Eidon)
+    Write("Guess what?🅐")
+    Icon(Icon_Salafy)
+    Write("You brought⭍cookies?🅐")
+    Icon(Icon_Eidon)
+    Write("No, but you⭍should know🅐that you have⭍found every🅐secret exit in⭍the regions I🅐have taken you⭍to.🅐")
+    Icon(Icon_Salafy)
+    Write("And...🅐")
+    SetEventMaster(1)
+    Icon(Icon_Eidon)
+    Write("I'm proud!🅐")
+    Icon(Icon_Salafy)
+    Write(".........?🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_58F8::
+    End()
+
+SCRIPT_19_58F9::
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
+    Icon(Icon_Eidon)
+    Write("There's an⭍extra exit to🅐one of these⭍Core mazes?🅐")
+    Icon(Icon_Salafy)
+    Write("There was, and⭍this one was🅐not easy!🅐")
+    Icon(Icon_Eidon)
+    SetEventMaster(1)
+    Write("That's funny,⭍I don't seem to🅐see where the⭍extra path is.🅐Oh, well, I'm⭍sure it's🅐around here⭍somewhere...🅐")
+    Close()
+    Sync(0, 2)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_59E7::
+    End()
+
+SCRIPT_19_59E8::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_5A54, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $06, $09, $D0BA, $00, ACTORSCRIPT0_19_5AA2, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $08, $09, $D0BC, $28, ACTORSCRIPT0_19_5B15, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0C, $0A, $D0D4, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($09, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_5A54::
+    Delay(80)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 8)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 0)
+    }
+    WaitEventText(10)
+    Delay(90)
+    SetScriptText(SCRIPT_19_5D8F)
+    WaitEventText(11)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 16)
+        ScriptDelay(SCRIPT_14_5C9D, 48)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(1, SCRIPT_0F_4518)
+        Case(2, SCRIPT_09_494B)
+        Case(3, SCRIPT_09_5A94)
+        Case(4, SCRIPT_0F_59DD)
+        Case(5, SCRIPT_0E_4EBB)
+    }
+    End()
+
+ACTORSCRIPT0_19_5AA2::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(SCRIPT_15_751C, 32)
+    }
+    Sync(0, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7498, 16)
+        ScriptDelay(SCRIPT_15_74B8, 86)
+    }
+    ThatDelete(4)
+    ThisSetAnimSingle(SCRIPT_15_7512)
+    SetScriptText(SCRIPT_19_5B97)
+    WaitEventText(3)
+    ThisSetAnimSingle(SCRIPT_15_751C)
+    SetScriptText(SCRIPT_19_5BCF)
+    WaitEventText(4)
+    SetScriptText(SCRIPT_19_5C27)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7512, 64)
+        ScriptDelay(SCRIPT_15_751C, 0)
+    }
+    WaitEventText(7)
+    ThisSetAnimSingle(SCRIPT_15_7512)
+    SetScriptText(SCRIPT_19_5CC0)
+    WaitEventText(12)
+    ThisSetAnimSingle(SCRIPT_15_751C)
+    WaitEventText(9)
+    SetScriptText(SCRIPT_19_5D76)
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 32)
+        ScriptDelay(SCRIPT_15_7498, 32)
+        ScriptDelay(SCRIPT_15_74B8, 48)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_19_5B15::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7AE6, 40)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+    }
+    SetScriptText(SCRIPT_19_5B7D)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 16)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+    }
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A30, 16)
+        ScriptDelay(SCRIPT_10_7ABE, 0)
+    }
+    SetScriptText(SCRIPT_19_5BAC)
+    WaitEventText(6)
+    SetScriptText(SCRIPT_19_5C3D)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7ABE, 32)
+    }
+    WaitEventText(10)
+    Delay(40)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 80)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7A50, 64)
+    }
+    ThisDelete()
+    End()
+
+SCRIPT_19_5B7D::
+    Icon(Icon_Core_Zet)
+    Write("It's over here!🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_5B97::
+    Icon(Icon_Core_Korg)
+    Write("I found it!🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_5BAC::
+    Icon(Icon_Core_Zet)
+    Write("Yeah, but I saw⭍it first!🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_19_5BCF::
+    Icon(Icon_Core_Korg)
+    Write("So? This was my⭍plan!🅐")
+    Icon(Icon_Core_Zet)
+    Write("You wouldn't⭍know a plan if🅐it hit you in⭍the head!🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_19_5C27::
+    Icon(Icon_Core_Korg)
+    Write("Err... yeah!🅐")
+    Close()
+    SetEventText(6)
+    End()
+
+SCRIPT_19_5C3D::
+    Icon(Icon_Core_Zet)
+    Write("Now if we can⭍just find the🅐rest of the⭍wand before🅐that meddling⭍kid comes back,🅐we will be⭍able to free🅐the core⭍hyren!🅐")
+    Close()
+    SetEventText(7)
+    End()
+
+SCRIPT_19_5CC0::
+    Icon(Icon_Core_Korg)
+    Write("My name will be⭍written in the🅐history books,⭍it shall say,🅐'Korg, um...⭍let loose...🅐freed...⭍ravaged...'🅐")
+    SetEventText(12)
+    Write("what was I⭍saying?🅐")
+    Icon(Icon_Core_Zet)
+    Write("You were saying⭍that we were🅐leaving!🅐")
+    Close()
+    SetEventText(9)
+    End()
+
+SCRIPT_19_5D76::
+    Icon(Icon_Core_Korg)
+    Write("Yes! Follow me!🅐")
+    Close()
+    SetEventText(10)
+    End()
+
+SCRIPT_19_5D8F::
+    Icon(Icon_Salafy)
+    Write("Hmm... couldn't⭍get this one,🅐but I had⭍better try and🅐get the other⭍three pieces!🅐")
+    Close()
+    SetEventText(11)
+    End()
+
+SCRIPT_19_5DEB::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0D, $0C, $D0FD, $00, ACTORSCRIPT0_19_5E57, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0E, $05, $D072, $00, ACTORSCRIPT0_19_5EB3, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0E, $05, $D072, $28, ACTORSCRIPT0_19_5EF5, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $07, $07, $D093, $58, ACTORSCRIPT0_11_7180, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_19_4000, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($09, $08)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_5E57::
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 24)
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+        ScriptDelay(SCRIPT_14_5D97, 48)
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+    }
+    SetEventMaster(1)
+    WaitEventMaster(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 16)
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5DA1, 12)
+    }
+    SetScriptText(SCRIPT_19_5F53)
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 16)
+        ScriptDelay(SCRIPT_14_5C5D, 64)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(1, SCRIPT_0F_4518)
+        Case(2, SCRIPT_09_494B)
+        Case(3, SCRIPT_09_5A94)
+        Case(4, SCRIPT_0F_59DD)
+        Case(5, SCRIPT_0E_4EBB)
+    }
+    End()
+
+ACTORSCRIPT0_19_5EB3::
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74A8, 48)
+        ScriptDelay(SCRIPT_15_7498, 32)
+        ScriptDelay(SCRIPT_15_74A8, 54)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74A8, 4)
+        ScriptDelay(SCRIPT_15_751C, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 4)
+    }
+    SetScriptText(SCRIPT_19_5F1D)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7512, 64)
+        ScriptDelay(SCRIPT_15_7526, 0)
+    }
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 64)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(SCRIPT_15_74B8, 64)
+    }
+    SetEventMaster(2)
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_19_5EF5::
+    WaitEventMaster(1)
+    Delay(24)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 30)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7A40, 40)
+        ScriptDelay(SCRIPT_10_7AB4, 0)
+    }
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 40)
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A50, 64)
+    }
+    ThisDelete()
+    End()
+
+SCRIPT_19_5F1D::
+    Icon(Icon_Core_Korg)
+    Write("I found it! All⭍me! Not You!🅐")
+    Close()
+    SetEventText(1)
+    Icon(Icon_Core_Zet)
+    Write("AAARGG!🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_5F53::
+    Icon(Icon_Salafy)
+    Write("It's a wonder⭍they get🅐anything done⭍at all.🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_19_5F89::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0A, $06, $D082, $00, ACTORSCRIPT0_19_5FC3, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0A, $0B, $D0E6, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(4)
+    SetCamera($0A, $0C)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_5FC3::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 70)
+        ScriptDelay(SCRIPT_14_5DA1, 6)
+    }
+    ThatDelete(4)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 48)
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+        ScriptDelay(SCRIPT_14_5DA1, 32)
+    }
+    SetScriptText(SCRIPT_19_6020)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5ABE, 48)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C52)
+        Case(7, SCRIPT_0C_6CA0)
+        Case(8, SCRIPT_16_7079)
+        Case(9, SCRIPT_08_6E06)
+        Case(10, SCRIPT_0E_6BCC)
+    }
+    End()
+
+SCRIPT_19_6020::
+    Icon(Icon_Salafy)
+    Write("The final⭍piece!🅐")
+    Clear()
+    Write("I guess no one⭍is going to try🅐to stop me. I⭍hope that's🅐good.🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_607D::
+    Icon(Icon_Salafy)
+    Write("Uhh...🅐")
+    Icon(Icon_Eidon)
+    Write("Good news?🅐")
+    Icon(Icon_Salafy)
+    Write("Nope. I managed⭍to recover a🅐piece of the⭍crystal, but🅐just as I was⭍leaving this🅐little green⭍guy snuck up🅐behind me and⭍grabbed the🅐piece of the⭍wand I had.🅐")
+    Icon(Icon_Eidon)
+    Write("Sounds like the⭍work of Zet.🅐")
+    Icon(Icon_Eidon)
+    Write("Hmm...🅐")
+    Icon(Icon_Eidon)
+    Write("I think the⭍best thing to🅐do is to⭍collect the🅐rest of the⭍crystal. At⭍least then you🅐will have a⭍weapon against🅐Korg and Zet.🅐")
+    Close()
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_0B_6AB5)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_6201::
+    End()
+
+SCRIPT_19_6202::
+    Icon(Icon_Salafy)
+    Write("Got the rest of⭍the crystal!🅐")
+    Icon(Icon_Eidon)
+    Write("That's great!🅐")
+    Icon(Icon_Salafy)
+    Write("What now?🅐")
+    Icon(Icon_Eidon)
+    Write("Now you finish⭍the rest of the🅐Paradwyn mazes⭍so I can give🅐you back into⭍the... er...🅐care of Yaki.⭍Then he will🅐take you to the⭍remainder of🅐the puzzles.🅐")
+    Icon(Icon_Salafy)
+    Write("Why don't you⭍take me?🅐")
+    Icon(Icon_Eidon)
+    Write("I've got to go⭍back to d'Resh,🅐work on my tan.🅐")
+    Icon(Icon_Salafy)
+    Write("That's a⭍horrible🅐excuse!🅐")
+    Icon(Icon_Eidon)
+    Write("Yes.⭍Yes, it is.🅐")
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_0B_6AB5)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_637D::
+    End()
+
+SCRIPT_19_637E::
+    Icon(Icon_Salafy)
+    Write("Hi, Yaki!🅐")
+    Icon(Icon_Yaki)
+    Write("Salafy! The⭍YAKI is glad to🅐see you!🅐")
+    Icon(Icon_Salafy)
+    Write("Thanks!🅐")
+    Icon(Icon_Yaki)
+    Write("I think I saw⭍Korg still🅐snooping around⭍in here. And🅐remember, if⭍you can get to🅐even one piece⭍of the wand🅐before Korg and⭍Zet do, it🅐might be enough⭍to stop them.🅐")
+    Icon(Icon_Salafy)
+    Write("I know, I know.⭍Fate of the🅐Moonlands and⭍everything...🅐")
+    Icon(Icon_Yaki)
+    Write("NOWWW you got⭍it! GO!!!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_64CD::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $04, $08, $D0A4, $00, ACTORSCRIPT0_19_6520, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0F, $05, $D073, $28, ACTORSCRIPT0_19_65C0, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($0A, $09)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6520::
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 48)
+        ScriptDelay(SCRIPT_14_5C5D, 16)
+        ScriptDelay(SCRIPT_14_5DC9, 0)
+    }
+    SetScriptText(SCRIPT_19_6601)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 12)
+        ScriptDelay(SCRIPT_14_5DA1, 8)
+    }
+    SetScriptText(SCRIPT_19_660E)
+    Delay(24)
+    ThatDelete(4)
+    WaitEventText(2)
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 12)
+    }
+    SetScriptText(SCRIPT_19_6668)
+    Delay(36)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 48)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 48)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 3)
+    Delay(64)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5ACE, 32)
+    }
+    SetScriptText(SCRIPT_19_669C)
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DD3, 96)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(1, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 24)
+        ScriptDelay(SCRIPT_14_5C6D, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C52)
+        Case(7, SCRIPT_0C_6CA0)
+        Case(8, SCRIPT_16_7079)
+        Case(9, SCRIPT_08_6E06)
+        Case(10, SCRIPT_0E_6BCC)
+    }
+    End()
+
+ACTORSCRIPT0_19_65C0::
+    WaitEventText(1)
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 48)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7AAA, 0)
+    }
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 48)
+        ScriptDelay(SCRIPT_10_7AAA, 0)
+    }
+    Sync(0, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 16)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7A50, 24)
+        ScriptDelay(SCRIPT_10_7A20, 48)
+        ScriptDelay(SCRIPT_10_7A50, 48)
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A50, 64)
+    }
+    ThisDelete()
+    End()
+
+SCRIPT_19_6601::
+    Icon(Icon_Salafy)
+    Write("???🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_660E::
+    Icon(Icon_Salafy)
+    Write("Aha! This must⭍be a piece of🅐the crystal⭍that Yaki and🅐Eidon were⭍talking about.🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_6668::
+    Icon(Icon_Salafy)
+    Write("Who's there?🅐")
+    Clear()
+    Write("I know I heard⭍something.🅐")
+    Close()
+    Sync(0, 3)
+    End()
+
+SCRIPT_19_669C::
+    Icon(Icon_Salafy)
+    Write("Ow!🅐")
+    Icon(Icon_Salafy)
+    Write("Hey! That weird⭍little green🅐guy just stole⭍the piece of🅐the wand I⭍found.🅐")
+    Icon(Icon_Salafy)
+    Write("At least I⭍still have the🅐piece of⭍crystal.🅐")
+    Close()
+    Sync(1, 2)
+    End()
+
+SCRIPT_19_672B::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $07, $07, $D093, $00, ACTORSCRIPT0_19_6765, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0E, $05, $D072, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(4)
+    SetCamera($0C, $06)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6765::
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 64)
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 16)
+        ScriptDelay(SCRIPT_14_5DB5, 48)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 48)
+        ScriptDelay(SCRIPT_14_5DAB, 4)
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 4)
+        ScriptDelay(SCRIPT_14_5DB5, 24)
+        ScriptDelay(SCRIPT_14_5C9D, 24)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    SetScriptText(SCRIPT_19_67D3)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 40)
+        ScriptDelay(SCRIPT_14_5C7D, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+SCRIPT_19_67D3::
+    Icon(Icon_Salafy)
+    Write("No one here?🅐")
+    Clear()
+    Write("Now I'm⭍worried.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_67FD::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0E, $0F, $D13A, $00, ACTORSCRIPT0_19_6837, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0C, $09, $D0C0, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(4)
+    SetCamera($0C, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6837::
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 64)
+        ScriptDelay(SCRIPT_14_5C7D, 48)
+        ScriptDelay(SCRIPT_14_5C33, 24)
+        ScriptDelay(SCRIPT_14_5C9D, 12)
+        ScriptDelay(SCRIPT_14_5DD3, 8)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 24)
+    }
+    SetScriptText(SCRIPT_19_6891)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 40)
+        ScriptDelay(SCRIPT_14_5C5D, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+SCRIPT_19_6891::
+    Icon(Icon_Salafy)
+    Write("Hmm...🅐")
+    Clear()
+    Write("I hope Zet⭍isn't doing🅐anything too⭍bad.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_68CD::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0C, $07, $D098, $00, ACTORSCRIPT0_19_6907, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $05, $09, $D0B9, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(4)
+    SetCamera($06, $09)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6907::
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 64)
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5C7D, 40)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 6)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 64)
+        ScriptDelay(SCRIPT_14_5DC9, 64)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 64)
+    }
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    SetScriptText(SCRIPT_19_696D)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 48)
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 80)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+SCRIPT_19_696D::
+    Icon(Icon_Salafy)
+    Write("No one here?🅐")
+    Clear()
+    Write("Now I'm REALLY⭍worried.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_699E::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0B, $0D, $D10F, $00, ACTORSCRIPT0_19_6A0A, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0E, $04, $D05E, $00, ACTORSCRIPT0_19_6A73, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0E, $06, $D086, $28, ACTORSCRIPT0_19_6A92, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $06, $D081, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($0D, $08)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6A0A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 80)
+        ScriptDelay(SCRIPT_14_5D97, 48)
+        ScriptDelay(SCRIPT_14_5DD3, 48)
+        ScriptDelay(SCRIPT_14_5D97, 48)
+    }
+    WaitEventText(1)
+    SetScriptText(SCRIPT_19_6B0D)
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    WaitEventText(2)
+    SetScriptText(SCRIPT_19_6B4B)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5C33, 24)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 100)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 2)
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+ACTORSCRIPT0_19_6A73::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_753A, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(SCRIPT_15_753A, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(SCRIPT_15_753A, 32)
+        ScriptDelay(SCRIPT_15_7512, 32)
+    }
+    SetScriptText(SCRIPT_19_6AB5)
+    End()
+
+ACTORSCRIPT0_19_6A92::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A20, 4)
+        ScriptDelay(SCRIPT_10_7AE6, 40)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(SCRIPT_10_7AA0, 32)
+    }
+    End()
+
+SCRIPT_19_6AB5::
+    Icon(Icon_Core_Korg)
+    Write("Zet, this is⭍it! A truly🅐great plan! A⭍plan so cunning🅐it could peel⭍a banana!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_6B0D::
+    Icon(Icon_Salafy)
+    Write("Is this what⭍evil villians🅐are coming to⭍these days?🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_6B4B::
+    Icon(Icon_Core_Zet)
+    Write("-Grumble-⭍Sure. Whatever🅐you say. You're⭍in charge here.🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_6B8E::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0E, $07, $D09A, $00, ACTORSCRIPT0_19_6BFA, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $05, $08, $D0A5, $00, ACTORSCRIPT0_19_6C48, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $05, $0A, $D0CD, $28, ACTORSCRIPT0_19_6CBE, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $09, $0A, $D0D1, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($08, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_6BFA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 48)
+        ScriptDelay(SCRIPT_14_5C5D, 16)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 0)
+    }
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    ThatDelete(4)
+    SetScriptText(SCRIPT_19_6E82)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5ABE, 48)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 3)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 32)
+        ScriptDelay(SCRIPT_14_5C33, 32)
+        ScriptDelay(SCRIPT_14_5C9D, 80)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    End()
+
+ACTORSCRIPT0_19_6C48::
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_15_7530, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 32)
+        ScriptDelay(SCRIPT_15_7512, 32)
+    }
+    SetScriptText(SCRIPT_19_6D16)
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7526, 48)
+        ScriptDelay(SCRIPT_15_7512, 48)
+        ScriptDelay(SCRIPT_15_754E, 0)
+    }
+    SetScriptText(SCRIPT_19_6D87)
+    WaitEventText(4)
+    Delay(16)
+    ThisSetAnimSingle(SCRIPT_15_754E)
+    WaitEventText(5)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 64)
+        ScriptDelay(SCRIPT_15_7498, 48)
+        ScriptDelay(SCRIPT_15_74B8, 80)
+        ScriptDelay(SCRIPT_15_7512, 0)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C52)
+        Case(7, SCRIPT_0C_6CA0)
+        Case(8, SCRIPT_16_7079)
+        Case(9, SCRIPT_08_6E06)
+        Case(10, SCRIPT_0E_6BCC)
+    }
+    End()
+
+ACTORSCRIPT0_19_6CBE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7ADC, 40)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 32)
+        ScriptDelay(SCRIPT_10_7AA0, 32)
+    }
+    Sync(0, 3)
+    ThisSetAnimSingle(SCRIPT_10_7ABE)
+    SetScriptText(SCRIPT_19_6D52)
+    WaitEventText(3)
+    ThisSetAnimSingle(SCRIPT_10_7AA0)
+    SetScriptText(SCRIPT_19_6DB7)
+    WaitEventText(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 48)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 0)
+    }
+    SetScriptText(SCRIPT_19_6E35)
+    WaitEventText(5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7A50, 80)
+        ScriptDelay(SCRIPT_10_7AAA, 0)
+    }
+    End()
+
+SCRIPT_19_6D16::
+    Icon(Icon_Core_Korg)
+    Write("I've got it! A⭍plan so cunning🅐you can swim⭍in it!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_6D52::
+    Icon(Icon_Core_Zet)
+    Write("Is your plan⭍good enough to🅐stop that girl?🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_6D87::
+    Icon(Icon_Core_Korg)
+    Write("Why didn't you⭍point her out🅐earlier?!🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_19_6DB7::
+    Icon(Icon_Core_Zet)
+    Write("She wasn't⭍there!🅐")
+    Icon(Icon_Core_Korg)
+    Write("Well, she's⭍gone now! Zet,🅐this is all⭍your fault, now🅐we'll never⭍finish the🅐Staff of Hyren!🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_19_6E35::
+    Icon(Icon_Core_Korg)
+    Write("You'll never⭍work with me🅐again!🅐")
+    Icon(Icon_Core_Zet)
+    Write("Oh, if only⭍that were🅐true...🅐")
+    Close()
+    SetEventText(5)
+    End()
+
+SCRIPT_19_6E82::
+    Icon(Icon_Salafy)
+    Write("Last one! And⭍not even a🅐scratch to⭍show for it.🅐")
+    Close()
+    Sync(0, 3)
+    End()
+
+SCRIPT_19_6EBD::
+    Icon(Icon_Salafy)
+    Write("Eidon! Guess⭍what I found!🅐")
+    Icon(Icon_Eidon)
+    Write(".........🅐")
+    Icon(Icon_Salafy)
+    Write("A piece of⭍crystal from🅐the Staff⭍of Hyren!🅐")
+    Icon(Icon_Eidon)
+    Write("Oh, of course.🅐")
+    Clear()
+    Write("Did Korg and⭍Zet see you?🅐")
+    Icon(Icon_Salafy)
+    Write("They saw me,⭍but I got away🅐before they⭍could catch me.🅐")
+    Icon(Icon_Eidon)
+    Write("Good for you.⭍Now go find the🅐rest of that⭍staff!🅐")
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_0B_6AB5)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_6FD3::
+    End()
+
+SCRIPT_19_6FD4::
+    Icon(Icon_Salafy)
+    Write("Got the last of⭍those pieces🅐of the crystal!🅐")
+    Icon(Icon_Eidon)
+    Write("Did you see⭍what happened🅐to Korg and⭍Zet?🅐")
+    Icon(Icon_Salafy)
+    Write("They saw me,⭍but I got🅐away before⭍they could🅐catch me.🅐")
+    Icon(Icon_Eidon)
+    Write("Good for you!🅐Now finish the⭍Paradwyn🅐puzzles so we⭍can move on!🅐")
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_0B_6AB5)
+    SetByte(wScript_StartButtonDisabled, $00)
+    LongJump(SCRIPT_19_70CB)
+
+SCRIPT_19_70CA::
+    End()
+
+SCRIPT_19_70CB::
+    Switch(#c[xZoneToLoad]#) {
+        Case(1, SCRIPT_19_7107)
+        Case(2, SCRIPT_19_710A)
+        Case(3, SCRIPT_19_710D)
+        Case(4, SCRIPT_19_7110)
+        Case(5, SCRIPT_19_7113)
+        Case(6, SCRIPT_19_7116)
+        Case(7, SCRIPT_19_7119)
+        Case(8, SCRIPT_19_711C)
+        Case(9, SCRIPT_19_711F)
+        Case(10, SCRIPT_19_7122)
+        Case(11, SCRIPT_19_7125)
+    }
+
+SCRIPT_19_7107::
+    StartSong(SONGID_Vash_Naroom)
+    End()
+
+SCRIPT_19_710A::
+    StartSong(SONGID_Arderial)
+    End()
+
+SCRIPT_19_710D::
+    StartSong(SONGID_Shop)
+    End()
+
+SCRIPT_19_7110::
+    StartSong(SONGID_Parathin)
+    End()
+
+SCRIPT_19_7113::
+    StartSong(SONGID_DreamCreature)
+    End()
+
+SCRIPT_19_7116::
+    StartSong(SONGID_Weave)
+    End()
+
+SCRIPT_19_7119::
+    StartSong(SONGID_The_Deep)
+    End()
+
+SCRIPT_19_711C::
+    StartSong(SONGID_Boss)
+    End()
+
+SCRIPT_19_711F::
+    StartSong(SONGID_Mushroom_Farm)
+    End()
+
+SCRIPT_19_7122::
+    StartSong(SONGID_Parathin)
+    End()
+
+SCRIPT_19_7125::
+    StartSong(SONGID_Agram)
+    End()
+
+SCRIPT_19_7128::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $07, $09, $D0BB, $00, ACTORSCRIPT0_19_7194, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0F, $0E, $D127, $00, ACTORSCRIPT0_19_71F6, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0D, $0E, $D125, $28, ACTORSCRIPT0_19_7251, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0D, $0A, $D0D5, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($0D, $0D)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_7194::
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 64)
+        ScriptDelay(SCRIPT_14_5C5D, 16)
+        ScriptDelay(SCRIPT_14_5C9D, 16)
+        ScriptDelay(SCRIPT_14_5DC9, 0)
+    }
+    WaitEventText(1)
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    SetScriptText(SCRIPT_19_72F3)
+    WaitEventText(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 16)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 16)
+        ScriptDelay(SCRIPT_14_5C33, 16)
+        ScriptDelay(SCRIPT_14_5C7D, 80)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    WaitEventText(4)
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+ACTORSCRIPT0_19_71F6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7512, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(SCRIPT_15_751C, 32)
+    }
+    SetScriptText(SCRIPT_19_72AA)
+    WaitEventText(3)
+    ThisSetAnimSingle(ACTORSCRIPT1_15_7530)
+    SetScriptText(SCRIPT_19_7359)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74A8, 32)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(SCRIPT_15_74B8, 32)
+        ScriptDelay(SCRIPT_15_7498, 32)
+        ScriptDelay(SCRIPT_15_74A8, 32)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(SCRIPT_15_74A8, 32)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(SCRIPT_15_74A8, 32)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(SCRIPT_15_74A8, 32)
+        ScriptDelay(SCRIPT_15_7512, 0)
+    }
+    End()
+
+ACTORSCRIPT0_19_7251::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7AAA, 40)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ABE, 32)
+    }
+    WaitEventText(2)
+    ThisSetAnimSingle(ACTORSCRIPT1_10_7AC8)
+    SetScriptText(SCRIPT_19_7314)
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A30, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7A20, 32)
+        ScriptDelay(SCRIPT_10_7A40, 32)
+        ScriptDelay(SCRIPT_10_7AAA, 0)
+    }
+    End()
+
+SCRIPT_19_72AA::
+    Icon(Icon_Core_Korg)
+    Write("I've got it! A⭍plan so cunning🅐you can smell⭍your breath🅐on it!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_72F3::
+    Icon(Icon_Salafy)
+    Write("What's with⭍those guys?🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_7314::
+    Icon(Icon_Core_Zet)
+    Write("Well, while you⭍made plans, the🅐girl got the⭍crystal again!🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_19_7359::
+    Icon(Icon_Core_Korg)
+    Write("Zet, this is⭍all your fault!🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_19_737F::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $0D, $0A, $D0D5, $00, ACTORSCRIPT0_19_73EB, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $08, $07, $D094, $00, ACTORSCRIPT0_19_744A, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0A, $07, $D096, $28, ACTORSCRIPT0_19_7469, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $05, $0A, $D0CD, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($08, $09)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_73EB::
+    Delay(64)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 64)
+        ScriptDelay(SCRIPT_14_5D97, 48)
+        ScriptDelay(SCRIPT_14_5DAB, 48)
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    WaitEventText(1)
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    SetScriptText(SCRIPT_19_74E1)
+    WaitEventText(2)
+    SetScriptText(SCRIPT_19_7504)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C6D, 60)
+    }
+    ThatDelete(4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 128)
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 2)
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C4B)
+        Case(7, SCRIPT_0C_6C99)
+        Case(8, SCRIPT_16_7072)
+        Case(9, SCRIPT_08_6DFF)
+        Case(10, SCRIPT_0E_6BC5)
+    }
+    End()
+
+ACTORSCRIPT0_19_744A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7508, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 32)
+        ScriptDelay(SCRIPT_15_753A, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 32)
+        ScriptDelay(SCRIPT_15_753A, 32)
+        ScriptDelay(SCRIPT_15_7526, 32)
+    }
+    SetScriptText(SCRIPT_19_7488)
+    End()
+
+ACTORSCRIPT0_19_7469::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7AA0, 40)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 32)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 32)
+        ScriptDelay(SCRIPT_10_7AB4, 32)
+    }
+    End()
+
+SCRIPT_19_7488::
+    Icon(Icon_Core_Korg)
+    Write("Aha! This time⭍I've got it! A🅐plan so cunning⭍you can clip🅐your toenails⭍on it!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_74E1::
+    Icon(Icon_Salafy)
+    Write("Sheesh, this⭍is too easy!🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_19_7504::
+    Icon(Icon_Core_Zet)
+    Write("'Clip your⭍toenails on🅐it?' What does⭍that mean!?🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_7540::
+    LoadSpritePalette(Pal_AllSprites)
+    ThatInit(0, Call_001_4AF8, $04, $09, $D0B8, $00, ACTORSCRIPT0_19_75AC, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $0B, $0A, $D0D3, $00, ACTORSCRIPT0_19_7614, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $09, $0A, $D0D1, $28, ACTORSCRIPT0_19_7784, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0B, $07, $D097, $58, ACTORSCRIPT0_11_728D, Actor_RestoreState)
+    LoadSingleBitmap($28, BITMAP_0D_6BC0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0C_45F0, $8280, $00)
+    LoadSingleBitmap($0C, BITMAP_0D_4760, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($0A, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_19_75AC::
+    Delay(64)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(SCRIPT_14_5C33, 16)
+        ScriptDelay(SCRIPT_14_5C9D, 16)
+        ScriptDelay(SCRIPT_14_5C33, 16)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(SCRIPT_14_5DB5, 48)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+    }
+    WaitEventText(4)
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    SetScriptText(SCRIPT_19_7949)
+    WaitEventText(5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C9D, 64)
+    }
+    ThatDelete(4)
+    SetEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 32)
+        ScriptDelay(SCRIPT_14_5C7D, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 0)
+    }
+    WaitEventText(9)
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    SetScriptText(SCRIPT_19_79F8)
+    WaitEventText(11)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 48)
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+    }
+    SetEventMaster(2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C7D, 60)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_19_7614::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7512, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 32)
+        ScriptDelay(SCRIPT_15_754E, 32)
+        ScriptDelay(SCRIPT_15_751C, 32)
+    }
+    SetScriptText(SCRIPT_19_788F)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 32)
+        ScriptDelay(SCRIPT_15_754E, 48)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 48)
+        ScriptDelay(SCRIPT_15_754E, 48)
+    }
+    Sync(0, 2)
+    ThisSetAnimSingle(SCRIPT_15_751C)
+    SetScriptText(SCRIPT_19_78F9)
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7498, 16)
+        ScriptDelay(SCRIPT_15_754E, 48)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 48)
+        ScriptDelay(SCRIPT_15_754E, 48)
+    }
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_15_7530)
+    SetScriptText(SCRIPT_19_7967)
+    WaitEventText(7)
+    SetScriptText(SCRIPT_19_79B1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74A8, 16)
+        ScriptDelay(SCRIPT_15_7488, 32)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 0)
+    }
+    Sync(1, 3)
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74A8, 48)
+        ScriptDelay(SCRIPT_15_753A, 6)
+        ScriptDelay(SCRIPT_15_7508, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 6)
+        ScriptDelay(SCRIPT_15_751C, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 6)
+        ScriptDelay(SCRIPT_15_7512, 6)
+        ScriptDelay(SCRIPT_15_754E, 6)
+        ScriptDelay(SCRIPT_15_7526, 6)
+        ScriptDelay(SCRIPT_15_74A8, 16)
+        ScriptDelay(SCRIPT_15_753A, 6)
+        ScriptDelay(SCRIPT_15_7508, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 6)
+        ScriptDelay(SCRIPT_15_751C, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 6)
+        ScriptDelay(SCRIPT_15_7512, 6)
+        ScriptDelay(SCRIPT_15_754E, 6)
+        ScriptDelay(SCRIPT_15_7526, 6)
+    }
+    WaitEventMaster(2)
+    ThisSetAnimSingle(ACTORSCRIPT1_15_7530)
+    SetScriptText(SCRIPT_19_7A20)
+    WaitEventText(12)
+    Delay(16)
+    SetScriptText(SCRIPT_19_7A33)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_753A, 6)
+        ScriptDelay(SCRIPT_15_7508, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 6)
+        ScriptDelay(SCRIPT_15_751C, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 6)
+        ScriptDelay(SCRIPT_15_7512, 6)
+        ScriptDelay(SCRIPT_15_754E, 6)
+        ScriptDelay(SCRIPT_15_7526, 6)
+        ScriptDelay(SCRIPT_15_74A8, 16)
+        ScriptDelay(SCRIPT_15_753A, 6)
+        ScriptDelay(SCRIPT_15_7508, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7530, 6)
+        ScriptDelay(SCRIPT_15_751C, 6)
+        ScriptDelay(ACTORSCRIPT1_15_7544, 6)
+        ScriptDelay(SCRIPT_15_7512, 6)
+        ScriptDelay(SCRIPT_15_754E, 6)
+        ScriptDelay(SCRIPT_15_7526, 6)
+    }
+    Sync(2, 2)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_15_7530, 48)
+        ScriptDelay(SCRIPT_15_753A, 48)
+    }
+    SetScriptText(SCRIPT_19_7A4D)
+    WaitEventText(14)
+    Delay(32)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_74B8, 48)
+        ScriptDelay(SCRIPT_15_7488, 48)
+        ScriptDelay(SCRIPT_15_74B8, 32)
+        ScriptDelay(SCRIPT_15_7488, 16)
+        ScriptDelay(SCRIPT_15_7512, 0)
+        ScriptDelay(SCRIPT_15_74B8, 64)
+    }
+    Sync(3, 2)
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    Switch(#c[xZoneToLoad]#) {
+        Case(6, SCRIPT_09_6C52)
+        Case(7, SCRIPT_0C_6CA0)
+        Case(8, SCRIPT_16_7079)
+        Case(9, SCRIPT_08_6E06)
+        Case(10, SCRIPT_0E_6BCC)
+    }
+    End()
+
+ACTORSCRIPT0_19_7784::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7AAA, 40)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7ABE, 32)
+    }
+    WaitEventText(1)
+    SetScriptText(SCRIPT_19_78D1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 16)
+        ScriptDelay(SCRIPT_10_7ABE, 48)
+        ScriptDelay(SCRIPT_10_7ADC, 32)
+        ScriptDelay(SCRIPT_10_7AB4, 0)
+    }
+    WaitEventText(3)
+    ThisSetAnimSingle(SCRIPT_10_7ABE)
+    SetScriptText(SCRIPT_19_792D)
+    WaitEventText(4)
+    ThisSetAnimSingle(SCRIPT_10_7ADC)
+    WaitEventText(6)
+    ThisSetAnimSingle(SCRIPT_10_7ABE)
+    SetScriptText(SCRIPT_19_79A1)
+    Sync(1, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A20, 16)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 6)
+        ScriptDelay(SCRIPT_10_7AA0, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 6)
+        ScriptDelay(SCRIPT_10_7AB4, 6)
+        ScriptDelay(SCRIPT_10_7ADC, 6)
+        ScriptDelay(SCRIPT_10_7AAA, 6)
+        ScriptDelay(SCRIPT_10_7AE6, 6)
+        ScriptDelay(SCRIPT_10_7ABE, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 6)
+        ScriptDelay(SCRIPT_10_7AA0, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 6)
+        ScriptDelay(SCRIPT_10_7AB4, 6)
+        ScriptDelay(SCRIPT_10_7ADC, 6)
+        ScriptDelay(SCRIPT_10_7AAA, 6)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7AB4, 0)
+    }
+    SetScriptText(SCRIPT_19_79C7)
+    WaitEventText(12)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A40, 24)
+        ScriptDelay(SCRIPT_10_7A50, 16)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 6)
+        ScriptDelay(SCRIPT_10_7AA0, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 6)
+        ScriptDelay(SCRIPT_10_7AB4, 6)
+        ScriptDelay(SCRIPT_10_7ADC, 6)
+        ScriptDelay(SCRIPT_10_7AAA, 6)
+        ScriptDelay(SCRIPT_10_7AE6, 6)
+        ScriptDelay(SCRIPT_10_7ABE, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AD2, 6)
+        ScriptDelay(SCRIPT_10_7AA0, 6)
+        ScriptDelay(ACTORSCRIPT1_10_7AC8, 6)
+        ScriptDelay(SCRIPT_10_7AB4, 6)
+        ScriptDelay(SCRIPT_10_7ADC, 6)
+        ScriptDelay(SCRIPT_10_7AAA, 6)
+        ScriptDelay(SCRIPT_10_7AE6, 32)
+        ScriptDelay(SCRIPT_10_7AB4, 0)
+    }
+    WaitEventText(14)
+    SetScriptText(SCRIPT_19_7A6C)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_7A50, 32)
+        ScriptDelay(SCRIPT_10_7A20, 48)
+        ScriptDelay(SCRIPT_10_7A50, 16)
+        ScriptDelay(SCRIPT_10_7A20, 16)
+        ScriptDelay(SCRIPT_10_7A50, 60)
+    }
+    ThisDelete()
+    End()
+
+SCRIPT_19_788F::
+    Icon(Icon_Core_Korg)
+    Write("I'm in charge,⭍and I say the🅐crystal piece⭍is over here!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_19_78D1::
+    Icon(Icon_Core_Zet)
+    Write("No, Korg! I saw⭍it over here.🅐")
+    Close()
+    Sync(0, 2)
+    End()
+
+SCRIPT_19_78F9::
+    Icon(Icon_Core_Korg)
+    Write("I already⭍looked there,🅐it's not...⭍there!🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_19_792D::
+    Icon(Icon_Core_Zet)
+    Write("AAARRG, come⭍back!🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_19_7949::
+    Icon(Icon_Salafy)
+    Write("Those guys are⭍evil?🅐")
+    Close()
+    SetEventText(5)
+    End()
+
+SCRIPT_19_7967::
+    Icon(Icon_Core_Korg)
+    Write("Hey, that girl⭍just picked up🅐the crystal⭍piece!🅐")
+    Close()
+    SetEventText(6)
+    End()
+
+SCRIPT_19_79A1::
+    Icon(Icon_Core_Zet)
+    Write("Where?🅐")
+    Close()
+    SetEventText(7)
+    End()
+
+SCRIPT_19_79B1::
+    Icon(Icon_Core_Korg)
+    Write("Over there!🅐")
+    Close()
+    Sync(1, 3)
+    End()
+
+SCRIPT_19_79C7::
+    Icon(Icon_Core_Zet)
+    Write("You idiot!🅐")
+    Icon(Icon_Core_Korg)
+    Write("This is all⭍your fault!🅐")
+    Close()
+    SetEventText(9)
+    End()
+
+SCRIPT_19_79F8::
+    Icon(Icon_Salafy)
+    Write("Time for me to⭍get outta here.🅐")
+    Close()
+    SetEventText(11)
+    End()
+
+SCRIPT_19_7A20::
+    Icon(Icon_Core_Korg)
+    Write("Stop her!🅐")
+    Close()
+    SetEventText(12)
+    End()
+
+SCRIPT_19_7A33::
+    Icon(Icon_Core_Korg)
+    Write("Zet, you idiot!🅐")
+    Close()
+    Sync(2, 2)
+    End()
+
+SCRIPT_19_7A4D::
+    Icon(Icon_Core_Korg)
+    Write("Which way did⭍she go?🅐")
+    Close()
+    SetEventText(14)
+    End()
+
+SCRIPT_19_7A6C::
+    Icon(Icon_Core_Zet)
+    Write("I think she⭍went this way.🅐")
+    Close()
+    Sync(3, 2)
+    End()

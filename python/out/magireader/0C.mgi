@@ -1,0 +1,3217 @@
+
+SCRIPT_0C_4AA0::
+    StartSong(SONGID_Final_Battle)
+    LongJump(Script_KybarsTeeth_Puzzle1_First)
+
+SCRIPT_0C_4AA6::
+    StartSong(SONGID_Final_Battle)
+    LongJump(Script_KybarsTeeth_Puzzle2_First)
+
+SCRIPT_0C_4AAC::
+    StartSong(SONGID_Final_Battle)
+    LongJump(Script_KybarsTeeth_Puzzle3_First)
+
+SCRIPT_0C_4AB2::
+    StartSong(SONGID_Final_Battle)
+    LongJump(Script_KybarsTeeth_Puzzle4_First)
+
+SCRIPT_0C_4AB8::
+    StartSong(SONGID_Final_Battle)
+    LongJump(Script_KybarsTeeth_Puzzle5_First)
+
+Script_KybarsTeeth_Puzzle1_Complete::
+    OrByte(xBits_KybarsTeeth, %00000001)
+
+SCRIPT_0C_4AC2::
+    HeroToDoor($11, $04)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle2_Complete::
+    OrByte(xBits_KybarsTeeth, %00000010)
+
+SCRIPT_0C_4ACD::
+    HeroToDoor($05, $03)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle2_SecretComplete::
+    LongJumpIf(#bitmatch(c[xBits_Secrets_1], c%10000000)#, SCRIPT_0C_4AEC)
+    OrByte(xBits_KybarsTeeth, %00000010)
+    OrByte(xBits_KybarsTeeth, %00100000)
+    OrByte(xBits_Secrets_1, %10000000)
+    LongJump(Script_KybarsTeeth_SecretCompletedFirstTime)
+
+SCRIPT_0C_4AEC::
+    OrByte(xBits_KybarsTeeth, %00000010)
+    OrByte(xBits_KybarsTeeth, %00100000)
+    HeroToDoor($05, $03)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle3_Complete::
+    OrByte(xBits_KybarsTeeth, %00000100)
+
+SCRIPT_0C_4AFF::
+    HeroToDoor($04, $10)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle4_Complete::
+    LongJumpIf(#bitmatch(c[xBits_KybarsTeeth], c%00001000)#, SCRIPT_0C_4B19)
+    OrByte(xBits_KybarsTeeth, %00001000)
+    HeroToDoor($0C, $16)
+    LongJump(Script_KybarsTeeth_CompletedFirstTime)
+
+SCRIPT_0C_4B19::
+    HeroToDoor($0C, $16)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle5_Complete::
+    LongJumpIf(#bitmatch(c[xBits_KybarsTeeth], c%00010000)#, SCRIPT_0C_4B30)
+    OrByte(xBits_KybarsTeeth, %00010000)
+    LongJump(SCRIPT_16_7001)
+
+SCRIPT_0C_4B30::
+    HeroToDoor($18, $0E)
+    LongJump(SCRIPT_16_6F20)
+
+Script_KybarsTeeth_Puzzle1_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_KybarsTeeth_Puzzle1_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_KybarsTeeth_Puzzle1)
+    LoadHotspots(Hotspot_KybarsTeeth_Puzzle1)
+    ThatInit(0, AI_Hero, $01, $05, $D04C, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(3, AI_01_70E1, $03, $01, $D012, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(4, AI_01_70E1, $05, $01, $D014, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(5, AI_01_70E1, $07, $05, $D052, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(6, AI_01_70E1, $09, $01, $D018, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(7, AI_01_70E1, $0B, $01, $D01A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(8, AI_01_70E1, $0D, $02, $D02B, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(9, AI_01_70E1, $0D, $03, $D03A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatInit(10, AI_01_70E1, $0D, $04, $D049, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_4C40)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_4C1B)
+    End()
+
+SCRIPT_STARTBUTTON_0C_4C1B::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_0C_4C4F, SCRIPT_0C_4AC2)
+    End()
+
+ACTORSCRIPT1_0C_4C40::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatScript(0, SCRIPT_0C_4C4F)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    End()
+
+SCRIPT_0C_4C4F::
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(Script_KybarsTeeth_Puzzle1_Again)
+
+SCRIPT_0C_4C78::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+SCRIPT_0C_4C8F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    End()
+
+SCRIPT_0C_4CA6::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    End()
+
+SCRIPT_0C_4CBD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    End()
+
+SCRIPT_0C_4CD4::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_4CEB::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    End()
+
+SCRIPT_0C_4D02::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    End()
+
+SCRIPT_0C_4D19::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 96)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_0::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4D41)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4D41::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4D53)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4D53::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_2::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4D65)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4D65::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_3::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4D77)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4D77::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_4D88)
+    ThatScript(3, SCRIPT_0C_4C78)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_4D88::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_4::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4D9A)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4D9A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_4DAB)
+    ThatScript(4, SCRIPT_0C_4C8F)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_4DAB::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_5::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4DBD)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4DBD::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_4DCE)
+    ThatScript(5, SCRIPT_0C_4CA6)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_4DCE::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_6::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4DE0)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4DE0::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_4DF1)
+    ThatScript(6, SCRIPT_0C_4CBD)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_4DF1::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_7::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_4E03)
+    ThatScript(10, SCRIPT_0C_4D19)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_4E03::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_4E14)
+    ThatScript(7, SCRIPT_0C_4CD4)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_4E14::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_8::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4E26)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4E26::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_4E37)
+    ThatScript(3, SCRIPT_0C_4C78)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_4E37::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_9::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4E49)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4E49::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_4E5A)
+    ThatScript(4, SCRIPT_0C_4C8F)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_4E5A::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4E6C)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4E6C::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_4E7D)
+    ThatScript(5, SCRIPT_0C_4CA6)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_4E7D::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4E8F)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4E8F::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_4EA0)
+    ThatScript(6, SCRIPT_0C_4CBD)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_4EA0::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_C::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_4EB2)
+    ThatScript(9, SCRIPT_0C_4D02)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_4EB2::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_4EC3)
+    ThatScript(7, SCRIPT_0C_4CD4)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_4EC3::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_D::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4ED5)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4ED5::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_4EE6)
+    ThatScript(3, SCRIPT_0C_4C78)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_4EE6::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4EF8)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4EF8::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_4F09)
+    ThatScript(4, SCRIPT_0C_4C8F)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_4F09::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_F::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4F1B)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4F1B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_4F2C)
+    ThatScript(5, SCRIPT_0C_4CA6)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_4F2C::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_10::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4F3E)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4F3E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_4F4F)
+    ThatScript(6, SCRIPT_0C_4CBD)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_4F4F::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_11::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_4F61)
+    ThatScript(8, SCRIPT_0C_4CEB)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_4F61::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_4F72)
+    ThatScript(7, SCRIPT_0C_4CD4)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_4F72::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_12::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_4F84)
+    ThatScript(5, SCRIPT_0C_4CA6)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_4F84::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle1_13::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000001) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle1_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000001) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle1_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle1_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle1_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle1_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle1_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle1_Complete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle1_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle1_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle1_Complete)
+
+Script_KybarsTeeth_Puzzle2_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_KybarsTeeth_Puzzle2_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_KybarsTeeth_Puzzle2)
+    LoadHotspots(Hotspot_KybarsTeeth_Puzzle2)
+    SetStartButtonScript(Hotspot_KybarsTeeth_Puzzle2_7)
+    ThatInit(0, AI_Hero, $02, $3D, $DF42, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(4, AI_01_70E1, $04, $30, $DC04, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(5, AI_01_70E1, $0F, $3C, $DF0F, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(6, AI_01_70E1, $15, $3C, $DF15, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(7, AI_01_70E1, $0D, $3A, $DE8D, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(8, AI_01_70E1, $0F, $35, $DD4F, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(9, AI_01_70E1, $11, $38, $DE11, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(10, AI_01_70E1, $1F, $18, $D61F, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(11, AI_01_70E1, $25, $17, $D5E5, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(18, AI_01_70E1, $25, $14, $D525, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(19, AI_01_70E1, $28, $17, $D5E8, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(20, AI_01_70E1, $25, $25, $D965, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatInit(21, AI_01_70E1, $25, $24, $D925, $18, ACTORSCRIPT0_11_778A, ACTORSCRIPT1_0C_5269)
+    ThatStart(0)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    ThatStart(11)
+    ThatStart(18)
+    ThatStart(19)
+    ThatStart(21)
+    ThatStart(20)
+    LoadSingleBitmap($0C, BITMAP_0C_4000, $8000, $00)
+    LoadSingleBitmap($0A, BITMAP_17_4000, $80C0, $00)
+    LoadSingleBitmap($0B, BITMAP_19_45E0, $8180, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    AndByte(xBits_Puzzle_Bits2, %11111011)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_5244)
+    End()
+
+SCRIPT_STARTBUTTON_0C_5244::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_0C_5277, SCRIPT_0C_4ACD)
+    End()
+
+ACTORSCRIPT1_0C_5269::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_778A)
+
+Hotspot_KybarsTeeth_Puzzle2_7::
+    ThatDelete(0)
+    LongJump(SCRIPT_0C_5277)
+
+SCRIPT_0C_5277::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(Script_KybarsTeeth_Puzzle2_Again)
+
+Hotspot_KybarsTeeth_Puzzle2_1::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle2_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle2_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle2_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle2_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle2_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_Complete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle2_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_Complete)
+
+SCRIPT_0C_5417::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77F2, 70)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 16)
+        ScriptDelay(SCRIPT_11_7808, 70)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    End()
+
+SCRIPT_0C_5430::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7834, 8)
+        ScriptDelay(SCRIPT_11_77F2, 56)
+        ScriptDelay(SCRIPT_11_781E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 16)
+        ScriptDelay(SCRIPT_11_7834, 40)
+        ScriptDelay(SCRIPT_11_7808, 56)
+        ScriptDelay(SCRIPT_11_781E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    End()
+
+SCRIPT_0C_5459::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7808, 48)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 16)
+        ScriptDelay(SCRIPT_11_77A2, 96)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_546E::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77CA, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77DE, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    End()
+
+SCRIPT_0C_5487::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77CA, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77DE, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_549C::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77B6, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77A2, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    End()
+
+SCRIPT_0C_54B5::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77B6, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77A2, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_54CA::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77DE, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77CA, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111011)
+    End()
+
+SCRIPT_0C_54E3::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77DE, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 154)
+        ScriptDelay(SCRIPT_11_77CA, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_54F8::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77F2, 32)
+        ScriptDelay(SCRIPT_11_781E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_550D::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7834, 16)
+        ScriptDelay(SCRIPT_11_7808, 32)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    End()
+
+SCRIPT_0C_5522::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7808, 48)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_552F::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77A2, 16)
+        ScriptDelay(SCRIPT_11_77F2, 40)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_5540::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7834, 24)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_554D::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_781E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    End()
+
+SCRIPT_0C_555E::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7808, 24)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_556B::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_77F2, 24)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    End()
+
+SCRIPT_0C_5578::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7834, 24)
+        ScriptDelay(SCRIPT_11_7808, 24)
+        ScriptDelay(SCRIPT_11_781E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 16)
+        ScriptDelay(SCRIPT_11_7834, 32)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 16)
+        ScriptDelay(SCRIPT_11_781E, 16)
+        ScriptDelay(SCRIPT_11_77F2, 24)
+        ScriptDelay(SCRIPT_11_781E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    End()
+
+SCRIPT_0C_55A9::
+    StartSFX0(SFXID_Drain)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7808, 8)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 1)
+        ScriptDelay(SCRIPT_11_7834, 8)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 1)
+        ScriptDelay(SCRIPT_11_77F2, 8)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 1)
+        ScriptDelay(SCRIPT_11_781E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_778A, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_0::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_55E3)
+    ThatScript(4, SCRIPT_0C_5417)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_55E3::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_4::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_55FA)
+    ThatScript(6, SCRIPT_0C_5459)
+    ThatScript(5, SCRIPT_0C_5430)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_55FA::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_3::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_561E)
+    ThatScript(7, SCRIPT_0C_546E)
+    ThatScript(8, SCRIPT_0C_54B5)
+    ThatScript(9, SCRIPT_0C_54E3)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
+
+SCRIPT_0C_561E::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_2::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_0C_5642)
+    ThatScript(8, SCRIPT_0C_549C)
+    ThatScript(7, SCRIPT_0C_5487)
+    ThatScript(9, SCRIPT_0C_54E3)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
+
+SCRIPT_0C_5642::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_5::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000100)#, SCRIPT_0C_5666)
+    ThatScript(9, SCRIPT_0C_54CA)
+    ThatScript(7, SCRIPT_0C_5487)
+    ThatScript(8, SCRIPT_0C_54B5)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+    OrByte(xBits_Puzzle_Bits2, %00000100)
+
+SCRIPT_0C_5666::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_6::
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits2], c%00000100) == c0)#, SCRIPT_0C_5689)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits2], c%00000010) == c0)#, SCRIPT_0C_5689)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits2], c%00000001) == c0)#, SCRIPT_0C_5689)
+    End()
+
+SCRIPT_0C_5689::
+    TransplantMap($D0FD, $01, $02, $DD51, $35, $11)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_8::
+    SetScriptScroll(SCRIPT_0C_569C)
+    End()
+
+SCRIPT_0C_569C::
+    ThatDelete(4)
+    ThatDelete(5)
+    ThatDelete(6)
+    ThatDelete(7)
+    TransplantMap($D0B6, $03, $02, $DBD6, $2F, $16)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DB96, $2E, $16)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DB56, $2D, $16)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DB16, $2C, $16)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DAD6, $2B, $16)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DA96, $2A, $16)
+    Delay(1)
+    TransplantMap($D0B6, $03, $02, $DA56, $29, $16)
+    TransplantMap($D0F6, $01, $01, $D9D5, $27, $15)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $DA16, $28, $16)
+    TransplantMap($D0F6, $01, $01, $D995, $26, $15)
+    TransplantMap($D0F6, $01, $01, $D9D9, $27, $19)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $D9D6, $27, $16)
+    TransplantMap($D0F6, $01, $01, $D955, $25, $15)
+    TransplantMap($D0F6, $01, $01, $D999, $26, $19)
+    Delay(2)
+    TransplantMap($D0B6, $03, $02, $D996, $26, $16)
+    TransplantMap($D0F6, $01, $01, $D959, $25, $19)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_9::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_5762)
+    ThatScript(10, SCRIPT_0C_54F8)
+    ThatScript(11, SCRIPT_0C_5522)
+    ThatScript(18, SCRIPT_0C_5540)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_5762::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_5779)
+    ThatScript(19, SCRIPT_0C_555E)
+    ThatScript(18, SCRIPT_0C_554D)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_5779::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_5795)
+    ThatScript(19, SCRIPT_0C_556B)
+    ThatScript(11, SCRIPT_0C_552F)
+    ThatScript(10, SCRIPT_0C_550D)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_5795::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_C::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_57A7)
+    ThatScript(20, SCRIPT_0C_5578)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_57A7::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_D::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_57B9)
+    ThatScript(21, SCRIPT_0C_55A9)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_57B9::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_F::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍a SECRET!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000010) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle2_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle2_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle2_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle2_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle2_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle2_SecretComplete)
+
+Hotspot_KybarsTeeth_Puzzle2_E::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $0C, $38, $DE0C, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    CameraSeekActor(RAM_00_C189, 8)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5DA1)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle2_10::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_59A3)
+    ThatDelete(4)
+    ThatInit(4, AI_InvisibleLaser, $0E, $24, $D90E, $0C, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_59A4)
+    ThatStart(4)
+    ThatDelete(5)
+    ThatInit(5, AI_InvisibleLaser, $0D, $21, $D84D, $0C, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_59A4)
+    LongJumpIf(#(c[wSalafyInvincible] > c0)#, SCRIPT_0C_598C)
+    ThatStart(5)
+
+SCRIPT_0C_598C::
+    ThatDelete(6)
+    ThatInit(6, AI_InvisibleLaser, $0D, $1C, $D70D, $0C, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_59A4)
+    ThatStart(6)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+
+SCRIPT_0C_59A3::
+    End()
+
+ACTORSCRIPT1_0C_59A4::
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_5A48)
+        Case(1, SCRIPT_0C_5A57)
+        Case(2, SCRIPT_0C_5A67)
+        Case(3, SCRIPT_0C_5A77)
+    }
+    LongJump(SCRIPT_0C_5ACB)
+
+SCRIPT_0C_59CD::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_794E)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_5A48)
+        Case(1, SCRIPT_0C_5A57)
+        Case(2, SCRIPT_0C_5A67)
+        Case(3, SCRIPT_0C_5A77)
+    }
+    LongJump(SCRIPT_0C_5ACB)
+
+SCRIPT_0C_59F6::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7944)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(SCRIPT_0C_5ACB)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_5A48)
+        Case(1, SCRIPT_0C_5A57)
+        Case(2, SCRIPT_0C_5A67)
+        Case(3, SCRIPT_0C_5A77)
+    }
+    LongJump(SCRIPT_0C_5ACB)
+
+SCRIPT_0C_5A1F::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7958)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(SCRIPT_0C_5ACB)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_5A48)
+        Case(1, SCRIPT_0C_5A57)
+        Case(2, SCRIPT_0C_5A67)
+        Case(3, SCRIPT_0C_5A77)
+    }
+    LongJump(SCRIPT_0C_5ACB)
+
+SCRIPT_0C_5A48::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A4D, $12)
+
+ACTORSCRIPT0_0C_5A4D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A61, 4)
+    }
+    LongJump(SCRIPT_0C_5ABA)
+
+SCRIPT_0C_5A57::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A5C, $12)
+
+ACTORSCRIPT0_0C_5A5C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A2E, 4)
+    }
+    LongJump(SCRIPT_0C_5A98)
+
+SCRIPT_0C_5A66::
+    End()
+
+SCRIPT_0C_5A67::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A6C, $12)
+
+ACTORSCRIPT0_0C_5A6C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A50, 4)
+    }
+    LongJump(SCRIPT_0C_5AA9)
+
+SCRIPT_0C_5A76::
+    End()
+
+SCRIPT_0C_5A77::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A7C, $12)
+
+ACTORSCRIPT0_0C_5A7C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A3F, 4)
+    }
+    LongJump(SCRIPT_0C_5A87)
+
+SCRIPT_0C_5A86::
+    End()
+
+SCRIPT_0C_5A87::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A8C, $12)
+
+ACTORSCRIPT0_0C_5A8C::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_794E)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_59CD)
+    End()
+
+SCRIPT_0C_5A98::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5A9D, $12)
+
+ACTORSCRIPT0_0C_5A9D::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7944)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_59F6)
+    End()
+
+SCRIPT_0C_5AA9::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5AAE, $12)
+
+ACTORSCRIPT0_0C_5AAE::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7958)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_5A1F)
+    End()
+
+SCRIPT_0C_5ABA::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_5ABF, $12)
+
+ACTORSCRIPT0_0C_5ABF::
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(ACTORSCRIPT1_0C_59A4)
+    End()
+
+SCRIPT_0C_5ACB::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    LongJump(Hotspot_KybarsTeeth_Puzzle2_7)
+
+Script_KybarsTeeth_Puzzle3_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_KybarsTeeth_Puzzle3_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_KybarsTeeth_Puzzle3)
+    LoadHotspots(Hotspot_KybarsTeeth_Puzzle3)
+    ThatInit(0, AI_Hero, $07, $08, $D087, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(3, AI_01_70E1, $09, $06, $D069, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(4, AI_01_70E1, $0D, $05, $D05D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(5, AI_01_70E1, $06, $03, $D036, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(6, AI_01_70E1, $0D, $02, $D02D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(7, AI_01_70E1, $0D, $01, $D01D, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(8, AI_01_70E1, $06, $05, $D056, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(9, AI_01_70E1, $01, $06, $D061, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatInit(10, AI_01_70E1, $01, $07, $D071, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_5C0F)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_5BBD)
+    End()
+
+SCRIPT_STARTBUTTON_0C_5BBD::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_0C_5277, SCRIPT_0C_4AFF)
+    End()
+
+SCRIPT_0C_5BE2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(Script_KybarsTeeth_Puzzle3_Again)
+
+ACTORSCRIPT1_0C_5C0F::
+    Pass()
+    ThatScript(0, SCRIPT_0C_5BE2)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    End()
+
+SCRIPT_0C_5C1A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+SCRIPT_0C_5C31::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+SCRIPT_0C_5C48::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    End()
+
+SCRIPT_0C_5C5F::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    End()
+
+SCRIPT_0C_5C76::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    End()
+
+SCRIPT_0C_5C8D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 72)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 72)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_5CA4::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    End()
+
+SCRIPT_0C_5CBB::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    End()
+
+SCRIPT_0C_5CD2::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_0::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_5CFA)
+    ThatScript(3, SCRIPT_0C_5C1A)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_5CFA::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_5D0C)
+    ThatScript(3, SCRIPT_0C_5C31)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_5D0C::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_2::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_5D1E)
+    ThatScript(4, SCRIPT_0C_5C48)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_5D1E::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_3::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_5D30)
+    ThatScript(5, SCRIPT_0C_5C5F)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_5D30::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_4::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_5D42)
+    ThatScript(6, SCRIPT_0C_5C76)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_5D42::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_5::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_5D54)
+    ThatScript(7, SCRIPT_0C_5C8D)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_5D54::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_6::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_5D66)
+    ThatScript(8, SCRIPT_0C_5CA4)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_5D66::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_7::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_5D78)
+    ThatScript(9, SCRIPT_0C_5CBB)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_5D78::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_8::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_5D8A)
+    ThatScript(10, SCRIPT_0C_5CD2)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_5D8A::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle3_9::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000100) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle3_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00000100) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle3_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle3_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle3_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle3_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle3_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle3_Complete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle3_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle3_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle3_Complete)
+
+Script_KybarsTeeth_Puzzle4_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_KybarsTeeth_Puzzle4_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_KybarsTeeth_Puzzle4)
+    LoadHotspots(Hotspot_KybarsTeeth_Puzzle4)
+    ThatInit(0, AI_Hero, $04, $05, $D077, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    ThatInit(3, AI_01_70E1, $06, $03, $D04B, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(4, AI_01_70E1, $02, $08, $D0BA, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(5, AI_01_70E1, $0B, $0D, $D136, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(6, AI_01_70E1, $0D, $0E, $D14F, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(7, AI_01_70E1, $0B, $06, $D095, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(8, AI_01_70E1, $0C, $04, $D068, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(9, AI_01_70E1, $0E, $05, $D081, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(10, AI_01_70E1, $13, $0A, $D0F9, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(11, AI_01_70E1, $12, $06, $D09C, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatInit(18, AI_01_70E1, $14, $04, $D070, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_0C_6066)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    ThatStart(11)
+    ThatStart(18)
+    LoadSingleBitmap($20, BITMAP_19_43E0, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_6014)
+    End()
+
+SCRIPT_STARTBUTTON_0C_6014::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_0C_6039, SCRIPT_0C_4B19)
+    End()
+
+SCRIPT_0C_6039::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(Actor_Null)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(Script_KybarsTeeth_Puzzle4_Again)
+
+ACTORSCRIPT1_0C_6066::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    ThatScript(0, SCRIPT_0C_6039)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    End()
+
+SCRIPT_0C_6075::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+SCRIPT_0C_608C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+SCRIPT_0C_60A3::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    End()
+
+SCRIPT_0C_60BA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    End()
+
+SCRIPT_0C_60D1::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    End()
+
+SCRIPT_0C_60E8::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    End()
+
+SCRIPT_0C_60FF::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    End()
+
+SCRIPT_0C_6116::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_612D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_6144::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    End()
+
+SCRIPT_0C_615B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    End()
+
+SCRIPT_0C_6172::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 40)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    End()
+
+SCRIPT_0C_6189::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 32)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    End()
+
+SCRIPT_0C_61A0::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_769C, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_76C3, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    End()
+
+SCRIPT_0C_61B7::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    End()
+
+SCRIPT_0C_61CE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    End()
+
+SCRIPT_0C_61E5::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 16)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    End()
+
+SCRIPT_0C_61FC::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_764E, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_7675, 24)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    End()
+
+SCRIPT_0C_6213::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_76C3, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_769C, 48)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    End()
+
+SCRIPT_0C_622A::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7675, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(SCRIPT_11_764E, 8)
+        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+    }
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_0::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle4_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00001000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle4_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle4_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle4_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle4_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle4_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle4_Complete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle4_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle4_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle4_Complete)
+
+Hotspot_KybarsTeeth_Puzzle4_1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_63CD)
+    ThatScript(3, SCRIPT_0C_6075)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_63CD::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_2::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_63DF)
+    ThatScript(3, SCRIPT_0C_608C)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_63DF::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_3::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_63F1)
+    ThatScript(4, SCRIPT_0C_60BA)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_63F1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_0C_6402)
+    ThatScript(3, SCRIPT_0C_6075)
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+
+SCRIPT_0C_6402::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_4::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_6414)
+    ThatScript(4, SCRIPT_0C_60BA)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_6414::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_5::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_0C_6426)
+    ThatScript(4, SCRIPT_0C_60A3)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+
+SCRIPT_0C_6426::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_6::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_6438)
+    ThatScript(5, SCRIPT_0C_60E8)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_6438::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_7::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_644A)
+    ThatScript(6, SCRIPT_0C_60FF)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_644A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_645B)
+    ThatScript(5, SCRIPT_0C_60E8)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_645B::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_8::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_0C_646D)
+    ThatScript(5, SCRIPT_0C_60D1)
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+
+SCRIPT_0C_646D::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_9::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_0C_647F)
+    ThatScript(6, SCRIPT_0C_60FF)
+    OrByte(xBits_Puzzle_Bits1, %00001000)
+
+SCRIPT_0C_647F::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_6491)
+    ThatScript(7, SCRIPT_0C_612D)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_6491::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_64A3)
+    ThatScript(7, SCRIPT_0C_6116)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_64A3::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_64B4)
+    ThatScript(9, SCRIPT_0C_6172)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_64B4::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_C::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_64C6)
+    ThatScript(9, SCRIPT_0C_6172)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_64C6::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_D::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_64D8)
+    ThatScript(8, SCRIPT_0C_615B)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_64D8::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_64E9)
+    ThatScript(9, SCRIPT_0C_6172)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_64E9::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_64FB)
+    ThatScript(8, SCRIPT_0C_615B)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_64FB::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_650C)
+    ThatScript(7, SCRIPT_0C_6144)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_650C::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_F::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_651E)
+    ThatScript(9, SCRIPT_0C_6189)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_651E::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_652F)
+    ThatScript(7, SCRIPT_0C_6144)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_652F::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_10::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00010000)#, SCRIPT_0C_6541)
+    ThatScript(7, SCRIPT_0C_6144)
+    OrByte(xBits_Puzzle_Bits1, %00010000)
+
+SCRIPT_0C_6541::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_11::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00100000)#, SCRIPT_0C_6553)
+    ThatScript(8, SCRIPT_0C_615B)
+    OrByte(xBits_Puzzle_Bits1, %00100000)
+
+SCRIPT_0C_6553::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_12::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%01000000)#, SCRIPT_0C_6565)
+    ThatScript(9, SCRIPT_0C_6189)
+    OrByte(xBits_Puzzle_Bits1, %01000000)
+
+SCRIPT_0C_6565::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_13::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_6577)
+    ThatScript(11, SCRIPT_0C_61E5)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+
+SCRIPT_0C_6577::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_14::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_6589)
+    ThatScript(11, SCRIPT_0C_61FC)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+
+SCRIPT_0C_6589::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_659A)
+    ThatScript(10, SCRIPT_0C_61A0)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_659A::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_15::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_65AC)
+    ThatScript(11, SCRIPT_0C_61FC)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+
+SCRIPT_0C_65AC::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_0C_65BD)
+    ThatScript(18, SCRIPT_0C_6213)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+
+SCRIPT_0C_65BD::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_16::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000001)#, SCRIPT_0C_65CF)
+    ThatScript(11, SCRIPT_0C_61FC)
+    OrByte(xBits_Puzzle_Bits2, %00000001)
+
+SCRIPT_0C_65CF::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_17::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_65E1)
+    ThatScript(10, SCRIPT_0C_61A0)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_65E1::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_18::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_0C_65F3)
+    ThatScript(18, SCRIPT_0C_6213)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+
+SCRIPT_0C_65F3::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_19::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_0C_6605)
+    ThatScript(18, SCRIPT_0C_622A)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+
+SCRIPT_0C_6605::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_6616)
+    ThatScript(10, SCRIPT_0C_61A0)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_6616::
+    End()
+
+Hotspot_KybarsTeeth_Puzzle4_1A::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%00000010)#, SCRIPT_0C_6628)
+    ThatScript(18, SCRIPT_0C_6213)
+    OrByte(xBits_Puzzle_Bits2, %00000010)
+
+SCRIPT_0C_6628::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%10000000)#, SCRIPT_0C_6639)
+    ThatScript(10, SCRIPT_0C_61B7)
+    OrByte(xBits_Puzzle_Bits1, %10000000)
+
+SCRIPT_0C_6639::
+    End()
+
+Script_KybarsTeeth_Puzzle5_First::
+    SetByte(xNumberOfAttempts, $01)
+
+Script_KybarsTeeth_Puzzle5_Again::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_KybarsTeeth_Puzzle5)
+    LoadHotspots(Hotspot_KybarsTeeth_Puzzle5)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_68FA)
+    ThatInit(0, AI_Hero, $02, $18, $D1E2, $00, ACTORSCRIPT0_14_5E57, SCRIPT_STARTBUTTON_0C_68FA)
+    ThatInit(3, AI_InvisibleLaser, $03, $16, $D1BB, $00, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_6925)
+    ThatInit(4, AI_InvisibleLaser, $08, $14, $D198, $00, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_6925)
+    ThatInit(5, AI_InvisibleLaser, $06, $15, $D1AA, $00, ACTORSCRIPT1_11_794E, ACTORSCRIPT1_0C_6925)
+    ThatInit(6, AI_InvisibleLaser, $04, $14, $D194, $00, ACTORSCRIPT1_11_7944, ACTORSCRIPT1_0C_6925)
+    ThatInit(7, AI_InvisibleLaser, $02, $12, $D16A, $00, ACTORSCRIPT1_11_7958, ACTORSCRIPT1_0C_6925)
+    ThatInit(8, AI_InvisibleLaser, $02, $0F, $D12E, $00, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_6925)
+    ThatInit(9, AI_InvisibleLaser, $05, $0B, $D0E1, $00, ACTORSCRIPT1_11_7944, ACTORSCRIPT1_0C_6925)
+    ThatInit(10, AI_InvisibleLaser, $02, $0C, $D0F2, $00, ACTORSCRIPT0_11_793A, ACTORSCRIPT1_0C_6925)
+    ThatStart(0)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    ThatStart(10)
+    LoadSingleBitmap($0A, BITMAP_17_4000, $8000, $00)
+    HeroSetCamera()
+    SceneReady()
+    SetByte(xHeroAbilities, $01)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    AndByte(xBits_Puzzle_Bits1, %11110111)
+    AndByte(xBits_Puzzle_Bits1, %11101111)
+    AndByte(xBits_Puzzle_Bits1, %11011111)
+    AndByte(xBits_Puzzle_Bits1, %10111111)
+    AndByte(xBits_Puzzle_Bits1, %01111111)
+    AndByte(xBits_Puzzle_Bits2, %11111110)
+    AndByte(xBits_Puzzle_Bits2, %11111101)
+    AndByte(xBits_Puzzle_Bits2, %11111011)
+    AndByte(xBits_Puzzle_Bits2, %11110111)
+    SetStartButtonScript(SCRIPT_STARTBUTTON_0C_6732)
+    End()
+
+SCRIPT_STARTBUTTON_0C_6732::
+    ResetActorList()
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    StartSFX0(SFXID_Jump)
+    Icon(Icon_Salafy)
+    Write(" Restart⭍ Exit")
+    Menu(SCRIPT_0C_68F2, SCRIPT_0C_4B30)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle5_0::
+    StartSFX0(SFXID_EnemyDie)
+    ThatInit(0, Call_001_4AF8, $08, $10, $D148, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
+    PalClearAnim(0, 16, WHITE_A)
+    CameraSeekActor(RAM_00_C189, 4)
+    PalRefresh(0, 16)
+    ThatAI(0, AI_Hero)
+    End()
+
+Hotspot_KybarsTeeth_Puzzle5_1::
+    StartSong(SONGID_GetItem)
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    Write("You found⭍the exit!🅐")
+    LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
+    FormatChar(xNumberOfAttempts)
+    Write("It took you⭍🔊 attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00010000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle5_Complete)
+
+.MaxAttempts::
+    Write("It took you⭍more than 255🅐attempts.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_KybarsTeeth], c%00010000) != c0)#, .HighScore)
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    LongJump(Script_KybarsTeeth_Puzzle5_Complete)
+
+.HighScore::
+    LongJumpIf(#(c[xNumberOfAttempts] < c[xKybarsTeeth_Puzzle5_HighScore])#, .HighscoreNew)
+    FormatChar(xKybarsTeeth_Puzzle5_HighScore)
+    LongJumpIf(#(c[xKybarsTeeth_Puzzle5_HighScore] == c1)#, .Highscore1)
+    Write("The current⭍High Score is🅐🔊 attempts.🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle5_Complete)
+
+.Highscore1::
+    Write("The current⭍High Score is🅐an unbeatable⭍1 attempt!🅐")
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle5_Complete)
+
+.HighscoreNew::
+    FormatChar(xKybarsTeeth_Puzzle5_HighScore)
+    Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 attempts.🅐")
+    Close()
+    VarByteExpr(xKybarsTeeth_Puzzle5_HighScore, #c[xNumberOfAttempts]#)
+    Close()
+    LongJump(Script_KybarsTeeth_Puzzle5_Complete)
+
+SCRIPT_0C_68F2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+
+SCRIPT_STARTBUTTON_0C_68FA::
+    ThatDelete(0)
+    LongJump(SCRIPT_0C_6900)
+
+SCRIPT_0C_6900::
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, .MaxFailedAttempts)
+    VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
+
+.MaxFailedAttempts::
+    StartSFX0(SFXID_DarkAttack)
+    Delay(16)
+    PalClearBase(0, 16, $00, $00, $00, 255)
+    PalFadeAnimToBase(1, $20, 0, 7)
+    PalFadeAnimToBase(1, $20, 7, 9)
+    LongJump(Script_KybarsTeeth_Puzzle5_Again)
+
+ACTORSCRIPT1_0C_6925::
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_69C9)
+        Case(1, SCRIPT_0C_69D8)
+        Case(2, SCRIPT_0C_69E8)
+        Case(3, SCRIPT_0C_69F8)
+    }
+    LongJump(ACTORINTERRUPT_0C_6A4C)
+
+SCRIPT_0C_694E::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_794E)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_69C9)
+        Case(1, SCRIPT_0C_69D8)
+        Case(2, SCRIPT_0C_69E8)
+        Case(3, SCRIPT_0C_69F8)
+    }
+    LongJump(ACTORINTERRUPT_0C_6A4C)
+
+SCRIPT_0C_6977::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7944)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_69C9)
+        Case(1, SCRIPT_0C_69D8)
+        Case(2, SCRIPT_0C_69E8)
+        Case(3, SCRIPT_0C_69F8)
+    }
+    LongJump(ACTORINTERRUPT_0C_6A4C)
+
+SCRIPT_0C_69A0::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7958)
+    ThisAI(AI_01_70E1)
+    ThisSetInterrupt(ACTORINTERRUPT_0C_6A4C)
+    Pass()
+    Switch(#c[MATHADDRESS_00_C9D8]#) {
+        Case(0, SCRIPT_0C_69C9)
+        Case(1, SCRIPT_0C_69D8)
+        Case(2, SCRIPT_0C_69E8)
+        Case(3, SCRIPT_0C_69F8)
+    }
+    LongJump(ACTORINTERRUPT_0C_6A4C)
+
+SCRIPT_0C_69C9::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_69CE, $12)
+
+ACTORSCRIPT0_0C_69CE::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A61, 4)
+    }
+    LongJump(SCRIPT_0C_6A3B)
+
+SCRIPT_0C_69D8::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_69DD, $12)
+
+ACTORSCRIPT0_0C_69DD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A2E, 4)
+    }
+    LongJump(SCRIPT_0C_6A19)
+
+SCRIPT_0C_69E7::
+    End()
+
+SCRIPT_0C_69E8::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_69ED, $12)
+
+ACTORSCRIPT0_0C_69ED::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A50, 4)
+    }
+    LongJump(SCRIPT_0C_6A2A)
+
+SCRIPT_0C_69F7::
+    End()
+
+SCRIPT_0C_69F8::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_69FD, $12)
+
+ACTORSCRIPT0_0C_69FD::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_7A3F, 4)
+    }
+    LongJump(SCRIPT_0C_6A08)
+
+SCRIPT_0C_6A07::
+    End()
+
+SCRIPT_0C_6A08::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_6A0D, $12)
+
+ACTORSCRIPT0_0C_6A0D::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_794E)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_694E)
+    End()
+
+SCRIPT_0C_6A19::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_6A1E, $12)
+
+ACTORSCRIPT0_0C_6A1E::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7944)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_6977)
+    End()
+
+SCRIPT_0C_6A2A::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_6A2F, $12)
+
+ACTORSCRIPT0_0C_6A2F::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_7958)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(SCRIPT_0C_69A0)
+    End()
+
+SCRIPT_0C_6A3B::
+    ThisSaveScriptBugged(ACTORSCRIPT0_0C_6A40, $12)
+
+ACTORSCRIPT0_0C_6A40::
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    ThisAI(AI_InvisibleLaser)
+    ThisSetInterrupt(ACTORSCRIPT1_0C_6925)
+    End()
+
+ACTORINTERRUPT_0C_6A4C::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThatDelete(0)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_793A)
+    LongJump(SCRIPT_0C_68F2)
+
+Start_dResh_Main::
+    StartSFX0(SFXID_Jump)
+    SetScriptMaster(Start_dResh_Main.Prompt)
+    End()
+
+Start_dResh_Main.Prompt::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    Icon(Icon_Salafy)
+    Write("Save Game?🅐")
+    Clear()
+    Write(" No.⭍ Yes.")
+    Menu(Start_dResh_Main.No, Start_dResh_Main.Yes)
+
+Start_dResh_Main.Yes::
+    SaveLocation(Script_dResh_LoadGame)
+    SaveGame(1)
+    Clear()
+    Write("Game Saved to⭍")
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, Start_dResh_Main.Slot1)
+    Write("Slot 2.🅐")
+    LongJump(Start_dResh_Main.No)
+
+Start_dResh_Main.Slot1::
+    Write("Slot 1.🅐")
+
+Start_dResh_Main.No::
+    Close()
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_0C_6ACE::
+    StartSong(SONGID_The_Deep)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, AI_Hero, $04, $15, $D27A, $00, ACTORSCRIPT0_14_5DBF, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $04, $17, $D2B6, $00, ACTORSCRIPT0_0C_6B2E, ACTORSCRIPT1_0C_721B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_0C_6B2E::
+    LongJumpIf(#bitmatch(c[xBits_ZonesCompleted_2], c%00001000)#, SCRIPT_19_4710)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D48)
+    End()
+
+Script_dResh_Main::
+    StartSong(SONGID_The_Deep)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $03, $16, $D297, $00, ACTORSCRIPT0_0C_6B9C, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $04, $17, $D2B6, $00, ACTORSCRIPT0_0C_6B2E, ACTORSCRIPT1_0C_721B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroFromDoor()
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_0C_6B9C::
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C5D, 32, 0, 1)
+    }
+    ThisSetAnimSingle(ACTORSCRIPT0_14_5DBF)
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+Script_dResh_LoadGame::
+    StartSong(SONGID_The_Deep)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $00, $16, $D294, $00, ACTORSCRIPT0_0C_6C0D, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $04, $17, $D2B6, $00, ACTORSCRIPT0_0C_6B2E, ACTORSCRIPT1_0C_721B)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_0C_6C0D::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 48)
+        ScriptDelay(SCRIPT_14_5DAB, 0)
+    }
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_0C_6C1C::
+    StartSong(SONGID_Mischief)
+    VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $07)
+    Switch(#c[xStaffOfHyrenQuest]#) {
+        Case(0, SCRIPT_0C_6C52)
+        Case(1, SCRIPT_0C_6C5A)
+        Case(2, SCRIPT_0C_6C6F)
+        Case(3, SCRIPT_0C_6C84)
+        Case(4, SCRIPT_0C_6C99)
+        Case(5, SCRIPT_0C_6C99)
+    }
+    LongJump(SCRIPT_0C_6C99)
+
+SCRIPT_0C_6C52::
+    SetByte(xStaffOfHyrenQuest, $03)
+    LongJump(SCRIPT_0C_6C84)
+
+SCRIPT_0C_6C5A::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_dResh_Cutscene)
+    LongJump(SCRIPT_0B_6C8B)
+
+SCRIPT_0C_6C6F::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_dResh_Cutscene)
+    LongJump(SCRIPT_0B_6D11)
+
+SCRIPT_0C_6C84::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadScene(Scene_dResh_Cutscene)
+    LongJump(SCRIPT_0B_6D4A)
+
+SCRIPT_0C_6C99::
+    HeroToDoor($14, $13)
+    LongJump(Script_dResh_Main)
+
+SCRIPT_0C_6CA0::
+    StartSong(SONGID_The_Deep)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $14, $12, $D230, $00, ACTORSCRIPT0_0C_6CFA, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $16, $15, $D28C, $00, ACTORSCRIPT0_0C_6D0B, ACTORSCRIPT1_0C_6D10)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($15, $15)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_0C_6CFA::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 48)
+        ScriptDelay(SCRIPT_14_5DB5, 32)
+    }
+    SetScriptText(SCRIPT_0B_6CAA)
+    End()
+
+ACTORSCRIPT0_0C_6D0B::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    End()
+
+ACTORSCRIPT1_0C_6D10::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_0C_6D1C)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_0C_6D1C::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Eidon)
+    Write("Get going, we⭍don't have all🅐day!🅐")
+    Close()
+    SetEventText(1)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_0C_6D53::
+    StartSong(SONGID_The_Deep)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $05, $02, $D041, $00, ACTORSCRIPT0_0C_6DAD, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $07, $04, $D07F, $00, ACTORSCRIPT0_0C_6DE1, ACTORSCRIPT1_0C_6DF2)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($07, $03)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_0C_6DAD::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 32)
+        ScriptDelay(SCRIPT_14_5DB5, 32)
+    }
+    SetByte(xZoneToLoad, $07)
+    SetScriptText(SCRIPT_0B_6D88)
+    WaitEventMaster(1)
+    ThisSetAnimSingle(SCRIPT_14_5DC9)
+    CameraSeekPos($0C, $0B, 1)
+    Delay(32)
+    CameraSeekPos($14, $15, 1)
+    Delay(32)
+    CameraSeekActor(RAM_00_C189, 4)
+    Sync(0, 2)
+    SetEventMaster(2)
+    SetStartButtonScript(Start_dResh_Main)
+    End()
+
+ACTORSCRIPT0_0C_6DE1::
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D66)
+    WaitEventMaster(2)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D34)
+    End()
+
+ACTORSCRIPT1_0C_6DF2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_0C_6DFE)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_0C_6DFE::
+    Icon(Icon_Eidon)
+    Write("Get going, we⭍don't have all🅐day!🅐")
+    Close()
+    SetEventText(1)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Script_dResh_SecretCompletedFirstTime::
+    StartSong(SONGID_The_Deep)
+    OrByte(xBits_ZonesCompleted_2, %00001000)
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    SceneNew()
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $17, $02, $D053, $00, ACTORSCRIPT0_0C_6E8F, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $15, $06, $D0C9, $00, ACTORSCRIPT0_0C_6F8C, Actor_RestoreState)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($17, $07)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_0C_6E8F::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C4D, 64)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 8)
+        ScriptDelay(SCRIPT_14_5DAB, 0)
+    }
+    SetScriptText(SCRIPT_0C_6EBB)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 0)
+    }
+    Sync(0, 3)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_0C_6EBB::
+    Icon(Icon_Salafy)
+    Write("I don't believe⭍I will ever get🅐the sand out of⭍my shoes.🅐")
+    Icon(Icon_Eidon)
+    Write("Don't worry,⭍living with🅐sand in your⭍shoes isn't all🅐")
+    Write("bad...🅐")
+    Icon(Icon_Salafy)
+    Write("What's good⭍about it?🅐")
+    Icon(Icon_Eidon)
+    Write("Um... It's a⭍secret!🅐")
+    SetEventText(1)
+    Icon(Icon_Salafy)
+    Write("Yeah, right.🅐")
+    Close()
+    Sync(0, 3)
+    End()
+
+ACTORSCRIPT0_0C_6F8C::
+    ThisSetAnimSingle(SCRIPT_13_6D3E)
+    WaitEventText(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CB0, 24)
+        ScriptDelay(SCRIPT_13_6CD0, 32)
+        ScriptDelay(SCRIPT_13_6CB0, 24)
+        ScriptDelay(SCRIPT_13_6CD0, 32)
+        ScriptDelay(SCRIPT_13_6CB0, 100)
+        ScriptDelay(SCRIPT_13_6D2A, 0)
+    }
+    Sync(0, 3)
+    ThisDelete()
+    End()
+
+SCRIPT_0C_6FB1::
+    StartSong(SONGID_The_Deep)
+    SetByte(xCurrentZone, $07)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_dResh_Main)
+    LoadHotspots(Hotspot_dResh_Main)
+    LoadMapMask(METAMAP_MASK_2B_679A, COLLMAP_MASK_2C_64FB)
+    LoadTriggers(Trigger_dResh_Main)
+    ThatInit(0, Call_001_4AF8, $00, $16, $D294, $00, ACTORSCRIPT0_0C_7041, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $00, $17, $D2B2, $00, ACTORSCRIPT0_0C_70EB, ACTORSCRIPT1_0C_721B)
+    ThatInit(3, Call_001_4AF8, $0A, $15, $D280, $30, ACTORSCRIPT0_0C_7126, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0B, $16, $D29F, $58, ACTORSCRIPT0_0C_7180, Actor_RestoreState)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8000, $00)
+    LoadSingleBitmap($28, BITMAP_0D_6E40, $8300, $00)
+    LoadSingleBitmap($23, BITMAP_0C_43C0, $8580, $00)
+    ThatStart(0)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    SetCamera($05, $16)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_0C_7041::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 16)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 16)
+        ScriptDelay(SCRIPT_14_5DD3, 16)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 16)
+        ScriptDelay(SCRIPT_14_5DB5, 16)
+        ScriptDelay(SCRIPT_14_5DC9, 16)
+    }
+    WaitEventText(3)
+    Delay(32)
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    WaitEventText(5)
+    ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
+    SetScriptText(SCRIPT_0C_74A8)
+    WaitEventText(6)
+    Delay(12)
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    WaitEventText(8)
+    SetScriptText(SCRIPT_0C_7505)
+    WaitEventText(9)
+    ThisSetAnimSingle(SCRIPT_14_5DC9)
+    SetScriptText(SCRIPT_0C_7556)
+    WaitEventText(10)
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    SetScriptText(SCRIPT_0C_759D)
+    WaitEventText(11)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 32)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 48)
+        ScriptDelay(SCRIPT_14_5DC9, 48)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 48)
+    }
+    SetScriptText(SCRIPT_0C_75C6)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C6D, 32)
+        ScriptDelay(SCRIPT_14_5DB5, 0)
+    }
+    WaitEventText(13)
+    SetScriptText(SCRIPT_0C_761C)
+    WaitEventText(17)
+    SetScriptText(SCRIPT_0C_7697)
+    WaitEventText(19)
+    SetScriptText(SCRIPT_0C_770A)
+    WaitEventText(25)
+    ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
+    SetScriptText(SCRIPT_0C_783B)
+    WaitEventText(27)
+    ThisSetAnimSingle(SCRIPT_14_5DB5)
+    SetScriptText(SCRIPT_0C_7894)
+    Sync(0, 3)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(Start_dResh_Main)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT0_0C_70EB::
+    Delay(16)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 48)
+        ScriptDelay(ACTORSCRIPT1_13_6D48, 32)
+    }
+    SetScriptText(SCRIPT_0C_7394)
+    WaitEventText(1)
+    SetScriptText(SCRIPT_0C_73DB)
+    WaitEventText(2)
+    SetScriptText(SCRIPT_0C_7400)
+    WaitEventText(3)
+    Delay(38)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D52)
+    WaitEventText(20)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 16)
+    }
+    SetScriptText(SCRIPT_0C_7732)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6D20, 24)
+        ScriptDelay(ACTORSCRIPT1_13_6D48, 0)
+    }
+    End()
+
+ACTORSCRIPT0_0C_7126::
+    ThisSetAnimSingle(ACTORSCRIPT1_11_424C)
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_41B0, 96)
+        ScriptDelay(ACTORSCRIPT1_11_424C, 0)
+    }
+    SetScriptText(SCRIPT_0C_7432)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_421A, 16)
+    }
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_11_424C, 8)
+    }
+    WaitEventText(4)
+    SetScriptText(SCRIPT_0C_744F)
+    WaitEventText(22)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_41B0, 12)
+        ScriptDelay(SCRIPT_11_421A, 16)
+    }
+    SetScriptText(SCRIPT_0C_77A9)
+    WaitEventText(23)
+    SetScriptText(SCRIPT_0C_77CF)
+    WaitEventText(24)
+    SetScriptText(SCRIPT_0C_77DE)
+    WaitEventText(26)
+    ThisSetAnimSingle(ACTORSCRIPT1_11_424C)
+    SetScriptText(SCRIPT_0C_7851)
+    WaitEventText(27)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_41A0, 32)
+        ScriptDelay(SCRIPT_11_41B0, 100)
+    }
+    ThisDelete()
+    End()
+
+ACTORSCRIPT0_0C_7180::
+    Delay(8)
+    ThisSetAnimSingle(ACTORSCRIPT1_10_77E9)
+    WaitEventText(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_774D, 96)
+        ScriptDelay(ACTORSCRIPT1_10_77E9, 0)
+    }
+    WaitEventText(6)
+    ThisSetAnimSingle(ACTORSCRIPT1_10_77C1)
+    SetScriptText(SCRIPT_0C_74C3)
+    WaitEventText(7)
+    SetScriptText(SCRIPT_0C_74EF)
+    WaitEventText(12)
+    SetScriptText(SCRIPT_0C_7607)
+    WaitEventText(14)
+    SetScriptText(SCRIPT_0C_762E)
+    WaitEventText(15)
+    SetScriptText(SCRIPT_0C_7655)
+    WaitEventText(16)
+    SetScriptText(SCRIPT_0C_7675)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_774D, 8)
+        ScriptDelay(ACTORSCRIPT1_10_77E9, 40)
+        ScriptDelay(ACTORSCRIPT1_10_77C1, 0)
+    }
+    WaitEventText(18)
+    SetScriptText(SCRIPT_0C_76E4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_77D5, 6)
+        ScriptDelay(SCRIPT_10_77AD, 6)
+        ScriptDelay(SCRIPT_10_77DF, 6)
+        ScriptDelay(SCRIPT_10_77CB, 6)
+        ScriptDelay(SCRIPT_10_77F3, 6)
+        ScriptDelay(SCRIPT_10_77B7, 6)
+        ScriptDelay(ACTORSCRIPT1_10_77E9, 6)
+        ScriptDelay(ACTORSCRIPT1_10_77C1, 6)
+    }
+    WaitEventText(21)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_10_77E9, 48)
+    }
+    SetScriptText(SCRIPT_0C_7796)
+    WaitEventText(22)
+    Delay(6)
+    ThisSetAnimSingle(ACTORSCRIPT1_10_77C1)
+    WaitEventText(27)
+    Delay(24)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_10_774D, 24)
+        ScriptDelay(SCRIPT_10_773D, 16)
+        ScriptDelay(SCRIPT_10_774D, 100)
+    }
+    Sync(0, 3)
+    ThisDelete()
+    End()
+
+ACTORSCRIPT1_0C_721B::
+    SetByte(wScript_StartButtonDisabled, $01)
+    SetScriptText(SCRIPT_0C_7227)
+    LongJump(SCRIPT_13_6D70)
+
+SCRIPT_0C_7227::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00010000) == w65535)#, SCRIPT_0C_728D)
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) == w65535)#, SCRIPT_0C_72E3)
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00000100) == w65535)#, SCRIPT_0C_733A)
+    Icon(Icon_Eidon)
+    Write("Flarps don't⭍enjoy the🅐desert heat any⭍more than🅐you do!🅐")
+    LongJump(SCRIPT_0C_7390)
+
+SCRIPT_0C_728D::
+    Icon(Icon_Eidon)
+    Write("Every scrap of⭍ground is🅐useful here,⭍even if you🅐don't realize⭍it at first.🅐")
+    LongJump(SCRIPT_0C_7390)
+
+SCRIPT_0C_72E3::
+    Icon(Icon_Eidon)
+    Write("There's no⭍safety from the🅐statues here,⭍so don't stray🅐too far from a⭍flarp!🅐")
+    LongJump(SCRIPT_0C_7390)
+
+SCRIPT_0C_733A::
+    Icon(Icon_Eidon)
+    Write("You need to get⭍to the water🅐fountains⭍before you🅐collapse from⭍dehydration!🅐")
+    LongJump(SCRIPT_0C_7390)
+
+SCRIPT_0C_7390::
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_0C_7394::
+    Icon(Icon_Salafy)
+    Write("And I thought⭍Cald was hot.🅐This place is⭍as hot as a🅐desert!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_0C_73DB::
+    Icon(Icon_Eidon)
+    Write("Guess what? It⭍is a desert!🅐")
+    Close()
+    SetEventText(2)
+    End()
+
+SCRIPT_0C_7400::
+    Icon(Icon_Salafy)
+    Write("That would⭍explain why🅐there's no⭍beach.🅐")
+    Close()
+    SetEventText(3)
+    End()
+
+SCRIPT_0C_7432::
+    Icon(Icon_dResh_NaHara)
+    Write("Eidon, how are⭍you?🅐")
+    Close()
+    SetEventText(4)
+    End()
+
+SCRIPT_0C_744F::
+    Icon(Icon_Eidon)
+    Write("Great, Na'Hara!🅐Salafy, meet⭍Na'Hara and🅐Ydra.⭍Na'Hara is the🅐Keeper of⭍d'Resh.🅐")
+    Close()
+    SetEventText(5)
+    End()
+
+SCRIPT_0C_74A8::
+    Icon(Icon_Salafy)
+    Write("Nice to meet⭍you.🅐")
+    Close()
+    SetEventText(6)
+    End()
+
+SCRIPT_0C_74C3::
+    Icon(Icon_dResh_Ydra)
+    Write("Thanks, real⭍pleasure on🅐our part.🅐")
+    Close()
+    SetEventText(7)
+    End()
+
+SCRIPT_0C_74EF::
+    Icon(Icon_Salafy)
+    Write("Uh, oh.⭍Why?🅐")
+    Close()
+    SetEventText(8)
+    End()
+
+SCRIPT_0C_7505::
+    Icon(Icon_dResh_NaHara)
+    Write("Let's just say⭍that the sand🅐will not be⭍very kind in🅐your near⭍future.🅐")
+    Close()
+    SetEventText(9)
+    End()
+
+SCRIPT_0C_7556::
+    Icon(Icon_Salafy)
+    Write("Oh, great. More⭍people who🅐think that I⭍will fail their🅐maze.🅐")
+    Close()
+    SetEventText(10)
+    End()
+
+SCRIPT_0C_759D::
+    Icon(Icon_dResh_Ydra)
+    Write("Take a look at⭍my hat.🅐")
+    Icon(Icon_Salafy)
+    Write("OK.🅐")
+    Close()
+    SetEventText(11)
+    End()
+
+SCRIPT_0C_75C6::
+    Icon(Icon_Salafy)
+    Write("Looks like some⭍kind of skull.🅐It has pretty⭍big teeth.🅐")
+    Close()
+    SetEventText(12)
+    End()
+
+SCRIPT_0C_7607::
+    Icon(Icon_dResh_Ydra)
+    Write("Scared yet?🅐")
+    Close()
+    SetEventText(13)
+    End()
+
+SCRIPT_0C_761C::
+    Icon(Icon_Salafy)
+    Write("Of what?🅐")
+    Close()
+    SetEventText(14)
+    End()
+
+SCRIPT_0C_762E::
+    Icon(Icon_dResh_Ydra)
+    Write("I'm wearing a⭍skull as a hat!🅐")
+    Close()
+    SetEventText(15)
+    End()
+
+SCRIPT_0C_7655::
+    Icon(Icon_Salafy)
+    Write("OK, you found⭍a skull.🅐")
+    Close()
+    SetEventText(16)
+    End()
+
+SCRIPT_0C_7675::
+    Icon(Icon_dResh_Ydra)
+    Write("I defeated it⭍in battle!🅐")
+    Close()
+    SetEventText(17)
+    End()
+
+SCRIPT_0C_7697::
+    Icon(Icon_Salafy)
+    Write("It looks about⭍the size of an🅐Eebit, and⭍those are🅐pretty⭍harmless.🅐")
+    Close()
+    SetEventText(18)
+    End()
+
+SCRIPT_0C_76E4::
+    Icon(Icon_dResh_Ydra)
+    Write("This thing was⭍15 feet tall!🅐")
+    Close()
+    SetEventText(19)
+    End()
+
+SCRIPT_0C_770A::
+    Icon(Icon_Salafy)
+    Write("OK, it had a⭍really long🅐neck.🅐")
+    Close()
+    SetEventText(20)
+    End()
+
+SCRIPT_0C_7732::
+    Icon(Icon_Eidon)
+    Write("Sorry Ydra,⭍Salafy's been🅐training for⭍quite some🅐time. Dream⭍Creatures don't🅐impress her.🅐")
+    Close()
+    SetEventText(21)
+    End()
+
+SCRIPT_0C_7796::
+    Icon(Icon_dResh_Ydra)
+    Write(".........🅐")
+    Close()
+    SetEventText(22)
+    End()
+
+SCRIPT_0C_77A9::
+    Icon(Icon_dResh_NaHara)
+    Write("She's not to⭍be intimidated.🅐")
+    Close()
+    SetEventText(23)
+    End()
+
+SCRIPT_0C_77CF::
+    Icon(Icon_Eidon)
+    Write("Nope.🅐")
+    Close()
+    SetEventText(24)
+    End()
+
+SCRIPT_0C_77DE::
+    Icon(Icon_dResh_NaHara)
+    Write("Well, let's see⭍if she can🅐avoid the Sands⭍of d'Resh🅐curse, that no⭍one can escape.🅐")
+    Close()
+    SetEventText(25)
+    End()
+
+SCRIPT_0C_783B::
+    Icon(Icon_Salafy)
+    Write("What's that?🅐")
+    Close()
+    SetEventText(26)
+    End()
+
+SCRIPT_0C_7851::
+    Icon(Icon_dResh_NaHara)
+    Write("No one has ever⭍left here🅐without...🅐sand in their⭍shoes!🅐")
+    Close()
+    SetEventText(27)
+    End()
+
+SCRIPT_0C_7894::
+    Icon(Icon_Salafy)
+    Write("NOOOOO!!!!!!🅐")
+    Close()
+    Sync(0, 3)
+    End()
+
+Hotspot_dResh_Main_0::
+    LongJump(Script_dResh_Puzzle1)
+
+Hotspot_dResh_Main_1::
+    LongJump(Script_dResh_Puzzle2)
+
+Hotspot_dResh_Main_2::
+    LongJump(Script_dResh_Puzzle3)
+
+Hotspot_dResh_Main_3::
+    LongJump(Script_dResh_Puzzle4)
+
+Hotspot_dResh_Main_4::
+    LongJump(Script_dResh_Puzzle5)
+
+Hotspot_dResh_Main_5::
+    HeroToDoor($11, $18)
+    LongJump(SCRIPT_1A_512C)
+
+Hotspot_dResh_Main_6::
+    HeroToDoor($0F, $18)
+    LongJump(SCRIPT_1A_512C)
+
+Trigger_dResh_Main_0::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    Write("A beachball ⭍cactus!🅐")
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Trigger_dResh_Main_3::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_0C_7906, SCRIPT_0C_792E, SCRIPT_0C_7943, SCRIPT_0C_797D)
+
+SCRIPT_0C_7906::
+    Write("Even the walls⭍are radiating🅐heat!🅐")
+    Jump(SCRIPT_0C_79B7)
+
+SCRIPT_0C_792E::
+    Write("OUCH! Hot, hot!🅐")
+    Jump(SCRIPT_0C_79B7)
+
+SCRIPT_0C_7943::
+    Write("Sand and rock⭍everywhere, as🅐far as the eye⭍can see!🅐")
+    Jump(SCRIPT_0C_79B7)
+
+SCRIPT_0C_797D::
+    Write("The sun's ⭍reflection off🅐this rock wall⭍hurts my eyes!🅐")
+
+SCRIPT_0C_79B7::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Trigger_dResh_Main_1::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_0C_79CF, SCRIPT_0C_7A03, SCRIPT_0C_7A48)
+
+SCRIPT_0C_79CF::
+    Write("I hear that⭍fried cacti are🅐a tasty ⭍delicacy.🅐")
+    Jump(SCRIPT_0C_7A80)
+
+SCRIPT_0C_7A03::
+    Write("Hrmm...if there⭍is a cactus 🅐here, there ⭍must be water🅐nearby!🅐")
+    Jump(SCRIPT_0C_7A80)
+
+SCRIPT_0C_7A48::
+    Write("I wonder if ⭍that cactus has🅐sand in its ⭍shoes, too!🅐")
+
+SCRIPT_0C_7A80::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Trigger_dResh_Main_2::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_0C_7A98, SCRIPT_0C_7ACA, SCRIPT_0C_7B18)
+
+SCRIPT_0C_7A98::
+    Write("I have the urge⭍to climb a🅐giant ⭍beanstalk.🅐")
+    Jump(SCRIPT_0C_7B4C)
+
+SCRIPT_0C_7ACA::
+    Write("I wonder if ⭍there is a 🅐giant, red  ⭍flower at the 🅐top of that ⭍plant?🅐")
+    Jump(SCRIPT_0C_7B4C)
+
+SCRIPT_0C_7B18::
+    Write("The thorns on⭍that plant are🅐the size of my⭍head!🅐")
+
+SCRIPT_0C_7B4C::
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Trigger_dResh_Main_4::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00000100) == c0)#, Actor_Null)
+    TransplantMapMask($D0D3, $07, $0E, $D0D3, $07, $01)
+    End()
+
+Trigger_dResh_Main_5::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00001000) == c0)#, Actor_Null)
+    TransplantMapMask($D026, $08, $0C, $D026, $01, $08)
+    End()
+
+Trigger_dResh_Main_6::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00010000) == c0)#, Actor_Null)
+    TransplantMapMask($D0FE, $08, $07, $D0FE, $08, $0E)
+    End()
+
+Trigger_dResh_Main_7::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%00100000) == c0)#, Actor_Null)
+    TransplantMapMask($D0E9, $05, $08, $D0E9, $07, $17)
+    End()
+
+Trigger_dResh_Main_8::
+    LongJumpIf(#(bitmatch(c[xBits_dResh], c%10000000) == c0)#, Actor_Null)
+    TransplantMapMask($D1CF, $09, $0A, $D1CF, $0F, $0D)
+    End()
+
+Trigger_dResh_Main_9::
+    End()

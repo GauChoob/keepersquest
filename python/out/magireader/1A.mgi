@@ -1,0 +1,2057 @@
+
+SCRIPT_1A_48E3::
+    SpriteBlock(8, 0, -1) {
+        Draw(OAMX_1A_484D)
+        Draw(OAMX_1A_4866)
+    }
+    Jump(SCRIPT_1A_48E3)
+
+SCRIPT_1A_48EF::
+    SpriteBlock(8, 0, 1) {
+        Draw(OAMX_1A_481B)
+        Draw(OAMX_1A_4834)
+    }
+    Jump(SCRIPT_1A_48EF)
+
+SCRIPT_1A_48FB::
+    SpriteBlock(8, -1, 0) {
+        Draw(OAMX_1A_48B1)
+        Draw(OAMX_1A_48CA)
+    }
+    Jump(SCRIPT_1A_48FB)
+
+SCRIPT_1A_4907::
+    SpriteBlock(8, 1, 0) {
+        Draw(OAMX_1A_487F)
+        Draw(OAMX_1A_4898)
+    }
+    Jump(SCRIPT_1A_4907)
+
+SCRIPT_1A_4913::
+    SpriteBlock(8, 0, -2) {
+        Draw(OAMX_1A_484D)
+        Draw(OAMX_1A_4866)
+    }
+    Jump(SCRIPT_1A_4913)
+
+SCRIPT_1A_491F::
+    SpriteBlock(8, 0, 2) {
+        Draw(OAMX_1A_481B)
+        Draw(OAMX_1A_4834)
+    }
+    Jump(SCRIPT_1A_491F)
+
+SCRIPT_1A_492B::
+    SpriteBlock(8, -2, 0) {
+        Draw(OAMX_1A_48B1)
+        Draw(OAMX_1A_48CA)
+    }
+    Jump(SCRIPT_1A_492B)
+
+SCRIPT_1A_4937::
+    SpriteBlock(8, 2, 0) {
+        Draw(OAMX_1A_487F)
+        Draw(OAMX_1A_4898)
+    }
+    Jump(SCRIPT_1A_4937)
+
+SCRIPT_1A_4943::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_4866)
+    }
+    Jump(SCRIPT_1A_4943)
+
+SCRIPT_1A_494D::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_4834)
+    }
+    Jump(SCRIPT_1A_494D)
+
+SCRIPT_1A_4957::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_48CA)
+    }
+    Jump(SCRIPT_1A_4957)
+
+SCRIPT_1A_4961::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_4898)
+    }
+    Jump(SCRIPT_1A_4961)
+
+SCRIPT_1A_496B::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_4802)
+    }
+    Jump(SCRIPT_1A_496B)
+
+SCRIPT_1A_4975::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_47E9)
+    }
+    Jump(SCRIPT_1A_4975)
+
+SCRIPT_1A_497F::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_47D0)
+    }
+    Jump(SCRIPT_1A_497F)
+
+ACTORSCRIPT1_1A_4989::
+    SpriteDraw() {
+        MoveDraw(255, 0, 0, OAMX_1A_47B7)
+    }
+    Jump(ACTORSCRIPT1_1A_4989)
+
+SCRIPT_1A_4993::
+    Switch(#DIRECTION#) {
+        Case(Actor_FLAGS_FACENORTH, SCRIPT_1A_49AA)
+        Case(Actor_FLAGS_FACESOUTH, SCRIPT_1A_49B1)
+        Case(Actor_FLAGS_FACEEAST, SCRIPT_1A_49BF)
+        Case(Actor_FLAGS_FACEWEST, SCRIPT_1A_49B8)
+    }
+
+SCRIPT_1A_49AA::
+    ThisSetAnimSingle(SCRIPT_1A_4943)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_1A_49B1::
+    ThisSetAnimSingle(SCRIPT_1A_494D)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_1A_49B8::
+    ThisSetAnimSingle(SCRIPT_1A_4957)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_1A_49BF::
+    ThisSetAnimSingle(SCRIPT_1A_4961)
+    WaitEventText(1)
+    RestoreActorState()
+
+SCRIPT_1A_49C6::
+    StartSFX0(SFXID_Jump)
+    SetScriptMaster(SCRIPT_1A_49CD)
+    End()
+
+SCRIPT_1A_49CD::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    Icon(Icon_Salafy)
+    Write("Save Game?🅐")
+    Clear()
+    Write(" No.⭍ Yes.")
+    Menu(SCRIPT_1A_4A30, SCRIPT_1A_49F7)
+
+SCRIPT_1A_49F7::
+    SaveLocation(SCRIPT_1A_4A85)
+    SaveGame(1)
+    Clear()
+    Write("Game Saved to⭍")
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_1A_4A26)
+    Write("Slot 2.🅐")
+    LongJump(SCRIPT_1A_4A30)
+
+SCRIPT_1A_4A26::
+    Write("Slot 1.🅐")
+
+SCRIPT_1A_4A30::
+    Close()
+    SetStartButtonScript(SCRIPT_1A_49C6)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_4A3A::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_1)
+    LoadHotspots(Hotspot_Overworld_1)
+    LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
+    LoadTriggers(Trigger_Overworld_1)
+    ThatInit(0, Call_001_4AF8, $08, $08, $D0F8, $00, ACTORSCRIPT0_1A_4A6C, Actor_RestoreState)
+    ThatStart(0)
+    HeroFromDoor()
+    LongJump(SCRIPT_1A_4AED)
+
+ACTORSCRIPT0_1A_4A6C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 16)
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    Delay(32)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_1A_49C6)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_4A85::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_1)
+    LoadHotspots(Hotspot_Overworld_1)
+    LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
+    LoadTriggers(Trigger_Overworld_1)
+    ThatInit(0, Call_001_4AF8, $03, $12, $D21F, $00, ACTORSCRIPT0_1A_4AD8, Actor_RestoreState)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_4AD1)
+    ThatInit(0, Call_001_4AF8, $04, $05, $D09A, $00, ACTORSCRIPT0_1A_4AD8, Actor_RestoreState)
+
+SCRIPT_1A_4AD1::
+    ThatStart(0)
+    HeroSetCamera()
+    LongJump(SCRIPT_1A_4AED)
+
+ACTORSCRIPT0_1A_4AD8::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    Delay(48)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_1A_49C6)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_4AED::
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_4B16)
+    LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_4B16)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+SCRIPT_1A_4B16::
+    ThatInit(2, AI_01_6E8F, $04, $17, $D2B6, $00, ACTORSCRIPT0_11_7148, ACTORSCRIPT1_1A_4B3D)
+    ThatStart(2)
+    LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT1_1A_4B3D::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(ACTORSCRIPT0_11_7148)
+    Write("Take trip to⭍Paradwyn?🅐 Yes.⭍ No.")
+    Menu(SCRIPT_1A_4B85, SCRIPT_1A_4B70)
+
+SCRIPT_1A_4B70::
+    Close()
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5C23)
+    Delay(4)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    RestoreActorState()
+
+SCRIPT_1A_4B85::
+    Close()
+    ThatDelete(0)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_713A, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    LongJump(SCRIPT_1A_51E7)
+
+SCRIPT_1A_4B99::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_1)
+    LoadHotspots(Hotspot_Overworld_1)
+    LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
+    LoadTriggers(Trigger_Overworld_1)
+    ThatInit(0, AI_Hero, $04, $16, $D298, $00, SCRIPT_14_5DB5, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $04, $1D, $D36A, $00, ACTORSCRIPT0_1A_4BF5, ACTORSCRIPT1_1A_4B3D)
+    LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
+    ThatStart(2)
+    SetCamera($04, $16)
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_1A_4BF5::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_712C, 96)
+        ScriptDelay(ACTORSCRIPT0_11_7148, 14)
+    }
+    ThatStart(0)
+    SetStartButtonScript(SCRIPT_1A_49C6)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Hotspot_Overworld_1_0::
+    LongJump(SCRIPT_SCENELOADER_09_4878)
+
+Hotspot_Overworld_1_1::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000100) == c0)#, SCRIPT_1A_4C1D)
+    LongJump(SCRIPT_SCENELOADER_09_59C1)
+
+SCRIPT_1A_4C1D::
+    OrByte(xBits_ZonesIntroduced_1, %00000100)
+    LongJump(SCRIPT_09_5EA7)
+
+Hotspot_Overworld_1_2::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00000001) == c0)#, SCRIPT_1A_4C34)
+    LongJump(SCRIPT_SCENELOADER_0F_4298)
+
+SCRIPT_1A_4C34::
+    OrByte(xBits_ZonesIntroduced_1, %00000001)
+    LongJump(SCRIPT_0F_4843)
+
+Hotspot_Overworld_1_3::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%00001000) == c0)#, SCRIPT_1A_4C4B)
+    LongJump(SCRIPT_SCENELOADER_0F_590A)
+
+SCRIPT_1A_4C4B::
+    OrByte(xBits_ZonesIntroduced_1, %00001000)
+    LongJump(SCRIPT_0F_5CFE)
+
+Hotspot_Overworld_1_4::
+    LongJump(SCRIPT_SCENELOADER_0E_4DE8)
+
+SCRIPT_1A_4C57::
+    OrByte(xBits_ZonesIntroduced_1, %00010000)
+    LongJump(SCRIPT_0E_56E8)
+
+SCRIPT_1A_4C5F::
+    End()
+
+SCRIPT_1A_4C60::
+    LongJump(SCRIPT_1A_517F)
+
+Trigger_Overworld_1_B::
+    Icon(Icon_Salafy)
+    RandLongJump(SCRIPT_1A_4C75, SCRIPT_1A_4CC1, SCRIPT_1A_4CFB, SCRIPT_1A_4D41)
+
+SCRIPT_1A_4C75::
+    Write("I can't see the⭍bottom! That 🅐cliff seems to⭍go down into🅐nothingness!🅐")
+    Jump(SCRIPT_1A_4D73)
+
+SCRIPT_1A_4CC1::
+    Write("WOW! The edge⭍of the whole🅐world! I better⭍not slip!🅐")
+    Jump(SCRIPT_1A_4D73)
+
+SCRIPT_1A_4CFB::
+    Write("Shucks. It's⭍the edge of 🅐the world and⭍I have nothing 🅐to wear!🅐")
+    Jump(SCRIPT_1A_4D73)
+
+SCRIPT_1A_4D41::
+    Write("It's the edge⭍of the world🅐and I'm ⭍speechless.🅐")
+
+SCRIPT_1A_4D73::
+    Close()
+    End()
+
+Trigger_Overworld_1_0::
+    Icon(Icon_Salafy)
+    Write("That is the ⭍second tallest🅐group of trees⭍I have seen in 🅐the Moonlands!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_1::
+    Icon(Icon_Salafy)
+    Write("Now THOSE are ⭍the tallest 🅐trees I have ⭍ever seen in 🅐the Moonlands!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_2::
+    Icon(Icon_Salafy)
+    Write("Hrmm... ⭍This tree seems🅐to be shorter ⭍than me!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_3::
+    Icon(Icon_Salafy)
+    Write("This tree could⭍be a toothpick🅐for an ormagon!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_4::
+    Icon(Icon_Salafy)
+    Write("A well watered⭍and well kept🅐household tree.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_5::
+    Icon(Icon_Salafy)
+    Write("A lone tree in⭍the middle of🅐nowhere.....🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_6::
+    Icon(Icon_Salafy)
+    Write("The branches⭍are all bent!🅐This tree has⭍had one too 🅐many giant 🅐birds landing⭍on it!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_7::
+    Icon(Icon_Salafy)
+    Write("Nothing special⭍about this 🅐tree. Nope, ⭍nothing special🅐at all....🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_8::
+    Icon(Icon_Salafy)
+    Write("This tree looks⭍to be even 🅐thirstier than ⭍I am!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_9::
+    Icon(Icon_Salafy)
+    Write("For some reason⭍I dare not get 🅐any closer to ⭍this bush.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_A::
+    Icon(Icon_Salafy)
+    Write("Even from a⭍distance, there🅐is no doubt⭍Vash Naroom is🅐the prettiest⭍city around!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_1_C::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000010) == c0)#, Actor_Null)
+    TransplantMapMask($D009, $09, $09, $D009, $00, $09)
+    End()
+
+Trigger_Overworld_1_D::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000100) == c0)#, Actor_Null)
+    TransplantMapMask($D140, $08, $09, $D140, $0A, $14)
+    End()
+
+Trigger_Overworld_1_E::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00000001) == c0)#, Actor_Null)
+    TransplantMapMask($D285, $0C, $0A, $D285, $15, $0F)
+    End()
+
+Trigger_Overworld_1_F::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00001000) == c0)#, Actor_Null)
+    TransplantMapMask($D221, $08, $07, $D221, $12, $05)
+    End()
+
+Trigger_Overworld_1_10::
+Trigger_Overworld_1_11::
+    End()
+
+SCRIPT_1A_50B8::
+    StartSFX0(SFXID_Jump)
+    SetScriptMaster(SCRIPT_1A_50BF)
+    End()
+
+SCRIPT_1A_50BF::
+    SetByte(wScript_StartButtonDisabled, $01)
+    Pass()
+    Icon(Icon_Salafy)
+    Write("Save Game?🅐")
+    Clear()
+    Write(" No.⭍ Yes.")
+    Menu(SCRIPT_1A_5122, SCRIPT_1A_50E9)
+
+SCRIPT_1A_50E9::
+    SaveLocation(SCRIPT_1A_517F)
+    SaveGame(1)
+    Clear()
+    Write("Game Saved to⭍")
+    LongJumpIf(#(c[wBattery_CurrentSaveSlot] == c0)#, SCRIPT_1A_5118)
+    Write("Slot 2.🅐")
+    LongJump(SCRIPT_1A_5122)
+
+SCRIPT_1A_5118::
+    Write("Slot 1.🅐")
+
+SCRIPT_1A_5122::
+    Close()
+    SetStartButtonScript(SCRIPT_1A_50B8)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_512C::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_2)
+    LoadHotspots(Hotspot_Overworld_2)
+    LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
+    LoadTriggers(Trigger_Overworld_2)
+    ThatInit(0, Call_001_4AF8, $08, $08, $D0F8, $00, ACTORSCRIPT0_1A_5166, Actor_RestoreState)
+    ThatStart(0)
+    HeroFromDoor()
+    LongJump(SCRIPT_1A_5258)
+
+ACTORSCRIPT0_1A_5166::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C5D, 16)
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    Delay(32)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_1A_50B8)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_517F::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_2)
+    LoadHotspots(Hotspot_Overworld_2)
+    LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
+    LoadTriggers(Trigger_Overworld_2)
+    ThatInit(0, Call_001_4AF8, $07, $07, $D0D9, $00, ACTORSCRIPT0_1A_51D2, Actor_RestoreState)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_51CB)
+    ThatInit(0, Call_001_4AF8, $08, $14, $D260, $00, ACTORSCRIPT0_1A_51D2, Actor_RestoreState)
+
+SCRIPT_1A_51CB::
+    ThatStart(0)
+    LongJump(SCRIPT_1A_5258)
+
+SCRIPT_1A_51D1::
+    End()
+
+ACTORSCRIPT0_1A_51D2::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    Delay(48)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetStartButtonScript(SCRIPT_1A_50B8)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_51E7::
+    StartSong(SONGID_Glade)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Overworld_2)
+    LoadHotspots(Hotspot_Overworld_2)
+    LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
+    LoadTriggers(Trigger_Overworld_2)
+    ThatInit(0, AI_Hero, $03, $07, $D0D5, $00, SCRIPT_14_5DB5, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $02, $00, $D002, $00, ACTORSCRIPT0_1A_5243, ACTORSCRIPT1_1A_52A8)
+    LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
+    ThatStart(2)
+    SetCamera($03, $07)
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_1A_5243::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_11_713A, 112)
+        ScriptDelay(SCRIPT_11_7172, 14)
+    }
+    ThatStart(0)
+    SetStartButtonScript(SCRIPT_1A_50B8)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_1A_5258::
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_5281)
+    LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_5281)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+SCRIPT_1A_5281::
+    ThatInit(2, AI_01_6E8F, $02, $07, $D0D4, $00, SCRIPT_11_7172, ACTORSCRIPT1_1A_52A8)
+    LoadSingleBitmap($0F, BITMAP_0A_7A13, $8000, $00)
+    ThatStart(2)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT1_1A_52A8::
+    SetByte(wScript_StartButtonDisabled, $01)
+    ThisSetAnimSingle(SCRIPT_11_7172)
+    Write("Take trip to⭍Arderial?🅐 Yes.⭍ No.")
+    Menu(SCRIPT_1A_52F0, SCRIPT_1A_52DB)
+
+SCRIPT_1A_52DB::
+    Close()
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_5C8D)
+    Delay(4)
+    SetScriptScroll(SCRIPT_19_46F0)
+    SetByte(wScript_StartButtonDisabled, $00)
+    RestoreActorState()
+
+SCRIPT_1A_52F0::
+    Close()
+    ThatDelete(0)
+    Delay(12)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT0_11_7148, 8)
+        ScriptDelay(SCRIPT_11_712C, 100)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    LongJump(SCRIPT_1A_4B99)
+
+Hotspot_Overworld_2_0::
+    LongJump(SCRIPT_SCENELOADER_09_6B5F)
+
+Hotspot_Overworld_2_1::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%01000000) == c0)#, SCRIPT_1A_531D)
+    LongJump(Script_dResh_LoadGame)
+
+SCRIPT_1A_531D::
+    OrByte(xBits_ZonesIntroduced_1, %01000000)
+    LongJump(SCRIPT_0C_6FB1)
+
+Hotspot_Overworld_2_2::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_1], c%10000000) == c0)#, SCRIPT_1A_5334)
+    LongJump(SCRIPT_SCENELOADER_16_6F92)
+
+SCRIPT_1A_5334::
+    OrByte(xBits_ZonesIntroduced_1, %10000000)
+    LongJump(SCRIPT_16_737D)
+
+Hotspot_Overworld_2_3::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_2], c%00000001) == c0)#, SCRIPT_1A_534B)
+    LongJump(SCRIPT_SCENELOADER_08_6D13)
+
+SCRIPT_1A_534B::
+    OrByte(xBits_ZonesIntroduced_2, %00000001)
+    LongJump(SCRIPT_08_72FF)
+
+Hotspot_Overworld_2_4::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesIntroduced_2], c%00000010) == c0)#, SCRIPT_1A_5362)
+    LongJump(SCRIPT_SCENELOADER_0E_6AD9)
+
+SCRIPT_1A_5362::
+    OrByte(xBits_ZonesIntroduced_2, %00000010)
+    LongJump(SCRIPT_0E_74F1)
+
+Hotspot_Overworld_2_5::
+    LongJump(SCRIPT_SCENELOADER_10_45A5)
+
+SCRIPT_1A_536E::
+    End()
+
+Trigger_Overworld_2_0::
+    Icon(Icon_Salafy)
+    Write("Do I really  ⭍expect this 🅐tree to talk⭍back to me? 🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_1::
+    Icon(Icon_Salafy)
+    Write("This tree may⭍live in the 🅐desert, but I ⭍am thirstier 🅐than it is!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_2::
+    Icon(Icon_Salafy)
+    Write("I have been in ⭍the desert too🅐long! This tree⭍must be just a 🅐mirage!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_3::
+    Icon(Icon_Salafy)
+    Write("It may look  ⭍like a tree, 🅐but really it's⭍just an  🅐overgrown weed!🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_4::
+    Icon(Icon_Salafy)
+    Write("This sure is a⭍popular type of🅐tree around⭍here.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_5::
+    Icon(Icon_Salafy)
+    Write("Is there⭍anything around🅐here that isn't⭍covered in mud?🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_6::
+    Icon(Icon_Salafy)
+    Write("It appears to⭍be a mound of 🅐mud in the ⭍shape of a 🅐stubby tree.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_7::
+    Icon(Icon_Salafy)
+    Write("If I never see⭍another tree  🅐covered in mud,⭍then I would 🅐never see ⭍another tree🅐covered in mud.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_8::
+    Icon(Icon_Salafy)
+    Write("It's so hot⭍here that there🅐is steam rising⭍from the leaves🅐of this tree.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_9::
+    Icon(Icon_Salafy)
+    Write("There is some⭍writing carved🅐on this tree.⭍It says 'The 🅐incredible,⭍spectacular,🅐amazing, real⭍talking tree!'🅐.......⭍'Out of order.'🅐Figures.🅐")
+    Close()
+    End()
+
+Trigger_Overworld_2_A::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%00100000) == c0)#, Actor_Null)
+    TransplantMapMask($D206, $09, $0B, $D206, $11, $08)
+    End()
+
+Trigger_Overworld_2_B::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_2], c%00001000) == c0)#, Actor_Null)
+    TransplantMapMask($D1F0, $06, $06, $D1F0, $10, $10)
+    End()
+
+Trigger_Overworld_2_C::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_1], c%10000000) == c0)#, Actor_Null)
+    TransplantMapMask($D04F, $0A, $0B, $D04F, $02, $13)
+    End()
+
+Trigger_Overworld_2_D::
+    LongJumpIf(#(bitmatch(c[xBits_ZonesCompleted_2], c%00000001) == c0)#, Actor_Null)
+    TransplantMapMask($D044, $06, $06, $D044, $02, $08)
+    End()
+
+Trigger_Overworld_2_E::
+    LongJumpIf(#((c[xOverworld1_SecretsCompleted] != c5) or (c[xOverworld2_SecretsCompleted] != c5))#, Actor_Null)
+    TransplantMapMask($D11A, $07, $07, $D11A, $09, $0C)
+    End()
+
+Trigger_Overworld_2_F::
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_5730)
+    LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_5730)
+    End()
+
+SCRIPT_1A_5730::
+    TransplantMapMask($D1C3, $02, $0A, $D1C3, $0F, $01)
+    End()
+
+SCRIPT_1A_573A::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Naroom_Demo)
+    LoadHotspots(Hotspot_Naroom_Demo)
+    ThatInit(0, AI_Hero, $0A, $0E, $D2C6, $00, ACTORSCRIPT0_1A_5779, Actor_RestoreState)
+    ThatStart(0)
+    HeroSetCamera()
+    SetByte(wScript_StartButtonDisabled, $01)
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    LongJump(SCRIPT_1A_579B)
+
+SCRIPT_1A_5778::
+    End()
+
+ACTORSCRIPT0_1A_5779::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DA1, 16)
+    }
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_1A_5784::
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetScriptMaster(SCRIPT_1A_578D)
+    End()
+
+SCRIPT_1A_578D::
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    Delay(255)
+    Delay(255)
+    LongJump(SCRIPT_1A_579B)
+
+SCRIPT_1A_579A::
+    End()
+
+SCRIPT_1A_579B::
+    ThatAI(0, Call_001_4AF8)
+    ThatScript(0, SCRIPT_14_5DA1)
+    Icon(Icon_Salafy)
+    SetStartButtonScript(SCRIPT_1A_5784)
+    Write("Welcome to the⭍")
+    Delay(24)
+    Write("Magi-Nation:⭍")
+    Delay(24)
+    Write("Keeper's Quest⭍")
+    Delay(24)
+    Write("DEMO!!⭍")
+    Delay(24)
+    Write("To play any of⭍")
+    Delay(24)
+    Write("our challenges⭍")
+    Delay(24)
+    Write("enter any of⭍")
+    Delay(24)
+    Write("the above five⭍")
+    Delay(24)
+    Write("doors.⭍")
+    Close()
+    SetScriptScroll(SCRIPT_19_46F0)
+    Delay(255)
+    Delay(255)
+    LongJump(SCRIPT_1A_579B)
+
+SCRIPT_1A_584D::
+    End()
+
+Hotspot_Overworld_1_7::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_HouseNoStool)
+    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000)#, SCRIPT_1A_5868)
+    LoadScene(Scene_HouseStool)
+
+SCRIPT_1A_5868::
+    LoadHotspots(Hotspot_House_Orothe)
+    LoadTriggers(Trigger_House_Orothe)
+    ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_13_6039, ACTORSCRIPT1_1A_58AB)
+    LoadSingleBitmap($30, BITMAP_0D_47E0, $8000, $00)
+    ThatStart(0)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00001000)#, SCRIPT_1A_58A6)
+    ThatStart(2)
+
+SCRIPT_1A_58A6::
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT1_1A_58AB::
+    ThisSetAnimSingle(ACTORSCRIPT0_13_6039)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000) and not bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000010))#, SCRIPT_1A_58DD)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000010)#, SCRIPT_1A_58D5)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00001000)#, SCRIPT_1A_58E9)
+    SetScriptText(SCRIPT_1A_5A07)
+    LongJump(SCRIPT_13_6089)
+
+SCRIPT_1A_58D5::
+    SetScriptText(SCRIPT_1A_58F1)
+    LongJump(SCRIPT_13_6089)
+
+SCRIPT_1A_58DD::
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000010)
+    SetScriptText(SCRIPT_1A_5919)
+    LongJump(SCRIPT_13_6089)
+
+SCRIPT_1A_58E9::
+    SetScriptText(SCRIPT_1A_59C4)
+    LongJump(SCRIPT_13_6089)
+
+SCRIPT_1A_58F1::
+    Icon(Icon_Orothe_Blu)
+    Write("It has a⭍stool and🅐everything!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_5919::
+    Icon(Icon_Orothe_Blu)
+    Write("Salafy!🅐How do you⭍like my new🅐fungus-free⭍home?🅐")
+    Icon(Icon_Salafy)
+    Write("What?⭍You got rid🅐of your⭍fungus?🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Nope... I⭍got rid of🅐the house.⭍I traded it🅐in for the⭍deluxe model!🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_59C4::
+    Icon(Icon_Orothe_Blu)
+    Write("Argh, there⭍be icky🅐fungus⭍everywhere!🅐")
+    LongJumpIf(#((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000))#, SCRIPT_1A_5BBC)
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_5A07::
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00001000)
+    Icon(Icon_Orothe_Blu)
+    Write("Arr, Salafy,⭍great to see🅐ye again!⭍Good work on🅐beatin' our⭍mazes.🅐")
+    Icon(Icon_Salafy)
+    Write("Thanks, Blu!⭍This is a🅐really nice⭍house you have!🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Thank ye.⭍Me house would🅐be even nicer⭍if it weren't🅐for this fungus⭍problem.🅐")
+    Icon(Icon_Salafy)
+    Write("Fungus?⭍I don't see🅐any fungus.🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Argh, it be⭍everywhere!🅐Here, have⭍some for🅐yerself!🅐")
+    Icon(Icon_Salafy)
+    Write("Ohhhh, this⭍fungus! I did🅐not see it⭍before. It🅐just blends in⭍with the🅐carpet.🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Aye, that⭍it does.🅐")
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100))#, SCRIPT_1A_5BBC)
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_5BBC::
+    Icon(Icon_Salafy)
+    Write("Hrmm... I⭍might be able🅐to find⭍something that🅐could get rid⭍of this fungus🅐for you. Mind⭍if I take🅐a sample?🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Take as much⭍as ye wants!🅐")
+    Icon(Icon_Salafy)
+    Write("I can store⭍the fungus in🅐this specimen⭍jar that I🅐found.🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("Why don't ya⭍use that🅐canister-⭍looking thingy🅐with the crayon⭍writing all🅐over it that⭍ye got there?🅐")
+    Icon(Icon_Salafy)
+    Write("I think Valkan⭍would get upset🅐if he knew I⭍was using his🅐treasured Cald⭍trophy to hold🅐fungus.🅐")
+    Icon(Icon_Orothe_Blu)
+    Write("In that case,⭍be sure to🅐let 'ol Blu⭍know if ye🅐find something⭍to get rid of🅐this fungus!🅐")
+    Icon(Icon_Salafy)
+    Write("Sure thing!🅐")
+    Close()
+    SetEventText(1)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00010000)
+    End()
+
+Hotspot_Overworld_1_6::
+    SetByte(xTrainingRoom_TimesAround, $00)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    AndByte(xBits_Puzzle_Bits1, %11111101)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Naroom_TrainingRoom_Normal)
+    LoadHotspots(Hotspot_Naroom_TrainingRoom_Normal)
+    LoadTriggers(Trigger_Naroom_TrainingRoom_Normal)
+    ThatInit(0, Call_001_4AF8, $00, $12, $D2D0, $00, ACTORSCRIPT0_1A_698B, Actor_RestoreState)
+    ThatStart(0)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+Hotspot_Naroom_TrainingRoom_Normal_0::
+    HeroToDoor($1C, $16)
+    LongJump(SCRIPT_1A_4A3A)
+
+Hotspot_Naroom_TrainingRoom_Normal_1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_1A_5E44)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits1], c%00000100) == c0)#, SCRIPT_1A_5E44)
+    AndByte(xBits_Puzzle_Bits1, %11111011)
+    LongJumpIf(#(c[xTrainingRoom_TimesAround] == c5)#, SCRIPT_1A_5E45)
+    VarByteExpr(xTrainingRoom_TimesAround, #(c[xTrainingRoom_TimesAround] + c1)#)
+
+SCRIPT_1A_5E44::
+    End()
+
+SCRIPT_1A_5E45::
+    OrByte(xBits_Puzzle_Bits1, %00000001)
+    End()
+
+Hotspot_Naroom_TrainingRoom_Normal_2::
+Hotspot_Naroom_TrainingRoom_Normal_3::
+    SetByte(xTrainingRoom_TimesAround, $00)
+    AndByte(xBits_Puzzle_Bits1, %11111110)
+    End()
+
+Hotspot_Naroom_TrainingRoom_Normal_4::
+    OrByte(xBits_Puzzle_Bits1, %00000100)
+    End()
+
+Trigger_Naroom_TrainingRoom_Normal_1::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_1A_5E61)
+    End()
+
+SCRIPT_1A_5E61::
+    SetByte(wScript_StartButtonDisabled, $01)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_1A_5E98)
+    Write("'Click!'🅐")
+    Close()
+    TransplantMap($D434, $02, $03, $D21D, $0D, $15)
+    OrByte(xBits_Puzzle_Bits1, %00000010)
+    LongJumpIf(#(bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100) == c0)#, SCRIPT_1A_5E98)
+    TransplantTile($03, $18, $D090, COLLID_TR00, $FF)
+
+SCRIPT_1A_5E98::
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Trigger_Naroom_TrainingRoom_Normal_0::
+    TriggerOnce(xBits_Puzzle_Bits5_Chicken_Ormagon[2], SCRIPT_TRIGGERALREADYON_1A_5ED6, $FF, $D090)
+    StartSFX0(SFXID_PhysicalAttack)
+    SetByte(wScript_StartButtonDisabled, $01)
+    Write("Salafy found a⭍Specimen Jar!🅐")
+    Close()
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00000100)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+SCRIPT_TRIGGERALREADYON_1A_5ED6::
+    InitSkip(SCRIPT_1A_46E7)
+    SetByte(wScript_StartButtonDisabled, $01)
+    Icon(Icon_Salafy)
+    Write("Empty... SIGH.🅐")
+    Close()
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+Hotspot_House_Weave_0::
+    HeroToDoor($06, $1A)
+    LongJump(SCRIPT_1A_512C)
+
+Hotspot_Overworld_2_6::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_HouseNoStool)
+    LoadHotspots(Hotspot_House_Weave)
+    LoadTriggers(Trigger_House_Weave)
+    ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_13_62AC, ACTORSCRIPT1_1A_5F56)
+    LoadSingleBitmap($29, BITMAP_0D_5340, $8000, $00)
+    ThatStart(0)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00100000)#, SCRIPT_1A_5F49)
+    ThatStart(2)
+
+SCRIPT_1A_5F49::
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetStartButtonScript(SCRIPT_1A_50B8)
+    SetByte(wScript_StartButtonDisabled, $00)
+    End()
+
+ACTORSCRIPT1_1A_5F56::
+    ThisSetAnimSingle(ACTORSCRIPT0_13_62AC)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00100000)#, SCRIPT_1A_5F6A)
+    SetScriptText(SCRIPT_1A_5FDF)
+    LongJump(SCRIPT_13_62FC)
+
+SCRIPT_1A_5F6A::
+    SetScriptText(SCRIPT_1A_5F72)
+    LongJump(SCRIPT_13_62FC)
+
+SCRIPT_1A_5F72::
+    Icon(Icon_Weave_BoAhsa)
+    Write("I would be⭍rich with🅐animite right⭍now if Eidon🅐had just made⭍that bet.....🅐")
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_6160)
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_5FDF::
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00100000)
+    Icon(Icon_Weave_BoAhsa)
+    Write("Heya, Salafy.🅐")
+    Icon(Icon_Salafy)
+    Write("Hi, Bo'Ahsa,⭍how are you?🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("Doing fine,⭍though I🅐would be doing⭍better if🅐Eidon had⭍just made that🅐bet!🅐")
+    Icon(Icon_Salafy)
+    Write("But I beat⭍those mazes!🅐If you had⭍made that bet,🅐you would have⭍lost all your🅐animite!🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("Hah! If⭍Eidon had made🅐that bet, then⭍the pressure🅐on you would⭍have been too🅐much and you⭍would have🅐failed!🅐")
+    Icon(Icon_Salafy)
+    Write("........🅐")
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_6160)
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_6160::
+    Icon(Icon_Salafy)
+    Write("I was⭍wondering if🅐you could help⭍me.🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("I will⭍if I can.🅐")
+    Icon(Icon_Salafy)
+    Write("My friend⭍has a fungus🅐problem in⭍his house,🅐and I have been⭍trying to find🅐something to⭍get rid of🅐it.🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("The house or⭍the fungus?🅐")
+    Icon(Icon_Salafy)
+    Write("!!🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("Yeah, I⭍have some🅐fungicide I⭍could give🅐you.🅐")
+    Icon(Icon_Salafy)
+    Write("Really?🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("Of course!🅐This is the⭍Weave!🅐We always need⭍to have 🅐something ready⭍to destroy🅐nasty fungus⭍and weeds that🅐try to ruin⭍our grass.🅐")
+    Icon(Icon_Salafy)
+    Write("Wow! Thanks,⭍Bo'Ahsa!🅐I guess I'll⭍use this trophy🅐to carry the⭍fungicide for🅐now.🅐")
+    Icon(Icon_Weave_BoAhsa)
+    Write("Trophy?🅐Looks more like⭍a canister with🅐crayon writing⭍all over it.🅐")
+    Icon(Icon_Salafy)
+    Write(".......🅐")
+    Close()
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %01000000)
+    SetEventText(1)
+    End()
+
+Hotspot_Overworld_1_5::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_HouseNoStool)
+    LoadHotspots(Hotspot_House_Cald)
+    LoadTriggers(Trigger_House_Cald)
+    ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_697E, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, SCRIPT_11_5356, ACTORSCRIPT1_1A_6403)
+    LoadSingleBitmap($2A, BITMAP_0D_7B20, $8000, $00)
+    ThatStart(0)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_1], c%00000100)#, SCRIPT_1A_63FE)
+    ThatStart(2)
+
+SCRIPT_1A_63FE::
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT1_1A_6403::
+    ThisSetAnimSingle(SCRIPT_11_5374)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010)#, SCRIPT_1A_6417)
+    SetScriptText(SCRIPT_1A_64A0)
+    LongJump(SCRIPT_11_53A6)
+
+SCRIPT_1A_6417::
+    SetScriptText(SCRIPT_1A_641F)
+    LongJump(SCRIPT_11_53A6)
+
+SCRIPT_1A_641F::
+    Icon(Icon_Cald_Valkan)
+    Write("Be sure to⭍take care of🅐that trophy and⭍polish it twice🅐daily!🅐")
+    Icon(Icon_Salafy)
+    Write("Don't worry,⭍it will be🅐taken care of.⭍Yeah. Right.🅐")
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_64A0::
+    Icon(Icon_Cald_Valkan)
+    Write("Salafy!🅐Welcome to⭍my house!🅐")
+    Icon(Icon_Salafy)
+    Write("Thank you,⭍Valkan.🅐")
+    Icon(Icon_Cald_Valkan)
+    Write("Since you⭍got so lucky🅐beating our⭍Cald mazes...🅐")
+    Icon(Icon_Salafy)
+    Write("It was skill,⭍not luck!🅐")
+    Icon(Icon_Cald_Valkan)
+    Write("... because⭍your luck🅐got you⭍through,🅐I would like⭍to present you🅐with this⭍trophy🅐signifying⭍your completion🅐of the Cald⭍mazes.🅐")
+    Icon(Icon_Salafy)
+    Write("This looks⭍like a canister🅐with my name⭍on it written🅐in crayon!🅐")
+    Icon(Icon_Cald_Valkan)
+    Write("What?! That's⭍not just a🅐canister!⭍That's an🅐ancient,🅐highly sought-⭍after trophy!🅐It has been⭍given to those🅐worthy of it⭍for hundreds🅐of years!🅐")
+    Icon(Icon_Salafy)
+    Write("Umm....🅐thanks then...⭍I shall cherish🅐this canister,⭍er.. I mean🅐trophy,⭍for a long🅐time.🅐")
+    Icon(Icon_Cald_Valkan)
+    Write("Glad you⭍like it!🅐")
+    Icon(Icon_Salafy)
+    Write(".........🅐")
+    Close()
+    SetEventText(1)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %00000010)
+    End()
+
+Trigger_House_Cald_0::
+    Icon(Icon_Salafy)
+    Write("It doesn't⭍respond,🅐its just a⭍'cat picture.'🅐")
+    Close()
+    End()
+
+Trigger_House_Cald_1::
+    Icon(Icon_Salafy)
+    Write("A view⭍of magma.🅐")
+    Close()
+    End()
+
+Trigger_House_Cald_2::
+    Icon(Icon_Salafy)
+    Write("Pumice⭍underwear?🅐")
+    Close()
+    End()
+
+Trigger_House_Cald_3::
+    Icon(Icon_Salafy)
+    Write("Bridge-⭍building🅐books.🅐")
+    Close()
+    End()
+
+Trigger_House_Weave_0::
+    Icon(Icon_Salafy)
+    Write("Grass cat⭍pinata🅐picture.🅐")
+    Close()
+    End()
+
+Trigger_House_Weave_1::
+    Icon(Icon_Salafy)
+    Write("Can't see⭍past the🅐huge⭍dandelion.🅐")
+    Close()
+    End()
+
+Trigger_House_Weave_2::
+    Icon(Icon_Salafy)
+    Write("This sewing kit⭍has a hedge🅐trimmer⭍in it.🅐")
+    Close()
+    End()
+
+Trigger_House_Weave_3::
+    Icon(Icon_Salafy)
+    Write("Woven grass⭍furniture.🅐")
+    Close()
+    End()
+
+Trigger_House_Orothe_0::
+    Icon(Icon_Salafy)
+    Write("Surfer cat.🅐")
+    Close()
+    End()
+
+Trigger_House_Orothe_1::
+    Icon(Icon_Salafy)
+    Write("This window is⭍rusted shut.🅐")
+    Close()
+    End()
+
+Trigger_House_Orothe_2::
+    Icon(Icon_Salafy)
+    Write("39 black⭍eyepatches🅐and 1 purple⭍one.🅐")
+    Close()
+    End()
+
+Trigger_House_Orothe_3::
+    Icon(Icon_Salafy)
+    Write("Three⭍waterlogged🅐copies of⭍'Pirates of🅐Oscent Mar.'🅐")
+    Close()
+    End()
+
+Trigger_House_Bograth_0::
+    Icon(Icon_Salafy)
+    Write("This cat is⭍staring at me.🅐")
+    Close()
+    End()
+
+Trigger_House_Bograth_1::
+    Icon(Icon_Salafy)
+    Write("There is a⭍mud garden🅐out there.🅐")
+    Close()
+    End()
+
+Trigger_House_Bograth_2::
+    Icon(Icon_Salafy)
+    Write("Full of dirt.🅐")
+    Close()
+    End()
+
+Trigger_House_Bograth_3::
+    Icon(Icon_Salafy)
+    Write("All of the⭍books on this🅐shelf are cheap⭍cardboard🅐props.🅐")
+    Close()
+    End()
+
+ACTORSCRIPT0_1A_697E::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 16)
+    }
+    Delay(16)
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+ACTORSCRIPT0_1A_698B::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+    }
+    Delay(16)
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+Hotspot_House_Cald_0::
+    HeroToDoor($19, $02)
+    LongJump(SCRIPT_1A_4A3A)
+
+Hotspot_House_Orothe_0::
+    HeroToDoor($0C, $1A)
+    LongJump(SCRIPT_1A_4A3A)
+
+SCRIPT_1A_69A6::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Naroom_Demo)
+    LoadHotspots(Hotspot_Naroom_Demo)
+    ThatInit(0, Call_001_4AF8, $08, $08, $D198, $00, ACTORSCRIPT0_1A_69E6, Actor_RestoreState)
+    ThatStart(0)
+    HeroFromDoor()
+    HeroSetCamera()
+    SetByte(wScript_StartButtonDisabled, $01)
+    PalClearAnim(0, 16, WHITE_A)
+    SetByte(xHeroAbilities, $05)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    Delay(255)
+    Delay(255)
+    LongJump(SCRIPT_1A_579B)
+
+SCRIPT_1A_69E5::
+    End()
+
+ACTORSCRIPT0_1A_69E6::
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C5D, 48, 0, 1)
+    }
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+Hotspot_Naroom_Demo_0::
+    LongJump(Script_Naroom_Puzzle2_First)
+
+Hotspot_Naroom_Demo_1::
+    LongJump(Script_Underneath_Puzzle1_First)
+
+Hotspot_Naroom_Demo_2::
+    LongJump(Script_Cald_Puzzle2_First)
+
+Hotspot_Naroom_Demo_3::
+    LongJump(Script_Orothe_Puzzle3_First)
+
+Hotspot_Naroom_Demo_4::
+    LongJump(Script_Arderial_Puzzle1_First)
+
+SCRIPT_1A_6A07::
+    OrByte(xBits_Naroom, %00000010)
+    HeroToDoor($0C, $0A)
+    LongJump(SCRIPT_1A_69A6)
+
+SCRIPT_1A_6A12::
+    OrByte(xBits_Underneath, %00000001)
+    HeroToDoor($0F, $0A)
+    LongJump(SCRIPT_1A_69A6)
+
+SCRIPT_1A_6A1D::
+    OrByte(xBits_Cald, %00000010)
+    HeroToDoor($12, $0A)
+    LongJump(SCRIPT_1A_69A6)
+
+SCRIPT_1A_6A28::
+    OrByte(xBits_Orothe, %00000100)
+    HeroToDoor($15, $0A)
+    LongJump(SCRIPT_1A_69A6)
+
+SCRIPT_1A_6A33::
+    OrByte(xBits_Arderial, %00000001)
+    HeroToDoor($18, $0A)
+    LongJump(SCRIPT_1A_69A6)
+
+SCRIPT_1A_6A3E::
+    StartSong(SONGID_Quest)
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $00)
+    SetByte(wScript_TransplantTileDisabled, $00)
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Naroom_TrainingRoom_Cutscene)
+    ThatInit(0, Call_001_4AF8, $0E, $11, $D2B6, $00, ACTORSCRIPT0_1A_6F27, Actor_RestoreState)
+    ThatInit(2, Call_001_4AF8, $10, $11, $D2B8, $00, ACTORSCRIPT0_1A_6FBA, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0C, $10, $D28C, $30, ACTORSCRIPT0_1A_7051, Actor_RestoreState)
+    LoadSingleBitmap($30, BITMAP_0D_43D0, $8000, $00)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8300, $00)
+    ThatStart(0)
+    ThatStart(2)
+    SetCamera($14, $12)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetScriptText(SCRIPT_1A_6AA6)
+    End()
+
+SCRIPT_1A_6AA6::
+    Icon(Icon_Yaki)
+    Write("But the party's⭍about to start!🅐")
+    Icon(Icon_Salafy)
+    Write("I still think I⭍need to get rid🅐of this thing.🅐")
+    Icon(Icon_Yaki)
+    Write("Where did you⭍find it?🅐")
+    Icon(Icon_Salafy)
+    Write("In the Core. I⭍figure if it's🅐from there,⭍it's not safe🅐to have lying⭍around.🅐")
+    Icon(Icon_Yaki)
+    Write("Do you have to⭍put it in my🅐secret room?🅐")
+    Icon(Icon_Salafy)
+    Write("Yes.🅐")
+    Close()
+    Sync(0, 3)
+    Delay(80)
+    Icon(Icon_Yaki)
+    Write("OK, I'll hide🅐it here, but🅐you can't watch🅐me open it.🅐")
+    Close()
+    Sync(1, 3)
+    End()
+
+SCRIPT_1A_6BED::
+    Icon(Icon_Yaki)
+    Write("Happy now?🅐")
+    Icon(Icon_Salafy)
+    Write("I will be,⭍as soon as🅐you put the⭍relic away.🅐")
+    Icon(Icon_Yaki)
+    Write("OHHH YEAH!!🅐")
+    Close()
+    Sync(2, 3)
+    End()
+
+SCRIPT_1A_6C46::
+    TransplantMap($D432, $02, $03, $D21D, $0D, $15)
+    Icon(Icon_Yaki)
+    Write("LET'S PARTY!!⭍WOOO!!🅐")
+    Close()
+    Sync(3, 3)
+    End()
+
+SCRIPT_1A_6C6E::
+    Icon(Icon_Yaki)
+    Write("What are you⭍doing?🅐")
+    Icon(Icon_Salafy)
+    Write("I'm sure⭍you did🅐something to⭍this statue to🅐open the door.🅐")
+    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)#, SCRIPT_1A_6D20)
+    Write("I opened it⭍earlier, I🅐just can't⭍remember how🅐to do it!🅐So you can⭍tell me.🅐")
+
+SCRIPT_1A_6D20::
+    Icon(Icon_Yaki)
+    Write("Forget it. I'm⭍not telling.🅐Let's just go⭍to the party.🅐")
+    Close()
+    Sync(4, 3)
+    End()
+
+SCRIPT_1A_6D62::
+    Icon(Icon_Yaki)
+    Write("IT'S PARTY⭍TIME! Let's go!🅐")
+    Close()
+    ThatStart(3)
+    Sync(5, 4)
+    Icon(Icon_Eidon)
+    Write("Salafy, it's⭍time.🅐")
+    Icon(Icon_Salafy)
+    Write("Eidon, do you⭍know how to🅐open that door?🅐")
+    Icon(Icon_Eidon)
+    Write("Of course. All⭍Keepers do.🅐")
+    Icon(Icon_Salafy)
+    Write("And I'm about⭍to become🅐Keeper.🅐")
+    Icon(Icon_Eidon)
+    Write("You're not⭍Keeper yet--🅐you have to go⭍through the🅐official⭍ceremony first.🅐")
+    Icon(Icon_Salafy)
+    Write("All right, but⭍you'll tell me🅐afterwards.🅐")
+    Icon(Icon_Eidon)
+    Write("I don't know...🅐after Yaki⭍built that room🅐it still took⭍me years to get🅐him to tell me⭍how to get🅐in...🅐")
+    Sync(6, 2)
+    SetEventScroll(56)
+    Icon(Icon_Yaki)
+    Write("WE BETTER⭍GET GOING!!🅐")
+    Close()
+    Sync(7, 4)
+    End()
+
+ACTORSCRIPT0_1A_6F27::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 64)
+        ScriptDelay(SCRIPT_14_5DB5, 0)
+    }
+    Sync(0, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 0)
+    }
+    Sync(1, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DD3, 0)
+    }
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 0)
+    }
+    Sync(2, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 8)
+        ScriptDelay(SCRIPT_14_5D97, 80)
+    }
+    SetEventMaster(3)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_14_5DDD, 0)
+    }
+    Sync(3, 3)
+    Delay(8)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D97, 8)
+        ScriptDelay(SCRIPT_14_5DD3, 16)
+        ScriptDelay(SCRIPT_14_5DAB, 48)
+    }
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C6D, 32, -1, 0)
+    }
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    Sync(4, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C4D, 16)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 32)
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 32)
+        ScriptDelay(SCRIPT_14_5DAB, 0)
+    }
+    SetScriptText(SCRIPT_1A_6D62)
+    Sync(5, 4)
+    ThisSetAnimSingle(SCRIPT_14_5DD3)
+    Sync(6, 2)
+    ThisSetAnimSingle(SCRIPT_14_5DAB)
+    Sync(7, 4)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C6D, 48)
+    }
+    End()
+
+ACTORSCRIPT0_1A_6FBA::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_780A, 64)
+        ScriptDelay(SCRIPT_15_786E, 0)
+    }
+    Sync(0, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_780A, 16)
+        ScriptDelay(SCRIPT_15_77DA, 16)
+        ScriptDelay(SCRIPT_15_785A, 48)
+        ScriptDelay(ACTORSCRIPT1_15_7896, 0)
+    }
+    Sync(1, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_77EA, 120)
+        ScriptDelay(ACTORSCRIPT1_15_7864, 48)
+    }
+    TransplantMap($D427, $02, $03, $D21D, $0D, $15)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_77DA, 120)
+        ScriptDelay(ACTORSCRIPT1_15_7896, 0)
+    }
+    SetEventMaster(1)
+    SetScriptText(SCRIPT_1A_6BED)
+    Sync(2, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_781A, 50)
+        ScriptDelay(SCRIPT_15_782A, 50)
+        ScriptDelay(ACTORSCRIPT1_15_7896, 0)
+    }
+    SetEventMaster(3)
+    SetScriptText(SCRIPT_1A_6C46)
+    Sync(3, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_783A, 80)
+        ScriptDelay(ACTORSCRIPT1_15_7896, 32)
+        ScriptDelay(SCRIPT_15_784A, 32)
+        ScriptDelay(SCRIPT_15_782A, 16)
+        ScriptDelay(SCRIPT_15_788C, 0)
+    }
+    SetScriptText(SCRIPT_1A_6C6E)
+    Sync(4, 3)
+    Delay(8)
+    ThisSetAnimSingle(SCRIPT_15_7878)
+    Sync(5, 4)
+    ThisSetAnimSingle(SCRIPT_15_788C)
+    Sync(7, 4)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_77FA, 48)
+    }
+    End()
+
+ACTORSCRIPT0_1A_7051::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 64)
+        ScriptDelay(SCRIPT_13_6D2A, 0)
+    }
+    Sync(5, 4)
+    WaitEventScroll(56)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
+    Sync(7, 4)
+    Delay(48)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CC0, 48)
+    }
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    LongJump(SCRIPT_1A_707A)
+
+SCRIPT_1A_707A::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_Naroom_Vash)
+    ThatInit(2, Call_001_4AF8, $0E, $0B, $D158, $00, ACTORSCRIPT0_1A_71A7, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $0C, $0B, $D156, $79, ACTORSCRIPT0_1A_728B, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $0D, $0C, $D175, $A9, ACTORSCRIPT0_1A_721F, Actor_RestoreState)
+    ThatInit(5, Call_001_4AF8, $07, $0D, $D18D, $00, ACTORSCRIPT0_13_6854, Actor_RestoreState)
+    ThatInit(6, Call_001_4AF8, $08, $10, $D1E8, $2B, ACTORSCRIPT0_11_4242, Actor_RestoreState)
+    ThatInit(7, Call_001_4AF8, $0C, $13, $D246, $A0, ACTORSCRIPT0_13_62AC, Actor_RestoreState)
+    ThatInit(8, Call_001_4AF8, $0F, $13, $D249, $79, ACTORSCRIPT0_11_44A3, Actor_RestoreState)
+    ThatInit(9, Call_001_4AF8, $12, $10, $D1F2, $53, ACTORSCRIPT0_11_4E58, Actor_RestoreState)
+    ThatStart(2)
+    ThatStart(3)
+    ThatStart(4)
+    ThatStart(5)
+    ThatStart(6)
+    ThatStart(7)
+    ThatStart(8)
+    ThatStart(9)
+    LoadSingleBitmap($2B, BITMAP_0D_55D0, $8000, $00)
+    LoadSingleBitmap($28, BITMAP_0D_6E40, $82B0, $00)
+    LoadSingleBitmap($26, BITMAP_0D_7340, $8530, $00)
+    LoadSingleBitmap($30, BITMAP_0D_43D0, $8790, $00)
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8A90, $00)
+    SetCamera($0E, $0A)
+    PalClearAnim(0, 16, WHITE_A)
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    SetScriptScroll(SCRIPT_1A_7147)
+    End()
+
+SCRIPT_1A_7147::
+    ScrollMap() {
+        Move(50, -1, 1)
+        Move(70, -1, 0)
+    }
+    LoadSingleBitmap($29, BITMAP_0D_5340, $8A00, $00)
+    ScrollMap() {
+        Move(72, 0, 1)
+    }
+    LoadSingleBitmap($28, BITMAP_0D_70C0, $8790, $00)
+    ScrollMap() {
+        Move(176, 1, 0)
+    }
+    LoadSingleBitmap($30, BITMAP_0D_40A0, $8A90, $00)
+    ScrollMap() {
+        Move(72, 0, -1)
+    }
+    LoadSingleBitmap($30, BITMAP_0D_43D0, $8790, $00)
+    ScrollMap() {
+        Move(60, -1, 0)
+    }
+    Sync(0, 2)
+    End()
+
+SCRIPT_1A_7187::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6F63, 8)
+        ScriptDelay(SCRIPT_13_6F43, 16)
+        ScriptDelay(SCRIPT_13_6FEB, 0)
+    }
+    Sync(6, 5)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6F73, 16)
+        ScriptDelay(SCRIPT_13_6F43, 32)
+        ScriptDelay(SCRIPT_13_6F73, 72)
+    }
+    ThisDelete()
+
+ACTORSCRIPT0_1A_71A7::
+    ThisSetAnimSingle(SCRIPT_14_5DA1)
+    Sync(2, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(SCRIPT_14_5C6D, 8)
+        ScriptDelay(SCRIPT_14_5C4D, 16)
+        ScriptDelay(SCRIPT_14_5DC9, 32)
+        ScriptDelay(SCRIPT_14_5C4D, 16)
+        ScriptDelay(SCRIPT_14_5DA1, 32)
+    }
+    SetScriptText(SCRIPT_1A_72BC)
+    Sync(3, 4)
+    ThisSetAnimSingle(SCRIPT_14_5D97)
+    Sync(4, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D41, 8)
+        ScriptDelay(SCRIPT_14_5DAB, 12)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 8)
+        ScriptDelay(SCRIPT_14_5DA1, 32)
+        ScriptDelay(SCRIPT_14_5DB5, 16)
+    }
+    SetScriptText(SCRIPT_1A_71FD)
+    WaitEventText(11)
+    PalClearBase(0, 16, WHITE_A)
+    PalFadeAnimToBase(1, $20, 0, 16)
+    LongJump(Script_Credits_BeatGame)
+
+SCRIPT_1A_71FD::
+    Icon(Icon_Salafy)
+    Write("Better?🅐")
+    Icon(Icon_Eidon)
+    Write("It will do.🅐")
+    Close()
+    SetEventText(11)
+    End()
+
+ACTORSCRIPT0_1A_721F::
+    ThisSetAnimSingle(SCRIPT_13_6D2A)
+    Sync(0, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6D2A, 32)
+        ScriptDelay(SCRIPT_13_6CB0, 16)
+    }
+    SetEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6CD0, 8)
+        ScriptDelay(SCRIPT_13_6D2A, 32)
+    }
+    SetScriptText(SCRIPT_1A_742C)
+    Sync(1, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_13_6D66, 32)
+        ScriptDelay(ACTORSCRIPT1_13_6D5C, 32)
+        ScriptDelay(SCRIPT_13_6D20, 32)
+    }
+    SetEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_13_6D10, 16)
+        ScriptDelay(ACTORSCRIPT1_13_6D48, 0)
+    }
+    Sync(2, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_13_6D48, 104)
+        ScriptDelay(ACTORSCRIPT1_13_6D34, 0)
+    }
+    Sync(3, 4)
+    ThisSetAnimSingle(ACTORSCRIPT1_13_6D48)
+    Sync(4, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(ACTORSCRIPT1_13_6D48, 8)
+        ScriptDelay(ACTORSCRIPT1_13_6D34, 12)
+        ScriptDelay(ACTORSCRIPT1_13_6D5C, 8)
+        ScriptDelay(SCRIPT_13_6D2A, 32)
+        ScriptDelay(ACTORSCRIPT1_13_6D34, 0)
+    }
+    End()
+
+ACTORSCRIPT0_1A_728B::
+    ThisSetAnimSingle(ACTORSCRIPT1_15_7864)
+    WaitEventMaster(1)
+    ThisSetAnimSingle(ACTORSCRIPT1_15_78A0)
+    WaitEventMaster(1)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_7878, 56)
+        ScriptDelay(ACTORSCRIPT1_15_78A0, 0)
+    }
+    Sync(3, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_784A, 8)
+        ScriptDelay(ACTORSCRIPT1_15_7864, 0)
+    }
+    Sync(4, 4)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_15_784A, 4)
+        ScriptDelay(SCRIPT_15_782A, 96)
+    }
+    ThisDelete()
+
+SCRIPT_1A_72BC::
+    Icon(Icon_Salafy)
+    Write("As your new⭍Keeper, I🅐promise to⭍lower taxes and🅐clean out the⭍Eebits that🅐are plaguing⭍our fair city,🅐as well as⭍begin my new🅐park renovation⭍plan.🅐")
+    Icon(Icon_Eidon)
+    Write("-Pssst!-⭍That's not part🅐of the job⭍description!🅐")
+    Icon(Icon_Salafy)
+    Write("....... Okay.🅐I promise to⭍keep out the 🅐wild timber⭍hyren and🅐protect the⭍city.🅐")
+    Close()
+    Write("YIPPEEE!🅐LONG LIVE⭍THE KEEPER!🅐")
+    Close()
+    Sync(3, 4)
+    Icon(Icon_Yaki)
+    Write("TIME TO PARTY!🅐YEAH! WOO!🅐")
+    Close()
+    Sync(4, 4)
+    End()
+
+SCRIPT_1A_742C::
+    Icon(Icon_Eidon)
+    Write("And so⭍I give you your🅐new Keeper...🅐Salafy!🅐")
+    Close()
+    Write("YEAAAHH! HOORAY⭍FOR SALAFY!🅐")
+    Close()
+    Sync(1, 2)
+    End()
+
+Hotspot_House_Bograth_0::
+    HeroToDoor($19, $1B)
+    LongJump(SCRIPT_1A_512C)
+
+Hotspot_Overworld_2_7::
+    SceneNew()
+    SetByte(wScript_StartButtonDisabled, $01)
+    LoadSpritePalette(Pal_AllSprites)
+    LoadScene(Scene_HouseStool)
+    LoadHotspots(Hotspot_House_Bograth)
+    LoadTriggers(Trigger_House_Bograth)
+    ThatInit(0, Call_001_4AF8, $05, $0B, $D089, $00, ACTORSCRIPT0_1A_74D9, Actor_RestoreState)
+    ThatInit(2, AI_01_6E8F, $07, $03, $D02B, $00, ACTORSCRIPT0_1A_7594, ACTORSCRIPT1_1A_7607)
+    LoadSingleBitmap($2D, BITMAP_0A_7813, $8000, $00)
+    ThatStart(0)
+    HeroSetCamera()
+    PalClearAnim(0, 16, WHITE_A)
+    LongJumpIf(#not bitmatch(c[xBits_ZonesCompleted_2], c%00000001)#, SCRIPT_1A_74D4)
+    ThatStart(2)
+
+SCRIPT_1A_74D4::
+    SceneReady()
+    PalFadeAnimToBase(2, $20, 0, 16)
+    End()
+
+ACTORSCRIPT0_1A_74D9::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 16)
+    }
+    LongJumpIf(#(((((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000)) and not bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%10000000)) and bitmatch(c[xBits_ZonesCompleted_2], c%00000001))#, SCRIPT_1A_750C)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D97, 48)
+    }
+    SetScriptScroll(SCRIPT_19_46F0)
+    End()
+
+SCRIPT_1A_750C::
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 16)
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+    }
+    ThisSetAnimScroll() {
+        ScriptScroll(SCRIPT_14_5C23, 16, 0, -1)
+    }
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 16)
+        ScriptDelay(SCRIPT_14_5C8D, 16)
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    Sync(0, 2)
+    SetScriptText(SCRIPT_1A_761B)
+    Sync(2, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5C23, 24)
+        ScriptDelay(SCRIPT_14_5D97, 32)
+        ScriptDelay(ACTORSCRIPT0_14_5DBF, 0)
+    }
+    SetScriptText(SCRIPT_1A_7B6C)
+    Sync(3, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D27, 8)
+        ScriptDelay(SCRIPT_14_5CFD, 16)
+        ScriptDelay(SCRIPT_14_5D41, 8)
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    SetScriptScroll(SCRIPT_1A_7CF4)
+    WaitEventScroll(1)
+    Delay(12)
+    SetScriptScroll(SCRIPT_1A_7CF4)
+    WaitEventScroll(1)
+    Delay(12)
+    SetScriptScroll(SCRIPT_1A_7CF4)
+    WaitEventScroll(1)
+    SetScriptText(SCRIPT_1A_7C30)
+    Sync(4, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_14_5D97, 6)
+        ScriptDelay(SCRIPT_14_5CFD, 4)
+        ScriptDelay(SCRIPT_14_5D41, 4)
+        ScriptDelay(SCRIPT_14_5D97, 0)
+    }
+    Sync(5, 3)
+    ThisSetAnimSingle(ACTORSCRIPT0_14_5DBF)
+    End()
+
+ACTORSCRIPT0_1A_7594::
+    ThisSetAnimSingle(SCRIPT_1A_4943)
+    Sync(0, 2)
+    ThisSetAnimSingle(SCRIPT_1A_494D)
+    Sync(1, 2)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_48EF, 16)
+        ScriptDelay(SCRIPT_1A_48FB, 16)
+        ScriptDelay(SCRIPT_1A_48EF, 32)
+        ScriptDelay(SCRIPT_1A_4907, 16)
+        ScriptDelay(SCRIPT_1A_494D, 32)
+        ScriptDelay(SCRIPT_1A_48E3, 8)
+        ScriptDelay(SCRIPT_1A_4943, 32)
+        ScriptDelay(SCRIPT_1A_494D, 0)
+    }
+    SetScriptText(SCRIPT_1A_7A40)
+    Sync(2, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_48FB, 16)
+        ScriptDelay(SCRIPT_1A_4961, 0)
+    }
+    Sync(3, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_491F, 4)
+        ScriptDelay(SCRIPT_1A_4943, 12)
+        ScriptDelay(SCRIPT_1A_4913, 16)
+        ScriptDelay(SCRIPT_1A_4975, 0)
+    }
+    Sync(4, 3)
+    ThisSetAnimDelay() {
+        ScriptDelay(SCRIPT_1A_4913, 4)
+        ScriptDelay(SCRIPT_1A_4937, 4)
+        ScriptDelay(SCRIPT_1A_4943, 0)
+    }
+    SetScriptText(SCRIPT_1A_7C75)
+    Sync(5, 3)
+    ThisSetAnimSingle(SCRIPT_1A_4975)
+    End()
+
+ACTORSCRIPT1_1A_7607::
+    ThisSetAnimSingle(SCRIPT_1A_4943)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000001)#, SCRIPT_1A_7D0F)
+    SetScriptText(SCRIPT_1A_761B)
+    LongJump(SCRIPT_1A_4993)
+
+SCRIPT_1A_761B::
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits6_Ormagon], c%00000001)#, SCRIPT_1A_786C)
+    Icon(Icon_Salafy)
+    Write("Obgren, this⭍is your house?🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("Yup, sure is.🅐")
+    Icon(Icon_Salafy)
+    Write("No wonder⭍you were sooooo🅐late to the⭍mazes! You🅐live soooooo⭍far away from🅐them.🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("Good, quality-⭍made mud houses🅐are too⭍expensive,🅐so I live in⭍a house of🅐sticks and⭍twigs far away🅐from the hub⭍of Bograth.🅐")
+    Icon(Icon_Salafy)
+    Write("And your house⭍looks exactly🅐the same as⭍everyone🅐else's house!⭍Why does🅐everyone have⭍the same🅐looking house?!🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("There was a⭍good sale on🅐manufactured⭍homes last🅐month.🅐")
+    Icon(Icon_Salafy)
+    Write("The only thing⭍different in🅐your house is⭍that stool!🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("I got the⭍deluxe model🅐home!🅐")
+    Icon(Icon_Salafy)
+    Write("........🅐")
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000001)
+    LongJumpIf(#(((bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000010) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00000100)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%00010000)) and bitmatch(c[xBits_Puzzle_Bits5_Chicken_Ormagon], c%01000000))#, SCRIPT_1A_7888)
+    Close()
+    SetEventText(1)
+    End()
+
+SCRIPT_1A_786C::
+    Icon(Icon_Salafy)
+    Write("Hi, Obgren!⭍What's up?🅐")
+
+SCRIPT_1A_7888::
+    Icon(Icon_Bograth_Obgren)
+    Write("I think I⭍am going to🅐return this⭍house for a🅐new one,⭍because that🅐stool has this⭍strange fungus🅐forming all⭍over it.🅐")
+    Icon(Icon_Salafy)
+    Write("Hey, that⭍is the same🅐fungus I have⭍in my specimen🅐jar! I think⭍we can solve🅐your fungus⭍problem with🅐this fungicide⭍I have in🅐my canister!🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("You mean that⭍beautiful🅐trophy with⭍your name so🅐intricately⭍written onto🅐it?🅐")
+    Icon(Icon_Salafy)
+    Write(".........🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("Let me just⭍grab the stool🅐and put this⭍fungicide stuff🅐on it.🅐")
+    Close()
+    Sync(1, 2)
+    End()
+
+SCRIPT_1A_7A40::
+    Icon(Icon_Bograth_Obgren)
+    Write("Hrmm.... That⭍fungicide seems🅐to have rid⭍the stool of🅐the fungus,⭍but it appears🅐to also have⭍hollowed out🅐the stool.🅐")
+    Icon(Icon_Salafy)
+    Write("Yeah....🅐Wait! I think⭍I remember that🅐something⭍really neat is🅐supposed to⭍happen if you🅐blow through⭍the leg of a🅐hollow stool.🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("Really? That⭍sounds rather🅐odd.🅐")
+    Sync(2, 3)
+    End()
+
+SCRIPT_1A_7B6C::
+    Icon(Icon_Salafy)
+    Write("Shucks,⭍nothing🅐happened.🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("What did you⭍expect? An🅐ormagon to⭍make a guest🅐appearance?🅐")
+    Icon(Icon_Salafy)
+    Write("Hehe,⭍not really.🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("Not like the⭍Ormagon Quest🅐or anything!🅐")
+    Close()
+    SetScriptScroll(SCRIPT_1A_7CF4)
+    WaitEventScroll(1)
+    Icon(Icon_Salafy)
+    Write("What is THAT?!🅐")
+    Close()
+    Sync(3, 3)
+    End()
+
+SCRIPT_1A_7C30::
+    Icon(Icon_Salafy)
+    Write("Oh my! There⭍is an ormagon🅐outside your⭍house!🅐")
+    Icon(Icon_Bograth_Obgren)
+    Write("What?!🅐")
+    Close()
+    Sync(4, 3)
+    End()
+
+SCRIPT_1A_7C75::
+    Icon(Icon_Bograth_Obgren)
+    Write("There IS an⭍ormagon🅐outside my⭍house!🅐")
+    Sync(5, 3)
+    Icon(Icon_Bograth_Obgren)
+    Write("Now that was⭍an interesting🅐coincidence,⭍wasn't it?🅐")
+    Close()
+    OrByte(xBits_Puzzle_Bits6_Ormagon, %00000001)
+    OrByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %10000000)
+    ThatAI(0, AI_Hero)
+    ThatScript(0, SCRIPT_14_5D97)
+    ThatScript(2, SCRIPT_1A_4943)
+    End()
+
+SCRIPT_1A_7CF4::
+    StartSFX0(SFXID_Earthquake)
+    ScrollMap() {
+        Move(4, 3, 0)
+        Move(4, -3, 0)
+        Move(2, 3, 0)
+        Move(2, -3, 0)
+        Move(1, 3, 0)
+        Move(1, -3, 0)
+    }
+    StartSFX0(SFXID_EarthquakeEnd)
+    SetEventScroll(1)
+    End()
+
+SCRIPT_1A_7D0F::
+    SetScriptText(SCRIPT_1A_7D17)
+    LongJump(SCRIPT_1A_4993)
+
+SCRIPT_1A_7D17::
+    Icon(Icon_Bograth_Obgren)
+    Write("This house⭍might not🅐have cost⭍much animite,🅐but the long⭍daily trip to🅐work just⭍ruins my day.🅐")
+    Close()
+    SetEventText(1)
+    End()
