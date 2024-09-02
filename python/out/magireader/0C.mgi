@@ -2425,7 +2425,7 @@ SCRIPT_0C_6C1C::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $07)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_0C_6C52)
         Case(1, SCRIPT_0C_6C5A)
         Case(2, SCRIPT_0C_6C6F)
@@ -2436,7 +2436,7 @@ SCRIPT_0C_6C1C::
     LongJump(SCRIPT_0C_6C99)
 
 SCRIPT_0C_6C52::
-    SetByte(xWandCrystalChoice, $03)
+    SetByte(xStaffOfHyrenQuest, $03)
     LongJump(SCRIPT_0C_6C84)
 
 SCRIPT_0C_6C5A::

@@ -1183,7 +1183,7 @@ Script_StartRoom::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     SetByte(wScript_TransplantTileDisabled, $00)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_StartRoom)
@@ -1218,7 +1218,7 @@ SCRIPT_18_5E5C::
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     SetByte(xNumberOfAttempts, $00)
-    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000010)#, SCRIPT_18_5E92)
+    LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000010)#, SCRIPT_18_5E92)
     Delay(3)
     TransplantTile($0D, $08, $D10C, COLLID_HS02, $F4)
 
@@ -1286,11 +1286,11 @@ SCRIPT_18_5F1D::
     ThisDelete()
 
 SCRIPT_18_5F22::
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000010)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000010)#, Actor_Null)
     Write("You found⭍a SECRET!!🅐")
     Close()
     ThatAI(0, Call_001_4AF8)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000010)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000010)
     TransplantMap($D000, $01, $01, $D10C, $0D, $08)
     Pass()
     SetScriptScroll(SCRIPT_18_5F65)
@@ -1629,7 +1629,7 @@ Script_Cald_Puzzle5_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
@@ -1670,7 +1670,7 @@ SCRIPT_18_6519::
         ScriptDelay(SCRIPT_11_77A2, 112)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($12, $03, $D0FF, COLLID_HS02, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -1706,7 +1706,7 @@ SCRIPT_18_656F::
         ScriptDelay(SCRIPT_11_77DE, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0D, $01, $D0B7, COLLID_HS05, $FA)
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -1730,7 +1730,7 @@ SCRIPT_18_65AD::
         ScriptDelay(SCRIPT_11_77DE, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($07, $0C, $D06E, COLLID_HS07, $FA)
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -1771,7 +1771,7 @@ ACTORSCRIPT1_18_6618::
 
 Hotspot_Cald_Puzzle5_0::
     StartSong(SONGID_GetItem)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
@@ -1920,7 +1920,7 @@ Script_Cald_Puzzle2_SecretComplete::
     OrByte(xBits_Cald, %00000010)
     OrByte(xBits_Cald, %00100000)
     OrByte(xBits_Secrets_1, %00000100)
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Cald_Puzzle2_SecretComplete)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, Script_Cald_Puzzle2_SecretComplete)
     LongJump(Script_Cald_SecretCompletedFirstTime)
 
 SCRIPT_18_68C3::
@@ -1987,7 +1987,7 @@ Script_Cald_Puzzle1_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11111110)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
@@ -2016,7 +2016,7 @@ SCRIPT_18_6A1B::
         ScriptDelay(SCRIPT_11_77A2, 128)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($18, $01, $D2D1, COLLID_HS00, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
@@ -2028,7 +2028,7 @@ SCRIPT_18_6A41::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0F, $07, $D1C9, COLLID_HS02, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     End()
@@ -2040,7 +2040,7 @@ SCRIPT_18_6A67::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0D, $07, $D18D, COLLID_HS03, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -2052,7 +2052,7 @@ SCRIPT_18_6A8D::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0B, $07, $D151, COLLID_HS04, $FA)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -2064,7 +2064,7 @@ SCRIPT_18_6AB3::
         ScriptDelay(SCRIPT_11_77DE, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($08, $03, $D0F3, COLLID_HS05, $FA)
     AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
@@ -2076,7 +2076,7 @@ SCRIPT_18_6AD9::
         ScriptDelay(SCRIPT_11_77DE, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($06, $05, $D0B9, COLLID_HS06, $FA)
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -2088,7 +2088,7 @@ SCRIPT_18_6AFF::
         ScriptDelay(SCRIPT_11_77DE, 48)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($06, $02, $D0B6, COLLID_HS07, $FA)
     AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
@@ -2100,7 +2100,7 @@ SCRIPT_18_6B25::
         ScriptDelay(SCRIPT_11_77DE, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($17, $05, $D2B7, COLLID_HS01, $FA)
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -2200,7 +2200,7 @@ SCRIPT_18_6C49::
 
 Hotspot_Cald_Puzzle1_8::
     StartSong(SONGID_GetItem)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
@@ -2274,7 +2274,7 @@ Script_Cald_Puzzle2_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     AndByte(xBits_Puzzle_Bits1, %11101111)
@@ -2305,7 +2305,7 @@ SCRIPT_18_6EEF::
         ScriptDelay(SCRIPT_11_77DE, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($10, $02, $D142, COLLID_HS02, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -2317,7 +2317,7 @@ SCRIPT_18_6F15::
         ScriptDelay(SCRIPT_11_77DE, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($11, $03, $D157, COLLID_HS03, $FA)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -2329,7 +2329,7 @@ SCRIPT_18_6F3B::
         ScriptDelay(SCRIPT_11_77A2, 112)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($10, $0C, $D14C, COLLID_HS04, $FA)
     AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
@@ -2341,7 +2341,7 @@ SCRIPT_18_6F61::
         ScriptDelay(SCRIPT_11_77B6, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($10, $12, $D152, COLLID_HS05, $FA)
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -2353,7 +2353,7 @@ SCRIPT_18_6F87::
         ScriptDelay(SCRIPT_11_77B6, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0D, $12, $D116, COLLID_HS06, $FA)
     AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
@@ -2365,7 +2365,7 @@ SCRIPT_18_6FAD::
         ScriptDelay(SCRIPT_11_77A2, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($09, $0E, $D0C2, COLLID_HS07, $FA)
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -2377,7 +2377,7 @@ SCRIPT_18_6FD3::
         ScriptDelay(SCRIPT_11_77DE, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($09, $05, $D0B9, COLLID_HS08, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111110)
     End()
@@ -2389,7 +2389,7 @@ SCRIPT_18_6FF9::
         ScriptDelay(SCRIPT_11_77DE, 128)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($07, $05, $D091, COLLID_HS09, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111101)
     End()
@@ -2401,7 +2401,7 @@ SCRIPT_18_701F::
         ScriptDelay(SCRIPT_11_77A2, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($03, $03, $D03F, COLLID_HS0A, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111011)
     End()
@@ -2431,7 +2431,7 @@ SCRIPT_18_7076::
 
 Hotspot_Cald_Puzzle2_0::
     StartSong(SONGID_GetItem)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
@@ -2473,7 +2473,7 @@ Hotspot_Cald_Puzzle2_0::
 
 Hotspot_Cald_Puzzle2_1::
     StartSong(SONGID_GetItem)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     SetByte(wScript_StartButtonDisabled, $01)
     Write("You found a⭍SECRET!🅐")
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
@@ -2629,7 +2629,7 @@ Script_Cald_Puzzle3_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
@@ -2660,7 +2660,7 @@ SCRIPT_18_7590::
         ScriptDelay(SCRIPT_11_77DE, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($13, $02, $D132, COLLID_HS01, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     End()
@@ -2672,7 +2672,7 @@ SCRIPT_18_75B6::
         ScriptDelay(SCRIPT_11_77DE, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($11, $05, $D115, COLLID_HS02, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -2684,7 +2684,7 @@ SCRIPT_18_75DC::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($13, $0C, $D13C, COLLID_HS03, $FA)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -2696,7 +2696,7 @@ SCRIPT_18_7602::
         ScriptDelay(SCRIPT_11_77B6, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($11, $0C, $D11C, COLLID_HS04, $FA)
     AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
@@ -2708,7 +2708,7 @@ SCRIPT_18_7628::
         ScriptDelay(SCRIPT_11_77CA, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0D, $0A, $D0DA, COLLID_HS05, $FA)
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -2720,7 +2720,7 @@ SCRIPT_18_764E::
         ScriptDelay(SCRIPT_11_77A2, 96)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($08, $08, $D088, COLLID_HS06, $FA)
     AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
@@ -2732,7 +2732,7 @@ SCRIPT_18_7674::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($06, $06, $D066, COLLID_HS07, $FA)
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -2744,7 +2744,7 @@ SCRIPT_18_769A::
         ScriptDelay(SCRIPT_11_77B6, 144)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($09, $05, $D095, COLLID_HS08, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111110)
     End()
@@ -2756,7 +2756,7 @@ SCRIPT_18_76C0::
         ScriptDelay(SCRIPT_11_77B6, 144)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($06, $04, $D064, COLLID_HS09, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111101)
     End()
@@ -2768,7 +2768,7 @@ SCRIPT_18_76E6::
         ScriptDelay(SCRIPT_11_77CA, 144)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0A, $02, $D0A2, COLLID_HS0A, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111011)
     End()
@@ -2797,7 +2797,7 @@ ACTORSCRIPT1_18_7735::
 Hotspot_Cald_Puzzle3_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)
@@ -2960,7 +2960,7 @@ Script_Cald_Puzzle4_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $01)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
@@ -2990,7 +2990,7 @@ SCRIPT_18_7ADE::
         ScriptDelay(SCRIPT_11_77DE, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($16, $02, $D228, COLLID_HS01, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     End()
@@ -3002,7 +3002,7 @@ SCRIPT_18_7B04::
         ScriptDelay(SCRIPT_11_77DE, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($14, $03, $D1F7, COLLID_HS02, $FA)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -3014,7 +3014,7 @@ SCRIPT_18_7B2A::
         ScriptDelay(SCRIPT_11_77A2, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($17, $09, $D248, COLLID_HS03, $FA)
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -3026,7 +3026,7 @@ SCRIPT_18_7B50::
         ScriptDelay(SCRIPT_11_77A2, 48)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($14, $08, $D1FC, COLLID_HS04, $FA)
     AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
@@ -3038,7 +3038,7 @@ SCRIPT_18_7B76::
         ScriptDelay(SCRIPT_11_77B6, 128)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0E, $07, $D165, COLLID_HS05, $FA)
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -3050,7 +3050,7 @@ SCRIPT_18_7B9C::
         ScriptDelay(SCRIPT_11_77DE, 128)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0E, $06, $D164, COLLID_HS06, $FA)
     AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
@@ -3062,7 +3062,7 @@ SCRIPT_18_7BC2::
         ScriptDelay(SCRIPT_11_77A2, 80)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0C, $06, $D132, COLLID_HS07, $FA)
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -3074,7 +3074,7 @@ SCRIPT_18_7BE8::
         ScriptDelay(SCRIPT_11_77B6, 128)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0A, $08, $D102, COLLID_HS08, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111110)
     End()
@@ -3086,7 +3086,7 @@ SCRIPT_18_7C0E::
         ScriptDelay(SCRIPT_11_77A2, 64)
         ScriptDelay(ACTORSCRIPT0_11_778A, 0)
     }
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($0B, $05, $D118, COLLID_HS09, $FA)
     AndByte(xBits_Puzzle_Bits2, %11111101)
     End()
@@ -3115,7 +3115,7 @@ ACTORSCRIPT1_18_7C5D::
 Hotspot_Cald_Puzzle4_0::
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     Write("You found⭍the exit!🅐")
     LongJumpIf(#(c[xNumberOfAttempts] == c255)#, .MaxAttempts)

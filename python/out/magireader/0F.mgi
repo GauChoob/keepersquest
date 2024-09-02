@@ -324,7 +324,7 @@ SCRIPT_0F_44C4::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $01)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_0F_44FA)
         Case(1, SCRIPT_0F_44FE)
         Case(2, SCRIPT_0F_450B)
@@ -335,7 +335,7 @@ SCRIPT_0F_44C4::
     LongJump(SCRIPT_0F_4518)
 
 SCRIPT_0F_44FA::
-    SetByte(xWandCrystalChoice, $01)
+    SetByte(xStaffOfHyrenQuest, $01)
 
 SCRIPT_0F_44FE::
     SceneNew()
@@ -1378,7 +1378,7 @@ SCRIPT_0F_5979::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $04)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_0F_59AF)
         Case(1, SCRIPT_0F_59B3)
         Case(2, SCRIPT_0F_59C8)
@@ -1389,7 +1389,7 @@ SCRIPT_0F_5979::
     LongJump(SCRIPT_0F_59DD)
 
 SCRIPT_0F_59AF::
-    SetByte(xWandCrystalChoice, $01)
+    SetByte(xStaffOfHyrenQuest, $01)
 
 SCRIPT_0F_59B3::
     SceneNew()
@@ -2208,7 +2208,7 @@ Script_Naroom_Puzzle4_Complete::
     LongJump(Script_Naroom_CompletedFirstTime)
 
 Script_Naroom_Puzzle4_SecretComplete::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_0F_698E)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_0F_698E)
     LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000001) == c0)#, Script_Naroom_SecretCompletedFirstTimeCutscene)
 
 SCRIPT_0F_698E::
@@ -2262,7 +2262,7 @@ Script_Naroom_Puzzle1_Again::
     ThatInit(20, AI_01_70E1, $15, $05, $D0AB, $00, ACTORSCRIPT0_0F_6B9C, ACTORSCRIPT1_0F_6BAE)
     ThatInit(21, AI_01_70E1, $14, $03, $D06E, $00, ACTORSCRIPT0_0F_6B9C, ACTORSCRIPT1_0F_6BAE)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -2288,7 +2288,7 @@ Script_Naroom_Puzzle1_Again::
 SCRIPT_STARTBUTTON_0F_6B03::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2352,7 +2352,7 @@ SCRIPT_0F_6B90::
 
 ACTORSCRIPT0_0F_6B9C::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2445,7 +2445,7 @@ Script_Naroom_Puzzle2_Again::
     ThatInit(12, AI_01_70E1, $01, $07, $D06A, $00, ACTORSCRIPT0_0F_6EE7, ACTORSCRIPT1_0F_6EF9)
     ThatInit(13, AI_01_70E1, $01, $06, $D05B, $00, ACTORSCRIPT0_0F_6EE7, ACTORSCRIPT1_0F_6EF9)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -2522,7 +2522,7 @@ SCRIPT_0F_6EDB::
 
 ACTORSCRIPT0_0F_6EE7::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2544,7 +2544,7 @@ SCRIPT_STARTBUTTON_0F_6F12::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
@@ -2846,7 +2846,7 @@ Script_Naroom_Puzzle4_Again::
     ThatInit(18, AI_01_70E1, $04, $10, $D1E4, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
     ThatInit(19, AI_01_70E1, $04, $12, $D220, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
     ThatInit(20, AI_01_70E1, $10, $08, $D100, $00, ACTORSCRIPT0_0F_7709, ACTORSCRIPT1_0F_771B)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
     LoadSingleBitmap($02, BITMAP_19_4370, $8040, $00)
     ThatStart(0)
@@ -2873,7 +2873,7 @@ Script_Naroom_Puzzle4_Again::
 SCRIPT_STARTBUTTON_0F_75F4::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2978,7 +2978,7 @@ ACTORSCRIPT0_0F_76EB::
 
 ACTORSCRIPT0_0F_7709::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 

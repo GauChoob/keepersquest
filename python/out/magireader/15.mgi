@@ -41,7 +41,7 @@ SCRIPT_15_4038::
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle4_SecretComplete::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_15_4054)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_15_4054)
     LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000010) == c0)#, Script_Underneath_SecretCompletedFirstTimeCutscene)
 
 SCRIPT_15_4054::
@@ -2304,7 +2304,7 @@ Script_Paradwyn_Puzzle3_SecretComplete::
     OrByte(xBits_Paradwyn, %00000100)
     OrByte(xBits_Paradwyn, %00100000)
     OrByte(xBits_Secrets_2, %00000010)
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Paradwyn_Puzzle3_SecretComplete)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, Script_Paradwyn_Puzzle3_SecretComplete)
     LongJump(Script_Paradwyn_SecretCompletedFirstTime)
 
 SCRIPT_15_5EA3::
@@ -2349,7 +2349,7 @@ Script_Paradwyn_Puzzle1_Again::
     ThatInit(4, AI_InvisibleLaser, $09, $07, $D09C, $00, Actor_Null, ACTORSCRIPT1_15_5FB0)
     ThatInit(5, AI_01_70E1, $09, $0B, $D0F0, $00, ACTORSCRIPT0_15_6020, ACTORSCRIPT1_15_6032)
     ThatInit(6, AI_01_70E1, $0D, $0D, $D11E, $00, ACTORSCRIPT0_15_6020, ACTORSCRIPT1_15_6032)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
     ThatStart(0)
     ThatStart(2)
@@ -2367,7 +2367,7 @@ Script_Paradwyn_Puzzle1_Again::
 SCRIPT_STARTBUTTON_15_5F87::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2431,7 +2431,7 @@ SCRIPT_15_6014::
 
 ACTORSCRIPT0_15_6020::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2534,7 +2534,7 @@ Script_Paradwyn_Puzzle2_Again::
     ThatInit(3, AI_InvisibleLaser, $09, $0A, $D095, $00, Actor_Null, ACTORSCRIPT1_15_62EF)
     ThatInit(4, AI_InvisibleLaser, $0C, $0C, $D0B4, $00, Actor_Null, ACTORSCRIPT1_15_62EF)
     ThatInit(5, AI_01_70E1, $01, $02, $D01D, $00, ACTORSCRIPT0_15_635F, ACTORSCRIPT1_15_6371)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
     ThatStart(0)
     ThatStart(2)
@@ -2552,7 +2552,7 @@ SCRIPT_STARTBUTTON_15_62C6::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
     ThatDelete(0)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
     Write(" Restart⭍ Exit")
@@ -2615,7 +2615,7 @@ SCRIPT_15_6353::
 
 ACTORSCRIPT0_15_635F::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -2721,7 +2721,7 @@ Script_Paradwyn_Puzzle4_Again::
     ThatInit(5, AI_InvisibleLaser, $0A, $0C, $D0D6, $00, Actor_Null, ACTORSCRIPT1_15_6649)
     ThatInit(6, AI_01_70E1, $07, $05, $D05C, $00, ACTORSCRIPT0_15_66B9, ACTORSCRIPT1_15_66CB)
     ThatInit(7, AI_01_70E1, $05, $09, $D09E, $00, ACTORSCRIPT0_15_66B9, ACTORSCRIPT1_15_66CB)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     LoadSingleBitmap($04, BITMAP_19_4330, $8000, $00)
     ThatStart(0)
     ThatStart(2)
@@ -2740,7 +2740,7 @@ Script_Paradwyn_Puzzle4_Again::
 SCRIPT_STARTBUTTON_15_6620::
     ResetActorList()
     SetByte(wScript_StartButtonDisabled, $01)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     ThatDelete(0)
     StartSFX0(SFXID_Jump)
     Icon(Icon_Salafy)
@@ -2804,7 +2804,7 @@ SCRIPT_15_66AD::
 
 ACTORSCRIPT0_15_66B9::
     ThisWaitTile($FE)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_EMPTYBLOCK, $FD)
     ThisDelete()
 
@@ -3153,7 +3153,7 @@ Script_Paradwyn_Puzzle5_Again::
     OrByte(xBits_Puzzle_Bits3, %00100000)
     OrByte(xBits_Puzzle_Bits3, %01000000)
     AndByte(xBits_Puzzle_Bits3, %01111111)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000001)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000001)
     SetStartButtonScript(SCRIPT_STARTBUTTON_15_6E97)
     End()
 
@@ -3296,13 +3296,13 @@ SCRIPT_15_7170::
     LongJump(SCRIPT_15_71AB)
 
 SCRIPT_15_7181::
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000001)#, SCRIPT_15_719A)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000001)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000001)#, SCRIPT_15_719A)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000001)
     TransplantMapMask($D041, $01, $03, $D36E, $0D, $2E)
     LongJump(SCRIPT_15_71AB)
 
 SCRIPT_15_719A::
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111110)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111110)
     TransplantMapMask($D042, $01, $03, $D36E, $0D, $2E)
     LongJump(SCRIPT_15_71AB)
 
@@ -3387,7 +3387,7 @@ Trigger_Paradwyn_Puzzle5_5::
     SetScriptScroll(SCRIPT_15_7181)
     WaitEventText(1)
     LongJumpIf(#(c[xPuzzle_Misc_1] == not c[xPuzzle_Misc_2])#, SCRIPT_19_46C0)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     TransplantTile($10, $38, $D438, COLLID_HS00, $DA)
     LongJump(SCRIPT_19_46A7)
 

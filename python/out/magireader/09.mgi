@@ -289,7 +289,7 @@ SCRIPT_09_48E7::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $02)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_09_491D)
         Case(1, SCRIPT_09_4921)
         Case(2, SCRIPT_09_4936)
@@ -300,7 +300,7 @@ SCRIPT_09_48E7::
     LongJump(SCRIPT_09_494B)
 
 SCRIPT_09_491D::
-    SetByte(xWandCrystalChoice, $01)
+    SetByte(xStaffOfHyrenQuest, $01)
 
 SCRIPT_09_4921::
     SceneNew()
@@ -1259,7 +1259,7 @@ SCRIPT_09_5A30::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $03)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_09_5A66)
         Case(1, SCRIPT_09_5A6A)
         Case(2, SCRIPT_09_5A7F)
@@ -1270,7 +1270,7 @@ SCRIPT_09_5A30::
     LongJump(SCRIPT_09_5A94)
 
 SCRIPT_09_5A66::
-    SetByte(xWandCrystalChoice, $01)
+    SetByte(xStaffOfHyrenQuest, $01)
 
 SCRIPT_09_5A6A::
     SceneNew()
@@ -2233,7 +2233,7 @@ SCRIPT_09_6BCE::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $06)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_09_6C04)
         Case(1, SCRIPT_09_6C0C)
         Case(2, SCRIPT_09_6C21)
@@ -2244,7 +2244,7 @@ SCRIPT_09_6BCE::
     LongJump(SCRIPT_09_6C4B)
 
 SCRIPT_09_6C04::
-    SetByte(xWandCrystalChoice, $03)
+    SetByte(xStaffOfHyrenQuest, $03)
     LongJump(SCRIPT_09_6C36)
 
 SCRIPT_09_6C0C::
@@ -2912,9 +2912,9 @@ SCRIPT_09_775C::
     Write("Thanks. Bye.🅐")
     Close()
     SetEventText(21)
-    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_09_7819)
-    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld1_SecretsCompleted] != c5))#, SCRIPT_09_7810)
-    LongJumpIf(#(c[xWandCrystalChoice] == c0)#, Actor_Null)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c2)#, SCRIPT_09_7819)
+    LongJumpIf(#((c[xStaffOfHyrenQuest] == c1) and (c[xOverworld1_SecretsCompleted] != c5))#, SCRIPT_09_7810)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c0)#, Actor_Null)
     Icon(Icon_Eidon)
     Write("Remember, as⭍you solve this🅐next series⭍of mazes, look🅐for the⭍crystal! It is🅐very important⭍that you find🅐it.🅐")
     Close()
@@ -2922,7 +2922,7 @@ SCRIPT_09_775C::
     End()
 
 SCRIPT_09_7810::
-    SetByte(xWandCrystalChoice, $00)
+    SetByte(xStaffOfHyrenQuest, $00)
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 

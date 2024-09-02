@@ -38,7 +38,7 @@ Script_Credits_BeatGame::
     Menu(SCRIPT_0E_4782, SCRIPT_0E_4792)
 
 SCRIPT_0E_4782::
-    SetByte(xWandCrystalChoice, $04)
+    SetByte(xStaffOfHyrenQuest, $04)
     Close()
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
@@ -82,7 +82,7 @@ Script_Turret::
     SetCamera($04, $0C)
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     AndByte(xBits_Puzzle_Bits3, %11110111)
     AndByte(xBits_Puzzle_Bits1, %11111110)
     AndByte(xBits_Puzzle_Bits1, %11111101)
@@ -484,7 +484,7 @@ SCRIPT_0E_4C88::
 
 SCRIPT_STARTBUTTON_0E_4C89::
     StartSFX0(SFXID_Jump)
-    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %00000100)
+    OrByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %00000100)
     SetScriptMaster(SCRIPT_0E_4C94)
     End()
 
@@ -513,7 +513,7 @@ SCRIPT_0E_4CF7::
     Close()
     SetStartButtonScript(SCRIPT_STARTBUTTON_0E_4C89)
     SetByte(wScript_StartButtonDisabled, $00)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     End()
 
 SCRIPT_0E_4D05::
@@ -615,7 +615,7 @@ SCRIPT_0E_4E57::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $05)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_0E_4E8D)
         Case(1, SCRIPT_0E_4E91)
         Case(2, SCRIPT_0E_4EA6)
@@ -626,7 +626,7 @@ SCRIPT_0E_4E57::
     LongJump(SCRIPT_0E_4EBB)
 
 SCRIPT_0E_4E8D::
-    SetByte(xWandCrystalChoice, $01)
+    SetByte(xStaffOfHyrenQuest, $01)
 
 SCRIPT_0E_4E91::
     SceneNew()
@@ -779,8 +779,8 @@ SCRIPT_0E_5135::
 Script_Arderial_CompletedFirstTime::
     StartSong(SONGID_DreamCreature)
     OrByte(xBits_ZonesCompleted_1, %00010000)
-    LongJumpIf(#(((c[xWandCrystalChoice] == c2) and (c[xOverworld1_SecretsCompleted] == c5)) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_52DC)
-    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_5449)
+    LongJumpIf(#(((c[xStaffOfHyrenQuest] == c2) and (c[xOverworld1_SecretsCompleted] == c5)) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_52DC)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c2)#, SCRIPT_0E_5449)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1144,7 +1144,7 @@ SCRIPT_0E_56E8::
     ThatInit(3, Call_001_4AF8, $03, $09, $D111, $30, ACTORSCRIPT0_0E_597A, Actor_RestoreState)
     ThatInit(4, Call_001_4AF8, $0C, $10, $D1EC, $5B, ACTORSCRIPT0_0E_59FD, Actor_RestoreState)
     ThatInit(5, Call_001_4AF8, $09, $07, $D0DB, $A3, ACTORSCRIPT0_0E_5A0B, Actor_RestoreState)
-    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
+    AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11111011)
     LoadSingleBitmap($30, BITMAP_0D_43D0, $8000, $00)
     LoadSingleBitmap($2B, BITMAP_0D_55D0, $8300, $00)
     LoadSingleBitmap($48, BITMAP_0D_62C0, $85B0, $00)
@@ -1189,7 +1189,7 @@ ACTORSCRIPT0_0E_5793::
     WaitEventText(2)
     SetScriptText(SCRIPT_0E_5B11)
     WaitEventText(5)
-    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_580C)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c2)#, SCRIPT_0E_580C)
     SetScriptText(SCRIPT_0E_5BF2)
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_14_5ABE, 60)
@@ -1321,7 +1321,7 @@ ACTORSCRIPT0_0E_5880::
     SetScriptText(SCRIPT_0E_609F)
     WaitEventText(28)
     ThisSetAnimSingle(ACTORSCRIPT1_15_7864)
-    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
+    LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $28)
     End()
 
@@ -1340,7 +1340,7 @@ ACTORSCRIPT0_0E_597A::
     }
     WaitEventMaster(2)
     Delay(6)
-    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_59AE)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c2)#, SCRIPT_0E_59AE)
     SetScriptText(SCRIPT_0E_5B66)
     LongJump(SCRIPT_0E_59B5)
 
@@ -1961,7 +1961,7 @@ SCRIPT_0E_6B48::
     StartSong(SONGID_Mischief)
     VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
     SetByte(xZoneToLoad, $0A)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, SCRIPT_0E_6B7E)
         Case(1, SCRIPT_0E_6B86)
         Case(2, SCRIPT_0E_6B9B)
@@ -1972,7 +1972,7 @@ SCRIPT_0E_6B48::
     LongJump(SCRIPT_0E_6BC5)
 
 SCRIPT_0E_6B7E::
-    SetByte(xWandCrystalChoice, $03)
+    SetByte(xStaffOfHyrenQuest, $03)
     LongJump(SCRIPT_0E_6BB0)
 
 SCRIPT_0E_6B86::
@@ -2117,9 +2117,9 @@ SCRIPT_0E_6D1E::
 Script_Paradwyn_CompletedFirstTime::
     StartSong(SONGID_Parathin)
     OrByte(xBits_ZonesCompleted_2, %00000010)
-    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_70FF)
-    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_7243)
-    LongJumpIf(#((c[xWandCrystalChoice] == c3) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_7402)
+    LongJumpIf(#((c[xStaffOfHyrenQuest] == c1) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_70FF)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c2)#, SCRIPT_0E_7243)
+    LongJumpIf(#((c[xStaffOfHyrenQuest] == c3) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_7402)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)

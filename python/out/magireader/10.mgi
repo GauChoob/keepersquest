@@ -59,12 +59,12 @@ SCRIPT_10_4074::
     End()
 
 ACTORSCRIPT0_10_40ED::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_19_4710)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
     End()
 
 ACTORSCRIPT0_10_40FC::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_19_4710)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_78A0)
     End()
 
@@ -283,7 +283,7 @@ ACTORSCRIPT0_10_461E::
 
 Script_Core_CompletedFirstTime::
     OrByte(xBits_ZonesCompleted_2, %00000100)
-    Switch(#c[xWandCrystalChoice]#) {
+    Switch(#c[xStaffOfHyrenQuest]#) {
         Case(0, Script_Core_Puzzle4_Complete)
         Case(1, SCRIPT_10_4650)
         Case(2, SCRIPT_10_4747)
@@ -1310,7 +1310,7 @@ SCRIPT_10_5736::
     End()
 
 SCRIPT_10_5803::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_16_4096)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_16_4096)
     SceneNew()
     StartSong(SONGID_Mischief)
     SetByte(wScript_StartButtonDisabled, $00)

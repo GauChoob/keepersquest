@@ -200,7 +200,7 @@ SCRIPT_1A_4A85::
     LoadMapMask(METAMAP_MASK_24_7CEF, COLLMAP_MASK_2D_5C80)
     LoadTriggers(Trigger_Overworld_1)
     ThatInit(0, Call_001_4AF8, $03, $12, $D21F, $00, ACTORSCRIPT0_1A_4AD8, Actor_RestoreState)
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_1A_4AD1)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_4AD1)
     ThatInit(0, Call_001_4AF8, $04, $05, $D09A, $00, ACTORSCRIPT0_1A_4AD8, Actor_RestoreState)
 
 SCRIPT_1A_4AD1::
@@ -219,7 +219,7 @@ ACTORSCRIPT0_1A_4AD8::
     End()
 
 SCRIPT_1A_4AED::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_1A_4B16)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_4B16)
     LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_4B16)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
@@ -520,7 +520,7 @@ SCRIPT_1A_517F::
     LoadMapMask(METAMAP_MASK_2A_7792, COLLMAP_MASK_2D_5110)
     LoadTriggers(Trigger_Overworld_2)
     ThatInit(0, Call_001_4AF8, $07, $07, $D0D9, $00, ACTORSCRIPT0_1A_51D2, Actor_RestoreState)
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_1A_51CB)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_51CB)
     ThatInit(0, Call_001_4AF8, $08, $14, $D260, $00, ACTORSCRIPT0_1A_51D2, Actor_RestoreState)
 
 SCRIPT_1A_51CB::
@@ -573,7 +573,7 @@ ACTORSCRIPT0_1A_5243::
     End()
 
 SCRIPT_1A_5258::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_1A_5281)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_5281)
     LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_5281)
     HeroSetCamera()
     PalClearAnim(0, 16, WHITE_A)
@@ -747,7 +747,7 @@ Trigger_Overworld_2_E::
     End()
 
 Trigger_Overworld_2_F::
-    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_1A_5730)
+    LongJumpIf(#(c[xStaffOfHyrenQuest] == c4)#, SCRIPT_1A_5730)
     LongJumpIf(#((c[xOverworld1_SecretsCompleted] == c5) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_1A_5730)
     End()
 
