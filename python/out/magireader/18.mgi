@@ -33,7 +33,7 @@ ACTORSCRIPT0_18_406C::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_478D)
         Case(2, SCRIPT_09_4952)
         Case(3, SCRIPT_09_5A9B)
@@ -239,7 +239,7 @@ ACTORSCRIPT0_18_451D::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -487,7 +487,7 @@ ACTORSCRIPT0_18_4955::
     Sync(0, 2)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -587,7 +587,7 @@ ACTORSCRIPT0_18_4B20::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -698,7 +698,7 @@ ACTORSCRIPT0_18_4D63::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -761,7 +761,7 @@ SCRIPT_18_4E12::
     End()
 
 SCRIPT_18_4E45::
-    LongJumpIf(#(c[xVARBYTE_00_A138] > c0)#, SCRIPT_18_50DE)
+    LongJumpIf(#(c[xOverworld1_SecretsCompleted] > c0)#, SCRIPT_18_50DE)
     LoadSpritePalette(Pal_AllSprites)
     ThatInit(0, Call_001_4AF8, $10, $0B, $D0EC, $00, ACTORSCRIPT0_18_4EBB, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $10, $06, $D088, $00, ACTORSCRIPT0_18_4EF7, Actor_RestoreState)
@@ -793,7 +793,7 @@ ACTORSCRIPT0_18_4EBB::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -920,7 +920,7 @@ ACTORSCRIPT0_18_5161::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -1063,7 +1063,7 @@ SCRIPT_18_52C3::
     End()
 
 SCRIPT_18_558D::
-    LongJumpIf(#(c[xVARBYTE_00_A138] > c0)#, SCRIPT_18_59CC)
+    LongJumpIf(#(c[xOverworld1_SecretsCompleted] > c0)#, SCRIPT_18_59CC)
     Icon(Icon_Eidon)
     Write("Salafy!⭍Anything🅐interesting⭍happen?🅐")
     Icon(Icon_Salafy)
@@ -1178,7 +1178,7 @@ SCRIPT_18_5BC3::
 SCRIPT_18_5DA7::
     End()
 
-SCRIPT_18_5DA8::
+Script_StartRoom::
     StartSong(SONGID_Quest)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1313,7 +1313,7 @@ SCRIPT_18_5F67::
     LongJump(SCRIPT_18_5F67)
 
 Hotspot_StartRoom_2::
-    LongJump(SCRIPT_0E_47AC)
+    LongJump(Script_Turret)
 
 SCRIPT_18_5F79::
     ThisSetAnimDelay() {
@@ -1505,10 +1505,10 @@ SCRIPT_18_62BE::
     End()
 
 SCRIPT_18_62CB::
-    SetScriptText(SCRIPT_18_62D0)
+    SetScriptText(Script_Credits_StartRoom)
     End()
 
-SCRIPT_18_62D0::
+Script_Credits_StartRoom::
     StartSong(SONGID_Core_Battle)
     SetByte(wScript_CheatCode_Succeeded, $00)
     SetByte(wScript_StartButtonDisabled, $00)
@@ -1545,7 +1545,7 @@ SCRIPT_18_62D0::
     Delay(255)
     Delay(255)
     Delay(255)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_18_6344::
     ScrollMap() {
@@ -1559,7 +1559,7 @@ SCRIPT_18_6344::
 SCRIPT_STARTBUTTON_18_6352::
     SetByte(RAM_00_C734, $00)
     LongJumpIf(#c[wScript_CheatCode_Succeeded]#, SCRIPT_18_6361)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_18_6361::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -1920,7 +1920,7 @@ Script_Cald_Puzzle2_SecretComplete::
     OrByte(xBits_Cald, %00000010)
     OrByte(xBits_Cald, %00100000)
     OrByte(xBits_Secrets_1, %00000100)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Cald_Puzzle2_SecretComplete)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Cald_Puzzle2_SecretComplete)
     LongJump(Script_Cald_SecretCompletedFirstTime)
 
 SCRIPT_18_68C3::

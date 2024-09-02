@@ -1,12 +1,12 @@
 
-SCRIPT_14_7918::
+Script_Tavel_Entrance::
     SongFadeOut(1)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(PAL8_14_78D8)
-    LoadScene(Scene_Tavel_EntranceUNK)
-    LoadHotspots(Hotspot_Tavel_EntranceUNK)
+    LoadScene(Scene_Tavel_Entrance)
+    LoadHotspots(Hotspot_Tavel_Entrance)
     ThatInit(0, Call_001_4AF8, $06, $03, $D02A, $00, ACTORSCRIPT0_14_79AB, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $06, $07, $D05A, $00, ACTORSCRIPT0_14_79FA, Actor_RestoreState)
     ThatInit(3, Call_001_4AF8, $05, $06, $D04D, $30, ACTORSCRIPT0_14_7B06, Actor_RestoreState)
@@ -32,8 +32,8 @@ SCRIPT_14_7918::
 SCRIPT_STARTBUTTON_14_79A6::
     End()
 
-Hotspot_Tavel_EntranceUNK_0::
-    LongJump(SCRIPT_14_7B55)
+Hotspot_Tavel_Entrance_0::
+    LongJump(Script_Tavel_Cave)
 
 ACTORSCRIPT0_14_79AB::
     ThisSetAnimSingle(SCRIPT_14_5DA1)
@@ -84,19 +84,19 @@ ACTORSCRIPT0_14_79FA::
     End()
 
 SCRIPT_14_7A2C::
-    Icon(Icon_Tavel_1)
+    Icon(Icon_Tavel_Josh)
     Write("HEY!!🅐")
     Sync(1, 4)
     Write("Who are YOU?!🅐")
-    Icon(Icon_Tavel_2)
+    Icon(Icon_Tavel_Sly)
     Write("Yeah! You⭍aren't FONEY🅐BONEY!!🅐")
-    Icon(Icon_Tavel_3)
+    Icon(Icon_Tavel_Benny)
     Write("Did that fink⭍send you out🅐with our⭍Crystal?🅐")
     Close()
     Sync(2, 2)
     Icon(Icon_Salafy)
     Write("Uh...🅐")
-    Icon(Icon_Tavel_1)
+    Icon(Icon_Tavel_Josh)
     Write("WELL?!🅐")
     Sync(3, 2)
     Delay(16)
@@ -110,7 +110,7 @@ SCRIPT_14_7A2C::
     Sync(6, 4)
     Write("HEY!!🅐")
     Close()
-    LongJump(SCRIPT_14_7B55)
+    LongJump(Script_Tavel_Cave)
 
 ACTORSCRIPT0_14_7B06::
     ThisSetAnimSingle(ACTORSCRIPT1_1A_44D8)
@@ -145,13 +145,13 @@ ACTORSCRIPT0_14_7B2E::
     ThisSetAnimSingle(ACTORSCRIPT1_1A_4734)
     End()
 
-SCRIPT_14_7B55::
+Script_Tavel_Cave::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     SetByte(wScript_TransplantTileDisabled, $00)
     LoadSpritePalette(PAL8_14_78D8)
-    LoadScene(Scene_Tavel_CaveUNK)
-    LoadHotspots(Hotspot_Tavel_CaveUNK)
+    LoadScene(Scene_Tavel_Cave)
+    LoadHotspots(Hotspot_Tavel_Cave)
     ThatInit(0, Call_001_4AF8, $0D, $19, $D201, $00, ACTORSCRIPT0_14_7BAD, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $0D, $16, $D1C5, $00, ACTORSCRIPT0_14_7D1E, Actor_RestoreState)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111011)
@@ -168,8 +168,8 @@ SCRIPT_14_7B55::
 SCRIPT_STARTBUTTON_14_7BA8::
     End()
 
-Hotspot_Tavel_CaveUNK_0::
-    LongJump(SCRIPT_14_7918)
+Hotspot_Tavel_Cave_0::
+    LongJump(Script_Tavel_Entrance)
 
 ACTORSCRIPT0_14_7BAD::
     ThisSetAnimDelay() {
@@ -191,7 +191,7 @@ ACTORSCRIPT0_14_7BAD::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(3, $20, 0, 16)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_14_7BEF::
     Write("OUCH!🅐")

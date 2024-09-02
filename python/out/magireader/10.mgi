@@ -59,12 +59,12 @@ SCRIPT_10_4074::
     End()
 
 ACTORSCRIPT0_10_40ED::
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_19_4710)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_13_6D5C)
     End()
 
 ACTORSCRIPT0_10_40FC::
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_19_4710)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_19_4710)
     ThisSetAnimSingle(ACTORSCRIPT1_15_78A0)
     End()
 
@@ -184,7 +184,7 @@ Script_Core_SecretCompletedFirstTime::
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
     SetByte(wScript_StartButtonDisabled, $01)
-    SetByte(RAM_00_A135, $0B)
+    SetByte(xZoneToLoad, $0B)
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Core_Main)
     LoadHotspots(Hotspot_Core_Main)
@@ -283,7 +283,7 @@ ACTORSCRIPT0_10_461E::
 
 Script_Core_CompletedFirstTime::
     OrByte(xBits_ZonesCompleted_2, %00000100)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, Script_Core_Puzzle4_Complete)
         Case(1, SCRIPT_10_4650)
         Case(2, SCRIPT_10_4747)
@@ -1239,7 +1239,7 @@ SCRIPT_10_5541::
 
 SCRIPT_10_5676::
     StartSong(SONGID_Agram)
-    SetByte(RAM_00_A134, $0B)
+    SetByte(xCurrentZone, $0B)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1310,7 +1310,7 @@ SCRIPT_10_5736::
     End()
 
 SCRIPT_10_5803::
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_16_4096)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_16_4096)
     SceneNew()
     StartSong(SONGID_Mischief)
     SetByte(wScript_StartButtonDisabled, $00)
@@ -1534,7 +1534,7 @@ ACTORSCRIPT0_10_5C4E::
         ScriptDelay(SCRIPT_10_7A60, 60)
     }
     SetScriptScroll(SCRIPT_19_46F0)
-    SetByte(RAM_00_A135, $0B)
+    SetByte(xZoneToLoad, $0B)
     SetScriptText(SCRIPT_19_70CB)
     ThisDelete()
 
@@ -1598,7 +1598,7 @@ ACTORSCRIPT0_10_5FDB::
 
 SCRIPT_10_609A::
     StartSong(SONGID_Agram)
-    SetByte(RAM_00_A134, $0B)
+    SetByte(xCurrentZone, $0B)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1688,7 +1688,7 @@ SCRIPT_10_627C::
 
 SCRIPT_10_62EE::
     StartSong(SONGID_Agram)
-    SetByte(RAM_00_A134, $0B)
+    SetByte(xCurrentZone, $0B)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)

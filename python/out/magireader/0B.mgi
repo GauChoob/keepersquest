@@ -407,7 +407,7 @@ ACTORSCRIPT0_0B_48C6::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    LongJump(SCRIPT_0E_4710)
+    LongJump(Script_Credits_BeatGame)
 
 SCRIPT_0B_48DB::
     ScrollMap() {
@@ -481,7 +481,7 @@ SCRIPT_0B_4A1B::
     End()
 
 SCRIPT_0B_4ABA::
-    LongJump(SCRIPT_0E_4710)
+    LongJump(Script_Credits_BeatGame)
 
 ACTORSCRIPT0_0B_4ABE::
     ThisSetAnimSingle(SCRIPT_14_5DA1)
@@ -567,7 +567,7 @@ ACTORSCRIPT0_0B_4ABE::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJump(SCRIPT_0E_4710)
+    LongJump(Script_Credits_BeatGame)
 
 SCRIPT_0B_4BC5::
     Icon(Icon_Salafy)
@@ -1300,7 +1300,7 @@ SCRIPT_0B_5AD0::
     Close()
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJump(SCRIPT_0B_5BE7)
+    LongJump(Script_Cald_MainOpen_Cutscene)
 
 ACTORSCRIPT0_0B_5BD8::
     ThisSetAnimDelay() {
@@ -1310,11 +1310,11 @@ ACTORSCRIPT0_0B_5BD8::
     }
     ThisDelete()
 
-SCRIPT_0B_5BE7::
+Script_Cald_MainOpen_Cutscene::
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     LoadSpritePalette(Pal_AllSprites)
-    LoadScene(Scene_Cald_MainOpen_UNK)
+    LoadScene(Scene_Cald_MainOpen_Cutscene)
     ThatInit(0, Call_001_4AF8, $05, $1D, $D36B, $00, ACTORSCRIPT0_0B_5D18, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $09, $16, $D29D, $00, ACTORSCRIPT0_0B_5C71, Actor_RestoreState)
     ThatInit(3, Call_001_4AF8, $05, $1D, $D36B, $2A, ACTORSCRIPT0_0B_5C8A, Actor_RestoreState)
@@ -1455,7 +1455,7 @@ ACTORSCRIPT0_0B_6065::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJump(SCRIPT_0E_4710)
+    LongJump(Script_Credits_BeatGame)
 
 ACTORSCRIPT0_0B_6085::
     ThisSetAnimSingle(SCRIPT_15_7878)
@@ -1762,7 +1762,7 @@ SCRIPT_0B_6A2B::
     Close()
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJump(SCRIPT_0E_4710)
+    LongJump(Script_Credits_BeatGame)
 
 SCRIPT_0B_6AB5::
     SetScriptMaster(SCRIPT_0B_6ABA)
@@ -1778,7 +1778,7 @@ SCRIPT_0B_6ABA::
     Menu(SCRIPT_0B_6B8E, SCRIPT_0B_6AE4)
 
 SCRIPT_0B_6AE4::
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0B_6B20)
         Case(2, SCRIPT_0B_6B2A)
         Case(3, SCRIPT_0B_6B34)
@@ -1848,7 +1848,7 @@ SCRIPT_0B_6B84::
     LongJump(SCRIPT_0B_6B8E)
 
 SCRIPT_0B_6B8E::
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0B_6BCA)
         Case(2, SCRIPT_0B_6BD4)
         Case(3, SCRIPT_0B_6BDE)
@@ -1929,7 +1929,7 @@ SCRIPT_0B_6C2E::
     End()
 
 SCRIPT_0B_6C38::
-    Switch(#c[xVARBYTE_00_A138]#) {
+    Switch(#c[xOverworld1_SecretsCompleted]#) {
         Case(1, SCRIPT_0B_6DAC)
         Case(2, SCRIPT_0B_75B4)
         Case(3, SCRIPT_0B_7737)
@@ -1939,13 +1939,13 @@ SCRIPT_0B_6C38::
     End()
 
 SCRIPT_0B_6C57::
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A138] == c1))#, SCRIPT_0B_705A)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A138] == c5))#, SCRIPT_0B_7B8A)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c2) and (c[xVARBYTE_00_A138] == c5))#, SCRIPT_18_434A)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld1_SecretsCompleted] == c1))#, SCRIPT_0B_705A)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld1_SecretsCompleted] == c5))#, SCRIPT_0B_7B8A)
+    LongJumpIf(#((c[xWandCrystalChoice] == c2) and (c[xOverworld1_SecretsCompleted] == c5))#, SCRIPT_18_434A)
     End()
 
 SCRIPT_0B_6C8B::
-    Switch(#c[xVARBYTE_00_A139]#) {
+    Switch(#c[xOverworld2_SecretsCompleted]#) {
         Case(1, SCRIPT_19_7540)
         Case(2, SCRIPT_19_7128)
         Case(3, SCRIPT_19_737F)
@@ -1955,16 +1955,16 @@ SCRIPT_0B_6C8B::
     End()
 
 SCRIPT_0B_6CAA::
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A139] == c1))#, SCRIPT_19_6EBD)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_19_6FD4)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c2) and (c[xVARBYTE_00_A139] == c1))#, SCRIPT_19_607D)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c2) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_19_6202)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c3) and (c[xVARBYTE_00_A139] == c1))#, SCRIPT_18_558D)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c3) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_18_5BC3)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld2_SecretsCompleted] == c1))#, SCRIPT_19_6EBD)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_19_6FD4)
+    LongJumpIf(#((c[xWandCrystalChoice] == c2) and (c[xOverworld2_SecretsCompleted] == c1))#, SCRIPT_19_607D)
+    LongJumpIf(#((c[xWandCrystalChoice] == c2) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_19_6202)
+    LongJumpIf(#((c[xWandCrystalChoice] == c3) and (c[xOverworld2_SecretsCompleted] == c1))#, SCRIPT_18_558D)
+    LongJumpIf(#((c[xWandCrystalChoice] == c3) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_18_5BC3)
     End()
 
 SCRIPT_0B_6D11::
-    Switch(#c[xVARBYTE_00_A139]#) {
+    Switch(#c[xOverworld2_SecretsCompleted]#) {
         Case(1, SCRIPT_19_64CD)
         Case(2, SCRIPT_19_672B)
         Case(3, SCRIPT_19_67FD)
@@ -1974,7 +1974,7 @@ SCRIPT_0B_6D11::
     End()
 
 SCRIPT_0B_6D30::
-    Switch(#c[xVARBYTE_00_A138]#) {
+    Switch(#c[xOverworld1_SecretsCompleted]#) {
         Case(2, SCRIPT_19_59E8)
         Case(3, SCRIPT_19_5DEB)
         Case(4, SCRIPT_19_504D)
@@ -1983,7 +1983,7 @@ SCRIPT_0B_6D30::
     End()
 
 SCRIPT_0B_6D4A::
-    Switch(#c[xVARBYTE_00_A139]#) {
+    Switch(#c[xOverworld2_SecretsCompleted]#) {
         Case(1, SCRIPT_18_44B1)
         Case(2, SCRIPT_18_48B6)
         Case(3, SCRIPT_18_4AB4)
@@ -1993,7 +1993,7 @@ SCRIPT_0B_6D4A::
     End()
 
 SCRIPT_0B_6D69::
-    Switch(#c[MATHADDRESS_00_A13A]#) {
+    Switch(#c[xOverworld1_SecretsOpened]#) {
         Case(0, SCRIPT_19_5243)
         Case(1, SCRIPT_19_5349)
         Case(2, SCRIPT_19_53EE)
@@ -2003,7 +2003,7 @@ SCRIPT_0B_6D69::
     End()
 
 SCRIPT_0B_6D88::
-    Switch(#c[MATHADDRESS_00_A13B]#) {
+    Switch(#c[xOverworld2_SecretsOpened]#) {
         Case(0, SCRIPT_19_55B7)
         Case(1, SCRIPT_19_5681)
         Case(2, SCRIPT_19_573E)
@@ -2073,7 +2073,7 @@ ACTORSCRIPT0_0B_6DFF::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_478D)
         Case(2, SCRIPT_09_4952)
         Case(3, SCRIPT_09_5A9B)
@@ -2220,7 +2220,7 @@ SCRIPT_0B_7528::
     Write("Get the⭍crystal? Good🅐choice! The⭍crystal part🅐isn't hidden⭍around here,🅐but Eidon knows⭍where the🅐pieces of it⭍are.🅐")
     Close()
     Delay(48)
-    SetByte(MATHADDRESS_00_A136, $02)
+    SetByte(xWandCrystalChoice, $02)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
     LongJump(SCRIPT_09_6F8A)
@@ -2277,7 +2277,7 @@ ACTORSCRIPT0_0B_7607::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -2371,7 +2371,7 @@ ACTORSCRIPT0_0B_778A::
     Sync(1, 2)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -2465,7 +2465,7 @@ ACTORSCRIPT0_0B_7900::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -2577,7 +2577,7 @@ ACTORSCRIPT0_0B_7AB8::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_478D)
         Case(2, SCRIPT_09_4952)
         Case(3, SCRIPT_09_5A9B)

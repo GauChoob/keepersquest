@@ -139,7 +139,7 @@ SCRIPT_STARTBUTTON_19_47E7::
     SetByte(RAM_00_C734, $00)
     LongJumpIf(#c[wScript_CheatCode_Succeeded]#, SCRIPT_19_47F9)
     HeroToDoor($06, $13)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_19_47F9::
     SetByte(wScript_StartButtonDisabled, $01)
@@ -147,7 +147,7 @@ SCRIPT_19_47F9::
     StartSong(SONGID_GetItem)
     Delay(96)
     HeroToDoor($06, $13)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 ACTORSCRIPT0_19_480C::
     Delay(32)
@@ -833,7 +833,7 @@ ACTORSCRIPT0_19_50B9::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -935,7 +935,7 @@ SCRIPT_19_51F9::
     End()
 
 SCRIPT_19_5243::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Yaki)
     Write("Salafy! Guess⭍what you just🅐did!🅐")
     Icon(Icon_Salafy)
@@ -954,7 +954,7 @@ SCRIPT_19_5348::
     End()
 
 SCRIPT_19_5349::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Yaki)
     Write("WOOO! You⭍opened up🅐two mazes⭍again!🅐")
     Icon(Icon_Salafy)
@@ -973,7 +973,7 @@ SCRIPT_19_53ED::
     End()
 
 SCRIPT_19_53EE::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Yaki)
     Write("OOOH YEAA!⭍")
     SetEventMaster(1)
@@ -988,7 +988,7 @@ SCRIPT_19_5445::
     End()
 
 SCRIPT_19_5446::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Salafy)
     Write("Where is it?🅐")
     Clear()
@@ -1007,7 +1007,7 @@ SCRIPT_19_54D9::
     End()
 
 SCRIPT_19_54DA::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Yaki)
     Write("All right,⭍sister! Looks🅐like you've⭍opened up all🅐the extra mazes⭍that there are.🅐")
     Icon(Icon_Salafy)
@@ -1027,7 +1027,7 @@ SCRIPT_19_55B6::
     End()
 
 SCRIPT_19_55B7::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Eidon)
     Write("I see you have⭍found an extra🅐exit from this⭍maze. This one🅐opened up two⭍mazes instead🅐of one.🅐")
     SetEventMaster(1)
@@ -1043,7 +1043,7 @@ SCRIPT_19_5680::
     End()
 
 SCRIPT_19_5681::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Salafy)
     Write("I found another⭍secret!🅐")
     Icon(Icon_Eidon)
@@ -1063,7 +1063,7 @@ SCRIPT_19_573D::
     End()
 
 SCRIPT_19_573E::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Eidon)
     Write("Guess what?🅐")
     Icon(Icon_Salafy)
@@ -1081,7 +1081,7 @@ SCRIPT_19_579E::
     End()
 
 SCRIPT_19_579F::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Eidon)
     Write("Are those extra⭍exits any🅐harder than the⭍the normal🅐ones?🅐")
     SetEventMaster(1)
@@ -1097,7 +1097,7 @@ SCRIPT_19_581E::
     End()
 
 SCRIPT_19_581F::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Eidon)
     Write("Guess what?🅐")
     Icon(Icon_Salafy)
@@ -1121,7 +1121,7 @@ SCRIPT_19_58F8::
     End()
 
 SCRIPT_19_58F9::
-    VarByteExpr(MATHADDRESS_00_A13B, #(c[MATHADDRESS_00_A13B] + c1)#)
+    VarByteExpr(xOverworld2_SecretsOpened, #(c[xOverworld2_SecretsOpened] + c1)#)
     Icon(Icon_Eidon)
     Write("There's an⭍extra exit to🅐one of these⭍Core mazes?🅐")
     Icon(Icon_Salafy)
@@ -1175,7 +1175,7 @@ ACTORSCRIPT0_19_5A54::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -1376,7 +1376,7 @@ ACTORSCRIPT0_19_5E57::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_0F_4518)
         Case(2, SCRIPT_09_494B)
         Case(3, SCRIPT_09_5A94)
@@ -1486,7 +1486,7 @@ ACTORSCRIPT0_19_5FC3::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -1635,7 +1635,7 @@ ACTORSCRIPT0_19_6520::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -1744,7 +1744,7 @@ ACTORSCRIPT0_19_6765::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -1797,7 +1797,7 @@ ACTORSCRIPT0_19_6837::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -1853,7 +1853,7 @@ ACTORSCRIPT0_19_6907::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -1916,7 +1916,7 @@ ACTORSCRIPT0_19_6A0A::
     Sync(0, 2)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -2050,7 +2050,7 @@ ACTORSCRIPT0_19_6C48::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)
@@ -2179,7 +2179,7 @@ SCRIPT_19_70CA::
     End()
 
 SCRIPT_19_70CB::
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(1, SCRIPT_19_7107)
         Case(2, SCRIPT_19_710A)
         Case(3, SCRIPT_19_710D)
@@ -2281,7 +2281,7 @@ ACTORSCRIPT0_19_7194::
     WaitEventText(4)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -2419,7 +2419,7 @@ ACTORSCRIPT0_19_73EB::
     Sync(0, 2)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C4B)
         Case(7, SCRIPT_0C_6C99)
         Case(8, SCRIPT_16_7072)
@@ -2637,7 +2637,7 @@ ACTORSCRIPT0_19_7614::
     Sync(3, 2)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    Switch(#c[RAM_00_A135]#) {
+    Switch(#c[xZoneToLoad]#) {
         Case(6, SCRIPT_09_6C52)
         Case(7, SCRIPT_0C_6CA0)
         Case(8, SCRIPT_16_7079)

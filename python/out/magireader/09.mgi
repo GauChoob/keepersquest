@@ -287,9 +287,9 @@ ACTORSCRIPT0_09_48D8::
 
 SCRIPT_09_48E7::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A138, #(c[xVARBYTE_00_A138] + c1)#)
-    SetByte(RAM_00_A135, $02)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $02)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_09_491D)
         Case(1, SCRIPT_09_4921)
         Case(2, SCRIPT_09_4936)
@@ -300,7 +300,7 @@ SCRIPT_09_48E7::
     LongJump(SCRIPT_09_494B)
 
 SCRIPT_09_491D::
-    SetByte(MATHADDRESS_00_A136, $01)
+    SetByte(xWandCrystalChoice, $01)
 
 SCRIPT_09_4921::
     SceneNew()
@@ -475,7 +475,7 @@ ACTORSCRIPT0_09_4AFA::
 
 SCRIPT_09_4B52::
     StartSong(SONGID_Arderial)
-    SetByte(RAM_00_A134, $02)
+    SetByte(xCurrentZone, $02)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $01)
     SetByte(wScript_TransplantTileDisabled, $01)
@@ -1257,9 +1257,9 @@ ACTORSCRIPT0_09_5A21::
 
 SCRIPT_09_5A30::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A138, #(c[xVARBYTE_00_A138] + c1)#)
-    SetByte(RAM_00_A135, $03)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $03)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_09_5A66)
         Case(1, SCRIPT_09_5A6A)
         Case(2, SCRIPT_09_5A7F)
@@ -1270,7 +1270,7 @@ SCRIPT_09_5A30::
     LongJump(SCRIPT_09_5A94)
 
 SCRIPT_09_5A66::
-    SetByte(MATHADDRESS_00_A136, $01)
+    SetByte(xWandCrystalChoice, $01)
 
 SCRIPT_09_5A6A::
     SceneNew()
@@ -1344,7 +1344,7 @@ SCRIPT_09_5B1B::
 
 Script_Cald_SecretCompletedFirstTime::
     StartSong(SONGID_Shop)
-    SetByte(RAM_00_A135, $03)
+    SetByte(xZoneToLoad, $03)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1549,7 +1549,7 @@ SCRIPT_09_5E71::
 
 SCRIPT_09_5EA7::
     StartSong(SONGID_Shop)
-    SetByte(RAM_00_A134, $03)
+    SetByte(xCurrentZone, $03)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2231,9 +2231,9 @@ ACTORSCRIPT0_09_6BBF::
 
 SCRIPT_09_6BCE::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A139, #(c[xVARBYTE_00_A139] + c1)#)
-    SetByte(RAM_00_A135, $06)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $06)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_09_6C04)
         Case(1, SCRIPT_09_6C0C)
         Case(2, SCRIPT_09_6C21)
@@ -2244,7 +2244,7 @@ SCRIPT_09_6BCE::
     LongJump(SCRIPT_09_6C4B)
 
 SCRIPT_09_6C04::
-    SetByte(MATHADDRESS_00_A136, $03)
+    SetByte(xWandCrystalChoice, $03)
     LongJump(SCRIPT_09_6C36)
 
 SCRIPT_09_6C0C::
@@ -2350,7 +2350,7 @@ ACTORSCRIPT0_09_6D53::
         ScriptDelay(SCRIPT_14_5C5D, 32)
         ScriptDelay(SCRIPT_14_5DB5, 32)
     }
-    SetByte(RAM_00_A135, $06)
+    SetByte(xZoneToLoad, $06)
     SetScriptText(SCRIPT_0B_6D88)
     WaitEventMaster(1)
     ThisSetAnimSingle(SCRIPT_14_5DC9)
@@ -2484,7 +2484,7 @@ SCRIPT_09_6F40::
 
 SCRIPT_09_6F8A::
     StartSong(SONGID_Weave)
-    SetByte(RAM_00_A134, $06)
+    SetByte(xCurrentZone, $06)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2912,9 +2912,9 @@ SCRIPT_09_775C::
     Write("Thanks. Bye.🅐")
     Close()
     SetEventText(21)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_09_7819)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A138] != c5))#, SCRIPT_09_7810)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c0)#, Actor_Null)
+    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_09_7819)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld1_SecretsCompleted] != c5))#, SCRIPT_09_7810)
+    LongJumpIf(#(c[xWandCrystalChoice] == c0)#, Actor_Null)
     Icon(Icon_Eidon)
     Write("Remember, as⭍you solve this🅐next series⭍of mazes, look🅐for the⭍crystal! It is🅐very important⭍that you find🅐it.🅐")
     Close()
@@ -2922,7 +2922,7 @@ SCRIPT_09_775C::
     End()
 
 SCRIPT_09_7810::
-    SetByte(MATHADDRESS_00_A136, $00)
+    SetByte(xWandCrystalChoice, $00)
     SetByte(wScript_StartButtonDisabled, $00)
     End()
 

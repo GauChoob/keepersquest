@@ -1,5 +1,5 @@
 
-SCRIPT_0E_4710::
+Script_Credits_BeatGame::
     SetByte(wScript_StartButtonDisabled, $01)
     SceneNew()
     StartSong(SONGID_Core_Battle)
@@ -38,7 +38,7 @@ SCRIPT_0E_4710::
     Menu(SCRIPT_0E_4782, SCRIPT_0E_4792)
 
 SCRIPT_0E_4782::
-    SetByte(MATHADDRESS_00_A136, $04)
+    SetByte(xWandCrystalChoice, $04)
     Close()
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
@@ -48,7 +48,7 @@ SCRIPT_0E_4792::
     Close()
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(1, $20, 0, 16)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_0E_479E::
     ScrollMap() {
@@ -59,7 +59,7 @@ SCRIPT_0E_479E::
     }
     LongJump(SCRIPT_0E_479E)
 
-SCRIPT_0E_47AC::
+Script_Turret::
     StartSong(SONGID_Descent)
     SetByte(xNumberOfAttempts, $00)
     SceneNew()
@@ -70,10 +70,10 @@ SCRIPT_0E_47AC::
     LoadScene(Scene_Turret)
     LoadHotspots(Hotspot_Turret)
     ThatInit(0, AI_Hero, $09, $0C, $D08D, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
-    ThatInit(9, Call_001_4AF8, $00, $00, $D000, $00, ACTORSCRIPT0_0E_48B8, Actor_Null)
-    ThatInit(10, Call_001_4AF8, $00, $00, $D000, $12, ACTORSCRIPT0_0E_4AD1, Actor_Null)
+    ThatInit(9, Call_001_4AF8, $00, $00, $D000, $00, Actor_TurretController_Control, Actor_Null)
+    ThatInit(10, Call_001_4AF8, $00, $00, $D000, $12, Actor_Pellet_RandomLocation, Actor_Null)
     ThatInit(18, AI_01_7115, $03, $0C, $D087, $10, SCRIPT_11_75EA, Actor_Null)
-    OverlayInit(RAM_00_C2CD, $96, $23, $15, SCRIPT_ACTORSCRIPT0_0E_4953)
+    OverlayInit(RAM_00_C2CD, $96, $23, $15, Actor_OverlayTimer)
     LoadSingleBitmap($0C, BITMAP_0C_4000, $8000, $00)
     LoadSingleBitmap($04, BITMAP_19_4330, $80C0, $00)
     LoadSingleBitmap($02, BITMAP_19_4370, $8100, $00)
@@ -97,31 +97,31 @@ SCRIPT_0E_47AC::
     ThatStart(9)
     End()
 
-ACTORSCRIPT0_0E_48B8::
+Actor_TurretController_Control::
     Delay(2)
     Switch(#DIRECTION#) {
-        Case(Actor_FLAGS_FACEEAST, SCRIPT_0E_48DE)
-        Case(Actor_FLAGS_FACEWEST, SCRIPT_0E_48D5)
-        Case(Actor_FLAGS_FACENORTH, SCRIPT_0E_48E7)
-        Case(Actor_FLAGS_FACESOUTH, SCRIPT_0E_48F0)
+        Case(Actor_FLAGS_FACEEAST, .SendEast)
+        Case(Actor_FLAGS_FACEWEST, .SendWest)
+        Case(Actor_FLAGS_FACENORTH, .SendNorth)
+        Case(Actor_FLAGS_FACESOUTH, .SendSouth)
     }
-    LongJump(ACTORSCRIPT0_0E_48B8)
+    LongJump(Actor_TurretController_Control)
 
-SCRIPT_0E_48D5::
+.SendWest::
     ThatScript(18, ACTORSCRIPT0_11_75CC)
-    LongJump(ACTORSCRIPT0_0E_48B8)
+    LongJump(Actor_TurretController_Control)
 
-SCRIPT_0E_48DE::
+.SendEast::
     ThatScript(18, ACTORSCRIPT0_11_75D6)
-    LongJump(ACTORSCRIPT0_0E_48B8)
+    LongJump(Actor_TurretController_Control)
 
-SCRIPT_0E_48E7::
+.SendNorth::
     ThatScript(18, ACTORSCRIPT0_11_75C2)
-    LongJump(ACTORSCRIPT0_0E_48B8)
+    LongJump(Actor_TurretController_Control)
 
-SCRIPT_0E_48F0::
+.SendSouth::
     ThatScript(18, ACTORSCRIPT0_11_75E0)
-    LongJump(ACTORSCRIPT0_0E_48B8)
+    LongJump(Actor_TurretController_Control)
 
 SCRIPT_0E_48F9::
     ThisSetAnimDelay() {
@@ -131,27 +131,27 @@ SCRIPT_0E_48F9::
     ThisLoc($00, $00, $00, $00, $D000)
     End()
 
-SCRIPT_0E_490B::
+Actor_TurretController_CollectPellet::
     Pass()
     StartSFX0(SFXID_Jump)
     ThisLoc($00, $00, $00, $00, $D000)
     ThisSetAnimSingle(Actor_Null)
     ThisAI(Call_001_4AF8)
     VarByteExpr(xNumberOfAttempts, #(c[xNumberOfAttempts] + c1)#)
-    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, SCRIPT_0E_4A6F)
+    LongJumpIf(#(c[xNumberOfAttempts] > c254)#, Script_Turret_255EnergyOverload)
     ThatScript(12, Actor_Null)
     Pass()
-    ThatScript(12, SCRIPT_ACTORSCRIPT0_0E_4953)
-    SetScriptScroll(SCRIPT_0E_493F)
+    ThatScript(12, Actor_OverlayTimer)
+    SetScriptScroll(Script_Pellet_NewPellet)
     End()
 
-SCRIPT_0E_493F::
+Script_Pellet_NewPellet::
     ThatDelete(10)
-    ThatInit(10, Call_001_4AF8, $00, $00, $D000, $12, ACTORSCRIPT0_0E_4AD1, Actor_Null)
+    ThatInit(10, Call_001_4AF8, $00, $00, $D000, $12, Actor_Pellet_RandomLocation, Actor_Null)
     ThatStart(10)
     End()
 
-SCRIPT_ACTORSCRIPT0_0E_4953::
+Actor_OverlayTimer::
     ThisSetAnimDelay() {
         ScriptDelay(ACTORSCRIPT1_11_5A35, 32)
         ScriptDelay(ACTORSCRIPT1_11_5A21, 32)
@@ -167,10 +167,10 @@ SCRIPT_ACTORSCRIPT0_0E_4953::
         ScriptDelay(ACTORSCRIPT1_11_59BD, 32)
         ScriptDelay(ACTORSCRIPT1_11_59B3, 0)
     }
-    SetScriptText(SCRIPT_0E_498E)
+    SetScriptText(Script_Turret_End)
     End()
 
-SCRIPT_0E_498E::
+Script_Turret_End::
     ThatDelete(0)
     ThatDelete(3)
     ThatDelete(4)
@@ -181,25 +181,25 @@ SCRIPT_0E_498E::
     ThatDelete(12)
     FormatChar(xNumberOfAttempts)
     Write("Time's UP!!🅐You collected⭍🔊 Energy.🅐")
-    LongJumpIf(#(c[xTurret_HighScore] == c0)#, SCRIPT_0E_4A62)
+    LongJumpIf(#(c[xTurret_HighScore] == c0)#, .FirstCompletion)
     LongJumpIf(#(c[xNumberOfAttempts] > c[xTurret_HighScore])#, .HighscoreNew)
     FormatChar(xTurret_HighScore)
     Write("The current⭍High Score is🅐🔊 Energy.🅐")
     Close()
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 .HighscoreNew::
     FormatChar(xTurret_HighScore)
     Write("⭍Well done!!⭍You have set a🅐new High Score!🅐The previous⭍High Score was🅐🔊 Energy.🅐")
     Close()
 
-SCRIPT_0E_4A62::
+.FirstCompletion::
     VarByteExpr(xTurret_HighScore, #c[xNumberOfAttempts]#)
     Close()
     SaveGame(1)
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
-SCRIPT_0E_4A6F::
+Script_Turret_255EnergyOverload::
     ThatDelete(0)
     ThatDelete(3)
     ThatDelete(4)
@@ -208,28 +208,28 @@ SCRIPT_0E_4A6F::
     ThatDelete(10)
     ThatDelete(18)
     ThatDelete(12)
-    SetScriptScroll(SCRIPT_0E_4A99)
-    SetScriptText(SCRIPT_0E_4AA9)
+    SetScriptScroll(Script_Turret_255EnergyOverload_Earthquake)
+    SetScriptText(Script_Turret_255EnergyOverload_Text)
     WaitEventText(1)
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(3, $20, 0, 16)
     HeroToDoor($06, $06)
     SaveGame(1)
-    LongJump(SCRIPT_14_7918)
+    LongJump(Script_Tavel_Entrance)
 
-SCRIPT_0E_4A99::
+Script_Turret_255EnergyOverload_Earthquake::
     StartSFX0(SFXID_Earthquake)
 
-SCRIPT_0E_4A9B::
+.Loop::
     ScrollMap() {
         Move(2, 2, 2)
     }
     ScrollMap() {
         Move(2, -2, -2)
     }
-    LongJump(SCRIPT_0E_4A9B)
+    LongJump(.Loop)
 
-SCRIPT_0E_4AA9::
+Script_Turret_255EnergyOverload_Text::
     Write("ENERGY⭍OVERLOAD!!!!🅐")
     Close()
     SetEventText(1)
@@ -238,63 +238,63 @@ SCRIPT_0E_4AA9::
 Hotspot_Turret_0::
 Hotspot_Turret_1::
     ThatDrawTile(10, $00, $00, $00, COLLID_SPACE, $FD)
-    ThatScript(10, SCRIPT_0E_490B)
+    ThatScript(10, Actor_TurretController_CollectPellet)
     End()
 
-ACTORSCRIPT0_0E_4AD1::
-    RandLongJump(SCRIPT_0E_4AF1, SCRIPT_0E_4AFB, SCRIPT_0E_4B05, SCRIPT_0E_4B0F, SCRIPT_0E_4B19, SCRIPT_0E_4B23, SCRIPT_0E_4B2D, SCRIPT_0E_4B37, SCRIPT_0E_4B41, SCRIPT_0E_4B4B)
+Actor_Pellet_RandomLocation::
+    RandLongJump(Actor_Pellet_RandomLocation_1, Actor_Pellet_RandomLocation_2, Actor_Pellet_RandomLocation_3, Actor_Pellet_RandomLocation_4, Actor_Pellet_RandomLocation_5, Actor_Pellet_RandomLocation_6, Actor_Pellet_RandomLocation_7, Actor_Pellet_RandomLocation_8, Actor_Pellet_RandomLocation_9, Actor_Pellet_RandomLocation_10)
 
-SCRIPT_0E_4AF1::
+Actor_Pellet_RandomLocation_1::
     ThisLoc($08, $08, $05, $0E, $D09F)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4AFB::
+Actor_Pellet_RandomLocation_2::
     ThisLoc($08, $08, $02, $0E, $D09C)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B05::
+Actor_Pellet_RandomLocation_3::
     ThisLoc($08, $08, $06, $08, $D05E)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B0F::
+Actor_Pellet_RandomLocation_4::
     ThisLoc($08, $08, $01, $08, $D059)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B19::
+Actor_Pellet_RandomLocation_5::
     ThisLoc($08, $08, $05, $0A, $D073)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B23::
+Actor_Pellet_RandomLocation_6::
     ThisLoc($08, $08, $03, $0C, $D087)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B2D::
+Actor_Pellet_RandomLocation_7::
     ThisLoc($08, $08, $06, $0F, $D0AB)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B37::
+Actor_Pellet_RandomLocation_8::
     ThisLoc($08, $08, $01, $0F, $D0A6)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B41::
+Actor_Pellet_RandomLocation_9::
     ThisLoc($08, $08, $05, $0D, $D094)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B4B::
+Actor_Pellet_RandomLocation_10::
     ThisLoc($08, $08, $03, $09, $D066)
-    Jump(SCRIPT_0E_4B55)
+    Jump(Actor_Pellet_Display)
 
-SCRIPT_0E_4B55::
+Actor_Pellet_Display::
     ThisDrawTile($00, $00, $00, COLLID_HS01, $FD)
     ThisSetAnimDelay() {
-        ScriptDelay(SCRIPT_11_72FB, 64)
+        ScriptDelay(Sprite_Anim_Pellet, 64)
     }
     ThisDrawTile($00, $00, $00, COLLID_SPACE, $FD)
     ThisLoc($00, $00, $00, $00, $D000)
     ThisSetAnimDelay() {
         ScriptDelay(Actor_Null, 32)
     }
-    LongJump(ACTORSCRIPT0_0E_4AD1)
+    LongJump(Actor_Pellet_RandomLocation)
 
 Script_DeveloperRoom::
     SongFadeOut(1)
@@ -477,7 +477,7 @@ Hotspot_DeveloperRoom_36_Core_Puzzle4::
     LongJump(Script_Core_Puzzle4_First)
 
 Hotspot_DeveloperRoom_37_StartRoom::
-    LongJump(SCRIPT_18_5DA8)
+    LongJump(Script_StartRoom)
 
 SCRIPT_0E_4C88::
     End()
@@ -613,9 +613,9 @@ ACTORSCRIPT0_0E_4E48::
 
 SCRIPT_0E_4E57::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A138, #(c[xVARBYTE_00_A138] + c1)#)
-    SetByte(RAM_00_A135, $05)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $05)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_0E_4E8D)
         Case(1, SCRIPT_0E_4E91)
         Case(2, SCRIPT_0E_4EA6)
@@ -626,7 +626,7 @@ SCRIPT_0E_4E57::
     LongJump(SCRIPT_0E_4EBB)
 
 SCRIPT_0E_4E8D::
-    SetByte(MATHADDRESS_00_A136, $01)
+    SetByte(xWandCrystalChoice, $01)
 
 SCRIPT_0E_4E91::
     SceneNew()
@@ -677,7 +677,7 @@ ACTORSCRIPT0_0E_4F20::
         ScriptDelay(SCRIPT_14_5C4D, 32)
         ScriptDelay(SCRIPT_14_5DB5, 32)
     }
-    SetByte(RAM_00_A135, $05)
+    SetByte(xZoneToLoad, $05)
     SetScriptText(SCRIPT_0E_4FA5)
     WaitEventMaster(1)
     ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
@@ -715,7 +715,7 @@ SCRIPT_0E_4F79::
     End()
 
 SCRIPT_0E_4FA5::
-    VarByteExpr(MATHADDRESS_00_A13A, #(c[MATHADDRESS_00_A13A] + c1)#)
+    VarByteExpr(xOverworld1_SecretsOpened, #(c[xOverworld1_SecretsOpened] + c1)#)
     Icon(Icon_Yaki)
     Write("Salafy! You⭍just opened an🅐extra maze!🅐")
     Icon(Icon_Salafy)
@@ -779,8 +779,8 @@ SCRIPT_0E_5135::
 Script_Arderial_CompletedFirstTime::
     StartSong(SONGID_DreamCreature)
     OrByte(xBits_ZonesCompleted_1, %00010000)
-    LongJumpIf(#(((c[MATHADDRESS_00_A136] == c2) and (c[xVARBYTE_00_A138] == c5)) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_52DC)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_5449)
+    LongJumpIf(#(((c[xWandCrystalChoice] == c2) and (c[xOverworld1_SecretsCompleted] == c5)) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_52DC)
+    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_5449)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1129,7 +1129,7 @@ SCRIPT_0E_56A8::
 
 SCRIPT_0E_56E8::
     StartSong(SONGID_DreamCreature)
-    SetByte(RAM_00_A134, $05)
+    SetByte(xCurrentZone, $05)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -1189,7 +1189,7 @@ ACTORSCRIPT0_0E_5793::
     WaitEventText(2)
     SetScriptText(SCRIPT_0E_5B11)
     WaitEventText(5)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_580C)
+    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_580C)
     SetScriptText(SCRIPT_0E_5BF2)
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_14_5ABE, 60)
@@ -1340,7 +1340,7 @@ ACTORSCRIPT0_0E_597A::
     }
     WaitEventMaster(2)
     Delay(6)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_59AE)
+    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_59AE)
     SetScriptText(SCRIPT_0E_5B66)
     LongJump(SCRIPT_0E_59B5)
 
@@ -1959,9 +1959,9 @@ ACTORSCRIPT0_0E_6B39::
 
 SCRIPT_0E_6B48::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A139, #(c[xVARBYTE_00_A139] + c1)#)
-    SetByte(RAM_00_A135, $0A)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $0A)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_0E_6B7E)
         Case(1, SCRIPT_0E_6B86)
         Case(2, SCRIPT_0E_6B9B)
@@ -1972,7 +1972,7 @@ SCRIPT_0E_6B48::
     LongJump(SCRIPT_0E_6BC5)
 
 SCRIPT_0E_6B7E::
-    SetByte(MATHADDRESS_00_A136, $03)
+    SetByte(xWandCrystalChoice, $03)
     LongJump(SCRIPT_0E_6BB0)
 
 SCRIPT_0E_6B86::
@@ -2078,7 +2078,7 @@ ACTORSCRIPT0_0E_6CCD::
         ScriptDelay(SCRIPT_14_5C5D, 32)
         ScriptDelay(SCRIPT_14_5DB5, 32)
     }
-    SetByte(RAM_00_A135, $0A)
+    SetByte(xZoneToLoad, $0A)
     SetScriptText(SCRIPT_0B_6D88)
     WaitEventMaster(1)
     ThisSetAnimSingle(ACTORSCRIPT0_14_5DBF)
@@ -2117,9 +2117,9 @@ SCRIPT_0E_6D1E::
 Script_Paradwyn_CompletedFirstTime::
     StartSong(SONGID_Parathin)
     OrByte(xBits_ZonesCompleted_2, %00000010)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c1) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_70FF)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c2)#, SCRIPT_0E_7243)
-    LongJumpIf(#((c[MATHADDRESS_00_A136] == c3) and (c[xVARBYTE_00_A139] == c5))#, SCRIPT_0E_7402)
+    LongJumpIf(#((c[xWandCrystalChoice] == c1) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_70FF)
+    LongJumpIf(#(c[xWandCrystalChoice] == c2)#, SCRIPT_0E_7243)
+    LongJumpIf(#((c[xWandCrystalChoice] == c3) and (c[xOverworld2_SecretsCompleted] == c5))#, SCRIPT_0E_7402)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2182,7 +2182,7 @@ ACTORSCRIPT0_0E_6E0D::
     }
     PalClearBase(0, 16, WHITE_A)
     PalFadeAnimToBase(2, $20, 0, 16)
-    LongJumpIf(#(c[xVARBYTE_00_A139] > c0)#, SCRIPT_0B_609B)
+    LongJumpIf(#(c[xOverworld2_SecretsCompleted] > c0)#, SCRIPT_0B_609B)
     LongJump(SCRIPT_0B_4A1B)
 
 ACTORSCRIPT0_0E_6E80::
@@ -2254,7 +2254,7 @@ SCRIPT_0E_6F33::
 SCRIPT_0E_6F40::
     Icon(Icon_Eidon)
     Write("You're done!⭍Finished!🅐There's nothing⭍more to do!🅐")
-    LongJumpIf(#(c[xVARBYTE_00_A138] != c5)#, SCRIPT_0E_7051)
+    LongJumpIf(#(c[xOverworld1_SecretsCompleted] != c5)#, SCRIPT_0E_7051)
     Write("You have half⭍of the Staff of🅐Hyren and have⭍stopped Korg🅐and Zet from⭍releasing the🅐core hyren.⭍It would be🅐nice if you had⭍found all of🅐the crystal,⭍but you stopped🅐them, and that⭍is the🅐important part.🅐")
 
 SCRIPT_0E_7051::
@@ -2427,23 +2427,23 @@ ACTORSCRIPT0_0E_729D::
     End()
 
 SCRIPT_0E_7304::
-    SetByte(RAM_00_A134, $05)
+    SetByte(xCurrentZone, $05)
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_730C::
-    SetByte(RAM_00_A134, $04)
+    SetByte(xCurrentZone, $04)
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_7314::
-    SetByte(RAM_00_A134, $01)
+    SetByte(xCurrentZone, $01)
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_731C::
-    SetByte(RAM_00_A134, $03)
+    SetByte(xCurrentZone, $03)
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_7324::
-    SetByte(RAM_00_A134, $02)
+    SetByte(xCurrentZone, $02)
     LongJump(SCRIPT_0E_732C)
 
 SCRIPT_0E_732C::
@@ -2558,7 +2558,7 @@ SCRIPT_0E_74A5::
 
 SCRIPT_0E_74F1::
     StartSong(SONGID_Parathin)
-    SetByte(RAM_00_A134, $0A)
+    SetByte(xCurrentZone, $0A)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)

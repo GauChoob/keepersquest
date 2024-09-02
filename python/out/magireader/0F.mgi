@@ -322,9 +322,9 @@ SCRIPT_0F_44AA::
 
 SCRIPT_0F_44C4::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A138, #(c[xVARBYTE_00_A138] + c1)#)
-    SetByte(RAM_00_A135, $01)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $01)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_0F_44FA)
         Case(1, SCRIPT_0F_44FE)
         Case(2, SCRIPT_0F_450B)
@@ -335,7 +335,7 @@ SCRIPT_0F_44C4::
     LongJump(SCRIPT_0F_4518)
 
 SCRIPT_0F_44FA::
-    SetByte(MATHADDRESS_00_A136, $01)
+    SetByte(xWandCrystalChoice, $01)
 
 SCRIPT_0F_44FE::
     SceneNew()
@@ -875,7 +875,7 @@ SCRIPT_0F_5134::
     SetCamera($0E, $10)
     PalClearAnim(0, 16, WHITE_A)
     SceneReady()
-    SetByte(RAM_00_A134, $01)
+    SetByte(xCurrentZone, $01)
     PalFadeAnimToBase(2, $20, 0, 16)
     End()
 
@@ -1376,9 +1376,9 @@ ACTORSCRIPT0_0F_596A::
 
 SCRIPT_0F_5979::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A138, #(c[xVARBYTE_00_A138] + c1)#)
-    SetByte(RAM_00_A135, $04)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld1_SecretsCompleted, #(c[xOverworld1_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $04)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_0F_59AF)
         Case(1, SCRIPT_0F_59B3)
         Case(2, SCRIPT_0F_59C8)
@@ -1389,7 +1389,7 @@ SCRIPT_0F_5979::
     LongJump(SCRIPT_0F_59DD)
 
 SCRIPT_0F_59AF::
-    SetByte(MATHADDRESS_00_A136, $01)
+    SetByte(xWandCrystalChoice, $01)
 
 SCRIPT_0F_59B3::
     SceneNew()
@@ -1488,7 +1488,7 @@ ACTORSCRIPT0_0F_5B00::
         ScriptDelay(SCRIPT_14_5C5D, 16)
         ScriptDelay(SCRIPT_14_5DAB, 32)
     }
-    SetByte(RAM_00_A134, $04)
+    SetByte(xCurrentZone, $04)
     SetScriptText(SCRIPT_0B_6D69)
     WaitEventMaster(1)
     ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
@@ -1625,7 +1625,7 @@ SCRIPT_0F_5CEB::
 
 SCRIPT_0F_5CFE::
     StartSong(SONGID_Shadow_Geyser)
-    SetByte(RAM_00_A134, $04)
+    SetByte(xCurrentZone, $04)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)
@@ -2208,7 +2208,7 @@ Script_Naroom_Puzzle4_Complete::
     LongJump(Script_Naroom_CompletedFirstTime)
 
 Script_Naroom_Puzzle4_SecretComplete::
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_0F_698E)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_0F_698E)
     LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000001) == c0)#, Script_Naroom_SecretCompletedFirstTimeCutscene)
 
 SCRIPT_0F_698E::

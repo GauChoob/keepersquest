@@ -33,8 +33,12 @@ xNumberOfSaves:
 
     ;ds $A018 - @
 xGamestate_RAM_NEW_GAME_START::
-
-    ds $A01B - @
+    ds 1
+    ;ds $A019 - @
+    ds 1
+    ;ds $A01A - @
+    ds 1
+    ;ds $A01B - @
 xInventory_Rings:
     ds 10
     ;ds $A025 - @
@@ -64,10 +68,14 @@ xBits_Puzzle_Bits2::
     ds 1
     ;ds $A02A - @
 xBits_Puzzle_Bits3::
+    ; Bograth_Puzzle2 & Bograth_Puzzle4:
+    ;   0: Hotspot script is running to create holes
+    ;   1: Actor script is running to create holes
+    ;   
     ds 1
     ;ds $A02B - @
-xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret::
-    ; 0 = Multi-use, depends on the puzzle
+xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret::
+    ; 0 = Multi-use, depends on the puzzle TODO
     ; 1 = Start Screen secret unlocked
     ; 2 = Set to disable tile copying (when puzzle is cancelled or finished)
     ; 3 = Start Screen preview - disable the fade from white to the start screen (set after playing a demo scene when going back to start screen)
@@ -84,8 +92,8 @@ xBits_Puzzle_Bits5_Chicken_Ormagon::
     ; 3 = Talked to Blu at his house (he has fungus)
     ; 4 = Got fungus Specimen from Blu's house (requires Specimen Jar & Trophy)
     ; 5 = Talked to Bo'Ahsa at her house
-    ; 6 = Got Fungicide from Bo'Ahsa
-    ; 7 = Encountered Ormagon at Obgren's house
+    ; 6 = Got Fungicide from Bo'Ahsa (requires fungus Specimen)
+    ; 7 = Encountered Ormagon at Obgren's house (requires Fungicide)
     ds 1
     ;ds $A02D - @
 xBits_Puzzle_Bits6_Ormagon::
@@ -222,7 +230,7 @@ xBits_Core::
 ; unused
     ds 9
 
-    ds $A046 - @
+    ;ds $A046 - @
 xBits_ZonesCompleted_1::
     ; These bits are sort of duplicated from above, but in this case
     ; are used to determine the cutscenes that play after a zone is completed (puzzle 4)
@@ -286,7 +294,7 @@ xBits_Secrets_2::
 ; Unused space
     ds (xScript_SaveBits + $FF) - @
 
-    ds $A127 - @
+    ;ds $A127 - @
 xScript_SaveVars::
 xdResh_Puzzle5_PreviousChunkID::
     ; dResh_Puzzle5 = The ID of the chunk being erased
@@ -294,7 +302,7 @@ xdResh_Puzzle5_PreviousChunkID::
     ; Core_Puzzle2 = ?deprecated
     ds 1
     ;ds $A128 - @
-xPuzzle_SwitchCounter_Thirst::
+xPuzzle_Misc_1::
     ; dResh_Puzzle2 & Paradwyn_Puzzle3 & Bograth_Puzzle2 = Number of switches activated (0-4) for secret
     ; Core_Puzzle1 & Core_Puzzle4 = Number of switches activated from the sets of 3 (0-3)
     ; dResh_Puzzle5 = Thirst = 1-14
@@ -310,26 +318,140 @@ xDeprecated::
     ; Underneath_Puzzle4 - deprecated?
     ds 1
 
-    ; unused puzzle bytes?
+; unused puzzle bytes
+    ds 7
 
-    ds $A132 - @
-xNumberOfAttempts:
+    ;ds $A132 - @
+xNumberOfAttempts::
+    ; Number of attempts for each puzzle
+    ; Number of pellets collected in Turret minigame
     ds 1
     ;ds $A133 - @
-xPuzzleCounter:
+xPuzzle_Misc_2::
     ; dResh_Puzzle2 = Thirst = 1-14
     ; dResh_Puzzle5 = The ID of the chunk being drawn
+    ; Paradwyn_Puzzle5 = The Trigger # of the switch that was triggered (1-6) - value is compared to xPuzzle_SwitchCounter_Thirst
+    ; Core_Puzzle5 = Number of switches activated (0-4)
+    ; Core_Puzzle1 & Core_Puzzle4 = A sum calculated to determine if the 3 switches were selected in order
+    ;   Core_Puzzle4:
+    ;          1st 2nd 3rd (xPuzzle_Misc_1)
+    ;       0: +1  +10  0
+    ;       1: +2  +20  0
+    ;       2: +3  +30  0
+    ;       Outcomes:
+    ;           012 = Allows you to path back
+    ;           021 = Sets xBits_Puzzle_Bits2[6] - related to disabling the end turrets, 2nd and 4th row?
+    ;           102 = Sets xBits_Puzzle_Bits2[7] - related to disabling the end turrets, 1st and 3rd and 5th row?
+    ;           Other = 3 Lasers
+    ; Core_Puzzle1 = After the first part is done, ID of the selected switch (1-3)
+    ; Orothe_Puzzle1, Orothe_Puzzle2, Orothe_Puzzle3, Orothe_Puzzle4, Orothe_Puzzle5 = Number of bubbles
+    ; Bograth_Puzzle2 & Bograth_Puzzle4 = Counter of number of mud triggered, to determine where to place holes (0-7)
+    ;   0 North
+    ;   1 East + West
+    ;   2 East
+    ;   3 North + South
+    ;   4 South
+    ;   5 East + West
+    ;   6 West
+    ;   7 North + South
     ds 1
     ;ds $A134 - @
+xCurrentZone::
+    ; Salafy's current location
+    ; Seems to be write-only? Deprecated?
+    ; 1 = Naroom
+    ; 2 = Underneath
+    ; 3 = Cald
+    ; 4 = Orothe
+    ; 5 = Arderial
+    ; 6 = Weave
+    ; 7 = dResh
+    ; 8 = KybarsTeeth
+    ; 9 = Bograth
+    ; A = Paradwyn
+    ; B = Core
+    ds 1
     ;ds $A135 - @
+xZoneToLoad::
+    ; The main zone to load next
+    ; Not fully investigated but I presume this is for after secret cutscenes
+    ; 1 = Naroom
+    ; 2 = Underneath
+    ; 3 = Cald
+    ; 4 = Orothe
+    ; 5 = Arderial
+    ; 6 = Weave
+    ; 7 = dResh
+    ; 8 = KybarsTeeth
+    ; 9 = Bograth
+    ; A = Paradwyn
+    ; B = Core
+    ds 1
     ;ds $A136 - @
+xStaffOfHyrenQuest::
+    ; 0 = Started game. Found no pieces of anything
+    ; 1 = Found 1 Wand piece, and continuing on wand quest
+    ; 2 = Chose Crystal after finding wand piece (do Overworld_2 before Overworld_1)
+    ; 3 = Found 0-4 wand pieces (reset back to 0), and then found at least 1 crystal in Overworld_2
+    ; 4 = Finished game (credits) - disables all cutscenes pretty much
+    ; What changes:
+    ;   Secret cutscenes
+    ;   Dialogue with Eidon/Yaki with finding the first/last secret of 5
+    ;   Arderial intro:
+    ;       Slightly different dialogue if 2 because already have wings
+    ;   Arderial end branches:
+    ;       2 and found all 10 secrets = Go to Core, only Salafy can enter because she has Crystal
+    ;       2 and did not find all secrets = Glade Keeper ceremony (no Core)
+    ;       Everything else = Go to Weave
+    ;   Weave intro:
+    ;       Slightly different dialogue:
+    ;           0 = No extra dialogue
+    ;           1 and found first 5 secrets = Find the crystal!
+    ;           1 and did not find all 5 secrets = Reset xStaffOfHyrenQuest to 0 (chance at 3)
+    ;           2 = Get wings
+    ;   Paradwyn end branches:
+    ;       1 and found all 10 secrets = Go to Core, only Salafy can enter because Staff of Hyren
+    ;       2 = Back to Underneath
+    ;       3 and found last 5 secrets = Go to Core, only Salafy can enter because she did so many mazes
+    ;       Everything else = Glade Keeper ceremony (no Core)
+    ds 1
 
+; unused
+    ds 1
     ;ds $A138 - @
+xOverworld1_SecretsCompleted::
+    ; Number of secrets completed among Underneath, Cald, Naroom, Orothe, Arderial (0-5)
+    ds 1
     ;ds $A139 - @
+xOverworld2_SecretsCompleted::
+    ; Number of secrets completed among Weave, dResh, KybarsTeeth, Bograth, Paradwyn (0-5)
+    ds 1
     ;ds $A13A - @
+xOverworld1_SecretsOpened::
+    ; Number of secrets revealed among the first 5 zones with Yaki (0-5)
+    ; Used to change Yaki's dialogue only
+    ds 1
     ;ds $A13B - @
+xOverworld2_SecretsOpened::
+    ; Number of secrets revealed among the last 6 zones with Eidon, including the Core (0-6)
+    ; Used to change Eidon's dialogue
+    ds 1
     ;ds $A13C - @
+xPuzzle_Misc_3_A::
+    ; Core_Puzzle4 = Set to disable laser maze (once you clear it)
+    ; Bograth_Puzzle4 = The ID (1-3) of one of the 3 switches at the end. Then calculated into a sum % 9 to determine how to change the 3x3 pit
+    ;   Sum = xPuzzle_Misc_3_A[1-3] + xPuzzle_Misc_3_B[0-9] (modulo so between 1-9)
+    ;   Toggle the tile of the sum
+    ;       123
+    ;       456
+    ;       789
+    ; Fastest strategy could be to hit Left, Right, Left, Right?
+    ds 1
     ;ds $A13D - @
+xPuzzle_Misc_3_B::
+    ; Core_Puzzle4 = Set to activate laser maze (once you enter it)
+    ; Bograth_Puzzle4 = Total number of times switches pressed, modulo 9
+    ds 1
 
 
     ds $A159 - @

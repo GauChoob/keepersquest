@@ -31,7 +31,7 @@ Script_Orothe_Puzzle1_SecretComplete::
     OrByte(xBits_Orothe, %00000001)
     OrByte(xBits_Orothe, %00100000)
     OrByte(xBits_Secrets_1, %00001000)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Orothe_Puzzle1_SecretComplete)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Orothe_Puzzle1_SecretComplete)
     LongJump(Script_Orothe_SecretCompletedFirstTime)
 
 SCRIPT_17_40EB::
@@ -87,9 +87,9 @@ Script_Orothe_Puzzle1_Again::
     LoadSolidHotspot(SolidHotspot_Orothe_Puzzle1)
     ThatInit(0, AI_Hero, $1E, $15, $D366, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $1E, $13, $D316, $00, ACTORSCRIPT0_11_7279, Actor_RestoreState)
-    ThatInit(3, Call_001_4AF8, $1D, $1B, $D455, $0F, SCRIPT_11_72FB, Actor_RestoreState)
-    ThatInit(4, Call_001_4AF8, $1F, $05, $D0E7, $0F, SCRIPT_11_72FB, Actor_RestoreState)
-    ThatInit(5, Call_001_4AF8, $22, $25, $D5EA, $0F, SCRIPT_11_72FB, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $1D, $1B, $D455, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $1F, $05, $D0E7, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
+    ThatInit(5, Call_001_4AF8, $22, $25, $D5EA, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
     ThatInit(6, Call_001_4AF8, $15, $17, $D3AD, $12, ACTORSCRIPT0_11_7476, Actor_RestoreState)
     ThatLoc(6, $10, $00, $15, $17, $D3AD)
     ThatStart(0)
@@ -109,7 +109,7 @@ Script_Orothe_Puzzle1_Again::
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111011)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits2, %01111111)
     AndByte(xBits_Puzzle_Bits2, %10111111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_17_4210)
@@ -265,10 +265,10 @@ SolidHotspot_Orothe_Puzzle1_0::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%01000000)#, SCRIPT_17_4687)
     StartSFX0(SFXID_Dig)
     LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits2], c%10000000)#, SCRIPT_17_4235)
-    LongJumpIf(#(c[xPuzzleCounter] < c1)#, SCRIPT_17_4235)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] - c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_2] < c1)#, SCRIPT_17_4235)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] - c1)#)
     OrByte(xBits_Puzzle_Bits2, %01000000)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_4621)
         Case(1, SCRIPT_17_4627)
         Case(2, SCRIPT_17_462D)
@@ -343,7 +343,7 @@ SCRIPT_17_469E::
 Hotspot_Orothe_Puzzle1_7::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000001)#, SCRIPT_17_46C7)
     OrByte(xBits_Puzzle_Bits3, %00000001)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(3)
     LongJump(SCRIPT_17_4957)
 
@@ -353,7 +353,7 @@ SCRIPT_17_46C7::
 Hotspot_Orothe_Puzzle1_8::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000010)#, SCRIPT_17_46E3)
     OrByte(xBits_Puzzle_Bits3, %00000010)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(4)
     LongJump(SCRIPT_17_4957)
 
@@ -363,7 +363,7 @@ SCRIPT_17_46E3::
 Hotspot_Orothe_Puzzle1_9::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000100)#, SCRIPT_17_46FF)
     OrByte(xBits_Puzzle_Bits3, %00000100)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(5)
     LongJump(SCRIPT_17_4957)
 
@@ -430,10 +430,10 @@ Script_Orothe_Puzzle2_Again::
     ThatInit(7, AI_01_70E1, $19, $3E, $DF99, $00, ACTORSCRIPT0_17_492D, ACTORSCRIPT1_17_48F7)
     ThatInit(9, AI_01_70E1, $1C, $3E, $DF9C, $00, ACTORSCRIPT0_17_4942, ACTORSCRIPT1_17_48F7)
     ThatInit(10, Call_001_4AF8, $10, $0F, $D3D0, $09, ACTORSCRIPT0_11_7279, Actor_Null)
-    ThatInit(11, Call_001_4AF8, $18, $0F, $D3D8, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(12, Call_001_4AF8, $21, $12, $D4A1, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(13, Call_001_4AF8, $10, $2E, $DB90, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(14, Call_001_4AF8, $08, $34, $DD08, $0F, SCRIPT_11_72FB, Actor_Null)
+    ThatInit(11, Call_001_4AF8, $18, $0F, $D3D8, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(12, Call_001_4AF8, $21, $12, $D4A1, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(13, Call_001_4AF8, $10, $2E, $DB90, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(14, Call_001_4AF8, $08, $34, $DD08, $0F, Sprite_Anim_Pellet, Actor_Null)
     ThatStart(0)
     ThatStart(3)
     ThatStart(4)
@@ -453,7 +453,7 @@ Script_Orothe_Puzzle2_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits2, %01111111)
     AndByte(xBits_Puzzle_Bits2, %10111111)
     AndByte(xBits_Puzzle_Bits1, %11111110)
@@ -513,7 +513,7 @@ ACTORSCRIPT0_17_4942::
 
 SCRIPT_17_4957::
     StartSFX0(SFXID_Jump)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(1, SCRIPT_17_4973)
         Case(2, SCRIPT_17_497F)
         Case(3, SCRIPT_17_498B)
@@ -544,7 +544,7 @@ SCRIPT_17_4997::
 Hotspot_Orothe_Puzzle2_0::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000001)#, SCRIPT_17_49BE)
     OrByte(xBits_Puzzle_Bits1, %00000001)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(11)
     LongJump(SCRIPT_17_4957)
 
@@ -554,7 +554,7 @@ SCRIPT_17_49BE::
 Hotspot_Orothe_Puzzle2_A::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000010)#, SCRIPT_17_49DA)
     OrByte(xBits_Puzzle_Bits1, %00000010)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(12)
     LongJump(SCRIPT_17_4957)
 
@@ -564,7 +564,7 @@ SCRIPT_17_49DA::
 Hotspot_Orothe_Puzzle2_B::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00000100)#, SCRIPT_17_49F6)
     OrByte(xBits_Puzzle_Bits1, %00000100)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(13)
     LongJump(SCRIPT_17_4957)
 
@@ -574,7 +574,7 @@ SCRIPT_17_49F6::
 Hotspot_Orothe_Puzzle2_C::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits1], c%00001000)#, SCRIPT_17_4A12)
     OrByte(xBits_Puzzle_Bits1, %00001000)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(14)
     LongJump(SCRIPT_17_4957)
 
@@ -712,10 +712,10 @@ SolidHotspot_Orothe_Puzzle2_0::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%01000000)#, SCRIPT_17_4D65)
     StartSFX0(SFXID_Dig)
     LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits2], c%10000000)#, SCRIPT_17_4CAA)
-    LongJumpIf(#(c[xPuzzleCounter] < c1)#, SCRIPT_17_4CAA)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] - c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_2] < c1)#, SCRIPT_17_4CAA)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] - c1)#)
     OrByte(xBits_Puzzle_Bits2, %01000000)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_4CFF)
         Case(1, SCRIPT_17_4D05)
         Case(2, SCRIPT_17_4D0B)
@@ -787,9 +787,9 @@ Script_Orothe_Puzzle3_Again::
     LoadSolidHotspot(SolidHotspot_Orothe_Puzzle3)
     ThatInit(0, AI_Hero, $03, $03, $D0C3, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(10, Call_001_4AF8, $03, $02, $D083, $09, ACTORSCRIPT0_11_7279, Actor_Null)
-    ThatInit(11, Call_001_4AF8, $02, $04, $D102, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(12, Call_001_4AF8, $04, $05, $D144, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(13, Call_001_4AF8, $39, $29, $DA79, $0F, SCRIPT_11_72FB, Actor_Null)
+    ThatInit(11, Call_001_4AF8, $02, $04, $D102, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(12, Call_001_4AF8, $04, $05, $D144, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(13, Call_001_4AF8, $39, $29, $DA79, $0F, Sprite_Anim_Pellet, Actor_Null)
     ThatStart(0)
     ThatStart(10)
     ThatStart(11)
@@ -810,7 +810,7 @@ Script_Orothe_Puzzle3_Again::
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111011)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits2, %01111111)
     AndByte(xBits_Puzzle_Bits2, %10111111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_17_4E2C)
@@ -953,10 +953,10 @@ SolidHotspot_Orothe_Puzzle3_0::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%01000000)#, SCRIPT_17_51E1)
     StartSFX0(SFXID_Dig)
     LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits2], c%10000000)#, SCRIPT_17_4E51)
-    LongJumpIf(#(c[xPuzzleCounter] < c1)#, SCRIPT_17_4E51)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] - c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_2] < c1)#, SCRIPT_17_4E51)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] - c1)#)
     OrByte(xBits_Puzzle_Bits2, %01000000)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_517B)
         Case(1, SCRIPT_17_5181)
         Case(2, SCRIPT_17_5187)
@@ -1030,7 +1030,7 @@ SCRIPT_17_51F1::
 Hotspot_Orothe_Puzzle3_1::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000001)#, SCRIPT_17_521A)
     OrByte(xBits_Puzzle_Bits3, %00000001)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(11)
     LongJump(SCRIPT_17_4957)
 
@@ -1040,7 +1040,7 @@ SCRIPT_17_521A::
 Hotspot_Orothe_Puzzle3_2::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000010)#, SCRIPT_17_5236)
     OrByte(xBits_Puzzle_Bits3, %00000010)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(12)
     LongJump(SCRIPT_17_4957)
 
@@ -1050,7 +1050,7 @@ SCRIPT_17_5236::
 Hotspot_Orothe_Puzzle3_4::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000100)#, SCRIPT_17_5252)
     OrByte(xBits_Puzzle_Bits3, %00000100)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(13)
     LongJump(SCRIPT_17_4957)
 
@@ -1071,9 +1071,9 @@ Script_Orothe_Puzzle4_Again::
     LoadSolidHotspot(SolidHotspot_Orothe_Puzzle4)
     ThatInit(0, AI_Hero, $0F, $0D, $D1AF, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(18, Call_001_4AF8, $03, $02, $D043, $09, ACTORSCRIPT0_11_7279, Actor_Null)
-    ThatInit(11, Call_001_4AF8, $02, $04, $D082, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(12, Call_001_4AF8, $04, $05, $D0A4, $0F, SCRIPT_11_72FB, Actor_Null)
-    ThatInit(13, Call_001_4AF8, $39, $29, $D559, $0F, SCRIPT_11_72FB, Actor_Null)
+    ThatInit(11, Call_001_4AF8, $02, $04, $D082, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(12, Call_001_4AF8, $04, $05, $D0A4, $0F, Sprite_Anim_Pellet, Actor_Null)
+    ThatInit(13, Call_001_4AF8, $39, $29, $D559, $0F, Sprite_Anim_Pellet, Actor_Null)
     ThatStart(0)
     LoadSingleBitmap($09, BITMAP_0D_46D0, $8000, $00)
     LoadSingleBitmap($06, BITMAP_0D_4040, $8090, $00)
@@ -1091,7 +1091,7 @@ Script_Orothe_Puzzle4_Again::
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111011)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits2, %01111111)
     AndByte(xBits_Puzzle_Bits2, %10111111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_17_5315)
@@ -1248,10 +1248,10 @@ SolidHotspot_Orothe_Puzzle4_0::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%01000000)#, SCRIPT_17_56DC)
     StartSFX0(SFXID_Dig)
     LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits2], c%10000000)#, SCRIPT_17_533A)
-    LongJumpIf(#(c[xPuzzleCounter] < c1)#, SCRIPT_17_533A)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] - c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_2] < c1)#, SCRIPT_17_533A)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] - c1)#)
     OrByte(xBits_Puzzle_Bits2, %01000000)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_5676)
         Case(1, SCRIPT_17_567C)
         Case(2, SCRIPT_17_5682)
@@ -1325,7 +1325,7 @@ SCRIPT_17_56EC::
 SCRIPT_17_56FA::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000001)#, SCRIPT_17_5715)
     OrByte(xBits_Puzzle_Bits3, %00000001)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(11)
     LongJump(SCRIPT_17_4957)
 
@@ -1335,7 +1335,7 @@ SCRIPT_17_5715::
 SCRIPT_17_5716::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000010)#, SCRIPT_17_5731)
     OrByte(xBits_Puzzle_Bits3, %00000010)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(12)
     LongJump(SCRIPT_17_4957)
 
@@ -1345,7 +1345,7 @@ SCRIPT_17_5731::
 SCRIPT_17_5732::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000100)#, SCRIPT_17_574D)
     OrByte(xBits_Puzzle_Bits3, %00000100)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(13)
     LongJump(SCRIPT_17_4957)
 
@@ -1366,9 +1366,9 @@ Script_Orothe_Puzzle5_Again::
     LoadSolidHotspot(SolidHotspot_Orothe_Puzzle5)
     ThatInit(0, AI_Hero, $25, $20, $D525, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
     ThatInit(2, Call_001_4AF8, $26, $20, $D526, $00, ACTORSCRIPT0_11_7279, Actor_RestoreState)
-    ThatInit(3, Call_001_4AF8, $14, $03, $D08C, $0F, SCRIPT_11_72FB, Actor_RestoreState)
-    ThatInit(4, Call_001_4AF8, $05, $16, $D375, $0F, SCRIPT_11_72FB, Actor_RestoreState)
-    ThatInit(5, Call_001_4AF8, $18, $20, $D518, $0F, SCRIPT_11_72FB, Actor_RestoreState)
+    ThatInit(3, Call_001_4AF8, $14, $03, $D08C, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
+    ThatInit(4, Call_001_4AF8, $05, $16, $D375, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
+    ThatInit(5, Call_001_4AF8, $18, $20, $D518, $0F, Sprite_Anim_Pellet, Actor_RestoreState)
     ThatStart(0)
     ThatStart(2)
     ThatStart(3)
@@ -1388,7 +1388,7 @@ Script_Orothe_Puzzle5_Again::
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111011)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits2, %01111111)
     AndByte(xBits_Puzzle_Bits2, %10111111)
     SetStartButtonScript(SCRIPT_STARTBUTTON_17_580C)
@@ -1517,10 +1517,10 @@ SolidHotspot_Orothe_Puzzle5_0::
     StartSFX0(SFXID_EnemyHit)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits2], c%01000000)#, SCRIPT_17_5BA7)
     LongJumpIf(#not bitmatch(c[xBits_Puzzle_Bits2], c%10000000)#, SCRIPT_17_5831)
-    LongJumpIf(#(c[xPuzzleCounter] < c1)#, SCRIPT_17_5831)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] - c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_2] < c1)#, SCRIPT_17_5831)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] - c1)#)
     OrByte(xBits_Puzzle_Bits2, %01000000)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_5B14)
         Case(1, SCRIPT_17_5B1A)
         Case(2, SCRIPT_17_5B20)
@@ -1610,21 +1610,21 @@ SCRIPT_17_5BB7::
 Hotspot_Orothe_Puzzle5_3::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000001)#, Actor_Null)
     OrByte(xBits_Puzzle_Bits3, %00000001)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(3)
     LongJump(SCRIPT_17_4957)
 
 Hotspot_Orothe_Puzzle5_4::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000010)#, Actor_Null)
     OrByte(xBits_Puzzle_Bits3, %00000010)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(4)
     LongJump(SCRIPT_17_4957)
 
 Hotspot_Orothe_Puzzle5_5::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000100)#, Actor_Null)
     OrByte(xBits_Puzzle_Bits3, %00000100)
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     ThatDelete(5)
     LongJump(SCRIPT_17_4957)
 
@@ -1681,7 +1681,7 @@ Script_Bograth_Puzzle2_SecretComplete::
     OrByte(xBits_Bograth, %00000010)
     OrByte(xBits_Bograth, %00100000)
     OrByte(xBits_Secrets_2, %00000001)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Bograth_Puzzle2_SecretComplete)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Bograth_Puzzle2_SecretComplete)
     LongJump(Script_Bograth_SecretCompletedFirstTime)
 
 SCRIPT_17_5CA6::
@@ -2410,8 +2410,8 @@ Script_Bograth_Puzzle2_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    SetByte(xPuzzleCounter, $00)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $00)
+    SetByte(xPuzzle_Misc_2, $00)
+    SetByte(xPuzzle_Misc_1, $00)
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111011)
@@ -2456,7 +2456,7 @@ SCRIPT_17_65D0::
 Hotspot_Bograth_Puzzle24_0::
     ThatDelete(0)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits3], c%00000100)#, SCRIPT_17_72AE)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == c4)#, SCRIPT_17_678E)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == c4)#, SCRIPT_17_678E)
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     Write("You found⭍the exit!🅐")
@@ -2586,7 +2586,7 @@ ACTORSCRIPT0_17_6973::
     ThisTeleportTo(0)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_SPACE, $76)
-    Switch(#c[xPuzzleCounter]#) {
+    Switch(#c[xPuzzle_Misc_2]#) {
         Case(0, SCRIPT_17_69BF)
         Case(1, SCRIPT_17_69DA)
         Case(2, SCRIPT_17_6A0C)
@@ -2644,18 +2644,18 @@ SCRIPT_17_6A74::
     LongJump(SCRIPT_17_6A8F)
 
 SCRIPT_17_6A8F::
-    VarByteExpr(xPuzzleCounter, #(c[xPuzzleCounter] + c1)#)
+    VarByteExpr(xPuzzle_Misc_2, #(c[xPuzzle_Misc_2] + c1)#)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11011111)
     AndByte(xBits_Puzzle_Bits3, %10111111)
     AndByte(xBits_Puzzle_Bits3, %01111111)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111110)
-    LongJumpIf(#(c[xPuzzleCounter] == c8)#, SCRIPT_17_6ABB)
+    LongJumpIf(#(c[xPuzzle_Misc_2] == c8)#, SCRIPT_17_6ABB)
     ThisDelete()
 
 SCRIPT_17_6ABB::
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     ThisDelete()
 
 Trigger_Bograth_Puzzle2_0::
@@ -2680,8 +2680,8 @@ Trigger_Bograth_Puzzle2_3::
 SCRIPT_17_6AFC::
     SetScriptScroll(SCRIPT_19_4690)
     WaitEventText(2)
-    VarByteExpr(xPuzzle_SwitchCounter_Thirst, #(c[xPuzzle_SwitchCounter_Thirst] + c1)#)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == c4)#, SCRIPT_19_46A7)
+    VarByteExpr(xPuzzle_Misc_1, #(c[xPuzzle_Misc_1] + c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == c4)#, SCRIPT_19_46A7)
     End()
 
 Script_Bograth_Puzzle3_First::
@@ -3239,9 +3239,9 @@ Script_Bograth_Puzzle4_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_2, $00)
     SetByte(xdResh_Puzzle5_PreviousChunkID, $00)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $00)
+    SetByte(xPuzzle_Misc_1, $00)
     AndByte(xBits_Puzzle_Bits3, %11111110)
     AndByte(xBits_Puzzle_Bits3, %11111101)
     OrByte(xBits_Puzzle_Bits3, %00000100)
@@ -3262,8 +3262,8 @@ Script_Bograth_Puzzle4_Again::
     AndByte(xBits_Puzzle_Bits3, %10111111)
     AndByte(xBits_Puzzle_Bits3, %01111111)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret, %11111110)
-    SetByte(RAM_00_A13C, $00)
-    SetByte(RAM_00_A13D, $00)
+    SetByte(xPuzzle_Misc_3_A, $00)
+    SetByte(xPuzzle_Misc_3_B, $00)
     SetStartButtonScript(SCRIPT_STARTBUTTON_17_7285)
     End()
 
@@ -3455,8 +3455,8 @@ Trigger_Bograth_Puzzle4_A::
 SCRIPT_17_7698::
     SetScriptScroll(SCRIPT_19_4690)
     WaitEventText(2)
-    VarByteExpr(xPuzzle_SwitchCounter_Thirst, #(c[xPuzzle_SwitchCounter_Thirst] + c1)#)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == c4)#, SCRIPT_17_76B5)
+    VarByteExpr(xPuzzle_Misc_1, #(c[xPuzzle_Misc_1] + c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == c4)#, SCRIPT_17_76B5)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 SCRIPT_17_76B5::
@@ -3483,7 +3483,7 @@ Trigger_Bograth_Puzzle4_C::
     TransplantTile($24, $0A, $D712, COLLID_TR0D, $FF)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     TransplantTile($24, $0C, $D714, COLLID_TR0E, $FF)
-    SetByte(RAM_00_A13C, $01)
+    SetByte(xPuzzle_Misc_3_A, $01)
     LongJump(SCRIPT_17_77A4)
 
 Trigger_Bograth_Puzzle4_D::
@@ -3493,7 +3493,7 @@ Trigger_Bograth_Puzzle4_D::
     TransplantTile($24, $0C, $D714, COLLID_TR0E, $FF)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     TransplantTile($24, $08, $D710, COLLID_TR0C, $FF)
-    SetByte(RAM_00_A13C, $02)
+    SetByte(xPuzzle_Misc_3_A, $02)
     LongJump(SCRIPT_17_77A4)
 
 Trigger_Bograth_Puzzle4_E::
@@ -3503,18 +3503,18 @@ Trigger_Bograth_Puzzle4_E::
     TransplantTile($24, $08, $D710, COLLID_TR0C, $FF)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     TransplantTile($24, $0A, $D712, COLLID_TR0D, $FF)
-    SetByte(RAM_00_A13C, $03)
+    SetByte(xPuzzle_Misc_3_A, $03)
     LongJump(SCRIPT_17_77A4)
 
 SCRIPT_17_77A4::
-    VarByteExpr(RAM_00_A13D, #(c[RAM_00_A13D] + c1)#)
-    LongJumpIf(#(c[RAM_00_A13D] == c9)#, SCRIPT_17_7800)
+    VarByteExpr(xPuzzle_Misc_3_B, #(c[xPuzzle_Misc_3_B] + c1)#)
+    LongJumpIf(#(c[xPuzzle_Misc_3_B] == c9)#, SCRIPT_17_7800)
 
 SCRIPT_17_77B7::
-    VarByteExpr(RAM_00_A13C, #(c[RAM_00_A13C] + c[RAM_00_A13D])#)
+    VarByteExpr(xPuzzle_Misc_3_A, #(c[xPuzzle_Misc_3_A] + c[xPuzzle_Misc_3_B])#)
 
 SCRIPT_17_77C1::
-    Switch(#c[RAM_00_A13C]#) {
+    Switch(#c[xPuzzle_Misc_3_A]#) {
         Case(1, SCRIPT_17_7808)
         Case(2, SCRIPT_17_783E)
         Case(3, SCRIPT_17_7874)
@@ -3525,11 +3525,11 @@ SCRIPT_17_77C1::
         Case(8, SCRIPT_17_7982)
         Case(9, SCRIPT_17_79B8)
     }
-    VarByteExpr(RAM_00_A13C, #(c[RAM_00_A13C] - c9)#)
+    VarByteExpr(xPuzzle_Misc_3_A, #(c[xPuzzle_Misc_3_A] - c9)#)
     LongJump(SCRIPT_17_77C1)
 
 SCRIPT_17_7800::
-    SetByte(RAM_00_A13D, $00)
+    SetByte(xPuzzle_Misc_3_B, $00)
     LongJump(SCRIPT_17_77B7)
 
 SCRIPT_17_7808::

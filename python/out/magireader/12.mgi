@@ -61,7 +61,7 @@ Script_Arderial_Puzzle3_SecretComplete::
     OrByte(xBits_Arderial, %00100000)
     OrByte(xBits_Arderial, %00001000)
     OrByte(xBits_Secrets_1, %00010000)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Arderial_Puzzle3_SecretComplete)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Arderial_Puzzle3_SecretComplete)
     LongJump(Script_Arderial_SecretCompletedFirstTime)
 
 SCRIPT_12_4095::

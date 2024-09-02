@@ -127,9 +127,9 @@ ACTORSCRIPT0_08_6D73::
 
 SCRIPT_08_6D82::
     StartSong(SONGID_Mischief)
-    VarByteExpr(xVARBYTE_00_A139, #(c[xVARBYTE_00_A139] + c1)#)
-    SetByte(RAM_00_A135, $09)
-    Switch(#c[MATHADDRESS_00_A136]#) {
+    VarByteExpr(xOverworld2_SecretsCompleted, #(c[xOverworld2_SecretsCompleted] + c1)#)
+    SetByte(xZoneToLoad, $09)
+    Switch(#c[xWandCrystalChoice]#) {
         Case(0, SCRIPT_08_6DB8)
         Case(1, SCRIPT_08_6DC0)
         Case(2, SCRIPT_08_6DD5)
@@ -140,7 +140,7 @@ SCRIPT_08_6D82::
     LongJump(SCRIPT_08_6DFF)
 
 SCRIPT_08_6DB8::
-    SetByte(MATHADDRESS_00_A136, $03)
+    SetByte(xWandCrystalChoice, $03)
     LongJump(SCRIPT_08_6DEA)
 
 SCRIPT_08_6DC0::
@@ -248,7 +248,7 @@ ACTORSCRIPT0_08_6F0F::
         ScriptDelay(SCRIPT_14_5C5D, 32)
         ScriptDelay(SCRIPT_14_5DB5, 32)
     }
-    SetByte(RAM_00_A135, $09)
+    SetByte(xZoneToLoad, $09)
     SetScriptText(SCRIPT_0B_6D88)
     WaitEventMaster(1)
     ThisSetAnimSingle(ACTORSCRIPT1_14_5DDD)
@@ -422,7 +422,7 @@ SCRIPT_08_72E1::
 
 SCRIPT_08_72FF::
     StartSong(SONGID_Mushroom_Farm)
-    SetByte(RAM_00_A134, $09)
+    SetByte(xCurrentZone, $09)
     SceneNew()
     SetByte(wScript_StartButtonDisabled, $00)
     SetByte(wScript_TransplantTileDisabled, $00)

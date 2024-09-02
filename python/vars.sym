@@ -9,11 +9,11 @@
 ; Kybar's Teeth
 ; Bograth
 ; Paradwyn
-; Core - No secret?
+; Core
 ; Names of enemies:
 ; Parmalag
-; Wand first: Staff of Hyren to ward off
-; Crystal first: Shield of Hyren
+; Flarp
+; Arbolit
 13:4EAC Scene_Arderial_Puzzle1
 13:4EBB Scene_Arderial_Puzzle2
 ; Order intentionally inverted
@@ -24,7 +24,7 @@
 13:4EF7 Scene_DeveloperRoom
 13:4F06 Scene_StartRoom
 13:4F15 Scene_Turret
-13:4F24 Scene_Naroom_UNK1
+13:4F24 Scene_Naroom_Unused
 13:4F33 Scene_Arderial_Main
 13:4F42 Scene_Arderial_Cutscene
 13:4F51 Scene_Credits
@@ -32,6 +32,7 @@
 ; Puzzle2: If you hit the 4 switches, the end is secret, or else normal
 13:4F6F Scene_Bograth_Puzzle2
 13:4F7E Scene_Bograth_Puzzle3
+; Puzzle4: Optimal strategy at the end: Left Right Left Right
 13:4F8D Scene_Bograth_Puzzle4
 13:4F9C Scene_Bograth_Puzzle5
 13:4FAB Scene_Bograth_Main
@@ -49,7 +50,8 @@
 ; Do bottomleft first
 ; Do bottomright switch: middle/bottom in any order
 ; Hit topright switch then do topleft
-; TODO Secret???
+; After that, for secret:
+;   Set switches 1, 2, 5, 7 to reveal alternative exit
 13:5041 Scene_Core_Puzzle2
 ; Puzzle3:
 ; Right, then Bottom, then only one, Right, Bottom
@@ -85,8 +87,8 @@
 13:50E6 Scene_dResh_Puzzle2
 ; Secret: Head to southeast corner, then northeast corner, then to exit in the north
 13:50F5 Scene_dResh_Puzzle5
-13:5104 Scene_Tavel_EntranceUNK
-13:5113 Scene_Tavel_CaveUNK
+13:5104 Scene_Tavel_Entrance
+13:5113 Scene_Tavel_Cave
 13:5122 Scene_Underneath_Puzzle1_Demo
 13:5131 Scene_Cald_Puzzle4_Demo
 13:5140 Scene_Paradwyn_Main_Demo
@@ -113,8 +115,8 @@
 13:5230 Scene_Naroom_Cutscene
 13:523F Scene_Naroom_Vash
 13:524E Scene_Paradwyn_MainOpen_WIP
-13:525D Scene_Naroom_Glade_UNK
-13:526C Scene_Cald_MainOpen_UNK
+13:525D Scene_Naroom_Glade_Cutscene
+13:526C Scene_Cald_MainOpen_Cutscene
 13:527B Scene_Naroom_Puzzle25_End
 ; Use teleport in south
 ; Switch in bottomleft then topleft = Normal
@@ -199,9 +201,9 @@
 08:60D0 Icon_Orothe_Blu
 08:6260 Icon_Orothe_Arosa
 08:63F0 Icon_KybarsTeeth_Jagt
-08:6580 Icon_Tavel_1
-08:6710 Icon_Tavel_2
-08:68A0 Icon_Tavel_3
+08:6580 Icon_Tavel_Josh
+08:6710 Icon_Tavel_Sly
+08:68A0 Icon_Tavel_Benny
 08:6A30 Icon_Bograth_Obgren
 ;
 ;
@@ -806,8 +808,8 @@
 13:4E4A Trigger_Weave_Main
 13:44AA Hotspot_Core_Main
 13:44C7 Trigger_Core_Main
-13:46CE Hotspot_Tavel_EntranceUNK
-13:46D3 Hotspot_Tavel_CaveUNK
+13:46CE Hotspot_Tavel_Entrance
+13:46D3 Hotspot_Tavel_Cave
 13:46D8 Hotspot_KybarsTeeth_Main
 13:46F5 Trigger_KybarsTeeth_Main
 13:413C Hotspot_StartRoom
@@ -1392,10 +1394,10 @@
 18:5F9D Hotspot_StartRoom_0
 18:5FAF Hotspot_StartRoom_1
 18:5F75 Hotspot_StartRoom_2
-; Hotspot_Tavel_CaveUNK.hs
-14:7BA9 Hotspot_Tavel_CaveUNK_0
-; Hotspot_Tavel_EntranceUNK.hs
-14:79A7 Hotspot_Tavel_EntranceUNK_0
+; Hotspot_Tavel_Cave.hs
+14:7BA9 Hotspot_Tavel_Cave_0
+; Hotspot_Tavel_Entrance.hs
+14:79A7 Hotspot_Tavel_Entrance_0
 ; Hotspot_Turret.hs
 0E:4AC3 Hotspot_Turret_0
 0E:4AC3 Hotspot_Turret_1
@@ -1939,3 +1941,40 @@
 0F:5AA6 Script_Orothe_SecretCompletedFirstTime
 08:6EB5 Script_Bograth_SecretCompletedFirstTime
 09:5B65 Script_Cald_SecretCompletedFirstTime
+;
+;
+11:72FB Sprite_Anim_Pellet
+0E:47AC Script_Turret
+0E:48B8 Actor_TurretController_Control
+0E:490B Actor_TurretController_CollectPellet
+0E:48D5 .SendWest
+0E:48DE .SendEast
+0E:48E7 .SendNorth
+0E:48F0 .SendSouth
+0E:493F Script_Pellet_NewPellet
+0E:4953 Actor_OverlayTimer
+0E:498E Script_Turret_End
+0E:4AD1 Actor_Pellet_RandomLocation
+0E:4AF1 Actor_Pellet_RandomLocation_1
+0E:4AFB Actor_Pellet_RandomLocation_2
+0E:4B05 Actor_Pellet_RandomLocation_3
+0E:4B0F Actor_Pellet_RandomLocation_4
+0E:4B19 Actor_Pellet_RandomLocation_5
+0E:4B23 Actor_Pellet_RandomLocation_6
+0E:4B2D Actor_Pellet_RandomLocation_7
+0E:4B37 Actor_Pellet_RandomLocation_8
+0E:4B41 Actor_Pellet_RandomLocation_9
+0E:4B4B Actor_Pellet_RandomLocation_10
+0E:4B55 Actor_Pellet_Display
+0E:4A6F Script_Turret_255EnergyOverload
+0E:4AA9 Script_Turret_255EnergyOverload_Text
+0E:4A99 Script_Turret_255EnergyOverload_Earthquake
+0E:4A9B .Loop
+0E:4A62 .FirstCompletion
+;
+14:7918 Script_Tavel_Entrance
+14:7B55 Script_Tavel_Cave
+18:5DA8 Script_StartRoom
+18:62D0 Script_Credits_StartRoom
+0E:4710 Script_Credits_BeatGame
+0B:5BE7 Script_Cald_MainOpen_Cutscene

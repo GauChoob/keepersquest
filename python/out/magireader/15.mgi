@@ -41,7 +41,7 @@ SCRIPT_15_4038::
     LongJump(SCRIPT_09_4561)
 
 Script_Underneath_Puzzle4_SecretComplete::
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, SCRIPT_15_4054)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, SCRIPT_15_4054)
     LongJumpIf(#(bitmatch(c[xBits_Secrets_1], c%00000010) == c0)#, Script_Underneath_SecretCompletedFirstTimeCutscene)
 
 SCRIPT_15_4054::
@@ -2304,7 +2304,7 @@ Script_Paradwyn_Puzzle3_SecretComplete::
     OrByte(xBits_Paradwyn, %00000100)
     OrByte(xBits_Paradwyn, %00100000)
     OrByte(xBits_Secrets_2, %00000010)
-    LongJumpIf(#(c[MATHADDRESS_00_A136] == c4)#, Script_Paradwyn_Puzzle3_SecretComplete)
+    LongJumpIf(#(c[xWandCrystalChoice] == c4)#, Script_Paradwyn_Puzzle3_SecretComplete)
     LongJump(Script_Paradwyn_SecretCompletedFirstTime)
 
 SCRIPT_15_5EA3::
@@ -2938,7 +2938,7 @@ Script_Paradwyn_Puzzle3_Again::
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
     AndByte(xBits_Puzzle_Bits1, %11110111)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $00)
+    SetByte(xPuzzle_Misc_1, $00)
     SetStartButtonScript(SCRIPT_STARTBUTTON_15_69A9)
     End()
 
@@ -2965,7 +2965,7 @@ Hotspot_Paradwyn_Puzzle3_2::
 
 Hotspot_Paradwyn_Puzzle3_0::
     ThatDelete(0)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == c4)#, SCRIPT_15_6B77)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == c4)#, SCRIPT_15_6B77)
     StartSong(SONGID_GetItem)
     SetByte(wScript_StartButtonDisabled, $01)
     Write("You found⭍the exit!🅐")
@@ -3053,10 +3053,10 @@ Hotspot_Paradwyn_Puzzle3_1::
     End()
 
 SCRIPT_15_6D0B::
-    VarByteExpr(xPuzzle_SwitchCounter_Thirst, #(c[xPuzzle_SwitchCounter_Thirst] + c1)#)
+    VarByteExpr(xPuzzle_Misc_1, #(c[xPuzzle_Misc_1] + c1)#)
     SetScriptScroll(SCRIPT_19_4690)
     WaitEventText(2)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] != c4)#, SCRIPT_15_6D2A)
+    LongJumpIf(#(c[xPuzzle_Misc_1] != c4)#, SCRIPT_15_6D2A)
     SetScriptScroll(SCRIPT_19_46A7)
     WaitEventText(2)
 
@@ -3138,8 +3138,8 @@ Script_Paradwyn_Puzzle5_Again::
     HeroSetCamera()
     SceneReady()
     SetByte(xHeroAbilities, $05)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $03)
-    SetByte(xPuzzleCounter, $00)
+    SetByte(xPuzzle_Misc_1, $03)
+    SetByte(xPuzzle_Misc_2, $00)
     AndByte(xBits_Puzzle_Bits1, %11111110)
     AndByte(xBits_Puzzle_Bits1, %11111101)
     AndByte(xBits_Puzzle_Bits1, %11111011)
@@ -3313,7 +3313,7 @@ SCRIPT_15_71AB::
 Trigger_Paradwyn_Puzzle5_0::
     TriggerOnce(xBits_Puzzle_Bits1[0], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D242)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $01)
+    SetByte(xPuzzle_Misc_2, $01)
     SetScriptScroll(SCRIPT_15_72C9)
     WaitEventText(2)
     SetScriptScroll(SCRIPT_15_70AF)
@@ -3321,13 +3321,13 @@ Trigger_Paradwyn_Puzzle5_0::
     SetScriptScroll(SCRIPT_15_712D)
     WaitEventText(1)
     SetScriptScroll(SCRIPT_15_7181)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $06)
+    SetByte(xPuzzle_Misc_1, $06)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 Trigger_Paradwyn_Puzzle5_1::
     TriggerOnce(xBits_Puzzle_Bits1[1], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D40E)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $02)
+    SetByte(xPuzzle_Misc_2, $02)
     SetScriptScroll(SCRIPT_15_72C9)
     WaitEventText(2)
     SetScriptScroll(SCRIPT_15_7085)
@@ -3335,13 +3335,13 @@ Trigger_Paradwyn_Puzzle5_1::
     SetScriptScroll(SCRIPT_15_7103)
     WaitEventText(1)
     SetScriptScroll(SCRIPT_15_7157)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $01)
+    SetByte(xPuzzle_Misc_1, $01)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 Trigger_Paradwyn_Puzzle5_2::
     TriggerOnce(xBits_Puzzle_Bits1[2], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D1D8)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $03)
+    SetByte(xPuzzle_Misc_2, $03)
     SetScriptScroll(SCRIPT_15_72C9)
     WaitEventText(2)
     SetScriptScroll(SCRIPT_15_705B)
@@ -3349,13 +3349,13 @@ Trigger_Paradwyn_Puzzle5_2::
     SetScriptScroll(SCRIPT_15_7085)
     WaitEventText(1)
     SetScriptScroll(SCRIPT_15_712D)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $05)
+    SetByte(xPuzzle_Misc_1, $05)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 Trigger_Paradwyn_Puzzle5_3::
     TriggerOnce(xBits_Puzzle_Bits1[3], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D2E7)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $04)
+    SetByte(xPuzzle_Misc_2, $04)
     SetScriptScroll(SCRIPT_15_72C9)
     WaitEventText(2)
     SetScriptScroll(SCRIPT_15_705B)
@@ -3363,13 +3363,13 @@ Trigger_Paradwyn_Puzzle5_3::
     SetScriptScroll(SCRIPT_15_7085)
     WaitEventText(1)
     SetScriptScroll(SCRIPT_15_7157)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $02)
+    SetByte(xPuzzle_Misc_1, $02)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 Trigger_Paradwyn_Puzzle5_4::
     TriggerOnce(xBits_Puzzle_Bits1[4], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D137)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $05)
+    SetByte(xPuzzle_Misc_2, $05)
     SetScriptScroll(SCRIPT_15_72C9)
     WaitEventText(2)
     SetScriptScroll(SCRIPT_15_70AF)
@@ -3377,22 +3377,22 @@ Trigger_Paradwyn_Puzzle5_4::
     SetScriptScroll(SCRIPT_15_70D9)
     WaitEventText(1)
     SetScriptScroll(SCRIPT_15_712D)
-    SetByte(xPuzzle_SwitchCounter_Thirst, $04)
+    SetByte(xPuzzle_Misc_1, $04)
     LongJump(SCRIPT_TRIGGERALREADYON_19_46DC)
 
 Trigger_Paradwyn_Puzzle5_5::
     TriggerOnce(xBits_Puzzle_Bits1[5], SCRIPT_TRIGGERALREADYON_19_46DC, $E8, $D3B6)
     StartSFX0(SFXID_PhysicalAttack)
-    SetByte(xPuzzleCounter, $06)
+    SetByte(xPuzzle_Misc_2, $06)
     SetScriptScroll(SCRIPT_15_7181)
     WaitEventText(1)
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == not c[xPuzzleCounter])#, SCRIPT_19_46C0)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == not c[xPuzzle_Misc_2])#, SCRIPT_19_46C0)
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_Hole_Turret], c%00000100)#, Actor_Null)
     TransplantTile($10, $38, $D438, COLLID_HS00, $DA)
     LongJump(SCRIPT_19_46A7)
 
 SCRIPT_15_72C9::
-    LongJumpIf(#(c[xPuzzle_SwitchCounter_Thirst] == c[xPuzzleCounter])#, SCRIPT_15_72D8)
+    LongJumpIf(#(c[xPuzzle_Misc_1] == c[xPuzzle_Misc_2])#, SCRIPT_15_72D8)
     LongJump(SCRIPT_19_46C0)
 
 SCRIPT_15_72D8::
