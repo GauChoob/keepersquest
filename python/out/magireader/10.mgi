@@ -1944,20 +1944,20 @@ Script_Bograth_Puzzle5_Again::
     LoadScene(Scene_Bograth_Puzzle5)
     LoadHotspots(Hotspot_Bograth_Puzzle5)
     ThatInit(0, AI_Hero, $01, $12, $D169, $00, ACTORSCRIPT0_14_5E57, Actor_RestoreState)
-    ThatInit(3, AI_01_70E1, $05, $11, $D159, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(4, AI_01_70E1, $0A, $10, $D14A, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(5, AI_01_70E1, $0B, $0F, $D137, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(6, AI_01_70E1, $07, $0E, $D11F, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(7, AI_01_70E1, $02, $08, $D0A2, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(8, AI_01_70E1, $01, $05, $D065, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(9, AI_01_70E1, $04, $03, $D040, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(10, AI_01_70E1, $05, $04, $D055, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(11, AI_01_70E1, $0A, $03, $D046, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(18, AI_01_70E1, $0A, $05, $D06E, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(19, AI_01_70E1, $0C, $07, $D098, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(20, AI_01_70E1, $0D, $01, $D021, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(21, AI_01_70E1, $11, $04, $D061, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
-    ThatInit(22, AI_01_70E1, $11, $06, $D089, $00, ACTORSCRIPT0_11_75F4, ACTORSCRIPT1_10_6CEA)
+    ThatInit(3, AI_01_70E1, $05, $11, $D159, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(4, AI_01_70E1, $0A, $10, $D14A, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(5, AI_01_70E1, $0B, $0F, $D137, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(6, AI_01_70E1, $07, $0E, $D11F, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(7, AI_01_70E1, $02, $08, $D0A2, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(8, AI_01_70E1, $01, $05, $D065, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(9, AI_01_70E1, $04, $03, $D040, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(10, AI_01_70E1, $05, $04, $D055, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(11, AI_01_70E1, $0A, $03, $D046, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(18, AI_01_70E1, $0A, $05, $D06E, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(19, AI_01_70E1, $0C, $07, $D098, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(20, AI_01_70E1, $0D, $01, $D021, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(21, AI_01_70E1, $11, $04, $D061, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
+    ThatInit(22, AI_01_70E1, $11, $06, $D089, $00, Actor_Parmalag, ACTORSCRIPT1_10_6CEA)
     ThatStart(0)
     ThatStart(3)
     ThatStart(4)
@@ -2020,15 +2020,15 @@ ACTORSCRIPT1_10_6CEA::
     SetByte(wScript_StartButtonDisabled, $01)
     Pass()
     ThatScript(0, SCRIPT_10_6CC1)
-    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    ThisSetAnimSingle(Actor_Parmalag)
     End()
 
 SCRIPT_10_6CF9::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_7675, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_764E, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
@@ -2036,9 +2036,9 @@ SCRIPT_10_6CF9::
 SCRIPT_10_6D10::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_76C3, 8)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_769C, 8)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11111110)
     End()
@@ -2046,9 +2046,9 @@ SCRIPT_10_6D10::
 SCRIPT_10_6D27::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_7675, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_764E, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11111101)
     End()
@@ -2056,9 +2056,9 @@ SCRIPT_10_6D27::
 SCRIPT_10_6D3E::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_7675, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_764E, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11111011)
     End()
@@ -2066,9 +2066,9 @@ SCRIPT_10_6D3E::
 SCRIPT_10_6D55::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_76C3, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_769C, 32)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -2076,9 +2076,9 @@ SCRIPT_10_6D55::
 SCRIPT_10_6D6C::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_764E, 16)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 16)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11110111)
     End()
@@ -2086,9 +2086,9 @@ SCRIPT_10_6D6C::
 SCRIPT_10_6D83::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_764E, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11101111)
     End()
@@ -2096,9 +2096,9 @@ SCRIPT_10_6D83::
 SCRIPT_10_6D9A::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_764E, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %11011111)
     End()
@@ -2106,9 +2106,9 @@ SCRIPT_10_6D9A::
 SCRIPT_10_6DB1::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_76C3, 56)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_769C, 56)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %10111111)
     End()
@@ -2116,9 +2116,9 @@ SCRIPT_10_6DB1::
 SCRIPT_10_6DC8::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_76C3, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_769C, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits1, %01111111)
     End()
@@ -2126,9 +2126,9 @@ SCRIPT_10_6DC8::
 SCRIPT_10_6DDF::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_764E, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11111110)
     End()
@@ -2136,9 +2136,9 @@ SCRIPT_10_6DDF::
 SCRIPT_10_6DF6::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_764E, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11111101)
     End()
@@ -2146,9 +2146,9 @@ SCRIPT_10_6DF6::
 SCRIPT_10_6E0D::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_769C, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_76C3, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11111011)
     End()
@@ -2156,9 +2156,9 @@ SCRIPT_10_6E0D::
 SCRIPT_10_6E24::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_76C3, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_769C, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11110111)
     End()
@@ -2166,9 +2166,9 @@ SCRIPT_10_6E24::
 SCRIPT_10_6E3B::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_7675, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_764E, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11101111)
     End()
@@ -2176,9 +2176,9 @@ SCRIPT_10_6E3B::
 SCRIPT_10_6E52::
     ThisSetAnimDelay() {
         ScriptDelay(SCRIPT_11_7675, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_764E, 48)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     AndByte(xBits_Puzzle_Bits2, %11011111)
     End()

@@ -52,16 +52,18 @@ xGameCount::
     ds 2
     ;ds $A028 - @
 xScript_SaveBits::
+xBits_Puzzle_Bits1::
     ; Generic puzzle bits
-    ; dResh_Puzzle1:
-    ;   4:2
-    ;   3:3
     ; dResh_Puzzle2:
     ;   0-3 = switches pressed
     ;   5-6 = half-moon buttons pressed
     ; Weave_Puzzle1:
     ;   0-1 = Reset but unused
-xBits_Puzzle_Bits1::
+    ; KybarsTeeth_Puzzle1, KybarsTeeth_Puzzle3
+    ;   Bits are set when Parmalags are moving (up to 8 parmalags)
+    ; KybarsTeeth_Puzzle2
+    ;   
+    ; Bits saying whether Parmalags are moving
     ds 1
     ;ds $A029 - @
 xBits_Puzzle_Bits2::
