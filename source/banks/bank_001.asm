@@ -2062,7 +2062,7 @@ Jump_001_4BEE:
 
 
 Call_001_4C08:
-Jump_001_4C08:
+AI_Hero_CheckAction_Down:
     call Call_001_4D4C                            ; $4C08: $CD $4C $4D
     ld a, [$C9CD]                                 ; $4C0B: $FA $CD $C9
     bit 0, a                                      ; $4C0E: $CB $47
@@ -2114,7 +2114,7 @@ jr_001_4C4C:
 
 
 Call_001_4C59:
-Jump_001_4C59:
+AI_Hero_CheckAction_Left:
     call Call_001_4D6A                            ; $4C59: $CD $6A $4D
     ld a, [$C9CD]                                 ; $4C5C: $FA $CD $C9
     bit 0, a                                      ; $4C5F: $CB $47
@@ -2166,7 +2166,7 @@ jr_001_4C9D:
 
 
 Call_001_4CAA:
-Jump_001_4CAA:
+AI_Hero_CheckAction_Right:
     call Call_001_4D85                            ; $4CAA: $CD $85 $4D
     ld a, [$C9CD]                                 ; $4CAD: $FA $CD $C9
     bit 0, a                                      ; $4CB0: $CB $47
@@ -2200,6 +2200,7 @@ jr_001_4CD5:
     sub $01                                       ; $4CDC: $D6 $01
     jp c, Jump_001_634D                           ; $4CDE: $DA $4D $63
 
+    ; Hero Kick Right
     ld a, $1B                                     ; $4CE1: $3E $1B
     ld [hScript.Frame], a                                 ; $4CE3: $EA $A9 $FF
     ld a, $61                                     ; $4CE6: $3E $61
@@ -2218,7 +2219,7 @@ jr_001_4CEE:
 
 
 Call_001_4CFB:
-Jump_001_4CFB:
+AI_Hero_CheckAction_Up:
     call Call_001_4DA0                            ; $4CFB: $CD $A0 $4D
     ld a, [$C9CD]                                 ; $4CFE: $FA $CD $C9
     bit 0, a                                      ; $4D01: $CB $47
@@ -5158,7 +5159,7 @@ Jump_001_60D6:
     jp nz, Jump_001_5F65                          ; $60F8: $C2 $65 $5F
 
     call Call_001_4B7D                            ; $60FB: $CD $7D $4B
-    call Call_001_6479                            ; $60FE: $CD $79 $64
+    call AI_Hero_Action_Stand_Main                            ; $60FE: $CD $79 $64
     jp Jump_001_634D                              ; $6101: $C3 $4D $63
 
 
@@ -5225,19 +5226,19 @@ Call_001_6166:
     jr z, jr_001_6183                             ; $6178: $28 $09
 
 jr_001_617A:
-    jp Jump_001_4CFB                              ; $617A: $C3 $FB $4C
+    jp AI_Hero_CheckAction_Up                              ; $617A: $C3 $FB $4C
 
 
 jr_001_617D:
-    jp Jump_001_4C08                              ; $617D: $C3 $08 $4C
+    jp AI_Hero_CheckAction_Down                              ; $617D: $C3 $08 $4C
 
 
 jr_001_6180:
-    jp Jump_001_4C59                              ; $6180: $C3 $59 $4C
+    jp AI_Hero_CheckAction_Left                              ; $6180: $C3 $59 $4C
 
 
 jr_001_6183:
-    jp Jump_001_4CAA                              ; $6183: $C3 $AA $4C
+    jp AI_Hero_CheckAction_Right                              ; $6183: $C3 $AA $4C
 
 
     ret                                           ; $6186: $C9
@@ -5647,7 +5648,7 @@ AI_Hero_Start:
     ld hl, $4372                                  ; $645B: $21 $72 $43
     ld e, $05                                     ; $645E: $1E $05
     call CallForeign                            ; $6460: $CD $A9 $07
-    jr jr_001_6470                                ; $6463: $18 $0B
+    jr AI_Hero_Action_Stand                                ; $6463: $18 $0B
 
 jr_001_6465:
     ld hl, $4372                                  ; $6465: $21 $72 $43
@@ -5655,13 +5656,13 @@ jr_001_6465:
     call CallForeign                            ; $646A: $CD $A9 $07
     call Call_001_422E                            ; $646D: $CD $2E $42
 
-jr_001_6470:
+AI_Hero_Action_Stand:
     call Call_001_4B7D                            ; $6470: $CD $7D $4B
-    call Call_001_6479                            ; $6473: $CD $79 $64
+    call AI_Hero_Action_Stand_Main                            ; $6473: $CD $79 $64
     jp Jump_001_634D                              ; $6476: $C3 $4D $63
 
 
-Call_001_6479:
+AI_Hero_Action_Stand_Main:
     ld a, [$C9CD]                                 ; $6479: $FA $CD $C9
     bit 0, a                                      ; $647C: $CB $47
     ret z                                         ; $647E: $C8
@@ -5669,31 +5670,31 @@ Call_001_6479:
     ldh a, [$FF8C]                                  ; $647F: $F0 $8C
     and $03                                       ; $6481: $E6 $03
     cp $00                                        ; $6483: $FE $00
-    jr z, jr_001_6493                             ; $6485: $28 $0C
+    jr z, .FacingUp                             ; $6485: $28 $0C
 
     cp $03                                        ; $6487: $FE $03
-    jr z, jr_001_6496                             ; $6489: $28 $0B
+    jr z, .FacingDown                             ; $6489: $28 $0B
 
     cp $01                                        ; $648B: $FE $01
-    jr z, jr_001_6499                             ; $648D: $28 $0A
+    jr z, .FacingLeft                             ; $648D: $28 $0A
 
     cp $02                                        ; $648F: $FE $02
-    jr z, jr_001_649C                             ; $6491: $28 $09
+    jr z, .FacingRight                             ; $6491: $28 $09
 
-jr_001_6493:
-    jp Jump_001_4CFB                              ; $6493: $C3 $FB $4C
-
-
-jr_001_6496:
-    jp Jump_001_4C08                              ; $6496: $C3 $08 $4C
+.FacingUp:
+    jp AI_Hero_CheckAction_Up                              ; $6493: $C3 $FB $4C
 
 
-jr_001_6499:
-    jp Jump_001_4C59                              ; $6499: $C3 $59 $4C
+.FacingDown:
+    jp AI_Hero_CheckAction_Down                              ; $6496: $C3 $08 $4C
 
 
-jr_001_649C:
-    jp Jump_001_4CAA                              ; $649C: $C3 $AA $4C
+.FacingLeft:
+    jp AI_Hero_CheckAction_Left                              ; $6499: $C3 $59 $4C
+
+
+.FacingRight:
+    jp AI_Hero_CheckAction_Right                              ; $649C: $C3 $AA $4C
 
 
     ret                                           ; $649F: $C9
@@ -7103,19 +7104,19 @@ Call_001_6C26:
     jr z, jr_001_6C43                             ; $6C38: $28 $09
 
 jr_001_6C3A:
-    jp Jump_001_4CFB                              ; $6C3A: $C3 $FB $4C
+    jp AI_Hero_CheckAction_Up                              ; $6C3A: $C3 $FB $4C
 
 
 jr_001_6C3D:
-    jp Jump_001_4C08                              ; $6C3D: $C3 $08 $4C
+    jp AI_Hero_CheckAction_Down                              ; $6C3D: $C3 $08 $4C
 
 
 jr_001_6C40:
-    jp Jump_001_4C59                              ; $6C40: $C3 $59 $4C
+    jp AI_Hero_CheckAction_Left                              ; $6C40: $C3 $59 $4C
 
 
 jr_001_6C43:
-    jp Jump_001_4CAA                              ; $6C43: $C3 $AA $4C
+    jp AI_Hero_CheckAction_Right                              ; $6C43: $C3 $AA $4C
 
 
     ret                                           ; $6C46: $C9

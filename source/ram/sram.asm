@@ -67,13 +67,17 @@ xBits_Puzzle_Bits1::
     ds 1
     ;ds $A029 - @
 xBits_Puzzle_Bits2::
+    ; Orothe_Puzzle1:
+    ;   7 = Staff of Orothe obtained
+    ;   
     ds 1
     ;ds $A02A - @
 xBits_Puzzle_Bits3::
     ; Bograth_Puzzle2 & Bograth_Puzzle4:
     ;   0: Hotspot script is running to create holes
     ;   1: Actor script is running to create holes
-    ;   
+    ; Orothe_Puzzle2:
+    ;   0-2 = Bits for bubbles obtained
     ds 1
     ;ds $A02B - @
 xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret::
