@@ -2849,8 +2849,8 @@ SCRIPT_0A_6F0C::
     ThatInit(4, Call_001_4AF8, $01, $0F, $D0B5, $00, ACTORSCRIPT0_0A_6FE5, Actor_RestoreState)
     ThatInit(5, Call_001_4AF8, $06, $0B, $D08A, $00, ACTORSCRIPT0_0A_7003, Actor_RestoreState)
     ThatInit(6, Call_001_4AF8, $08, $0C, $D098, $00, ACTORSCRIPT0_0A_7008, Actor_RestoreState)
-    ThatInit(7, Call_001_4AF8, $09, $05, $D045, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
-    ThatInit(8, Call_001_4AF8, $03, $06, $D04B, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(7, Call_001_4AF8, $09, $05, $D045, $00, Actor_Parmalag, Actor_RestoreState)
+    ThatInit(8, Call_001_4AF8, $03, $06, $D04B, $00, Actor_Parmalag, Actor_RestoreState)
     OverlayInit(RAM_00_C2CD, $50, $5C, $20, SCRIPT_ACTORSCRIPT0_0A_73FD)
     ThatStart(0)
     ThatStart(3)
@@ -2872,35 +2872,35 @@ SCRIPT_STARTBUTTON_0A_6FBC::
     LongJump(Script_StartRoom)
 
 ACTORSCRIPT0_0A_6FC7::
-    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    ThisSetAnimSingle(Actor_Parmalag)
     Sync(0, 2)
     ThisSetAnimDelay() {
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 4)
+        ScriptDelay(Actor_Parmalag, 4)
         ScriptDelay(SCRIPT_11_769C, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_76C3, 24)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     End()
 
 ACTORSCRIPT0_0A_6FE5::
-    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    ThisSetAnimSingle(Actor_Parmalag)
     Sync(1, 2)
     ThisSetAnimDelay() {
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 4)
+        ScriptDelay(Actor_Parmalag, 4)
         ScriptDelay(SCRIPT_11_764E, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     End()
 
 ACTORSCRIPT0_0A_7003::
-    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    ThisSetAnimSingle(Actor_Parmalag)
     End()
 
 ACTORSCRIPT0_0A_7008::
-    ThisSetAnimSingle(ACTORSCRIPT0_11_75F4)
+    ThisSetAnimSingle(Actor_Parmalag)
     End()
 
 ACTORSCRIPT0_0A_700D::
@@ -3112,10 +3112,10 @@ ACTORSCRIPT0_0A_729C::
     LoadSpritePalette(Pal_AllSprites)
     LoadScene(Scene_Bograth_Puzzle3_Demo)
     ThatInit(0, Call_001_4AF8, $14, $05, $D087, $00, ACTORSCRIPT0_0A_7378, Actor_RestoreState)
-    ThatInit(6, Call_001_4AF8, $13, $02, $D041, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
-    ThatInit(7, Call_001_4AF8, $15, $03, $D05A, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
-    ThatInit(8, Call_001_4AF8, $10, $05, $D083, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
-    ThatInit(9, Call_001_4AF8, $11, $06, $D09B, $00, ACTORSCRIPT0_11_75F4, Actor_RestoreState)
+    ThatInit(6, Call_001_4AF8, $13, $02, $D041, $00, Actor_Parmalag, Actor_RestoreState)
+    ThatInit(7, Call_001_4AF8, $15, $03, $D05A, $00, Actor_Parmalag, Actor_RestoreState)
+    ThatInit(8, Call_001_4AF8, $10, $05, $D083, $00, Actor_Parmalag, Actor_RestoreState)
+    ThatInit(9, Call_001_4AF8, $11, $06, $D09B, $00, Actor_Parmalag, Actor_RestoreState)
     ThatInit(11, Call_001_4AF8, $06, $0A, $D0EC, $00, ACTORSCRIPT0_0A_73D6, Actor_RestoreState)
     OverlayInit(RAM_00_C2CD, $50, $5C, $60, SCRIPT_ACTORSCRIPT0_0A_73FD)
     ThatStart(0)
@@ -3173,15 +3173,15 @@ ACTORSCRIPT0_0A_7378::
 
 ACTORSCRIPT0_0A_73D6::
     ThisSetAnimDelay() {
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 4)
+        ScriptDelay(Actor_Parmalag, 4)
         ScriptDelay(SCRIPT_11_764E, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 40)
+        ScriptDelay(Actor_Parmalag, 40)
         ScriptDelay(SCRIPT_11_764E, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 24)
+        ScriptDelay(Actor_Parmalag, 24)
         ScriptDelay(SCRIPT_11_7675, 40)
-        ScriptDelay(ACTORSCRIPT0_11_75F4, 0)
+        ScriptDelay(Actor_Parmalag, 0)
     }
     End()
 

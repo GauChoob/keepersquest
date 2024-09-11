@@ -52,26 +52,32 @@ xGameCount::
     ds 2
     ;ds $A028 - @
 xScript_SaveBits::
+xBits_Puzzle_Bits1::
     ; Generic puzzle bits
-    ; dResh_Puzzle1:
-    ;   4:2
-    ;   3:3
     ; dResh_Puzzle2:
     ;   0-3 = switches pressed
     ;   5-6 = half-moon buttons pressed
     ; Weave_Puzzle1:
     ;   0-1 = Reset but unused
-xBits_Puzzle_Bits1::
+    ; KybarsTeeth_Puzzle1, KybarsTeeth_Puzzle3
+    ;   Bits are set when Parmalags are moving (up to 8 parmalags)
+    ; KybarsTeeth_Puzzle2
+    ;   
+    ; Bits saying whether Parmalags are moving
     ds 1
     ;ds $A029 - @
 xBits_Puzzle_Bits2::
+    ; Orothe_Puzzle1:
+    ;   7 = Staff of Orothe obtained
+    ;   
     ds 1
     ;ds $A02A - @
 xBits_Puzzle_Bits3::
     ; Bograth_Puzzle2 & Bograth_Puzzle4:
     ;   0: Hotspot script is running to create holes
     ;   1: Actor script is running to create holes
-    ;   
+    ; Orothe_Puzzle2:
+    ;   0-2 = Bits for bubbles obtained
     ds 1
     ;ds $A02B - @
 xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret::

@@ -198,7 +198,7 @@ System_Init::
     xor a                                         ; $08D9: $AF
     ld [wRAMBank], a                                 ; $08DA: $EA $5A $C9
     ld [wROMBank], a                                 ; $08DD: $EA $5B $C9
-    ld [$C188], a                                 ; $08E0: $EA $88 $C1
+    ld [wActorSave_Flags], a                                 ; $08E0: $EA $88 $C1
     ld [$C6D8], a                                 ; $08E3: $EA $D8 $C6
     ld [$CCC3], a                                 ; $08E6: $EA $C3 $CC
     ld [$C6F7], a                                 ; $08E9: $EA $F7 $C6
@@ -241,14 +241,14 @@ System_UpdateGame:
     jr z, jr_000_0956                             ; $094B: $28 $09
 
     xor a                                         ; $094D: $AF
-    ld hl, $C9CC                                  ; $094E: $21 $CC $C9
+    ld hl, wAI_Cnt1                                  ; $094E: $21 $CC $C9
     ld [hl+], a                                   ; $0951: $22
     ld [hl+], a                                   ; $0952: $22
     ld [hl+], a                                   ; $0953: $22
     jr jr_000_0965                                ; $0954: $18 $0F
 
 jr_000_0956:
-    ld hl, $C9CC                                  ; $0956: $21 $CC $C9
+    ld hl, wAI_Cnt1                                  ; $0956: $21 $CC $C9
     ld a, [wCnt1]                                 ; $0959: $FA $54 $C9
     ld [hl+], a                                   ; $095C: $22
     ld a, [wCntDown]                                 ; $095D: $FA $55 $C9

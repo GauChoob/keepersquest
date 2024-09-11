@@ -204,7 +204,7 @@ SCRIPT_19_4866::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_48A1::
@@ -223,7 +223,7 @@ SCRIPT_19_48A1::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_48DC::
@@ -242,7 +242,7 @@ SCRIPT_19_48DC::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4917::
@@ -261,7 +261,7 @@ SCRIPT_19_4917::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FA)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT0_19_4952::
@@ -297,7 +297,7 @@ SCRIPT_19_498F::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_49CA::
@@ -316,7 +316,7 @@ SCRIPT_19_49CA::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4A05::
@@ -335,7 +335,7 @@ SCRIPT_19_4A05::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4A40::
@@ -354,7 +354,7 @@ SCRIPT_19_4A40::
     LongJumpIf(#bitmatch(c[xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret], c%00000100)#, Actor_Null)
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT0_19_4A7B::
@@ -394,7 +394,7 @@ SCRIPT_19_4AB9::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4B03::
@@ -416,7 +416,7 @@ SCRIPT_19_4B03::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4B4D::
@@ -438,7 +438,7 @@ SCRIPT_19_4B4D::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4B97::
@@ -461,7 +461,7 @@ SCRIPT_19_4B97::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %11011111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT0_19_4BE5::
@@ -501,7 +501,7 @@ SCRIPT_19_4C23::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4C6D::
@@ -523,7 +523,7 @@ SCRIPT_19_4C6D::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4CB7::
@@ -545,7 +545,7 @@ SCRIPT_19_4CB7::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4D01::
@@ -568,7 +568,7 @@ SCRIPT_19_4D01::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %10111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT0_19_4D4F::
@@ -608,7 +608,7 @@ SCRIPT_19_4D8D::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4DD7::
@@ -630,7 +630,7 @@ SCRIPT_19_4DD7::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4E21::
@@ -652,7 +652,7 @@ SCRIPT_19_4E21::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4E6B::
@@ -675,7 +675,7 @@ SCRIPT_19_4E6B::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
     AndByte(xBits_Puzzle_Bits4_Chicken_Demo_CanDraw_Turret, %01111111)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT0_19_4EB9::
@@ -715,7 +715,7 @@ SCRIPT_19_4EF7::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4F41::
@@ -737,7 +737,7 @@ SCRIPT_19_4F41::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4F8B::
@@ -759,7 +759,7 @@ SCRIPT_19_4F8B::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FC)
     AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 SCRIPT_19_4FD5::
@@ -782,7 +782,7 @@ SCRIPT_19_4FD5::
     ThisDrawTile($00, $00, $00, COLLID_WALL, $FB)
     AndByte(xBits_Puzzle_Bits5_Chicken_Ormagon, %11111110)
     ThisAI(AI_Chicken)
-    SetByte(RAM_00_C188, $00)
+    SetByte(wActorSave_Flags, $00)
     End()
 
 ACTORSCRIPT1_19_5023::

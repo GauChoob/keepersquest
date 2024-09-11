@@ -2,12 +2,12 @@
 SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
 
 Actor_CheckRestore:
-    ld a, [$C188]                                 ; $4000: $FA $88 $C1
+    ld a, [wActorSave_Flags]                                 ; $4000: $FA $88 $C1
     cp $03                                        ; $4003: $FE $03
     ret nz                                        ; $4005: $C0
 
     xor a                                         ; $4006: $AF
-    ld [$C188], a                                 ; $4007: $EA $88 $C1
+    ld [wActorSave_Flags], a                                 ; $4007: $EA $88 $C1
     ld a, [$C175]                                 ; $400A: $FA $75 $C1
     ld h, a                                       ; $400D: $67
     ld a, [$C174]                                 ; $400E: $FA $74 $C1
@@ -27,7 +27,7 @@ jr_001_4017:
 
 Actor_StoreCopy:
     ld a, $01                                     ; $401E: $3E $01
-    ld [$C188], a                                 ; $4020: $EA $88 $C1
+    ld [wActorSave_Flags], a                                 ; $4020: $EA $88 $C1
     ldh a, [hActor_CurrentAddress]                                  ; $4023: $F0 $8A
     ld l, a                                       ; $4025: $6F
     ld [$C174], a                                 ; $4026: $EA $74 $C1
@@ -2058,13 +2058,13 @@ Jump_001_4BEE:
     ld a, e                                       ; $4BFE: $7B
     ld [$C9C3], a                                 ; $4BFF: $EA $C3 $C9
     call Call_001_4AC0                            ; $4C02: $CD $C0 $4A
-    jp Jump_001_634D                              ; $4C05: $C3 $4D $63
+    jp AI_Hero_Close                              ; $4C05: $C3 $4D $63
 
 
 Call_001_4C08:
-Jump_001_4C08:
+AI_Hero_CheckAction_Down:
     call Call_001_4D4C                            ; $4C08: $CD $4C $4D
-    ld a, [$C9CD]                                 ; $4C0B: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $4C0B: $FA $CD $C9
     bit 0, a                                      ; $4C0E: $CB $47
     ret z                                         ; $4C10: $C8
 
@@ -2079,7 +2079,7 @@ Jump_001_4C08:
 
     ld a, [wHeroAbilities]                                 ; $4C1E: $FA $CF $C9
     sub $02                                       ; $4C21: $D6 $02
-    jp c, Jump_001_634D                           ; $4C23: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4C23: $DA $4D $63
 
     ld a, $B3                                     ; $4C26: $3E $B3
     ld [hScript.Frame], a                                 ; $4C28: $EA $A9 $FF
@@ -2094,7 +2094,7 @@ jr_001_4C33:
 
     ld a, [wHeroAbilities]                                 ; $4C37: $FA $CF $C9
     sub $01                                       ; $4C3A: $D6 $01
-    jp c, Jump_001_634D                           ; $4C3C: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4C3C: $DA $4D $63
 
     ld a, $67                                     ; $4C3F: $3E $67
     ld [hScript.Frame], a                                 ; $4C41: $EA $A9 $FF
@@ -2105,18 +2105,18 @@ jr_001_4C33:
 
 jr_001_4C4C:
     and $E0                                       ; $4C4C: $E6 $E0
-    jp z, Jump_001_634D                           ; $4C4E: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $4C4E: $CA $4D $63
 
     bit 7, a                                      ; $4C51: $CB $7F
-    jp nz, Jump_001_634D                          ; $4C53: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $4C53: $C2 $4D $63
 
     jp Jump_001_4BEE                              ; $4C56: $C3 $EE $4B
 
 
 Call_001_4C59:
-Jump_001_4C59:
+AI_Hero_CheckAction_Left:
     call Call_001_4D6A                            ; $4C59: $CD $6A $4D
-    ld a, [$C9CD]                                 ; $4C5C: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $4C5C: $FA $CD $C9
     bit 0, a                                      ; $4C5F: $CB $47
     ret z                                         ; $4C61: $C8
 
@@ -2131,7 +2131,7 @@ Jump_001_4C59:
 
     ld a, [wHeroAbilities]                                 ; $4C6F: $FA $CF $C9
     sub $02                                       ; $4C72: $D6 $02
-    jp c, Jump_001_634D                           ; $4C74: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4C74: $DA $4D $63
 
     ld a, $D9                                     ; $4C77: $3E $D9
     ld [hScript.Frame], a                                 ; $4C79: $EA $A9 $FF
@@ -2146,7 +2146,7 @@ jr_001_4C84:
 
     ld a, [wHeroAbilities]                                 ; $4C88: $FA $CF $C9
     sub $01                                       ; $4C8B: $D6 $01
-    jp c, Jump_001_634D                           ; $4C8D: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4C8D: $DA $4D $63
 
     ld a, $F5                                     ; $4C90: $3E $F5
     ld [hScript.Frame], a                                 ; $4C92: $EA $A9 $FF
@@ -2157,18 +2157,18 @@ jr_001_4C84:
 
 jr_001_4C9D:
     and $E0                                       ; $4C9D: $E6 $E0
-    jp z, Jump_001_634D                           ; $4C9F: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $4C9F: $CA $4D $63
 
     bit 7, a                                      ; $4CA2: $CB $7F
-    jp nz, Jump_001_634D                          ; $4CA4: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $4CA4: $C2 $4D $63
 
     jp Jump_001_4BEE                              ; $4CA7: $C3 $EE $4B
 
 
 Call_001_4CAA:
-Jump_001_4CAA:
+AI_Hero_CheckAction_Right:
     call Call_001_4D85                            ; $4CAA: $CD $85 $4D
-    ld a, [$C9CD]                                 ; $4CAD: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $4CAD: $FA $CD $C9
     bit 0, a                                      ; $4CB0: $CB $47
     ret z                                         ; $4CB2: $C8
 
@@ -2178,12 +2178,13 @@ Jump_001_4CAA:
     ldh [$FFB1], a                                  ; $4CB8: $E0 $B1
     ld a, [hl]                                    ; $4CBA: $7E
     ld e, a                                       ; $4CBB: $5F
+    ; Dig
     cp $0B                                        ; $4CBC: $FE $0B
     jr nz, jr_001_4CD5                            ; $4CBE: $20 $15
 
     ld a, [wHeroAbilities]                                 ; $4CC0: $FA $CF $C9
     sub $02                                       ; $4CC3: $D6 $02
-    jp c, Jump_001_634D                           ; $4CC5: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4CC5: $DA $4D $63
 
     ld a, $FF                                     ; $4CC8: $3E $FF
     ld [hScript.Frame], a                                 ; $4CCA: $EA $A9 $FF
@@ -2193,13 +2194,15 @@ Jump_001_4CAA:
 
 
 jr_001_4CD5:
+    ; Kick block
     cp $09                                        ; $4CD5: $FE $09
     jr nz, jr_001_4CEE                            ; $4CD7: $20 $15
 
     ld a, [wHeroAbilities]                                 ; $4CD9: $FA $CF $C9
     sub $01                                       ; $4CDC: $D6 $01
-    jp c, Jump_001_634D                           ; $4CDE: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4CDE: $DA $4D $63
 
+    ; Hero Kick Right
     ld a, $1B                                     ; $4CE1: $3E $1B
     ld [hScript.Frame], a                                 ; $4CE3: $EA $A9 $FF
     ld a, $61                                     ; $4CE6: $3E $61
@@ -2208,19 +2211,20 @@ jr_001_4CD5:
 
 
 jr_001_4CEE:
+    ; Check trigger
     and $E0                                       ; $4CEE: $E6 $E0
-    jp z, Jump_001_634D                           ; $4CF0: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $4CF0: $CA $4D $63
 
     bit 7, a                                      ; $4CF3: $CB $7F
-    jp nz, Jump_001_634D                          ; $4CF5: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $4CF5: $C2 $4D $63
 
     jp Jump_001_4BEE                              ; $4CF8: $C3 $EE $4B
 
 
 Call_001_4CFB:
-Jump_001_4CFB:
+AI_Hero_CheckAction_Up:
     call Call_001_4DA0                            ; $4CFB: $CD $A0 $4D
-    ld a, [$C9CD]                                 ; $4CFE: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $4CFE: $FA $CD $C9
     bit 0, a                                      ; $4D01: $CB $47
     ret z                                         ; $4D03: $C8
 
@@ -2235,7 +2239,7 @@ Jump_001_4CFB:
 
     ld a, [wHeroAbilities]                                 ; $4D11: $FA $CF $C9
     sub $02                                       ; $4D14: $D6 $02
-    jp c, Jump_001_634D                           ; $4D16: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4D16: $DA $4D $63
 
     ld a, $8D                                     ; $4D19: $3E $8D
     ld [hScript.Frame], a                                 ; $4D1B: $EA $A9 $FF
@@ -2250,7 +2254,7 @@ jr_001_4D26:
 
     ld a, [wHeroAbilities]                                 ; $4D2A: $FA $CF $C9
     sub $01                                       ; $4D2D: $D6 $01
-    jp c, Jump_001_634D                           ; $4D2F: $DA $4D $63
+    jp c, AI_Hero_Close                           ; $4D2F: $DA $4D $63
 
     ld a, $41                                     ; $4D32: $3E $41
     ld [hScript.Frame], a                                 ; $4D34: $EA $A9 $FF
@@ -2261,10 +2265,10 @@ jr_001_4D26:
 
 jr_001_4D3F:
     and $E0                                       ; $4D3F: $E6 $E0
-    jp z, Jump_001_634D                           ; $4D41: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $4D41: $CA $4D $63
 
     bit 7, a                                      ; $4D44: $CB $7F
-    jp nz, Jump_001_634D                          ; $4D46: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $4D46: $C2 $4D $63
 
     jp Jump_001_4BEE                              ; $4D49: $C3 $EE $4B
 
@@ -2413,7 +2417,7 @@ Jump_001_4E34:
     ld a, $0B                                     ; $4E34: $3E $0B
     ld [$C944], a                                 ; $4E36: $EA $44 $C9
     pop af                                        ; $4E39: $F1
-    jp Jump_001_634D                              ; $4E3A: $C3 $4D $63
+    jp AI_Hero_Close                              ; $4E3A: $C3 $4D $63
 
 
 Jump_001_4E3D:
@@ -2469,7 +2473,7 @@ Jump_001_4E3D:
     call CallForeign                            ; $4EAA: $CD $A9 $07
     ld hl, $FFB1                                  ; $4EAD: $21 $B1 $FF
     set 3, [hl]                                   ; $4EB0: $CB $DE
-    jp Jump_001_634D                              ; $4EB2: $C3 $4D $63
+    jp AI_Hero_Close                              ; $4EB2: $C3 $4D $63
 
 
     call Call_001_6393                            ; $4EB5: $CD $93 $63
@@ -2649,11 +2653,11 @@ Jump_001_4FEF:
     ldh [$FF8D], a                                  ; $4FF9: $E0 $8D
     ld a, $50                                     ; $4FFB: $3E $50
     ldh [$FF8E], a                                  ; $4FFD: $E0 $8E
-    jp Jump_001_634D                              ; $4FFF: $C3 $4D $63
+    jp AI_Hero_Close                              ; $4FFF: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5002: $CD $93 $63
-    ld a, [$C9CC]                                 ; $5005: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5005: $FA $CC $C9
     bit 4, a                                      ; $5008: $CB $67
     jp nz, Jump_001_51A6                          ; $500A: $C2 $A6 $51
 
@@ -2672,7 +2676,7 @@ Jump_001_4FEF:
     call CallForeign                            ; $5024: $CD $A9 $07
     call Call_001_422E                            ; $5027: $CD $2E $42
     call Call_001_4B7D                            ; $502A: $CD $7D $4B
-    jp Jump_001_634D                              ; $502D: $C3 $4D $63
+    jp AI_Hero_Close                              ; $502D: $C3 $4D $63
 
 
 Jump_001_5030:
@@ -2690,7 +2694,7 @@ Jump_001_5030:
     ldh [$FF8D], a                                  ; $5046: $E0 $8D
     ld a, $50                                     ; $5048: $3E $50
     ldh [$FF8E], a                                  ; $504A: $E0 $8E
-    jp Jump_001_634D                              ; $504C: $C3 $4D $63
+    jp AI_Hero_Close                              ; $504C: $C3 $4D $63
 
 
     call Call_001_6393                            ; $504F: $CD $93 $63
@@ -2710,14 +2714,14 @@ Jump_001_5052:
     ldh [$FF8D], a                                  ; $5068: $E0 $8D
     ld a, $50                                     ; $506A: $3E $50
     ldh [$FF8E], a                                  ; $506C: $E0 $8E
-    jp Jump_001_634D                              ; $506E: $C3 $4D $63
+    jp AI_Hero_Close                              ; $506E: $C3 $4D $63
 
 
     ld a, $03                                     ; $5071: $3E $03
     ldh [$FF8C], a                                  ; $5073: $E0 $8C
     call Call_001_6393                            ; $5075: $CD $93 $63
     call Call_001_4FE6                            ; $5078: $CD $E6 $4F
-    ld a, [$C9CD]                                 ; $507B: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $507B: $FA $CD $C9
     bit 6, a                                      ; $507E: $CB $77
     jp nz, Jump_001_5250                          ; $5080: $C2 $50 $52
 
@@ -2730,7 +2734,7 @@ Jump_001_5052:
     call Call_001_64A0                            ; $508D: $CD $A0 $64
     ld a, [$C6D3]                                 ; $5090: $FA $D3 $C6
     and a                                         ; $5093: $A7
-    jp z, Jump_001_634D                           ; $5094: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $5094: $CA $4D $63
 
     ld hl, $4372                                  ; $5097: $21 $72 $43
     ld e, $05                                     ; $509A: $1E $05
@@ -2739,7 +2743,7 @@ Jump_001_5052:
     call Call_001_4B7D                            ; $50A2: $CD $7D $4B
     ld a, [$C6D3]                                 ; $50A5: $FA $D3 $C6
     and a                                         ; $50A8: $A7
-    jp nz, Jump_001_634D                          ; $50A9: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $50A9: $C2 $4D $63
 
     call Call_001_4DC0                            ; $50AC: $CD $C0 $4D
     ld a, [hl]                                    ; $50AF: $7E
@@ -2747,7 +2751,7 @@ Jump_001_5052:
     jp z, Jump_001_59CB                           ; $50B2: $CA $CB $59
 
     cp $02                                        ; $50B5: $FE $02
-    jp z, Jump_001_634D                           ; $50B7: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $50B7: $CA $4D $63
 
     cp $00                                        ; $50BA: $FE $00
     jp nz, Jump_001_50CD                          ; $50BC: $C2 $CD $50
@@ -2783,7 +2787,7 @@ Jump_001_50DA:
     ldh [$FF8D], a                                  ; $50F0: $E0 $8D
     ld a, $51                                     ; $50F2: $3E $51
     ldh [$FF8E], a                                  ; $50F4: $E0 $8E
-    jp Jump_001_634D                              ; $50F6: $C3 $4D $63
+    jp AI_Hero_Close                              ; $50F6: $C3 $4D $63
 
 
     call Call_001_6393                            ; $50F9: $CD $93 $63
@@ -2803,14 +2807,14 @@ Jump_001_50FC:
     ldh [$FF8D], a                                  ; $5112: $E0 $8D
     ld a, $51                                     ; $5114: $3E $51
     ldh [$FF8E], a                                  ; $5116: $E0 $8E
-    jp Jump_001_634D                              ; $5118: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5118: $C3 $4D $63
 
 
     ld a, $01                                     ; $511B: $3E $01
     ldh [$FF8C], a                                  ; $511D: $E0 $8C
     call Call_001_6393                            ; $511F: $CD $93 $63
     call Call_001_4FE6                            ; $5122: $CD $E6 $4F
-    ld a, [$C9CD]                                 ; $5125: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $5125: $FA $CD $C9
     bit 4, a                                      ; $5128: $CB $67
     jp nz, Jump_001_51A6                          ; $512A: $C2 $A6 $51
 
@@ -2823,7 +2827,7 @@ Jump_001_50FC:
     call Call_001_64A0                            ; $5137: $CD $A0 $64
     ld a, [$C6D2]                                 ; $513A: $FA $D2 $C6
     and a                                         ; $513D: $A7
-    jp z, Jump_001_634D                           ; $513E: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $513E: $CA $4D $63
 
     ld hl, $4372                                  ; $5141: $21 $72 $43
     ld e, $05                                     ; $5144: $1E $05
@@ -2832,7 +2836,7 @@ Jump_001_50FC:
     call Call_001_4B7D                            ; $514C: $CD $7D $4B
     ld a, [$C6D2]                                 ; $514F: $FA $D2 $C6
     and a                                         ; $5152: $A7
-    jp nz, Jump_001_634D                          ; $5153: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5153: $C2 $4D $63
 
     call Call_001_4DDE                            ; $5156: $CD $DE $4D
     ld a, [hl]                                    ; $5159: $7E
@@ -2840,7 +2844,7 @@ Jump_001_50FC:
     jp z, Jump_001_5A1D                           ; $515C: $CA $1D $5A
 
     cp $02                                        ; $515F: $FE $02
-    jp z, Jump_001_634D                           ; $5161: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $5161: $CA $4D $63
 
     cp $00                                        ; $5164: $FE $00
     jp nz, Jump_001_5177                          ; $5166: $C2 $77 $51
@@ -2876,7 +2880,7 @@ Jump_001_5184:
     ldh [$FF8D], a                                  ; $519A: $E0 $8D
     ld a, $51                                     ; $519C: $3E $51
     ldh [$FF8E], a                                  ; $519E: $E0 $8E
-    jp Jump_001_634D                              ; $51A0: $C3 $4D $63
+    jp AI_Hero_Close                              ; $51A0: $C3 $4D $63
 
 
     call Call_001_6393                            ; $51A3: $CD $93 $63
@@ -2896,14 +2900,14 @@ Jump_001_51A6:
     ldh [$FF8D], a                                  ; $51BC: $E0 $8D
     ld a, $51                                     ; $51BE: $3E $51
     ldh [$FF8E], a                                  ; $51C0: $E0 $8E
-    jp Jump_001_634D                              ; $51C2: $C3 $4D $63
+    jp AI_Hero_Close                              ; $51C2: $C3 $4D $63
 
 
     ld a, $02                                     ; $51C5: $3E $02
     ldh [$FF8C], a                                  ; $51C7: $E0 $8C
     call Call_001_6393                            ; $51C9: $CD $93 $63
     call Call_001_4FE6                            ; $51CC: $CD $E6 $4F
-    ld a, [$C9CD]                                 ; $51CF: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $51CF: $FA $CD $C9
     bit 5, a                                      ; $51D2: $CB $6F
     jp nz, Jump_001_50FC                          ; $51D4: $C2 $FC $50
 
@@ -2916,7 +2920,7 @@ Jump_001_51A6:
     call Call_001_64A0                            ; $51E1: $CD $A0 $64
     ld a, [$C6D2]                                 ; $51E4: $FA $D2 $C6
     and a                                         ; $51E7: $A7
-    jp z, Jump_001_634D                           ; $51E8: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $51E8: $CA $4D $63
 
     ld hl, $4372                                  ; $51EB: $21 $72 $43
     ld e, $05                                     ; $51EE: $1E $05
@@ -2925,7 +2929,7 @@ Jump_001_51A6:
     call Call_001_4B7D                            ; $51F6: $CD $7D $4B
     ld a, [$C6D2]                                 ; $51F9: $FA $D2 $C6
     and a                                         ; $51FC: $A7
-    jp nz, Jump_001_634D                          ; $51FD: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $51FD: $C2 $4D $63
 
     call Call_001_4DF9                            ; $5200: $CD $F9 $4D
     ld a, [hl]                                    ; $5203: $7E
@@ -2933,7 +2937,7 @@ Jump_001_51A6:
     jp z, Jump_001_5A46                           ; $5206: $CA $46 $5A
 
     cp $02                                        ; $5209: $FE $02
-    jp z, Jump_001_634D                           ; $520B: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $520B: $CA $4D $63
 
     cp $00                                        ; $520E: $FE $00
     jp nz, Jump_001_5221                          ; $5210: $C2 $21 $52
@@ -2969,7 +2973,7 @@ Jump_001_522E:
     ldh [$FF8D], a                                  ; $5244: $E0 $8D
     ld a, $52                                     ; $5246: $3E $52
     ldh [$FF8E], a                                  ; $5248: $E0 $8E
-    jp Jump_001_634D                              ; $524A: $C3 $4D $63
+    jp AI_Hero_Close                              ; $524A: $C3 $4D $63
 
 
     call Call_001_6393                            ; $524D: $CD $93 $63
@@ -2989,14 +2993,14 @@ Jump_001_5250:
     ldh [$FF8D], a                                  ; $5266: $E0 $8D
     ld a, $52                                     ; $5268: $3E $52
     ldh [$FF8E], a                                  ; $526A: $E0 $8E
-    jp Jump_001_634D                              ; $526C: $C3 $4D $63
+    jp AI_Hero_Close                              ; $526C: $C3 $4D $63
 
 
     ld a, $00                                     ; $526F: $3E $00
     ldh [$FF8C], a                                  ; $5271: $E0 $8C
     call Call_001_6393                            ; $5273: $CD $93 $63
     call Call_001_4FE6                            ; $5276: $CD $E6 $4F
-    ld a, [$C9CD]                                 ; $5279: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $5279: $FA $CD $C9
     bit 7, a                                      ; $527C: $CB $7F
     jp nz, Jump_001_5052                          ; $527E: $C2 $52 $50
 
@@ -3009,7 +3013,7 @@ Jump_001_5250:
     call Call_001_64A0                            ; $528B: $CD $A0 $64
     ld a, [$C6D3]                                 ; $528E: $FA $D3 $C6
     and a                                         ; $5291: $A7
-    jp z, Jump_001_634D                           ; $5292: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $5292: $CA $4D $63
 
     ld hl, $4372                                  ; $5295: $21 $72 $43
     ld e, $05                                     ; $5298: $1E $05
@@ -3018,7 +3022,7 @@ Jump_001_5250:
     call Call_001_4B7D                            ; $52A0: $CD $7D $4B
     ld a, [$C6D3]                                 ; $52A3: $FA $D3 $C6
     and a                                         ; $52A6: $A7
-    jp nz, Jump_001_634D                          ; $52A7: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $52A7: $C2 $4D $63
 
     call Call_001_4E14                            ; $52AA: $CD $14 $4E
     ld a, [hl]                                    ; $52AD: $7E
@@ -3026,7 +3030,7 @@ Jump_001_5250:
     jp z, Jump_001_59F4                           ; $52B0: $CA $F4 $59
 
     cp $02                                        ; $52B3: $FE $02
-    jp z, Jump_001_634D                           ; $52B5: $CA $4D $63
+    jp z, AI_Hero_Close                           ; $52B5: $CA $4D $63
 
     cp $00                                        ; $52B8: $FE $00
     jp nz, Jump_001_52CB                          ; $52BA: $C2 $CB $52
@@ -3246,11 +3250,11 @@ Jump_001_53CA:
     ldh [$FF8D], a                                  ; $53E0: $E0 $8D
     ld a, $53                                     ; $53E2: $3E $53
     ldh [$FF8E], a                                  ; $53E4: $E0 $8E
-    jp Jump_001_634D                              ; $53E6: $C3 $4D $63
+    jp AI_Hero_Close                              ; $53E6: $C3 $4D $63
 
 
     call Call_001_6393                            ; $53E9: $CD $93 $63
-    ld a, [$C9CC]                                 ; $53EC: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $53EC: $FA $CC $C9
     bit 7, a                                      ; $53EF: $CB $7F
     jp nz, Jump_001_5401                          ; $53F1: $C2 $01 $54
 
@@ -3276,7 +3280,7 @@ jr_001_5408:
 
 
 jr_001_540F:
-    ld a, [$C9CC]                                 ; $540F: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $540F: $FA $CC $C9
     bit 1, a                                      ; $5412: $CB $4F
     jp nz, Jump_001_5691                          ; $5414: $C2 $91 $56
 
@@ -3323,7 +3327,7 @@ jr_001_5456:
     call Call_001_5BF4                            ; $5462: $CD $F4 $5B
 
 jr_001_5465:
-    jp Jump_001_634D                              ; $5465: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5465: $C3 $4D $63
 
 
 Jump_001_5468:
@@ -3341,11 +3345,11 @@ Jump_001_5468:
     ldh [$FF8D], a                                  ; $547E: $E0 $8D
     ld a, $54                                     ; $5480: $3E $54
     ldh [$FF8E], a                                  ; $5482: $E0 $8E
-    jp Jump_001_634D                              ; $5484: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5484: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5487: $CD $93 $63
-    ld a, [$C9CC]                                 ; $548A: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $548A: $FA $CC $C9
     bit 5, a                                      ; $548D: $CB $6F
     jr nz, jr_001_549E                            ; $548F: $20 $0D
 
@@ -3361,7 +3365,7 @@ jr_001_549E:
     and $01                                       ; $54A0: $E6 $01
     jp z, Jump_001_54C4                           ; $54A2: $CA $C4 $54
 
-    ld a, [$C9CC]                                 ; $54A5: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $54A5: $FA $CC $C9
     bit 6, a                                      ; $54A8: $CB $77
     jr z, jr_001_54B3                             ; $54AA: $28 $07
 
@@ -3377,7 +3381,7 @@ jr_001_54B3:
     ld [$C6D3], a                                 ; $54B9: $EA $D3 $C6
 
 jr_001_54BC:
-    ld a, [$C9CC]                                 ; $54BC: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $54BC: $FA $CC $C9
     bit 1, a                                      ; $54BF: $CB $4F
     jp nz, Jump_001_5724                          ; $54C1: $C2 $24 $57
 
@@ -3443,7 +3447,7 @@ jr_001_551C:
     call Call_001_5C0F                            ; $5528: $CD $0F $5C
 
 jr_001_552B:
-    jp Jump_001_634D                              ; $552B: $C3 $4D $63
+    jp AI_Hero_Close                              ; $552B: $C3 $4D $63
 
 
 Jump_001_552E:
@@ -3461,11 +3465,11 @@ Jump_001_552E:
     ldh [$FF8D], a                                  ; $5544: $E0 $8D
     ld a, $55                                     ; $5546: $3E $55
     ldh [$FF8E], a                                  ; $5548: $E0 $8E
-    jp Jump_001_634D                              ; $554A: $C3 $4D $63
+    jp AI_Hero_Close                              ; $554A: $C3 $4D $63
 
 
     call Call_001_6393                            ; $554D: $CD $93 $63
-    ld a, [$C9CC]                                 ; $5550: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5550: $FA $CC $C9
     bit 4, a                                      ; $5553: $CB $67
     jr nz, jr_001_5564                            ; $5555: $20 $0D
 
@@ -3481,7 +3485,7 @@ jr_001_5564:
     and $01                                       ; $5566: $E6 $01
     jp z, Jump_001_558A                           ; $5568: $CA $8A $55
 
-    ld a, [$C9CC]                                 ; $556B: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $556B: $FA $CC $C9
     bit 6, a                                      ; $556E: $CB $77
     jr z, jr_001_5579                             ; $5570: $28 $07
 
@@ -3497,7 +3501,7 @@ jr_001_5579:
     ld [$C6D3], a                                 ; $557F: $EA $D3 $C6
 
 jr_001_5582:
-    ld a, [$C9CC]                                 ; $5582: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5582: $FA $CC $C9
     bit 1, a                                      ; $5585: $CB $4F
     jp nz, Jump_001_57DC                          ; $5587: $C2 $DC $57
 
@@ -3563,7 +3567,7 @@ jr_001_55E2:
     call Call_001_5C2A                            ; $55EE: $CD $2A $5C
 
 jr_001_55F1:
-    jp Jump_001_634D                              ; $55F1: $C3 $4D $63
+    jp AI_Hero_Close                              ; $55F1: $C3 $4D $63
 
 
 Jump_001_55F4:
@@ -3581,11 +3585,11 @@ Jump_001_55F4:
     ldh [$FF8D], a                                  ; $560A: $E0 $8D
     ld a, $56                                     ; $560C: $3E $56
     ldh [$FF8E], a                                  ; $560E: $E0 $8E
-    jp Jump_001_634D                              ; $5610: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5610: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5613: $CD $93 $63
-    ld a, [$C9CC]                                 ; $5616: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5616: $FA $CC $C9
     bit 6, a                                      ; $5619: $CB $77
     jr nz, jr_001_562A                            ; $561B: $20 $0D
 
@@ -3611,7 +3615,7 @@ jr_001_5631:
 
 
 jr_001_5638:
-    ld a, [$C9CC]                                 ; $5638: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5638: $FA $CC $C9
     bit 1, a                                      ; $563B: $CB $4F
     jp nz, Jump_001_5894                          ; $563D: $C2 $94 $58
 
@@ -3658,7 +3662,7 @@ jr_001_567F:
     call Call_001_5C45                            ; $568B: $CD $45 $5C
 
 jr_001_568E:
-    jp Jump_001_634D                              ; $568E: $C3 $4D $63
+    jp AI_Hero_Close                              ; $568E: $C3 $4D $63
 
 
 Jump_001_5691:
@@ -3676,11 +3680,11 @@ Jump_001_5691:
     ldh [$FF8D], a                                  ; $56A7: $E0 $8D
     ld a, $56                                     ; $56A9: $3E $56
     ldh [$FF8E], a                                  ; $56AB: $E0 $8E
-    jp Jump_001_634D                              ; $56AD: $C3 $4D $63
+    jp AI_Hero_Close                              ; $56AD: $C3 $4D $63
 
 
     call Call_001_6393                            ; $56B0: $CD $93 $63
-    ld a, [$C9CC]                                 ; $56B3: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $56B3: $FA $CC $C9
     bit 7, a                                      ; $56B6: $CB $7F
     jr nz, jr_001_56C7                            ; $56B8: $20 $0D
 
@@ -3736,11 +3740,11 @@ jr_001_5707:
     call Call_001_5BF4                            ; $5716: $CD $F4 $5B
 
 jr_001_5719:
-    ld a, [$C9CC]                                 ; $5719: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5719: $FA $CC $C9
     bit 1, a                                      ; $571C: $CB $4F
     jp z, Jump_001_53CA                           ; $571E: $CA $CA $53
 
-    jp Jump_001_634D                              ; $5721: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5721: $C3 $4D $63
 
 
 Jump_001_5724:
@@ -3758,11 +3762,11 @@ Jump_001_5724:
     ldh [$FF8D], a                                  ; $573A: $E0 $8D
     ld a, $57                                     ; $573C: $3E $57
     ldh [$FF8E], a                                  ; $573E: $E0 $8E
-    jp Jump_001_634D                              ; $5740: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5740: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5743: $CD $93 $63
-    ld a, [$C9CC]                                 ; $5746: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5746: $FA $CC $C9
     bit 5, a                                      ; $5749: $CB $6F
     jr nz, jr_001_575A                            ; $574B: $20 $0D
 
@@ -3847,11 +3851,11 @@ jr_001_57BF:
     call Call_001_5C0F                            ; $57CE: $CD $0F $5C
 
 jr_001_57D1:
-    ld a, [$C9CC]                                 ; $57D1: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $57D1: $FA $CC $C9
     bit 1, a                                      ; $57D4: $CB $4F
     jp z, Jump_001_5468                           ; $57D6: $CA $68 $54
 
-    jp Jump_001_634D                              ; $57D9: $C3 $4D $63
+    jp AI_Hero_Close                              ; $57D9: $C3 $4D $63
 
 
 Jump_001_57DC:
@@ -3869,11 +3873,11 @@ Jump_001_57DC:
     ldh [$FF8D], a                                  ; $57F2: $E0 $8D
     ld a, $57                                     ; $57F4: $3E $57
     ldh [$FF8E], a                                  ; $57F6: $E0 $8E
-    jp Jump_001_634D                              ; $57F8: $C3 $4D $63
+    jp AI_Hero_Close                              ; $57F8: $C3 $4D $63
 
 
     call Call_001_6393                            ; $57FB: $CD $93 $63
-    ld a, [$C9CC]                                 ; $57FE: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $57FE: $FA $CC $C9
     bit 4, a                                      ; $5801: $CB $67
     jr nz, jr_001_5812                            ; $5803: $20 $0D
 
@@ -3958,11 +3962,11 @@ jr_001_5877:
     call Call_001_5C2A                            ; $5886: $CD $2A $5C
 
 jr_001_5889:
-    ld a, [$C9CC]                                 ; $5889: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5889: $FA $CC $C9
     bit 1, a                                      ; $588C: $CB $4F
     jp z, Jump_001_552E                           ; $588E: $CA $2E $55
 
-    jp Jump_001_634D                              ; $5891: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5891: $C3 $4D $63
 
 
 Jump_001_5894:
@@ -3980,11 +3984,11 @@ Jump_001_5894:
     ldh [$FF8D], a                                  ; $58AA: $E0 $8D
     ld a, $58                                     ; $58AC: $3E $58
     ldh [$FF8E], a                                  ; $58AE: $E0 $8E
-    jp Jump_001_634D                              ; $58B0: $C3 $4D $63
+    jp AI_Hero_Close                              ; $58B0: $C3 $4D $63
 
 
     call Call_001_6393                            ; $58B3: $CD $93 $63
-    ld a, [$C9CC]                                 ; $58B6: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $58B6: $FA $CC $C9
     bit 6, a                                      ; $58B9: $CB $77
     jr nz, jr_001_58CA                            ; $58BB: $20 $0D
 
@@ -4040,11 +4044,11 @@ jr_001_590A:
     call Call_001_5C45                            ; $5919: $CD $45 $5C
 
 jr_001_591C:
-    ld a, [$C9CC]                                 ; $591C: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $591C: $FA $CC $C9
     bit 1, a                                      ; $591F: $CB $4F
     jp z, Jump_001_55F4                           ; $5921: $CA $F4 $55
 
-    jp Jump_001_634D                              ; $5924: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5924: $C3 $4D $63
 
 
     ld a, $19                                     ; $5927: $3E $19
@@ -4235,7 +4239,7 @@ jr_001_5AC4:
     ldh [$FF8D], a                                  ; $5AE5: $E0 $8D
     ld a, $5C                                     ; $5AE7: $3E $5C
     ldh [$FF8E], a                                  ; $5AE9: $E0 $8E
-    jp Jump_001_634D                              ; $5AEB: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5AEB: $C3 $4D $63
 
 
 jr_001_5AEE:
@@ -4339,12 +4343,12 @@ Jump_001_5BAD:
     ldh [$FF8D], a                                  ; $5BB7: $E0 $8D
     ld a, $5B                                     ; $5BB9: $3E $5B
     ldh [$FF8E], a                                  ; $5BBB: $E0 $8E
-    jp Jump_001_634D                              ; $5BBD: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5BBD: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5BC0: $CD $93 $63
     call Call_001_5BA4                            ; $5BC3: $CD $A4 $5B
-    ld a, [$C9CC]                                 ; $5BC6: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5BC6: $FA $CC $C9
     bit 4, a                                      ; $5BC9: $CB $67
     jp nz, Jump_001_5D7B                          ; $5BCB: $C2 $7B $5D
 
@@ -4364,7 +4368,7 @@ Jump_001_5BAD:
     call Call_001_422E                            ; $5BE8: $CD $2E $42
     call Call_001_4B7D                            ; $5BEB: $CD $7D $4B
     call Call_001_5E95                            ; $5BEE: $CD $95 $5E
-    jp Jump_001_634D                              ; $5BF1: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5BF1: $C3 $4D $63
 
 
 Call_001_5BF4:
@@ -4454,12 +4458,12 @@ Jump_001_5C60:
     ldh [$FF8D], a                                  ; $5C76: $E0 $8D
     ld a, $5C                                     ; $5C78: $3E $5C
     ldh [$FF8E], a                                  ; $5C7A: $E0 $8E
-    jp Jump_001_634D                              ; $5C7C: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5C7C: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5C7F: $CD $93 $63
     call Call_001_5BA4                            ; $5C82: $CD $A4 $5B
-    ld a, [$C9CC]                                 ; $5C85: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5C85: $FA $CC $C9
     bit 7, a                                      ; $5C88: $CB $7F
     jp nz, Jump_001_5C9A                          ; $5C8A: $C2 $9A $5C
 
@@ -4502,11 +4506,11 @@ jr_001_5CA8:
 jr_001_5CC9:
     ld a, [$C6D3]                                 ; $5CC9: $FA $D3 $C6
     and a                                         ; $5CCC: $A7
-    jp nz, Jump_001_634D                          ; $5CCD: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5CCD: $C2 $4D $63
 
     ld a, [hl]                                    ; $5CD0: $7E
     cp $00                                        ; $5CD1: $FE $00
-    jp nz, Jump_001_634D                          ; $5CD3: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5CD3: $C2 $4D $63
 
     call Call_001_5B9B                            ; $5CD6: $CD $9B $5B
     ld a, $3A                                     ; $5CD9: $3E $3A
@@ -4531,12 +4535,12 @@ Jump_001_5CE6:
     ldh [$FF8D], a                                  ; $5CFC: $E0 $8D
     ld a, $5D                                     ; $5CFE: $3E $5D
     ldh [$FF8E], a                                  ; $5D00: $E0 $8E
-    jp Jump_001_634D                              ; $5D02: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5D02: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5D05: $CD $93 $63
     call Call_001_5BA4                            ; $5D08: $CD $A4 $5B
-    ld a, [$C9CC]                                 ; $5D0B: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5D0B: $FA $CC $C9
     bit 5, a                                      ; $5D0E: $CB $6F
     jr nz, jr_001_5D1F                            ; $5D10: $20 $0D
 
@@ -4552,7 +4556,7 @@ jr_001_5D1F:
     and $01                                       ; $5D21: $E6 $01
     jp z, Jump_001_5D3D                           ; $5D23: $CA $3D $5D
 
-    ld a, [$C9CC]                                 ; $5D26: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5D26: $FA $CC $C9
     bit 6, a                                      ; $5D29: $CB $77
     jr z, jr_001_5D34                             ; $5D2B: $28 $07
 
@@ -4586,11 +4590,11 @@ jr_001_5D3D:
 jr_001_5D5E:
     ld a, [$C6D3]                                 ; $5D5E: $FA $D3 $C6
     and a                                         ; $5D61: $A7
-    jp nz, Jump_001_634D                          ; $5D62: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5D62: $C2 $4D $63
 
     ld a, [hl]                                    ; $5D65: $7E
     cp $00                                        ; $5D66: $FE $00
-    jp nz, Jump_001_634D                          ; $5D68: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5D68: $C2 $4D $63
 
     call Call_001_5B9B                            ; $5D6B: $CD $9B $5B
     ld a, $91                                     ; $5D6E: $3E $91
@@ -4615,12 +4619,12 @@ Jump_001_5D7B:
     ldh [$FF8D], a                                  ; $5D91: $E0 $8D
     ld a, $5D                                     ; $5D93: $3E $5D
     ldh [$FF8E], a                                  ; $5D95: $E0 $8E
-    jp Jump_001_634D                              ; $5D97: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5D97: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5D9A: $CD $93 $63
     call Call_001_5BA4                            ; $5D9D: $CD $A4 $5B
-    ld a, [$C9CC]                                 ; $5DA0: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5DA0: $FA $CC $C9
     bit 4, a                                      ; $5DA3: $CB $67
     jr nz, jr_001_5DB4                            ; $5DA5: $20 $0D
 
@@ -4636,7 +4640,7 @@ jr_001_5DB4:
     and $01                                       ; $5DB6: $E6 $01
     jp z, Jump_001_5DD2                           ; $5DB8: $CA $D2 $5D
 
-    ld a, [$C9CC]                                 ; $5DBB: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5DBB: $FA $CC $C9
     bit 6, a                                      ; $5DBE: $CB $77
     jr z, jr_001_5DC9                             ; $5DC0: $28 $07
 
@@ -4670,11 +4674,11 @@ jr_001_5DD2:
 jr_001_5DF3:
     ld a, [$C6D3]                                 ; $5DF3: $FA $D3 $C6
     and a                                         ; $5DF6: $A7
-    jp nz, Jump_001_634D                          ; $5DF7: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5DF7: $C2 $4D $63
 
     ld a, [hl]                                    ; $5DFA: $7E
     cp $00                                        ; $5DFB: $FE $00
-    jp nz, Jump_001_634D                          ; $5DFD: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5DFD: $C2 $4D $63
 
     call Call_001_5B9B                            ; $5E00: $CD $9B $5B
     ld a, $C6                                     ; $5E03: $3E $C6
@@ -4699,12 +4703,12 @@ Jump_001_5E10:
     ldh [$FF8D], a                                  ; $5E26: $E0 $8D
     ld a, $5E                                     ; $5E28: $3E $5E
     ldh [$FF8E], a                                  ; $5E2A: $E0 $8E
-    jp Jump_001_634D                              ; $5E2C: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5E2C: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5E2F: $CD $93 $63
     call Call_001_5BA4                            ; $5E32: $CD $A4 $5B
-    ld a, [$C9CC]                                 ; $5E35: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5E35: $FA $CC $C9
     bit 6, a                                      ; $5E38: $CB $77
     jr nz, jr_001_5E49                            ; $5E3A: $20 $0D
 
@@ -4747,11 +4751,11 @@ jr_001_5E57:
 jr_001_5E78:
     ld a, [$C6D3]                                 ; $5E78: $FA $D3 $C6
     and a                                         ; $5E7B: $A7
-    jp nz, Jump_001_634D                          ; $5E7C: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5E7C: $C2 $4D $63
 
     ld a, [hl]                                    ; $5E7F: $7E
     cp $00                                        ; $5E80: $FE $00
-    jp nz, Jump_001_634D                          ; $5E82: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $5E82: $C2 $4D $63
 
     call Call_001_5B9B                            ; $5E85: $CD $9B $5B
     ld a, $FB                                     ; $5E88: $3E $FB
@@ -4914,7 +4918,7 @@ Jump_001_5F65:
     ldh [$FF8D], a                                  ; $5F7B: $E0 $8D
     ld a, $5F                                     ; $5F7D: $3E $5F
     ldh [$FF8E], a                                  ; $5F7F: $E0 $8E
-    jp Jump_001_634D                              ; $5F81: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5F81: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5F84: $CD $93 $63
@@ -4922,7 +4926,7 @@ Jump_001_5F65:
     and $01                                       ; $5F89: $E6 $01
     jr z, jr_001_5FAB                             ; $5F8B: $28 $1E
 
-    ld a, [$C9CC]                                 ; $5F8D: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5F8D: $FA $CC $C9
     bit 7, a                                      ; $5F90: $CB $7F
     jp nz, Jump_001_5F98                          ; $5F92: $C2 $98 $5F
 
@@ -4954,7 +4958,7 @@ jr_001_5FAB:
     call Call_001_422E                            ; $5FB3: $CD $2E $42
     call Call_001_4B7D                            ; $5FB6: $CD $7D $4B
     call Call_001_4C08                            ; $5FB9: $CD $08 $4C
-    jp Jump_001_634D                              ; $5FBC: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5FBC: $C3 $4D $63
 
 
 Jump_001_5FBF:
@@ -4972,7 +4976,7 @@ Jump_001_5FBF:
     ldh [$FF8D], a                                  ; $5FD5: $E0 $8D
     ld a, $5F                                     ; $5FD7: $3E $5F
     ldh [$FF8E], a                                  ; $5FD9: $E0 $8E
-    jp Jump_001_634D                              ; $5FDB: $C3 $4D $63
+    jp AI_Hero_Close                              ; $5FDB: $C3 $4D $63
 
 
     call Call_001_6393                            ; $5FDE: $CD $93 $63
@@ -4980,7 +4984,7 @@ Jump_001_5FBF:
     and $01                                       ; $5FE3: $E6 $01
     jr z, jr_001_600A                             ; $5FE5: $28 $23
 
-    ld a, [$C9CC]                                 ; $5FE7: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $5FE7: $FA $CC $C9
     bit 5, a                                      ; $5FEA: $CB $6F
     jr nz, jr_001_5FF1                            ; $5FEC: $20 $03
 
@@ -5014,7 +5018,7 @@ jr_001_600A:
     call Call_001_422E                            ; $6012: $CD $2E $42
     call Call_001_4B7D                            ; $6015: $CD $7D $4B
     call Call_001_4C59                            ; $6018: $CD $59 $4C
-    jp Jump_001_634D                              ; $601B: $C3 $4D $63
+    jp AI_Hero_Close                              ; $601B: $C3 $4D $63
 
 
 Jump_001_601E:
@@ -5032,7 +5036,7 @@ Jump_001_601E:
     ldh [$FF8D], a                                  ; $6034: $E0 $8D
     ld a, $60                                     ; $6036: $3E $60
     ldh [$FF8E], a                                  ; $6038: $E0 $8E
-    jp Jump_001_634D                              ; $603A: $C3 $4D $63
+    jp AI_Hero_Close                              ; $603A: $C3 $4D $63
 
 
     call Call_001_6393                            ; $603D: $CD $93 $63
@@ -5040,7 +5044,7 @@ Jump_001_601E:
     and $01                                       ; $6042: $E6 $01
     jr z, jr_001_6069                             ; $6044: $28 $23
 
-    ld a, [$C9CC]                                 ; $6046: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6046: $FA $CC $C9
     bit 4, a                                      ; $6049: $CB $67
     jr nz, jr_001_6050                            ; $604B: $20 $03
 
@@ -5074,7 +5078,7 @@ jr_001_6069:
     call Call_001_422E                            ; $6071: $CD $2E $42
     call Call_001_4B7D                            ; $6074: $CD $7D $4B
     call Call_001_4CAA                            ; $6077: $CD $AA $4C
-    jp Jump_001_634D                              ; $607A: $C3 $4D $63
+    jp AI_Hero_Close                              ; $607A: $C3 $4D $63
 
 
 Jump_001_607D:
@@ -5092,7 +5096,7 @@ Jump_001_607D:
     ldh [$FF8D], a                                  ; $6093: $E0 $8D
     ld a, $60                                     ; $6095: $3E $60
     ldh [$FF8E], a                                  ; $6097: $E0 $8E
-    jp Jump_001_634D                              ; $6099: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6099: $C3 $4D $63
 
 
     call Call_001_6393                            ; $609C: $CD $93 $63
@@ -5100,7 +5104,7 @@ Jump_001_607D:
     and $01                                       ; $60A1: $E6 $01
     jr z, jr_001_60C2                             ; $60A3: $28 $1D
 
-    ld a, [$C9CC]                                 ; $60A5: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $60A5: $FA $CC $C9
     bit 6, a                                      ; $60A8: $CB $77
     jr nz, jr_001_60AF                            ; $60AA: $20 $03
 
@@ -5132,7 +5136,7 @@ jr_001_60C2:
     call Call_001_422E                            ; $60CA: $CD $2E $42
     call Call_001_4B7D                            ; $60CD: $CD $7D $4B
     call Call_001_4CFB                            ; $60D0: $CD $FB $4C
-    jp Jump_001_634D                              ; $60D3: $C3 $4D $63
+    jp AI_Hero_Close                              ; $60D3: $C3 $4D $63
 
 
 Jump_001_60D6:
@@ -5140,11 +5144,11 @@ Jump_001_60D6:
     ldh [$FF8D], a                                  ; $60D8: $E0 $8D
     ld a, $60                                     ; $60DA: $3E $60
     ldh [$FF8E], a                                  ; $60DC: $E0 $8E
-    jp Jump_001_634D                              ; $60DE: $C3 $4D $63
+    jp AI_Hero_Close                              ; $60DE: $C3 $4D $63
 
 
     call Call_001_6393                            ; $60E1: $CD $93 $63
-    ld a, [$C9CC]                                 ; $60E4: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $60E4: $FA $CC $C9
     bit 4, a                                      ; $60E7: $CB $67
     jp nz, Jump_001_601E                          ; $60E9: $C2 $1E $60
 
@@ -5158,8 +5162,8 @@ Jump_001_60D6:
     jp nz, Jump_001_5F65                          ; $60F8: $C2 $65 $5F
 
     call Call_001_4B7D                            ; $60FB: $CD $7D $4B
-    call Call_001_6479                            ; $60FE: $CD $79 $64
-    jp Jump_001_634D                              ; $6101: $C3 $4D $63
+    call AI_Hero_Action_Stand_Main                            ; $60FE: $CD $79 $64
+    jp AI_Hero_Close                              ; $6101: $C3 $4D $63
 
 
     Battery_SetBank $00
@@ -5179,12 +5183,12 @@ Jump_001_611D:
     ldh [$FF8D], a                                  ; $6127: $E0 $8D
     ld a, $61                                     ; $6129: $3E $61
     ldh [$FF8E], a                                  ; $612B: $E0 $8E
-    jp Jump_001_634D                              ; $612D: $C3 $4D $63
+    jp AI_Hero_Close                              ; $612D: $C3 $4D $63
 
 
 Jump_001_6130:
     call Call_001_6393                            ; $6130: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6133: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6133: $FA $CC $C9
     bit 4, a                                      ; $6136: $CB $67
     jp nz, Jump_001_625E                          ; $6138: $C2 $5E $62
 
@@ -5203,10 +5207,10 @@ Jump_001_6130:
     call CallForeign                            ; $6152: $CD $A9 $07
     call Call_001_422E                            ; $6155: $CD $2E $42
     call Call_001_4B7D                            ; $6158: $CD $7D $4B
-    ld a, [$C9CD]                                 ; $615B: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $615B: $FA $CD $C9
     bit 0, a                                      ; $615E: $CB $47
     call nz, Call_001_6166                        ; $6160: $C4 $66 $61
-    jp Jump_001_634D                              ; $6163: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6163: $C3 $4D $63
 
 
 Call_001_6166:
@@ -5225,19 +5229,19 @@ Call_001_6166:
     jr z, jr_001_6183                             ; $6178: $28 $09
 
 jr_001_617A:
-    jp Jump_001_4CFB                              ; $617A: $C3 $FB $4C
+    jp AI_Hero_CheckAction_Up                              ; $617A: $C3 $FB $4C
 
 
 jr_001_617D:
-    jp Jump_001_4C08                              ; $617D: $C3 $08 $4C
+    jp AI_Hero_CheckAction_Down                              ; $617D: $C3 $08 $4C
 
 
 jr_001_6180:
-    jp Jump_001_4C59                              ; $6180: $C3 $59 $4C
+    jp AI_Hero_CheckAction_Left                              ; $6180: $C3 $59 $4C
 
 
 jr_001_6183:
-    jp Jump_001_4CAA                              ; $6183: $C3 $AA $4C
+    jp AI_Hero_CheckAction_Right                              ; $6183: $C3 $AA $4C
 
 
     ret                                           ; $6186: $C9
@@ -5260,11 +5264,11 @@ Jump_001_6187:
     ldh [$FF8D], a                                  ; $61A1: $E0 $8D
     ld a, $61                                     ; $61A3: $3E $61
     ldh [$FF8E], a                                  ; $61A5: $E0 $8E
-    jp Jump_001_634D                              ; $61A7: $C3 $4D $63
+    jp AI_Hero_Close                              ; $61A7: $C3 $4D $63
 
 
     call Call_001_6393                            ; $61AA: $CD $93 $63
-    ld a, [$C9CC]                                 ; $61AD: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $61AD: $FA $CC $C9
     bit 7, a                                      ; $61B0: $CB $7F
     jp nz, Jump_001_61C2                          ; $61B2: $C2 $C2 $61
 
@@ -5299,7 +5303,7 @@ jr_001_61D0:
     ld a, [$C6D3]                                 ; $61E1: $FA $D3 $C6
     and a                                         ; $61E4: $A7
     call z, Call_001_4C08                         ; $61E5: $CC $08 $4C
-    jp Jump_001_634D                              ; $61E8: $C3 $4D $63
+    jp AI_Hero_Close                              ; $61E8: $C3 $4D $63
 
 
 Jump_001_61EB:
@@ -5319,11 +5323,11 @@ Jump_001_61EB:
     ldh [$FF8D], a                                  ; $6205: $E0 $8D
     ld a, $62                                     ; $6207: $3E $62
     ldh [$FF8E], a                                  ; $6209: $E0 $8E
-    jp Jump_001_634D                              ; $620B: $C3 $4D $63
+    jp AI_Hero_Close                              ; $620B: $C3 $4D $63
 
 
     call Call_001_6393                            ; $620E: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6211: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6211: $FA $CC $C9
     bit 5, a                                      ; $6214: $CB $6F
     jr nz, jr_001_6225                            ; $6216: $20 $0D
 
@@ -5339,7 +5343,7 @@ jr_001_6225:
     and $01                                       ; $6227: $E6 $01
     jp z, Jump_001_6243                           ; $6229: $CA $43 $62
 
-    ld a, [$C9CC]                                 ; $622C: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $622C: $FA $CC $C9
     bit 6, a                                      ; $622F: $CB $77
     jr z, jr_001_623A                             ; $6231: $28 $07
 
@@ -5365,7 +5369,7 @@ jr_001_6243:
     ld a, [$C6D2]                                 ; $6254: $FA $D2 $C6
     and a                                         ; $6257: $A7
     call z, Call_001_4C59                         ; $6258: $CC $59 $4C
-    jp Jump_001_634D                              ; $625B: $C3 $4D $63
+    jp AI_Hero_Close                              ; $625B: $C3 $4D $63
 
 
 Jump_001_625E:
@@ -5385,11 +5389,11 @@ Jump_001_625E:
     ldh [$FF8D], a                                  ; $6278: $E0 $8D
     ld a, $62                                     ; $627A: $3E $62
     ldh [$FF8E], a                                  ; $627C: $E0 $8E
-    jp Jump_001_634D                              ; $627E: $C3 $4D $63
+    jp AI_Hero_Close                              ; $627E: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6281: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6284: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6284: $FA $CC $C9
     bit 4, a                                      ; $6287: $CB $67
     jr nz, jr_001_6298                            ; $6289: $20 $0D
 
@@ -5405,7 +5409,7 @@ jr_001_6298:
     and $01                                       ; $629A: $E6 $01
     jp z, Jump_001_62B6                           ; $629C: $CA $B6 $62
 
-    ld a, [$C9CC]                                 ; $629F: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $629F: $FA $CC $C9
     bit 6, a                                      ; $62A2: $CB $77
     jr z, jr_001_62AD                             ; $62A4: $28 $07
 
@@ -5431,7 +5435,7 @@ jr_001_62B6:
     ld a, [$C6D2]                                 ; $62C7: $FA $D2 $C6
     and a                                         ; $62CA: $A7
     call z, Call_001_4CAA                         ; $62CB: $CC $AA $4C
-    jp Jump_001_634D                              ; $62CE: $C3 $4D $63
+    jp AI_Hero_Close                              ; $62CE: $C3 $4D $63
 
 
 Jump_001_62D1:
@@ -5451,11 +5455,11 @@ Jump_001_62D1:
     ldh [$FF8D], a                                  ; $62EB: $E0 $8D
     ld a, $62                                     ; $62ED: $3E $62
     ldh [$FF8E], a                                  ; $62EF: $E0 $8E
-    jp Jump_001_634D                              ; $62F1: $C3 $4D $63
+    jp AI_Hero_Close                              ; $62F1: $C3 $4D $63
 
 
     call Call_001_6393                            ; $62F4: $CD $93 $63
-    ld a, [$C9CC]                                 ; $62F7: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $62F7: $FA $CC $C9
     bit 6, a                                      ; $62FA: $CB $77
     jr nz, jr_001_630B                            ; $62FC: $20 $0D
 
@@ -5490,7 +5494,7 @@ jr_001_6319:
     ld a, [$C6D3]                                 ; $632A: $FA $D3 $C6
     and a                                         ; $632D: $A7
     call z, Call_001_4CFB                         ; $632E: $CC $FB $4C
-    jp Jump_001_634D                              ; $6331: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6331: $C3 $4D $63
 
 AI_Hero:
     Battery_SetBank $00
@@ -5501,7 +5505,7 @@ AI_Hero:
     jp AI_Hero_Start                              ; $634A: $C3 $20 $64
 
 
-Jump_001_634D:
+AI_Hero_Close:
     call Script_Close                            ; $634D: $CD $78 $2B
     call Call_001_410A                            ; $6350: $CD $0A $41
     ret                                           ; $6353: $C9
@@ -5516,7 +5520,7 @@ Jump_001_6354:
     ldh [$FF8D], a                                  ; $635E: $E0 $8D
     ld a, $63                                     ; $6360: $3E $63
     ldh [$FF8E], a                                  ; $6362: $E0 $8E
-    jp Jump_001_634D                              ; $6364: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6364: $C3 $4D $63
 
 
     call Call_001_412F                            ; $6367: $CD $2F $41
@@ -5610,12 +5614,12 @@ Jump_001_640D:
     ldh [$FF8D], a                                  ; $6417: $E0 $8D
     ld a, $64                                     ; $6419: $3E $64
     ldh [$FF8E], a                                  ; $641B: $E0 $8E
-    jp Jump_001_634D                              ; $641D: $C3 $4D $63
+    jp AI_Hero_Close                              ; $641D: $C3 $4D $63
 
 
 AI_Hero_Start:
     call Call_001_6393                            ; $6420: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6423: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6423: $FA $CC $C9
     bit 4, a                                      ; $6426: $CB $67
     jp nz, Jump_001_552E                          ; $6428: $C2 $2E $55
 
@@ -5647,7 +5651,7 @@ AI_Hero_Start:
     ld hl, $4372                                  ; $645B: $21 $72 $43
     ld e, $05                                     ; $645E: $1E $05
     call CallForeign                            ; $6460: $CD $A9 $07
-    jr jr_001_6470                                ; $6463: $18 $0B
+    jr AI_Hero_Action_Stand                                ; $6463: $18 $0B
 
 jr_001_6465:
     ld hl, $4372                                  ; $6465: $21 $72 $43
@@ -5655,45 +5659,45 @@ jr_001_6465:
     call CallForeign                            ; $646A: $CD $A9 $07
     call Call_001_422E                            ; $646D: $CD $2E $42
 
-jr_001_6470:
+AI_Hero_Action_Stand:
     call Call_001_4B7D                            ; $6470: $CD $7D $4B
-    call Call_001_6479                            ; $6473: $CD $79 $64
-    jp Jump_001_634D                              ; $6476: $C3 $4D $63
+    call AI_Hero_Action_Stand_Main                            ; $6473: $CD $79 $64
+    jp AI_Hero_Close                              ; $6476: $C3 $4D $63
 
 
-Call_001_6479:
-    ld a, [$C9CD]                                 ; $6479: $FA $CD $C9
+AI_Hero_Action_Stand_Main:
+    ld a, [wAI_CntDown]                                 ; $6479: $FA $CD $C9
     bit 0, a                                      ; $647C: $CB $47
     ret z                                         ; $647E: $C8
 
     ldh a, [$FF8C]                                  ; $647F: $F0 $8C
     and $03                                       ; $6481: $E6 $03
     cp $00                                        ; $6483: $FE $00
-    jr z, jr_001_6493                             ; $6485: $28 $0C
+    jr z, .FacingUp                             ; $6485: $28 $0C
 
     cp $03                                        ; $6487: $FE $03
-    jr z, jr_001_6496                             ; $6489: $28 $0B
+    jr z, .FacingDown                             ; $6489: $28 $0B
 
     cp $01                                        ; $648B: $FE $01
-    jr z, jr_001_6499                             ; $648D: $28 $0A
+    jr z, .FacingLeft                             ; $648D: $28 $0A
 
     cp $02                                        ; $648F: $FE $02
-    jr z, jr_001_649C                             ; $6491: $28 $09
+    jr z, .FacingRight                             ; $6491: $28 $09
 
-jr_001_6493:
-    jp Jump_001_4CFB                              ; $6493: $C3 $FB $4C
-
-
-jr_001_6496:
-    jp Jump_001_4C08                              ; $6496: $C3 $08 $4C
+.FacingUp:
+    jp AI_Hero_CheckAction_Up                              ; $6493: $C3 $FB $4C
 
 
-jr_001_6499:
-    jp Jump_001_4C59                              ; $6499: $C3 $59 $4C
+.FacingDown:
+    jp AI_Hero_CheckAction_Down                              ; $6496: $C3 $08 $4C
 
 
-jr_001_649C:
-    jp Jump_001_4CAA                              ; $649C: $C3 $AA $4C
+.FacingLeft:
+    jp AI_Hero_CheckAction_Left                              ; $6499: $C3 $59 $4C
+
+
+.FacingRight:
+    jp AI_Hero_CheckAction_Right                              ; $649C: $C3 $AA $4C
 
 
     ret                                           ; $649F: $C9
@@ -6742,7 +6746,7 @@ Call_001_69B2:
     ldh [$FF8D], a                                  ; $69EA: $E0 $8D
     ld a, $6E                                     ; $69EC: $3E $6E
     ldh [$FF8E], a                                  ; $69EE: $E0 $8E
-    jp Jump_001_634D                              ; $69F0: $C3 $4D $63
+    jp AI_Hero_Close                              ; $69F0: $C3 $4D $63
 
 
 Jump_001_69F3:
@@ -6760,11 +6764,11 @@ Jump_001_69F3:
     ldh [$FF8D], a                                  ; $6A09: $E0 $8D
     ld a, $6A                                     ; $6A0B: $3E $6A
     ldh [$FF8E], a                                  ; $6A0D: $E0 $8E
-    jp Jump_001_634D                              ; $6A0F: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6A0F: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6A12: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6A15: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6A15: $FA $CC $C9
     bit 7, a                                      ; $6A18: $CB $7F
     jp nz, Jump_001_6A20                          ; $6A1A: $C2 $20 $6A
 
@@ -6795,12 +6799,12 @@ jr_001_6A2E:
     call Call_001_4B7D                            ; $6A3E: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6A41: $FA $D3 $C6
     and a                                         ; $6A44: $A7
-    jp nz, Jump_001_634D                          ; $6A45: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $6A45: $C2 $4D $63
 
 Jump_001_6A48:
     call Call_001_4D4C                            ; $6A48: $CD $4C $4D
     call Call_001_69B2                            ; $6A4B: $CD $B2 $69
-    jp Jump_001_634D                              ; $6A4E: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6A4E: $C3 $4D $63
 
 
 Jump_001_6A51:
@@ -6818,11 +6822,11 @@ Jump_001_6A51:
     ldh [$FF8D], a                                  ; $6A67: $E0 $8D
     ld a, $6A                                     ; $6A69: $3E $6A
     ldh [$FF8E], a                                  ; $6A6B: $E0 $8E
-    jp Jump_001_634D                              ; $6A6D: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6A6D: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6A70: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6A73: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6A73: $FA $CC $C9
     bit 5, a                                      ; $6A76: $CB $6F
     jr nz, jr_001_6A7D                            ; $6A78: $20 $03
 
@@ -6855,12 +6859,12 @@ jr_001_6A8D:
     call Call_001_4B7D                            ; $6AA1: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6AA4: $FA $D3 $C6
     and a                                         ; $6AA7: $A7
-    jp nz, Jump_001_634D                          ; $6AA8: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $6AA8: $C2 $4D $63
 
 Jump_001_6AAB:
     call Call_001_4D6A                            ; $6AAB: $CD $6A $4D
     call Call_001_69B2                            ; $6AAE: $CD $B2 $69
-    jp Jump_001_634D                              ; $6AB1: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6AB1: $C3 $4D $63
 
 
 Jump_001_6AB4:
@@ -6878,11 +6882,11 @@ Jump_001_6AB4:
     ldh [$FF8D], a                                  ; $6ACA: $E0 $8D
     ld a, $6A                                     ; $6ACC: $3E $6A
     ldh [$FF8E], a                                  ; $6ACE: $E0 $8E
-    jp Jump_001_634D                              ; $6AD0: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6AD0: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6AD3: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6AD6: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6AD6: $FA $CC $C9
     bit 4, a                                      ; $6AD9: $CB $67
     jr nz, jr_001_6AE0                            ; $6ADB: $20 $03
 
@@ -6915,12 +6919,12 @@ jr_001_6AF0:
     call Call_001_4B7D                            ; $6B04: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6B07: $FA $D3 $C6
     and a                                         ; $6B0A: $A7
-    jp nz, Jump_001_634D                          ; $6B0B: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $6B0B: $C2 $4D $63
 
 Jump_001_6B0E:
     call Call_001_4D85                            ; $6B0E: $CD $85 $4D
     call Call_001_69B2                            ; $6B11: $CD $B2 $69
-    jp Jump_001_634D                              ; $6B14: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6B14: $C3 $4D $63
 
 
 Jump_001_6B17:
@@ -6938,11 +6942,11 @@ Jump_001_6B17:
     ldh [$FF8D], a                                  ; $6B2D: $E0 $8D
     ld a, $6B                                     ; $6B2F: $3E $6B
     ldh [$FF8E], a                                  ; $6B31: $E0 $8E
-    jp Jump_001_634D                              ; $6B33: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6B33: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6B36: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6B39: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6B39: $FA $CC $C9
     bit 6, a                                      ; $6B3C: $CB $77
     jr nz, jr_001_6B43                            ; $6B3E: $20 $03
 
@@ -6973,12 +6977,12 @@ jr_001_6B51:
     call Call_001_4B7D                            ; $6B61: $CD $7D $4B
     ld a, [$C6D3]                                 ; $6B64: $FA $D3 $C6
     and a                                         ; $6B67: $A7
-    jp nz, Jump_001_634D                          ; $6B68: $C2 $4D $63
+    jp nz, AI_Hero_Close                          ; $6B68: $C2 $4D $63
 
 Jump_001_6B6B:
     call Call_001_4DA0                            ; $6B6B: $CD $A0 $4D
     call Call_001_69B2                            ; $6B6E: $CD $B2 $69
-    jp Jump_001_634D                              ; $6B71: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6B71: $C3 $4D $63
 
 
     xor a                                         ; $6B74: $AF
@@ -6992,12 +6996,12 @@ Jump_001_6B7F:
     ldh [$FF8D], a                                  ; $6B81: $E0 $8D
     ld a, $6B                                     ; $6B83: $3E $6B
     ldh [$FF8E], a                                  ; $6B85: $E0 $8E
-    jp Jump_001_634D                              ; $6B87: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6B87: $C3 $4D $63
 
 
 jr_001_6B8A:
     call Call_001_6393                            ; $6B8A: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6B8D: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6B8D: $FA $CC $C9
     bit 4, a                                      ; $6B90: $CB $67
     jp nz, Jump_001_6AB4                          ; $6B92: $C2 $B4 $6A
 
@@ -7058,12 +7062,12 @@ Jump_001_6BE0:
     ldh [$FF8D], a                                  ; $6BEA: $E0 $8D
     ld a, $6B                                     ; $6BEC: $3E $6B
     ldh [$FF8E], a                                  ; $6BEE: $E0 $8E
-    jp Jump_001_634D                              ; $6BF0: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6BF0: $C3 $4D $63
 
 
 Jump_001_6BF3:
     call Call_001_6393                            ; $6BF3: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6BF6: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6BF6: $FA $CC $C9
     bit 4, a                                      ; $6BF9: $CB $67
     jp nz, Jump_001_6D18                          ; $6BFB: $C2 $18 $6D
 
@@ -7081,10 +7085,10 @@ Jump_001_6BF3:
     call CallForeign                            ; $6C12: $CD $A9 $07
     call Call_001_422E                            ; $6C15: $CD $2E $42
     call Call_001_4B7D                            ; $6C18: $CD $7D $4B
-    ld a, [$C9CD]                                 ; $6C1B: $FA $CD $C9
+    ld a, [wAI_CntDown]                                 ; $6C1B: $FA $CD $C9
     bit 0, a                                      ; $6C1E: $CB $47
     call nz, Call_001_6C26                        ; $6C20: $C4 $26 $6C
-    jp Jump_001_634D                              ; $6C23: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6C23: $C3 $4D $63
 
 
 Call_001_6C26:
@@ -7103,19 +7107,19 @@ Call_001_6C26:
     jr z, jr_001_6C43                             ; $6C38: $28 $09
 
 jr_001_6C3A:
-    jp Jump_001_4CFB                              ; $6C3A: $C3 $FB $4C
+    jp AI_Hero_CheckAction_Up                              ; $6C3A: $C3 $FB $4C
 
 
 jr_001_6C3D:
-    jp Jump_001_4C08                              ; $6C3D: $C3 $08 $4C
+    jp AI_Hero_CheckAction_Down                              ; $6C3D: $C3 $08 $4C
 
 
 jr_001_6C40:
-    jp Jump_001_4C59                              ; $6C40: $C3 $59 $4C
+    jp AI_Hero_CheckAction_Left                              ; $6C40: $C3 $59 $4C
 
 
 jr_001_6C43:
-    jp Jump_001_4CAA                              ; $6C43: $C3 $AA $4C
+    jp AI_Hero_CheckAction_Right                              ; $6C43: $C3 $AA $4C
 
 
     ret                                           ; $6C46: $C9
@@ -7138,11 +7142,11 @@ Jump_001_6C47:
     ldh [$FF8D], a                                  ; $6C61: $E0 $8D
     ld a, $6C                                     ; $6C63: $3E $6C
     ldh [$FF8E], a                                  ; $6C65: $E0 $8E
-    jp Jump_001_634D                              ; $6C67: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6C67: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6C6A: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6C6D: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6C6D: $FA $CC $C9
     bit 7, a                                      ; $6C70: $CB $7F
     jp nz, Jump_001_6C82                          ; $6C72: $C2 $82 $6C
 
@@ -7176,7 +7180,7 @@ jr_001_6C90:
     ld a, [$C6D3]                                 ; $6C9E: $FA $D3 $C6
     and a                                         ; $6CA1: $A7
     call z, Call_001_4C08                         ; $6CA2: $CC $08 $4C
-    jp Jump_001_634D                              ; $6CA5: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6CA5: $C3 $4D $63
 
 
 Jump_001_6CA8:
@@ -7196,11 +7200,11 @@ Jump_001_6CA8:
     ldh [$FF8D], a                                  ; $6CC2: $E0 $8D
     ld a, $6C                                     ; $6CC4: $3E $6C
     ldh [$FF8E], a                                  ; $6CC6: $E0 $8E
-    jp Jump_001_634D                              ; $6CC8: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6CC8: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6CCB: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6CCE: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6CCE: $FA $CC $C9
     bit 5, a                                      ; $6CD1: $CB $6F
     jr nz, jr_001_6CE2                            ; $6CD3: $20 $0D
 
@@ -7216,7 +7220,7 @@ jr_001_6CE2:
     and $01                                       ; $6CE4: $E6 $01
     jp z, Jump_001_6D00                           ; $6CE6: $CA $00 $6D
 
-    ld a, [$C9CC]                                 ; $6CE9: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6CE9: $FA $CC $C9
     bit 6, a                                      ; $6CEC: $CB $77
     jr z, jr_001_6CF7                             ; $6CEE: $28 $07
 
@@ -7241,7 +7245,7 @@ jr_001_6D00:
     ld a, [$C6D2]                                 ; $6D0E: $FA $D2 $C6
     and a                                         ; $6D11: $A7
     call z, Call_001_4C59                         ; $6D12: $CC $59 $4C
-    jp Jump_001_634D                              ; $6D15: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6D15: $C3 $4D $63
 
 
 Jump_001_6D18:
@@ -7261,11 +7265,11 @@ Jump_001_6D18:
     ldh [$FF8D], a                                  ; $6D32: $E0 $8D
     ld a, $6D                                     ; $6D34: $3E $6D
     ldh [$FF8E], a                                  ; $6D36: $E0 $8E
-    jp Jump_001_634D                              ; $6D38: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6D38: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6D3B: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6D3E: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6D3E: $FA $CC $C9
     bit 4, a                                      ; $6D41: $CB $67
     jr nz, jr_001_6D52                            ; $6D43: $20 $0D
 
@@ -7281,7 +7285,7 @@ jr_001_6D52:
     and $01                                       ; $6D54: $E6 $01
     jp z, Jump_001_6D70                           ; $6D56: $CA $70 $6D
 
-    ld a, [$C9CC]                                 ; $6D59: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6D59: $FA $CC $C9
     bit 6, a                                      ; $6D5C: $CB $77
     jr z, jr_001_6D67                             ; $6D5E: $28 $07
 
@@ -7306,7 +7310,7 @@ jr_001_6D70:
     ld a, [$C6D2]                                 ; $6D7E: $FA $D2 $C6
     and a                                         ; $6D81: $A7
     call z, Call_001_4CAA                         ; $6D82: $CC $AA $4C
-    jp Jump_001_634D                              ; $6D85: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6D85: $C3 $4D $63
 
 
 Jump_001_6D88:
@@ -7326,11 +7330,11 @@ Jump_001_6D88:
     ldh [$FF8D], a                                  ; $6DA2: $E0 $8D
     ld a, $6D                                     ; $6DA4: $3E $6D
     ldh [$FF8E], a                                  ; $6DA6: $E0 $8E
-    jp Jump_001_634D                              ; $6DA8: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6DA8: $C3 $4D $63
 
 
     call Call_001_6393                            ; $6DAB: $CD $93 $63
-    ld a, [$C9CC]                                 ; $6DAE: $FA $CC $C9
+    ld a, [wAI_Cnt1]                                 ; $6DAE: $FA $CC $C9
     bit 6, a                                      ; $6DB1: $CB $77
     jr nz, jr_001_6DC2                            ; $6DB3: $20 $0D
 
@@ -7364,7 +7368,7 @@ jr_001_6DD0:
     ld a, [$C6D3]                                 ; $6DDE: $FA $D3 $C6
     and a                                         ; $6DE1: $A7
     call z, Call_001_4CFB                         ; $6DE2: $CC $FB $4C
-    jp Jump_001_634D                              ; $6DE5: $C3 $4D $63
+    jp AI_Hero_Close                              ; $6DE5: $C3 $4D $63
 
 
     call Call_001_65A8                            ; $6DE8: $CD $A8 $65
@@ -7374,7 +7378,7 @@ jr_001_6DD0:
     and a                                         ; $6DEC: $A7
     ret z                                         ; $6DED: $C8
 
-    ld a, [$C188]                                 ; $6DEE: $FA $88 $C1
+    ld a, [wActorSave_Flags]                                 ; $6DEE: $FA $88 $C1
     and a                                         ; $6DF1: $A7
     ret nz                                        ; $6DF2: $C0
 
@@ -7491,7 +7495,7 @@ jr_001_6E2C:
     and a                                         ; $6E95: $A7
     ret z                                         ; $6E96: $C8
 
-    ld a, [$C188]                                 ; $6E97: $FA $88 $C1
+    ld a, [wActorSave_Flags]                                 ; $6E97: $FA $88 $C1
     and a                                         ; $6E9A: $A7
     ret nz                                        ; $6E9B: $C0
 
@@ -7511,12 +7515,12 @@ jr_001_6E2C:
 
 AI_Chicken::
     call Call_001_4B1C                            ; $6EB2: $CD $1C $4B
-    call Call_001_7038                            ; $6EB5: $CD $38 $70
+    call AI_Chicken_ProbablyCheckIfKicked                            ; $6EB5: $CD $38 $70
     and a                                         ; $6EB8: $A7
     ret z                                         ; $6EB9: $C8
 
     ld a, $01                                     ; $6EBA: $3E $01
-    ld [$C188], a                                 ; $6EBC: $EA $88 $C1
+    ld [wActorSave_Flags], a                                 ; $6EBC: $EA $88 $C1
     ld a, [hActor_CurrentAddress + 1]                                 ; $6EBF: $FA $8B $FF
     ld h, a                                       ; $6EC2: $67
     ld a, [hActor_CurrentAddress]                                 ; $6EC3: $FA $8A $FF
@@ -7534,7 +7538,7 @@ Call_001_6ECF:
     bit 2, a                                      ; $6ED1: $CB $57
     jp z, Jump_001_6F81                           ; $6ED3: $CA $81 $6F
 
-    ld a, [$C188]                                 ; $6ED6: $FA $88 $C1
+    ld a, [wActorSave_Flags]                                 ; $6ED6: $FA $88 $C1
     cp $00                                        ; $6ED9: $FE $00
     jp nz, Jump_001_6F81                          ; $6EDB: $C2 $81 $6F
 
@@ -7776,12 +7780,12 @@ jr_001_7014:
     ret                                           ; $7037: $C9
 
 
-Call_001_7038:
+AI_Chicken_ProbablyCheckIfKicked:
     ldh a, [$FFB2]                                  ; $7038: $F0 $B2
     bit 2, a                                      ; $703A: $CB $57
     jp z, Jump_001_70C1                           ; $703C: $CA $C1 $70
 
-    ld a, [$C188]                                 ; $703F: $FA $88 $C1
+    ld a, [wActorSave_Flags]                                 ; $703F: $FA $88 $C1
     cp $00                                        ; $7042: $FE $00
     jp nz, Jump_001_70C1                          ; $7044: $C2 $C1 $70
 
