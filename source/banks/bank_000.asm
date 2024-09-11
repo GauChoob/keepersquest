@@ -1942,7 +1942,7 @@ Cmd_Actor_RestoreActorState:
     ; Although it is originally known as ThisActorRestoreState, technically the actor
     ; that was saved will be restored, be it This actor or a different actor
     ld a, $03                                     ; $0D5C: $3E $03
-    ld [$C188], a                                 ; $0D5E: $EA $88 $C1
+    ld [wActorSave_Flags], a                                 ; $0D5E: $EA $88 $C1
     ld a, $20                                     ; $0D61: $3E $20
     ld [$C18A], a                                 ; $0D63: $EA $8A $C1
     ld a, $64                                     ; $0D66: $3E $64

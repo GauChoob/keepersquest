@@ -1,4 +1,12 @@
 SECTION "WRAM", WRAM0[$C000]
+    ds $C188 - @
+wActorSave_Flags::
+    ; Used to determine whether wActor_Save already contains saved data or not
+    DEF ActorSave_Flag_EMPTY EQU $00 ; No saved actor - able to save
+    DEF ActorSave_Flag_FULL EQU $01 ; Actor has been saved
+    DEF ActorSave_Flag_REQUEST_SAVE EQU $02 ; Unused and unimplemented, but theoretically this flag is intended to request to save the current actor
+    DEF ActorSave_Flag_REQUEST_RESTORE EQU $03 ; Set to request to request saved data to current actor
+    ds 1
 
     ds $C1A4 - @
 wActor_Save::
@@ -186,6 +194,19 @@ wROMBank::
     ds $C9CB - @
 wSalafyInvincible::
     ; Set to 1 when cheat code entered on starting screen
+    ds 1
+
+    ;ds $C9CC
+wAI_Cnt1::
+    ; Mirror of wCnt1, but not transmitted to the AI if the Textbox is open
+    ds 1
+    ;ds $C9CD
+wAI_CntDown::
+    ; Mirror of wCntDown, but not transmitted to the AI if the Textbox is open
+    ds 1
+    ;ds $C9CE
+wAI_CntUp::
+    ; Mirror of wCntUp, but not transmitted to the AI if the Textbox is open
     ds 1
 
     ds $C9CF - @
